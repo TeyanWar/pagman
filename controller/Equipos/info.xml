@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>Equipos</nombre>
+    <descripcion>Modulo de Equipos</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>equiposController</nombre>
+            <display>Equipos</display>
+            <descripcion>Controlador de Equipos</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Equipos</display>
+                    <descripcion>Crear Equipos</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Permisos</display>
+                    <descripcion>Editar Permisos</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Equipos</display>
+                    <descripcion>Eliminar Equipos</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Equipos</display>
+                    <descripcion>Listar Equipos</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>Consultar</nombre>
+                    <display>Consultar Equipos</display>
+                    <descripcion>Consultar Equipos</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

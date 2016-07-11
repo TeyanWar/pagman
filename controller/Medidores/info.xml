@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>Medidores</nombre>
+    <descripcion>Modulo de Medidores</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>medidoresController</nombre>
+            <display>Medidores</display>
+            <descripcion>Controlador de Medidores</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Medidores</display>
+                    <descripcion>Crear Medidores</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Medidores</display>
+                    <descripcion>Editar Medidores</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Medidores</display>
+                    <descripcion>Eliminar Medidores</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Medidores</display>
+                    <descripcion>Listar Medidores</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>Consultar</nombre>
+                    <display>Consultar Medidores</display>
+                    <descripcion>Consultar Medidores</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

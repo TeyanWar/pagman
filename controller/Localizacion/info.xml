@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>Localizacion</nombre>
+    <descripcion>Modulo de Localizacion</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>localizacionController</nombre>
+            <display>Localizacion</display>
+            <descripcion>Controlador de Localizacion</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Localizacion</display>
+                    <descripcion>Crear Localizacion</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Localizacion</display>
+                    <descripcion>Editar Localizacion</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Localizacion</display>
+                    <descripcion>Eliminar Localizacion</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Localizacion</display>
+                    <descripcion>Listar Localizacion</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>Consultar</nombre>
+                    <display>Consultar Localizacion</display>
+                    <descripcion>Consultar Localizacion</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

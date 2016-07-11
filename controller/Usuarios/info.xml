@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>Usuarios</nombre>
+    <descripcion>Modulo Usuarios</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>UsuariosController</nombre>
+            <display>Usuarios</display>
+            <descripcion>Controlador de Usuarios</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Usuarios</display>
+                    <descripcion>Crear Usuarios</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Usuarios</display>
+                    <descripcion>Editar Usuarios</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Usuarios</display>
+                    <descripcion>Listar Usuarios</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Usuarios</display>
+                    <descripcion>Eliminar Usuarios</descripcion>
+                </funcion>
+                
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

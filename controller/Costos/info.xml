@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>Costos</nombre>
+    <descripcion>Modulo de Costos</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>costosController</nombre>
+            <display>Costos</display>
+            <descripcion>Controlador de Costos</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Costos</display>
+                    <descripcion>Crear Costos</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Costos</display>
+                    <descripcion>Editar Costos</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Costos</display>
+                    <descripcion>Eliminar Costos</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Costos</display>
+                    <descripcion>Listar Costos</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>Consultar</nombre>
+                    <display>Consultar Costos</display>
+                    <descripcion>Consultar Costos</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>Roles</nombre>
+    <descripcion>Modulo asignar Roles a un usuario</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>RolesController</nombre>
+            <display>Roles</display>
+            <descripcion>Controlador de Roles</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Rol</display>
+                    <descripcion>Crear Rol</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Rol</display>
+                    <descripcion>Editar Rol</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Permisos</display>
+                    <descripcion>Listar Permisos</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>ELiminar Rol</display>
+                    <descripcion>ELiminar Rol</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>validarFuncionAsignada</nombre>
+                    <display>validar Funcion Asignada</display>
+                    <descripcion>validarFuncionAsignada</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

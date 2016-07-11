@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>Personas</nombre>
+    <descripcion>Modulo de Personas</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>personasController</nombre>
+            <display>Personas</display>
+            <descripcion>Controlador de Personas</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Personas</display>
+                    <descripcion>Crear Personas</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Personas</display>
+                    <descripcion>Editar Personas</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Personas</display>
+                    <descripcion>Eliminar Personas</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Personas</display>
+                    <descripcion>Listar Personas</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>Consultar</nombre>
+                    <display>Consultar Personas</display>
+                    <descripcion>Consultar Personas</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

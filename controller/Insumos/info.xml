@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>Insumos</nombre>
+    <descripcion>Modulo de Insumos</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>insumosController</nombre>
+            <display>Insumos</display>
+            <descripcion>Controlador de Insumos</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Insumos</display>
+                    <descripcion>Crear Insumos</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Insumos</display>
+                    <descripcion>Editar Insumos</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Insumos</display>
+                    <descripcion>Eliminar Insumos</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Insumos</display>
+                    <descripcion>Listar Insumos</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>Consultar</nombre>
+                    <display>Consultar Insumos</display>
+                    <descripcion>Consultar Insumos</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>Programacion</nombre>
+    <descripcion>Modulo Programacion</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>ProgramacionController</nombre>
+            <display>Programacion</display>
+            <descripcion>Controlador de Programacion</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Programacion</display>
+                    <descripcion>Crear Programacion</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Programacion</display>
+                    <descripcion>Editar Programacion</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Programacion</display>
+                    <descripcion>Listar Programacion</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Programacion</display>
+                    <descripcion>Eliminar Programacion</descripcion>
+                </funcion>
+                
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>
