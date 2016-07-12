@@ -42,8 +42,8 @@ and open the template in the editor.
                 
                 <funcion>
                     <nombre>Consultar</nombre>
-                    <display>Consultar Mediciones</display>
-                    <descripcion>Consultar Mediciones</descripcion>
+                    <display>Consultar Permisos</display>
+                    <descripcion>Consultar Permisos</descripcion>
                 </funcion>
             </funciones>
             

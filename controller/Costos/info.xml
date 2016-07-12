@@ -48,5 +48,21 @@ and open the template in the editor.
             </funciones>
             
         </controlador>
+        
+<!--        <controlador>
+            <nombre>pruebasController</nombre>
+            <display>Pruebas</display>
+            <descripcion>Controlador de Costos para probar</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Prueba</display>
+                    <descripcion>Crear Prueba</descripcion>
+                </funcion>
+            </funciones>
+        </controlador>-->
+        
     </controladores>
 </modulos>

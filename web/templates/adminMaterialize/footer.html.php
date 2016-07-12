@@ -30,7 +30,7 @@ Scripts
 
 <!-- jQuery Validation -->
     <script src="<?php echo addLib('templates/adminMaterialize/js/plugins/jquery-validation/jquery.validate.min.js') ?>" type="text/javascript"></script>
-    <script src="<?php echo addLib('templates/adminMaterialize/"js/plugins/jquery-validation/additional-methods.min.js') ?>" type="text/javascript"></script>
+    <script src="<?php echo addLib('templates/adminMaterialize/js/plugins/jquery-validation/additional-methods.min.js') ?>" type="text/javascript"></script>
  <!--angularjs-->
 <!-- <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins/angular.min.js') ?>"></script>-->
 

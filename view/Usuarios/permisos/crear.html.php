@@ -25,7 +25,7 @@
                             <tr>
                                 <th><center>Asignar permisos</center></th>
                         <th><center>Nombre del Rol</center></th>
-                        <th>Permisos asignados actualmente.</th>
+                        <th>Permisos asignados actualmente</th>
                         </tr>
                         </thead>
                         <tbody>                                
@@ -45,7 +45,7 @@
                                 <?php
                                 foreach ($permisos as $permiso) {
                                     if ($permiso['rol_id'] == $rol['rol_id']) {
-                                        echo $permiso['func_nombre'] . ", &nbsp;";
+                                        echo $permiso['func_display'] . ", &nbsp;";
                                     }
                                     
                                 }

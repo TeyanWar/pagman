@@ -160,7 +160,7 @@
                         <?php
                         foreach ($funcionesBuscar as $permisos) {
                             ?>
-                            <option value="<?php echo $permisos['id_permiso']; ?>" name=""><?php echo $permisos['func_display']; ?></option><?php
+                            <option value="<?php echo $permisos['func_id']; ?>" name=""><?php echo $permisos['func_display']; ?></option><?php
                         }
                         ?>
                     </select>

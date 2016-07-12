@@ -474,6 +474,22 @@ CREATE TABLE `pag_funcion` (
 -- Volcar la base de datos para la tabla `pag_funcion`
 -- 
 
+-- --------------------------------------------------------
+
+-- 
+-- Estructura de tabla para la tabla `pag_permisos`
+-- 
+
+CREATE TABLE `pag_permisos` (
+  `perm_id` int(11) NOT NULL auto_increment,
+  `func_id` int(11) NOT NULL,
+  `rol_id` int(11) NOT NULL,
+  PRIMARY KEY  (`perm_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- 
+-- Volcar la base de datos para la tabla `pag_permisos`
+-- 
 
 -- --------------------------------------------------------
 
