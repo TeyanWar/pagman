@@ -8,9 +8,14 @@ function crearUrl($modulo, $controlador, $accion, $parametros=false){
     }else{
         $url = $_SERVER['SCRIPT_NAME']."/$modulo/$controlador/$accion";
     }
-    
+
     return $url;
-    
+
+}
+
+function dd($array){
+    echo "<pre>";
+    die(print_r($array));
 }
 
 function addLib($enlace){

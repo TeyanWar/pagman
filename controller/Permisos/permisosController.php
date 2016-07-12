@@ -1,12 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 include_once("../model/Permisos/permisosClass.php");
 
 class PermisosController {
@@ -28,31 +21,36 @@ class PermisosController {
 
         $objPerm = new PermisosClass();
         $dirModulos = $objPerm->verFicheros();
-
-        foreach ($dirModulos as $modulos) {
+        foreach ($dirModulos as $dirModulo) {
 
             // Registro el Modulo
-            $sqlModulo = "INSERT INTO pag_modulo(mod_nombre,mod_descripcion) VALUES('$modulos','$modulos')";
+            $sqlModulo = "INSERT INTO pag_modulo(mod_nombre,mod_descripcion) VALUES('$dirModulo','$dirModulo')";
             //$objPerm->insertar($sqlModulo);   
             //Registro los controladores de cada Modulo
-            $mod_id = $objPerm->find("SELECT MAX(mod_id) as mod_id FROM pag_modulo");
+//            $mod_id = $objPerm->find("SELECT MAX(mod_id) as mod_id FROM pag_modulo");
 
-            $controladores = simplexml_load_file("../controller/$modulos/info.xml");
-            foreach ($controladores->controladores->controlador as $controlador) {
+            $modulos = simplexml_load_file("../controller/$dirModulo/info.xml");
+            //Registro de controladores
+            foreach ($modulos->controladores->controlador as $controlador) {
                 $sql = "INSERT INTO pag_controlador(mod_id,cont_nombre,cont_descripcion,estado)VALUES"
                         . "($mod_id[mod_id],'$controlador->display','$controlador->display',1)";
+                
+                $cont_id = $objPerm->find("SELECT MAX(cont_id) as cont_id FROM pag_controlador");
+                //Registro de funciones
+                foreach ($modulos->controladores->controlador->funciones->funcion as $funcion) {
+                    $sqlFunciones = "INSERT INTO pag_funcion(cont_id,func_nombre,func_descripcion)VALUES"
+                            . "($cont_id[cont_id],'$funcion->display','$funcion->display')";
+                    //   $objPerm->insertar($sqlFunciones);
+                }
                 // $objPerm->insertar($sql);
             }
 
-
-            $funciones = simplexml_load_file("../controller/$modulos/info.xml");
-
             $cont_id = $objPerm->find("SELECT MAX(cont_id) as cont_id FROM pag_controlador");
-            // Resgitro Funcion del Modulo
-            foreach ($funciones->controladores->controlador->funciones->funcion as $funcion) {
+            // Resgitro funciones
+            foreach ($modulos->controladores->controlador->funciones->funcion as $funcion) {
                 $sqlFunciones = "INSERT INTO pag_funcion(cont_id,func_nombre,func_descripcion)VALUES"
                         . "($cont_id[cont_id],'$funcion->display','$funcion->display')";
-                //   $funciones = $objPerm->insertar($sqlFunciones);
+                //   $objPerm->insertar($sqlFunciones);
             }
         }
 

@@ -3,11 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/opt/lampp/htdocs/pagmanNuevo/view/Usuarios/permisos/crear.html.php</file>
-            <file>file:/opt/lampp/htdocs/pagmanNuevo/controller/Permisos/permisosController.php</file>
-            <file>file:/opt/lampp/htdocs/pagmanNuevo/web/js/modulos/permisos-permisos.js</file>
-            <file>file:/opt/lampp/htdocs/pagmanNuevo/view/Usuarios/permisos/modalCrear.html.php</file>
-            <file>file:/opt/lampp/htdocs/pagmanNuevo/view/Equipos/equipos/editar.html.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/controller/Equipos/equiposController.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/web/index.php</file>
         </group>
     </open-files>
 </project-private>
