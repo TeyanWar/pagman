@@ -35,7 +35,7 @@ if (!isset($_SESSION['login']) && (!isset($_SERVER['PATH_INFO'])  || $_SERVER['P
 
     // Captura la funcion del controlador
     $accion = $cadena[3];
-
+//    dd($cadena);
     // Antes de cargar la venta para crear o editar un rol, se destruye la variable
     // de session 'controladores'
     if ($controller == 'roles' && ($accion == 'editar' || $accion == 'crear')) {

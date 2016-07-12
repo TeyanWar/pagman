@@ -35,13 +35,13 @@ and open the template in the editor.
                 </funcion>
                 
                  <funcion>
-                    <nombre>Listar</nombre>
+                    <nombre>listar</nombre>
                     <display>Listar Costos</display>
                     <descripcion>Listar Costos</descripcion>
                 </funcion>
                 
                 <funcion>
-                    <nombre>Consultar</nombre>
+                    <nombre>consultar</nombre>
                     <display>Consultar Costos</display>
                     <descripcion>Consultar Costos</descripcion>
                 </funcion>

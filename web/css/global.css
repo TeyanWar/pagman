@@ -50,3 +50,11 @@
 .select2-container--default .select2-selection--single .select2-selection__arrow{
     height: 45px !important;
 }
+
+code{
+    background-color: #f9f2f4;
+    border-radius: 4px;
+    color: #c7254e;
+    font-size: 90%;
+    padding: 2px 4px;
+}

@@ -11,7 +11,7 @@
                 <div class = "col s12 m4 l4" id = "flight-card">
                     <div class = "card-header cyan darken-2">
                         <div class = "card-title">
-                            <h5 class = "flight-card-title">Costos</h5>
+                            <h5 class = "flight-card-title"><?php echo $modulo['mod_nombre']; ?></h5>
                         </div>
                     </div>
                     <div class = "input-field col s12">
