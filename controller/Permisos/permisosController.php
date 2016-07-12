@@ -10,50 +10,17 @@ class PermisosController {
         $sqlRol = "SELECT * FROM pag_rol";
         $sqlPermisos = "select * from pag_funcion,pag_permisos WHERE pag_permisos.func_id=pag_funcion.func_id;";
         
-        $buscarPermisos = $objPerm->select($sqlPermisos);
-        $buscarRol = $objPerm->select($sqlRol);
+        $permisos = $objPerm->select($sqlPermisos);
+        $roles = $objPerm->select($sqlRol);
         $objPerm->cerrar();
-
+        $this->registrarActualizarPermisos();
         include_once '../view/Usuarios/permisos/crear.html.php';
     }
 
     public function crearPermisos($parametros = false) {
 
         $objPerm = new PermisosClass();
-        $dirModulos = $objPerm->verFicheros();
-        foreach ($dirModulos as $dirModulo) {
-
-            // Registro el Modulo
-            $sqlModulo = "INSERT INTO pag_modulo(mod_nombre,mod_descripcion) VALUES('$dirModulo','$dirModulo')";
-            //$objPerm->insertar($sqlModulo);   
-            //Registro los controladores de cada Modulo
-//            $mod_id = $objPerm->find("SELECT MAX(mod_id) as mod_id FROM pag_modulo");
-
-            $modulos = simplexml_load_file("../controller/$dirModulo/info.xml");
-            //Registro de controladores
-            foreach ($modulos->controladores->controlador as $controlador) {
-                $sql = "INSERT INTO pag_controlador(mod_id,cont_nombre,cont_descripcion,estado)VALUES"
-                        . "($mod_id[mod_id],'$controlador->display','$controlador->display',1)";
-                
-                $cont_id = $objPerm->find("SELECT MAX(cont_id) as cont_id FROM pag_controlador");
-                //Registro de funciones
-                foreach ($modulos->controladores->controlador->funciones->funcion as $funcion) {
-                    $sqlFunciones = "INSERT INTO pag_funcion(cont_id,func_nombre,func_descripcion)VALUES"
-                            . "($cont_id[cont_id],'$funcion->display','$funcion->display')";
-                    //   $objPerm->insertar($sqlFunciones);
-                }
-                // $objPerm->insertar($sql);
-            }
-
-            $cont_id = $objPerm->find("SELECT MAX(cont_id) as cont_id FROM pag_controlador");
-            // Resgitro funciones
-            foreach ($modulos->controladores->controlador->funciones->funcion as $funcion) {
-                $sqlFunciones = "INSERT INTO pag_funcion(cont_id,func_nombre,func_descripcion)VALUES"
-                        . "($cont_id[cont_id],'$funcion->display','$funcion->display')";
-                //   $objPerm->insertar($sqlFunciones);
-            }
-        }
-
+        
         $sqlBuscar = "select * from pag_funcion WHERE cont_id='1'"; //Busqueda FUnciones PERMISOS
         $sqlLocalizacion = "select * from pag_funcion WHERE cont_id='2'"; //Busqueda FUnciones LOCALIZACION
         $sqlUsuarios = "select * from pag_funcion WHERE cont_id='3'"; //Busqueda FUnciones USUARIOS
@@ -94,10 +61,7 @@ class PermisosController {
         $objPerm->cerrar();
 
         include_once '../view/Usuarios/permisos/modalCrear.html.php';
-    }
-
-//cierre funcion Crear
-
+    }//cierre funcion Crear
 
     public function postCrear() {
 
@@ -114,9 +78,58 @@ class PermisosController {
         if ($sqlInsertar) {
             redirect(crearUrl("permisos", "permisos", "crear"));
         } else {
-            die(print_r("MALO"));
+            die("Error al asignar permisos, por favor comun&iacute;carse con soporte");
         }
-    }
+    }//postCrear
+    
+    public function registrarActualizarPermisos(){
+
+        $objPerm = new PermisosClass();
+        $dirModulos = $objPerm->verFicheros();
+        //Recorrer cada fichero para extraer módulos del archivo info.xml
+        foreach ($dirModulos as $dirModulo) {
+            $modulo = simplexml_load_file("../controller/$dirModulo/info.xml");
+            
+            // Validar existencia de módulo
+            $existeModulo=$objPerm->find("SELECT * FROM pag_modulo WHERE mod_nombre='$modulo->nombre'");
+            if($existeModulo){
+                $mod_id = array('mod_id'=>$existeModulo['mod_id']);
+                $objPerm->update("UPDATE pag_modulo SET mod_descripcion='$modulo->descripcion' WHERE mod_id=".$existeModulo['mod_id']);
+            }else{
+                $sqlModulo = "INSERT INTO pag_modulo(mod_nombre,mod_descripcion) VALUES('$modulo->nombre','$modulo->descripcion')";
+                $objPerm->insertar($sqlModulo);
+                $mod_id = $objPerm->find("SELECT MAX(mod_id) as mod_id FROM pag_modulo");
+            }//if
+            
+            foreach ($modulo->controladores->controlador as $controlador) {
+                //Validar existencia de controlador
+                $existeControlador=$objPerm->find("SELECT * FROM pag_controlador WHERE cont_nombre='$controlador->nombre'");
+                if($existeControlador){
+                    $cont_id=array('cont_id'=>$existeControlador['cont_id']);
+                    $objPerm->update("UPDATE pag_controlador SET cont_descripcion='$controlador->descripcion' WHERE cont_id=".$existeControlador['cont_id']);
+                }else{
+                    $sqlControlador = "INSERT INTO pag_controlador(mod_id,cont_nombre,cont_descripcion,estado)VALUES"
+                            . "(".$mod_id['mod_id'].",'$controlador->display','$controlador->descripcion',1)";
+                    $objPerm->insertar($sqlControlador);
+                    $cont_id = $objPerm->find("SELECT MAX(cont_id) as cont_id FROM pag_controlador");
+                }//if
+                
+                foreach ($controlador->funciones->funcion as $funcion) {
+                    //Validar existencia de función
+                    $existeFuncion=$objPerm->find("SELECT * FROM pag_funcion WHERE func_nombre='$funcion->nombre'");
+                    if($existeFuncion){
+                        $objPerm->update("UPDATE pag_funcion SET cont_descripcion='$controlador->descripcion' WHERE cont_id=".$existeControlador['cont_id']);
+                    }else{
+                        $sqlFuncion = "INSERT INTO pag_funcion(cont_id,func_nombre,func_descripcion)VALUES"
+                                . "(".$cont_id['cont_id'].",'$funcion->display','$funcion->descripcion')";
+                        $objPerm->insertar($sqlFuncion);
+                    }//if
+                    
+                }//foreach funciones
+            }//foreach controladores
+        }//foreach ficheros
+        
+    }//registrarActualizarPermisos
 
 }
 ?>

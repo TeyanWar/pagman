@@ -23,13 +23,13 @@
                     <table class="striped" style="border:1px; border-color: black;">
                         <thead>
                             <tr>
-                                <th><center>¿Seleccionar?</center></th>
+                                <th><center>Asignar permisos</center></th>
                         <th><center>Nombre del Rol</center></th>
                         <th>Permisos asignados actualmente.</th>
                         </tr>
                         </thead>
                         <tbody>                                
-                            <?php foreach ($buscarRol as $rol) { ?>
+                            <?php foreach ($roles as $rol) { ?>
                                 <tr>
                                     <td style="width: 200px;"><center>
                                 <a class="btn-floating cyan darken-1 modal-trigger ver-detalle1"
@@ -43,9 +43,9 @@
                             </td>
                             <td>
                                 <?php
-                                foreach ($buscarPermisos as $permisos) {
-                                    if ($permisos['rol_id'] == $rol['rol_id']) {
-                                        echo $permisos['func_nombre'] . ", &nbsp;";
+                                foreach ($permisos as $permiso) {
+                                    if ($permiso['rol_id'] == $rol['rol_id']) {
+                                        echo $permiso['func_nombre'] . ", &nbsp;";
                                     }
                                     
                                 }
