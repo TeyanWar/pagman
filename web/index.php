@@ -7,6 +7,9 @@ include_once("../lib/php/helper.php");
 // Se incluyen todas las variables globales del sitio
 include_once("../lib/php/global.php");
 
+//se incluye el paginado
+include_once("../lib/php/PaginadoClass.php");
+
 //if(!isset($modulo) && !isset($controller) && !isset($accion)){
 if (!isset($_SESSION['login']) && (!isset($_SERVER['PATH_INFO'])  || $_SERVER['PATH_INFO'] != "/sesion/sesion/postInicio/noVista")) {
     include_once('templates/adminMaterialize/login/header.html.php');

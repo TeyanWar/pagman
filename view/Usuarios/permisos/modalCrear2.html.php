@@ -19,7 +19,8 @@
                                 <?php foreach ($modulo['controladores'] as $controlaor) { ?>
                                       <!--<optgroup label="<?php // echo $controlaor['cont_display']; ?>">-->
                                     <?php foreach ($controlaor['funciones'] as $funcion) { ?>
-                                            <option value="<?php echo $funcion['func_id']; ?>" name=""><?php echo $funcion['func_display']; ?></option>
+                                            <option value="<?php echo $funcion['func_id']; ?>" name="opcion<?php echo $cont; ?>"><?php echo $funcion['func_display']; ?></option>
+                                            <?php $cont++; ?>
                                     <?php } ?>
                                       <!--</optgroup>-->
                                 <?php } ?>
@@ -36,4 +37,5 @@
 </div>
 <script>
     $('select').material_select();
+//    $();
 </script>

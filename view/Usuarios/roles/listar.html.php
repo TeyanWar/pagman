@@ -1,64 +1,90 @@
 <div class="col s12 m12 l6">
     <div class="card-panel">
-        <h5>LISTA DE ROLES</h5>
+        <h5>LISTAR ROLES</h5>
         <ol class="breadcrumbs"> 
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li> 
             <li><a href="#">Usuarios</a></li> 
-            <li><a href="#">Roles</a></li> 
-            <li class="active">Lista de roles</li> 
-        </ol>
-        <div id="card-alert" class="card teal"> 
-            <div class="card-content white-text"> 
-                <p><i class="mdi-action-info-outline"></i> 
-                    INFORMACIÓN: Aquí podrá consultar, editar o eliminar la información
-                    de cualquier rol registrado.
-                </p> 
-            </div> 
-            <button type="button" class="close white-text" datadismiss="alert" aria-label="Close"> 
-                <span aria-hidden="true">×</span> 
-            </button> 
+            <li><a href="#">Permisos</a></li> 
+            <li class="active">Crear permisos</li> 
+        </ol>   
+
+        <div id="card-alert" class="card teal">
+            <div class="card-content white-text">
+                <p><i class="mdi-action-info-outline"></i> IMPORTANTE : La siguiente lista muestra los roles creados en el Sistema con sus respectios permisos y/o funciones asignados a este.</p>
+            </div>
+            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
         </div>
-        <table class="striped">
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Editar</th>
-                <th>Detalle</th>
-                <th>Eliminar</th>
-            </tr>
-            <?php foreach ($roles as $rol) { ?>
-                <tr>
-                    <td><?php echo $rol['rol_nombre'] ?></td>
-                    <td><?php echo $rol['rol_descripcion'] ?></td>
-                    <td>
-                        <a class="btn-floating waves-effect waves-light teal" href="<?php echo crearUrl('Roles', 'roles', "editar",array($rol['rol_id']))?>">
-                            <i class="mdi-content-create small"/></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" href="#modal_detalle_rol">
-                            <i class="mdi-action-find-in-page tiny detalle_rol" data-url="<?php echo crearUrl("Roles", "roles", "verDetalle", array('noVista' => 'noVista', 'rol_id' => $rol['rol_id'], 'rol_nombre' => $rol['rol_nombre'], 'rol_descripcion' => $rol['rol_descripcion'])) ?>"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a class="btn-floating waves-effect waves-light modal-eliminar red darken-4" href="#">
-                            <i class="mdi-action-delete small eliminar_rol" data-url="<?php echo crearUrl("Roles", "roles", "eliminar", array('noVista' => 'noVista', 'rol_id' => $rol['rol_id'])) ?>" accesskey=""></i>
-                        </a>   
-                    </td>
-                </tr>
-            <?php } ?>
-        </table>
+
+        <div class="col s12 m6 l3" id="flight-card">
+            <div class="input-field col s12">
+                <div class="input-field col s12">
+                    <table class="striped" style="border:1px; border-color: black;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th><center>Rol</center></th>
+                        <th colspan="2"><center>Funciones</center></th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($roles as $rol) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $paginado->count++ ?></td>
+                                    <td><?php echo $rol['rol_nombre'] ?></td>
+                                    <td>
+                                        <a class="btn-floating modal-trigger teal editarRoles" 
+                                           href="#modalUpdateRoles" data-url="<?php echo crearUrl('roles', 'roles', 'editar', array('noVista' => 'noVista', 'id' => $rol['rol_id'])) ?>">
+                                            <i class="mdi-content-create small"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class="btn-floating cyan darken-1 modal-trigger ver-detalle-roles"
+                                           href="#modalDetalleRol" data-url="<?php echo crearUrl('roles', 'roles', 'verDetalle', array('noVista' => 'noVista', 'id' => $rol['rol_id'])) ?>">
+                                            <i class="mdi-action-find-in-page tiny"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a class=" btn-floating waves-effect waves-light modal-eliminar red
+                                           darken-4 eliminar" data-rol_id="<?php echo $rol['rol_id'] ?>"  data-url="<?php echo crearUrl('roles', 'roles', 'postEliminar', array('noVista' => 'noVista', 'id' => $rol['rol_id'])) ?>">
+                                            <i class="mdi-action-delete small red "></i>
+                                        </a>
+                                    </td>
+
+                                    <?php
+                                }
+                                ?>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <?php $paginado->render() ?>
+                </div>
+            </div>
+        </div>     
+        <div id="modalDetalleRol" class="modal modal-fixed-footer">
+
+            <div class="modal-content"></div>
+            <div class="modal-footer">
+                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
+            </div>
+        </div>
+        <div id="modalUpdateRoles" class="modal modal-fixed-footer">
+
+            <div class="modal-content"></div>
+            <div class="modal-footer">
+                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
+            </div>
+        </div>
+        <div id="modaleliminar1" class="modal modal-fixed-footer">
+            <div class="modal-content"></div>
+            <div class="modal-footer">
+                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           
+            </div>
+        </div>
     </div>
 </div>
 
-<!--Modal para ver detalle-->
-<div style="z-index: 1003; display: none; opacity: 1; transform: scaleX(1); top: 10%;" id="modal_detalle_rol" class="modal modal-fixed-footer">
-    <div id="modal_content_rol" class="modal-content">
-
-    </div>
-    <div class="modal-footer">
-        <a class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
-        <a id="form_modificar_rol" class="waves-effect waves-green btn-flat modal-action modal-close">Modificar</a>
-    </div>
-
-</div>

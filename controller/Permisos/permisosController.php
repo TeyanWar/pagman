@@ -62,7 +62,9 @@ class PermisosController {
         $rolActual = $objPerm->select($sqlRolActual);
         
         $objPerm->cerrar();
-
+        
+        //Contador para asignar identificadores a las opciones
+        $cont=1;
         include_once '../view/Usuarios/permisos/modalCrear2.html.php';
     }//cierre funcion Crear
     
