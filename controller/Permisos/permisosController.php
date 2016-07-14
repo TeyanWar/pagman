@@ -26,10 +26,10 @@ class PermisosController {
         $funciones=$objPerm->select("SELECT cont_id,func_id,func_display FROM pag_funcion");
         $permisos=$objPerm->select("SELECT func_id FROM pag_permisos WHERE rol_id=$rol_id");
         foreach($funciones as $key=>$funcion){
-            $funciones[$key]['checkeado']='false';
+            $funciones[$key]['checkeado']='';
             foreach($permisos as $permiso){
                 if($funcion['func_id']==$permiso['func_id']){
-                    $funciones[$key]['checkeado']='true';
+                    $funciones[$key]['checkeado']='checked';
                     break;
                 }
             }
@@ -68,56 +68,14 @@ class PermisosController {
         include_once '../view/Usuarios/permisos/modalCrear2.html.php';
     }//cierre funcion Crear
     
-//    public function crearPermisos($parametros = false) {
-//
-//        $objPerm = new PermisosClass();
-//        
-//        $sqlBuscar = "select * from pag_funcion WHERE cont_id='1'"; //Busqueda FUnciones PERMISOS
-//        $sqlLocalizacion = "select * from pag_funcion WHERE cont_id='2'"; //Busqueda FUnciones LOCALIZACION
-//        $sqlUsuarios = "select * from pag_funcion WHERE cont_id='3'"; //Busqueda FUnciones USUARIOS
-//        $sqlEquipos = "select * from pag_funcion WHERE cont_id='4'"; //Busqueda FUnciones EQUIPOS
-//        $sqlMedidores = "select * from pag_funcion WHERE cont_id='5'"; //Busqueda FUnciones MEDIDORES
-//        $sqlOT = "select * from pag_funcion WHERE cont_id='6'"; //Busqueda FUnciones OT
-//        $sqlRoles = "select * from pag_funcion WHERE cont_id='7'"; //Busqueda FUnciones ROLES
-//        $sqlInsumos = "select * from pag_funcion WHERE cont_id='8'"; //Busqueda FUnciones INSUMOS
-//        $sqlCostos = "select * from pag_funcion WHERE cont_id='9'"; //Busqueda FUnciones COSTOS
-//        $sqlHerramientas = "select * from pag_funcion WHERE cont_id='10'"; //Busqueda FUnciones HERRAMIENTAS
-//        $sqlPersonas = "select * from pag_funcion WHERE cont_id='11'"; //Busqueda FUnciones PERSONAS
-//        $sqlProgramacion = "select * from pag_funcion WHERE cont_id='12'"; //Busqueda FUnciones PROGRAMACION
-//        $sqlMediciones = "select * from pag_funcion WHERE cont_id='13'"; //Busqueda FUnciones MEDICIONES
-//        //Busqueda todos los roles
-////        die(print_r($sqlBuscar));
-//        $funcionesBuscar = $objPerm->select($sqlBuscar);
-//        $buscarLocalizacion = $objPerm->select($sqlLocalizacion);
-//        $buscarUsuarios = $objPerm->select($sqlUsuarios);
-//        $buscarEquipos = $objPerm->select($sqlEquipos);
-//        $buscarMedidores = $objPerm->select($sqlMedidores);
-//        $buscarOT = $objPerm->select($sqlOT);
-//        $buscarRoles = $objPerm->select($sqlRoles);
-//        $buscarInsumos = $objPerm->select($sqlInsumos);
-//        $buscarCostos = $objPerm->select($sqlCostos);
-//        $buscarHerramientas = $objPerm->select($sqlHerramientas);
-//        $buscarPersonas = $objPerm->select($sqlPersonas);
-//        $buscarProgramacion = $objPerm->select($sqlProgramacion);
-//        $buscarMediciones = $objPerm->select($sqlMediciones);
-//
-//        $id = $parametros[1];
-//        
-//        $sql = "SELECT * FROM pag_permisos WHERE rol_id='".$id."'";
-//        $buscarPermisos = $objPerm->find($sql);
-//        
-//        $sqlRolActual = "SELECT * FROM pag_rol where rol_id='".$id."'";
-//        $rolActual = $objPerm->select($sqlRolActual);
-//        $objPerm->cerrar();
-//
-//        include_once '../view/Usuarios/permisos/modalCrear.html.php';
-//    }//cierre funcion Crear
-
     public function postCrear() {
         $rol_id = $_POST['roles'];
         $funcionModulos = $_POST['funcionesModulos'];
         $objPerm = new PermisosClass();
 
+        //Elimino los permisos que antes tenía para insertar los nuevos
+        $objPerm->delete("DELETE FROM pag_permisos WHERE rol_id=".$rol_id);
+        
         foreach ($funcionModulos as $func_id) {
             $sqlPermisos = "INSERT INTO pag_permisos (func_id,rol_id)VALUES($func_id,$rol_id)";
             $sqlInsertar = $objPerm->insertar($sqlPermisos);

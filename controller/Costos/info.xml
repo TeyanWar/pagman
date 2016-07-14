@@ -49,7 +49,7 @@ and open the template in the editor.
             
         </controlador>
         
-<!--        <controlador>
+        <controlador>
             <nombre>pruebasController</nombre>
             <display>Pruebas</display>
             <descripcion>Controlador de Costos para probar</descripcion>
@@ -61,8 +61,38 @@ and open the template in the editor.
                     <display>Crear Prueba</display>
                     <descripcion>Crear Prueba</descripcion>
                 </funcion>
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Prueba</display>
+                    <descripcion>Eliminar Prueba</descripcion>
+                </funcion>
+                <funcion>
+                    <nombre>Consultar</nombre>
+                    <display>Consultar Prueba</display>
+                    <descripcion>Consultar Prueba</descripcion>
+                </funcion>
             </funciones>
-        </controlador>-->
+        </controlador>
+        
+        <controlador>
+            <nombre>pruebas2Controller</nombre>
+            <display>Pruebas2</display>
+            <descripcion>Controlador de Costos para probar</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Prueba2</display>
+                    <descripcion>Crear Prueba2</descripcion>
+                </funcion>
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Prueba2</display>
+                    <descripcion>Eliminar Prueba2</descripcion>
+                </funcion>
+            </funciones>
+        </controlador>
         
     </controladores>
 </modulos>

@@ -8,15 +8,11 @@ foreach ($roles as $rol) {
     ?>
     <form class="col s12" role="form" action="<?php echo crearUrl("roles", "roles", "postEditar") ?>" method="post">
         <div class="row">
-            <div class="input col s6">
-                <label>(*) Id:</label>
-                <input type="text" name="idRol" value="<?php echo $rol['rol_id'] ?>" type="text" readonly>
-            </div>
-            <div class="input col s6">
+            <div class="input col s12">
                 <label>(*) Rol actual:</label>
                 <input type="text" name="nombreRol" value="<?php echo $rol['rol_nombre'] ?>" type="text">
             </div>
-            <div class="input col s6">
+            <div class="input col s12">
                 <label>(*) Descripción</label>
                 <input type="text" name="rol_descripcion" value="<?php echo $rol['rol_descripcion'] ?>">
             </div>

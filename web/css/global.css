@@ -58,3 +58,29 @@ code{
     font-size: 90%;
     padding: 2px 4px;
 }
+
+/*Efecto zoom para los módulos cuando se edita un permiso*/
+
+.modulo_permisos{
+    text-align: center;
+    color:white;
+    font-size: 16px;
+    border-top: 3px;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid black;
+    /*Efecto zoom*/
+    transition: 0.5s ease;
+    -moz-transition: 0.1s ease; /* Firefox */
+    -webkit-transition: ease; /* Chrome - Safari */
+    -o-transition: 0.1s ease; /* Opera */
+}
+
+.modulo_permisos:hover{
+    background:black !important;
+    transform : scale(1.05);
+    -moz-transform : scale(1.05); /* Firefox */
+    -webkit-transform : scale(1.07); /* Chrome - Safari */
+    -o-transform : scale(1.05); /* Opera */
+    -ms-transform : scale(1.05); /* IE9 */
+}

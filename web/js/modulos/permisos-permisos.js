@@ -11,6 +11,12 @@ $(document).ready(function () {
             }
         });
     });
+    
+    $(document).on('click','.modulo_permisos', function(){
+       var divPermisos=$(this).data('div_permisos');
+       $('#contenedor_permisos div').css('display','none');
+       $(divPermisos).css('display','block');
+    });
 });
 
 
