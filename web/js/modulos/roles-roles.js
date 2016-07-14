@@ -36,20 +36,29 @@ $(document).ready(function () {
             showCancelButton: true,
             confirmButtonColor: "Red ",
             confirmButtonText: "si,eliminar registro",
-            closeOnConfirm: false},
-                function () {
-                    $.ajax({
-                        url: url,
-                        type: 'post',
-                        data: {
-                            id: rol_id
-                        }
-                    }).done(function (data) {
+            closeOnConfirm: false
+        },
+        function () {
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {
+                    id: rol_id
+                }
+            }).done(function (data) {
 
-                    });
-                    swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
-                    $('#busquedaAjax').triger('keyup');
-                });
+            });
+            swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
+            $('#busquedaAjax').triger('keyup');
+        });
+    });
+    
+    //Para mostrar los controladores y sus funciones de un módulo 
+    //al asignar permisos
+    $(document).on('click','.modulo_permisos', function(){
+       var divPermisos=$(this).data('div_permisos');
+       $('#contenedor_permisos div').css('display','none');
+       $(divPermisos).css('display','block');
     });
 
 });

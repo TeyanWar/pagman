@@ -32,9 +32,9 @@
                             <?php foreach ($roles as $rol) { ?>
                                 <tr>
                                     <td style="width: 200px;"><center>
-                                <a class="btn-floating cyan darken-1 modal-trigger ver-detalle1"
+                                <a class="btn-floating teal darken-1 modal-trigger ver-detalle1"
                                    href="#modalDetalle1" data-url="<?php echo crearUrl('permisos', 'permisos', 'crearPermisos', array('noVista' => 'noVista', 'id' => $rol['rol_id'])) ?>">
-                                    <i class="mdi-action-done activator"></i>
+                                    <i class="mdi-content-create small"></i>
                                     <span>done</span>
                                 </a></center>
                             </td>

@@ -63,29 +63,24 @@ class PermisosController {
         
         $objPerm->cerrar();
         
-        //Contador para asignar identificadores a las opciones
-        $cont=1;
         include_once '../view/Usuarios/permisos/modalCrear2.html.php';
     }//cierre funcion Crear
     
     public function postCrear() {
-        $rol_id = $_POST['roles'];
-        $funcionModulos = $_POST['funcionesModulos'];
         $objPerm = new PermisosClass();
+        $rol_id = $_POST['roles'];
+        $funciones = $_POST['funciones'];
 
-        //Elimino los permisos que antes tenía para insertar los nuevos
+        //Eliminar los permisos que antes tenía para insertar los nuevos
         $objPerm->delete("DELETE FROM pag_permisos WHERE rol_id=".$rol_id);
         
-        foreach ($funcionModulos as $func_id) {
+        foreach ($funciones as $func_id) {
             $sqlPermisos = "INSERT INTO pag_permisos (func_id,rol_id)VALUES($func_id,$rol_id)";
             $sqlInsertar = $objPerm->insertar($sqlPermisos);
         }
 
-        if ($sqlInsertar) {
-            redirect(crearUrl("permisos", "permisos", "crear"));
-        } else {
-            die("Error al asignar permisos, por favor comun&iacute;carse con soporte");
-        }
+        redirect(crearUrl("permisos", "permisos", "crear"));
+        
     }//postCrear
     
     public function registrarActualizarPermisos(){

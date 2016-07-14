@@ -12,6 +12,8 @@ $(document).ready(function () {
         });
     });
     
+    //Para mostrar los controladores y sus funciones de un módulo 
+    //al asignar permisos
     $(document).on('click','.modulo_permisos', function(){
        var divPermisos=$(this).data('div_permisos');
        $('#contenedor_permisos div').css('display','none');

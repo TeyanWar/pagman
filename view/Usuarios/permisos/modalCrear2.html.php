@@ -26,7 +26,7 @@
                                 <h5><?php echo $controlaor['cont_display']; ?></h5>
                                 <?php foreach ($controlaor['funciones'] as $funcion) { ?>
                                     <p>
-                                       <input name="funcionesModulos[]" id="<?php echo $funcion['func_id'] ?>" value="<?php echo $funcion['func_id'] ?>" type="checkbox" <?php echo $funcion['checkeado']; ?> >
+                                       <input name="funciones[]" id="<?php echo $funcion['func_id'] ?>" value="<?php echo $funcion['func_id'] ?>" type="checkbox" <?php echo $funcion['checkeado']; ?> >
                                        <label for="<?php echo $funcion['func_id'] ?>"><?php echo ucwords($funcion['func_display']) ?></label>
                                     </p>
                                 <?php } ?>
@@ -50,11 +50,9 @@
 //    $();
 </script>
 <style>
-    .modal{
+    #modalDetalle1{
+        /*top: 5% !important;*/
         max-height: 80%;
-    }
-    
-    .modal.modal-fixed-footer{
         height: 80%;
     }
 </style>
