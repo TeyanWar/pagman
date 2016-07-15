@@ -10,7 +10,7 @@ and open the template in the editor.
    
     <controladores>
         <controlador>
-            <nombre>UsuariosController</nombre>
+            <nombre>usuariosController</nombre>
             <display>Usuarios</display>
             <descripcion>Controlador de Usuarios</descripcion>
             

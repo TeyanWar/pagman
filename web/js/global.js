@@ -32,6 +32,14 @@ $(document).ready(function(){
     
     //----- INICIO de código del controlador Personas y login -----//
     $("#loginAjax").click(function() {
+        login();
+    });
+    $("#password").keypress(function(e){
+        if (e.which == 13){
+            login();
+        }
+    });
+    function login(){
         var url = $("#formLoginAjax").attr('action');
         $.ajax({
             url: url + "/noVista",
@@ -49,6 +57,6 @@ $(document).ready(function(){
 
             }
         });
-    });
+    }
     
 });

@@ -63,7 +63,7 @@ class PermisosController {
         
         $objPerm->cerrar();
         
-        include_once '../view/Usuarios/permisos/modalCrear2.html.php';
+        include_once '../view/Usuarios/permisos/modalCrear.html.php';
     }//cierre funcion Crear
     
     public function postCrear() {
@@ -134,6 +134,35 @@ class PermisosController {
         
     }//registrarActualizarPermisos
 
+    public function validarAcceso($cadena){
+        $objPermiso = new PermisosClass();
+        
+        $sql= "SELECT cont_id FROM pag_controlador WHERE cont_nombre='$cadena[2]Controller'";
+        $controlador=$objPermiso->find($sql);
+        $cont_id=$controlador['cont_id'];
+        
+        $sql="SELECT func_id FROM pag_funcion WHERE cont_id=$cont_id AND func_nombre='$cadena[3]'";
+        $funcion=$objPermiso->find($sql);
+
+        //Si la función existe entonces validar si el rol la tiene asignada
+        if($funcion){
+            $func_id=$funcion['func_id'];        
+            $sql="SELECT * FROM pag_permisos WHERE func_id=$func_id AND rol_id=".$_SESSION['login']['rol_id'];
+            $permiso=$objPermiso->find($sql);
+            //No la tiene asignada?
+            if(empty($permiso)){
+                return false;
+//                die("No tiene permisos para acceder a la función solicitada, contacte con soporte");
+            }
+            
+        }
+        
+        ////Sino existe la función, dejelo pasar porque es una función a la que no hay que controlar el acceso
+        //Por ejemplo: Una función ajax, una función para validar, etc.
+        
+        return true;
+    }//validarAcceso
+    
 }
 ?>
 

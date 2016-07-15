@@ -29,7 +29,7 @@ if (!isset($_SESSION['login']) && (!isset($_SERVER['PATH_INFO'])  || $_SERVER['P
 
     // /equipos/equipos/crear
     $cadena = explode("/", $_SERVER['PATH_INFO']);
-
+//    dd($_SESSION);
     // Captura el nombre del modulo con la primer letra mayuscula
     $modulo = ucwords($cadena[1]);
 
@@ -38,15 +38,20 @@ if (!isset($_SESSION['login']) && (!isset($_SERVER['PATH_INFO'])  || $_SERVER['P
 
     // Captura la funcion del controlador
     $accion = $cadena[3];
-//    dd($cadena);
-    // Antes de cargar la venta para crear o editar un rol, se destruye la variable
-    // de session 'controladores'
-    if ($controller == 'roles' && ($accion == 'editar' || $accion == 'crear')) {
-        if (isset($_SESSION['controladores'])) {
-            unset($_SESSION['controladores']);
+    
+    //Inicio para validar permisos de navegación
+        include_once('../controller/Permisos/permisosController.php');
+        $objPermiso= new PermisosController();
+        if(!$objPermiso->validarAcceso($cadena)){
+            include_once('templates/adminMaterialize/header.html.php');
+            include_once('templates/adminMaterialize/sidebar-left.html.php');
+            include_once('templates/adminMaterialize/accessDenied.html.php');
+            include_once('templates/adminMaterialize/sidebar-right.html.php');
+            include_once('templates/adminMaterialize/footer.html.php');
+            die();
         }
-    }
-
+    //Fin validación permisos de navegación
+    
     // /equipos/equipos/crear/noVista
     if (!isset($cadena[4]) || $cadena[4] != "noVista") {
         

@@ -10,7 +10,7 @@ and open the template in the editor.
    
     <controladores>
         <controlador>
-            <nombre>RolesController</nombre>
+            <nombre>rolesController</nombre>
             <display>Roles</display>
             <descripcion>Controlador de Roles</descripcion>
             
@@ -41,9 +41,9 @@ and open the template in the editor.
                 </funcion>
                 
                 <funcion>
-                    <nombre>validarFuncionAsignada</nombre>
-                    <display>validar Funcion Asignada</display>
-                    <descripcion>validarFuncionAsignada</descripcion>
+                    <nombre>listar</nombre>
+                    <display>Listar roles</display>
+                    <descripcion>Lista los roles</descripcion>
                 </funcion>
             </funciones>
             

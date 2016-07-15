@@ -10,7 +10,7 @@ and open the template in the editor.
    
     <controladores>
         <controlador>
-            <nombre>ProgramacionController</nombre>
+            <nombre>programacionController</nombre>
             <display>Programacion</display>
             <descripcion>Controlador de Programacion</descripcion>
             
