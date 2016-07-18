@@ -10,6 +10,9 @@ include_once("../lib/php/global.php");
 //se incluye el paginado
 include_once("../lib/php/PaginadoClass.php");
 
+//se incluye la clase para cargar el menú
+include_once("../lib/php/MenuClass.php");
+
 //if(!isset($modulo) && !isset($controller) && !isset($accion)){
 if (!isset($_SESSION['login']) && (!isset($_SERVER['PATH_INFO'])  || $_SERVER['PATH_INFO'] != "/sesion/sesion/postInicio/noVista")) {
     include_once('templates/adminMaterialize/login/header.html.php');
@@ -54,7 +57,6 @@ if (!isset($_SESSION['login']) && (!isset($_SERVER['PATH_INFO'])  || $_SERVER['P
     
     // /equipos/equipos/crear/noVista
     if (!isset($cadena[4]) || $cadena[4] != "noVista") {
-        
         
         // Se carga el header de nuestra aplicación
         include_once('templates/adminMaterialize/header.html.php');

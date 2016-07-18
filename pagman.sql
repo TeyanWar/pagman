@@ -177,6 +177,7 @@ CREATE TABLE `pag_controlador` (
   `cont_id` int(11) NOT NULL auto_increment,
   `mod_id` int(11) NOT NULL,
   `cont_nombre` varchar(40) NOT NULL,
+  `cont_icono` varchar(40) NOT NULL,
   `cont_display` varchar(40) NOT NULL,
   `cont_descripcion` varchar(100) default NULL,
   `estado` timestamp NULL default NULL,
@@ -590,6 +591,8 @@ INSERT INTO `pag_jornada` VALUES (3, 'noche', NULL);
 CREATE TABLE `pag_modulo` (
   `mod_id` int(11) NOT NULL auto_increment,
   `mod_nombre` varchar(20) NOT NULL,
+  `mod_icono` varchar(40) NOT NULL,
+  `mod_sitio_menu` varchar(20) NOT NULL,
   `mod_descripcion` varchar(100) default NULL,
   `estado` tinyint(1) NOT NULL default '1',
   PRIMARY KEY  (`mod_id`)

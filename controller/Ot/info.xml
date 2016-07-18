@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>OT</nombre>
+    <icono>mdi-action-assignment</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de OT</descripcion>
    
     <controladores>
         <controlador>
             <nombre>otController</nombre>
+            <icono>mdi-action-assignment</icono>
             <display>ot</display>
             <descripcion>Controlador de ot</descripcion>
             

@@ -95,9 +95,11 @@ class PermisosController {
             $existeModulo=$objPerm->find("SELECT * FROM pag_modulo WHERE mod_nombre='$modulo->nombre'");
             if($existeModulo){
                 $mod_id = array('mod_id'=>$existeModulo['mod_id']);
-                $objPerm->update("UPDATE pag_modulo SET mod_descripcion='$modulo->descripcion' WHERE mod_id=".$existeModulo['mod_id']);
+                $objPerm->update("UPDATE pag_modulo SET mod_descripcion='$modulo->descripcion', mod_icono='$modulo->icono', "
+                        . "mod_sitio_menu='$modulo->sitioMenu' WHERE mod_id=".$existeModulo['mod_id']);
             }else{
-                $sqlModulo = "INSERT INTO pag_modulo(mod_nombre,mod_descripcion) VALUES('$modulo->nombre','$modulo->descripcion')";
+                $sqlModulo = "INSERT INTO pag_modulo(mod_nombre,mod_icono,mod_sitio_menu,mod_descripcion) "
+                        . "VALUES('$modulo->nombre','$modulo->icono','$modulo->sitioMenu','$modulo->descripcion')";
                 $objPerm->insertar($sqlModulo);
                 $mod_id = $objPerm->find("SELECT MAX(mod_id) as mod_id FROM pag_modulo");
             }//if
@@ -107,11 +109,12 @@ class PermisosController {
                 $existeControlador=$objPerm->find("SELECT * FROM pag_controlador WHERE cont_nombre='$controlador->nombre'");
                 if($existeControlador){
                     $cont_id=array('cont_id'=>$existeControlador['cont_id']);
-                    $objPerm->update("UPDATE pag_controlador SET cont_display='$controlador->display', cont_descripcion='$controlador->descripcion' "
-                            . "WHERE cont_id=".$existeControlador['cont_id']);
+                    $objPerm->update("UPDATE pag_controlador SET cont_display='$controlador->display', cont_icono='$controlador->icono'"
+                            . "cont_descripcion='$controlador->descripcion' WHERE cont_id=".$existeControlador['cont_id']);
                 }else{
-                    $sqlControlador = "INSERT INTO pag_controlador(mod_id,cont_nombre,cont_display,cont_descripcion,estado) VALUES"
-                            . "(".$mod_id['mod_id'].",'$controlador->nombre','$controlador->display','$controlador->descripcion',1)";
+                    $sqlControlador = "INSERT INTO pag_controlador(mod_id,cont_nombre,cont_icono,cont_display,cont_descripcion,estado) "
+                            . "VALUES (".$mod_id['mod_id'].",'$controlador->nombre','$controlador->icono','$controlador->display',"
+                            . "'$controlador->descripcion',1)";
                     $objPerm->insertar($sqlControlador);
                     $cont_id = $objPerm->find("SELECT MAX(cont_id) as cont_id FROM pag_controlador");
                 }//if
@@ -135,29 +138,31 @@ class PermisosController {
     }//registrarActualizarPermisos
 
     public function validarAcceso($cadena){
+        
         $objPermiso = new PermisosClass();
         
+        //Buscar el id del controlador
         $sql= "SELECT cont_id FROM pag_controlador WHERE cont_nombre='$cadena[2]Controller'";
         $controlador=$objPermiso->find($sql);
-        $cont_id=$controlador['cont_id'];
-        
-        $sql="SELECT func_id FROM pag_funcion WHERE cont_id=$cont_id AND func_nombre='$cadena[3]'";
-        $funcion=$objPermiso->find($sql);
+        if($controlador){
+            $cont_id=$controlador['cont_id'];
+            //Buscar el id de la función a la que intenta acceder el usuario
+            $sql="SELECT func_id FROM pag_funcion WHERE cont_id=$cont_id AND func_nombre='$cadena[3]'";
+            $funcion=$objPermiso->find($sql);
 
-        //Si la función existe entonces validar si el rol la tiene asignada
-        if($funcion){
-            $func_id=$funcion['func_id'];        
-            $sql="SELECT * FROM pag_permisos WHERE func_id=$func_id AND rol_id=".$_SESSION['login']['rol_id'];
-            $permiso=$objPermiso->find($sql);
-            //No la tiene asignada?
-            if(empty($permiso)){
-                return false;
-//                die("No tiene permisos para acceder a la función solicitada, contacte con soporte");
-            }
-            
+            //Si la función existe entonces validar si el rol la tiene asignada
+            if($funcion){
+                $func_id=$funcion['func_id'];        
+                $sql="SELECT * FROM pag_permisos WHERE func_id=$func_id AND rol_id=".$_SESSION['login']['rol_id'];
+                $permiso=$objPermiso->find($sql);
+                //No tiene permiso?
+                if(!$permiso){
+                    return false;
+                }
+            }//if
         }
         
-        ////Sino existe la función, dejelo pasar porque es una función a la que no hay que controlar el acceso
+        ////Sino existe la función, deja pasar porque es una función a la que no hay que controlar el acceso
         //Por ejemplo: Una función ajax, una función para validar, etc.
         
         return true;

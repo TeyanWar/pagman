@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Programacion</nombre>
+    <icono>mdi-editor-insert-invitation</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo Programacion</descripcion>
    
     <controladores>
         <controlador>
             <nombre>programacionController</nombre>
+            <icono>mdi-editor-insert-invitation</icono>
             <display>Programacion</display>
             <descripcion>Controlador de Programacion</descripcion>
             

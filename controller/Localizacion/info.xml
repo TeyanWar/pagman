@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Localizacion</nombre>
+    <icono>mdi-communication-location-on</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de Localizacion</descripcion>
    
     <controladores>
         <controlador>
             <nombre>localizacionController</nombre>
+            <icono>mdi-communication-location-on</icono>
             <display>Localizacion</display>
             <descripcion>Controlador de Localizacion</descripcion>
             

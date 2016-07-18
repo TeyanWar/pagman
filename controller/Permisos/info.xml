@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Permisos</nombre>
+    <icono>mdi-action-lock</icono>
+    <sitioMenu>configuracion</sitioMenu>
     <descripcion>Modulo de Permisos</descripcion>
    
     <controladores>
         <controlador>
             <nombre>permisosController</nombre>
+            <icono>mdi-action-lock</icono>
             <display>Permisos</display>
             <descripcion>Controlador de Permisos</descripcion>
             

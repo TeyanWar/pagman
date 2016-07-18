@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Medidores</nombre>
+    <icono>mdi-image-timer</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de Medidores</descripcion>
    
     <controladores>
         <controlador>
             <nombre>medidoresController</nombre>
+            <icono>mdi-image-timer</icono>
             <display>Medidores</display>
             <descripcion>Controlador de Medidores</descripcion>
             

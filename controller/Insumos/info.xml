@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Insumos</nombre>
+    <icono>mdi-maps-local-gas-station</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de Insumos</descripcion>
    
     <controladores>
         <controlador>
             <nombre>insumosController</nombre>
+            <icono>mdi-maps-local-gas-station</icono>
             <display>Insumos</display>
             <descripcion>Controlador de Insumos</descripcion>
             

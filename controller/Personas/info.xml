@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Personas</nombre>
+    <icono>mdi-social-person-outline</icono>
+    <sitioMenu>configuracion</sitioMenu>
     <descripcion>Modulo de Personas</descripcion>
    
     <controladores>
         <controlador>
             <nombre>personasController</nombre>
+            <icono>mdi-social-person-outline</icono>
             <display>Personas</display>
             <descripcion>Controlador de Personas</descripcion>
             

@@ -3,7 +3,10 @@
 <div id="main">
     <!-- START WRAPPER -->
     <div class="wrapper">
-
+        <?php 
+        $objMenu=new MenuClass(); 
+        $modulosRol=$objMenu->getModulos();
+        ?>
         <!-- START LEFT SIDEBAR NAV-->
         <aside id="left-sidebar-nav">
             <ul id="slide-out" class="side-nav leftside-navigation">
@@ -35,118 +38,43 @@
                 <li class="bold"><a href="<?php echo addLib('') ?>" class="waves-effect waves-cyan">
                         <i class="mdi-action-dashboard"></i> Panel de control</a>
                 </li>
-                <!-- Modulo de equipos -->
-                <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
-                                <i class="mdi-hardware-desktop-windows"></i> Equipos</a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a href="<?php echo crearUrl("Equipos", "equipos", "crear") ?>">Crear equipos</a>
-                                    </li>
-                                    <li><a href="<?php echo crearUrl("Equipos", "equipos", "listar") ?>">Listar equipos</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <?php ?>
-                <!-- Modulo de inventarios -->
-                <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
-                                <i class="mdi-image-exposure-plus-1"></i> Inventarios</a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a href="layout-fullscreen.html">Full Screen</a>
-                                    </li>
-                                    <li><a href="layout-horizontal-menu.html">Horizontal Menu</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
 
-                <!-- Modulo de mediciones -->
-                <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
-                                <i class="mdi-action-view-carousel"></i> Mediciones</a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li>
-                                        <a class="submenu">Mediciones</a>
-                                        <div class="submenu-lista">
-                                            <ul>
-                                                <li><a class="left-align" href="layout-fullscreen.html">
-                                                        <i class="mdi-content-add-circle-outline"></i>Crear medici&oacute;n</a>
-                                                </li>
-                                                <li><a href="layout-horizontal-menu.html">
-                                                        <i class="mdi-action-list"></i>Listar medici&oacute;n</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-
-                                    <li><a class="submenu">Medidores</a>
-                                        <div class="submenu-lista">
-                                            <ul>
-                                                <li><a href="layout-fullscreen.html">
-                                                        <i class="mdi-content-add-circle-outline"></i>Crear medidor</a>
-                                                </li>
-                                                <li><a href="layout-horizontal-menu.html">
-                                                        <i class="mdi-action-list"></i>Listar medidores</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                <!-- Modulos -->
+                <?php foreach($modulosRol as $moduloRol){ ?>
+                        <li class="no-padding">
+                            <ul class="collapsible collapsible-accordion">
+                                <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
+                                    <i class="<?php echo $moduloRol['mod_icono'];?>"></i> <?php echo $moduloRol['mod_nombre']; ?></a>
+                                    <div class="collapsible-body">
+                                        <ul>
+                                            <?php foreach($moduloRol['controladores'] as $controlador){ ?>
+                                                    <li>
+                                                        <a class="submenu"><i class="<?php echo $controlador['cont_icono']; ?>"></i><?php echo $controlador['cont_display'];?></a>
+                                                        <div class="submenu-lista">
+                                                            <ul>
+                                                                <?php foreach($controlador['funciones'] as $funcion){ ?>
+                                                                        <li><a href="<?php echo crearUrl($moduloRol['mod_nombre'], $controlador['cont_nombre'], $funcion['func_nombre']) ?>">
+                                                                            <i class="<?php echo $funcion['func_icono']; ?>"></i>
+                                                                            <?php echo $funcion['func_display']; ?>
+                                                                            </a>
+                                                                        </li>
+                                                                <?php } ?>
+                                                            </ul>
+                                                        </div>
+                                                    </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
                         </li>
-                    </ul>
-                </li>
-
-                <!-- Modulo de OT -->
-                <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
-                                <i class="mdi-content-content-paste"></i> Ordenes</a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a href="layout-fullscreen.html">Full Screen</a>
-                                    </li>
-                                    <li><a href="layout-horizontal-menu.html">Horizontal Menu</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-
-                <!-- Modulo de costos -->
-                <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
-                                <i class="mdi-editor-attach-money"></i> Costos</a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a href="layout-fullscreen.html">Full Screen</a>
-                                    </li>
-                                    <li><a href="layout-horizontal-menu.html">Horizontal Menu</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+                <?php } ?>
 
                 <li class="li-hover"><div class="divider"></div></li>
 
                 <li class="li-hover"><p class="ultra-small margin more-text">CONFIGURACI&Oacute;N</p></li>
 
-                <!-- Modulo de Usuarios -->
+                <!-- Modulos -->
                 <li class="no-padding">
                     <ul class="collapsible collapsible-accordion">
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
@@ -192,13 +120,7 @@
                     </ul>
                 </li>
 
-                <li><a href="css-color.html"><i class="mdi-editor-format-color-fill"></i> Permisos</a>
-                </li>
-
-                <li class="li-hover"><div class="divider"></div></li>
-                <li class="li-hover"><p class="ultra-small margin more-text">Daily Sales</p></li>
-
+                <li class="li-hover"><div class="divider"></div></li>                
             </ul>
-            <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
         </aside>
         <!-- END LEFT SIDEBAR NAV-->

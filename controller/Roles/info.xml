@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Roles</nombre>
+    <icono>mdi-social-group</icono>
+    <sitioMenu>configuracion</sitioMenu>
     <descripcion>Modulo asignar Roles a un usuario</descripcion>
    
     <controladores>
         <controlador>
             <nombre>rolesController</nombre>
+            <icono>mdi-social-group</icono>
             <display>Roles</display>
             <descripcion>Controlador de Roles</descripcion>
             

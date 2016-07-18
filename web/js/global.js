@@ -54,7 +54,6 @@ $(document).ready(function(){
                 } else {
                     Materialize.toast('Error de Informacion', 2000, 'rounded col red');
                 }
-
             }
         });
     }

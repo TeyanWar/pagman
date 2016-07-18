@@ -7,7 +7,7 @@ class SesionController {
     function postInicio() {
         $nom_usu = $_POST['nom_usu'];
         $pass_usu = $_POST['pass_usu'];
-
+        
 
         $objSesion = new sesionModel();
         $sql = "SELECT * FROM pag_usuario WHERE usu_usuario='$nom_usu' and usu_clave='$pass_usu'";

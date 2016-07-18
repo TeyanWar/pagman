@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Usuarios</nombre>
+    <icono>mdi-action-account-circle</icono>
+    <sitioMenu>configuracion</sitioMenu>
     <descripcion>Modulo Usuarios</descripcion>
    
     <controladores>
         <controlador>
             <nombre>usuariosController</nombre>
+            <icono>mdi-action-account-circle</icono>
             <display>Usuarios</display>
             <descripcion>Controlador de Usuarios</descripcion>
             

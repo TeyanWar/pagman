@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Herramientas</nombre>
+    <icono>mdi-action-perm-data-setting</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de Herramientas</descripcion>
    
     <controladores>
         <controlador>
             <nombre>herramientasController</nombre>
+            <icono>mdi-action-perm-data-setting</icono>
             <display>Herramientas</display>
             <descripcion>Controlador de Herramientas</descripcion>
             

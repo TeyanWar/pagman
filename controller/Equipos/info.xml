@@ -6,12 +6,15 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Equipos</nombre>
+    <icono>mdi-hardware-desktop-windows</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de Equipos</descripcion>
    
     <controladores>
         <controlador>
             <nombre>equiposController</nombre>
             <display>Equipos</display>
+            <icono>mdi-hardware-desktop-windows</icono>
             <descripcion>Controlador de Equipos</descripcion>
             
             <funciones>
@@ -24,8 +27,8 @@ and open the template in the editor.
                 
                 <funcion>
                     <nombre>editar</nombre>
-                    <display>Editar Permisos</display>
-                    <descripcion>Editar Permisos</descripcion>
+                    <display>Editar Equipos</display>
+                    <descripcion>Editar Equipos </descripcion>
                 </funcion>
                 
                  <funcion>

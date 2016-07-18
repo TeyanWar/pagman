@@ -6,11 +6,14 @@ and open the template in the editor.
 -->
 <modulos>
     <nombre>Costos</nombre>
+    <icono>mdi-editor-attach-money</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de Costos</descripcion>
    
     <controladores>
         <controlador>
             <nombre>costosController</nombre>
+            <icono>mdi-editor-attach-money</icono>
             <display>Costos</display>
             <descripcion>Controlador de Costos</descripcion>
             
@@ -51,6 +54,7 @@ and open the template in the editor.
         
         <controlador>
             <nombre>pruebasController</nombre>
+            <icono>mdi-editor-attach-money</icono>
             <display>Pruebas</display>
             <descripcion>Controlador de Costos para probar</descripcion>
             
@@ -76,6 +80,7 @@ and open the template in the editor.
         
         <controlador>
             <nombre>pruebas2Controller</nombre>
+            <icono>mdi-editor-attach-money</icono>
             <display>Pruebas2</display>
             <descripcion>Controlador de Costos para probar</descripcion>
             
