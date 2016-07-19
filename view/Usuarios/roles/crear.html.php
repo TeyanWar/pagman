@@ -5,7 +5,7 @@
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li> 
             <li><a href="#">Usuarios</a></li> 
             <li><a href="#">Roles</a></li> 
-            <li class="active">Crear un rol</li> 
+            <li class="active">Crear rol</li> 
         </ol>
         <div id="card-alert" class="card teal"> 
             <div class="card-content white-text"> 
@@ -15,18 +15,19 @@
             </div> 
 
         </div>
+        <?php if(isset($_SESSION['mensajeError'])){ ?>
         <div id="card-alert" class="card red">
             <div class="card-content white-text">
-                <p>                    <?php echo getErrores(); ?>
-                </p>
+                <?php echo getErrores(); ?>
             </div>
         </div>
+        <?php } ?>
         <form class="col s12" action="<?php echo crearUrl("roles", "roles", "postCrear") ?>" method="POST">
             <!--Datos del rol-->
             <!--<h4 class="header2">Datos del rol</h4>-->            
             <div class="row">
                 <div class="input-field col s4">
-                    <input id="rol_nombre" name="rol_nombre" class="validate" type="text" required="">
+                    <input id="rol_nombre" name="rol_nombre" class="validate" type="text" required>
                     <label class="" for="rol_nombre">(*) Nombre</label>
                 </div>
                 <div class="input-field col s8">

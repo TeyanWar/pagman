@@ -52,7 +52,7 @@ function setErrores($errores =  array()){
         }
         
         $mensajeError .= "</ul>";
-        
+
     }
     
     $_SESSION['mensajeError'] = $mensajeError;
@@ -64,10 +64,10 @@ function getErrores(){
     $mensajeError="";
     
     if(isset($_SESSION['mensajeError'])){
-        
+
         $mensajeError = $_SESSION['mensajeError'];
         unset($_SESSION['mensajeError']);
     }
-    
+
     return $mensajeError;
 }

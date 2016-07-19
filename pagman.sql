@@ -594,7 +594,7 @@ CREATE TABLE `pag_modulo` (
   `mod_icono` varchar(40) NOT NULL,
   `mod_sitio_menu` varchar(20) NOT NULL,
   `mod_descripcion` varchar(100) default NULL,
-  `estado` tinyint(1) NOT NULL default '1',
+  `estado` timestamp NULL default NULL,
   PRIMARY KEY  (`mod_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

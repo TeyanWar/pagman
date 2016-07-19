@@ -46,11 +46,7 @@ if (!isset($_SESSION['login']) && (!isset($_SERVER['PATH_INFO'])  || $_SERVER['P
         include_once('../controller/Permisos/permisosController.php');
         $objPermiso= new PermisosController();
         if(!$objPermiso->validarAcceso($cadena)){
-            include_once('templates/adminMaterialize/header.html.php');
-            include_once('templates/adminMaterialize/sidebar-left.html.php');
-            include_once('templates/adminMaterialize/accessDenied.html.php');
-            include_once('templates/adminMaterialize/sidebar-right.html.php');
-            include_once('templates/adminMaterialize/footer.html.php');
+            include_once('templates/adminMaterialize/errors/accessDenied.html.php');
             die();
         }
     //Fin validación permisos de navegación

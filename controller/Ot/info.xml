@@ -14,7 +14,7 @@ and open the template in the editor.
         <controlador>
             <nombre>otController</nombre>
             <icono>mdi-action-assignment</icono>
-            <display>ot</display>
+            <display>Ordenes de trabajo</display>
             <descripcion>Controlador de ot</descripcion>
             
             <funciones>

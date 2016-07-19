@@ -109,12 +109,12 @@ class PermisosController {
                 $existeControlador=$objPerm->find("SELECT * FROM pag_controlador WHERE cont_nombre='$controlador->nombre'");
                 if($existeControlador){
                     $cont_id=array('cont_id'=>$existeControlador['cont_id']);
-                    $objPerm->update("UPDATE pag_controlador SET cont_display='$controlador->display', cont_icono='$controlador->icono'"
+                    $objPerm->update("UPDATE pag_controlador SET cont_display='$controlador->display', cont_icono='$controlador->icono', "
                             . "cont_descripcion='$controlador->descripcion' WHERE cont_id=".$existeControlador['cont_id']);
                 }else{
-                    $sqlControlador = "INSERT INTO pag_controlador(mod_id,cont_nombre,cont_icono,cont_display,cont_descripcion,estado) "
+                    $sqlControlador = "INSERT INTO pag_controlador(mod_id,cont_nombre,cont_icono,cont_display,cont_descripcion) "
                             . "VALUES (".$mod_id['mod_id'].",'$controlador->nombre','$controlador->icono','$controlador->display',"
-                            . "'$controlador->descripcion',1)";
+                            . "'$controlador->descripcion')";
                     $objPerm->insertar($sqlControlador);
                     $cont_id = $objPerm->find("SELECT MAX(cont_id) as cont_id FROM pag_controlador");
                 }//if

@@ -5,7 +5,7 @@
     <div class="wrapper">
         <?php 
         $objMenu=new MenuClass(); 
-        $modulosRol=$objMenu->getModulos();
+        $modulosMenu=$objMenu->getModulos();
         ?>
         <!-- START LEFT SIDEBAR NAV-->
         <aside id="left-sidebar-nav">
@@ -39,21 +39,21 @@
                         <i class="mdi-action-dashboard"></i> Panel de control</a>
                 </li>
 
-                <!-- Modulos -->
-                <?php foreach($modulosRol as $moduloRol){ ?>
+                <!-- Modulos sitio principal -->
+                <?php foreach($modulosMenu['principal'] as $moduloPrincipal){ ?>
                         <li class="no-padding">
                             <ul class="collapsible collapsible-accordion">
                                 <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
-                                    <i class="<?php echo $moduloRol['mod_icono'];?>"></i> <?php echo $moduloRol['mod_nombre']; ?></a>
+                                    <i class="<?php echo $moduloPrincipal['mod_icono'];?>"></i> <?php echo $moduloPrincipal['mod_nombre']; ?></a>
                                     <div class="collapsible-body">
                                         <ul>
-                                            <?php foreach($moduloRol['controladores'] as $controlador){ ?>
+                                            <?php foreach($moduloPrincipal['controladores'] as $controlador){ ?>
                                                     <li>
                                                         <a class="submenu"><i class="<?php echo $controlador['cont_icono']; ?>"></i><?php echo $controlador['cont_display'];?></a>
                                                         <div class="submenu-lista">
                                                             <ul>
                                                                 <?php foreach($controlador['funciones'] as $funcion){ ?>
-                                                                        <li><a href="<?php echo crearUrl($moduloRol['mod_nombre'], $controlador['cont_nombre'], $funcion['func_nombre']) ?>">
+                                                                        <li><a href="<?php echo crearUrl($moduloPrincipal['mod_nombre'], $controlador['cont_nombre'], $funcion['func_nombre']) ?>">
                                                                             <i class="<?php echo $funcion['func_icono']; ?>"></i>
                                                                             <?php echo $funcion['func_display']; ?>
                                                                             </a>
@@ -74,52 +74,36 @@
 
                 <li class="li-hover"><p class="ultra-small margin more-text">CONFIGURACI&Oacute;N</p></li>
 
-                <!-- Modulos -->
-                <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
-                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
-                                <i class="mdi-social-person-outline"></i> Usuarios</a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <!--Roles-->
-                                    <li>
-                                        <a class="submenu"><i class="mdi-social-group"></i>Roles</a>
-                                        <div class="submenu-lista">
-                                            <ul>
-                                                <li><a href="<?php echo crearUrl('Roles', 'roles', 'crear') ?>">
-                                                        <i class="mdi-content-add-circle-outline"></i>Crear rol</a>
-                                                </li>
-                                                <li><a href="<?php echo crearUrl('Roles', 'roles', 'listar') ?>">
-                                                        <i class="mdi-action-list"></i>Listar roles</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <!--Permisos-->
-                                    <li>
-                                        <a class="submenu" href="<?php echo crearUrl('Permisos', 'permisos', 'crear') ?>">
-                                            <i class="mdi-action-lock-open"></i>Permisos
-                                        </a>
-                                    </li>
-                                    <!--Usuarios-->
-                                    <li><a class="submenu">Usuarios</a>
-                                        <div class="submenu-lista">
-                                            <ul>
-                                                <li><a href="layout-fullscreen.html">
-                                                        <i class="mdi-content-add-circle-outline"></i>Crear medidor</a>
-                                                </li>
-                                                <li><a href="layout-horizontal-menu.html">
-                                                        <i class="mdi-action-list"></i>Listar medidores</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                <!-- Modulos sitio configuración -->
+                <?php foreach($modulosMenu['configuracion'] as $moduloConfig){ ?>
+                        <li class="no-padding">
+                            <ul class="collapsible collapsible-accordion">
+                                <li class="bold"><a class="collapsible-header waves-effect waves-cyan">
+                                    <i class="<?php echo $moduloConfig['mod_icono'];?>"></i> <?php echo $moduloConfig['mod_nombre']; ?></a>
+                                    <div class="collapsible-body">
+                                        <ul>
+                                            <?php foreach($moduloConfig['controladores'] as $controlador){ ?>
+                                                    <li>
+                                                        <a class="submenu"><i class="<?php echo $controlador['cont_icono']; ?>"></i><?php echo $controlador['cont_display'];?></a>
+                                                        <div class="submenu-lista">
+                                                            <ul>
+                                                                <?php foreach($controlador['funciones'] as $funcion){ ?>
+                                                                        <li><a href="<?php echo crearUrl($moduloConfig['mod_nombre'], $controlador['cont_nombre'], $funcion['func_nombre']) ?>">
+                                                                            <i class="<?php echo $funcion['func_icono']; ?>"></i>
+                                                                            <?php echo $funcion['func_display']; ?>
+                                                                            </a>
+                                                                        </li>
+                                                                <?php } ?>
+                                                            </ul>
+                                                        </div>
+                                                    </li>
+                                            <?php } ?>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
                         </li>
-                    </ul>
-                </li>
-
+                <?php } ?>
                 <li class="li-hover"><div class="divider"></div></li>                
             </ul>
         </aside>

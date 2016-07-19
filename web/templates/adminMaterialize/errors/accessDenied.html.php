@@ -1,3 +1,8 @@
+
+<link href="<?php echo addLib('templates/adminMaterialize/css/materialize.css') ?>" type="text/css" rel="stylesheet" media="screen,projection">
+<link href="<?php echo addLib('templates/adminMaterialize/css/style.css') ?>" type="text/css" rel="stylesheet" media="screen,projection">
+<link href="<?php echo addLib('templates/adminMaterialize/css/layouts/style-fullscreen.css') ?>" type="text/css" rel="stylesheet" media="screen,projection">
+
 <section id="content"><!-- START CONTENT -->
     <div class="container"><!--start container-->
         

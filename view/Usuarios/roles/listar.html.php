@@ -1,16 +1,16 @@
 <div class="col s12 m12 l6">
     <div class="card-panel">
-        <h5>LISTAR ROLES</h5>
+        <h5>LISTA DE ROLES</h5>
         <ol class="breadcrumbs"> 
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li> 
             <li><a href="#">Usuarios</a></li> 
-            <li><a href="#">Permisos</a></li> 
-            <li class="active">Crear permisos</li> 
+            <li><a href="#">Roles</a></li> 
+            <li class="active">Listar roles</li> 
         </ol>   
 
         <div id="card-alert" class="card teal">
             <div class="card-content white-text">
-                <p><i class="mdi-action-info-outline"></i> IMPORTANTE : La siguiente lista muestra los roles creados en el Sistema con sus respectios permisos y/o funciones asignados a este.</p>
+                <p><i class="mdi-action-info-outline"></i> A continuaci&oacute;n podr&aacute; gestionar un rol.</p>
             </div>
             <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>

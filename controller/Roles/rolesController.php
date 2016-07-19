@@ -15,12 +15,12 @@ class RolesController {
         $errores = array();
         $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
 
-        if (!isset($_POST['rol_nombre']) or $_POST['rol_nombre'] == "") {
-            $errores[] = "El campo rol no puede quedar vacio.";
+        if (!isset($_POST['rol_nombre']) || $_POST['rol_nombre'] == "") {
+            $errores[] = "El campo <code><b>nombre</b></code> debe estar diligenciado.";
         }
 
-        if (!isset($_POST['rol_descripcion']) or $_POST['rol_descripcion'] == "") {
-            $errores[] = "Por favor, el rol debe de tener una descripcion.";
+        if (!isset($_POST['rol_descripcion']) || $_POST['rol_descripcion'] == "") {
+            $errores[] = "El campo <code><b>descripci&oacute;n</b></code> debe estar diligenciado.";
         }
 
         if (count($errores) > 0) {
@@ -75,8 +75,8 @@ class RolesController {
         $rol_id = $parametros[1];
 
         $sqlBuscar = "SELECT * FROM pag_rol WHERE rol_id=$rol_id";
-        $roles = $objRol->select($sqlBuscar);
-        
+        $rol = $objRol->find($sqlBuscar);
+
         //Obtener funciones, y compararla con los permisos para checkear
         $funciones=$objRol->select("SELECT cont_id,func_id,func_display FROM pag_funcion");
         $permisos=$objRol->select("SELECT func_id FROM pag_permisos WHERE rol_id=$rol_id");

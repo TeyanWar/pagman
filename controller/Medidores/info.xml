@@ -14,7 +14,7 @@ and open the template in the editor.
         <controlador>
             <nombre>medidoresController</nombre>
             <icono>mdi-image-timer</icono>
-            <display>Medidores</display>
+            <display>Medidor</display>
             <descripcion>Controlador de Medidores</descripcion>
             
             <funciones>
