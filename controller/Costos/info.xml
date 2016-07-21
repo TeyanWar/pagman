@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+    <!--
+    To change this license header, choose License Headers in Project Properties.
+    To change this template file, choose Tools | Templates
+    and open the template in the editor.
+    -->
 <modulos>
     <nombre>Costos</nombre>
     <icono>mdi-editor-attach-money</icono>
@@ -52,14 +52,14 @@ and open the template in the editor.
             
         </controlador>
         
-        <controlador>
+<!--        <controlador>
             <nombre>pruebasController</nombre>
             <icono>mdi-editor-attach-money</icono>
             <display>Pruebas</display>
             <descripcion>Controlador de Costos para probar</descripcion>
             
             <funciones>
-                
+            
                 <funcion>
                     <nombre>crear</nombre>
                     <display>Crear Prueba</display>
@@ -97,7 +97,7 @@ and open the template in the editor.
                     <descripcion>Eliminar Prueba2</descripcion>
                 </funcion>
             </funciones>
-        </controlador>
+        </controlador>-->
         
     </controladores>
 </modulos>

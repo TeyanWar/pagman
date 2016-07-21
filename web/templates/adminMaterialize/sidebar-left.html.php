@@ -53,11 +53,13 @@
                                                         <div class="submenu-lista">
                                                             <ul>
                                                                 <?php foreach($controlador['funciones'] as $funcion){ ?>
+                                                                    <?php if(strcasecmp ($funcion['func_nombre'],'crear')==0 || strcasecmp ($funcion['func_nombre'],'listar')==0){ ?>
                                                                         <li><a href="<?php echo crearUrl($moduloPrincipal['mod_nombre'], $controlador['cont_nombre'], $funcion['func_nombre']) ?>">
                                                                             <i class="<?php echo $funcion['func_icono']; ?>"></i>
                                                                             <?php echo $funcion['func_display']; ?>
                                                                             </a>
                                                                         </li>
+                                                                    <?php } ?>
                                                                 <?php } ?>
                                                             </ul>
                                                         </div>
@@ -88,11 +90,13 @@
                                                         <div class="submenu-lista">
                                                             <ul>
                                                                 <?php foreach($controlador['funciones'] as $funcion){ ?>
+                                                                    <?php if(strcasecmp ($funcion['func_nombre'],'crear')==0 || strcasecmp ($funcion['func_nombre'],'listar')==0){ ?>
                                                                         <li><a href="<?php echo crearUrl($moduloConfig['mod_nombre'], $controlador['cont_nombre'], $funcion['func_nombre']) ?>">
                                                                             <i class="<?php echo $funcion['func_icono']; ?>"></i>
                                                                             <?php echo $funcion['func_display']; ?>
                                                                             </a>
                                                                         </li>
+                                                                    <?php } ?>
                                                                 <?php } ?>
                                                             </ul>
                                                         </div>

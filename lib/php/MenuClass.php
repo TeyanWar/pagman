@@ -22,7 +22,7 @@ class MenuClass{
         $modulos=$objPerm->select("SELECT DISTINCT m.mod_id, m.mod_nombre, m.mod_icono, m.mod_sitio_menu 
             FROM pag_modulo m, pag_controlador c, pag_funcion f, pag_permisos p  
             WHERE p.func_id=f.func_id AND f.cont_id=c.cont_id AND c.mod_id=m.mod_id AND p.rol_id=".$rol_id);
-        
+//        dd($funciones);
         //Inicio modificación de vector módulos
             //Añadir a cada controlador sus respectivas funciones
             foreach($controladores as $key=>$controlador){
