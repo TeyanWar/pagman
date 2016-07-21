@@ -55,7 +55,7 @@
 
                     <div class="col s4">
                         <label>(*) Equipo</label>
-                        <select class="select2" id="selectEqui" name="equipo" >
+                        <select class="select2" id="selectEqui" name="ot_equipo" >
                             <option value="" disabled selected>Seleccione</option>
                         </select>
                     </div>

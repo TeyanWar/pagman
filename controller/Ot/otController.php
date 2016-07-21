@@ -19,7 +19,7 @@ class OtController {
                 . "WHERE  pag_orden_trabajo.tfa_id = pag_tipo_falla.tfa_id "
                 . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
                 . "AND pag_orden_trabajo.per_id=pag_persona.per_id "
-                . "AND pag_orden_trabajo.reg_id = pag_regional.reg_id "
+//                . "AND pag_orden_trabajo.reg_id = pag_regional.reg_id "
                 . "AND pag_orden_trabajo.est_id=pag_estado.est_id "
                 . "AND pag_orden_trabajo.ot_prioridad=pag_prioridad_trabajo.priotra_id "
                 . "AND pag_estado.tdoc_id=pag_tipo_doc.tdoc_id "
@@ -48,7 +48,7 @@ class OtController {
                 . "WHERE  pag_orden_trabajo.tfa_id = pag_tipo_falla.tfa_id "
                 . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
                 . "AND pag_orden_trabajo.per_id=pag_persona.per_id "
-                . "AND pag_orden_trabajo.reg_id = pag_regional.reg_id "
+//                . "AND pag_orden_trabajo.reg_id = pag_regional.reg_id "
                 . "AND pag_orden_trabajo.est_id=pag_estado.est_id "
 //                . "AND pag_orden_trabajo.ins_id=pag_insumo.ins_nombre "
                 . "AND pag_estado.tdoc_id=pag_tipo_doc.tdoc_id "
@@ -76,7 +76,7 @@ class OtController {
         include_once("../view/Ot/ot/selectEquipo.html.php");
     }
 
-    function registrar($parametros) {
+    function crear($parametros=false) {
         
         $objCentroFormacion = new OtModel();
         $objTipoFalla = new OtModel();
@@ -171,8 +171,6 @@ class OtController {
     }
 
     function postCrear() {
-
-        //$regional = $_POST['ot_regional'];
         $centro_formacion = $_POST['ot_centro_formacion'];
         $equipo = $_POST['ot_equipo'];
         $tipoFalla = $_POST['ot_tipo_falla'];
@@ -188,7 +186,7 @@ class OtController {
 
         $componentes = $_POST ['componente'];
         //POST para insercion a tabla detalle
-
+        
         if (isset($centro_formacion) && ($equipo) && ($tipoFalla) && ($prioridad) && ($encargado) && ($fechaInicio) && ($fechaFin) && ($ayudantes) && ($ins_id) && ($descripcionFalla) && ($descripcionTrabajo)) {
 
             $insertOt = "INSERT INTO pag_orden_trabajo(cen_id,"
@@ -201,22 +199,18 @@ class OtController {
 
             $objOt = new OtModel();
             $insertar = $objOt->insertar($insertOt);
-        }
+        }// if de validacion
 
-        //die(print_r($insertOt));
-        // if de validacion
         if ($insertar) {
+            $objDetalle = new OtModel();
             foreach ($componentes as $componente) {
-
-                $objDetalle = new OtModel();
                 $insertDetalle = "INSERT INTO pag_detalle_ot (comp_id) VALUES ('$componente')";
-
                 $insertarDetalle = $objDetalle->insertar($insertDetalle);
             }
 
-            echo "OK";
+            echo true;
         } else {
-            echo "NO";
+            echo false;
         }
 
         // Cierra la conexion
@@ -236,7 +230,7 @@ class OtController {
                 . "AND pag_orden_trabajo.ins_id = pag_insumo.ins_id "
                 . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
                 . "AND pag_orden_trabajo.per_id=pag_persona.per_id "
-                . "AND pag_orden_trabajo.reg_id = pag_regional.reg_id "
+//                . "AND pag_orden_trabajo.reg_id = pag_regional.reg_id "
                 . "AND pag_orden_trabajo.ot_prioridad=pag_prioridad_trabajo.priotra_id "
                 . "AND pag_orden_trabajo.est_id=pag_estado.est_id "
                 . "AND pag_estado.tdoc_id=pag_tipo_doc.tdoc_id "
@@ -275,9 +269,9 @@ class OtController {
         $editarOt = $objPostEditar->update($sql);
 
         if ($editarOt) {
-            echo "OK";
+            echo true;
         } else {
-            "NO";
+            false;
         }
         //if validar para toast
         // Cierra la conexion

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<modulos>
+    <nombre>OT</nombre>
+    <icono>mdi-action-assignment</icono>
+    <sitioMenu>principal</sitioMenu>
+    <descripcion>Modulo de OT</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>otController</nombre>
+            <icono>mdi-action-assignment</icono>
+            <display>Ordenes</display>
+            <descripcion>Controlador de ot</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear ot</display>
+                    <descripcion>Crear ot</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar ot</display>
+                    <descripcion>Editar ot</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar ot</display>
+                    <descripcion>Eliminar ot</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar ot</display>
+                    <descripcion>Listar ot</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>consultar</nombre>
+                    <display>Consultar ot</display>
+                    <descripcion>Consultar ot</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+        <controlador>
+            <nombre>solicitudesController</nombre>
+            <icono>mdi-communication-quick-contacts-mail</icono>
+            <display>Solicitudes</display>
+            <descripcion>Controlador de solicitudes</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear solicitud</display>
+                    <descripcion>Crear solicitud de servicio</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar solicitud</display>
+                    <descripcion>Editar solicitud</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar solicitud</display>
+                    <descripcion>Eliminar solicitud</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar solicitud</display>
+                    <descripcion>Listar solicitud</descripcion>
+                </funcion>
+                
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

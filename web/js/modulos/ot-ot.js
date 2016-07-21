@@ -28,8 +28,8 @@ $(document).ready(function () {
             url: url,
             data: $(this).serialize()
         }).done(function (respuesta) {
-
-            if (respuesta === "OK") {
+            console.log(respuesta);
+            if (respuesta==true) {
                 Materialize.toast("<i class= 'material-icons' ></i> Registro exitoso.", 2000, 'green');
                 setTimeout(
                         function () {
@@ -87,7 +87,7 @@ $(document).ready(function () {
             data: $(this).serialize()
         }).done(function (respuesta) {
 
-            if (respuesta === "OK") {
+            if (respuesta == true) {
                 Materialize.toast("<i class= 'material-icons' ></i> Actualizacion exitosa.", 2000, 'green');
                 setTimeout(
                     function () {

@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `pag_almacenista` (
   `alma_id` int(11) NOT NULL AUTO_INCREMENT,
   `alma_nombre` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`alm_id`)
+  PRIMARY KEY (`alma_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -549,9 +549,8 @@ UNLOCK TABLES;
 --
 
 CREATE TABLE IF NOT EXISTS `pag_orden_trabajo` (
-`ot_id` int(11) NOT NULL,
+  `ot_id` int(11) NOT NULL,
   `ot_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `reg_id` int(11) NOT NULL,
   `cen_id` int(11) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
   `tfa_id` int(11) NOT NULL,
@@ -571,35 +570,35 @@ CREATE TABLE IF NOT EXISTS `pag_orden_trabajo` (
 -- Volcado de datos para la tabla `pag_orden_trabajo`
 --
 
-INSERT INTO `pag_orden_trabajo` (`ot_id`, `ot_fecha_creacion`, `reg_id`, `cen_id`, `equi_id`, `tfa_id`, `ot_prioridad`, `ot_desc_falla`, `ot_desc_trabajo`, `est_id`, `ot_fecha_inicio`, `ot_fecha_fin`, `ot_ayudantes`, `ins_id`, `per_id`, `estado`) VALUES
-(1, '2016-04-27 15:03:26', 3, 3, '1', 2, 'Alta', ' Necesita lubricación en las poleas y piñones', ' Desarmar la maquina para afinar los filtros', 3, '8 April, 2016', '15 April, 2016', 'Alex Romero, Nicolas Gaviria, Javier Perezs', 0, 1144125473, '2016-04-15 21:20:31.0'),
-(2, '2016-04-27 15:03:42', 4, 4, 'EP_003', 2, 'Media', 'Falla de mantenimiento', 'Reparar piñones', 3, '8 April, 2016', '15 April, 2016', 'Esteban, Ceron, Cortes', 0, 1144125473, NULL),
-(3, '2016-04-07 22:34:53', 3, 1, 'EP_003', 1, 'Media', ' Hay cortos en la maquina y sonidos.', ' Revisar el cableado de la maquina.', 3, '7 April, 2016', '21 April, 2016', 'Yan Carlo, Anibal, David.', 0, 1144125473, '2016-04-07 22:34:53.0'),
-(4, '2016-04-27 15:04:03', 5, 4, 'EP_003', 2, 'Media', ' sfhdgfvclk,.', ' Cambiar aceite, calibrar vÃ¡lvulas', 3, '14 April, 2016', '16 April, 2016', 'Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez, Edinson Martinez', 0, 1144125473, NULL),
-(5, '2016-04-21 21:33:56', 3, 1, 'EP_003', 2, 'Media', 'Calibrar llantas', 'Cambiar aceite', 3, '21 April, 2016', '23 April, 2016', 'Gloria, Edinson', 0, 1144125472, NULL),
-(6, '2016-04-29 18:19:12', 3, 1, '1', 1, 'Media', 'Sonido', 'Cambiar aceite', 3, '28 April, 2016', '29 April, 2016', 'Gloria, Edinson', 0, 1144125472, NULL),
-(7, '2016-04-29 18:19:38', 3, 1, '1', 1, 'Media', 'Sonido', 'Cambiar aceite', 3, '28 April, 2016', '29 April, 2016', 'Gloria, Edinson', 0, 1144125472, NULL),
-(8, '2016-04-29 18:20:07', 3, 1, '1', 1, 'Media', 'Sonido', 'Cambiar aceite', 3, '28 April, 2016', '29 April, 2016', 'Gloria, Edinson', 0, 1144125472, NULL),
-(9, '2016-05-06 17:46:34', 3, 1, 'TC001', 2, 'Media', 'Sonido', 'Cambiar aceite', 2, '28 April, 2016', '29 April, 2016', 'Gloria, Edinson', 0, 1144125473, '2016-05-06 17:46:34.0'),
-(10, '2016-05-06 17:46:18', 4, 2, '0123', 2, 'Media', ' Sonido', ' Cambiar aceite', 2, '26 April, 2016', '30 April, 2016', 'Gloria, Edinson', 0, 1143830254, '2016-05-06 17:46:18.0'),
-(11, '2016-05-06 17:41:59', 4, 2, '0123', 2, '<br />\r\n<b>Notice</b>:  Undefi', '  Sonido raro', '  Cambiar aceite, montar llantas', 2, '6 May, 2016', '7 May, 2016', 'Gloria, Edinson', 0, 1144125473, '2016-05-06 17:41:59.0'),
-(12, '2016-05-06 17:58:49', 4, 2, '0123', 2, '<br />\r\n<b>Notice</b>:  Undefi', 'awertfh', 'rtrtgjh', 2, '6 May, 2016', '7 May, 2016', 'Gloria, Edinson', 0, 234567, NULL),
-(13, '2016-05-06 18:10:31', 3, 1, 'PC_002', 2, '<br />\r\n<b>Notice</b>:  Undefi', ' srtghg', ' sfgh', 2, '6 May, 2016', '6 May, 2016', 'Gloria, Edinson', 0, 1144125445, '2016-05-06 18:10:31.0'),
-(14, '2016-05-06 18:14:18', 3, 1, '1', 1, '<br />\r\n<b>Notice</b>:  Undefi', ' lkfÃ±', ' erfc', 2, '6 May, 2016', '6 May, 2016', 'Gloria, Edinson', 0, 1144125473, NULL),
-(15, '2016-05-06 19:21:10', 3, 1, '1', 1, '<br />\r\n<b>Notice</b>:  Undefi', 'cvbn', 'dfgh', 2, '6 May, 2016', '8 May, 2016', 'ertyhj', 0, 234567, NULL),
-(16, '2016-05-06 18:23:38', 4, 2, '0123', 2, '<br />\r\n<b>Notice</b>:  Undefi', 'jjjjjj', 'sfdsfv', 3, '7 May, 2016', '13 May, 2016', 'Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez', 0, 1144125473, NULL),
-(17, '2016-05-11 02:17:17', 3, 1, 'EP_003', 1, '2', '   jjjjjj', '   sfdsfv', 3, '18 May, 2016', '18 May, 2016', 'Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez', 0, 1144125473, NULL),
-(18, '2016-06-14 02:17:50', 4, 2, '0123', 1, '1', '   Mundo', '   Hola', 5, '6 May, 2016', '6 May, 2016', 'Gloria, Edinson', 0, 234567, '2016-06-14 02:17:50.0'),
-(19, '2016-06-10 01:50:00', 3, 1, '1', 2, '3', '     srtyuj Gloria', '  Mundo   Hola', 6, '6 May, 2016', '6 May, 2016', 'Gloria, Edinson, Javier', 0, 234567, '2016-06-10 01:50:00.0'),
-(20, '2016-06-14 02:17:47', 3, 1, 'EP_003', 2, '3', 'Revisar frenos', 'Cambiar aceite y tensionar frenos', 3, '13 June, 2016', '18 June, 2016', 'Edinson Martinez', 0, 1144125473, '2016-06-14 02:17:47.0'),
-(21, '2016-06-14 02:17:43', 4, 2, '0123', 1, '3', 'asdfghnm', 'asdfgh', 3, '13 June, 2016', '17 June, 2016', 'Gloria, Edinson', 0, 1143830254, '2016-06-14 02:17:43.0'),
-(22, '2016-06-14 02:17:40', 3, 1, 'EP_003', 2, '3', 'ertykunbv', 'ygkjhnbvc', 3, '13 June, 2016', '18 June, 2016', 'Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez', 9998, 1143830254, '2016-06-14 02:17:40.0'),
-(23, '2016-06-14 02:22:11', 3, 1, 'TC001', 1, '1', ' asdfgh. Fin', ' ,gfvc . Fin', 3, '13 June, 2016', '18 June, 2016', 'Gloria, Edinson, Valentina', 9998, 1143830254, NULL),
-(24, '2016-06-14 02:23:17', 3, 1, 'EP_003', 1, '2', ' yujfhgxv. Hola', ' ipouityuh. Mundo', 3, '13 June, 2016', '14 June, 2016', 'Ninson Ibarra, Gloria TrÃ³chez', 9998, 1143830254, '2016-06-14 02:23:17.0'),
-(25, '2016-06-17 14:02:29', 3, 1, 'EP_003', 2, '1', '  kjhgnbvc', '  pki`p', 6, '13 June, 2016', '13 June, 2016', 'Gloria, Edinson', 9998, 1144125445, NULL),
-(26, '2016-06-17 14:33:30', 3, 1, 'EP_003', 2, '1', 'Sonido raro', 'Calibrar llantas, cambiar aceite', 3, '17 June, 2016', '23 June, 2016', 'Gloria', 9998, 1144125473, NULL),
-(27, '2016-06-17 14:37:02', 3, 1, 'EP_003', 2, '2', 'rethgdfvc', 'Cambiar aceite, ajustar freno', 3, '17 June, 2016', '22 June, 2016', 'Gloria', 9998, 1144125473, NULL),
-(28, '2016-06-17 15:04:00', 3, 1, 'PC_002', 2, '3', 'asfdgfh', 'thgbv', 3, '17 June, 2016', '20 June, 2016', 'Gloria, Edinson', 9998, 1143830254, NULL);
+INSERT INTO `pag_orden_trabajo` (`ot_id`, `ot_fecha_creacion`, `cen_id`, `equi_id`, `tfa_id`, `ot_prioridad`, `ot_desc_falla`, `ot_desc_trabajo`, `est_id`, `ot_fecha_inicio`, `ot_fecha_fin`, `ot_ayudantes`, `ins_id`, `per_id`, `estado`) VALUES
+(1, '2016-04-27 15:03:26', 3, '1', 2, 'Alta', ' Necesita lubricación en las poleas y piñones', ' Desarmar la maquina para afinar los filtros', 3, '8 April, 2016', '15 April, 2016', 'Alex Romero, Nicolas Gaviria, Javier Perezs', 0, 1144125473, '2016-04-15 21:20:31.0'),
+(2, '2016-04-27 15:03:42', 4, 'EP_003', 2, 'Media', 'Falla de mantenimiento', 'Reparar piñones', 3, '8 April, 2016', '15 April, 2016', 'Esteban, Ceron, Cortes', 0, 1144125473, NULL),
+(3, '2016-04-07 22:34:53', 1, 'EP_003', 1, 'Media', ' Hay cortos en la maquina y sonidos.', ' Revisar el cableado de la maquina.', 3, '7 April, 2016', '21 April, 2016', 'Yan Carlo, Anibal, David.', 0, 1144125473, '2016-04-07 22:34:53.0'),
+(4, '2016-04-27 15:04:03', 4, 'EP_003', 2, 'Media', ' sfhdgfvclk,.', ' Cambiar aceite, calibrar vÃ¡lvulas', 3, '14 April, 2016', '16 April, 2016', 'Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez, Edinson Martinez', 0, 1144125473, NULL),
+(5, '2016-04-21 21:33:56', 1, 'EP_003', 2, 'Media', 'Calibrar llantas', 'Cambiar aceite', 3, '21 April, 2016', '23 April, 2016', 'Gloria, Edinson', 0, 1144125472, NULL),
+(6, '2016-04-29 18:19:12', 1, '1', 1, 'Media', 'Sonido', 'Cambiar aceite', 3, '28 April, 2016', '29 April, 2016', 'Gloria, Edinson', 0, 1144125472, NULL),
+(7, '2016-04-29 18:19:38', 1, '1', 1, 'Media', 'Sonido', 'Cambiar aceite', 3, '28 April, 2016', '29 April, 2016', 'Gloria, Edinson', 0, 1144125472, NULL),
+(8, '2016-04-29 18:20:07', 1, '1', 1, 'Media', 'Sonido', 'Cambiar aceite', 3, '28 April, 2016', '29 April, 2016', 'Gloria, Edinson', 0, 1144125472, NULL),
+(9, '2016-05-06 17:46:34', 1, 'TC001', 2, 'Media', 'Sonido', 'Cambiar aceite', 2, '28 April, 2016', '29 April, 2016', 'Gloria, Edinson', 0, 1144125473, '2016-05-06 17:46:34.0'),
+(10, '2016-05-06 17:46:18', 2, '0123', 2, 'Media', ' Sonido', ' Cambiar aceite', 2, '26 April, 2016', '30 April, 2016', 'Gloria, Edinson', 0, 1143830254, '2016-05-06 17:46:18.0'),
+(11, '2016-05-06 17:41:59', 2, '0123', 2, '<br />\r\n<b>Notice</b>:  Undefi', '  Sonido raro', '  Cambiar aceite, montar llantas', 2, '6 May, 2016', '7 May, 2016', 'Gloria, Edinson', 0, 1144125473, '2016-05-06 17:41:59.0'),
+(12, '2016-05-06 17:58:49', 2, '0123', 2, '<br />\r\n<b>Notice</b>:  Undefi', 'awertfh', 'rtrtgjh', 2, '6 May, 2016', '7 May, 2016', 'Gloria, Edinson', 0, 234567, NULL),
+(13, '2016-05-06 18:10:31', 1, 'PC_002', 2, '<br />\r\n<b>Notice</b>:  Undefi', ' srtghg', ' sfgh', 2, '6 May, 2016', '6 May, 2016', 'Gloria, Edinson', 0, 1144125445, '2016-05-06 18:10:31.0'),
+(14, '2016-05-06 18:14:18', 1, '1', 1, '<br />\r\n<b>Notice</b>:  Undefi', ' lkfÃ±', ' erfc', 2, '6 May, 2016', '6 May, 2016', 'Gloria, Edinson', 0, 1144125473, NULL),
+(15, '2016-05-06 19:21:10', 1, '1', 1, '<br />\r\n<b>Notice</b>:  Undefi', 'cvbn', 'dfgh', 2, '6 May, 2016', '8 May, 2016', 'ertyhj', 0, 234567, NULL),
+(16, '2016-05-06 18:23:38', 2, '0123', 2, '<br />\r\n<b>Notice</b>:  Undefi', 'jjjjjj', 'sfdsfv', 3, '7 May, 2016', '13 May, 2016', 'Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez', 0, 1144125473, NULL),
+(17, '2016-05-11 02:17:17', 1, 'EP_003', 1, '2', '   jjjjjj', '   sfdsfv', 3, '18 May, 2016', '18 May, 2016', 'Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez', 0, 1144125473, NULL),
+(18, '2016-06-14 02:17:50', 2, '0123', 1, '1', '   Mundo', '   Hola', 5, '6 May, 2016', '6 May, 2016', 'Gloria, Edinson', 0, 234567, '2016-06-14 02:17:50.0'),
+(19, '2016-06-10 01:50:00', 1, '1', 2, '3', '     srtyuj Gloria', '  Mundo   Hola', 6, '6 May, 2016', '6 May, 2016', 'Gloria, Edinson, Javier', 0, 234567, '2016-06-10 01:50:00.0'),
+(20, '2016-06-14 02:17:47', 1, 'EP_003', 2, '3', 'Revisar frenos', 'Cambiar aceite y tensionar frenos', 3, '13 June, 2016', '18 June, 2016', 'Edinson Martinez', 0, 1144125473, '2016-06-14 02:17:47.0'),
+(21, '2016-06-14 02:17:43', 2, '0123', 1, '3', 'asdfghnm', 'asdfgh', 3, '13 June, 2016', '17 June, 2016', 'Gloria, Edinson', 0, 1143830254, '2016-06-14 02:17:43.0'),
+(22, '2016-06-14 02:17:40', 1, 'EP_003', 2, '3', 'ertykunbv', 'ygkjhnbvc', 3, '13 June, 2016', '18 June, 2016', 'Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez', 9998, 1143830254, '2016-06-14 02:17:40.0'),
+(23, '2016-06-14 02:22:11', 1, 'TC001', 1, '1', ' asdfgh. Fin', ' ,gfvc . Fin', 3, '13 June, 2016', '18 June, 2016', 'Gloria, Edinson, Valentina', 9998, 1143830254, NULL),
+(24, '2016-06-14 02:23:17', 1, 'EP_003', 1, '2', ' yujfhgxv. Hola', ' ipouityuh. Mundo', 3, '13 June, 2016', '14 June, 2016', 'Ninson Ibarra, Gloria TrÃ³chez', 9998, 1143830254, '2016-06-14 02:23:17.0'),
+(25, '2016-06-17 14:02:29', 1, 'EP_003', 2, '1', '  kjhgnbvc', '  pki`p', 6, '13 June, 2016', '13 June, 2016', 'Gloria, Edinson', 9998, 1144125445, NULL),
+(26, '2016-06-17 14:33:30', 1, 'EP_003', 2, '1', 'Sonido raro', 'Calibrar llantas, cambiar aceite', 3, '17 June, 2016', '23 June, 2016', 'Gloria', 9998, 1144125473, NULL),
+(27, '2016-06-17 14:37:02', 1, 'EP_003', 2, '2', 'rethgdfvc', 'Cambiar aceite, ajustar freno', 3, '17 June, 2016', '22 June, 2016', 'Gloria', 9998, 1144125473, NULL),
+(28, '2016-06-17 15:04:00', 1, 'PC_002', 2, '3', 'asfdgfh', 'thgbv', 3, '17 June, 2016', '20 June, 2016', 'Gloria, Edinson', 9998, 1143830254, NULL);
 
 -- --------------------------------------------------------
 
@@ -1138,7 +1137,7 @@ ALTER TABLE `pag_jornada`
 -- Indices de la tabla `pag_orden_trabajo`
 --
 ALTER TABLE `pag_orden_trabajo`
- ADD PRIMARY KEY (`ot_id`), ADD KEY `est_id` (`est_id`), ADD KEY `tfa_id` (`tfa_id`), ADD KEY `equi_id` (`equi_id`), ADD KEY `per_id` (`per_id`), ADD KEY `reg_id` (`reg_id`);
+ ADD PRIMARY KEY (`ot_id`), ADD KEY `est_id` (`est_id`), ADD KEY `tfa_id` (`tfa_id`), ADD KEY `equi_id` (`equi_id`), ADD KEY `per_id` (`per_id`);
 
 --
 -- Indices de la tabla `pag_persona`
@@ -1461,8 +1460,7 @@ ALTER TABLE `pag_orden_trabajo`
 ADD CONSTRAINT `pag_orden_trabajo_ibfk_1` FOREIGN KEY (`est_id`) REFERENCES `pag_estado` (`est_id`),
 ADD CONSTRAINT `pag_orden_trabajo_ibfk_2` FOREIGN KEY (`tfa_id`) REFERENCES `pag_tipo_falla` (`tfa_id`),
 ADD CONSTRAINT `pag_orden_trabajo_ibfk_3` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`),
-ADD CONSTRAINT `pag_orden_trabajo_ibfk_4` FOREIGN KEY (`per_id`) REFERENCES `pag_persona` (`per_id`),
-ADD CONSTRAINT `pag_orden_trabajo_ibfk_5` FOREIGN KEY (`reg_id`) REFERENCES `pag_regional` (`reg_id`);
+ADD CONSTRAINT `pag_orden_trabajo_ibfk_4` FOREIGN KEY (`per_id`) REFERENCES `pag_persona` (`per_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

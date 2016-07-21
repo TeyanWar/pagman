@@ -30,24 +30,6 @@ and open the template in the editor.
                     <display>Editar Permisos</display>
                     <descripcion>Editar Permisos</descripcion>
                 </funcion>
-                
-                 <funcion>
-                    <nombre>eliminar</nombre>
-                    <display>Eliminar Permisos</display>
-                    <descripcion>Eliminar Permisos</descripcion>
-                </funcion>
-                
-                 <funcion>
-                    <nombre>Listar</nombre>
-                    <display>Listar Permisos</display>
-                    <descripcion>Listar Permisos</descripcion>
-                </funcion>
-                
-                <funcion>
-                    <nombre>Consultar</nombre>
-                    <display>Consultar Permisos</display>
-                    <descripcion>Consultar Permisos</descripcion>
-                </funcion>
             </funciones>
             
         </controlador>
