@@ -28,15 +28,10 @@ class RolesController {
             redirect(crearUrl('roles', 'roles', 'crear'));
         } else {
 
-
             $rol_nombre = $_POST['rol_nombre'];
             $rol_descripcion = $_POST['rol_descripcion'];
 
             $sql = "INSERT INTO pag_rol (rol_nombre,rol_descripcion) VALUES ('$rol_nombre','$rol_descripcion')";
-            //die(print_r($sqlRol));
-
-
-
 
             $crearRol = $objRol->insertar($sql);
             $objRol->cerrar();
@@ -124,25 +119,32 @@ class RolesController {
         $rol_id = $_POST['rol_id'];
         $nombreRol = $_POST['rol_nombre'];
         $rol_descripcion = $_POST['rol_descripcion'];
-        $funciones = $_POST['funciones'];
+        $funciones = isset($_POST['funciones']) ? $_POST['funciones'] : '';
         
-        //Eliminar los permisos que antes tenía para insertar los nuevos
-        $objRol->delete("DELETE FROM pag_permisos WHERE rol_id=".$rol_id);
+        $errores= array();
         
-        foreach ($funciones as $func_id) {
-            $sqlPermisos = "INSERT INTO pag_permisos (func_id,rol_id)VALUES($func_id,$rol_id)";
-            $sqlInsertar = $objRol->insertar($sqlPermisos);
+        if(empty($nombreRol)) $errores[]= "Digitar el <code><b>nombre</b></code> del rol. ";
+        if(empty($rol_descripcion)) $errores[]= "Digitar la <code><b>descripci&oacute;n</b></code> del rol. ";
+        if(empty($funciones)) $errores[]="Asignar al menos una <code><b>funci&oacute;n</b></code> al rol. ";
+        
+        if(count($errores)>0){
+            setErrores($errores);
+        }else{
+            //Eliminar los permisos que antes tenía para insertar los nuevos
+            $objRol->delete("DELETE FROM pag_permisos WHERE rol_id=".$rol_id);
+
+            foreach ($funciones as $func_id) {
+                $sqlPermisos = "INSERT INTO pag_permisos (func_id,rol_id)VALUES($func_id,$rol_id)";
+                $sqlInsertar = $objRol->insertar($sqlPermisos);
+            }
+            $sql = "UPDATE pag_rol  SET rol_nombre='$nombreRol', rol_descripcion='$rol_descripcion'"
+                    . " WHERE rol_id=".$rol_id;
+            $update = $objRol->update($sql);
+            $objRol->cerrar();
         }
         
-        $sql = "UPDATE pag_rol  SET rol_nombre='$nombreRol', rol_descripcion='$rol_descripcion'"
-                . " WHERE rol_id=".$rol_id;
-        
-        $update = $objRol->update($sql);
-
-        $objRol->cerrar();
-
-        redirect(crearUrl("roles", "roles", "listar"));
-    }
+        echo getRespuestaAccion();
+    }//postEditars
 
     public function verDetalle($parametros = false) {
 

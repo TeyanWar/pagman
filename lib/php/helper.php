@@ -35,7 +35,7 @@ function getDocumentRoot(){
 }
 
 
-//------------------funcion de errores/ validaciones del servidor-------------------
+//------------------ Inicio funcion de errores/ validaciones del servidor-------
 
 function setErrores($errores =  array()){
     
@@ -43,12 +43,12 @@ function setErrores($errores =  array()){
     
     if(is_array($errores) && count($errores)>0){
         
-        $mensajeError = "<h5><strong>Por favor corregir los siguientes errores: </strong></h5>"
+        $mensajeError = "<h6><strong>Por favor corregir los siguientes errores: </strong></h6>"
                 . "<ul>";
         
         foreach ($errores as $error){
             
-            $mensajeError .= "<li>".$error."</li>";
+            $mensajeError .= "<li>* ".$error."</li>";
         }
         
         $mensajeError .= "</ul>";
@@ -71,3 +71,18 @@ function getErrores(){
 
     return $mensajeError;
 }
+
+//------------------ Fin funcion de errores/ validaciones del servidor----------
+
+//------------------ Inicio función para errores de validación servidor AJAX----
+
+function getRespuestaAccion(){
+    $accion=true; $mensajes="Acci&oacute;n exitosa. ";
+    if(isset($_SESSION['mensajeError'])){
+        $accion=false;
+        $mensajes=$_SESSION['mensajeError'];
+        unset($_SESSION['mensajeError']);
+    }
+    return json_encode(array('accion'=>$accion, 'mensajes'=>$mensajes));
+}
+//------------------ Fin función para errores de validación servidor AJAX-------

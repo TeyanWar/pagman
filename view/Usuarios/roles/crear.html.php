@@ -36,7 +36,6 @@
                 </div>
             </div> <!--fin datos rol-->
 
-
             <div class="row">
                 <div class="input-field col s12">
                     <button name="action" type="submit" class="btn cyan waves-effect waves-light right">Crear

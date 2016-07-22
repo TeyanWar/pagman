@@ -1,7 +1,16 @@
 <div class="col s12 m12 l6">
-    <form action = "<?php echo crearUrl("Permisos", "permisos", "postCrear") ?>" name = "formRol" method = "POST">
+    
+    <!--Inicio contenedor mensajes de error-->
+    <div class="card red">
+        <div id="cont_errors_ajax" class="card-content white-text">
+            
+        </div>
+    </div>
+    <!--Fin contenedor mensajes de error-->
+    
+    <form action = "<?php echo crearUrl("Permisos", "permisos", "postCrear",array('noVista')) ?>" name = "formRol" method = "POST">
         <div>
-            <input type="hidden" name="roles" value="<?php echo $rolActual[0]['rol_id']; ?>" readonly> 
+            <input type="hidden" name="rol_id" value="<?php echo $rolActual[0]['rol_id']; ?>" readonly> 
             Rol:
             <code><b><?php echo $rolActual[0]['rol_nombre']; ?></b></code>
         </div>
@@ -40,15 +49,11 @@
             </div>
         </div>
         <br>
-        <button name="action" type="submit" class="btn waves-effect waves-light teal">Registrar permisos
+        <button name="action" type="submit" class="btn waves-effect waves-light teal right btn_submit_modal">Asignar
             <i class="mdi-content-send right"></i>
         </button>
     </form>
 </div>
-<script>
-    $('select').material_select();
-//    $();
-</script>
 <style>
     #modalDetalle1{
         /*top: 5% !important;*/

@@ -68,19 +68,29 @@ class PermisosController {
     
     public function postCrear() {
         $objPerm = new PermisosClass();
-        $rol_id = $_POST['roles'];
-        $funciones = $_POST['funciones'];
+        $rol_id = $_POST['rol_id'];
+        $funciones = isset($_POST['funciones']) ? $_POST['funciones'] : '';
 
-        //Eliminar los permisos que antes tenía para insertar los nuevos
-        $objPerm->delete("DELETE FROM pag_permisos WHERE rol_id=".$rol_id);
+        //Variable para las validaciones
+        $errores=array();
         
-        foreach ($funciones as $func_id) {
-            $sqlPermisos = "INSERT INTO pag_permisos (func_id,rol_id)VALUES($func_id,$rol_id)";
-            $sqlInsertar = $objPerm->insertar($sqlPermisos);
+        if(empty($funciones)){
+            $errores[]='Asginar al menos una <code><b>funci&oacute;n</b></code> al rol. ';
         }
-
-        redirect(crearUrl("permisos", "permisos", "crear"));
         
+        if(count($errores)>0){
+            setErrores($errores);
+        }else{
+            //Eliminar los permisos que antes tenía para insertar los nuevos
+            $objPerm->delete("DELETE FROM pag_permisos WHERE rol_id=".$rol_id);
+
+            foreach ($funciones as $func_id) {
+                $sqlPermisos = "INSERT INTO pag_permisos (func_id,rol_id)VALUES($func_id,$rol_id)";
+                $sqlInsertar = $objPerm->insertar($sqlPermisos);
+            }
+        }
+        
+        echo getRespuestaAccion();
     }//postCrear
     
     public function registrarActualizarPermisos(){

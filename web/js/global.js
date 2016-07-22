@@ -30,7 +30,7 @@ $(document).ready(function(){
        
     });
     
-    //----- INICIO de código del controlador Personas y login -----//
+    //----- INICIO de login -----//
     $("#loginAjax").click(function() {
         login();
     });
@@ -57,5 +57,38 @@ $(document).ready(function(){
             }
         });
     }
+    //----- Fin de login -----//
+    
+    //Evento para los botones submit con ajax para las modales
+    $(document).on('click','.btn_submit_modal',function(e){
+       e.preventDefault();
+       var url=$(this).parents("form:first").attr("action");
+        $(this).prop('disabled',true);
+        $.ajax({
+            url:url,
+            type:"post",
+            data: $(this).parents("form:first").serialize()
+        }).done(function(response){
+            var respuesta = $.parseJSON(response);
+            if(respuesta.accion===true){
+                window.location.reload();
+            }else{
+                $('#cont_errors_ajax').html(respuesta.mensajes);
+                $('#cont_errors_ajax').css('display','block');
+                $('.btn_submit_modal').prop('disabled',false);
+                $('.modal-content').animate({scrollTop:$('#cont_errors_ajax').position().top}, 'slow');
+            }
+        });
+    });
+    
+    //Bajar el scroll de menú cuando se selecciona una opción
+    $(document).on('click','.module_menu',function(){
+        var elemento=$(this).children("a:first").attr('id');
+        var posicion = $('#'+elemento).position().top;
+//        alert(elemento);
+        $("#slide-out").animate({
+            scrollTop: posicion
+        }); 
+    });
     
 });

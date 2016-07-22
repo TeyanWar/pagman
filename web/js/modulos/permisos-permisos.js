@@ -19,6 +19,7 @@ $(document).ready(function () {
        $('#contenedor_permisos div').css('display','none');
        $(divPermisos).css('display','block');
     });
+    
 });
 
 

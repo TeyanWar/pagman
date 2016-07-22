@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/pagman/view/Ot/ot/registrar.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/controller/Permisos/info.xml</file>
-            <file>file:/C:/xampp/htdocs/pagman/controller/Ot/otController.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/ot-ot.js</file>
+            <file>file:/C:/xampp/htdocs/pagman/controller/Roles/rolesController.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/permisos-permisos.js</file>
+            <file>file:/C:/xampp/htdocs/pagman/controller/Permisos/permisosController.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/lib/php/validaciones.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/lib/php/helper.php</file>
         </group>
     </open-files>
 </project-private>

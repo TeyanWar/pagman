@@ -84,3 +84,8 @@ code{
     -o-transform : scale(1.05); /* Opera */
     -ms-transform : scale(1.05); /* IE9 */
 }
+
+/*Contenedor de los errores que se muestran por medio de ajax*/
+#cont_errors_ajax{
+    display:none;
+}
