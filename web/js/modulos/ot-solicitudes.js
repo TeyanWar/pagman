@@ -48,7 +48,8 @@ $(document).ready(function () {
             url: url,
             data: $(this).serialize(),
         }).done(function (respuesta) {
-            if (respuesta === "OK")
+            alert(respuesta);
+            if (respuesta == true)
             {
                 Materialize.toast("<i class='material-icons'></i>Registro exitoso", 2000, 'green');
                 setTimeout(
@@ -81,7 +82,8 @@ $(document).ready(function () {
             url: url,
             data: $(this).serialize(),
         }).done(function (respuesta) {
-            if (respuesta === "OK")
+
+            if (respuesta == true)
             {
                 Materialize.toast("<i class='material-icons'></i>Se actualizó el registro exitosamente", 4000, 'green');
             }

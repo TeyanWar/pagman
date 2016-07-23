@@ -83,9 +83,9 @@ class SolicitudesController {
         $insertar = $objSolicitudes->insertar($insertSolicitudes);
 
         if ($insertar) {
-            echo "OK";
+            echo true;
         } else {
-            echo "NO";
+            echo false;
         }
         // Cierra la conexion
         $objSolicitudes->cerrar();
@@ -223,15 +223,8 @@ class SolicitudesController {
     function postEditar() {
 
         $sserv_id = $_POST['sserv_id'];
-        //$sserv_fecha = $_POST['sserv_fecha'];
-        //$reg_id = $_POST['reg_id'];
-        //$cen_id = $_POST['cen_id'];
-        $equi_id = $_POST['equi_id'];
         $sserv_descripcion = $_POST['sserv_descripcion'];
-        //$per_id = $_POST['per_id'];
         $est_id = $_POST['est_id'];
-        //$tfa_id = $_POST['tfa_id'];      
-
 
         $objPostEditar = new SolicitudesModel();
 
@@ -241,15 +234,13 @@ class SolicitudesController {
         $respuesta = $objPostEditar->update($sql);
 
         if ($respuesta) {
-            echo "NO";
+            echo true;
         } else {
-            echo "OK";
+            echo false;
         }
-
 
         // Cierra la conexion
         $objPostEditar->cerrar();
-
         //redirect(crearUrl("Ot", "solicitudes", "listar"));
 
     }
