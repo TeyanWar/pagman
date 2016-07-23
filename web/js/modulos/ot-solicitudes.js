@@ -48,7 +48,7 @@ $(document).ready(function () {
             url: url,
             data: $(this).serialize(),
         }).done(function (respuesta) {
-            alert(respuesta);
+//            alert(respuesta);
             if (respuesta == true)
             {
                 Materialize.toast("<i class='material-icons'></i>Registro exitoso", 2000, 'green');

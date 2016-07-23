@@ -14,7 +14,7 @@ class OtController {
         $buscar = $_POST['resultado'];
         $objBuscar = new OtModel();
 
-        $sql = "SELECT * FROM pag_orden_trabajo, pag_tipo_falla, pag_regional, pag_equipo, "
+        $sql = "SELECT * FROM pag_orden_trabajo, pag_tipo_falla, pag_equipo, "
                 . "pag_persona,pag_estado,pag_tipo_doc, pag_prioridad_trabajo "
                 . "WHERE  pag_orden_trabajo.tfa_id = pag_tipo_falla.tfa_id "
                 . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
@@ -314,9 +314,7 @@ class OtController {
         $objInsumo = new OtModel();
         $sql = "SELECT * FROM pag_insumo where ins_id = $ins_id";
         $agregarInsumo = $objInsumo->find($sql);
-        $objInsumo->cerrar(); 
-        
-        
+        $objInsumo->cerrar();
         
         include_once("../view/Ot/ot/agregar.html.php");
     }
