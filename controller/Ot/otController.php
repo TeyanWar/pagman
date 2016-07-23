@@ -19,7 +19,6 @@ class OtController {
                 . "WHERE  pag_orden_trabajo.tfa_id = pag_tipo_falla.tfa_id "
                 . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
                 . "AND pag_orden_trabajo.per_id=pag_persona.per_id "
-//                . "AND pag_orden_trabajo.reg_id = pag_regional.reg_id "
                 . "AND pag_orden_trabajo.est_id=pag_estado.est_id "
                 . "AND pag_orden_trabajo.ot_prioridad=pag_prioridad_trabajo.priotra_id "
                 . "AND pag_estado.tdoc_id=pag_tipo_doc.tdoc_id "
@@ -29,9 +28,9 @@ class OtController {
                 . "'" . $buscar . "%' OR est_descripcion LIKE "
                 . "'%" . $buscar . "%') order by ot_id desc LIMIT 0,10";
 
-
+//        echo $sql; die();
         $ordenes = $objBuscar->select($sql);
-
+//        dd($ordenes);
         // Cierra la conexion
         $objBuscar->cerrar();
         include_once("../view/Ot/ot/listar.html.php");

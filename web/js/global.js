@@ -71,8 +71,10 @@ $(document).ready(function(){
         }).done(function(response){
             var respuesta = $.parseJSON(response);
             if(respuesta.accion===true){
-                window.location.reload();
+                Materialize.toast(respuesta.mensajes, 2000, 'rounded col green');
+                window.setTimeout('location.reload()', 2000);
             }else{
+                
                 $('#cont_errors_ajax').html(respuesta.mensajes);
                 $('#cont_errors_ajax').css('display','block');
                 $('.btn_submit_modal').prop('disabled',false);
@@ -82,13 +84,13 @@ $(document).ready(function(){
     });
     
     //Bajar el scroll de menú cuando se selecciona una opción
-    $(document).on('click','.module_menu',function(){
-        var elemento=$(this).children("a:first").attr('id');
-        var posicion = $('#'+elemento).position().top;
-//        alert(elemento);
-        $("#slide-out").animate({
-            scrollTop: posicion
-        }); 
-    });
+//    $(document).on('click','.module_menu',function(){
+//        var elemento=$(this).children("a:first").attr('id');
+//        var posicion = $('#'+elemento).position().top;
+////        alert(elemento);
+//        $("#slide-out").animate({
+//            scrollTop: posicion
+//        }); 
+//    });
     
 });
