@@ -4,6 +4,7 @@
             <table class="striped">
                 <thead>
                     <tr>
+						<th></th>
                         <th data-field="id">No. OT</th>
                         <th data-field="name">Encargado</th>
                         <th data-field="name">Fecha y hora de creaci&oacute;n</th>
@@ -19,9 +20,11 @@
 
                 <tbody>
                     <?php
+					
                     foreach ($ordenes as $orden) {
                         ?>
                         <tr>
+							<td><?php echo $paginado->count++ ?></td>
                             <td><?php echo $orden['ot_id'] ?></td>
                             <td><?php echo $orden['per_nombre'] ?></td>
                             <td><?php echo $orden['ot_fecha_creacion'] ?></td>
@@ -36,17 +39,9 @@
                     <?php } ?>
                 </tbody>
             </table>
-
-            <ul class="pagination center">
-                <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
-                <li class="active"><a href="#!">1</a></li>
-                <li class="waves-effect"><a href="#!">2</a></li>
-                <li class="waves-effect"><a href="#!">3</a></li>
-                <li class="waves-effect"><a href="#!">4</a></li>
-                <li class="waves-effect"><a href="#!">5</a></li>
-                <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
-            </ul>
-
+			
+			<?php $paginado->render() ?>
+           
         </div>
     </div>
 </div>
@@ -60,7 +55,7 @@
 
 <div class="modal" id="modal_detalle" style="z-index: 1003; display: none; 
      opacity: 0; transform: scaleX(0.7); top: 341.06px; height: auto; width: 65%;" >   
-<!--    <a class="btn-floating waves-effect waves-light brown right cerrar"><i class="mdi-content-clear"></i></a>-->
+<!--    <a class="btn-floating waves-effect waves-light brown right close"><i class="mdi-content-clear"></i></a>-->
     <div class="modal-content model-data">
 
     </div>   
