@@ -30,6 +30,16 @@ class OtController {
 
 //        echo $sql; die();
         $ordenes = $objBuscar->select($sql);
+		
+//Paginado
+		
+		$pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1);
+		$url = crearUrl('ot', 'ot', 'listar');
+		
+		$paginado = new Paginado($ordenes, $pagina, $url);
+		
+		$ordenes = $paginado->getDatos();
+//Fin		
 //        dd($ordenes);
         // Cierra la conexion
         $objBuscar->cerrar();
