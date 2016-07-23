@@ -27,4 +27,4 @@
     </div>
 </div>
 <div id="buscarHerramienta"></div>
-<?php $paginado->render() ?>
+<?php $paginado->render() ?>;
