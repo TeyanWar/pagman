@@ -27,11 +27,11 @@
             <!--<h4 class="header2">Datos del rol</h4>-->            
             <div class="row">
                 <div class="input-field col s4">
-                    <input id="rol_nombre" name="rol_nombre" class="validate" type="text" required>
+                    <input id="rol_nombre" name="rol_nombre" class="validate" type="text">
                     <label class="" for="rol_nombre">(*) Nombre</label>
                 </div>
                 <div class="input-field col s8">
-                    <input id="rol_descripcion" name="rol_descripcion" class="validate" type="text" required>
+                    <input id="rol_descripcion" name="rol_descripcion" class="validate" type="text">
                     <label class="" for="rol_descripcion">(*) Descripción</label>
                 </div>
             </div> <!--fin datos rol-->
