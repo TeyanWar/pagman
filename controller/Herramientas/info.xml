@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<modulos>
+    <nombre>Herramientas</nombre>
+    <descripcion>Modulo de Herramientas</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>herramientasController</nombre>
+            <display>Herramientas</display>
+            <descripcion>Controlador de Herramientas</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Herramientas</display>
+                    <descripcion>Crear Herramientas</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Herramientas</display>
+                    <descripcion>Editar Herramientas</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Herramientas</display>
+                    <descripcion>Eliminar Herramientas</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Herramientas</display>
+                    <descripcion>Listar Herramientas</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>Consultar</nombre>
+                    <display>Consultar Herramientas</display>
+                    <descripcion>Consultar Herramientas</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

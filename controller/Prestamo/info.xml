@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<modulos>
+    <nombre>Prestamo</nombre>
+    <icono>mdi-social-group</icono>
+    <sitioMenu>configuracion</sitioMenu>
+    <descripcion>Modulo de prestamos</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>prestamoController</nombre>
+            <icono>mdi-social-group</icono>
+            <display>Prestamo</display>
+            <descripcion>Controlador de Prestamos</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Prestamos</display>
+                    <descripcion>Crear Prestamo</descripcion>
+                </funcion>
+                                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Prestamo</display>
+                    <descripcion>Eliminar Prestamo</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Prestamos</display>
+                    <descripcion>Listar Prestamos</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>
