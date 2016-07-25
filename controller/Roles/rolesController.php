@@ -9,39 +9,22 @@ class RolesController {
     }
 
     public function postCrear() {
-
+        
         $objRol = new rolesModel();
-
-        $errores = array();
-        $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
-
-        if (!isset($_POST['rol_nombre']) || $_POST['rol_nombre'] == "") {
-            $errores[] = "El campo <code><b>nombre</b></code> debe estar diligenciado.";
-        }
-
-        if (!isset($_POST['rol_descripcion']) || $_POST['rol_descripcion'] == "") {
-            $errores[] = "El campo <code><b>descripci&oacute;n</b></code> debe estar diligenciado.";
-        }
-
-        if (count($errores) > 0) {
-            setErrores($errores);
-            redirect(crearUrl('roles', 'roles', 'crear'));
-        } else {
-
-            $rol_nombre = $_POST['rol_nombre'];
-            $rol_descripcion = $_POST['rol_descripcion'];
-
+        
+        $rol_nombre = isset($_POST['rol_nombre']) ? $_POST['rol_nombre'] : '';
+        $rol_descripcion = isset($_POST['rol_descripcion']) ? $_POST['rol_descripcion'] : '';
+                
+        $objRol->rol_nombre['val']=$rol_nombre;
+        $objRol->rol_descripcion['val']=$rol_descripcion;
+        if ($this->camposCorrectos($objRol,false,'rol_nombre','rol_descripcion',false)) {
             $sql = "INSERT INTO pag_rol (rol_nombre,rol_descripcion) VALUES ('$rol_nombre','$rol_descripcion')";
-
             $crearRol = $objRol->insertar($sql);
-            $objRol->cerrar();
-
-            if ($crearRol) {
-                redirect(crearUrl("roles", "roles", "listar"));
-            } else {
-                echo $sql;
-            }
         }
+        
+        $objRol->cerrar();
+        
+        echo getRespuestaAccion('listar');
     }
 
     public function listar() {
@@ -115,33 +98,27 @@ class RolesController {
     public function postEditar($parametros = false) {
 
         $objRol = new RolesModel();
+        
+        $objRol->rol_id['val'] = isset($_POST['rol_id']) ? $_POST['rol_id'] : '';
+        $objRol->rol_nombre['val'] = isset($_POST['rol_nombre']) ? $_POST['rol_nombre'] : '';
+        $objRol->rol_descripcion['val'] = isset($_POST['rol_descripcion']) ? $_POST['rol_descripcion'] : '';
+        $objRol->funciones = isset($_POST['funciones']) ? $_POST['funciones'] : '';
 
-        $rol_id = $_POST['rol_id'];
-        $nombreRol = $_POST['rol_nombre'];
-        $rol_descripcion = $_POST['rol_descripcion'];
-        $funciones = isset($_POST['funciones']) ? $_POST['funciones'] : '';
-        
-        $errores= array();
-        
-        if(empty($nombreRol)) $errores[]= "Digitar el <code><b>nombre</b></code> del rol. ";
-        if(empty($rol_descripcion)) $errores[]= "Digitar la <code><b>descripci&oacute;n</b></code> del rol. ";
-        if(empty($funciones)) $errores[]="Asignar al menos una <code><b>funci&oacute;n</b></code> al rol. ";
-        
-        if(count($errores)>0){
-            setErrores($errores);
-        }else{
+        if($this->camposCorrectos($objRol, false,'rol_nombre','rol_descripcion','funciones')){
+            
             //Eliminar los permisos que antes tenía para insertar los nuevos
-            $objRol->delete("DELETE FROM pag_permisos WHERE rol_id=".$rol_id);
+            $objRol->delete("DELETE FROM pag_permisos WHERE rol_id=".$objRol->rol_id['val']);
 
-            foreach ($funciones as $func_id) {
-                $sqlPermisos = "INSERT INTO pag_permisos (func_id,rol_id)VALUES($func_id,$rol_id)";
+            foreach ($objRol->funciones as $func_id) {
+                $sqlPermisos = "INSERT INTO pag_permisos (func_id,rol_id)VALUES($func_id,".$objRol->rol_id['val'].")";
                 $sqlInsertar = $objRol->insertar($sqlPermisos);
             }
-            $sql = "UPDATE pag_rol  SET rol_nombre='$nombreRol', rol_descripcion='$rol_descripcion'"
-                    . " WHERE rol_id=".$rol_id;
+            $sql = "UPDATE pag_rol  SET rol_nombre='".$objRol->rol_nombre['val']."', rol_descripcion='".$objRol->rol_descripcion['val']."' "
+                    . "WHERE rol_id=".$objRol->rol_id['val'];
             $update = $objRol->update($sql);
-            $objRol->cerrar();
         }
+        
+        $objRol->cerrar();
         
         echo getRespuestaAccion();
     }//postEditars
@@ -176,4 +153,45 @@ class RolesController {
         redirect(crearUrl("roles", "roles", "listar"));
     }
 
+    public function camposCorrectos($objRol,$rol_id=false, $rol_nombre=false, $rol_descripcion=false, $funciones=false){
+        
+        $errores=array();
+        
+        if($rol_id){
+            if(empty($objRol->rol_id['val'])) $errores[]= "Debe seleccionar un <code><b>rol</b></code>. ";
+        }//rol_id
+        
+        if($rol_nombre){
+            if (!between($objRol->rol_nombre['val'],$objRol->rol_nombre['min'],$objRol->rol_nombre['max'])) {
+            $errores[] = "El campo <code><b>nombre</b></code> debe contener entre ".$objRol->rol_nombre['min']." y ".$objRol->rol_nombre['max']." caracteres.";
+            }else{
+                //Se creará un rol? Entonces verifique si su nombre es único en todos los registros
+                if(empty($objRol->rol_id['val'])){
+                    $sql="SELECT rol_nombre FROM pag_rol WHERE rol_nombre='".$objRol->rol_nombre['val']."'";
+                }//Se editará un rol? Entonces verifique si su nombre es único en todos los registros excepto el mismo
+                else{
+                    $sql="SELECT rol_nombre FROM pag_rol WHERE rol_nombre='".$objRol->rol_nombre['val']."' AND rol_id!=".$objRol->rol_id['val'];
+                }
+                $existeRol=$objRol->find($sql);
+                if($existeRol) $errores[] = "Ya existe un rol registrado con el nombre <code><b>".$objRol->rol_nombre['val']."</b></code>.";
+            }
+        }//rol_nombre
+        
+        if($rol_descripcion){
+            if (!between($objRol->rol_descripcion['val'],$objRol->rol_descripcion['min'],$objRol->rol_descripcion['max'])){
+                $errores[] = "El campo <code><b>descripci&oacute;n</b></code> debe contener menos de ".$objRol->rol_descripcion['max']." caracteres.";
+            }
+        }//rol_descripcion
+        
+        if($funciones){
+            if(empty($objRol->funciones)) $errores[]="Asignar al menos una <code><b>funci&oacute;n</b></code> al rol. ";
+        }
+        if(count($errores)>0){
+            setErrores($errores);
+            return false;
+        }
+                
+        return true;
+    }
+    
 }

@@ -6,7 +6,6 @@
 <!--Inicio contenedor mensajes de error-->
 <div class="card red">
     <div id="cont_errors_ajax" class="card-content white-text">
-
     </div>
 </div>
 <!--Fin contenedor mensajes de error-->
