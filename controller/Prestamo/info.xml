@@ -2,26 +2,25 @@
 
 <modulos>
     <nombre>Prestamo</nombre>
-    <icono>mdi-social-group</icono>
-    <sitioMenu>configuracion</sitioMenu>
+    <icono>mdi-action-shopping-cart</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de prestamos</descripcion>
    
     <controladores>
         <controlador>
             <nombre>prestamoController</nombre>
-            <icono>mdi-social-group</icono>
+            <icono>mdi-action-shopping-cart</icono>
             <display>Prestamo</display>
             <descripcion>Controlador de Prestamos</descripcion>
             
             <funciones>
-                
                 <funcion>
                     <nombre>crear</nombre>
                     <display>Crear Prestamos</display>
                     <descripcion>Crear Prestamo</descripcion>
                 </funcion>
                                 
-                 <funcion>
+                <funcion>
                     <nombre>eliminar</nombre>
                     <display>Eliminar Prestamo</display>
                     <descripcion>Eliminar Prestamo</descripcion>

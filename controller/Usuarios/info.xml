@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <modulos>
     <nombre>Usuarios</nombre>
     <icono>mdi-action-account-circle</icono>
@@ -18,17 +14,16 @@ and open the template in the editor.
             <descripcion>Controlador de Usuarios</descripcion>
             
             <funciones>
-                
                 <funcion>
                     <nombre>crear</nombre>
-                    <display>Crear Usuarios</display>
-                    <descripcion>Crear Usuarios</descripcion>
+                    <display>Crear Usuario</display>
+                    <descripcion>Crear Usuario</descripcion>
                 </funcion>
                 
                 <funcion>
                     <nombre>editar</nombre>
-                    <display>Editar Usuarios</display>
-                    <descripcion>Editar Usuarios</descripcion>
+                    <display>Editar Usuario</display>
+                    <descripcion>Editar Usuario</descripcion>
                 </funcion>
                 
                 <funcion>
@@ -39,8 +34,8 @@ and open the template in the editor.
                 
                 <funcion>
                     <nombre>eliminar</nombre>
-                    <display>Eliminar Usuarios</display>
-                    <descripcion>Eliminar Usuarios</descripcion>
+                    <display>Eliminar Usuario</display>
+                    <descripcion>Eliminar Usuario</descripcion>
                 </funcion>
                 
             </funciones>

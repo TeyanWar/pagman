@@ -31,11 +31,11 @@ $(document).ready(function () {
         var rol_id = $(this).attr('data-rol_id');
 
         swal({title: "¿Realmente desea eliminar este registro?",
-            text: "Recuerde  que una vez eliminado no se podra recuperar",
+            text: "Una vez eliminado, deberá contactar con soporte para recuperarlo.",
             type: "warning",
             showCancelButton: true,
-            confirmButtonColor: "Red ",
-            confirmButtonText: "si,eliminar registro",
+            confirmButtonColor: "Red",
+            confirmButtonText: "Sí, eliminar registro",
             closeOnConfirm: false
         },
         function () {
@@ -43,13 +43,17 @@ $(document).ready(function () {
                 url: url,
                 type: 'post',
                 data: {
-                    id: rol_id
+                    rol_id: rol_id
                 }
             }).done(function (data) {
-
+//                alert(data);
+                if(data==true){
+                    swal("Eliminado!", "Registro eliminado.", "success");
+                    window.setTimeout('location.reload()', 1000);
+                }else{
+                    swal("Acción denegada", "No tiene los permisos para realizar esta acción.", "error");
+                }
             });
-            swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
-            $('#busquedaAjax').triger('keyup');
         });
     });
     

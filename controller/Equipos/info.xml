@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <modulos>
     <nombre>Equipos</nombre>
     <icono>mdi-hardware-desktop-windows</icono>
@@ -18,7 +14,6 @@ and open the template in the editor.
             <descripcion>Controlador de Equipos</descripcion>
             
             <funciones>
-                
                 <funcion>
                     <nombre>crear</nombre>
                     <display>Crear Equipos</display>
@@ -41,12 +36,6 @@ and open the template in the editor.
                     <nombre>Listar</nombre>
                     <display>Listar Equipos</display>
                     <descripcion>Listar Equipos</descripcion>
-                </funcion>
-                
-                <funcion>
-                    <nombre>Consultar</nombre>
-                    <display>Consultar Equipos</display>
-                    <descripcion>Consultar Equipos</descripcion>
                 </funcion>
             </funciones>
             

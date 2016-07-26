@@ -16,13 +16,13 @@ class MasterModel extends Conexion{
         
         if ($respuesta) {
             while ($row = @mysqli_fetch_array($respuesta)) {
-//                if(isset($row['estado']) ){
-//                    if($row['estado']==null){
-//                        $return[]=$row;
-//                    }
-//                }else{
+                if(isset($row['estado']) ){
+                    if($row['estado']==null){
+                        $return[]=$row;
+                    }
+                }else{
                     $return[]=$row;
-                //}
+                }
             }
         }
 
@@ -36,7 +36,13 @@ class MasterModel extends Conexion{
         if ($respuesta) {
             $return = array();
             while ($row = @mysqli_fetch_array($respuesta)) {
-                $return=$row;
+                if(isset($row['estado']) ){
+                    if($row['estado']==null){
+                        $return=$row;
+                    }
+                }else{
+                    $return=$row;
+                }
             }
         }
 

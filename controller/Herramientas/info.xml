@@ -2,16 +2,18 @@
 
 <modulos>
     <nombre>Herramientas</nombre>
+    <icono>mdi-action-wallet-travel</icono>
+    <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de Herramientas</descripcion>
    
     <controladores>
         <controlador>
             <nombre>herramientasController</nombre>
+            <icono>mdi-action-wallet-travel</icono>
             <display>Herramientas</display>
             <descripcion>Controlador de Herramientas</descripcion>
             
             <funciones>
-                
                 <funcion>
                     <nombre>crear</nombre>
                     <display>Crear Herramientas</display>
@@ -34,12 +36,6 @@
                     <nombre>Listar</nombre>
                     <display>Listar Herramientas</display>
                     <descripcion>Listar Herramientas</descripcion>
-                </funcion>
-                
-                <funcion>
-                    <nombre>Consultar</nombre>
-                    <display>Consultar Herramientas</display>
-                    <descripcion>Consultar Herramientas</descripcion>
                 </funcion>
             </funciones>
             

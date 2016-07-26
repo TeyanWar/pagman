@@ -62,7 +62,7 @@ class PermisosController {
         $rolActual = $objPerm->select($sqlRolActual);
         
         $objPerm->cerrar();
-        
+
         include_once '../view/Usuarios/permisos/modalCrear.html.php';
     }//cierre funcion Crear
     

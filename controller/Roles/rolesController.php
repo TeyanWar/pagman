@@ -135,22 +135,20 @@ class RolesController {
         include_once("../view/Usuarios/roles/detalle.html.php");
     }
 
-    public function postEliminar() {
+    public function eliminar() {
         
         $objRol = new rolesModel();
 
-        $id = $_POST['id'];
+        $rol_id = $_POST['rol_id'];
 
-
-        $sql = "UPDATE pag_rol SET estado = NOW() WHERE rol_id='" . $id . "'";
+        $sql = "UPDATE pag_rol SET estado = NOW() WHERE rol_id=" . $rol_id;
         //die(print_r($sql));
-
-        $respuesta = $objRol->update($sql);
+        $objRol->update($sql);
 
         // Cierra la conexion
         $objRol->cerrar();
-
-        redirect(crearUrl("roles", "roles", "listar"));
+        
+        echo true;
     }
 
     public function camposCorrectos($objRol,$rol_id=false, $rol_nombre=false, $rol_descripcion=false, $funciones=false){
@@ -167,10 +165,10 @@ class RolesController {
             }else{
                 //Se creará un rol? Entonces verifique si su nombre es único en todos los registros
                 if(empty($objRol->rol_id['val'])){
-                    $sql="SELECT rol_nombre FROM pag_rol WHERE rol_nombre='".$objRol->rol_nombre['val']."'";
+                    $sql="SELECT rol_nombre FROM pag_rol WHERE rol_nombre='".$objRol->rol_nombre['val']."'";// AND estado IS NULL";
                 }//Se editará un rol? Entonces verifique si su nombre es único en todos los registros excepto el mismo
                 else{
-                    $sql="SELECT rol_nombre FROM pag_rol WHERE rol_nombre='".$objRol->rol_nombre['val']."' AND rol_id!=".$objRol->rol_id['val'];
+                    $sql="SELECT rol_nombre FROM pag_rol WHERE rol_nombre='".$objRol->rol_nombre['val']."' AND rol_id!=".$objRol->rol_id['val'];//." AND estado IS NULL";
                 }
                 $existeRol=$objRol->find($sql);
                 if($existeRol) $errores[] = "Ya existe un rol registrado con el nombre <code><b>".$objRol->rol_nombre['val']."</b></code>.";
