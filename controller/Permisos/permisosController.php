@@ -7,11 +7,38 @@ class PermisosController {
     public function crear() {
         
         $objPerm = new PermisosClass();
-        $sqlRol = "SELECT * FROM pag_rol";
-        $sqlPermisos = "select * from pag_funcion,pag_permisos WHERE pag_permisos.func_id=pag_funcion.func_id;";
+        $sql="SELECT rol_id, rol_nombre, estado FROM pag_rol";
+        $roles=$objPerm->select($sql);
         
-        $permisos = $objPerm->select($sqlPermisos);
-        $roles = $objPerm->select($sqlRol);
+        $funciones="";
+        foreach($roles as $keyRol=>$rol){
+            //Selecciono los módulos del rol
+            $sql="SELECT DISTINCT m.mod_id, m.mod_nombre FROM pag_modulo m, pag_controlador c, pag_funcion f, pag_permisos p "
+                . "WHERE p.func_id=f.func_id AND f.cont_id=c.cont_id AND c.mod_id=m.mod_id "
+                . "AND p.rol_id=".$rol['rol_id'];
+            $modulos= $objPerm->select($sql);
+            
+            foreach($modulos as $keyMod=>$modulo){
+                $sql="SELECT f.func_id, f.func_display "
+                    . "FROM pag_modulo m, pag_controlador c, pag_funcion f,pag_permisos p "
+                    . "WHERE p.func_id=f.func_id AND f.cont_id=c.cont_id AND c.mod_id=m.mod_id "
+                    . "AND m.mod_id=".$modulo['mod_id']." AND p.rol_id=".$rol['rol_id']
+                    . " ORDER BY f.func_id ASC";
+                $funcionesBD= $objPerm->select($sql);
+                foreach($funcionesBD as $funcion){
+                    if ($funcion === end($funcionesBD)) {
+                        $funciones.= "<em>".ucwords($funcion['func_display'])."</em>. ";
+                    }else{
+                        $funciones.= "<em>".ucwords($funcion['func_display'])."</em>, ";
+                    }
+                }
+                $modulos[$keyMod]['funciones']=$funciones;
+                $funciones="";
+            }//foreach
+            
+            $roles[$keyRol]['modulos']=$modulos;
+        }//foreach
+
         $objPerm->cerrar();
         $this->registrarActualizarPermisos();
         include_once '../view/Usuarios/permisos/crear.html.php';

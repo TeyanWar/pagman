@@ -127,11 +127,41 @@ class RolesController {
 
         $objRol = new rolesModel();
 
-        $id = $parametros[1];
+        $rol_id = $parametros[1];
+        $sql="SELECT rol_id, rol_nombre, rol_descripcion, estado FROM pag_rol WHERE rol_id=".$rol_id;
+        $rol=$objRol->find($sql);
+        
+        //Contenedor de todas las funciones de cada módulo
+        $funciones="";
+        
+        //Seleccionar los distintos módulos del rol
+        $sql="SELECT DISTINCT m.mod_id, m.mod_nombre FROM pag_modulo m, pag_controlador c, pag_funcion f, pag_permisos p "
+            . "WHERE p.func_id=f.func_id AND f.cont_id=c.cont_id AND c.mod_id=m.mod_id "
+            . "AND p.rol_id=".$rol['rol_id'];
+        $modulos= $objRol->select($sql);
 
-        $sqlRol = "SELECT * FROM pag_rol Where rol_id=$id";
-        $roles = $objRol->select($sqlRol);
+        foreach($modulos as $keyMod=>$modulo){
+            //Seleccionar las funciones de cada módulo del rol
+            $sql="SELECT f.func_id, f.func_display "
+                . "FROM pag_modulo m, pag_controlador c, pag_funcion f,pag_permisos p "
+                . "WHERE p.func_id=f.func_id AND f.cont_id=c.cont_id AND c.mod_id=m.mod_id "
+                . "AND m.mod_id=".$modulo['mod_id']." AND p.rol_id=".$rol['rol_id']
+                . " ORDER BY f.func_id ASC";
+            $funcionesBD= $objRol->select($sql);
+            foreach($funcionesBD as $funcion){
+                if ($funcion === end($funcionesBD)) {
+                    $funciones.= "<em>".ucwords($funcion['func_display'])."</em>. ";
+                }else{
+                    $funciones.= "<em>".ucwords($funcion['func_display'])."</em>, ";
+                }
+            }
+            $modulos[$keyMod]['funciones']=$funciones;
+            $funciones="";
+        }//foreach
 
+        $rol['modulos']=$modulos;
+
+        $objRol->cerrar();
         include_once("../view/Usuarios/roles/detalle.html.php");
     }
 
@@ -177,7 +207,7 @@ class RolesController {
         
         if($rol_descripcion){
             if (!between($objRol->rol_descripcion['val'],$objRol->rol_descripcion['min'],$objRol->rol_descripcion['max'])){
-                $errores[] = "El campo <code><b>descripci&oacute;n</b></code> debe contener menos de ".$objRol->rol_descripcion['max']." caracteres.";
+                $errores[] = "El campo <code><b>descripci&oacute;n</b></code> debe contener ".$objRol->rol_descripcion['max']." o menos caracteres.";
             }
         }//rol_descripcion
         

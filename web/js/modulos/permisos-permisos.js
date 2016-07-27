@@ -16,7 +16,12 @@ $(document).ready(function () {
     //al asignar permisos
     $(document).on('click','.modulo_permisos', function(){
        var divPermisos=$(this).data('div_permisos');
-       $('#contenedor_permisos div').css('display','none');
+       
+       //Bloque para dejar seleccionado el módulo
+       $('#contenedor_modulos div').css('background','teal');
+       $(this).css('background','#1E90FF');
+       
+        $('#contenedor_permisos div').css('display','none');
        $(divPermisos).css('display','block');
     });
     
