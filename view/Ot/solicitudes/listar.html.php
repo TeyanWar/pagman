@@ -30,7 +30,6 @@
                                 <td><?php echo $solicitud['per_nombre'] . " " . $solicitud['per_apellido'] ?></td>
                                 <td><?php echo $solicitud['tfa_descripcion'] ?></td>
                                 <td><?php echo $solicitud['est_descripcion'] ?></td>
-
                                 <td>
                                     <a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" href="#registrar" data-url="<?php echo crearUrl("Ot", "ot", "crear", array('noVista' => 'noVista', 'ot_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-content-add tiny"/></a>
                                 </td>
@@ -43,11 +42,8 @@
                                 <td>
                                     <a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" data-url="<?php echo crearUrl("Ot", "solicitudes", "eliminar", array('noVista' => 'noVista', 'sserv_id' => $solicitud['sserv_id'])) ?>"><i class="mdi-action-delete small"></i></a>
                                 </td> 
-
                             </tr>        
-                            <?php
-                        }
-                        ?>
+                            <?php } ?>
                     </tbody>
                 </table>
                 <?php $paginado->render() ?>  
@@ -67,8 +63,6 @@
             <div class="modal-content model-data">                                            
             </div><!--fin modal --> 
         </div>
-
-
     </div>
 </div>
 

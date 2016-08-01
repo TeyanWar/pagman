@@ -119,7 +119,7 @@ class SolicitudesController {
                         or pag_tipo_falla.tfa_descripcion like '" . $buscar . "%'
                         or pag_estado.est_descripcion like '" . $buscar . "%'
                         or UPPER(pag_persona.per_nombre) like UPPER('" . $buscar . "%')
-                    ) order by sserv_id desc";
+                    ) order by sserv_id desc ";
 
         $solicitudes = $objBuscar->select($sql);
         
@@ -131,7 +131,7 @@ class SolicitudesController {
         
         $solicitudes = $paginado->getDatos();
         // Fin paginado
-
+       
         // Cierra la conexion
         $objBuscar->cerrar();
 
