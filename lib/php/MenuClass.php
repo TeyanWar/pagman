@@ -43,7 +43,7 @@ class MenuClass{
             }
         //Fin vector maestro
         
-        $modulosMenu=array();
+        $modulosMenu=array('principal'=>array(),'configuracion'=>array());
         //Separo los módulos de según sitio en el menú    
         foreach($modulos as $modulo){
             if($modulo['mod_sitio_menu']=='principal'){
@@ -52,8 +52,7 @@ class MenuClass{
                 $modulosMenu['configuracion'][]=$modulo;
             }
         }
-        
-//        dd($modulosMenu['configuracion']);
+
         return $modulosMenu;
     }
 }

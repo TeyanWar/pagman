@@ -4,8 +4,6 @@
 </div>
 <!-- END MAIN -->
 
-
-
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 
 <!-- START FOOTER -->
@@ -19,8 +17,6 @@
 </footer>
 <!-- END FOOTER -->
 
-
-
 <!-- ================================================
 Scripts
 ================================================ -->
@@ -31,8 +27,6 @@ Scripts
 <!-- jQuery Validation -->
 <script src="<?php echo addLib('templates/adminMaterialize/js/plugins/jquery-validation/jquery.validate.min.js') ?>" type="text/javascript"></script>
 <script src="<?php echo addLib('templates/adminMaterialize/js/plugins/jquery-validation/additional-methods.min.js') ?>" type="text/javascript"></script>
-<!--angularjs-->
-<!-- <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins/angular.min.js') ?>"></script>-->
 
 <!--materialize js-->
 <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/materialize.js') ?>"></script>
@@ -41,7 +35,7 @@ Scripts
 <!--scrollbar-->
 <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js') ?>"></script>
 <!-- chartist -->
-<!--<script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins/js/plugins/chartist-js/chartist.min.js') ?>"></script>-->
+<!--<script type="text/javascript" src="<?php // echo addLib('templates/adminMaterialize/js/plugins/js/plugins/chartist-js/chartist.min.js') ?>"></script>-->
 
 <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/sweetalert/dist/sweetalert.min.js') ?>"></script>
 

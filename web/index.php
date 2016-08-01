@@ -13,6 +13,9 @@ include_once("../lib/php/PaginadoClass.php");
 //se incluye la clase para cargar el menú
 include_once("../lib/php/MenuClass.php");
 
+//se incluyen las funciones para validar
+include_once("../lib/php/validaciones.php");
+
 //if(!isset($modulo) && !isset($controller) && !isset($accion)){
 if (!isset($_SESSION['login']) && (!isset($_SERVER['PATH_INFO'])  || $_SERVER['PATH_INFO'] != "/sesion/sesion/postInicio/noVista")) {
     include_once('templates/adminMaterialize/login/header.html.php');

@@ -14,7 +14,6 @@
             <descripcion>Controlador de Mediciones</descripcion>
             
             <funciones>
-                
                 <funcion>
                     <nombre>crear</nombre>
                     <display>Crear Mediciones</display>
@@ -37,12 +36,6 @@
                     <nombre>Listar</nombre>
                     <display>Listar Mediciones</display>
                     <descripcion>Listar Mediciones</descripcion>
-                </funcion>
-                
-                <funcion>
-                    <nombre>Consultar</nombre>
-                    <display>Consultar Mediciones</display>
-                    <descripcion>Consultar Mediciones</descripcion>
                 </funcion>
             </funciones>
             

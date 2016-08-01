@@ -9,21 +9,21 @@
     <!--Fin contenedor mensajes de error-->
     
     <form action = "<?php echo crearUrl("Permisos", "permisos", "postCrear",array('noVista')) ?>" name = "formRol" method = "POST">
-        <div>
-            <input type="hidden" name="rol_id" value="<?php echo $rolActual[0]['rol_id']; ?>" readonly> 
-            Rol:
-            <code><b><?php echo $rolActual[0]['rol_nombre']; ?></b></code>
+        <div id="card-alert" class="card teal">
+            <div class="card-content white-text">
+                <p><i class="mdi-action-info-outline"></i> Asignar permisos al rol: <code><b><?php echo $rolActual[0]['rol_nombre']; ?></b></code></p>
+            </div>
+            <input type="hidden" name="rol_id" value="<?php echo $rolActual[0]['rol_id']; ?>"> 
         </div>
-        
         <div class="row">
-            <div class="col s4" style="background: white">
+            <div id="contenedor_modulos" class="col s5">
                 <?php foreach($modulos as $modulo){?>
-                    <div class = "card-header cyan darken-2 modulo_permisos" data-div_permisos=".<?php echo $modulo['mod_nombre']; ?>">
+                    <div class = "card-header modulo_permisos" data-div_permisos=".<?php echo $modulo['mod_nombre']; ?>">
                         <?php echo $modulo['mod_nombre']; ?>
                     </div>
                 <?php } ?>
             </div>
-            <div id="contenedor_permisos" class="col s8" style="background: white">
+            <div id="contenedor_permisos" class="col s7">
                 <?php foreach($modulos as $modulo){?>
                     <div class="row <?php echo $modulo['mod_nombre']; ?>" style="display: none">
                         <?php foreach ($modulo['controladores'] as $key=> $controlaor) { ?>
@@ -56,8 +56,8 @@
 </div>
 <style>
     #modalDetalle1{
-        /*top: 5% !important;*/
-        max-height: 80%;
-        height: 80%;
+        top: 2% !important;
+        max-height: 100%;
+        height: 96%;
     }
 </style>

@@ -51,6 +51,7 @@
     height: 45px !important;
 }
 
+/* Estilos para resaltar los campos que el usuario debe corregir */
 code{
     background-color: #f9f2f4;
     border-radius: 4px;
@@ -60,8 +61,8 @@ code{
 }
 
 /*Efecto zoom para los módulos cuando se edita un permiso*/
-
 .modulo_permisos{
+    background: teal;
     text-align: center;
     color:white;
     font-size: 16px;
@@ -75,9 +76,8 @@ code{
     -webkit-transition: ease; /* Chrome - Safari */
     -o-transition: 0.1s ease; /* Opera */
 }
-
 .modulo_permisos:hover{
-    background:black !important;
+    background:#1E90FF !important;
     transform : scale(1.05);
     -moz-transform : scale(1.05); /* Firefox */
     -webkit-transform : scale(1.07); /* Chrome - Safari */
@@ -88,4 +88,9 @@ code{
 /*Contenedor de los errores que se muestran por medio de ajax*/
 #cont_errors_ajax{
     display:none;
+}
+
+/*Mensajes de error en los campos de formularios*/
+.error{
+    color: #F44336;
 }
