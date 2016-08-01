@@ -25,17 +25,14 @@
                             <tr>
                                 <th>#</th>
                                 <th><center>Rol</center></th>
-                        <th colspan="2"><center>Funciones</center></th>
-
-                        </tr>
+                                <th colspan="3"><center>Funciones</center></th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            foreach ($roles as $rol) {
-                                ?>
+                            <?php foreach ($roles as $rol) { ?>
                                 <tr>
-                                    <td><?php echo $paginado->count++ ?></td>
-                                    <td><?php echo $rol['rol_nombre'] ?></td>
+                                    <td><?php echo $paginado->count++; ?></td>
+                                    <td><?php echo $rol['rol_nombre']; ?></td>
                                     <td>
                                         <a class="btn-floating modal-trigger teal editarRoles" 
                                            href="#modalUpdateRoles" data-url="<?php echo crearUrl('roles', 'roles', 'editar', array('noVista' => 'noVista', 'id' => $rol['rol_id'])) ?>">
@@ -50,14 +47,11 @@
                                     </td>
                                     <td>
                                         <a class=" btn-floating waves-effect waves-light modal-eliminar red
-                                           darken-4 eliminar" data-rol_id="<?php echo $rol['rol_id'] ?>"  data-url="<?php echo crearUrl('roles', 'roles', 'postEliminar', array('noVista' => 'noVista', 'id' => $rol['rol_id'])) ?>">
+                                           darken-4 eliminar" data-rol_id="<?php echo $rol['rol_id'] ?>"  data-url="<?php echo crearUrl('roles', 'roles', 'eliminar', array('noVista')) ?>">
                                             <i class="mdi-action-delete small red "></i>
                                         </a>
                                     </td>
-
-                                    <?php
-                                }
-                                ?>
+                                <?php } ?>
                             </tr>
                         </tbody>
                     </table>
@@ -87,4 +81,3 @@
         </div>
     </div>
 </div>
-

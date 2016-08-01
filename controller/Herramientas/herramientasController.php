@@ -79,22 +79,24 @@ class HerramientasController {
     }
 
     function postEditar() {
-
+        $objHerramientas = new HerramientasModel();
         $her_id = $_POST['id'];
         $her_nombre = $_POST['her_nombre'];
         $her_descripcion = $_POST['her_descripcion'];
-        $her_imagen = $_POST['her_imagen'];
         $her_fecha_ingreso = $_POST['her_fecha_ingreso'];
-//        $ther_id = $_POST['ther_id'];
-
-        $objHerramientas = new HerramientasModel();
+//        $her_imagen = $_FILES['her_imagen'];
+////        $ther_id = $_POST['ther_id'];
+//        //$rutaImagen=$_FILES["her_imagen"]["name"];
+//        $rutaImagen = $_SERVER['DOCUMENT_ROOT'] . "/pagman/web/img/" . $_FILES["her_imagen"];
+//        // Si no es un archivo repetido y no hubo error, subimos a la carpeta /Imagenes para luego ser mostrada 
+//        move_uploaded_file($_FILES["her_imagen"], $rutaImagen);
 
         $sql = "UPDATE "
                 . "pag_herramienta "
                 . "SET "
                 . "her_nombre='$her_nombre', "
                 . "her_descripcion='$her_descripcion', "
-                . "her_imagen='$her_imagen', "
+//                . "her_imagen='" . $_POST["her_imagen"] . "', "
                 . "her_fecha_ingreso='$her_fecha_ingreso'  "
                 . "WHERE her_id='$her_id'";
 //        die(print_r($sql));
@@ -156,7 +158,7 @@ class HerramientasController {
         $herramienta = $_POST['her_id'];
 
         $sql = "SELECT * FROM pag_herramienta WHERE her_id LIKE '%" . $herramienta . "%' or her_nombre LIKE '%" . $herramienta . "%'";
-        
+
         $listarHer = $objherramientas->select($sql);
 
         $objherramientas->cerrar();

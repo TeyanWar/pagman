@@ -116,5 +116,8 @@ $(document).ready(function () {
     });
     // aqui termina el sweetAlert de herramientas
     //------------------------------------------------------------------------------//
+    
+    $('.fancybox').fancybox();
+    
 });
     

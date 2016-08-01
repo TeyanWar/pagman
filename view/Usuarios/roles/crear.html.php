@@ -13,32 +13,34 @@
                     IMPORTANTE : Los campos marcados con (*) son obligatorios.
                 </p> 
             </div> 
-
+            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
         </div>
-        <?php if(isset($_SESSION['mensajeError'])){ ?>
-        <div id="card-alert" class="card red">
-            <div class="card-content white-text">
-                <?php echo getErrores(); ?>
+        <!--Inicio contenedor mensajes de error-->
+        <div class="card red">
+            <div id="cont_errors_ajax" class="card-content white-text">
             </div>
         </div>
-        <?php } ?>
-        <form class="col s12" action="<?php echo crearUrl("roles", "roles", "postCrear") ?>" method="POST">
+        <!--Fin contenedor mensajes de error-->
+        
+        <form id="form_crear_rol" class="col s12" action="<?php echo crearUrl("roles", "roles", "postCrear",array('noVista')) ?>" method="POST">
             <!--Datos del rol-->
-            <!--<h4 class="header2">Datos del rol</h4>-->            
             <div class="row">
                 <div class="input-field col s4">
-                    <input id="rol_nombre" name="rol_nombre" class="validate" type="text" required>
-                    <label class="" for="rol_nombre">(*) Nombre</label>
+                    <input type="text" id="rol_nombre" name="rol_nombre" length="20">
+                    <label for="rol_nombre">(*) Nombre</label>
                 </div>
                 <div class="input-field col s8">
-                    <input id="rol_descripcion" name="rol_descripcion" class="validate" type="text" required>
-                    <label class="" for="rol_descripcion">(*) Descripción</label>
+                    <input id="rol_descripcion" name="rol_descripcion" type="text" length="100">
+                    <label for="rol_descripcion">(*) Descripción</label>
                 </div>
-            </div> <!--fin datos rol-->
+            </div> 
+            <!--fin datos rol-->
 
             <div class="row">
                 <div class="input-field col s12">
-                    <button name="action" type="submit" class="btn cyan waves-effect waves-light right">Crear
+                    <button name="action" type="submit" class="btn cyan waves-effect waves-light teal right btn_submit_modal">Crear
                         <i class="mdi-content-send right"></i>
                     </button>
                 </div>

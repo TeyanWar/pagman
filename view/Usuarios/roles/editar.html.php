@@ -6,42 +6,33 @@
 <!--Inicio contenedor mensajes de error-->
 <div class="card red">
     <div id="cont_errors_ajax" class="card-content white-text">
-
     </div>
 </div>
 <!--Fin contenedor mensajes de error-->
 
-<form class="col s12" role="form" action="<?php echo crearUrl("roles", "roles", "postEditar",array('noVista')) ?>" method="post">
+<form id="form_editar_rol" class="col s12" action="<?php echo crearUrl("roles", "roles", "postEditar",array('noVista')) ?>" method="post">
     <div class="row">
         <input type="hidden" value="<?php echo $rol['rol_id'] ?>" name="rol_id" required>
-        <div class="input col s12">
-            <label>(*) Rol:</label>
-            <input type="text" name="rol_nombre" value="<?php echo $rol['rol_nombre'] ?>" type="text" required>
+        <div class="input-field col s7">
+            <input value="<?php echo $rol['rol_nombre'] ?>" id="rol_nombre" name="rol_nombre" type="text" length="20">
+            <label for="rol_nombre">(*) Nombre</label>
         </div>
-        <div class="input col s12">
-            <label>(*) Descripción</label>
-            <input type="text" name="rol_descripcion" length="10" value="<?php echo $rol['rol_descripcion'] ?>" required>
+        <div class="input-field col s12">
+            <input value="<?php echo $rol['rol_descripcion'] ?>" id="rol_descripcion" name="rol_descripcion" type="text" length="100">
+            <label for="rol_descripcion">(*) Descripción</label>
         </div>
-        <!--<div class="row">-->
-<!--        <div class="input-field col s6">
-            <input type="text" length="10" id="input_text1">
-            <label for="input_text1" class="">Input text</label>
-            <span class="character-counter" style="float: right; font-size: 12px; height: 1px;"></span>
-        </div>-->
-        <!--</div>-->
-        
     </div> <!--fin datos rol-->
 
     <!--Inicio de asignación de permisos-->
     <div class="row">
-        <div class="col s4" style="background: white">
+        <div class="col s5" style="background: white">
             <?php foreach($modulos as $modulo){?>
-                <div class = "card-header cyan darken-2 modulo_permisos" data-div_permisos=".<?php echo $modulo['mod_nombre']; ?>">
+                <div class = "card-header modulo_permisos" data-div_permisos=".<?php echo $modulo['mod_nombre']; ?>">
                     <?php echo $modulo['mod_nombre']; ?>
                 </div>
             <?php } ?>
         </div>
-        <div id="contenedor_permisos" class="col s8" style="background: white">
+        <div id="contenedor_permisos" class="col s7" style="background: white">
             <?php foreach($modulos as $modulo){?>
                 <div class="row <?php echo $modulo['mod_nombre']; ?>" style="display: none">
                     <?php foreach ($modulo['controladores'] as $key=> $controlaor) { ?>
@@ -75,11 +66,55 @@
         </div>
     </div>
 </form>
+
+<!--materialize js para contar la longitud de los input -->
+<script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/materialize.js') ?>"></script>
 <style>
     #modalUpdateRoles{
-        top: 5% !important;
-        max-height: 90%;
-        height: 90%;
+        top: 2% !important;
+        max-height: 100%;
+        height: 96%;
     }
-    
 </style>
+<script>
+    $("#form_editar_rol").validate({
+        rules: {
+            rol_id: {
+                required: true,
+                numeric: true
+            },
+            rol_nombre: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            rol_descripcion: {
+                maxlength: 100
+            },
+            funciones: {
+                required: true
+            }
+        },
+        messages: {
+            rol_id: {
+                required: "Por favor seleccione un registro",
+                numeric: "Este campo debe contener sólo números"
+            },
+            rol_nombre: {
+                required: "Por favor diligencie este campo",
+                minlength: "Este campo debe contener entre 3 y 20 caracteres",
+                maxlength: "Este campo debe contener entre 3 y 20 caracteres"
+            },
+            rol_descripcion: {
+                maxlength: "Este campo debe contener 100 o menos caracteres"
+            },
+            funciones: {
+                required: "Por favor asignar al menos una función al rol"
+            }
+        },
+        errorElement: 'em',
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        }
+    });
+</script>

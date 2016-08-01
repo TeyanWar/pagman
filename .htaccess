@@ -1,0 +1,5 @@
+#Para localhost
+ErrorDocument 404 /pagman/web/templates/adminMaterialize/errors/error.php
+
+#Para virtualhost
+#ErrorDocument 404 /templates/adminMaterialize/errors/error.php       
