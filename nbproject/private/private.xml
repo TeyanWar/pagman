@@ -6,9 +6,10 @@
             <file>file:/C:/xampp/htdocs/pagman/view/Usuarios/permisos/crear.html.php</file>
             <file>file:/C:/xampp/htdocs/pagman/view/Usuarios/roles/editar.html.php</file>
             <file>file:/C:/xampp/htdocs/pagman/view/Usuarios/roles/listar.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/view/Usuarios/permisos/modalCrear.html.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/controller/Roles/rolesController.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/view/Usuarios/roles/detalle.html.php</file>
             <file>file:/C:/xampp/htdocs/pagman/controller/Permisos/permisosController.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/web/css/global.css</file>
+            <file>file:/C:/xampp/htdocs/pagman/view/Usuarios/permisos/modalCrear.html.php</file>
         </group>
     </open-files>
 </project-private>
