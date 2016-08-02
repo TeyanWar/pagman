@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<modulos>
+    <nombre>Mediciones</nombre>
+    <icono>mdi-av-timer</icono>
+    <sitioMenu>principal</sitioMenu>
+    <descripcion>Modulo de Mediciones</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>medicionesController</nombre>
+            <icono>mdi-av-timer</icono>
+            <display>Mediciones</display>
+            <descripcion>Controlador de Mediciones</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Mediciones</display>
+                    <descripcion>Crear Mediciones</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Mediciones</display>
+                    <descripcion>Editar Mediciones</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Mediciones</display>
+                    <descripcion>Eliminar Mediciones</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Mediciones</display>
+                    <descripcion>Listar Mediciones</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

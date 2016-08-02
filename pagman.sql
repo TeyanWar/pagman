@@ -133,7 +133,7 @@ CREATE TABLE `pag_cargo` (
 
 LOCK TABLES `pag_cargo` WRITE;
 /*!40000 ALTER TABLE `pag_cargo` DISABLE KEYS */;
-INSERT INTO `pag_cargo` VALUES (1,'Desarrollador de Software','0000-00-00 00:00:00');
+INSERT INTO `pag_cargo` VALUES (1,'Instructor',NULL);
 /*!40000 ALTER TABLE `pag_cargo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +161,7 @@ CREATE TABLE `pag_centro` (
 
 LOCK TABLES `pag_centro` WRITE;
 /*!40000 ALTER TABLE `pag_centro` DISABLE KEYS */;
-INSERT INTO `pag_centro` VALUES (1,'CDTI','Pondaje','3275647',3,'2016-06-25 05:00:00'),(2,'CEAI','Cali','2345',4,NULL),(4,'ASTIN','sdesdhgb','5678',5,NULL);
+INSERT INTO `pag_centro` VALUES (1,'CDTI','Pondaje','3275647',3,NULL),(2,'CEAI','Cali','2345',4,NULL),(4,'ASTIN','sdesdhgb','5678',5,NULL);
 /*!40000 ALTER TABLE `pag_centro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,7 +187,7 @@ CREATE TABLE `pag_ciudad` (
 
 LOCK TABLES `pag_ciudad` WRITE;
 /*!40000 ALTER TABLE `pag_ciudad` DISABLE KEYS */;
-INSERT INTO `pag_ciudad` VALUES (1,'Barranquilla',3,NULL);
+INSERT INTO `pag_ciudad` VALUES (1,'Cali',3,NULL);
 /*!40000 ALTER TABLE `pag_ciudad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `pag_componente` (
 
 LOCK TABLES `pag_componente` WRITE;
 /*!40000 ALTER TABLE `pag_componente` DISABLE KEYS */;
-INSERT INTO `pag_componente` VALUES ('1','Polea',NULL),('2','Piñon',NULL);
+INSERT INTO `pag_componente` VALUES ('1','Polea',NULL),('2','Piñón',NULL);
 /*!40000 ALTER TABLE `pag_componente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,8 +229,13 @@ CREATE TABLE `pag_control_medidas` (
   `ctrmed_medida_actual` varchar(100) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
   `per_id` bigint(20) NOT NULL,
+  `tmed_id` int NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`ctrmed_id`)
+  PRIMARY KEY (`ctrmed_id`),
+  KEY `tmed_id` (`tmed_id`),
+  KEY `equi_id` (`equi_id`),
+  CONSTRAINT `pag_control_medidas_ibfk_1` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`),
+  CONSTRAINT `pag_control_medidas_ibfk_2` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -293,7 +298,7 @@ CREATE TABLE `pag_departamento` (
 
 LOCK TABLES `pag_departamento` WRITE;
 /*!40000 ALTER TABLE `pag_departamento` DISABLE KEYS */;
-INSERT INTO `pag_departamento` VALUES (1,'VALLE DEL CAUCA',0,'0000-00-00 00:00:00'),(2,'Buenaventura',3,NULL),(3,'Atlantico',4,NULL);
+INSERT INTO `pag_departamento` VALUES (1,'VALLE DEL CAUCA',0,NULL),(2,'Buenaventura',3,NULL),(3,'Atlantico',4,NULL);
 /*!40000 ALTER TABLE `pag_departamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,7 +551,7 @@ CREATE TABLE `pag_estado` (
   PRIMARY KEY (`est_id`),
   KEY `tdoc_id` (`tdoc_id`),
   CONSTRAINT `pag_estado_ibfk_1` FOREIGN KEY (`tdoc_id`) REFERENCES `pag_tipo_doc` (`tdoc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -555,7 +560,9 @@ CREATE TABLE `pag_estado` (
 
 LOCK TABLES `pag_estado` WRITE;
 /*!40000 ALTER TABLE `pag_estado` DISABLE KEYS */;
-INSERT INTO `pag_estado` VALUES (1,'Activo',1,'0000-00-00 00:00:00'),(2,'Inactivo',1,'0000-00-00 00:00:00'),(3,'Creada',2,NULL),(4,'En ejecución',2,NULL),(5,'Gestionada',2,NULL),(6,'Cerrada',2,NULL),(7,'Por atender',4,NULL),(8,'Atendida',4,NULL),(9,'Cerrada',3,NULL),(10,'Activo',3,NULL),(11,'Inactivo',3,NULL),(12,'Cerrada',4,NULL);
+INSERT INTO `pag_estado` VALUES (1,'Activo',1,NULL),(2,'Inactivo',1,NULL),(3,'Creada',2,NULL),
+(4,'En ejecución',2,NULL),(5,'Gestionada',2,NULL),(6,'Cerrada',2,NULL),(7,'Por atender',4,NULL),
+(8,'Atendida',4,NULL);
 /*!40000 ALTER TABLE `pag_estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -612,7 +619,7 @@ CREATE TABLE `pag_herramienta` (
 
 LOCK TABLES `pag_herramienta` WRITE;
 /*!40000 ALTER TABLE `pag_herramienta` DISABLE KEYS */;
-INSERT INTO `pag_herramienta` VALUES ('01',2,'Martillo','Martillo 01','',NULL,NULL,NULL);
+INSERT INTO `pag_herramienta` VALUES ('01',2,'Martillo','Martillo 01',now(),NULL,NULL,NULL);
 /*!40000 ALTER TABLE `pag_herramienta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -631,7 +638,7 @@ CREATE TABLE `pag_insumo` (
   `umed_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ins_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9999 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -640,7 +647,7 @@ CREATE TABLE `pag_insumo` (
 
 LOCK TABLES `pag_insumo` WRITE;
 /*!40000 ALTER TABLE `pag_insumo` DISABLE KEYS */;
-INSERT INTO `pag_insumo` VALUES (1234,'Aceite','Aceite 3 en 1',23000,1,NULL),(9998,'Gasolina','Gasolina x Litro',21001,1,'2016-04-07 19:31:03');
+INSERT INTO `pag_insumo` VALUES (1,'Aceite','Aceite 3 en 1',23000,1,NULL),(2,'Gasolina','Gasolina x Litro',21001,1,NULL);
 /*!40000 ALTER TABLE `pag_insumo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -824,7 +831,7 @@ CREATE TABLE `pag_persona` (
 
 LOCK TABLES `pag_persona` WRITE;
 /*!40000 ALTER TABLE `pag_persona` DISABLE KEYS */;
-INSERT INTO `pag_persona` VALUES (5454,'vfdvf','vfdfvd','32323','545454545','fdsvdsvfdsfds@gmail','gdgfdfgdfd',1,3000,1,1,'usuario del sistema',NULL),(234567,'yan','narvaez','1235677','3456788','dasd@dss.com','Cra 45 ',1,6000,1,1,'usuario del sistema',NULL),(1143830254,'Alejandro','Yepes','3243452','3183452354','alejandro@gmail.com','Terron Colorado',1,28000,1,1,'usuario del sistema',NULL),(1144125445,'Jhonatan','Tavera','3213423','3154352342','jtavera@gmail.com','Sena',1,23000,1,1,'usuario del sistema',NULL),(1144125472,'Jhonatan','Tavera','3124534','3128546345','tatan@gmail.com','Cra 45 45 567',1,300000,1,1,'usuario del sistema',NULL),(1144125473,'David Fernando','Barona','4434564','3185235463','dferbac@gmail.com','Calle 8A 45 106',1,200000,1,1,'usuario del sistema',NULL),(1151956249,'Super','Administrador','3845030','3135396721','esteban@gmail.com',NULL,1,5000,1,1,'usuario del sistema',NULL);
+INSERT INTO `pag_persona` VALUES (1143830254,'Alejandro','Yepes','3243452','3183452354','alejandro@gmail.com','Terron Colorado',1,28000,1,1,'usuario del sistema',NULL),(1144125445,'Jhonatan','Tavera','3213423','3154352342','jtavera@gmail.com','Sena',1,23000,1,1,'usuario del sistema',NULL),(1144125472,'Jhonatan','Tavera','3124534','3128546345','tatan@gmail.com','Cra 45 45 567',1,300000,1,1,'usuario del sistema',NULL),(1144125473,'David Fernando','Barona','4434564','3185235463','dferbac@gmail.com','Calle 8A 45 106',1,200000,1,1,'usuario del sistema',NULL),(1151956249,'Super','Administrador','3845030','3135396721','esteban@gmail.com',NULL,1,5000,1,1,'usuario del sistema',NULL);
 /*!40000 ALTER TABLE `pag_persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -898,7 +905,7 @@ CREATE TABLE `pag_programacion_equipo` (
   `tman_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`proequi_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -907,7 +914,7 @@ CREATE TABLE `pag_programacion_equipo` (
 
 LOCK TABLES `pag_programacion_equipo` WRITE;
 /*!40000 ALTER TABLE `pag_programacion_equipo` DISABLE KEYS */;
-INSERT INTO `pag_programacion_equipo` VALUES (1,'5 April, 2016',1,'29 April, 2016',1,'2016-04-07 05:00:00'),(2,'5 April, 2016',1,'29 April, 2016',1,'2016-04-07 05:00:00'),(3,'4 April, 2016',1,'12 April, 2016',1,'2016-04-07 05:00:00'),(4,'4 April, 2016',1,'12 April, 2016',1,'2016-04-07 05:00:00');
+INSERT INTO `pag_programacion_equipo` VALUES (1,'5 April, 2016',1,'29 April, 2016',1,NULL);
 /*!40000 ALTER TABLE `pag_programacion_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -923,7 +930,7 @@ CREATE TABLE `pag_regional` (
   `reg_nombre` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`reg_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -932,7 +939,7 @@ CREATE TABLE `pag_regional` (
 
 LOCK TABLES `pag_regional` WRITE;
 /*!40000 ALTER TABLE `pag_regional` DISABLE KEYS */;
-INSERT INTO `pag_regional` VALUES (3,'Zona pacifico2',NULL),(4,'Zona Caribe',NULL),(5,'Zona Sur',NULL);
+INSERT INTO `pag_regional` VALUES (1,'Zona pacifico2',NULL),(2,'Zona Caribe',NULL),(3,'Zona Sur',NULL);
 /*!40000 ALTER TABLE `pag_regional` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1039,7 +1046,7 @@ CREATE TABLE `pag_tipo_de_equipo` (
 
 LOCK TABLES `pag_tipo_de_equipo` WRITE;
 /*!40000 ALTER TABLE `pag_tipo_de_equipo` DISABLE KEYS */;
-INSERT INTO `pag_tipo_de_equipo` VALUES (1,'Electromecanico',NULL),(2,'Hidraulico',NULL),(3,'Hola',NULL);
+INSERT INTO `pag_tipo_de_equipo` VALUES (1,'Electromecanico',NULL),(2,'Hidraulico',NULL),(3,'Refrigeración',NULL);
 /*!40000 ALTER TABLE `pag_tipo_de_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1055,7 +1062,7 @@ CREATE TABLE `pag_tipo_doc` (
   `tdoc_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`tdoc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1064,7 +1071,7 @@ CREATE TABLE `pag_tipo_doc` (
 
 LOCK TABLES `pag_tipo_doc` WRITE;
 /*!40000 ALTER TABLE `pag_tipo_doc` DISABLE KEYS */;
-INSERT INTO `pag_tipo_doc` VALUES (1,'General',NULL),(2,'Orden de trabajo',NULL),(3,'Programación equipos',NULL),(4,'Solicitudes de servicio',NULL),(5,'Equipo',NULL);
+INSERT INTO `pag_tipo_doc` VALUES (1,'General',NULL),(2,'Orden de trabajo',NULL),(3,'Programación equipos',NULL),(4,'Solicitudes de servicio',NULL);
 /*!40000 ALTER TABLE `pag_tipo_doc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1089,7 +1096,7 @@ CREATE TABLE `pag_tipo_falla` (
 
 LOCK TABLES `pag_tipo_falla` WRITE;
 /*!40000 ALTER TABLE `pag_tipo_falla` DISABLE KEYS */;
-INSERT INTO `pag_tipo_falla` VALUES (1,'Mecanica','0000-00-00 00:00:00'),(2,'Hidraulica','0000-00-00 00:00:00');
+INSERT INTO `pag_tipo_falla` VALUES (1,'Mecanica',NULL),(2,'Hidraulica',NULL);
 /*!40000 ALTER TABLE `pag_tipo_falla` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1180,7 +1187,7 @@ DROP TABLE IF EXISTS `pag_tipo_trabajo`;
 CREATE TABLE `pag_tipo_trabajo` (
   `ttra_id` int(11) NOT NULL AUTO_INCREMENT,
   `ttra_descripcion` varchar(100) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ttra_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1191,7 +1198,7 @@ CREATE TABLE `pag_tipo_trabajo` (
 
 LOCK TABLES `pag_tipo_trabajo` WRITE;
 /*!40000 ALTER TABLE `pag_tipo_trabajo` DISABLE KEYS */;
-INSERT INTO `pag_tipo_trabajo` VALUES (1,'Hidraulico',1),(2,'Limpieza',1);
+INSERT INTO `pag_tipo_trabajo` VALUES (1,'Hidraulico',NULL),(2,'Limpieza',NULL);
 /*!40000 ALTER TABLE `pag_tipo_trabajo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1216,7 +1223,7 @@ CREATE TABLE `pag_unidad_medida` (
 
 LOCK TABLES `pag_unidad_medida` WRITE;
 /*!40000 ALTER TABLE `pag_unidad_medida` DISABLE KEYS */;
-INSERT INTO `pag_unidad_medida` VALUES (1,'Litro',NULL),(2,'Centrimetros cubicos',NULL),(3,'Gramos',NULL),(4,'Libra',NULL);
+INSERT INTO `pag_unidad_medida` VALUES (1,'Litro',NULL),(2,'Centrimetros cúbicos',NULL),(3,'Gramos',NULL),(4,'Libra',NULL);
 /*!40000 ALTER TABLE `pag_unidad_medida` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1244,7 +1251,7 @@ CREATE TABLE `pag_usuario` (
 
 LOCK TABLES `pag_usuario` WRITE;
 /*!40000 ALTER TABLE `pag_usuario` DISABLE KEYS */;
-INSERT INTO `pag_usuario` VALUES (5454,'prueba','kkkk','desactivado',1),(234567,'yankarlo','0000','',1),(1143830254,'ayepes','123456','activo',1),(1144125445,'jtavera','123456','activo',1),(1144125472,'jorge','123456','activo',1),(1144125473,'dbarona','1234','activo',1),(1151956249,'admin','0000','activo',1);
+INSERT INTO `pag_usuario` VALUES (1143830254,'ayepes','123456','activo',1),(1144125445,'jtavera','123456','activo',1),(1144125473,'dbarona','1234','activo',1),(1151956249,'admin','0000','activo',1);
 /*!40000 ALTER TABLE `pag_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -138,12 +138,12 @@ class MedicionesController {
         redirect(crearUrl('mediciones', 'mediciones', 'listar'));
     }
 
-    public function ajaxAgregarEquipo() {
+    public function ajaxAgregarEquipo($parametros) {
         $idsEquipos = $_POST['ids'];
         $equipos = array();
         $objEquipos = new EquiposModel();
         foreach ($idsEquipos as $idEquipo) {
-            $sql = "SELECT equi_id, equi_nombre FROM pag_equipo WHERE equi_id = $idEquipo";
+            $sql = "SELECT equi_id, equi_nombre FROM pag_equipo WHERE equi_id = '$idEquipo'";
             $equipo = $objEquipos->select($sql);
             $equipos[$equipo[0]['equi_id']] = $equipo[0];
         }
@@ -175,16 +175,16 @@ class MedicionesController {
         $patronLetrasNumeros = "/^[0-9a-zA-Z]+$/";
 
         if (!isset($_POST['personas']) or $_POST['personas'] == "") {
-            $errores[] = "El campo Responsable es Obligatorio";
+            $errores[] = "El campo <code><b>Responsable</b></code> es Obligatorio";
         }
         if (isset($_POST['personas']) && !is_numeric($_POST['personas'])) {
             $errores[] = "En el campo Responsable unicamente se aceptan letras";
         }
         if (!isset($_POST['equipos']) or $_POST['equipos'] == "") {
-            $errores[] = "El campo Equipo no puede estar vacio";
+            $errores[] = "El campo <b><code>Equipo</b></code> no puede estar vacio";
         }
-        if (isset($_POST['equipos']) && !is_numeric($_POST['equipos'])) {
-            $errores[] = "En el campo Equipo unicamente se aceptan letras";
+        if (!isset($_POST['equipos'])) {
+            $errores[] = "En el campo <b><code>Equipo</b></code> unicamente se aceptan letras";
         }
         if (!isset($_POST['medidaActual']) or $_POST['medidaActual'] == "") {
             $errores[] = "El campo Medidas no puede estar vacio";
@@ -201,7 +201,7 @@ class MedicionesController {
 //            }
         }
         if (!isset($_POST['medidas']) or $_POST['medidas'] == "") {
-            $errores[] = "Debe agregar al menos 1 medicion";
+            $errores[] = "Debe agregar al menos 1 medici&oacute;n";
         } else {
             $medidas = $_POST['medidas'];
             foreach ($medidas as $medida) {
@@ -210,9 +210,6 @@ class MedicionesController {
                 } else {
                     if (!is_numeric($medida['medicion'])) {
                         $errores[] = "En el campo Medidas unicamente se aceptan Numeros";
-                    }
-                    if (!is_numeric($medida['equi_id'])) {
-                        $errores[] = "El codigo del equipo debe ser Numerico unicamente";
                     }
                     if (!preg_match($patronLetras, $medida['equi_nombre'])) {
                         $errores[] = "SOLO LETRAS";
@@ -235,14 +232,15 @@ class MedicionesController {
                 explodeFecha($medida['fecha']);
                 $fecha=  getFecha();
                 $sql = "INSERT INTO pag_control_medidas (per_id,equi_id,ctrmed_medida_actual,ctrmed_fecha,tmed_id)"
-                        . "VALUES ('$personaId',"
-                        . "'$medida[equi_id]',"
-                        . "'$medida[medicion]',"
+                        . "VALUES ($personaId,"
+                        . "'".$medida['equi_id']."',"
+                        . "'".$medida['medicion']."',"
                         . "'$fecha',"
-                        . "'$medida[tipo_medidor]')";
+                        . "'".$medida['tipo_medidor']."')";
                 $objMediciones->insertar($sql);
             }
 
+//            dd($sql);
             $objMediciones->cerrar();
             redirect(crearUrl('mediciones', 'mediciones', 'listar'));
         }

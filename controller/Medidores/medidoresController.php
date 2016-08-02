@@ -12,7 +12,7 @@ class MedidoresController {
         //die(print_r($_POST));
         $errores=array();
         $patronLetras="/^[a-zA-Z_áéíóúñ\s]*$/";
-        $patronLetrasNumeros="/^[0-9a-zA-Z]+$/";
+        $patronLetrasNumeros="/^[0-9a-zA-Z ]+$/";
         
         if(!isset($_POST['nombre']) or $_POST['nombre']==""){
             $errores[]="El campo nombre no puede estar vacio";

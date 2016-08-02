@@ -8,60 +8,74 @@ al igual de los campos a diligenciar: medida actual y fecha
             <table class="striped">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th data-field="cod_equ">C&oacute;digo equ&iacute;po</th>
                         <th data-field="nom_equ">Nombre equ&iacute;po</th>
                         <th data-field="medicion">Medici&oacute;n actual</th>
                         <th data-field="fecha_med">Fecha Medici&oacute;n</th>
-                        <th>Acciones</th>
+                        <th>Tipo Medidor</th>
+                        <th>Agregar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $count = 1;
-                    foreach($equipos as $equipo) { ?>
-                    <tr>
-                        <div>
-                            <td><?php echo $count++ ?></td>
-                            <td id="equi_id"><?php echo $equipo['equi_id'] ?></td>
-                            <td id="equi_nombre"><?php echo $equipo['equi_nombre'] ?></td>
-                            <td>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input id="medidaActual" name="medidaActual" type="text" class="validate" required="true">
-                                        <label for="medidaActual">Medida actual</label>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <input placeholder="Fecha" id="fecha" name="fecha" type="date" class="datepicker" required="true">
-                                        <label for="fecha"></label>
-                                    </div>
-                                </div>
-                            </td>
-                        </div>
+                    <?php 
+                    foreach ($equipos as $equipo) { ?>
+                        <tr>
+                    <div>
+                        <td id="equi_id"><?php echo $equipo['equi_id'] ?></td>
+                        <td id="equi_nombre"><?php echo $equipo['equi_nombre'] ?></td>
                         <td>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="medidaActual" name="medidaActual" type="text" class="validate" required="true">
+                                    <label for="medidaActual">Medida actual</label>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input placeholder="Fecha" id="fecha" name="fecha" type="date" class="datepicker" required="true">
+                                    <label for="fecha"></label>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <select name="tipoMedidor" id="tipoMedidor">
+                                        <?php
+                                        foreach ($_SESSION['medidores'] as $medidor) {;?>
+                                        
+                                        <option value=<?php echo $medidor['tmed_id'] ?>> <?php echo $medidor['tmed_acronimo']?></option>
+                                        <?php } 
+                                        unset($_SESSION['medidores']);
+                                        ?>
+                                    </select>
+                                    <label for="fecha"></label>
+                                </div>
+                            </div>
+                        </td>
+                    </div>
+                    <td>
                         <a class="btn-agregar btn-floating btn-small waves-effect waves-light right teal">
                             <i class="mdi-action-add-shopping-cart"></i>
                         </a>
-                        </td>
+                    </td>
                     </tr>
-                    <?php } ?>
+                <?php } ?>
                 </tbody>
             </table>
         </div> 
-    <div>
-</div>
-<script>
-    $(document).ready(function () {
-        $('select').material_select('destroy');
-        $('select').material_select();
-        $('.datepicker').pickadate({
-            selectMonths: true, // Creates a dropdown to control month
-            selectYears: 15 // Creates a dropdown of 15 years to control year
-        });
+        <div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('select').material_select('destroy');
+                $('select').material_select();
+                $('.datepicker').pickadate({
+                    selectMonths: true, // Creates a dropdown to control month
+                    selectYears: 15 // Creates a dropdown of 15 years to control year
+                });
 
-    });
-</script>
+            });
+        </script>
