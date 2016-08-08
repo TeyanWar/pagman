@@ -233,9 +233,7 @@ CREATE TABLE `pag_control_medidas` (
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ctrmed_id`),
   KEY `tmed_id` (`tmed_id`),
-  KEY `equi_id` (`equi_id`),
-  CONSTRAINT `pag_control_medidas_ibfk_1` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`),
-  CONSTRAINT `pag_control_medidas_ibfk_2` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`)
+  KEY `equi_id` (`equi_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -455,7 +453,7 @@ CREATE TABLE `pag_equipo` (
 
 LOCK TABLES `pag_equipo` WRITE;
 /*!40000 ALTER TABLE `pag_equipo` DISABLE KEYS */;
-INSERT INTO `pag_equipo` VALUES ('0123',1143830254,'Torno',1,2,'',NULL,NULL,'Asus','wert','2016','12245','Cali','2016-04-27','2016-04-27','2016-10-25',1,1,NULL),('1',1144125473,'Torno CNC',0,1,'',1,1,'Mazda','Mazda','Mazda','Mazda 123','Cali','2016-03-01','2016-03-02','2016-03-31',1,1,'0000-00-00 00:00:00'),('EP_003',1144125472,'Equipo de computo MAC',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-EP_003',NULL,NULL,'HP','HP','HP','3456','Salomia','2016-02-02','2016-03-02','2018-02-02',1,2,NULL),('PC_002',1144125473,'Portatil Linux',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-PC_002',NULL,NULL,'Lenovo','Lenovo','Lenovo','7431','Sena','2016-04-08','2016-04-08','2016-04-15',2,1,NULL),('TC001',1144125473,'Torno Convencional',1,1,'',NULL,NULL,'Tornos Technologies IbÃ©rica, S.A','Valor','2016','123456','CDTI','2014-04-12','2014-05-12','2020-04-12',1,1,NULL);
+INSERT INTO `pag_equipo` VALUES ('0123',1143830254,'Torno',1,2,'',NULL,NULL,'Asus','wert','2016','12245','Cali','2016-04-27','2016-04-27','2016-10-25',1,1,NULL),('1',1144125473,'Torno CNC',0,1,'',1,1,'Mazda','Mazda','Mazda','Mazda 123','Cali','2016-03-01','2016-03-02','2016-03-31',1,1,NULL),('EP_003',1144125472,'Equipo de computo MAC',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-EP_003',NULL,NULL,'HP','HP','HP','3456','Salomia','2016-02-02','2016-03-02','2018-02-02',1,2,NULL),('PC_002',1144125473,'Portatil Linux',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-PC_002',NULL,NULL,'Lenovo','Lenovo','Lenovo','7431','Sena','2016-04-08','2016-04-08','2016-04-15',2,1,NULL),('TC001',1144125473,'Torno Convencional',1,1,'',NULL,NULL,'Tornos Technologies IbÃ©rica, S.A','Valor','2016','123456','CDTI','2014-04-12','2014-05-12','2020-04-12',1,1,NULL);
 /*!40000 ALTER TABLE `pag_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
