@@ -45,6 +45,8 @@
   
   <link href="<?php echo addLib('css/global.css') ?>" type="text/css" rel="stylesheet" media="screen,projection">
   
+  <!-- estos son los estilos cuando se amplian las imagenes --> 
+  <link href="<?php echo addLib('templates/adminMaterialize/js/plugins/fancybox/jquery.fancybox.css')?>" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>

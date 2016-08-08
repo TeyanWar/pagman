@@ -43,6 +43,10 @@ Scripts
 <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins.js') ?>"></script>
 <!--<script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/custom-script.js') ?>"></script>-->
 
+<!-- plugins.js funciones para las imagenes  -->
+<script src="<?php echo addLib('templates/adminMaterialize/js/plugins/fancybox/jquery.fancybox.js')?>" type="text/javascript"></script>
+<script src="<?php echo addLib('templates/adminMaterialize/js/plugins/fancybox/jquery.fancybox.pack.js')?>" type="text/javascript"></script>
+
 <!-- Plugin chosen select2 -->
 <script type="text/javascript" src="<?php echo addLib('js/select2.full.min.js') ?>"></script>
 <script type="text/javascript">
@@ -51,13 +55,11 @@ Scripts
 
 <!-- Scripts personalizados --> 
 
-<?php if (isset($modulo) && file_exists('js/modulos/' . (strtolower($modulo)) .'-'. (strtolower($controller)) . '.js')) { ?>
-    <script type="text/javascript" src="<?php echo addLib('js/modulos/' . (strtolower($modulo)) .'-'. (strtolower($controller)) . '.js') ?>"></script>
+<?php if (isset($modulo) && file_exists('js/modulos/' . (strtolower($modulo)) . '-' . (strtolower($controller)) . '.js')) { ?>
+    <script type="text/javascript" src="<?php echo addLib('js/modulos/' . (strtolower($modulo)) . '-' . (strtolower($controller)) . '.js') ?>"></script>
 <?php } // if ?>
 
 <script type="text/javascript" src="<?php echo addLib('js/global.js') ?>"></script>
-
-
 </body>
 
 </html>
