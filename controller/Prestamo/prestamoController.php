@@ -62,24 +62,24 @@ class PrestamoController {
         }
     }
 
-    function listarPrestamo() {
+    function listar() {
         $objPrestamo = new PrestamoModel();
 
         $sql = "SELECT * FROM pag_prestamo_herramienta";
-        $listarPrestamo = $objPrestamo->select($sql);
+        $listar = $objPrestamo->select($sql);
 
         //aqui empieza el paginado
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-        $url = crearUrl('prestamo', 'prestamo', 'listarPrestamo');
+        $url = crearUrl('prestamo', 'prestamo', 'listar');
 
-        $paginado = new Paginado($listarPrestamo, $pagina, $url);
+        $paginado = new Paginado($listar, $pagina, $url);
 
-        $listarPrestamo = $paginado->getDatos();
+        $listar= $paginado->getDatos();
 //        // fin paginado
         // Cierra la conexion
         $objPrestamo->cerrar();
 
-        include_once("../view/Prestamo/prestamo/listarPrestamo.html.php");
+        include_once("../view/Prestamo/prestamo/listar.html.php");
     }
 
     function editar($parametros = false) {
