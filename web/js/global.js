@@ -59,7 +59,7 @@ $(document).ready(function(){
     }
     //----- Fin de login -----//
     
-    //Evento para los botones submit con ajax para las modales
+    //Evento para los botones submit con ajax
     $(document).on('click','.btn_submit_modal',function(e){
        e.preventDefault();
        var url=$(this).parents("form:first").attr("action");

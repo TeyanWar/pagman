@@ -1,4 +1,4 @@
-<div>
+<form  id="progr" novalidate>
     <div class='row' id="tabla">
         <div class='col s6' id="codigo">
             <label>(*) Placa</label>
@@ -44,10 +44,17 @@
     </div>
     <div class='row'>
         <div class="input-field col s4">
-            <input type="text" id="hora">
             <label for="hora">(*) Duracion horas</label>
+            <input type="text" id="hora" name="hora" data-error=".errorTxt91">
+            <div class="errorTxt91"></div>
         </div>
-
+        
+        <div class=" input-field col s4">
+              <label for="frecuencia">(*) Frecuencia</label>
+              <input type="text" id="frecuencia" name="frecuencia" data-error=".errorTxt92">
+            <div class="errorTxt92"></div>
+        </div>
+        
         <div class="input-field col s4">
             <select id="med">
                 <?php foreach ($medidores as $medidor) { ?>
@@ -58,10 +65,6 @@
             <label>(*) Medidores</label>
         </div>
         
-          <div class=" input-field col s4">
-             <input type="text" id="frecuencia">
-            <label for="frecuencia">(*) Frecuencia</label>
-        </div>
     </div>
     <div class='row'>
 
@@ -89,7 +92,7 @@
     </div>
    
 
-</div>
+</form>
 
 <script>
     $(document).ready(function () {
@@ -101,4 +104,52 @@
     });   
 
     });
+</script>
+
+<script>
+    //----------------- validaciones ---------------
+    $("#progr").validate({
+        rules: {
+            hora: {
+                required: true,
+                digits: true,
+                minlength: 1,
+                maxlength: 10
+            },
+            frecuencia: {
+                required: true,
+                digits: true,
+                minlength: 1,
+                maxlength: 10
+            },
+            cgender:"required",
+			cagree:"required",
+        },
+        //For custom messages
+        messages: {
+            hora:{
+                required: "El telefono es obligatorio.",
+                digits: "El valor debe ser numerico",
+                minlength: "Introduzca al menos 1 caracter",
+                maxlength: "Solo se permite introducir maximo 10 caracteres"
+            },
+            frecuencia:{
+                required: "El movil es obligatorio.",
+                digits: "El valor debe ser numerico",
+                minlength: "Introduzca al menos 1 caracter",
+                maxlength: "Solo se permite introducir maximo 10 caracteres"
+            },
+            curl: "Enter your website",
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        }
+    });
+
 </script>

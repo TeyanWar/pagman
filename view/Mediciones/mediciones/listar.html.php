@@ -18,6 +18,23 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
+        <?php
+                $errores = getErrores();
+                if (!$errores == "") {
+                    ?>
+                    <div id="prueba">
+                        <div id="card-alert" class="card red">
+                            <div class="card-content white-text">
+                                <p><i class="mdi-alert-error"></i> 
+                                <p><?php echo $errores ?></p>
+                            </div>
+                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    </div>
+        <?php } ?>
+
         <!--Fin mensaje de campos obligatorios-->
 
         <table class="highlight center striped bordered">
@@ -27,6 +44,7 @@
                     <th>#</th>
                     <th>Fecha</th>
                     <th>Medida</th>
+                    <th>Tipo Medida</th>
                     <th>Equipo</th>
                     <th>Nombre</th>
                     <th>Opciones</th>
@@ -36,11 +54,14 @@
                 <?php
                 $count = 1;
                 foreach ($mediciones as $medicion) {
+                    explodeFecha($medicion['ctrmed_fecha']);
+                    $fecha=getFecha();
                     ?>
                     <tr>
-                        <td><?php echo $count++ ?></td>
-                        <td><?php echo $medicion['ctrmed_fecha'] ?></td>
+                        <td><?php echo $paginado-> count++; ?></td>
+                        <td><?php echo $fecha ?></td>
                         <td><?php echo $medicion['ctrmed_medida_actual'] ?></td>
+                        <td><?php echo $medicion['tmed_acronimo'] ?></td>
                         <td><?php echo $medicion['equi_nombre'] ?></td>
                         <td><?php echo $medicion['per_nombre'] ?></td>
                        <td><a class="btn-floating waves-effect waves-light modal-trigger teal" 
@@ -53,20 +74,16 @@
             </div>
             
         </table>
+        
+        
         <div class="modal" id="editar">
             <div class="modal-content ">
 
             </div> 
         </div>
-        <ul class="pagination">
-            <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
-            <li class="active"><a href="#!">1</a></li>
-            <li class="waves-effect"><a href="#!">2</a></li>
-            <li class="waves-effect"><a href="#!">3</a></li>
-            <li class="waves-effect"><a href="#!">4</a></li>
-            <li class="waves-effect"><a href="#!">5</a></li>
-            <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
-        </ul>
+        
+        <?php $paginado->render() ?>
+        
     </div>
 </div>
 <script type="text/javascript">

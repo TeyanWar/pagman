@@ -18,6 +18,19 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
+        <?php $errores=getErrores();
+        if(!$errores==""){?>
+            <div id="card-alert" class="card red">
+                <div class="card-content white-text">
+                    <p><i class="mdi-alert-error"></i> 
+                        <?php echo $errores?>
+                    </p>
+                </div>
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        <?php } ?>
         <!--Fin mensaje de campos obligatorios-->
         
         <div id="bordered-table">
@@ -35,16 +48,21 @@
                     </thead>
                     <tbody>
                         <?php
-                        $count = 1;
                         foreach ($medidores as $medidor) {
                             ?>
                             <tr>
-                                <td><?php echo $count++ ?></td>
+                                <td><?php echo $paginado->count++ ?></td>
                                 <td><?php echo $medidor['tmed_nombre'] ?></td>
                                 <td><?php echo $medidor['tmed_acronimo'] ?></td>
                                 <td><?php echo $medidor['tmed_descripcion'] ?></td>
-                                <td><?php echo $medidor['tmed_estado'] ?></td>
-                                
+                                <td><?php if($medidor['tmed_estado'] ==0){
+                                    $medidor['tmed_estado']='Activo';
+                                }else{
+                                    $medidor['tmed_estado']='Inactivo';
+                                }
+                                echo $medidor['tmed_estado'];
+                                ?>
+                                </td>
                                 <td><a class="btn-floating waves-effect waves-light modal-trigger teal" 
                                href="#editar" data-url="<?php echo crearUrl('medidores', 'medidores', 'editar', array('noVista' => 'noVista', 'id' => $medidor['tmed_id']));?>"> 
                                 <i class="mdi-content-create small"></i></a></td>
@@ -61,15 +79,7 @@
 
             </div> 
         </div>
-        
-        <ul class="pagination">
-            <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
-            <li class="active"><a href="#!">1</a></li>
-            <li class="waves-effect"><a href="#!">2</a></li>
-            <li class="waves-effect"><a href="#!">3</a></li>
-            <li class="waves-effect"><a href="#!">4</a></li>
-            <li class="waves-effect"><a href="#!">5</a></li>
-            <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
-        </ul>
+            
+                <?php $paginado->render();?>
     </div>
 </div>
