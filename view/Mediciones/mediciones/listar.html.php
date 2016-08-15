@@ -19,20 +19,19 @@
             </button>
         </div>
         <?php
-                $errores = getErrores();
-                if (!$errores == "") {
-                    ?>
-                    <div id="prueba">
-                        <div id="card-alert" class="card red">
-                            <div class="card-content white-text">
-                                <p><i class="mdi-alert-error"></i> 
-                                <p><?php echo $errores ?></p>
-                            </div>
-                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
+            $errores = getErrores();
+            if (!$errores == "") { ?>
+                <div id="prueba">
+                    <div id="card-alert" class="card red">
+                        <div class="card-content white-text">
+                            <p><i class="mdi-alert-error"></i> 
+                            <p><?php echo $errores ?></p>
                         </div>
+                        <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
+                </div>
         <?php } ?>
 
         <!--Fin mensaje de campos obligatorios-->
@@ -42,32 +41,34 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Fecha</th>
-                    <th>Medida</th>
-                    <th>Tipo Medida</th>
                     <th>Equipo</th>
-                    <th>Nombre</th>
+                    <th>Últimas Mediciones</th>
+                    <th>Total</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $count = 1;
-                foreach ($mediciones as $medicion) {
-                    explodeFecha($medicion['ctrmed_fecha']);
-                    $fecha=getFecha();
-                    ?>
+                foreach ($equipos as $equipo) { ?>
                     <tr>
-                        <td><?php echo $paginado-> count++; ?></td>
-                        <td><?php echo $fecha ?></td>
-                        <td><?php echo $medicion['ctrmed_medida_actual'] ?></td>
-                        <td><?php echo $medicion['tmed_acronimo'] ?></td>
-                        <td><?php echo $medicion['equi_nombre'] ?></td>
-                        <td><?php echo $medicion['per_nombre'] ?></td>
-                       <td><a class="btn-floating waves-effect waves-light modal-trigger teal" 
-                               href="#editar" data-url="<?php echo crearUrl("mediciones", "mediciones", "editar", array('noVista' => 'noVista', 'id' => $medicion['ctrmed_id']));?>"> 
-                                <i class="mdi-content-create small"></i></a></td>
-                        
+                        <td><?php echo $count++; ?></td>
+                        <td><?php echo $equipo['equi_nombre'] ?></td>
+                        <td>
+                            <?php foreach($equipo['tiposMedidores'] as $tipoMedidor){ 
+                                echo $tipoMedidor['tmed_nombre'].": ".$tipoMedidor['ultimaMedicion']['ctrmed_medida_actual']
+                                     ." ".$tipoMedidor['ultimaMedicion']['responsable']." ".$tipoMedidor['ultimaMedicion']['ctrmed_fecha']."<br>"; 
+                            } ?>
+                        </td>
+                        <td>
+                            <?php foreach($equipo['tiposMedidores'] as $tipoMedidor){ 
+                                echo $tipoMedidor['totalMediciones']."<br>";
+                            } ?>
+                        </td>
+                        <td><a class="btn-floating waves-effect waves-light modal-trigger teal" 
+                               href="#editar" data-url="<?php echo crearUrl("mediciones", "mediciones", "editar", array('noVista' => 'noVista', 'id' => $equipo['equi_id']));?>"> 
+                                <i class="mdi-content-create small"></i></a>
+                        </td>
                     </tr>
             <?php } ?>
             </tbody>
@@ -82,7 +83,7 @@
             </div> 
         </div>
         
-        <?php $paginado->render() ?>
+        <?php // $paginado->render() ?>
         
     </div>
 </div>

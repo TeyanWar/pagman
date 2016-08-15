@@ -98,27 +98,64 @@ class MedicionesController {
 
     public function listar() {
         $objMediciones = new MedicionesModel();
-        $sql = "SELECT * FROM pag_control_medidas, pag_persona, pag_equipo,pag_tipo_medidor WHERE pag_control_medidas.per_id=pag_persona.per_id AND
-                pag_control_medidas.equi_id=pag_equipo.equi_id and pag_control_medidas.tmed_id=pag_tipo_medidor.tmed_id order by ctrmed_fecha desc ";
+        $sql="SELECT cm.equi_id, e.equi_nombre FROM pag_control_medidas cm, pag_equipo e 
+              WHERE e.equi_id=cm.equi_id GROUP BY cm.equi_id" ;
+        $equipos=$objMediciones->select($sql);
+        
+        //Para cada equipo seleccionar los tipos de medidores
+        foreach($equipos as $keyEquipo=>$equipo){
+            $sql="SELECT tm.tmed_id, tm.tmed_nombre FROM pag_control_medidas cm, pag_tipo_medidor tm 
+                  WHERE cm.tmed_id=tm.tmed_id AND equi_id='".$equipo['equi_id']."' GROUP BY tmed_id";
+            $tiposMedidores=$objMediciones->select($sql);
 
-        $mediciones = $objMediciones->select($sql);
-
-        /*
-         * Paginado
-         */
-        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
-        $url = crearUrl('mediciones', 'mediciones', 'listar');
-        
-        $paginado = new Paginado($mediciones, $pagina, $url);
-        
-        $mediciones = $paginado->getDatos();
-        /*
-         * Fin paginado
-         */
-        
+            //Para cada tipo de medidor seleccionar el último registro y el total de mediciones
+            foreach($tiposMedidores as $keyTipoMedidor=>$tipoMedidor){
+                $sql="SELECT cm.ctrmed_fecha, cm.ctrmed_medida_actual,  
+                CONCAT(p.per_nombre,' ',p.per_apellido) AS responsable 
+                FROM pag_control_medidas cm, pag_tipo_medidor tm, pag_persona p    
+                WHERE tm.tmed_id=cm.tmed_id AND cm.per_id=p.per_id AND cm.tmed_id='".$tipoMedidor['tmed_id']."' 
+                AND cm.equi_id='".$equipo['equi_id']."' AND cm.ctrmed_fecha=
+                    (SELECT MAX(ctrmed_fecha) FROM pag_control_medidas WHERE tmed_id='".$tipoMedidor['tmed_id']."' 
+                    AND equi_id='".$equipo['equi_id']."')";
+                $ultimaMedicion=$objMediciones->find($sql);
+                $tiposMedidores[$keyTipoMedidor]['ultimaMedicion']=$ultimaMedicion;
+                                
+                $sql="SELECT SUM(ctrmed_medida_actual) AS totalMediciones FROM pag_control_medidas 
+                WHERE tmed_id='".$tipoMedidor['tmed_id']."' AND equi_id='".$equipo['equi_id']."'";
+                $totalMediciones=$objMediciones->select($sql);
+                $tiposMedidores[$keyTipoMedidor]['totalMediciones']=$totalMediciones[0]['totalMediciones'];
+            }
+            $equipos[$keyEquipo]['tiposMedidores']=$tiposMedidores;
+        }
+//        dd($equipos);
         $objMediciones->cerrar();
         include_once '../view/Mediciones/mediciones/listar.html.php';
     }
+//    public function listar() {
+//        $objMediciones = new MedicionesModel();
+//        
+////        $equipos= array('equipo'=>'','tipos_medida'=>array(),'fecha'=);
+//        $sql = "SELECT * FROM pag_control_medidas, pag_persona, pag_equipo,pag_tipo_medidor WHERE pag_control_medidas.per_id=pag_persona.per_id AND
+//                pag_control_medidas.equi_id=pag_equipo.equi_id and pag_control_medidas.tmed_id=pag_tipo_medidor.tmed_id order by ctrmed_fecha desc ";
+//
+//        $mediciones = $objMediciones->select($sql);
+//
+//        /*
+//         * Paginado
+//         */
+//        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
+//        $url = crearUrl('mediciones', 'mediciones', 'listar');
+//        
+//        $paginado = new Paginado($mediciones, $pagina, $url);
+//        
+//        $mediciones = $paginado->getDatos();
+//        /*
+//         * Fin paginado
+//         */
+//        
+//        $objMediciones->cerrar();
+//        include_once '../view/Mediciones/mediciones/listar.html.php';
+//    }
 
     public function eliminar($parametros) {
         $objMediciones = new MedicionesModel();
