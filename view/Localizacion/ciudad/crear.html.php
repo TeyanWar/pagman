@@ -17,52 +17,46 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
+
+        <?php $error=getErrores(); ?>
+         <?php if (!$error=="") { ?>
+            <div id="card-alert" class="card red">
+                <div class="card-content white-text">
+                    <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
+                </div>
+
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        <?php } ?>
       
             
-        <form class="col s12" action="<?php echo crearUrl("localizacion", "ciudad", "postCrear") ?>" method="POST">
-
+        <form id="formciudad" class="col s12" action="<?php echo crearUrl("localizacion", "ciudad", "postCrear") ?>" method="POST" novalidate>
 
             <div class="row">
                 <div class="input-field col s6">
 
-                    <select class="select2" name="dept_id">
+                    <select class="error browser-default select2" name="dept_id" data-error=".errorTxt1">
+                        <option value="">(Vacio)</option>
                         <?php
                         foreach ($departamentos as $departamento) {
                             echo "<option value=" . $departamento['dept_id'] . ">" . $departamento['dept_nombre'] . "</option>";
                         }
                         ?>
                     </select>
-                    <label   for=" dept_id" class="active">(*)Seleccion de  Departamento  </label>
+                    <div class="errorTxt1"></div>
+                    <label   for=" dept_id" class="active">(*)Seleccione El Departamento</label>
                 </div>
 
 
                 <div class="input-field col s6">
-                    <input placeholder="Registre el nombre de la ciudad " id="ciud_nombre" name="ciud_nombre" type="text" class="validate">
-                    <label   for="ciud_nombre" class="active">(*)Nombre de la ciudad </label>
-
-
-
+                    <input placeholder="Registre el nombre de la ciudad " id="ciud_nombre" name="ciud_nombre" type="text" class="validate" data-error=".errorTxt2">
+                    <label   for="ciud_nombre" class="active">(*)Nombre De La ciudad </label>
+                    <div class="errorTxt2"></div>
                 </div>
-
-
 
             </div>
-
-            <!-- <div class="row">
-                <div class="input-field col s6">
-
-                    <select class="select2" multiple="multiple"id="ciud_id">
-            <?php
-            /*   foreach ($ciudades as $ciudad) {
-              echo "<option value=" . $ciudad['ciud_id'] . ">" . $ciudad['ciud_nom'] . "</option>";
-              } */
-            ?>
-                    </select>
-                    <label for=" Ciudad" class="active">Seleccion de  ciudad  </label>
-                </div>
-            </div>-->
-
-
 
             <div class="row">
                 <div class="input-field col s12">
@@ -71,9 +65,7 @@
                     </button>
                 </div>
             </div>
+        </form>
     </div>
-
-
-</form>
 </div>
 </div>

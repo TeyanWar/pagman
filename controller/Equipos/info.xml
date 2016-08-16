@@ -40,5 +40,38 @@
             </funciones>
             
         </controlador>
+        <controlador>
+            <nombre>tipoEquipoController</nombre>
+            <display>Tipos de equipo</display>
+            <icono>mdi-hardware-phonelink</icono>
+            <descripcion>Controlador de Tipos de equipos</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Tipo equipo</display>
+                    <descripcion>Crear Tipo equipo</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Tipo equipo</display>
+                    <descripcion>Editar Tipo equipo</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Tipo equipo</display>
+                    <descripcion>Eliminar Tipo equipo</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Tipos de equipos</display>
+                    <descripcion>Listar Tipos de equipos</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
     </controladores>
 </modulos>

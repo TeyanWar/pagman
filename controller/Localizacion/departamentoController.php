@@ -9,7 +9,7 @@ class DepartamentoController {
 
         $id = $parametros[1];
 
-        $sql = "select pag_departamento.dept_id, pag_departamento.dept_nombre, pag_regional.reg_nombre from "
+        $sql = "select pag_departamento.dept_id, pag_departamento.dept_nombre,pag_regional.reg_id,reg_nombre from "
                 . "pag_departamento, pag_regional WHERE dept_id = $id and"
                 . " pag_departamento.reg_id = pag_regional.reg_id";
         $departamentos = $objDepartamento->find($sql);
@@ -17,9 +17,6 @@ class DepartamentoController {
         $objRegional= new DepartamentoModel();
         $sql2="SELECT * FROM pag_regional WHERE estado IS NULL ";
         $regionales=$objRegional->select($sql2);
-        
-       
-
 
         // Cierra la conexion
     
@@ -49,7 +46,7 @@ class DepartamentoController {
         // Cierra la conexion
         $objDepartamento->cerrar();
 
-        redirect(crearUrl("localizacion", "departamento", "listar"));
+        redirect(crearUrl("localizacion", "departamento", "Consulta"));
     }
 
     function listar() {
@@ -90,27 +87,46 @@ class DepartamentoController {
     }
 
     function postCrear() {
+        
+        //--------------expresiones regulaes-----------
+        $patronLetras = "/^[a-zA-Z_,áéíóúñ\s]*$/";
+        $errores = array();
 
-        $dept_nombre = $_POST['dept_nombre'];
-        $reg_id = $_POST['reg_id'];
+        //---------------validaciones-------------------
 
+        if (!isset($_POST['dept_nombre']) or $_POST['dept_nombre'] == "") {
+            $errores[] = '(*) El campo "Nombre Del Departamento" es obligatorio';
+        }
 
-        $insertDepartamento = "INSERT INTO pag_departamento (dept_nombre,reg_id)"
-                . " VALUES('$dept_nombre',$reg_id)";
+        if (isset($_POST['dept_nombre']) && !preg_match($patronLetras, $_POST['dept_nombre'])) {
+            $errores[] = '(*) El campo "Nombre Del Departamento" debe contener letras unicamente';
+        }
 
+        if (!isset($_POST['reg_id']) or $_POST['reg_id'] == "") {
+            $errores[] = '(*) El campo "Regional" es obligatorio';
+        }
+        //----------------------------------------------
+        if (count($errores) > 0) {
+            setErrores($errores);
+            redirect(crearUrl("localizacion", "departamento", "crear"));
+            //----------------fin validaciones-----------------
+        } else {
+            $dept_nombre = $_POST['dept_nombre'];
+            $reg_id = $_POST['reg_id'];
 
+            $insertDepartamento = "INSERT INTO pag_departamento (dept_nombre,reg_id)"
+                    . " VALUES('$dept_nombre',$reg_id)";
 
-        echo $insertDepartamento;
+            $objDepartamento = new DepartamentoModel();
 
-//       die(print_r($_POST));
-        $objDepartamento = new DepartamentoModel();
+            $insertar = $objDepartamento->insertar($insertDepartamento);
 
-        $insertar = $objDepartamento->insertar($insertDepartamento);
+            // Cierra la conexion
+            $objDepartamento->cerrar();
 
-        // Cierra la conexion
-        $objDepartamento->cerrar();
-
-        redirect(crearUrl("localizacion", "departamento", "listar"));
+            redirect(crearUrl("localizacion", "departamento", "Consulta"));
+        }
+        
     }
 
      function eliminar($parametros) {
@@ -118,30 +134,12 @@ class DepartamentoController {
 
         $id = $parametros[1];
 
-        $sql = "SELECT * FROM pag_departamento WHERE dept_id=$id";
+        $sql = "UPDATE pag_departamento SET estado= NOW() WHERE dept_id=$id";
         $departamento = $objDepartamento->find($sql);
 
         // Cierra la conexion
         $objDepartamento->cerrar();
 
-        include_once("../view/Localizacion/departamento/eliminar.html.php");
-    }
-
-    function postEliminar() {
-        $objDepartamento = new DepartamentoModel();
-        
-        $id = $_POST['id'];
-
-
-        $sql = "UPDATE pag_departamento SET estado= NOW() WHERE dept_id=$id";
-        //die(print_r($sql));
-
-        $respuesta = $objDepartamento->update($sql);
-
-        // Cierra la conexion
-        $objDepartamento->cerrar();
-
-        redirect(crearUrl("localizacion", "departamento", "listar"));
     }
 
     function detalle($parametros = false) {
@@ -163,15 +161,10 @@ class DepartamentoController {
         include_once("../view/Localizacion/departamento/detalle.html.php");
     }
      function Consulta(){
-         
-         
-         
-         
-      include_once("../view/Localizacion/departamento/consulta.html.php");
-        
-        
-        
+
+      include_once("../view/Localizacion/departamento/consulta.html.php");        
     }
+
     function buscarAjax()
     {
       $objdepartamento = new DepartamentoModel();

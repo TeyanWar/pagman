@@ -1,6 +1,6 @@
 <?php
 
-include_once('../model/localizacion/CentroModel.php');
+include_once('../model/Localizacion/centroModel.php');
 
 class centroController {
 
@@ -8,52 +8,21 @@ class centroController {
         $objCentro = new centroModel();
 
         $id = $parametros[1];
-        $sql="select * from pag_centro WHERE cen_id=$id";
 
-       /* $sql = "SELECT pag_centro.cen_id,pag_centro.cen_nombre,pag_centro.cen_dir"
-                . "pag_centro.cen_telefono,pag_regional.reg_nombre,pag_departamento."
-                . "dept_nombre,pag_ciudad.ciud_nombre from"
-                . " pag_centro,pag_regional,pag_departamento,pag_ciudad "
-                . "WHERE cen_id =$id and pag_centro.reg_id=pag_regional.reg_id and"
-                . " pag_centro.dept_id=pag_departamento.dept_id"
-                . " and pag_centro.ciud_id=pag_ciudad.ciud_id";
-
-        */
+       $sql = "SELECT * from "
+                . "pag_centro,pag_regional "
+                . "WHERE pag_centro.reg_id=pag_regional.reg_id and cen_id=$id";
 
         
         $centro = $objCentro->find($sql);
-        $objRegionales = new centroModel();
 
         $sql2 = "SELECT * FROM pag_regional";
-        $regionales = $objRegionales->select($sql2);
-        
-        $objDepartamentos = new centroModel();
-
-        $sql3 = "SELECT * FROM pag_departamento";
-        $departamentos = $objDepartamentos->select($sql3);
-
-       
-        
-        $objCiudades = new centroModel();
-
-        $sql4 = "SELECT * FROM pag_ciudad";
-        $ciudades = $objCiudades->select($sql4);
-
-        // Cierra la conexion
-        
-         // Cierra la conexion
-        $objDepartamentos->cerrar();
-        $objCiudades->cerrar();
-        
-
-        // Cierra la conexion
-        $objRegionales->cerrar();
-        
+        $regionales = $objCentro->select($sql2);
 
         // Cierra la conexion
         $objCentro->cerrar();
 
-        include_once("../view/localizacion/centro/editar.html.php");
+        include_once("../view/Localizacion/centro/editar.html.php");
     }
 
     function postEditar() {
@@ -63,15 +32,13 @@ class centroController {
         $cen_dir = $_POST['cen_dir'];
         $cen_telefono = $_POST['cen_telefono'];
         $reg_id = $_POST['reg_id'];
-        $dept_id = $_POST['dept_id'];
-        $ciud_id = $_POST['ciud_id'];
-        $objCentro = new centroModel();
 
+        $objCentro = new centroModel();
 
         $sql = "UPDATE "
                 . "pag_centro "
                 . "SET "
-                . "cen_nombre='$cen_nombre', cen_dir='$cen_dir', cen_telefono='$cen_telefono',reg_id='$reg_id',dept_id='$dept_id',ciud_id='$ciud_id'"
+                . "cen_nombre='$cen_nombre', cen_dir='$cen_dir', cen_telefono='$cen_telefono',reg_id=$reg_id"
                 . " WHERE cen_id=$cen_id";
         //die(print_r($sql));
         $respuesta = $objCentro->update($sql);
@@ -79,7 +46,7 @@ class centroController {
         // Cierra la conexion
         $objCentro->cerrar();
 
-        redirect(crearUrl("Localizacion", "centro", "listar"));
+        redirect(crearUrl("Localizacion", "centro", "Consulta"));
     }
 
     function listar() {
@@ -123,35 +90,69 @@ class centroController {
 
         // Cierra la conexion
         $objCiudades->cerrar();
-        include_once("../view/localizacion/centro/crear.html.php");
+        include_once("../view/Localizacion/centro/crear.html.php");
     }
 
     function postCrear() {
-        $cod_centro = $_POST['cen_cod'];
-        $nom_centro = $_POST['cen_nom'];
         
-        $cen_dir = $_POST['cen_dir'];
-        $cen_telefono = $_POST['cen_telefono'];
-        $cen_telefono = $_POST['cen_telefono'];
-         $reg_id = $_POST['reg_id'];
-          $dept_id = $_POST['dept_id'];
-           $ciud_id = $_POST['ciud_id'];
+        //--------------expresiones regulaes-----------
+        $patronDireccio="/^.*(?=.*[0-9])(?=.*[a-zA-ZñÑ\s]).*$/";
+        $patronNumeros="/[0-9]{1,9}(\.[0-9]{0,2})?$/";
+        $patronLetras = "/^[a-zA-Z_,áéíóúñ\s]*$/";
+        $errores = array();
+
+        //---------------validaciones-------------------
+
+        if (!isset($_POST['cen_nom']) or $_POST['cen_nom'] == "") {
+            $errores[] = '(*) El campo "Nombre Del Centro De Formacion" es obligatorio';
+        }
+
+        if (isset($_POST['cen_nom']) && !preg_match($patronLetras, $_POST['cen_nom'])) {
+            $errores[] = '(*) El campo "Nombre Del Centro De Formacion" debe contener letras unicamente';
+        }
         
+        if(!isset($_POST['cen_dir']) or $_POST['cen_dir']==""){
+            $errores[]='(*) El campo "Direccion Del Centro" es obligatorio';
+        }
+        if(isset($_POST['cen_dir']) && !preg_match($patronDireccio,$_POST['cen_dir'])){
+            $errores[]='(*) El campo "Direccion Del Centro" debe ser valido';
+        }
         
-       
+        if(!isset($_POST['cen_telefono']) or $_POST['cen_telefono']==""){
+            $errores[]='(*) El campo "Telefono Del Centro" es obligatorio';
+        }
+        if(isset($_POST['cen_telefono']) && !preg_match($patronNumeros,$_POST['cen_telefono'])){
+            $errores[]='(*) El campo "Telefono Del Centro" debe contener numeros unicamente';
+        }
         
+        if(!isset($_POST['reg_id']) or $_POST['reg_id']==""){
+            $errores[]='(*) El campo "Regional" es obligatorio';
+        }
+        
+        //----------------------------------------------
+        if (count($errores) > 0) {
+            setErrores($errores);
+            redirect(crearUrl("localizacion", "centro", "crear"));
+            //----------------fin validaciones-----------------
+        } else {
+            $nom_centro = $_POST['cen_nom'];
+            $cen_dir = $_POST['cen_dir'];
+            $cen_telefono = $_POST['cen_telefono'];
+            $reg_id = $_POST['reg_id'];
 
+            $insertCentro = "INSERT INTO pag_centro (cen_nombre,cen_dir,cen_telefono,reg_id) 
+            VALUES('$nom_centro','$cen_dir','$cen_telefono',$reg_id)";
 
-        $insertCentro = "INSERT INTO pag_centro (cen_id,cen_nombre,cen_dir,cen_telefono,reg_id,dept_id,ciud_id) VALUES('$cod_centro','$nom_centro','$cen_dir','$cen_telefono','$reg_id','$dept_id','$ciud_id')";
+            $objCentro = new centroModel();
 
-        $objCentro = new centroModel();
+            $insertar = $objCentro->insertar($insertCentro);
 
-        $insertar = $objCentro->insertar($insertCentro);
+            // Cierra la conexion
+            $objCentro->cerrar();
 
-        // Cierra la conexion
-        $objCentro->cerrar();
-
-        redirect(crearUrl("localizacion", "centro", "listar"));
+            redirect(crearUrl("localizacion", "centro", "Consulta"));
+        }
+        
     }
 
     function eliminar($parametros) {
@@ -159,37 +160,21 @@ class centroController {
 
         $id = $parametros[1];
 
-        $sql = "select * from pag_centro WHERE cen_id=$id";
+        $sql = "update pag_centro set estado=NOW() WHERE cen_id=$id";
 
         $centro = $objCentro->find($sql);
 
         // Cierra la conexion
         $objCentro->cerrar();
 
-        include_once("../view/Localizacion/centro/eliminar.html.php");
-    }
-
-    function postEliminar() {
-
-        $id = $_POST['id'];
-
-        $objCentro = new centroModel();
-
-        $sql = "update pag_centro set estado=NOW() WHERE cen_id=$id";
-
-        $respuesta = $objCentro->delete($sql);
-
-        // Cierra la conexion
-        $objCentro->cerrar();
-
-        redirect(crearUrl("Localizacion", "centro", "listar"));
+        redirect(crearUrl("localizacion", "centro", "Consulta"));
     }
 
     function detalle($parametros = false) {
         $objCentro = new centromodel();
         $id = $parametros[1];
         
-$sql="SELECT pag_centro.cen_id, pag_centro.cen_nombre, pag_centro.cen_dir, pag_centro.cen_telefono, pag_regional.reg_nombre, pag_ciudad.ciud_nom, pag_departamento.dept_nombre FROM (pag_centro, pag_ciudad, pag_regional, pag_departamento) WHERE pag_centro.reg_id=pag_regional.reg_id AND pag_centro.ciud_id=pag_ciudad.ciud_id AND pag_centro.dept_id=pag_departamento.dept_id AND pag_centro.cen_id=$id;";
+        $sql="SELECT * FROM (pag_centro,pag_regional) WHERE pag_centro.reg_id=pag_regional.reg_id AND pag_centro.cen_id=$id;";
 
         //$sql = "SELECT * FROM pag_centro WHERE cen_id=$id";
         $centro = $objCentro->find($sql);
@@ -225,7 +210,7 @@ $sql="SELECT pag_centro.cen_id, pag_centro.cen_nombre, pag_centro.cen_dir, pag_c
 
       $objCentro->cerrar();
 
-      include_once("../view/Localizacion/centro/listar2.html.php");
+      include_once("../view/Localizacion/centro/listar.html.php");
     }
 }
 

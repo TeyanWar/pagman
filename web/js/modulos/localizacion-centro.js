@@ -1,21 +1,23 @@
-
 $(document).ready(function () {
     
      //consulta Centro
     $("#busquedaAjax26").keyup(function () {
-        var usuario = $("#busquedaAjax26").val();
+        var busquedacentro = $("#busquedaAjax26").val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedacentro=" + usuario,
+            data: "busquedacentro=" + busquedacentro,
             success: function (data) {
                 $("#tabla26").html(data);
             }
         });
     });
+    $("#busquedaAjax26").trigger("keyup");
 //Modal de Ver Detalle
-   $(document).on("click", ".ver-detalle2", function () {
+
+
+   $(document).on("click", ".ver-detalle", function () {
         var url = $(this).attr("data-url");
 
         $.ajax({
@@ -62,7 +64,78 @@ $(document).ready(function () {
 
                     });
                     swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
-                    window.location.href = "listar";
+                    window.location.href = "Consulta";
                 });
     });
+    
+    
+    //----------------- validaciones ---------------
+    
+    /* Incluimos un método para validar el campo nombre */
+
+    jQuery.validator.addMethod("letra", function(value, element) {
+        return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
+    });
+    
+    $("#fromcentro").validate({
+        rules: {
+            reg_id: {
+                required: true
+            },
+            cen_nom: {
+                required: true,
+                letra: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            cen_telefono: {
+                required: true,
+                digits: true,
+                minlength: 5,
+                maxlength: 10
+            },
+            cen_dir: {
+                required: true,
+                minlength: 5,
+                maxlength: 40
+            },
+            cgender:"required",
+			cagree:"required",
+        },
+        //For custom messages
+        messages: {
+            reg_id:{
+                required: "La regional es obligatorio."
+            },
+            cen_nom:{
+                required: "El Nombre del Centro es obligatorio.",
+                letra: "Solo se permiten letras",
+                minlength: "Introduzca al menos 3 caracteres",
+                maxlength: "Solo se permite introducir maximo 20 caracteres"
+            },
+            cen_telefono:{
+                required: "El Telefono del centro es obligatorio.",
+                digits: "El valor debe ser numerico",
+                minlength: "Introduzca al menos 5 caracteres",
+                maxlength: "Solo se permite introducir maximo 10 caracteres"
+            },
+            cen_dir:{
+                required: "La Direccion del centro es obligatorio.",
+                minlength: "Introduzca al menos 5 caracteres",
+                maxlength: "Solo se permite introducir maximo 40 caracteres"
+            },
+            curl: "Enter your website",
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        }
+    });
+    
+    
 });

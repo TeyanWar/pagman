@@ -229,7 +229,7 @@ CREATE TABLE `pag_control_medidas` (
   `ctrmed_medida_actual` varchar(100) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
   `per_id` bigint(20) NOT NULL,
-  `tmed_id` int NOT NULL,
+  `tmed_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ctrmed_id`),
   KEY `tmed_id` (`tmed_id`),
@@ -261,7 +261,7 @@ CREATE TABLE `pag_controlador` (
   `cont_display` varchar(40) NOT NULL,
   `cont_descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`cont_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -270,7 +270,7 @@ CREATE TABLE `pag_controlador` (
 
 LOCK TABLES `pag_controlador` WRITE;
 /*!40000 ALTER TABLE `pag_controlador` DISABLE KEYS */;
-INSERT INTO `pag_controlador` VALUES (1,1,'costosController','mdi-editor-attach-money','Costos','Controlador de Costos'),(2,2,'equiposController','mdi-hardware-desktop-windows','Equipos','Controlador de Equipos'),(3,3,'herramientasController','mdi-action-wallet-travel','Herramientas','Controlador de Herramientas'),(4,4,'insumosController','mdi-maps-local-gas-station','Insumos','Controlador de Insumos'),(5,5,'localizacionController','mdi-communication-location-on','Localizacion','Controlador de Localizacion'),(6,6,'medicionesController','mdi-av-timer','Mediciones','Controlador de Mediciones'),(7,7,'medidoresController','mdi-image-timer','Medidor','Controlador de Medidores'),(8,8,'otController','mdi-action-assignment','Ordenes','Controlador de ot'),(9,8,'solicitudesController','mdi-communication-quick-contacts-mail','Solicitudes','Controlador de solicitudes'),(10,9,'permisosController','mdi-action-lock','Permisos','Controlador de Permisos'),(11,10,'personasController','mdi-social-person-outline','Personas','Controlador de Personas'),(12,11,'prestamoController','mdi-action-shopping-cart','Prestamo','Controlador de Prestamos'),(13,12,'programacionController','mdi-editor-insert-invitation','Programacion','Controlador de Programacion'),(14,13,'rolesController','mdi-social-group','Roles','Controlador de Roles'),(15,14,'usuariosController','mdi-action-account-circle','Usuarios','Controlador de Usuarios');
+INSERT INTO `pag_controlador` VALUES (1,1,'costosController','mdi-editor-attach-money','Costos','Controlador de Costos'),(2,2,'equiposController','mdi-hardware-desktop-windows','Equipos','Controlador de Equipos'),(3,2,'tipoEquipoController','mdi-hardware-phonelink','Tipos de equipo','Controlador de Tipos de equipos'),(4,3,'herramientasController','mdi-action-wallet-travel','Herramientas','Controlador de Herramientas'),(5,4,'insumosController','mdi-maps-local-gas-station','Insumos','Controlador de Insumos'),(6,5,'regionalController','mdi-communication-location-on','Regionales','Controlador de Regionales'),(7,5,'departamentoController','mdi-image-filter-hdr','Departamentos','Controlador de Departamentos'),(8,5,'ciudadController','mdi-image-assistant-photo','Ciudades','Controlador de Ciudades'),(9,5,'centroController','mdi-image-center-focus-strong','Centros','Controlador de Centros'),(10,6,'medicionesController','mdi-av-timer','Mediciones','Controlador de Mediciones'),(11,7,'medidoresController','mdi-image-timer','Medidor','Controlador de Medidores'),(12,8,'otController','mdi-action-assignment','Ordenes','Controlador de ot'),(13,8,'solicitudesController','mdi-communication-quick-contacts-mail','Solicitudes','Controlador de solicitudes'),(14,9,'permisosController','mdi-action-lock','Permisos','Controlador de Permisos'),(15,10,'personasController','mdi-social-person-outline','Personas','Controlador de Personas'),(16,11,'prestamoController','mdi-action-shopping-cart','Prestamo','Controlador de Prestamos'),(17,12,'programacionController','mdi-editor-insert-invitation','Programacion','Controlador de Programacion'),(18,13,'rolesController','mdi-social-group','Roles','Controlador de Roles'),(19,14,'usuariosController','mdi-action-account-circle','Usuarios','Controlador de Usuarios');
 /*!40000 ALTER TABLE `pag_controlador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -453,7 +453,7 @@ CREATE TABLE `pag_equipo` (
 
 LOCK TABLES `pag_equipo` WRITE;
 /*!40000 ALTER TABLE `pag_equipo` DISABLE KEYS */;
-INSERT INTO `pag_equipo` VALUES ('0123',1143830254,'Torno',1,2,'',NULL,NULL,'Asus','wert','2016','12245','Cali','2016-04-27','2016-04-27','2016-10-25',1,1,NULL),('1',1144125473,'Torno CNC',0,1,'',1,1,'Mazda','Mazda','Mazda','Mazda 123','Cali','2016-03-01','2016-03-02','2016-03-31',1,1,NULL),('EP_003',1144125472,'Equipo de computo MAC',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-EP_003',NULL,NULL,'HP','HP','HP','3456','Salomia','2016-02-02','2016-03-02','2018-02-02',1,2,NULL),('PC_002',1144125473,'Portatil Linux',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-PC_002',NULL,NULL,'Lenovo','Lenovo','Lenovo','7431','Sena','2016-04-08','2016-04-08','2016-04-15',2,1,NULL),('TC001',1144125473,'Torno Convencional',1,1,'',NULL,NULL,'Tornos Technologies IbÃ©rica, S.A','Valor','2016','123456','CDTI','2014-04-12','2014-05-12','2020-04-12',1,1,NULL);
+INSERT INTO `pag_equipo` VALUES ('0123',1143830254,'Fresadora',1,2,'',NULL,NULL,'Asus','wert','2016','12245','Cali','2016-04-27','2016-04-27','2016-10-25',1,1,NULL),('1',1144125473,'Torno CNC',0,1,'',1,1,'Mazda','Mazda','Mazda','Mazda 123','Cali','2016-03-01','2016-03-02','2016-03-31',1,1,NULL),('EP_003',1144125472,'Equipo de computo MAC',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-EP_003',NULL,NULL,'HP','HP','HP','3456','Salomia','2016-02-02','2016-03-02','2018-02-02',1,2,NULL),('PC_002',1144125473,'Portatil Linux',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-PC_002',NULL,NULL,'Lenovo','Lenovo','Lenovo','7431','Sena','2016-04-08','2016-04-08','2016-04-15',2,1,NULL),('TC001',1144125473,'Torno Convencional',1,1,'',NULL,NULL,'Tornos Technologies IbÃ©rica, S.A','Valor','2016','123456','CDTI','2014-04-12','2014-05-12','2020-04-12',1,1,NULL);
 /*!40000 ALTER TABLE `pag_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -558,9 +558,7 @@ CREATE TABLE `pag_estado` (
 
 LOCK TABLES `pag_estado` WRITE;
 /*!40000 ALTER TABLE `pag_estado` DISABLE KEYS */;
-INSERT INTO `pag_estado` VALUES (1,'Activo',1,NULL),(2,'Inactivo',1,NULL),(3,'Creada',2,NULL),
-(4,'En ejecución',2,NULL),(5,'Gestionada',2,NULL),(6,'Cerrada',2,NULL),(7,'Por atender',4,NULL),
-(8,'Atendida',4,NULL);
+INSERT INTO `pag_estado` VALUES (1,'Activo',1,NULL),(2,'Inactivo',1,NULL),(3,'Creada',2,NULL),(4,'En ejecución',2,NULL),(5,'Gestionada',2,NULL),(6,'Cerrada',2,NULL),(7,'Por atender',4,NULL),(8,'Atendida',4,NULL);
 /*!40000 ALTER TABLE `pag_estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -578,7 +576,7 @@ CREATE TABLE `pag_funcion` (
   `func_display` varchar(40) NOT NULL,
   `func_descripcion` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`func_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -587,7 +585,7 @@ CREATE TABLE `pag_funcion` (
 
 LOCK TABLES `pag_funcion` WRITE;
 /*!40000 ALTER TABLE `pag_funcion` DISABLE KEYS */;
-INSERT INTO `pag_funcion` VALUES (1,1,'crear','Crear Costos','Crear Costos'),(2,1,'editar','Editar Costos','Editar Costos'),(3,1,'eliminar','Eliminar Costos','Eliminar Costos'),(4,1,'listar','Listar Costos','Listar Costos'),(5,2,'crear','Crear Equipos','Crear Equipos'),(6,2,'editar','Editar Equipos','Editar Equipos '),(7,2,'eliminar','Eliminar Equipos','Eliminar Equipos'),(8,2,'Listar','Listar Equipos','Listar Equipos'),(9,3,'crear','Crear Herramientas','Crear Herramientas'),(10,3,'editar','Editar Herramientas','Editar Herramientas'),(11,3,'eliminar','Eliminar Herramientas','Eliminar Herramientas'),(12,3,'Listar','Listar Herramientas','Listar Herramientas'),(13,4,'crear','Crear Insumos','Crear Insumos'),(14,4,'editar','Editar Insumos','Editar Insumos'),(15,4,'eliminar','Eliminar Insumos','Eliminar Insumos'),(16,4,'Listar','Listar Insumos','Listar Insumos'),(17,5,'crear','Crear Localizacion','Crear Localizacion'),(18,5,'editar','Editar Localizacion','Editar Localizacion'),(19,5,'eliminar','Eliminar Localizacion','Eliminar Localizacion'),(20,5,'Listar','Listar Localizacion','Listar Localizacion'),(21,6,'crear','Crear Mediciones','Crear Mediciones'),(22,6,'editar','Editar Mediciones','Editar Mediciones'),(23,6,'eliminar','Eliminar Mediciones','Eliminar Mediciones'),(24,6,'Listar','Listar Mediciones','Listar Mediciones'),(25,7,'crear','Crear Medidores','Crear Medidores'),(26,7,'editar','Editar Medidores','Editar Medidores'),(27,7,'eliminar','Eliminar Medidores','Eliminar Medidores'),(28,7,'Listar','Listar Medidores','Listar Medidores'),(29,8,'crear','Crear ot','Crear ot'),(30,8,'editar','Editar ot','Editar ot'),(31,8,'eliminar','Eliminar ot','Eliminar ot'),(32,8,'listar','Listar ot','Listar ot'),(33,9,'crear','Crear solicitud','Crear solicitud de servicio'),(34,9,'editar','Editar solicitud','Editar solicitud'),(35,9,'eliminar','Eliminar solicitud','Eliminar solicitud'),(36,9,'listar','Listar solicitud','Listar solicitud'),(37,10,'crear','Asignar','Asignar Permisos'),(38,11,'crear','Crear Personas','Crear Personas'),(39,11,'editar','Editar Personas','Editar Personas'),(40,11,'eliminar','Eliminar Personas','Eliminar Personas'),(41,11,'Listar','Listar Personas','Listar Personas'),(42,12,'crear','Crear Prestamos','Crear Prestamo'),(43,12,'eliminar','Eliminar Prestamo','Eliminar Prestamo'),(44,12,'Listar','Listar Prestamos','Listar Prestamos'),(45,13,'crear','Crear Programacion','Crear Programacion'),(46,13,'editar','Editar Programacion','Editar Programacion'),(47,13,'listar','Listar Programacion','Listar Programacion'),(48,13,'eliminar','Eliminar Programacion','Eliminar Programacion'),(49,14,'crear','Crear Rol','Crear Rol'),(50,14,'editar','Editar Rol','Editar Rol'),(51,14,'listar','Listar roles','Lista los roles'),(52,14,'eliminar','ELiminar Rol','ELiminar Rol'),(53,15,'crear','Crear Usuario','Crear Usuario'),(54,15,'editar','Editar Usuario','Editar Usuario'),(55,15,'listar','Listar Usuarios','Listar Usuarios'),(56,15,'eliminar','Eliminar Usuario','Eliminar Usuario');
+INSERT INTO `pag_funcion` VALUES (1,1,'crear','Crear Costos','Crear Costos'),(2,1,'editar','Editar Costos','Editar Costos'),(3,1,'eliminar','Eliminar Costos','Eliminar Costos'),(4,1,'listar','Listar Costos','Listar Costos'),(5,2,'crear','Crear Equipos','Crear Equipos'),(6,2,'editar','Editar Equipos','Editar Equipos '),(7,2,'eliminar','Eliminar Equipos','Eliminar Equipos'),(8,2,'Listar','Listar Equipos','Listar Equipos'),(9,3,'crear','Crear Tipo equipo','Crear Tipo equipo'),(10,3,'editar','Editar Tipo equipo','Editar Tipo equipo'),(11,3,'eliminar','Eliminar Tipo equipo','Eliminar Tipo equipo'),(12,3,'listar','Listar Tipos de equipos','Listar Tipos de equipos'),(13,4,'crear','Crear Herramientas','Crear Herramientas'),(14,4,'editar','Editar Herramientas','Editar Herramientas'),(15,4,'eliminar','Eliminar Herramientas','Eliminar Herramientas'),(16,4,'Listar','Listar Herramientas','Listar Herramientas'),(17,5,'crear','Crear Insumos','Crear Insumos'),(18,5,'editar','Editar Insumos','Editar Insumos'),(19,5,'eliminar','Eliminar Insumos','Eliminar Insumos'),(20,5,'Listar','Listar Insumos','Listar Insumos'),(21,6,'crear','Crear Regional','Crear Regional'),(22,6,'editar','Editar Regional','Editar Regional'),(23,6,'eliminar','Eliminar Regional','Eliminar Regional'),(24,6,'listar','Listar Regionales','Listar Regionales'),(25,7,'crear','Crear Departamento','Crear Departamento'),(26,7,'editar','Editar Departamento','Editar Departamento'),(27,7,'eliminar','Eliminar Departamento','Eliminar Departamento'),(28,7,'listar','Listar Departamentos','Listar '),(29,8,'crear','Crear Ciudad','Crear Ciudad'),(30,8,'editar','Editar Ciudad','Editar Ciudad'),(31,8,'eliminar','Eliminar Ciudad','Eliminar Ciudad'),(32,8,'listar','Listar Ciudades','Listar Ciudades'),(33,9,'crear','Crear Centro','Crear Centro'),(34,9,'editar','Editar Centro','Editar Centro'),(35,9,'eliminar','Eliminar Centro','Eliminar Centro'),(36,9,'listar','Listar Centros','Listar Centros'),(37,10,'crear','Crear Mediciones','Crear Mediciones'),(38,10,'editar','Editar Mediciones','Editar Mediciones'),(39,10,'eliminar','Eliminar Mediciones','Eliminar Mediciones'),(40,10,'Listar','Listar Mediciones','Listar Mediciones'),(41,11,'crear','Crear Medidores','Crear Medidores'),(42,11,'editar','Editar Medidores','Editar Medidores'),(43,11,'eliminar','Eliminar Medidores','Eliminar Medidores'),(44,11,'Listar','Listar Medidores','Listar Medidores'),(45,12,'crear','Crear ot','Crear ot'),(46,12,'editar','Editar ot','Editar ot'),(47,12,'eliminar','Eliminar ot','Eliminar ot'),(48,12,'listar','Listar ot','Listar ot'),(49,13,'crear','Crear solicitud','Crear solicitud de servicio'),(50,13,'editar','Editar solicitud','Editar solicitud'),(51,13,'eliminar','Eliminar solicitud','Eliminar solicitud'),(52,13,'listar','Listar solicitud','Listar solicitud'),(53,14,'crear','Asignar','Asignar Permisos'),(54,15,'crear','Crear Personas','Crear Personas'),(55,15,'editar','Editar Personas','Editar Personas'),(56,15,'eliminar','Eliminar Personas','Eliminar Personas'),(57,15,'Listar','Listar Personas','Listar Personas'),(58,16,'crear','Crear Prestamos','Crear Prestamo'),(59,16,'eliminar','Eliminar Prestamo','Eliminar Prestamo'),(60,16,'Listar','Listar Prestamos','Listar Prestamos'),(61,17,'crear','Crear Programacion','Crear Programacion'),(62,17,'editar','Editar Programacion','Editar Programacion'),(63,17,'listar','Listar Programacion','Listar Programacion'),(64,17,'eliminar','Eliminar Programacion','Eliminar Programacion'),(65,18,'crear','Crear Rol','Crear Rol'),(66,18,'editar','Editar Rol','Editar Rol'),(67,18,'listar','Listar roles','Lista los roles'),(68,18,'eliminar','ELiminar Rol','ELiminar Rol'),(69,19,'crear','Crear Usuario','Crear Usuario'),(70,19,'editar','Editar Usuario','Editar Usuario'),(71,19,'listar','Listar Usuarios','Listar Usuarios'),(72,19,'eliminar','Eliminar Usuario','Eliminar Usuario');
 /*!40000 ALTER TABLE `pag_funcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -617,7 +615,7 @@ CREATE TABLE `pag_herramienta` (
 
 LOCK TABLES `pag_herramienta` WRITE;
 /*!40000 ALTER TABLE `pag_herramienta` DISABLE KEYS */;
-INSERT INTO `pag_herramienta` VALUES ('01',2,'Martillo','Martillo 01',now(),NULL,NULL,NULL);
+INSERT INTO `pag_herramienta` VALUES ('01',2,'Martillo','Martillo 01','2016-08-16 21:01:13',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `pag_herramienta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -724,7 +722,7 @@ CREATE TABLE `pag_modulo` (
 
 LOCK TABLES `pag_modulo` WRITE;
 /*!40000 ALTER TABLE `pag_modulo` DISABLE KEYS */;
-INSERT INTO `pag_modulo` VALUES (1,'Costos','mdi-editor-attach-money','principal','Modulo de Costos'),(2,'Equipos','mdi-hardware-desktop-windows','principal','Modulo de Equipos'),(3,'Herramientas','mdi-action-wallet-travel','principal','Modulo de Herramientas'),(4,'Insumos','mdi-maps-local-gas-station','principal','Modulo de Insumos'),(5,'Localizacion','mdi-communication-location-on','principal','Modulo de Localizacion'),(6,'Mediciones','mdi-av-timer','principal','Modulo de Mediciones'),(7,'Medidores','mdi-image-timer','principal','Modulo de Medidores'),(8,'OT','mdi-action-assignment','principal','Modulo de OT'),(9,'Permisos','mdi-action-lock','configuracion','Modulo de Permisos'),(10,'Personas','mdi-social-person-outline','configuracion','Modulo de Personas'),(11,'Prestamo','mdi-action-shopping-cart','principal','Modulo de prestamos'),(12,'Programacion','mdi-editor-insert-invitation','principal','Modulo Programacion'),(13,'Roles','mdi-social-group','configuracion','Modulo asignar Roles a un usuario'),(14,'Usuarios','mdi-action-account-circle','configuracion','Modulo Usuarios');
+INSERT INTO `pag_modulo` VALUES (1,'Costos','mdi-editor-attach-money','principal','Modulo de Costos'),(2,'Equipos','mdi-hardware-desktop-windows','principal','Modulo de Equipos'),(3,'Herramientas','mdi-action-wallet-travel','principal','Modulo de Herramientas'),(4,'Insumos','mdi-maps-local-gas-station','principal','Modulo de Insumos'),(5,'Localizacion','mdi-maps-my-location','configuracion','Modulo de Localizacion'),(6,'Mediciones','mdi-av-timer','principal','Modulo de Mediciones'),(7,'Medidores','mdi-image-timer','principal','Modulo de Medidores'),(8,'OT','mdi-action-assignment','principal','Modulo de OT'),(9,'Permisos','mdi-action-lock','configuracion','Modulo de Permisos'),(10,'Personas','mdi-social-person-outline','configuracion','Modulo de Personas'),(11,'Prestamo','mdi-action-shopping-cart','principal','Modulo de prestamos'),(12,'Programacion','mdi-editor-insert-invitation','principal','Modulo Programacion'),(13,'Roles','mdi-social-group','configuracion','Modulo asignar Roles a un usuario'),(14,'Usuarios','mdi-action-account-circle','configuracion','Modulo Usuarios');
 /*!40000 ALTER TABLE `pag_modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -785,7 +783,7 @@ CREATE TABLE `pag_permisos` (
   `func_id` int(11) NOT NULL,
   `rol_id` int(11) NOT NULL,
   PRIMARY KEY (`perm_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -794,7 +792,7 @@ CREATE TABLE `pag_permisos` (
 
 LOCK TABLES `pag_permisos` WRITE;
 /*!40000 ALTER TABLE `pag_permisos` DISABLE KEYS */;
-INSERT INTO `pag_permisos` VALUES (1,1,1),(2,2,1),(3,3,1),(4,4,1),(5,5,1),(6,6,1),(7,7,1),(8,8,1),(9,9,1),(10,10,1),(11,11,1),(12,12,1),(13,13,1),(14,14,1),(15,15,1),(16,16,1),(17,17,1),(18,18,1),(19,19,1),(20,20,1),(21,21,1),(22,22,1),(23,23,1),(24,24,1),(25,25,1),(26,26,1),(27,27,1),(28,28,1),(29,29,1),(30,30,1),(31,31,1),(32,32,1),(33,33,1),(34,34,1),(35,35,1),(36,36,1),(37,37,1),(38,38,1),(39,39,1),(40,40,1),(41,41,1),(42,42,1),(43,43,1),(44,44,1),(45,45,1),(46,46,1),(47,47,1),(48,48,1),(49,49,1),(50,50,1),(51,51,1),(52,52,1),(53,53,1),(54,54,1),(55,55,1),(56,56,1);
+INSERT INTO `pag_permisos` VALUES (1,1,1),(2,2,1),(3,3,1),(4,4,1),(5,5,1),(6,6,1),(7,7,1),(8,8,1),(9,9,1),(10,10,1),(11,11,1),(12,12,1),(13,13,1),(14,14,1),(15,15,1),(16,16,1),(17,17,1),(18,18,1),(19,19,1),(20,20,1),(21,21,1),(22,22,1),(23,23,1),(24,24,1),(25,25,1),(26,26,1),(27,27,1),(28,28,1),(29,29,1),(30,30,1),(31,31,1),(32,32,1),(33,33,1),(34,34,1),(35,35,1),(36,36,1),(37,37,1),(38,38,1),(39,39,1),(40,40,1),(41,41,1),(42,42,1),(43,43,1),(44,44,1),(45,45,1),(46,46,1),(47,47,1),(48,48,1),(49,49,1),(50,50,1),(51,51,1),(52,52,1),(53,53,1),(54,54,1),(55,55,1),(56,56,1),(57,57,1),(58,58,1),(59,59,1),(60,60,1),(61,61,1),(62,62,1),(63,63,1),(64,64,1),(65,65,1),(66,66,1),(67,67,1),(68,68,1),(69,69,1),(70,70,1),(71,71,1),(72,72,1);
 /*!40000 ALTER TABLE `pag_permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1262,4 +1260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-26 16:14:07
+-- Dump completed on 2016-08-16 16:22:46

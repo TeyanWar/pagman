@@ -1,27 +1,5 @@
-
-<div id="bordered-table">
-    <h5 class="header">Lista de centros de formacion </h5>
-
-    <ol class="breadcrumbs">
-        <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
-       <li><a href="<?php echo crearUrl("localizacion","centro","crear")?>">Crear centro</a></li>
-            <li><a href="<?php echo crearUrl("localizacion","centro","consultar")?>">Consultar centro</a></li>
-        <li class="active">Crear orden de trabajo</li>
-    </ol>
-    <div id="card-alert" class="card teal">
-        <div class="card-content white-text">
-            <p><i class="mdi-action-info-outline"></i> IMPORTANTE : Los campos marcados con (*) son obligatorios.</p>
-        </div>
-        <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div>
-    <div class="row">
-        <!--<div class="col s12 m4 l3">
-            <p>Add <code class="  language-markup">class="bordered"</code> to the table tag for a bordered table</p>
-        </div>-->
-        <div class="col s12 m8 l9">
-            <table class="bordered">
+        <div class="col s12 m12 g12">
+            <table class="striped">
                 <thead>
                     <tr>
 
@@ -39,22 +17,23 @@
                             <td><?php echo $centro['cen_id'] ?></td>
                             <td><?php echo $centro['cen_nombre'] ?></td>
                             <td>
-                                <a class="modal-trigger ver-detalle2"
-                                   href="#modalDetalle2" data-url="<?php echo crearUrl('localizacion', 'centro', 'detalle', array('noVista' => 'noVista', 'id' => $centro['cen_id'])) ?>">
-                                    <i class="small mdi-action-visibility"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a class="modal-trigger Editar2" 
+                                <a class="btn-floating waves-effect waves-light modal-trigger teal Editar2" 
                                    href="#modalUpdate2" data-url="<?php echo crearUrl('localizacion', 'centro', 'editar', array('noVista' => 'noVista', 'id' => $centro['cen_id'])) ?>">
-                                    <i class="btn-floating small  mdi-content-create teal"></i>
+                                    <i class="mdi-content-create small  Teal"></i>
                                 </a>
 
+                            </td>
+                            <td>
+                                <a class="btn-floating waves-effect waves-light modal-trigger cyan
+                                   darken-1 ver-detalle"
+                                   href="#modalDetalle2" data-url="<?php echo crearUrl('localizacion', 'centro', 'detalle', array('noVista' => 'noVista', 'id' => $centro['cen_id'])) ?>">
+                                    <i class="mdi-action-find-in-page tiny"></i>
+                                </a>
                             </td>
 
                             <td>
                                 <a class=" btn-floating waves-effect waves-light modal-eliminar red
-                                   darken-4 eliminar" data-cen_id="<?php echo $centro['cen_id'] ?>"  data-url="<?php echo crearUrl('localizacion', 'centro', 'postEliminar', array('noVista' => 'noVista', 'id' => $centro['cen_id'])) ?>">
+                                   darken-4 eliminar" data-cen_id="<?php echo $centro['cen_id'] ?>"  data-url="<?php echo crearUrl('localizacion', 'centro', 'eliminar', array('noVista' => 'noVista', 'id' => $centro['cen_id'])) ?>">
                                     <i class="mdi-action-delete small red "></i>
                                 </a>
 
@@ -69,14 +48,8 @@
                     <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
                 </div>
             </div>
-        </div>
+
         <div id="modalUpdate2" class="modal modal-fixed-footer">
-            <div class="modal-content"></div>
-            <div class="modal-footer">
-                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           
-            </div>
-        </div>
-        <div id="modalEliminar" class="modal modal-fixed-footer">
             <div class="modal-content"></div>
             <div class="modal-footer">
                 <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           

@@ -17,12 +17,15 @@
         </div>
         <div class="input-field col s12">
              <select class="select2"  name="dept_id">
-                <option value="0"><?php echo $ciudades['dept_nombre'];?></option>
-                <?php
-                foreach ($departamentos as $departamento) {
-                    echo "<option value=" . $departamento['dept_id'] . ">" . $departamento['dept_nombre'] . "</option>";
-                }
-                ?>
+                <?php 
+                      foreach($departamentos as $departamento){
+                          if($departamento['dept_id']== $ciudades['dept_id']){
+                              echo "<option value='".$departamento["dept_id"]."' selected>". $departamento["dept_nombre"] . "</option>";
+                          }else{
+                              echo "<option value='".$departamento["dept_id"]."'>". $departamento["dept_nombre"] . "</option>";
+                          }
+                      }
+                  ?>
             </select>
 
         </div>

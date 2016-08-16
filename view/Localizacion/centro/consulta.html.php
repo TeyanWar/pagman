@@ -10,6 +10,19 @@
             </button>
         </div>
 
+        <?php $error=getErrores(); ?>
+         <?php if (!$error=="") { ?>
+            <div id="card-alert" class="card red">
+                <div class="card-content white-text">
+                    <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
+                </div>
+
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        <?php } ?>
+
         <ol class="breadcrumbs">
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
             <li><a href="<?php  echo crearUrl("localizacion", "centro", "crear")?>">crear centro</a></li>
@@ -18,7 +31,7 @@
         </ol>
 
 
-        <div class="col s12 m8 l8">
+        <div class="col s12 m12 l12">
 
             <div class="card-content">
                 <div id="right-search" class="row">
@@ -33,7 +46,7 @@
         </div>
     </div>
 </div>
-</div>
+
 <div class="card-panel">
 <table id="tabla26" class="table table-striped ">
 
