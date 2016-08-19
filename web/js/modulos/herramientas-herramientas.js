@@ -1,26 +1,22 @@
 $(document).ready(function () {
 //validacion para letras
-    jQuery.validator.addMethod("lettersonly", function (value, element) {
-        return this.optional(element) || /^[a-z]+$/i.test(value);
-    }, "Solo letras");
+//    jQuery.validator.addMethod("lettersonly", function (value, element) {
+//        return this.optional(element) || /^[a-z]+$/i.test(value);
+//    }, "Solo letras");
     //aqui empieza las validaciones para las herramientas
-    $("#F_registrar_her").validate({
+    $(".F_registrar_her").validate({
         rules: {
             her_id: {
                 required: true,
                 alphanumeric: true,
-                minlength: 10,
+                minlength: 5,
                 maxlength: 40
             },
             her_nombre: {
                 required: true,
+                letterswithbasicpunc: true,
                 minlength: 6,
                 maxlength: 40
-            },
-            her_descripcion: {
-                required: true,
-                minlength: 20,
-                maxlength: 200
             },
             ther_id: "required",
         },
@@ -28,19 +24,16 @@ $(document).ready(function () {
         messages: {
             her_id: {
                 required: "Este campo es obligatorio",
-                alphanumeric: "Solo se permiten letras, numeros y guiones bajos",
-                minlength: "debe tener minimo: 10 caracteres",
+                alphanumeric: "Solo se permiten letras, números y guiones bajos.",
+                minlength: "debe tener minimo: 5 caracteres",
                 maxlength: "debe tener maximo: 40 caracteres"
             },
             her_nombre: {
                 required: "Este campo es obligatorio",
+                letterswithbasicpunc: "solo se permiten letras y caracteres como:\n\
+                (guión medio, punto, coma, paréntesis, comillas simples o dobles y espacio).",
                 minlength: "Debe tener minimo: 6 caracteres",
                 maxlength: "Debe tener maximo: 40 caracteres"
-            },
-            her_descripcion: {
-                required: "Este campo es opcional",
-                minlength: "debe tener minimo: 20 caracteres",
-                maxlength: "debe tener maximo: 200 caracteres"
             },
             ther_id: {
                 required: "Este campo es obligatorio seleccionar",
@@ -56,6 +49,34 @@ $(document).ready(function () {
             }
         }
     });
+    //-------------------------------------------------------------------------------//
+    //aqui empieza el toast para cuando se crea una herramienta
+    $(document).on('submit', '#crearHer', function (e) {
+        e.preventDefault();
+        var url = $('#crearHer').attr("data-url");
+        var redirect = $('#crearHer').attr("data-redirect");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize()
+        }).done(function (respuesta) {
+            console.log(respuesta);
+            alert(respuesta);
+            if (respuesta==true) {
+                Materialize.toast("<i class= 'material-icons' ></i> Herramienta registrada exitosamente", 2000, 'green');
+                setTimeout(
+                        function () {
+                            window.location.href = (redirect);
+                        }, 2000);
+            }
+            else {
+                Materialize.toast("<i class= 'material-icons' ></i> Error al registrar la herramienta.", 3000, 'red');
+            }
+        });
+    });
+
+    //-------------------------------------------------------------------------------//
+
     //aqui terminan las validaciones del formulario de herramientas
     //------------------------------------------------------------------------------//
     // aqui empieza la modal para editar herramientas
@@ -116,8 +137,12 @@ $(document).ready(function () {
     });
     // aqui termina el sweetAlert de herramientas
     //------------------------------------------------------------------------------//
-    
+//efecto para ampliar las imagenes en el listado de herramientas
     $('.fancybox').fancybox();
-    
+
+    //Botón para cerrar modales
+    $(document).on('click', '.cerrar', function () {
+        $(".modal").closeModal();
+    });
 });
     

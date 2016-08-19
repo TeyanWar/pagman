@@ -70,15 +70,17 @@
             </div>   
         <div class="row">
             <div class=" col s3">
-            <label for="fecha">(*) Fecha Programacion</label>
-            <input id="fecha" type="date" class="datepicker" name="fecha" data-error=".errorTxt3">
-            <div class="errorTxt3"></div>
-        </div>
+                <label for="fecha">(*) Fecha Registro Programacion</label>
+                <input readonly="" type="text" name="fecha" value="<?php echo date('d-m-Y'); ?>" data-error=".errorTxt3">
+                <div class="errorTxt3"></div>
+            </div>
+            
             <div class=" col s3">
-            <label for="inicio">(*) Fecha Inicio Programacion</label>
-            <input id="inicio" type="date" class="datepicker" name="inicio" data-error=".errorTxt4">
-            <div class="errorTxt4"></div>
-        </div>
+                <label for="inicio">(*) Fecha Inicio Programacion</label>
+                <input id="inicio" type="date" name="inicio" data-error=".errorTxt4">
+                <div class="errorTxt4"></div>
+            </div>
+            
         </div>
             <div id="mod" class="modal">
                 <div class="modal-content model-data">
@@ -118,7 +120,7 @@
             <div class="row">
                 <div class="input-field col s3 offset-s9">
                     <br><br>
-                      <button class="btn cyan waves-effect waves-light" type="submit"><i class="mdi-content-add"></i>Registrar</button>
+                      <button class="btn teal waves-effect waves-light" type="submit"><i class="mdi-content-add"></i>Registrar</button>
                     
                 </div>
             </div>
@@ -126,7 +128,6 @@
         </div>
 </form>
 
-<script src="../../../web/js/modulos/programacion-programacion.js"></script>
 
 <script type="text/javascript">
     $(".modal-trigger").leanModal({

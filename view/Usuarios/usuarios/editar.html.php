@@ -222,7 +222,7 @@
             },
             clave: {
                 required: true,
-                minlength: 5,
+                minlength: 4,
                 maxlength: 20
             },
             estado: {
@@ -293,7 +293,7 @@
             },
             clave:{
                 required: "El clave es obligatorio.",
-                minlength: "Introduzca al menos 5 caracteres",
+                minlength: "Introduzca al menos 4 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
             estado:{

@@ -26,6 +26,7 @@ class HerramientasController {
         if (!isset($_POST['her_id']) or $_POST['her_id'] == "") {
             $errores[] = "El campo numero placa no debe estar vacio";
         }
+
         if (!isset($_POST['her_nombre']) or $_POST['her_nombre'] == "") {
             $errores[] = "El campor nombre no debe estar vacio";
         }
@@ -34,37 +35,46 @@ class HerramientasController {
             redirect(crearUrl('herramientas', 'herramientas', 'crear'));
         }
         // estos son los post que llegan de los formularios.
-        $her_id = $_POST['her_id'];
+        $her_id = $_POST ['her_id'];
         $her_nombre = $_POST['her_nombre'];
         $her_descripcion = $_POST['her_descripcion'];
         $her_fecha_ingreso = $_POST['her_fecha_ingreso'];
         $ther_id = $_POST['ther_id'];
         $her_imagen = $_FILES['her_imagen']['name'];
 
-        //aqui empieza la carga de archivos
-        //Si es que hubo un error en la subida, mostrarlo, de la variable $_FILES podemos extraer el valor de [error], que almacena un valor booleano (1 o 0).
-        if ($_FILES["her_imagen"]["error"] > 0) {
-            echo $_FILES["her_imagen"]["error"] . "";
-        } else {
-            // Si no hubo error, hacemos otra condicion para asegurar que el archivo no este repetido
-            if (file_exists("img/" . $_FILES["her_imagen"]["name"])) {
-                echo $_FILES["her_imagen"]["name"] . " ya existe. ";
-            } else {
+        if (isset($her_id) && ( $her_nombre) && ($her_descripcion) && ($her_fecha_ingreso) && ($_FILES) && ($ther_id)) {
+
+            //aqui empieza la carga de archivos
+            //Si es que hubo un error en la subida, mostrarlo, de la variable $_FILES podemos extraer el valor de [error], que almacena un valor booleano (1 o 0).
+            if ($_FILES["her_imagen"]["error"] > 0) {
+                echo $_FILES["her_imagen"]["error"] . "";
+//        } else {
+//            // Si no hubo error, hacemos otra condicion para asegurar que el archivo no este repetido
+//            if (file_exists("img/" . $_FILES["her_imagen"]["name"])) {
+//                echo $_FILES["her_imagen"]["name"] . " ya existe. ";
+//            } else {
                 //$rutaImagen=$_FILES["her_imagen"]["name"];
                 $rutaImagen = $_SERVER['DOCUMENT_ROOT'] . "/pagman/web/img/" . $_FILES["her_imagen"]["name"];
                 // Si no es un archivo repetido y no hubo error, subimos a la carpeta /Imagenes para luego ser mostrada 
                 move_uploaded_file($_FILES["her_imagen"]["tmp_name"], $rutaImagen);
 //                    echo "Archivo Subido ";
+
+                $insertHerramientas = "INSERT INTO pag_herramienta "
+                        . "(her_id,her_nombre,her_descripcion,her_imagen,her_fecha_ingreso,ther_id) "
+                        . "VALUES('$her_id','$her_nombre','$her_descripcion','" . $_FILES["her_imagen"] ["name"] . "','$her_fecha_ingreso','$ther_id')";
+//        }
+                $insertar = $objHerramientas->insertar($insertHerramientas);
+                if ($insertar) {
+                    echo true;
+                } else {
+                    echo false;
+                }
             }
-            $insertHerramientas = "INSERT INTO pag_herramienta (her_id,her_nombre,her_descripcion,her_imagen,her_fecha_ingreso,ther_id) "
-                    . "VALUES('$her_id','$her_nombre','$her_descripcion','" . $_FILES["her_imagen"]["name"] . "','$her_fecha_ingreso','$ther_id')";
-
-            $insertar = $objHerramientas->insertar($insertHerramientas);
-//            die(print_r($insertHerramientas));
         }
-        $objHerramientas->cerrar();
 
-        redirect(crearUrl("herramientas", "herramientas", "listar"));
+//        }
+        $objHerramientas->cerrar();
+//        redirect(crearUrl("herramientas", "herramientas", "listar"));
     }
 
     function editar($parametros = false) {

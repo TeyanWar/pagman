@@ -11,7 +11,7 @@ class SolicitudesController {
     function crear() {
 
         //Consulta de regionales
-        $objCentro= new SolicitudesModel();
+        $objCentro = new SolicitudesModel();
 
         $sql = "SELECT * FROM pag_centro";
         $centros = $objCentro->select($sql);
@@ -20,7 +20,7 @@ class SolicitudesController {
         $objCentro->cerrar();
 
         //Consulta de tipos de falla
-         
+
         $objTipoFalla = new TipoFallaModel();
 
         $sql = "SELECT * FROM pag_tipo_falla";
@@ -30,7 +30,7 @@ class SolicitudesController {
         $objTipoFalla->cerrar();
 
         //Consulta de estado
-       
+
         $objEstado = new EstadoModel();
 
         $sql = "SELECT * FROM pag_estado where tdoc_id=4";
@@ -40,7 +40,7 @@ class SolicitudesController {
         $objEstado->cerrar();
 
         //Consulta de persona
-        
+
         $objPersona = new PersonasModel();
 
         $sql = "SELECT * FROM pag_persona";
@@ -48,52 +48,51 @@ class SolicitudesController {
 
         // Cierra la conexion
         $objPersona->cerrar();
-        
-        include_once("../view/Ot/solicitudes/crear.html.php");
 
+        include_once("../view/Ot/solicitudes/crear.html.php");
     }
 
     function postCrear() {
         $objSolicitudes = new SolicitudesModel();
-        
-        $errores= array();
+
+        $errores = array();
         $patronLetras = "/^[a-zA-Z áéíóúñ\s]*$/";
         $patronCorreo = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
         $patronDireccion = "/^[0-9a-zA-Z]+$/";
-        
-        if(!isset($_POST['descripcion']) or $_POST['descripcion']==""){
-            $errores[]="El campo DESCRIPCION debe ser diligenciado";
-                
-        if(count($errores)>0){
-            setErrores($errores);
-            redirect(crearUrl('Ot','solicitudes','crear'));
-        }
-        }else{
 
-        $cen_id = $_POST['centro'];
-        $equi_id = $_POST['equipo'];
-        $sserv_descripcion = $_POST['descripcion'];
-        $per_id = $_POST['solicitante'];
-        $estado_id = $_POST['estado'];
-        $tfa_id = $_POST['tipo_falla'];
+        if (!isset($_POST['descripcion']) or $_POST['descripcion'] == "") {
+            $errores[] = "El campo DESCRIPCION debe ser diligenciado";
 
-        $insertSolicitudes = "INSERT INTO pag_solicitud_servicio (cen_id,equi_id,sserv_descripcion,per_id,est_id,tfa_id)"
-                . " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
-
-        $insertar = $objSolicitudes->insertar($insertSolicitudes);
-
-        if ($insertar) {
-            echo true;
+            if (count($errores) > 0) {
+                setErrores($errores);
+                redirect(crearUrl('Ot', 'solicitudes', 'crear'));
+            }
         } else {
-            echo false;
-        }
-        // Cierra la conexion
-        $objSolicitudes->cerrar();
 
-        //redirect(crearUrl("Ot", "solicitudes", "listar"));
+            $cen_id = $_POST['centro'];
+            $equi_id = $_POST['equipo'];
+            $sserv_descripcion = $_POST['descripcion'];
+            $per_id = $_POST['solicitante'];
+            $estado_id = $_POST['estado'];
+            $tfa_id = $_POST['tipo_falla'];
+
+            $insertSolicitudes = "INSERT INTO pag_solicitud_servicio (cen_id,equi_id,sserv_descripcion,per_id,est_id,tfa_id)"
+                    . " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
+
+            $insertar = $objSolicitudes->insertar($insertSolicitudes);
+
+            if ($insertar) {
+                echo true;
+            } else {
+                echo false;
+            }
+            // Cierra la conexion
+            $objSolicitudes->cerrar();
+
+            //redirect(crearUrl("Ot", "solicitudes", "listar"));
+        }
     }
-    }
-    
+
     function listar() {
         include_once("../view/Ot/solicitudes/buscador.html.php");
     }
@@ -122,21 +121,19 @@ class SolicitudesController {
                     ) order by sserv_id desc";
 
         $solicitudes = $objBuscar->select($sql);
-        
+
         // Paginado
-        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1);
-        $url = crearUrl('ot','solicitudes','listar');
-        
-        $paginado = new Paginado($solicitudes,$pagina,$url);
-        
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+        $url = crearUrl('ot', 'solicitudes', 'listar');
+
+        $paginado = new Paginado($solicitudes, $pagina, $url);
+
         $solicitudes = $paginado->getDatos();
         // Fin paginado
-
         // Cierra la conexion
         $objBuscar->cerrar();
 
         include_once("../view/Ot/solicitudes/listar.html.php");
-
     }
 
     function selectCen() {
@@ -170,7 +167,6 @@ class SolicitudesController {
         $objDescripcion->cerrar();
 
         include_once("../view/Ot/solicitudes/descripcion.html.php");
-
     }
 
     function editar($parametros) {
@@ -204,7 +200,7 @@ class SolicitudesController {
         // Cierra la conexión
 
         $objEstados->cerrar();
-        
+
         // Consulta de equipos
 
         $objEquipos = new SolicitudesModel();
@@ -242,7 +238,6 @@ class SolicitudesController {
         // Cierra la conexion
         $objPostEditar->cerrar();
         //redirect(crearUrl("Ot", "solicitudes", "listar"));
-
     }
 
     function Eliminar($parametros) {
@@ -260,7 +255,6 @@ class SolicitudesController {
         $objEliminar->cerrar();
 
         //redirect(crearUrl("Ot", "solicitudes", "listar"));
-
     }
 
 }

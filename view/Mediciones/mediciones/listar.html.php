@@ -18,55 +18,80 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
+        <?php
+        $errores = getErrores();
+        if (!$errores == "") {
+            ?>
+            <div id="prueba">
+                <div id="card-alert" class="card red">
+                    <div class="card-content white-text">
+                        <p><i class="mdi-alert-error"></i> 
+                        <p><?php echo $errores ?></p>
+                    </div>
+                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            </div>
+        <?php } ?>
+
         <!--Fin mensaje de campos obligatorios-->
 
         <table class="highlight center striped bordered">
             <div class="row">
                 <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Fecha</th>
-                    <th>Medida</th>
-                    <th>Equipo</th>
-                    <th>Nombre</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $count = 1;
-                foreach ($mediciones as $medicion) {
-                    ?>
                     <tr>
-                        <td><?php echo $count++ ?></td>
-                        <td><?php echo $medicion['ctrmed_fecha'] ?></td>
-                        <td><?php echo $medicion['ctrmed_medida_actual'] ?></td>
-                        <td><?php echo $medicion['equi_nombre'] ?></td>
-                        <td><?php echo $medicion['per_nombre'] ?></td>
-                       <td><a class="btn-floating waves-effect waves-light modal-trigger teal" 
-                               href="#editar" data-url="<?php echo crearUrl("mediciones", "mediciones", "editar", array('noVista' => 'noVista', 'id' => $medicion['ctrmed_id']));?>"> 
-                                <i class="mdi-content-create small"></i></a></td>
-                        
+                        <th>#</th>
+                        <th>Equipo</th>
+                        <th>Fecha Última(s) Medicion(es)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Medida y Tipo Medidor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Responsable</th>
+                        <th>Medicion Total</th>
+                        <th>Ver Detalle</th>
                     </tr>
-            <?php } ?>
-            </tbody>
+                </thead>
+                <tbody>
+                    <?php
+                    $count = 1;
+                    foreach ($equipos as $equipo) {
+                        ?>
+                        <tr>
+                            <td><?php echo $count++; ?></td>
+                            <td><?php echo $equipo['equi_nombre'] ?></td>
+                            <td>
+                                <?php
+                                foreach ($equipo['tiposMedidores'] as $tipoMedidor) {
+                                    explodeFecha($tipoMedidor['ultimaMedicion']['ctrmed_fecha']);
+                                    $fecha = getfecha();
+                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;" . $fecha . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" .
+                                    $tipoMedidor['ultimaMedicion']['ctrmed_medida_actual'] . " " . $tipoMedidor['tmed_nombre'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" .
+                                    "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#160;&#160;&#160;&#160;" . $tipoMedidor['ultimaMedicion']['responsable'] . "<br>";
+                                }
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                foreach ($equipo['tiposMedidores'] as $tipoMedidor) {
+                                    echo $tipoMedidor['totalMediciones'] . "  " . $tipoMedidor['tmed_nombre'] . "<br>";
+                                }
+                                ?>
+                            </td>
+                            <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
+                                   href="#modal_detalle_mediciones" 
+                                   data-url="<?php echo crearUrl("Mediciones", "mediciones", "detalle", array('noVista' => 'noVista', 'id' => $equipo['equi_id'])); ?>"><i class="mdi-action-find-in-page tiny"></i></a></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </div>
-            
-        </table>
-        <div class="modal" id="editar">
-            <div class="modal-content ">
 
-            </div> 
+        </table>
+
+        <div class="modal close" id="modal_detalle_mediciones" style="z-index: 1003; display: none; 
+             opacity: 0; transform: scaleX(0.7); top: 341.06px; height:auto; width: 75%;" >
+            <div class="modal-content" id="model-data"></div>
         </div>
-        <ul class="pagination">
-            <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
-            <li class="active"><a href="#!">1</a></li>
-            <li class="waves-effect"><a href="#!">2</a></li>
-            <li class="waves-effect"><a href="#!">3</a></li>
-            <li class="waves-effect"><a href="#!">4</a></li>
-            <li class="waves-effect"><a href="#!">5</a></li>
-            <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
-        </ul>
+        <?php $paginado->render() ?>
+
     </div>
 </div>
 <script type="text/javascript">

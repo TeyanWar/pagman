@@ -1,39 +1,40 @@
 <div class="col s12 m12 l6">
-    <div class="card-panel">
-        <h4 class="header2">Registrar herramienta</h4>
-        <ol class="breadcrumbs">
-            <li><a href="<?php echo addLib('') ?>">Panel de
-                    control</a></li>
-            <li><a href="#">Herramientas</a></li>
-            <li><a href="#">herramientas</a></li>
-            <li class="active">registrar herramienta</li>
-        </ol>
-        <div id="card-alert" class="card teal">
-            <div class="card-content white-text">
-                <p><i class="mdi-action-info-outline"></i> FORMULARIO REGISTRO HERRAMIENTAS:
-                    Aqui se efect&uacute;a el registro de herramientas con los siguientes datos:
-                    fecha ingreso, n&uacute;mero de placa, nombre, descripci&oacute;n, 
-                    imagen y tipo de herramienta</p>
-            </div>
-            <button type="button" class="close white-text" data- dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <?php
-        $miserrores = getErrores();
-        if (!$miserrores == "") {
-            ?>
-            <div id="card-alert" class="card red">
+    <form id="crearHer" class="col s12 F_registrar_her" data-url="<?php echo crearUrl("Herramientas", "herramientas", "postCrear", array('noVista' => 'noVista')) ?>" 
+          data-redirect="<?php echo crearUrl("Herramientas", "herramientas", "listar") ?>" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+        <div class="card-panel">
+            <h4 class="header2">Registrar herramienta</h4>
+            <ol class="breadcrumbs">
+                <li><a href="<?php echo addLib('') ?>">Panel de
+                        control</a></li>
+                <li><a href="#">Herramientas</a></li>
+                <li><a href="#">herramientas</a></li>
+                <li class="active">registrar herramienta</li>
+            </ol>
+            <div id="card-alert" class="card teal">
                 <div class="card-content white-text">
-                    <p><i class="mdi-action-info-outline"></i>
-                        <?php echo $miserrores; ?> 
-                    </p>
+                    <p><i class="mdi-action-info-outline"></i> FORMULARIO REGISTRO HERRAMIENTAS:
+                        Aqui se efect&uacute;a el registro de herramientas con los siguientes datos:
+                        fecha ingreso, n&uacute;mero de placa, nombre, descripci&oacute;n, 
+                        imagen y tipo de herramienta</p>
                 </div>
+                <button type="button" class="close white-text" data- dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
-        <?php }
-        ?>
-        <div class="row">
-            <form id="F_registrar_her" class="col s12" action="<?php echo crearUrl("herramientas", "herramientas", "postCrear") ?>" method="post" enctype="multipart/form-data" novalidate="novalidate">
+            <?php
+            $miserrores = getErrores();
+            if (!$miserrores == "") {
+                ?>
+                <div id="card-alert" class="card red">
+                    <div class="card-content white-text">
+                        <p><i class="mdi-action-info-outline"></i>
+                            <?php echo $miserrores; ?> 
+                        </p>
+                    </div>
+                </div>
+            <?php }
+            ?>
+            <div class="row">
                 <div class="row">
                     <div class="input-field col s6">
                         <label class="active"> *Fecha ingreso de herramienta: </label>
@@ -45,10 +46,10 @@
                         <input type="text" id="her_id" data-error=".errorTxt1" name="her_id" placeholder="Digite n&uacute;mero de placa herramienta" length="40" class="required">
                         <div class="errorTxt1"></div>
                         <label for="her_id">N&uacute;mero placa</label>
-        <!--                        <span class="help-block">
+                        <span class="help-block">
                             Por favor digite el numero de la placa de la herramienta a registrar, recuerde que el <code>n&uacute;mero de la placa</code> 
-                            debe corresponder al siguiente patron: <code>Pc001xxxxxxx</code>
-                        </span>-->
+                            debe corresponder al siguiente patron: <code>PCHP_001XXXX</code>
+                        </span>
                     </div>
                     <div class="input-field col s6">
                         <input type="text" id="her_nombre" data-error=".errorTxt2" name="her_nombre" placeholder="Digite el nombre de la herramienta" length="20" class="required"/>
@@ -88,12 +89,12 @@
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Registrar
+                        <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Crear Herramienta
                             <i class="mdi-content-add left"></i>
                         </button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>

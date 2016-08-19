@@ -1,5 +1,5 @@
 <div class="col s12 m12 l12">
-    <form class="form-horizontal" id="F_prestamo_herramienta" role="form" action="<?php echo crearUrl("Prestamo", "prestamo", "postCrear") ?>" method="post">
+    <form class="form-horizontal" id="F_prestamo_herramienta" role="form" action="<?php echo crearUrl("Prestamo", "prestamo", "postCrear") ?>" method="post" novalidate="novalidate">
         <div class="card-panel col s12 m12 l12">
             <h4 class="header2">Solicitud de Prestamo de Herramientas</h4>
             <ol class="breadcrumbs">
@@ -30,11 +30,11 @@
                   </div>-->
                 <div class="input-field col s6">
                     <label for="Almacenista" class="active"> (*) Seleccione el almacenista: </label>
-                    <select class="error browser-default select2" data-error=".errorTxt2" name="alma_id" id="alma_id" multiple="multiple">
+                    <select class="error browser-default" data-error=".errorTxt2" name="alma_id" id="alma_id"   >
                         <?php
                         foreach ($almacenista as $trabajador) {
 
-                            echo "<option value=" . $trabajador['alma_id'] . ">" . $trabajador['alma_descripcion'] . "</option>";
+                            echo "<option value=" . $trabajador['alma_id'] . ">" . $trabajador['alma_nombre'] . "</option>";
                         }
                         ?>
                     </select>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="input-field col s6">
                     <label for="Jornada" class="active"> (*) Seleccione la jornada: </label>
-                    <select class="error browser-default select2" data-error=".errorTxt3" multiple="multiple" name="jor_id" id="jor_id">
+                    <select class="error browser-default" data-error=".errorTxt3" name="jor_id" id="jor_id">
                         <?php
                         foreach ($jornada as $jor) {
 
@@ -70,7 +70,7 @@
         <div class="card-panel col s12 m12 l12" id="agregarPrestamo">
             <div class="row">
                 <h4 class="header2"> Prestamo de herramientas </h4>
-                <table class="centered col s12 m12 l12" id="tabla">
+                <table class="center col s12 m12 l12" id="tabla">
                     <thead>
                         <tr>
                             <th>N&uacute;mero de placa</th>

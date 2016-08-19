@@ -2,6 +2,7 @@
 <table id="data-table-simple" class="responsive-table display" cellspacing="0">
             <thead>
                 <tr>
+<!--                    <th>#</th>-->
                     <th>Placa</th>
                     <th>equipo</th>
                     <th>Centro</th>
@@ -16,6 +17,7 @@
                 <?php foreach ($programaciones as $programacion) {
                    ?>
                     <tr>
+<!--                        <td><?php echo $paginado->count++; ?></td>-->
                         <td><?php echo $programacion['equi_id'] ?></td>
                         <td><?php echo $programacion['equi_nombre'] ?></td>
                         <td><?php echo $programacion['cen_nombre'] ?></td>
@@ -33,6 +35,7 @@
             </tbody>
         </table>
     
+    
     <div id="edit" class="modal">
         <div class="modal-content model-data">
         </div>
@@ -41,6 +44,8 @@
         <div class="modal-content model-data">
         </div>
     </div>
+    
+    <?php // $paginado->render() ?>
 </div>
 <script type="text/javascript">
     $(".modal-trigger").leanModal({
