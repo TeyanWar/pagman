@@ -51,7 +51,7 @@ class HerramientasController {
                 echo $_FILES["her_imagen"]["name"] . " ya existe. ";
             } else {
                 //$rutaImagen=$_FILES["her_imagen"]["name"];
-                $rutaImagen = $_SERVER['DOCUMENT_ROOT'] . "/pagman/web/img/" . $_FILES["her_imagen"]["name"];
+                $rutaImagen = $_SERVER['DOCUMENT_ROOT'] . "/poo/pagman/web/img/" . $_FILES["her_imagen"]["name"];
                 // Si no es un archivo repetido y no hubo error, subimos a la carpeta /Imagenes para luego ser mostrada 
                 move_uploaded_file($_FILES["her_imagen"]["tmp_name"], $rutaImagen);
 //                    echo "Archivo Subido ";

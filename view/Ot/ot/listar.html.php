@@ -4,7 +4,7 @@
             <table class="striped">
                 <thead>
                     <tr>
-						<th></th>
+                        <th data-field="registro">No. Registro</th>
                         <th data-field="id">No. OT</th>
                         <th data-field="name">Encargado</th>
                         <th data-field="name">Fecha y hora de creaci&oacute;n</th>
@@ -19,12 +19,11 @@
                 </thead>
 
                 <tbody>
-                    <?php
-					
+                    <?php					
                     foreach ($ordenes as $orden) {
                         ?>
                         <tr>
-							<td><?php echo $paginado->count++ ?></td>
+                            <td><?php echo $paginado->count++ ?></td>
                             <td><?php echo $orden['ot_id'] ?></td>
                             <td><?php echo $orden['per_nombre'] ?></td>
                             <td><?php echo $orden['ot_fecha_creacion'] ?></td>
@@ -38,9 +37,8 @@
                         </tr>
                     <?php } ?>
                 </tbody>
-            </table>
-			
-			<?php $paginado->render() ?>
+            </table>			
+                    <?php $paginado->render() ?>
            
         </div>
     </div>

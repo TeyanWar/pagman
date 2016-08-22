@@ -19,7 +19,13 @@
         <input id="buscador" type="text" class="validate" data-url="<?php echo crearUrl("Ot", "solicitudes", "buscar", array('noVista' => 'noVista')) ?>">
         <label for="icon_prefix" class="">Buscar ordenes de trabajo</label>
     </div>
-         
+    
+    <?php if(isset($_REQUEST['pagina'])){ ?>
+        <input type="hidden" id="pagina" name="pagina" value="<?php echo $_REQUEST['pagina']?>">
+    <?php } else{ ?>
+        <input type="hidden" id="pagina" name="pagina" value="1">
+    <?php } ?>
+    
 </div>
 
 <div class="card-panel">
