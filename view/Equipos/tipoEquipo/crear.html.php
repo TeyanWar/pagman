@@ -24,6 +24,18 @@
                         <label for="tequi_descripcion" class="active" >(*)Tipo de Equipo:</label>
                     </div>
                 </div>
+                <br><br>
+                <div class="row">
+                    <select class="select2" name="cp_id">
+                            <option value="0">(Vacio)</option>
+                            <?php
+                            foreach ($campos_p as $campo_P) {
+                                echo "<option value=" . $campo_P['#'] . ">" . $campo_P['#'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <label for="Persona" class="active">(*) Seleccion el/los campos personalizados del equipo</label>
+                </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Crear

@@ -27,4 +27,19 @@ $(document).ready(function () {
     
 });
 
+function selectAllFunctionsController(checkbox){
+    //obtener el div contenedor del checkbox "Seleccionar todo"
+    contCheckbox=document.getElementById(checkbox.id).parentNode;
+   
+    //obtener todos los input del div
+    checkboxes=contCheckbox.getElementsByTagName('input');
+
+    for(i=0;i<checkboxes.length;i++) //recoremos todos los controles
+    {
+        if(checkboxes[i].type === "checkbox") //Entrar solo si es un checkbox
+        {
+           checkboxes[i].checked=checkbox.checked; //si es un checkbox le damos el valor del checkbox que lo llamó (Marcar/Desmarcar Todos)
+        }
+    }
+}
 

@@ -31,8 +31,11 @@
                             <?php if($key%2!=0){ ?>
                                     <div class="row <?php echo $modulo['mod_nombre']; ?>">
                             <?php } ?>
-                            <div class="col s6 <?php echo $modulo['mod_nombre']; ?>" >
+                            <div class="col s6 <?php echo $modulo['mod_nombre']; ?>" id="<?php echo $controlaor['cont_display']; ?>">
                                 <h5><?php echo $controlaor['cont_display']; ?></h5>
+                                <!--Seleccionar todo -->
+                                <input onclick="selectAllFunctionsController(this)" class="filled-in" id="all_<?php echo $controlaor['cont_display']; ?>" type="checkbox" >
+                                <label for="all_<?php echo $controlaor['cont_display']; ?>">Seleccionar todo</label>
                                 <?php foreach ($controlaor['funciones'] as $funcion) { ?>
                                     <p>
                                        <input name="funciones[]" id="<?php echo $funcion['func_id'] ?>" value="<?php echo $funcion['func_id'] ?>" type="checkbox" <?php echo $funcion['checkeado']; ?> >

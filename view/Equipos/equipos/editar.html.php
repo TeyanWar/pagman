@@ -2,7 +2,7 @@
     <form class="col s12" role="form" action="<?php echo crearUrl("equipos", "equipos", "postEditar") ?>" method="post">
         <div class="row">
             <div class="input-field col s4">
-                <input readonly type="text" id="equi_noplaca" value="<?php echo $equipo['equi_id']; ?>">
+                <input readonly type="text" id="equi_noplaca" name="equi_noplaca" value="<?php echo $equipo['equi_id']; ?>">
                 <label for="equi_noplaca" class="active">N.Placa:</label>
             </div>
             <div class="input-field col s4">
@@ -21,7 +21,7 @@
                 <label for="Persona" class="">(*) Seleccion al encargado  </label>
             </div>
             <div class="input-field col s4">
-                <input type="text" name="equi-nombre" value="<?php echo $equipo['equi_nombre']; ?>">
+                <input type="text" name="equi_nombre" value="<?php echo $equipo['equi_nombre']; ?>">
                 <label for="equi-nombre" class="active">Nombre del Equipo:</label>
 
             </div>
@@ -86,8 +86,12 @@
 
             </div>
         </div>
-        <div class="col-lg-offset-2 col-lg-10">
-            <input type="submit" class="btn" value="Editar">
+        <div class="row">
+            <div class="input-field col s12">
+                <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Editar
+                    <i class="mdi-content-send right"></i>
+                </button>
+            </div>
         </div>
     </form>
 </div>

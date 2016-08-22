@@ -36,16 +36,9 @@
                                 <i class="mdi-action-find-in-page tiny"></i>
                             </a>
                         </td>
-                       <!-- <td>
-                            <a class="modal-trigger eliminar2" 
-                               href="#modaleliminar2" data-url="<?php echo crearUrl('localizacion', 'departamento', 'eliminar', array('noVista' => 'noVista', 'id' => $departamento['dept_id'])) ?>">
-                                <i class="btn-floating small mdi-action-delete red"></i>
-                            </a>
-
-                        </td>-->
                         <td>
                             <a class=" btn-floating waves-effect waves-light modal-eliminar red
-                               darken-4 eliminar3" data-dept_id="<?php echo $departamento['dept_id'] ?>"  data-url="<?php echo crearUrl('localizacion', 'departamento', 'postEliminar', array('noVista' => 'noVista', 'id' => $departamento['dept_id'])) ?>">
+                               darken-4 eliminar3" data-dept_id="<?php echo $departamento['dept_id'] ?>"  data-url="<?php echo crearUrl('localizacion', 'departamento', 'eliminar', array('noVista' => 'noVista', 'id' => $departamento['dept_id'])) ?>">
                                 <i class="mdi-action-delete small red "></i>
                             </a>
 
