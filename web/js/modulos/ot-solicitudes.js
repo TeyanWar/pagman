@@ -83,12 +83,12 @@ $(document).ready(function () {
         e.preventDefault();
         var url = $('form').attr("data-url");
         
+//        alert($(this).serialize());
         $.ajax({
             type: 'POST',
             url: url,
             data: $(this).serialize(),
         }).done(function (respuesta) {
-
             if (respuesta == true)
             {
                 Materialize.toast("<i class='material-icons'></i>Se actualizó el registro exitosamente", 4000, 'green');

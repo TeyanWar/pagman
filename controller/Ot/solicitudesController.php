@@ -216,15 +216,14 @@ class SolicitudesController {
     }
 
     function postEditar() {
-
+//        dd($_POST); 
         $sserv_id = $_POST['sserv_id'];
-        $sserv_descripcion = $_POST['sserv_descripcion'];
         $est_id = $_POST['est_id'];
         $sserv_observaciones = $_POST['sserv_observaciones'];
         
         $objPostEditar = new SolicitudesModel();
 
-        $sql = "UPDATE pag_solicitud_servicio SET sserv_descripcion='" . $sserv_descripcion . "', ". "sserv_observaciones='" . $sserv_observaciones . "', est_id='" . $est_id . "', estado=NULL 
+        $sql = "UPDATE pag_solicitud_servicio SET sserv_observaciones='" . $sserv_observaciones . "', est_id='" . $est_id . "', estado=NULL 
                  WHERE pag_solicitud_servicio.sserv_id=" . $sserv_id;
         
         $respuesta = $objPostEditar->update($sql);        
