@@ -30,7 +30,7 @@
                     <!--<option value="" disabled selected>Seleccione</option> -->
                     <?php foreach ($equipos as $equipo) { ?>
                         <?php if ($registro['equi_id'] == $equipo['equi_id']) { ?>
-                            <option value="<?php echo $equipo['equi_id'] ?> " readonly selected><?php echo $equipo['equi_nombre'] ?></option>
+                            <option value="<?php echo $equipo['equi_id'] ?> " readonly ><?php echo $equipo['equi_nombre'] ?></option>
                         <?php } else { ?>                            
                             <?php
                         }
