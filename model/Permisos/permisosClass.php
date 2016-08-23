@@ -12,8 +12,10 @@ class PermisosClass extends MasterModel {
         $directorio = opendir("../controller"); // Indicamos la ruta del directorio
 
         while (false !== ($elemento = readdir($directorio))) {
-            if (is_dir("../controller/" . $elemento) && ($elemento != "." && $elemento != ".." && $elemento !="Sesion" && $elemento != "cargarPermisos")) {//indica si el nombre del archivo es un directorio
-                $lista[] = $elemento;
+            if (is_dir("../controller/" . $elemento) && ($elemento != "." && $elemento != "..")) {//indica si el nombre del archivo es un directorio
+                if(file_exists("../controller/$elemento/info.xml")){
+                    $lista[] = $elemento;
+                }
             }
         }//cierre while
         return $lista;
