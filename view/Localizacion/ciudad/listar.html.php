@@ -1,15 +1,6 @@
 <div id="bordered-table">
     <div class=" card-panel">
-     <h4 class="header">Crear ciudad </h4>
-         
-            
-        <ol class="breadcrumbs">
-            <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
-            <li><a href="<?php  echo crearUrl("localizacion", "ciudad", "consulta")?>">listar ciudad</a></li>
-            <li><a href="<?php  echo crearUrl("localizacion", "ciudad", "crear")?>">crear ciudad</a></li>
-            <li class="active">consultar ciudad </li>
-        </ol>
-      
+
         <div class="col s12 m12 g12">
             <table class="striped">
                 <thead>

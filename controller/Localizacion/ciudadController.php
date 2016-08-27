@@ -10,8 +10,9 @@ class CiudadController {
 
         $id = $parametros[1];
 
-       $sql = "select pag_ciudad.ciud_id, pag_ciudad.ciud_nombre, pag_departamento.dept_nombre from "
-                . "pag_ciudad, pag_departamento WHERE ciud_id = $id and"
+       $sql = "select pag_ciudad.ciud_id,pag_ciudad.ciud_nombre,pag_departamento.dept_id
+       ,dept_nombre from "
+                . "pag_ciudad,pag_departamento WHERE ciud_id = $id and"
                 . " pag_ciudad.dept_id = pag_departamento.dept_id";
        
        $ciudades = $objCiudad->find($sql);
@@ -22,9 +23,6 @@ class CiudadController {
         $sql2="SELECT * FROM pag_departamento WHERE estado IS NULL ";
         
         $departamentos=$objDepartamento->select($sql2);
-        
-       
-
 
         // Cierra la conexion
     
@@ -37,16 +35,16 @@ class CiudadController {
     function postEditar() {
 
         $ciud_nom = $_POST['ciud_nombre'];
-        $ciud_id = $_POST['ciud_id'];
         $dept_id = $_POST['dept_id'];
+        $ciud_id = $_POST['ciud_id'];
 
         $objCiudad = new CiudadModel();
 
         $sql = "UPDATE "
                 . "pag_ciudad "
                 . "SET "
-                . "ciud_nombre='$ciud_nombre', "
-                . "dept_id= $dept_id "
+                . "ciud_nombre='$ciud_nom', "
+                . "dept_id=$dept_id "
                 . "WHERE ciud_id=$ciud_id";
 
         $respuesta = $objCiudad->update($sql);
@@ -54,7 +52,7 @@ class CiudadController {
         // Cierra la conexion
         $objCiudad->cerrar();
 
-        redirect(crearUrl("localizacion", "ciudad", "listar"));
+        redirect(crearUrl("localizacion", "ciudad", "Consulta"));
     }
 
     function listar() {
@@ -86,34 +84,50 @@ class CiudadController {
         // Cierra la conexion
         $objCiudad->cerrar();
         $objDepartamento->cerrar();
-  
-
-
+        
         include_once("../view/Localizacion/ciudad/crear.html.php");
     }
 
     function postCrear() {
-       
-        $ciud_nombre = $_POST['ciud_nombre'];
-        $dept_id = $_POST['dept_id'];
-       
-
-        $insertCiudad = "INSERT INTO pag_ciudad (ciud_nombre,dept_id)"
-                . " VALUES('$ciud_nombre',$dept_id)";
         
+        //--------------expresiones regulaes-----------
+        $patronLetras = "/^[a-zA-Z_,áéíóúñ\s]*$/";
+        $errores = array();
+
+        //---------------validaciones-------------------
+        if (!isset($_POST['ciud_nombre']) or $_POST['ciud_nombre'] == "") {
+            $errores[] = '(*) El campo "Nombre De La Ciudad" es obligatorio';
+        }
+
+        if (isset($_POST['ciud_nombre']) && !preg_match($patronLetras, $_POST['ciud_nombre'])) {
+            $errores[] = '(*) El campo "Nombre De La Ciudad" debe contener letras unicamente';
+        }
+
+        if (!isset($_POST['dept_id']) or $_POST['dept_id'] == "") {
+            $errores[] = '(*) El campo "Departamento" es obligatorio';
+        }
+        //----------------------------------------------
+        if (count($errores) > 0) {
+            setErrores($errores);
+            redirect(crearUrl("localizacion", "ciudad", "crear"));
+            //----------------fin validaciones-----------------
+        } else {
+            $ciud_nombre = $_POST['ciud_nombre'];
+            $dept_id = $_POST['dept_id'];
+            
+            $insertCiudad = "INSERT INTO pag_ciudad (ciud_nombre,dept_id)"
+                    . " VALUES('$ciud_nombre',$dept_id)";
+
+            $objCiudad = new CiudadModel();
+
+            $insertar = $objCiudad->insertar($insertCiudad);
+
+            // Cierra la conexion
+            $objCiudad->cerrar();
+
+            redirect(crearUrl("localizacion", "ciudad", "Consulta"));
+        }
         
-
-        echo $insertCiudad;
-
-//       die(print_r($_POST));
-        $objCiudad = new CiudadModel();
-
-        $insertar = $objCiudad->insertar($insertCiudad);
-
-        // Cierra la conexion
-        $objCiudad->cerrar();
-
-        redirect(crearUrl("localizacion", "ciudad", "listar"));
     }
 
      function eliminar($parametros) {

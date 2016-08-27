@@ -16,10 +16,30 @@ $(document).ready(function () {
     //al asignar permisos
     $(document).on('click','.modulo_permisos', function(){
        var divPermisos=$(this).data('div_permisos');
-       $('#contenedor_permisos div').css('display','none');
+       
+       //Bloque para dejar seleccionado el módulo
+       $('#contenedor_modulos div').css('background','teal');
+       $(this).css('background','#1E90FF');
+       
+        $('#contenedor_permisos div').css('display','none');
        $(divPermisos).css('display','block');
     });
     
 });
 
+function selectAllFunctionsController(checkbox){
+    //obtener el div contenedor del checkbox "Seleccionar todo"
+    contCheckbox=document.getElementById(checkbox.id).parentNode;
+   
+    //obtener todos los input del div
+    checkboxes=contCheckbox.getElementsByTagName('input');
+
+    for(i=0;i<checkboxes.length;i++) //recoremos todos los controles
+    {
+        if(checkboxes[i].type === "checkbox") //Entrar solo si es un checkbox
+        {
+           checkboxes[i].checked=checkbox.checked; //si es un checkbox le damos el valor del checkbox que lo llamó (Marcar/Desmarcar Todos)
+        }
+    }
+}
 

@@ -4,16 +4,22 @@ $(document).ready(function () {
     //$('#buscador').focus()
     $('#buscador').keyup(function () {
         var solicitud = $('#buscador').val();
+        
+        if(solicitud != ""){
+            $('#pagina').val(1);
+        }
+        
+        var pagina = $('#pagina').val();        
         var url = $(this).attr("data-url");
 
         $.ajax({
             url: url,
             type: "POST",
-            data: "resul=" + solicitud,
+            data: "resul=" + solicitud+"&pagina="+pagina,
             success: function (data) {
                 $('#listar').html(data);
             }
-        });
+        });        
     });
 
     $('#buscador').trigger('keyup');
@@ -103,27 +109,24 @@ $(document).ready(function () {
 
         e.preventDefault();
         var url = $('form').attr("data-url");
-
-
+        
+//        alert($(this).serialize());
         $.ajax({
             type: 'POST',
             url: url,
             data: $(this).serialize(),
         }).done(function (respuesta) {
-
             if (respuesta == true)
             {
                 Materialize.toast("<i class='material-icons'></i>Se actualizó el registro exitosamente", 4000, 'green');
-            }
-            else
-            {
+            }else{
                 Materialize.toast("<i class='material-icons'></i>Se produjo un error, no se guardaron los cambios", 4000, 'red');
             }
         })
                 .fail(function () {
                     Materialize.toast("<i class='material-icons'>warning</i>", 4000, 'blue');
                 });
-
+        
         $(".modal").closeModal();
         $('#buscador').trigger('keyup');
     });//fin: editar solicitud
@@ -169,7 +172,6 @@ $(document).ready(function () {
                 }
             });
         });
-
     });//fin: sweetalert
 
     //Botón para cerrar modales

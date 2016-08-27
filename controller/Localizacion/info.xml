@@ -1,52 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <modulos>
     <nombre>Localizacion</nombre>
-    <icono>mdi-communication-location-on</icono>
-    <sitioMenu>principal</sitioMenu>
+    <icono>mdi-maps-my-location</icono>
+    <sitioMenu>configuracion</sitioMenu>
     <descripcion>Modulo de Localizacion</descripcion>
    
     <controladores>
         <controlador>
-            <nombre>localizacionController</nombre>
+            <nombre>regionalController</nombre>
             <icono>mdi-communication-location-on</icono>
-            <display>Localizacion</display>
-            <descripcion>Controlador de Localizacion</descripcion>
+            <display>Regionales</display>
+            <descripcion>Controlador de Regionales</descripcion>
             
             <funciones>
-                
                 <funcion>
                     <nombre>crear</nombre>
-                    <display>Crear Localizacion</display>
-                    <descripcion>Crear Localizacion</descripcion>
+                    <display>Crear Regional</display>
+                    <descripcion>Crear Regional</descripcion>
                 </funcion>
                 
                 <funcion>
                     <nombre>editar</nombre>
-                    <display>Editar Localizacion</display>
-                    <descripcion>Editar Localizacion</descripcion>
+                    <display>Editar Regional</display>
+                    <descripcion>Editar Regional</descripcion>
                 </funcion>
                 
                  <funcion>
                     <nombre>eliminar</nombre>
-                    <display>Eliminar Localizacion</display>
-                    <descripcion>Eliminar Localizacion</descripcion>
+                    <display>Eliminar Regional</display>
+                    <descripcion>Eliminar Regional</descripcion>
                 </funcion>
                 
                  <funcion>
-                    <nombre>Listar</nombre>
-                    <display>Listar Localizacion</display>
-                    <descripcion>Listar Localizacion</descripcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Regionales</display>
+                    <descripcion>Listar Regionales</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+        <controlador>
+            <nombre>departamentoController</nombre>
+            <icono>mdi-image-filter-hdr</icono>
+            <display>Departamentos</display>
+            <descripcion>Controlador de Departamentos</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Departamento</display>
+                    <descripcion>Crear Departamento</descripcion>
                 </funcion>
                 
                 <funcion>
-                    <nombre>Consultar</nombre>
-                    <display>Consultar Localizacion</display>
-                    <descripcion>Consultar Localizacion</descripcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Departamento</display>
+                    <descripcion>Editar Departamento</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Departamento</display>
+                    <descripcion>Eliminar Departamento</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Departamentos</display>
+                    <descripcion>Listar </descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+        <controlador>
+            <nombre>ciudadController</nombre>
+            <icono>mdi-image-assistant-photo</icono>
+            <display>Ciudades</display>
+            <descripcion>Controlador de Ciudades</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Ciudad</display>
+                    <descripcion>Crear Ciudad</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Ciudad</display>
+                    <descripcion>Editar Ciudad</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Ciudad</display>
+                    <descripcion>Eliminar Ciudad</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Ciudades</display>
+                    <descripcion>Listar Ciudades</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+        <controlador>
+            <nombre>centroController</nombre>
+            <icono>mdi-image-center-focus-strong</icono>
+            <display>Centros</display>
+            <descripcion>Controlador de Centros</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Centro</display>
+                    <descripcion>Crear Centro</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Centro</display>
+                    <descripcion>Editar Centro</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Centro</display>
+                    <descripcion>Eliminar Centro</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Centros</display>
+                    <descripcion>Listar Centros</descripcion>
                 </funcion>
             </funciones>
             

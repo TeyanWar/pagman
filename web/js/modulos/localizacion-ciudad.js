@@ -38,18 +38,7 @@ $(document).ready(function () {
             }
         });
     });
-    /* $(document).on("click",".eliminar5", function(){
-     var url = $(this).attr("data-url");
-     
-     $.ajax({
-     url: url,
-     type:"get",
-     success: function(data){
-     $("#modaleliminar5 > .modal-content").html(data);
-     }
-     });
-     });
-     */
+
     $(document).on('click', '.eliminar2', function (e) {
         e.preventDefault();
         var url = $(this).attr('data-url');
@@ -75,6 +64,53 @@ $(document).ready(function () {
             swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
           $("#busquedaAjax5").trigger('keyup');
         });
+    });
+    
+    
+        //----------------- validaciones ---------------
+    
+    /* Incluimos un método para validar el campo nombre */
+
+    jQuery.validator.addMethod("letra", function(value, element) {
+        return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
+    });
+    
+    $("#formciudad").validate({
+        rules: {
+            dept_id: {
+                required: true
+            },
+            ciud_nombre: {
+                required: true,
+                letra: true,
+                minlength: 5,
+                maxlength: 20
+            },
+            cgender:"required",
+			cagree:"required",
+        },
+        //For custom messages
+        messages: {
+            dept_id:{
+                required: "El Departamento es obligatorio."
+            },
+            ciud_nombre:{
+                required: "El Nombre De La ciudad es obligatorio.",
+                letra: "Solo se permiten letras",
+                minlength: "Introduzca al menos 5 caracteres",
+                maxlength: "Solo se permite introducir maximo 20 caracteres"
+            },
+            curl: "Enter your website",
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        }
     });
     
     

@@ -133,7 +133,7 @@ CREATE TABLE `pag_cargo` (
 
 LOCK TABLES `pag_cargo` WRITE;
 /*!40000 ALTER TABLE `pag_cargo` DISABLE KEYS */;
-INSERT INTO `pag_cargo` VALUES (1,'Desarrollador de Software','0000-00-00 00:00:00');
+INSERT INTO `pag_cargo` VALUES (1,'Instructor',NULL);
 /*!40000 ALTER TABLE `pag_cargo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +161,7 @@ CREATE TABLE `pag_centro` (
 
 LOCK TABLES `pag_centro` WRITE;
 /*!40000 ALTER TABLE `pag_centro` DISABLE KEYS */;
-INSERT INTO `pag_centro` VALUES (1,'CDTI','Pondaje','3275647',3,'2016-06-25 05:00:00'),(2,'CEAI','Cali','2345',4,NULL),(4,'ASTIN','sdesdhgb','5678',5,NULL);
+INSERT INTO `pag_centro` VALUES (1,'CDTI','Pondaje','3275647',3,NULL),(2,'CEAI','Cali','2345',4,NULL),(4,'ASTIN','sdesdhgb','5678',5,NULL);
 /*!40000 ALTER TABLE `pag_centro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -187,7 +187,7 @@ CREATE TABLE `pag_ciudad` (
 
 LOCK TABLES `pag_ciudad` WRITE;
 /*!40000 ALTER TABLE `pag_ciudad` DISABLE KEYS */;
-INSERT INTO `pag_ciudad` VALUES (1,'Barranquilla',3,NULL);
+INSERT INTO `pag_ciudad` VALUES (1,'Cali',3,NULL);
 /*!40000 ALTER TABLE `pag_ciudad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +212,7 @@ CREATE TABLE `pag_componente` (
 
 LOCK TABLES `pag_componente` WRITE;
 /*!40000 ALTER TABLE `pag_componente` DISABLE KEYS */;
-INSERT INTO `pag_componente` VALUES ('1','Polea',NULL),('2','Piñon',NULL);
+INSERT INTO `pag_componente` VALUES ('1','Polea',NULL),('2','Piñón',NULL);
 /*!40000 ALTER TABLE `pag_componente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,8 +229,11 @@ CREATE TABLE `pag_control_medidas` (
   `ctrmed_medida_actual` varchar(100) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
   `per_id` bigint(20) NOT NULL,
+  `tmed_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`ctrmed_id`)
+  PRIMARY KEY (`ctrmed_id`),
+  KEY `tmed_id` (`tmed_id`),
+  KEY `equi_id` (`equi_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -257,9 +260,8 @@ CREATE TABLE `pag_controlador` (
   `cont_icono` varchar(40) NOT NULL,
   `cont_display` varchar(40) NOT NULL,
   `cont_descripcion` varchar(100) DEFAULT NULL,
-  `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`cont_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +270,7 @@ CREATE TABLE `pag_controlador` (
 
 LOCK TABLES `pag_controlador` WRITE;
 /*!40000 ALTER TABLE `pag_controlador` DISABLE KEYS */;
-INSERT INTO `pag_controlador` VALUES (1,1,'costosController','mdi-editor-attach-money','Costos','Controlador de Costos',NULL),(2,2,'equiposController','mdi-hardware-desktop-windows','Equipos','Controlador de Equipos',NULL),(3,3,'herramientasController','mdi-action-perm-data-setting','Herramientas','Controlador de Herramientas',NULL),(4,4,'insumosController','mdi-maps-local-gas-station','Insumos','Controlador de Insumos',NULL),(5,5,'localizacionController','mdi-communication-location-on','Localizacion','Controlador de Localizacion',NULL),(6,6,'medicionesController','mdi-av-timer','Mediciones','Controlador de Mediciones',NULL),(7,7,'medidoresController','mdi-image-timer','Medidor','Controlador de Medidores',NULL),(8,8,'otController','mdi-action-assignment','Ordenes','Controlador de ot',NULL),(9,9,'permisosController','mdi-action-lock','Permisos','Controlador de Permisos',NULL),(10,10,'personasController','mdi-social-person-outline','Personas','Controlador de Personas',NULL),(11,11,'programacionController','mdi-editor-insert-invitation','Programacion','Controlador de Programacion',NULL),(12,12,'rolesController','mdi-social-group','Roles','Controlador de Roles',NULL),(13,13,'usuariosController','mdi-action-account-circle','Usuarios','Controlador de Usuarios',NULL),(14,8,'solicitudesController','mdi-communication-quick-contacts-mail','Solicitudes','Controlador de solicitudes',NULL);
+INSERT INTO `pag_controlador` VALUES (1,1,'costosController','mdi-editor-attach-money','Costos','Controlador de Costos'),(2,2,'equiposController','mdi-hardware-desktop-windows','Equipos','Controlador de Equipos'),(3,2,'tipoEquipoController','mdi-hardware-phonelink','Tipos de equipo','Controlador de Tipos de equipos'),(4,3,'herramientasController','mdi-action-wallet-travel','Herramientas','Controlador de Herramientas'),(5,4,'insumosController','mdi-maps-local-gas-station','Insumos','Controlador de Insumos'),(6,5,'regionalController','mdi-communication-location-on','Regionales','Controlador de Regionales'),(7,5,'departamentoController','mdi-image-filter-hdr','Departamentos','Controlador de Departamentos'),(8,5,'ciudadController','mdi-image-assistant-photo','Ciudades','Controlador de Ciudades'),(9,5,'centroController','mdi-image-center-focus-strong','Centros','Controlador de Centros'),(10,6,'medicionesController','mdi-av-timer','Mediciones','Controlador de Mediciones'),(11,7,'medidoresController','mdi-image-timer','Medidor','Controlador de Medidores'),(12,8,'otController','mdi-action-assignment','Ordenes','Controlador de ot'),(13,8,'solicitudesController','mdi-communication-quick-contacts-mail','Solicitudes','Controlador de solicitudes'),(14,9,'permisosController','mdi-action-lock','Permisos','Controlador de Permisos'),(15,10,'personasController','mdi-social-person-outline','Personas','Controlador de Personas'),(16,11,'prestamoController','mdi-action-shopping-cart','Prestamo','Controlador de Prestamos'),(17,12,'programacionController','mdi-editor-insert-invitation','Programacion','Controlador de Programacion'),(18,13,'rolesController','mdi-social-group','Roles','Controlador de Roles'),(19,14,'usuariosController','mdi-action-account-circle','Usuarios','Controlador de Usuarios');
 /*!40000 ALTER TABLE `pag_controlador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,7 +296,7 @@ CREATE TABLE `pag_departamento` (
 
 LOCK TABLES `pag_departamento` WRITE;
 /*!40000 ALTER TABLE `pag_departamento` DISABLE KEYS */;
-INSERT INTO `pag_departamento` VALUES (1,'VALLE DEL CAUCA',0,'0000-00-00 00:00:00'),(2,'Buenaventura',3,NULL),(3,'Atlantico',4,NULL);
+INSERT INTO `pag_departamento` VALUES (1,'VALLE DEL CAUCA',0,NULL),(2,'Buenaventura',3,NULL),(3,'Atlantico',4,NULL);
 /*!40000 ALTER TABLE `pag_departamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -451,7 +453,7 @@ CREATE TABLE `pag_equipo` (
 
 LOCK TABLES `pag_equipo` WRITE;
 /*!40000 ALTER TABLE `pag_equipo` DISABLE KEYS */;
-INSERT INTO `pag_equipo` VALUES ('0123',1143830254,'Torno',1,2,'',NULL,NULL,'Asus','wert','2016','12245','Cali','2016-04-27','2016-04-27','2016-10-25',1,1,NULL),('1',1144125473,'Torno CNC',0,1,'',1,1,'Mazda','Mazda','Mazda','Mazda 123','Cali','2016-03-01','2016-03-02','2016-03-31',1,1,'0000-00-00 00:00:00'),('EP_003',1144125472,'Equipo de computo MAC',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-EP_003',NULL,NULL,'HP','HP','HP','3456','Salomia','2016-02-02','2016-03-02','2018-02-02',1,2,NULL),('PC_002',1144125473,'Portatil Linux',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-PC_002',NULL,NULL,'Lenovo','Lenovo','Lenovo','7431','Sena','2016-04-08','2016-04-08','2016-04-15',2,1,NULL),('TC001',1144125473,'Torno Convencional',1,1,'',NULL,NULL,'Tornos Technologies IbÃ©rica, S.A','Valor','2016','123456','CDTI','2014-04-12','2014-05-12','2020-04-12',1,1,NULL);
+INSERT INTO `pag_equipo` VALUES ('0123',1143830254,'Fresadora',1,2,'',NULL,NULL,'Asus','wert','2016','12245','Cali','2016-04-27','2016-04-27','2016-10-25',1,1,NULL),('1',1144125473,'Torno CNC',0,1,'',1,1,'Mazda','Mazda','Mazda','Mazda 123','Cali','2016-03-01','2016-03-02','2016-03-31',1,1,NULL),('EP_003',1144125472,'Equipo de computo MAC',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-EP_003',NULL,NULL,'HP','HP','HP','3456','Salomia','2016-02-02','2016-03-02','2018-02-02',1,2,NULL),('PC_002',1144125473,'Portatil Linux',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-PC_002',NULL,NULL,'Lenovo','Lenovo','Lenovo','7431','Sena','2016-04-08','2016-04-08','2016-04-15',2,1,NULL),('TC001',1144125473,'Torno Convencional',1,1,'',NULL,NULL,'Tornos Technologies IbÃ©rica, S.A','Valor','2016','123456','CDTI','2014-04-12','2014-05-12','2020-04-12',1,1,NULL);
 /*!40000 ALTER TABLE `pag_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -547,7 +549,7 @@ CREATE TABLE `pag_estado` (
   PRIMARY KEY (`est_id`),
   KEY `tdoc_id` (`tdoc_id`),
   CONSTRAINT `pag_estado_ibfk_1` FOREIGN KEY (`tdoc_id`) REFERENCES `pag_tipo_doc` (`tdoc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -556,7 +558,7 @@ CREATE TABLE `pag_estado` (
 
 LOCK TABLES `pag_estado` WRITE;
 /*!40000 ALTER TABLE `pag_estado` DISABLE KEYS */;
-INSERT INTO `pag_estado` VALUES (1,'Activo',1,'0000-00-00 00:00:00'),(2,'Inactivo',1,'0000-00-00 00:00:00'),(3,'Creada',2,NULL),(4,'En ejecución',2,NULL),(5,'Gestionada',2,NULL),(6,'Cerrada',2,NULL),(7,'Por atender',4,NULL),(8,'Atendida',4,NULL),(9,'Cerrada',3,NULL),(10,'Activo',3,NULL),(11,'Inactivo',3,NULL),(12,'Cerrada',4,NULL);
+INSERT INTO `pag_estado` VALUES (1,'Activo',1,NULL),(2,'Inactivo',1,NULL),(3,'Creada',2,NULL),(4,'En ejecución',2,NULL),(5,'Gestionada',2,NULL),(6,'Cerrada',2,NULL),(7,'Por atender',4,NULL),(8,'Atendida',4,NULL);
 /*!40000 ALTER TABLE `pag_estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -573,9 +575,8 @@ CREATE TABLE `pag_funcion` (
   `func_nombre` varchar(40) NOT NULL,
   `func_display` varchar(40) NOT NULL,
   `func_descripcion` varchar(100) DEFAULT NULL,
-  `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`func_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -584,7 +585,7 @@ CREATE TABLE `pag_funcion` (
 
 LOCK TABLES `pag_funcion` WRITE;
 /*!40000 ALTER TABLE `pag_funcion` DISABLE KEYS */;
-INSERT INTO `pag_funcion` VALUES (1,1,'crear','Crear Costos','Crear Costos',NULL),(2,1,'editar','Editar Costos','Editar Costos',NULL),(3,1,'eliminar','Eliminar Costos','Eliminar Costos',NULL),(4,1,'listar','Listar Costos','Listar Costos',NULL),(5,1,'consultar','Consultar Costos','Consultar Costos',NULL),(6,2,'crear','Crear Equipos','Crear Equipos',NULL),(7,2,'editar','Editar Equipos','Editar Equipos ',NULL),(8,2,'eliminar','Eliminar Equipos','Eliminar Equipos',NULL),(9,2,'Listar','Listar Equipos','Listar Equipos',NULL),(10,2,'Consultar','Consultar Equipos','Consultar Equipos',NULL),(11,3,'crear','Crear Herramientas','Crear Herramientas',NULL),(12,3,'editar','Editar Herramientas','Editar Herramientas',NULL),(13,3,'eliminar','Eliminar Herramientas','Eliminar Herramientas',NULL),(14,3,'Listar','Listar Herramientas','Listar Herramientas',NULL),(15,3,'Consultar','Consultar Herramientas','Consultar Herramientas',NULL),(16,4,'crear','Crear Insumos','Crear Insumos',NULL),(17,4,'editar','Editar Insumos','Editar Insumos',NULL),(18,4,'eliminar','Eliminar Insumos','Eliminar Insumos',NULL),(19,4,'Listar','Listar Insumos','Listar Insumos',NULL),(20,4,'Consultar','Consultar Insumos','Consultar Insumos',NULL),(21,5,'crear','Crear Localizacion','Crear Localizacion',NULL),(22,5,'editar','Editar Localizacion','Editar Localizacion',NULL),(23,5,'eliminar','Eliminar Localizacion','Eliminar Localizacion',NULL),(24,5,'Listar','Listar Localizacion','Listar Localizacion',NULL),(25,5,'Consultar','Consultar Localizacion','Consultar Localizacion',NULL),(26,6,'crear','Crear Mediciones','Crear Mediciones',NULL),(27,6,'editar','Editar Mediciones','Editar Mediciones',NULL),(28,6,'eliminar','Eliminar Mediciones','Eliminar Mediciones',NULL),(29,6,'Listar','Listar Mediciones','Listar Mediciones',NULL),(30,6,'Consultar','Consultar Mediciones','Consultar Mediciones',NULL),(31,7,'crear','Crear Medidores','Crear Medidores',NULL),(32,7,'editar','Editar Medidores','Editar Medidores',NULL),(33,7,'eliminar','Eliminar Medidores','Eliminar Medidores',NULL),(34,7,'Listar','Listar Medidores','Listar Medidores',NULL),(35,7,'Consultar','Consultar Medidores','Consultar Medidores',NULL),(36,8,'crear','Crear ot','Crear ot',NULL),(37,8,'editar','Editar ot','Editar ot',NULL),(38,8,'eliminar','Eliminar ot','Eliminar ot',NULL),(39,8,'listar','Listar ot','Listar ot',NULL),(40,8,'consultar','Consultar ot','Consultar ot',NULL),(41,9,'crear','Crear Permisos','Crear Permisos',NULL),(68,12,'listar','Listar Permisos','Listar Permisos',NULL),(67,9,'editar','Editar Permisos','Editar Permisos',NULL),(46,10,'crear','Crear Personas','Crear Personas',NULL),(47,10,'editar','Editar Personas','Editar Personas',NULL),(48,10,'eliminar','Eliminar Personas','Eliminar Personas',NULL),(49,10,'Listar','Listar Personas','Listar Personas',NULL),(50,10,'Consultar','Consultar Personas','Consultar Personas',NULL),(51,11,'crear','Crear Programacion','Crear Programacion',NULL),(52,11,'editar','Editar Programacion','Editar Programacion',NULL),(53,11,'listar','Listar Programacion','Listar Programacion',NULL),(54,11,'eliminar','Eliminar Programacion','Eliminar Programacion',NULL),(55,12,'crear','Crear Rol','Crear Rol',NULL),(56,12,'editar','Editar Rol','Editar Rol',NULL),(57,12,'eliminar','ELiminar Rol','ELiminar Rol',NULL),(58,12,'listar','Listar roles','Lista los roles',NULL),(59,13,'crear','Crear Usuarios','Crear Usuarios',NULL),(60,13,'editar','Editar Usuarios','Editar Usuarios',NULL),(61,13,'listar','Listar Usuarios','Listar Usuarios',NULL),(62,13,'eliminar','Eliminar Usuarios','Eliminar Usuarios',NULL),(63,14,'crear','Crear solicitud','Crear solicitud de servicio',NULL),(64,14,'editar','Editar solicitud','Editar solicitud',NULL),(65,14,'eliminar','Eliminar solicitud','Eliminar solicitud',NULL),(66,14,'listar','Listar solicitud','Listar solicitud',NULL);
+INSERT INTO `pag_funcion` VALUES (1,1,'crear','Crear Costos','Crear Costos'),(2,1,'editar','Editar Costos','Editar Costos'),(3,1,'eliminar','Eliminar Costos','Eliminar Costos'),(4,1,'listar','Listar Costos','Listar Costos'),(5,2,'crear','Crear Equipos','Crear Equipos'),(6,2,'editar','Editar Equipos','Editar Equipos '),(7,2,'eliminar','Eliminar Equipos','Eliminar Equipos'),(8,2,'Listar','Listar Equipos','Listar Equipos'),(9,3,'crear','Crear Tipo equipo','Crear Tipo equipo'),(10,3,'editar','Editar Tipo equipo','Editar Tipo equipo'),(11,3,'eliminar','Eliminar Tipo equipo','Eliminar Tipo equipo'),(12,3,'listar','Listar Tipos de equipos','Listar Tipos de equipos'),(13,4,'crear','Crear Herramientas','Crear Herramientas'),(14,4,'editar','Editar Herramientas','Editar Herramientas'),(15,4,'eliminar','Eliminar Herramientas','Eliminar Herramientas'),(16,4,'Listar','Listar Herramientas','Listar Herramientas'),(17,5,'crear','Crear Insumos','Crear Insumos'),(18,5,'editar','Editar Insumos','Editar Insumos'),(19,5,'eliminar','Eliminar Insumos','Eliminar Insumos'),(20,5,'Listar','Listar Insumos','Listar Insumos'),(21,6,'crear','Crear Regional','Crear Regional'),(22,6,'editar','Editar Regional','Editar Regional'),(23,6,'eliminar','Eliminar Regional','Eliminar Regional'),(24,6,'listar','Listar Regionales','Listar Regionales'),(25,7,'crear','Crear Departamento','Crear Departamento'),(26,7,'editar','Editar Departamento','Editar Departamento'),(27,7,'eliminar','Eliminar Departamento','Eliminar Departamento'),(28,7,'listar','Listar Departamentos','Listar '),(29,8,'crear','Crear Ciudad','Crear Ciudad'),(30,8,'editar','Editar Ciudad','Editar Ciudad'),(31,8,'eliminar','Eliminar Ciudad','Eliminar Ciudad'),(32,8,'listar','Listar Ciudades','Listar Ciudades'),(33,9,'crear','Crear Centro','Crear Centro'),(34,9,'editar','Editar Centro','Editar Centro'),(35,9,'eliminar','Eliminar Centro','Eliminar Centro'),(36,9,'listar','Listar Centros','Listar Centros'),(37,10,'crear','Crear Mediciones','Crear Mediciones'),(38,10,'editar','Editar Mediciones','Editar Mediciones'),(39,10,'eliminar','Eliminar Mediciones','Eliminar Mediciones'),(40,10,'Listar','Listar Mediciones','Listar Mediciones'),(41,11,'crear','Crear Medidores','Crear Medidores'),(42,11,'editar','Editar Medidores','Editar Medidores'),(43,11,'eliminar','Eliminar Medidores','Eliminar Medidores'),(44,11,'Listar','Listar Medidores','Listar Medidores'),(45,12,'crear','Crear ot','Crear ot'),(46,12,'editar','Editar ot','Editar ot'),(47,12,'eliminar','Eliminar ot','Eliminar ot'),(48,12,'listar','Listar ot','Listar ot'),(49,13,'crear','Crear solicitud','Crear solicitud de servicio'),(50,13,'editar','Editar solicitud','Editar solicitud'),(51,13,'eliminar','Eliminar solicitud','Eliminar solicitud'),(52,13,'listar','Listar solicitud','Listar solicitud'),(53,14,'crear','Asignar','Asignar Permisos'),(54,15,'crear','Crear Personas','Crear Personas'),(55,15,'editar','Editar Personas','Editar Personas'),(56,15,'eliminar','Eliminar Personas','Eliminar Personas'),(57,15,'Listar','Listar Personas','Listar Personas'),(58,16,'crear','Crear Prestamos','Crear Prestamo'),(59,16,'eliminar','Eliminar Prestamo','Eliminar Prestamo'),(60,16,'Listar','Listar Prestamos','Listar Prestamos'),(61,17,'crear','Crear Programacion','Crear Programacion'),(62,17,'editar','Editar Programacion','Editar Programacion'),(63,17,'listar','Listar Programacion','Listar Programacion'),(64,17,'eliminar','Eliminar Programacion','Eliminar Programacion'),(65,18,'crear','Crear Rol','Crear Rol'),(66,18,'editar','Editar Rol','Editar Rol'),(67,18,'listar','Listar roles','Lista los roles'),(68,18,'eliminar','ELiminar Rol','ELiminar Rol'),(69,19,'crear','Crear Usuario','Crear Usuario'),(70,19,'editar','Editar Usuario','Editar Usuario'),(71,19,'listar','Listar Usuarios','Listar Usuarios'),(72,19,'eliminar','Eliminar Usuario','Eliminar Usuario');
 /*!40000 ALTER TABLE `pag_funcion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -614,7 +615,7 @@ CREATE TABLE `pag_herramienta` (
 
 LOCK TABLES `pag_herramienta` WRITE;
 /*!40000 ALTER TABLE `pag_herramienta` DISABLE KEYS */;
-INSERT INTO `pag_herramienta` VALUES ('01',2,'Martillo','Martillo 01','',NULL,NULL,NULL);
+INSERT INTO `pag_herramienta` VALUES ('01',2,'Martillo','Martillo 01','2016-08-16 21:01:13',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `pag_herramienta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -633,7 +634,7 @@ CREATE TABLE `pag_insumo` (
   `umed_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ins_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9999 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -642,7 +643,7 @@ CREATE TABLE `pag_insumo` (
 
 LOCK TABLES `pag_insumo` WRITE;
 /*!40000 ALTER TABLE `pag_insumo` DISABLE KEYS */;
-INSERT INTO `pag_insumo` VALUES (1234,'Aceite','Aceite 3 en 1',23000,1,NULL),(9998,'Gasolina','Gasolina x Litro',21001,1,'2016-04-07 19:31:03');
+INSERT INTO `pag_insumo` VALUES (1,'Aceite','Aceite 3 en 1',23000,1,NULL),(2,'Gasolina','Gasolina x Litro',21001,1,NULL);
 /*!40000 ALTER TABLE `pag_insumo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -711,9 +712,8 @@ CREATE TABLE `pag_modulo` (
   `mod_icono` varchar(40) NOT NULL,
   `mod_sitio_menu` varchar(20) NOT NULL,
   `mod_descripcion` varchar(100) DEFAULT NULL,
-  `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`mod_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -722,7 +722,7 @@ CREATE TABLE `pag_modulo` (
 
 LOCK TABLES `pag_modulo` WRITE;
 /*!40000 ALTER TABLE `pag_modulo` DISABLE KEYS */;
-INSERT INTO `pag_modulo` VALUES (1,'Costos','mdi-editor-attach-money','principal','Modulo de Costos',NULL),(2,'Equipos','mdi-hardware-desktop-windows','principal','Modulo de Equipos',NULL),(3,'Herramientas','mdi-action-perm-data-setting','principal','Modulo de Herramientas',NULL),(4,'Insumos','mdi-maps-local-gas-station','principal','Modulo de Insumos',NULL),(5,'Localizacion','mdi-communication-location-on','principal','Modulo de Localizacion',NULL),(6,'Mediciones','mdi-av-timer','principal','Modulo de Mediciones',NULL),(7,'Medidores','mdi-image-timer','principal','Modulo de Medidores',NULL),(8,'OT','mdi-action-assignment','principal','Modulo de OT',NULL),(9,'Permisos','mdi-action-lock','configuracion','Modulo de Permisos',NULL),(10,'Personas','mdi-social-person-outline','configuracion','Modulo de Personas',NULL),(11,'Programacion','mdi-editor-insert-invitation','principal','Modulo Programacion',NULL),(12,'Roles','mdi-social-group','configuracion','Modulo asignar Roles a un usuario',NULL),(13,'Usuarios','mdi-action-account-circle','configuracion','Modulo Usuarios',NULL);
+INSERT INTO `pag_modulo` VALUES (1,'Costos','mdi-editor-attach-money','principal','Modulo de Costos'),(2,'Equipos','mdi-hardware-desktop-windows','principal','Modulo de Equipos'),(3,'Herramientas','mdi-action-wallet-travel','principal','Modulo de Herramientas'),(4,'Insumos','mdi-maps-local-gas-station','principal','Modulo de Insumos'),(5,'Localizacion','mdi-maps-my-location','configuracion','Modulo de Localizacion'),(6,'Mediciones','mdi-av-timer','principal','Modulo de Mediciones'),(7,'Medidores','mdi-image-timer','principal','Modulo de Medidores'),(8,'OT','mdi-action-assignment','principal','Modulo de OT'),(9,'Permisos','mdi-action-lock','configuracion','Modulo de Permisos'),(10,'Personas','mdi-social-person-outline','configuracion','Modulo de Personas'),(11,'Prestamo','mdi-action-shopping-cart','principal','Modulo de prestamos'),(12,'Programacion','mdi-editor-insert-invitation','principal','Modulo Programacion'),(13,'Roles','mdi-social-group','configuracion','Modulo asignar Roles a un usuario'),(14,'Usuarios','mdi-action-account-circle','configuracion','Modulo Usuarios');
 /*!40000 ALTER TABLE `pag_modulo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -767,7 +767,7 @@ CREATE TABLE `pag_orden_trabajo` (
 
 LOCK TABLES `pag_orden_trabajo` WRITE;
 /*!40000 ALTER TABLE `pag_orden_trabajo` DISABLE KEYS */;
-INSERT INTO `pag_orden_trabajo` VALUES (1,'2016-04-27 15:03:26',3,'1',2,'Alta',' Necesita lubricación en las poleas y piñones',' Desarmar la maquina para afinar los filtros',3,'8 April, 2016','15 April, 2016','Alex Romero, Nicolas Gaviria, Javier Perezs',0,1144125473,'2016-04-15 21:20:31.0'),(2,'2016-04-27 15:03:42',4,'EP_003',2,'Media','Falla de mantenimiento','Reparar piñones',3,'8 April, 2016','15 April, 2016','Esteban, Ceron, Cortes',0,1144125473,NULL),(3,'2016-04-07 22:34:53',1,'EP_003',1,'Media',' Hay cortos en la maquina y sonidos.',' Revisar el cableado de la maquina.',3,'7 April, 2016','21 April, 2016','Yan Carlo, Anibal, David.',0,1144125473,'2016-04-07 22:34:53.0'),(4,'2016-04-27 15:04:03',4,'EP_003',2,'Media',' sfhdgfvclk,.',' Cambiar aceite, calibrar vÃ¡lvulas',3,'14 April, 2016','16 April, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez, Edinson Martinez',0,1144125473,NULL),(5,'2016-04-21 21:33:56',1,'EP_003',2,'Media','Calibrar llantas','Cambiar aceite',3,'21 April, 2016','23 April, 2016','Gloria, Edinson',0,1144125472,NULL),(6,'2016-04-29 18:19:12',1,'1',1,'Media','Sonido','Cambiar aceite',3,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125472,NULL),(7,'2016-04-29 18:19:38',1,'1',1,'Media','Sonido','Cambiar aceite',3,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125472,NULL),(8,'2016-04-29 18:20:07',1,'1',1,'Media','Sonido','Cambiar aceite',3,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125472,NULL),(9,'2016-05-06 17:46:34',1,'TC001',2,'Media','Sonido','Cambiar aceite',2,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125473,'2016-05-06 17:46:34.0'),(10,'2016-05-06 17:46:18',2,'0123',2,'Media',' Sonido',' Cambiar aceite',2,'26 April, 2016','30 April, 2016','Gloria, Edinson',0,1143830254,'2016-05-06 17:46:18.0'),(11,'2016-05-06 17:41:59',2,'0123',2,'<br />\r\n<b>Notice</b>:  Undefi','  Sonido raro','  Cambiar aceite, montar llantas',2,'6 May, 2016','7 May, 2016','Gloria, Edinson',0,1144125473,'2016-05-06 17:41:59.0'),(12,'2016-05-06 17:58:49',2,'0123',2,'<br />\r\n<b>Notice</b>:  Undefi','awertfh','rtrtgjh',2,'6 May, 2016','7 May, 2016','Gloria, Edinson',0,234567,NULL),(13,'2016-05-06 18:10:31',1,'PC_002',2,'<br />\r\n<b>Notice</b>:  Undefi',' srtghg',' sfgh',2,'6 May, 2016','6 May, 2016','Gloria, Edinson',0,1144125445,'2016-05-06 18:10:31.0'),(14,'2016-05-06 18:14:18',1,'1',1,'<br />\r\n<b>Notice</b>:  Undefi',' lkfÃ±',' erfc',2,'6 May, 2016','6 May, 2016','Gloria, Edinson',0,1144125473,NULL),(15,'2016-05-06 19:21:10',1,'1',1,'<br />\r\n<b>Notice</b>:  Undefi','cvbn','dfgh',2,'6 May, 2016','8 May, 2016','ertyhj',0,234567,NULL),(16,'2016-05-06 18:23:38',2,'0123',2,'<br />\r\n<b>Notice</b>:  Undefi','jjjjjj','sfdsfv',3,'7 May, 2016','13 May, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez',0,1144125473,NULL),(17,'2016-05-11 02:17:17',1,'EP_003',1,'2','   jjjjjj','   sfdsfv',3,'18 May, 2016','18 May, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez',0,1144125473,NULL),(18,'2016-06-14 02:17:50',2,'0123',1,'1','   Mundo','   Hola',5,'6 May, 2016','6 May, 2016','Gloria, Edinson',0,234567,'2016-06-14 02:17:50.0'),(19,'2016-06-10 01:50:00',1,'1',2,'3','     srtyuj Gloria','  Mundo   Hola',6,'6 May, 2016','6 May, 2016','Gloria, Edinson, Javier',0,234567,'2016-06-10 01:50:00.0'),(20,'2016-06-14 02:17:47',1,'EP_003',2,'3','Revisar frenos','Cambiar aceite y tensionar frenos',3,'13 June, 2016','18 June, 2016','Edinson Martinez',0,1144125473,'2016-06-14 02:17:47.0'),(21,'2016-06-14 02:17:43',2,'0123',1,'3','asdfghnm','asdfgh',3,'13 June, 2016','17 June, 2016','Gloria, Edinson',0,1143830254,'2016-06-14 02:17:43.0'),(22,'2016-06-14 02:17:40',1,'EP_003',2,'3','ertykunbv','ygkjhnbvc',3,'13 June, 2016','18 June, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez',9998,1143830254,'2016-06-14 02:17:40.0'),(23,'2016-06-14 02:22:11',1,'TC001',1,'1',' asdfgh. Fin',' ,gfvc . Fin',3,'13 June, 2016','18 June, 2016','Gloria, Edinson, Valentina',9998,1143830254,NULL),(24,'2016-06-14 02:23:17',1,'EP_003',1,'2',' yujfhgxv. Hola',' ipouityuh. Mundo',3,'13 June, 2016','14 June, 2016','Ninson Ibarra, Gloria TrÃ³chez',9998,1143830254,'2016-06-14 02:23:17.0'),(25,'2016-06-17 14:02:29',1,'EP_003',2,'1','  kjhgnbvc','  pki`p',6,'13 June, 2016','13 June, 2016','Gloria, Edinson',9998,1144125445,NULL),(26,'2016-06-17 14:33:30',1,'EP_003',2,'1','Sonido raro','Calibrar llantas, cambiar aceite',3,'17 June, 2016','23 June, 2016','Gloria',9998,1144125473,NULL),(27,'2016-06-17 14:37:02',1,'EP_003',2,'2','rethgdfvc','Cambiar aceite, ajustar freno',3,'17 June, 2016','22 June, 2016','Gloria',9998,1144125473,NULL),(28,'2016-07-21 15:55:27',1,'PC_002',2,'3',' asfdgfh',' thgbv',3,'17 June, 2016','20 June, 2016','Gloria, Edinson',9998,1143830254,NULL);
+INSERT INTO `pag_orden_trabajo` VALUES (1,'2016-04-27 15:03:26',3,'1',2,'Alta',' Necesita lubricación en las poleas y piñones',' Desarmar la maquina para afinar los filtros',3,'8 April, 2016','15 April, 2016','Alex Romero, Nicolas Gaviria, Javier Perezs',0,1144125473,'2016-04-15 21:20:31'),(2,'2016-04-27 15:03:42',4,'EP_003',2,'Media','Falla de mantenimiento','Reparar piñones',3,'8 April, 2016','15 April, 2016','Esteban, Ceron, Cortes',0,1144125473,NULL),(3,'2016-04-07 22:34:53',1,'EP_003',1,'Media',' Hay cortos en la maquina y sonidos.',' Revisar el cableado de la maquina.',3,'7 April, 2016','21 April, 2016','Yan Carlo, Anibal, David.',0,1144125473,'2016-04-07 22:34:53'),(4,'2016-04-27 15:04:03',4,'EP_003',2,'Media',' sfhdgfvclk,.',' Cambiar aceite, calibrar vÃ¡lvulas',3,'14 April, 2016','16 April, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez, Edinson Martinez',0,1144125473,NULL),(5,'2016-04-21 21:33:56',1,'EP_003',2,'Media','Calibrar llantas','Cambiar aceite',3,'21 April, 2016','23 April, 2016','Gloria, Edinson',0,1144125472,NULL),(6,'2016-04-29 18:19:12',1,'1',1,'Media','Sonido','Cambiar aceite',3,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125472,NULL),(7,'2016-04-29 18:19:38',1,'1',1,'Media','Sonido','Cambiar aceite',3,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125472,NULL),(8,'2016-04-29 18:20:07',1,'1',1,'Media','Sonido','Cambiar aceite',3,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125472,NULL),(9,'2016-05-06 17:46:34',1,'TC001',2,'Media','Sonido','Cambiar aceite',2,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125473,'2016-05-06 17:46:34'),(10,'2016-05-06 17:46:18',2,'0123',2,'Media',' Sonido',' Cambiar aceite',2,'26 April, 2016','30 April, 2016','Gloria, Edinson',0,1143830254,'2016-05-06 17:46:18'),(11,'2016-05-06 17:41:59',2,'0123',2,'<br />\r\n<b>Notice</b>:  Undefi','  Sonido raro','  Cambiar aceite, montar llantas',2,'6 May, 2016','7 May, 2016','Gloria, Edinson',0,1144125473,'2016-05-06 17:41:59'),(12,'2016-05-06 17:58:49',2,'0123',2,'<br />\r\n<b>Notice</b>:  Undefi','awertfh','rtrtgjh',2,'6 May, 2016','7 May, 2016','Gloria, Edinson',0,234567,NULL),(13,'2016-05-06 18:10:31',1,'PC_002',2,'<br />\r\n<b>Notice</b>:  Undefi',' srtghg',' sfgh',2,'6 May, 2016','6 May, 2016','Gloria, Edinson',0,1144125445,'2016-05-06 18:10:31'),(14,'2016-05-06 18:14:18',1,'1',1,'<br />\r\n<b>Notice</b>:  Undefi',' lkfÃ±',' erfc',2,'6 May, 2016','6 May, 2016','Gloria, Edinson',0,1144125473,NULL),(15,'2016-05-06 19:21:10',1,'1',1,'<br />\r\n<b>Notice</b>:  Undefi','cvbn','dfgh',2,'6 May, 2016','8 May, 2016','ertyhj',0,234567,NULL),(16,'2016-05-06 18:23:38',2,'0123',2,'<br />\r\n<b>Notice</b>:  Undefi','jjjjjj','sfdsfv',3,'7 May, 2016','13 May, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez',0,1144125473,NULL),(17,'2016-05-11 02:17:17',1,'EP_003',1,'2','   jjjjjj','   sfdsfv',3,'18 May, 2016','18 May, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez',0,1144125473,NULL),(18,'2016-06-14 02:17:50',2,'0123',1,'1','   Mundo','   Hola',5,'6 May, 2016','6 May, 2016','Gloria, Edinson',0,234567,'2016-06-14 02:17:50'),(19,'2016-06-10 01:50:00',1,'1',2,'3','     srtyuj Gloria','  Mundo   Hola',6,'6 May, 2016','6 May, 2016','Gloria, Edinson, Javier',0,234567,'2016-06-10 01:50:00'),(20,'2016-06-14 02:17:47',1,'EP_003',2,'3','Revisar frenos','Cambiar aceite y tensionar frenos',3,'13 June, 2016','18 June, 2016','Edinson Martinez',0,1144125473,'2016-06-14 02:17:47'),(21,'2016-06-14 02:17:43',2,'0123',1,'3','asdfghnm','asdfgh',3,'13 June, 2016','17 June, 2016','Gloria, Edinson',0,1143830254,'2016-06-14 02:17:43'),(22,'2016-06-14 02:17:40',1,'EP_003',2,'3','ertykunbv','ygkjhnbvc',3,'13 June, 2016','18 June, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez',9998,1143830254,'2016-06-14 02:17:40'),(23,'2016-06-14 02:22:11',1,'TC001',1,'1',' asdfgh. Fin',' ,gfvc . Fin',3,'13 June, 2016','18 June, 2016','Gloria, Edinson, Valentina',9998,1143830254,NULL),(24,'2016-06-14 02:23:17',1,'EP_003',1,'2',' yujfhgxv. Hola',' ipouityuh. Mundo',3,'13 June, 2016','14 June, 2016','Ninson Ibarra, Gloria TrÃ³chez',9998,1143830254,'2016-06-14 02:23:17'),(25,'2016-06-17 14:02:29',1,'EP_003',2,'1','  kjhgnbvc','  pki`p',6,'13 June, 2016','13 June, 2016','Gloria, Edinson',9998,1144125445,NULL),(26,'2016-06-17 14:33:30',1,'EP_003',2,'1','Sonido raro','Calibrar llantas, cambiar aceite',3,'17 June, 2016','23 June, 2016','Gloria',9998,1144125473,NULL),(27,'2016-06-17 14:37:02',1,'EP_003',2,'2','rethgdfvc','Cambiar aceite, ajustar freno',3,'17 June, 2016','22 June, 2016','Gloria',9998,1144125473,NULL),(28,'2016-07-21 15:55:27',1,'PC_002',2,'3',' asfdgfh',' thgbv',3,'17 June, 2016','20 June, 2016','Gloria, Edinson',9998,1143830254,NULL);
 /*!40000 ALTER TABLE `pag_orden_trabajo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -783,7 +783,7 @@ CREATE TABLE `pag_permisos` (
   `func_id` int(11) NOT NULL,
   `rol_id` int(11) NOT NULL,
   PRIMARY KEY (`perm_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=126 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -792,7 +792,7 @@ CREATE TABLE `pag_permisos` (
 
 LOCK TABLES `pag_permisos` WRITE;
 /*!40000 ALTER TABLE `pag_permisos` DISABLE KEYS */;
-INSERT INTO `pag_permisos` VALUES (120,57,1),(119,56,1),(118,55,1),(117,54,1),(116,53,1),(115,52,1),(114,51,1),(113,50,1),(112,49,1),(111,48,1),(110,47,1),(109,46,1),(108,67,1),(107,41,1),(106,66,1),(105,65,1),(104,64,1),(103,63,1),(102,40,1),(101,39,1),(100,38,1),(99,37,1),(98,36,1),(97,35,1),(96,34,1),(95,33,1),(94,32,1),(93,31,1),(92,30,1),(91,29,1),(90,28,1),(89,27,1),(88,26,1),(87,25,1),(86,24,1),(85,23,1),(84,22,1),(83,21,1),(82,20,1),(81,19,1),(80,18,1),(124,61,1),(123,60,1),(122,59,1),(121,58,1),(79,17,1),(78,16,1),(77,15,1),(76,14,1),(75,13,1),(74,12,1),(73,11,1),(72,10,1),(71,9,1),(70,8,1),(69,7,1),(68,6,1),(67,5,1),(66,4,1),(65,3,1),(64,2,1),(63,1,1),(125,62,1);
+INSERT INTO `pag_permisos` VALUES (1,1,1),(2,2,1),(3,3,1),(4,4,1),(5,5,1),(6,6,1),(7,7,1),(8,8,1),(9,9,1),(10,10,1),(11,11,1),(12,12,1),(13,13,1),(14,14,1),(15,15,1),(16,16,1),(17,17,1),(18,18,1),(19,19,1),(20,20,1),(21,21,1),(22,22,1),(23,23,1),(24,24,1),(25,25,1),(26,26,1),(27,27,1),(28,28,1),(29,29,1),(30,30,1),(31,31,1),(32,32,1),(33,33,1),(34,34,1),(35,35,1),(36,36,1),(37,37,1),(38,38,1),(39,39,1),(40,40,1),(41,41,1),(42,42,1),(43,43,1),(44,44,1),(45,45,1),(46,46,1),(47,47,1),(48,48,1),(49,49,1),(50,50,1),(51,51,1),(52,52,1),(53,53,1),(54,54,1),(55,55,1),(56,56,1),(57,57,1),(58,58,1),(59,59,1),(60,60,1),(61,61,1),(62,62,1),(63,63,1),(64,64,1),(65,65,1),(66,66,1),(67,67,1),(68,68,1),(69,69,1),(70,70,1),(71,71,1),(72,72,1);
 /*!40000 ALTER TABLE `pag_permisos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -827,7 +827,7 @@ CREATE TABLE `pag_persona` (
 
 LOCK TABLES `pag_persona` WRITE;
 /*!40000 ALTER TABLE `pag_persona` DISABLE KEYS */;
-INSERT INTO `pag_persona` VALUES (5454,'vfdvf','vfdfvd','32323','545454545','fdsvdsvfdsfds@gmail','gdgfdfgdfd',1,3000,1,1,'usuario del sistema',NULL),(234567,'yan','narvaez','1235677','3456788','dasd@dss.com','Cra 45 ',1,6000,1,1,'usuario del sistema',NULL),(1143830254,'Alejandro','Yepes','3243452','3183452354','alejandro@gmail.com','Terron Colorado',1,28000,1,1,'usuario del sistema',NULL),(1144125445,'Jhonatan','Tavera','3213423','3154352342','jtavera@gmail.com','Sena',1,23000,1,1,'usuario del sistema',NULL),(1144125472,'Jhonatan','Tavera','3124534','3128546345','tatan@gmail.com','Cra 45 45 567',1,300000,1,1,'usuario del sistema',NULL),(1144125473,'David Fernando','Barona','4434564','3185235463','dferbac@gmail.com','Calle 8A 45 106',1,200000,1,1,'usuario del sistema',NULL),(1151956249,'Super','Administrador','3845030','3135396721','esteban@gmail.com',NULL,1,5000,1,1,'usuario del sistema',NULL);
+INSERT INTO `pag_persona` VALUES (1143830254,'Alejandro','Yepes','3243452','3183452354','alejandro@gmail.com','Terron Colorado',1,28000,1,1,'usuario del sistema',NULL),(1144125445,'Jhonatan','Tavera','3213423','3154352342','jtavera@gmail.com','Sena',1,23000,1,1,'usuario del sistema',NULL),(1144125472,'Jhonatan','Tavera','3124534','3128546345','tatan@gmail.com','Cra 45 45 567',1,300000,1,1,'usuario del sistema',NULL),(1144125473,'David Fernando','Barona','4434564','3185235463','dferbac@gmail.com','Calle 8A 45 106',1,200000,1,1,'usuario del sistema',NULL),(1151956249,'Super','Administrador','3845030','3135396721','esteban@gmail.com',NULL,1,5000,1,1,'usuario del sistema',NULL);
 /*!40000 ALTER TABLE `pag_persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -901,7 +901,7 @@ CREATE TABLE `pag_programacion_equipo` (
   `tman_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`proequi_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -910,7 +910,7 @@ CREATE TABLE `pag_programacion_equipo` (
 
 LOCK TABLES `pag_programacion_equipo` WRITE;
 /*!40000 ALTER TABLE `pag_programacion_equipo` DISABLE KEYS */;
-INSERT INTO `pag_programacion_equipo` VALUES (1,'5 April, 2016',1,'29 April, 2016',1,'2016-04-07 05:00:00'),(2,'5 April, 2016',1,'29 April, 2016',1,'2016-04-07 05:00:00'),(3,'4 April, 2016',1,'12 April, 2016',1,'2016-04-07 05:00:00'),(4,'4 April, 2016',1,'12 April, 2016',1,'2016-04-07 05:00:00');
+INSERT INTO `pag_programacion_equipo` VALUES (1,'5 April, 2016',1,'29 April, 2016',1,NULL);
 /*!40000 ALTER TABLE `pag_programacion_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -926,7 +926,7 @@ CREATE TABLE `pag_regional` (
   `reg_nombre` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`reg_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -935,7 +935,7 @@ CREATE TABLE `pag_regional` (
 
 LOCK TABLES `pag_regional` WRITE;
 /*!40000 ALTER TABLE `pag_regional` DISABLE KEYS */;
-INSERT INTO `pag_regional` VALUES (3,'Zona pacifico2',NULL),(4,'Zona Caribe',NULL),(5,'Zona Sur',NULL);
+INSERT INTO `pag_regional` VALUES (1,'Zona pacifico2',NULL),(2,'Zona Caribe',NULL),(3,'Zona Sur',NULL);
 /*!40000 ALTER TABLE `pag_regional` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -961,7 +961,7 @@ CREATE TABLE `pag_rol` (
 
 LOCK TABLES `pag_rol` WRITE;
 /*!40000 ALTER TABLE `pag_rol` DISABLE KEYS */;
-INSERT INTO `pag_rol` VALUES (1,'Administrador','Tiene acceso a todo el sistema','0000-00-00 00:00:00');
+INSERT INTO `pag_rol` VALUES (1,'Administrador','Tiene acceso a todo el sistema',NULL);
 /*!40000 ALTER TABLE `pag_rol` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1042,7 +1042,7 @@ CREATE TABLE `pag_tipo_de_equipo` (
 
 LOCK TABLES `pag_tipo_de_equipo` WRITE;
 /*!40000 ALTER TABLE `pag_tipo_de_equipo` DISABLE KEYS */;
-INSERT INTO `pag_tipo_de_equipo` VALUES (1,'Electromecanico',NULL),(2,'Hidraulico',NULL),(3,'Hola',NULL);
+INSERT INTO `pag_tipo_de_equipo` VALUES (1,'Electromecanico',NULL),(2,'Hidraulico',NULL),(3,'Refrigeración',NULL);
 /*!40000 ALTER TABLE `pag_tipo_de_equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1058,7 +1058,7 @@ CREATE TABLE `pag_tipo_doc` (
   `tdoc_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`tdoc_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1067,7 +1067,7 @@ CREATE TABLE `pag_tipo_doc` (
 
 LOCK TABLES `pag_tipo_doc` WRITE;
 /*!40000 ALTER TABLE `pag_tipo_doc` DISABLE KEYS */;
-INSERT INTO `pag_tipo_doc` VALUES (1,'General',NULL),(2,'Orden de trabajo',NULL),(3,'Programación equipos',NULL),(4,'Solicitudes de servicio',NULL),(5,'Equipo',NULL);
+INSERT INTO `pag_tipo_doc` VALUES (1,'General',NULL),(2,'Orden de trabajo',NULL),(3,'Programación equipos',NULL),(4,'Solicitudes de servicio',NULL);
 /*!40000 ALTER TABLE `pag_tipo_doc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1092,7 +1092,7 @@ CREATE TABLE `pag_tipo_falla` (
 
 LOCK TABLES `pag_tipo_falla` WRITE;
 /*!40000 ALTER TABLE `pag_tipo_falla` DISABLE KEYS */;
-INSERT INTO `pag_tipo_falla` VALUES (1,'Mecanica','0000-00-00 00:00:00'),(2,'Hidraulica','0000-00-00 00:00:00');
+INSERT INTO `pag_tipo_falla` VALUES (1,'Mecanica',NULL),(2,'Hidraulica',NULL);
 /*!40000 ALTER TABLE `pag_tipo_falla` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1183,7 +1183,7 @@ DROP TABLE IF EXISTS `pag_tipo_trabajo`;
 CREATE TABLE `pag_tipo_trabajo` (
   `ttra_id` int(11) NOT NULL AUTO_INCREMENT,
   `ttra_descripcion` varchar(100) NOT NULL,
-  `estado` tinyint(1) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ttra_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1194,7 +1194,7 @@ CREATE TABLE `pag_tipo_trabajo` (
 
 LOCK TABLES `pag_tipo_trabajo` WRITE;
 /*!40000 ALTER TABLE `pag_tipo_trabajo` DISABLE KEYS */;
-INSERT INTO `pag_tipo_trabajo` VALUES (1,'Hidraulico',1),(2,'Limpieza',1);
+INSERT INTO `pag_tipo_trabajo` VALUES (1,'Hidraulico',NULL),(2,'Limpieza',NULL);
 /*!40000 ALTER TABLE `pag_tipo_trabajo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1219,7 +1219,7 @@ CREATE TABLE `pag_unidad_medida` (
 
 LOCK TABLES `pag_unidad_medida` WRITE;
 /*!40000 ALTER TABLE `pag_unidad_medida` DISABLE KEYS */;
-INSERT INTO `pag_unidad_medida` VALUES (1,'Litro',NULL),(2,'Centrimetros cubicos',NULL),(3,'Gramos',NULL),(4,'Libra',NULL);
+INSERT INTO `pag_unidad_medida` VALUES (1,'Litro',NULL),(2,'Centrimetros cúbicos',NULL),(3,'Gramos',NULL),(4,'Libra',NULL);
 /*!40000 ALTER TABLE `pag_unidad_medida` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1247,7 +1247,7 @@ CREATE TABLE `pag_usuario` (
 
 LOCK TABLES `pag_usuario` WRITE;
 /*!40000 ALTER TABLE `pag_usuario` DISABLE KEYS */;
-INSERT INTO `pag_usuario` VALUES (5454,'prueba','kkkk','desactivado',1),(234567,'yankarlo','0000','',1),(1143830254,'ayepes','123456','activo',1),(1144125445,'jtavera','123456','activo',1),(1144125472,'jorge','123456','activo',1),(1144125473,'dbarona','1234','activo',1),(1151956249,'admin','0000','activo',1);
+INSERT INTO `pag_usuario` VALUES (1143830254,'ayepes','123456','activo',1),(1144125445,'jtavera','123456','activo',1),(1144125473,'dbarona','1234','activo',1),(1151956249,'admin','0000','activo',1);
 /*!40000 ALTER TABLE `pag_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1260,4 +1260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-21 10:56:11
+-- Dump completed on 2016-08-16 16:22:46

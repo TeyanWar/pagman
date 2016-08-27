@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<modulos>
+    <nombre>Herramientas</nombre>
+    <icono>mdi-action-wallet-travel</icono>
+    <sitioMenu>principal</sitioMenu>
+    <descripcion>Modulo de Herramientas</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>herramientasController</nombre>
+            <icono>mdi-action-wallet-travel</icono>
+            <display>Herramientas</display>
+            <descripcion>Controlador de Herramientas</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Herramientas</display>
+                    <descripcion>Crear Herramientas</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Herramientas</display>
+                    <descripcion>Editar Herramientas</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Herramientas</display>
+                    <descripcion>Eliminar Herramientas</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>Listar</nombre>
+                    <display>Listar Herramientas</display>
+                    <descripcion>Listar Herramientas</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

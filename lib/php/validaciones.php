@@ -1,16 +1,6 @@
 <?php
 
-function isEmpty($campo){
-//    if(){
-//        
-//    }
-}
-
 function isInteger($campo){
-    
-}
-
-function between($campo,$min,$max){
     
 }
 
@@ -20,8 +10,8 @@ function email($subject){
     return $response;
 }
 
-function userNameLongitud($subject,$min,$max){
-    $pattern="/^[a-z\d_]{".$min.",".$max."}$/i";
-    
+function between($field,$min,$max){
+    $pattern="/^[\w\W]{".$min.",".$max."}$/";
+    return preg_match($pattern, $field);
 }
 

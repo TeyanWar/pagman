@@ -11,9 +11,9 @@
         <div id="card-alert" class="card teal">
             <div class="card-content white-text">
                 <p><i class="mdi-action-info-outline"></i> FORMULARIO REGISTRO HERRAMIENTAS:
-                    Aqui se efectua el registro de herramientas con los siguientes datos:
-                    fecha ingreso, numero de placa, nombre, descripci&oacute;n, 
-                    imagen y el tipo de herramienta</p>
+                    Aqui se efect&uacute;a el registro de herramientas con los siguientes datos:
+                    fecha ingreso, n&uacute;mero de placa, nombre, descripci&oacute;n, 
+                    imagen y tipo de herramienta</p>
             </div>
             <button type="button" class="close white-text" data- dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>

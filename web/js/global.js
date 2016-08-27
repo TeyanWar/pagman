@@ -59,7 +59,7 @@ $(document).ready(function(){
     }
     //----- Fin de login -----//
     
-    //Evento para los botones submit con ajax para las modales
+    //Evento para los botones submit con ajax
     $(document).on('click','.btn_submit_modal',function(e){
        e.preventDefault();
        var url=$(this).parents("form:first").attr("action");
@@ -73,10 +73,9 @@ $(document).ready(function(){
 			
             var respuesta = $.parseJSON(response);
             if(respuesta.accion===true){
-                Materialize.toast(respuesta.mensajes, 2000, 'rounded col green');
-                window.setTimeout('location.reload()', 2000);
+                Materialize.toast(respuesta.mensajes, 1500, 'rounded col green');
+                window.setTimeout("location.href='"+respuesta.redirect+"'", 1500);
             }else{
-                
                 $('#cont_errors_ajax').html(respuesta.mensajes);
                 $('#cont_errors_ajax').css('display','block');
                 $('.btn_submit_modal').prop('disabled',false);

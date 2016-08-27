@@ -17,20 +17,28 @@
             </button>
         </div>
         
+        <?php $error=getErrores(); ?>
+         <?php if (!$error=="") { ?>
+            <div id="card-alert" class="card red">
+                <div class="card-content white-text">
+                    <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
+                </div>
 
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        <?php } ?>
 
-
-        <form class="col s12" action="<?php echo crearUrl("localizacion", "regional", "postCrear") ?>" method="POST">
+        <form id="formreg" class="col s12" action="<?php echo crearUrl("localizacion", "regional", "postCrear") ?>" method="POST" novalidate>
             <div class="row">
                 <div class="input-field col s6">
 
-
-                    <input placeholder="Registre el nombre de la regional " id="reg_nombre" name="reg_nombre" type="text" class="validate">
-                    <label  for="reg_nombre" class="active">(*)Nombre de la regional </label>
-
-
-                </div>
-                
+                    <input placeholder="Registre el nombre de la regional " id="reg_nombre" name="reg_nombre" type="text" class="validate" data-error=".errorTxt1">
+                    <label  for="reg_nombre" class="active">(*)Nombre De La regional </label>
+                    <div class="errorTxt1"></div>
+                    
+                </div>    
             </div>
             <div class="row">
                 <div class="input-field col s12">

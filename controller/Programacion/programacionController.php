@@ -296,9 +296,9 @@ class ProgramacionController {
                 if(isset($_POST['id'])){
                     $a=0;
                     $estado=$_POST['id'];
+//                    dd($_POST);
                     $est=$_POST['est'];
-
-
+ 
                     //foreach ($estado as $id){
                     for($i=0;$i<COUNT($estado);$i++){
                         if($est[$i]==1){    
@@ -346,7 +346,8 @@ class ProgramacionController {
 
     function tablas() {
         $objProgramacion = new ProgramacionModel();
-        $sql=" SELECT pag_componente.comp_id,comp_descripcion from pag_equipo_componente,pag_componente where pag_equipo_componente.comp_id=pag_componente.comp_id and equi_id='".$_POST['equipo']."' ";
+        $sql=" SELECT pag_componente.comp_id,comp_descripcion from pag_equipo_componente,"
+                . "pag_componente where pag_equipo_componente.comp_id=pag_componente.comp_id and equi_id='".$_POST['equipo']."' ";
             
         $componentes=$tipos = $objProgramacion->select($sql);
         $tip = "SELECT * FROM pag_tipo_trabajo";
