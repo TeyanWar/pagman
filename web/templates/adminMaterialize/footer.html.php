@@ -63,6 +63,10 @@ Scripts
 
 <script type="text/javascript" src="<?php echo addLib('js/global.js') ?>"></script>
 
+<!-- Scripts PrintArea -->
+
+<script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>
+
 
 </body>
 

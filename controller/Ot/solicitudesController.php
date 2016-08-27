@@ -54,44 +54,66 @@ class SolicitudesController {
     }
 
     function postCrear() {
-        $objSolicitudes = new SolicitudesModel();
+        
         
         $errores= array();
-        $patronLetras = "/^[a-zA-Z áéíóúñ\s]*$/";
+		$centro = isset($_POST['centro'])? $_POST['centro'] : ''; 
+		$equipo = isset($_POST['equipo'])? $_POST['equipo'] : '';
+		$tipoFalla = isset($_POST['tipoFalla'])? $_POST['tipoFalla'] : '';
+		$solicitante = isset($_POST['solicitante'])? $_POST['solicitante'] : '';
+		$descripcion = isset($_POST['descripcion'])? $_POST['descripcion'] : '';
+	
+        $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
         $patronCorreo = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
         $patronDireccion = "/^[0-9a-zA-Z]+$/";
+		
+		if(empty ($centro)){
+			$errores[]="Debe seleccionar un <code><b>Centro de Formaci&oacute;n</b></code>"; 
+		}
+		
+		if(empty ($equipo)){
+			$errores[]="Debe seleccionar un <code><b>Equipo</b></code>";
+		}
+		
+		if(empty ($tipoFalla)){
+			$errores[]="El campo <code><b>Tipo de Falla</b></code> Debe ser Diligenciado";
+		}
+		
+		if(empty ($solicitante)){
+			$errores[]="Debe seleccionar un <code><b>Solicitante</b></code>";
+		}
         
-        if(!isset($_POST['descripcion']) or $_POST['descripcion']==""){
-            $errores[]="El campo DESCRIPCION debe ser diligenciado";
-                
+        if(empty($descripcion)){
+			$errores[]="El campo <code><b>descripci&oacute;n</b></code> Debe ser Diligenciado";
+		}
+		
         if(count($errores)>0){
+		
             setErrores($errores);
-            redirect(crearUrl('Ot','solicitudes','crear'));
-        }
+            
         }else{
+			
+			$objSolicitudes = new SolicitudesModel();
+			
+			$cen_id = $_POST['centro'];
+			$equi_id = $_POST['equipo'];
+			$sserv_descripcion = $_POST['descripcion'];
+			$per_id = $_POST['solicitante'];
+			$estado_id = $_POST['estado'];
+			$tfa_id = $_POST['tipo_falla'];
 
-        $cen_id = $_POST['centro'];
-        $equi_id = $_POST['equipo'];
-        $sserv_descripcion = $_POST['descripcion'];
-        $per_id = $_POST['solicitante'];
-        $estado_id = $_POST['estado'];
-        $tfa_id = $_POST['tipo_falla'];
+			$insertSolicitudes = "INSERT INTO pag_solicitud_servicio (cen_id,equi_id,sserv_descripcion,per_id,est_id,tfa_id)"
+					. " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
 
-        $insertSolicitudes = "INSERT INTO pag_solicitud_servicio (cen_id,equi_id,sserv_descripcion,per_id,est_id,tfa_id)"
-                . " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
+			$insertar = $objSolicitudes->insertar($insertSolicitudes);
 
-        $insertar = $objSolicitudes->insertar($insertSolicitudes);
+			
+			// Cierra la conexion
+			$objSolicitudes->cerrar();
 
-        if ($insertar) {
-            echo true;
-        } else {
-            echo false;
-        }
-        // Cierra la conexion
-        $objSolicitudes->cerrar();
-
-        //redirect(crearUrl("Ot", "solicitudes", "listar"));
-    }
+			
+		}
+		echo getRespuestaAccion('listar');
     }
     
     function listar() {

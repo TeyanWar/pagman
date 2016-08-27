@@ -38,7 +38,7 @@
 
             <div class="row">
                 <div class="input-field col s12">
-                    <button name="action" type="submit" class="btn cyan waves-effect waves-light right">Crear
+                    <button name="action" type="submit" class="btn cyan waves-effect waves-light right btn_submit_modal">Crear
                         <i class="mdi-content-send right"></i>
                     </button>
                 </div>

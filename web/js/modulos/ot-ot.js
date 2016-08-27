@@ -196,4 +196,10 @@ $(document).ready(function () {
      .css("display","none");
      });
      */
+	 
+	$(document).on("click", "#imprime", function (){
+		$('#orden').printArea();
+		
+	});
+	
 });

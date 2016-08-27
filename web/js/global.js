@@ -64,11 +64,13 @@ $(document).ready(function(){
        e.preventDefault();
        var url=$(this).parents("form:first").attr("action");
         $(this).prop('disabled',true);
+		
         $.ajax({
             url:url,
             type:"post",
             data: $(this).parents("form:first").serialize()
         }).done(function(response){
+			
             var respuesta = $.parseJSON(response);
             if(respuesta.accion===true){
                 Materialize.toast(respuesta.mensajes, 2000, 'rounded col green');

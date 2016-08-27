@@ -26,11 +26,11 @@
             
             <div class="input-field col s12 m4 l4">
                 <label class="active">Equipo</label>
-                <select disabled name="equi_id" class="browser-default" >
-                    <option value="" disabled selected>Seleccione</option>
+                <select name="equi_id" class="browser-default" >
+                    <!--<option value="" disabled selected>Seleccione</option>-->
                     <?php foreach ($equipos as $equipo) { ?>
                         <?php if ($registro['equi_id'] == $equipo['equi_id']) { ?>
-                            <option value="<?php echo $equipo['equi_id'] ?> " selected><?php echo $equipo['equi_nombre'] ?></option>
+                            <option value="<?php echo $equipo['equi_id'] ?> "  readonly selected><?php echo $equipo['equi_nombre'] ?></option>
                         <?php } else { ?>                            
                             <?php
                         }
