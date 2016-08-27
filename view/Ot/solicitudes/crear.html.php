@@ -15,23 +15,13 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
-        <?php
-        $errores = getErrores();
-        if (!$errores=="") {
-            ?>
-            <div id="card-alert" class="card red">
-                <div class="card-content white-text">
-                    <p><i class="mdi-action-info-outline"></i>
-            <?php echo $errores; ?>
-                    </p>
-                </div>
-            </div>
-        <?php }
-        ?>
-        <form class="col s12" id="crearSolicitud" method="POST" data-redirect="<?php echo crearUrl("Ot", "solicitudes", "listar") ?>" data-url="<?php echo crearUrl("Ot", "solicitudes", "postCrear", array('noVista' => 'noVista')) ?>">
+        <div class="card red">
+            <div id="cont_errors_ajax" class="card-content white-text"></div>
+        </div>        
+        <form class="col s12" id="crearSolicitud" method="POST" action="<?php echo crearUrl('Ot', 'solicitudes', 'postCrear', array('noVista' => 'noVista')) ?>" >
             <div class="row">
                 <div class="col s12 m4 l4">                
-                    <label>(*) Centro</label>
+                    <label>(*) Centro de formaci&oacute;n</label>
                     <select class="select2" id="selectCen" name="centro"  data-url="<?php echo crearUrl('Ot', 'solicitudes', 'selectCen', array('noVista' => 'noVista')) ?>">
                         <option value="" disabled selected>Seleccione</option>
                         <?php foreach ($centros as $centro) { ?>
@@ -64,7 +54,7 @@
                         <option value="" disabled selected>Seleccione</option>
                         <?php foreach ($personas as $persona) { ?>
                             <option value="<?php echo $persona['per_id'] ?>"><?php echo $persona['per_nombre'] . " " . $persona['per_apellido'] ?></option>
-<?php } ?>
+                        <?php } ?>
                     </select>
                 </div>
 
@@ -77,15 +67,11 @@
             <input type="hidden" value="7" name="estado" />
 
             <div class="row">
-                <div class="input-field col m2 offset-m8">
-                    <button class="btn teal waves-effect waves-light right" type="submit" name="action">Cancelar
-                        <!-- <i class="mdi-content-send right"></i> -->
-                    </button>
-                </div>
                 <div class="input-field col m2">
-                    <button class="btn teal waves-effect waves-light right" type="submit" id="btn-crear-solicitud" name="action">Crear
+                    <button class="btn_submit_modal" type="submit" id="btn-crear-solicitud" name="action">Crear
                         <i class="mdi-content-send right"></i>
                     </button>
                 </div>
             </div>
+        </form>    
     </div>

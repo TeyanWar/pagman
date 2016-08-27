@@ -17,8 +17,11 @@
                             <th>Estado</th>
                             <th colspan="4" >Acciones</th>
                         </tr>
+                    <script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+                    <script language="javascript" type="text/javascript" src="js/popup.js"></script>
+                    <link href="css/popup.css" rel="stylesheet" type="text/css">
                     </thead>
-                    <tbody>                            
+                    <tbody> 
                         <?php
                         foreach ($solicitudes as $solicitud) {
                             ?>
@@ -33,7 +36,7 @@
                                 <td>
                                     <a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" href="#registrar" data-url="<?php echo crearUrl("Ot", "ot", "crear", array('noVista' => 'noVista', 'ot_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-content-add tiny"/></a>
                                 </td>
-                                <td>
+                                <td>                                    
                                     <a class="btn-floating waves-effect waves-light modal-trigger teal" href="#editar" data-url="<?php echo crearUrl("Ot", "solicitudes", "editar", array('noVista' => 'noVista', 'sserv_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-image-edit small"/></a>
                                 </td>
                                 <td>

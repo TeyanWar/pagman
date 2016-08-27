@@ -151,5 +151,5 @@ $(document).ready(function () {
     $(document).on('click', '.cerrar', function () {
         $(".modal").closeModal();
     });
-
+    
 });//fin: $(document).ready
