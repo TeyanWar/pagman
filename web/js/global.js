@@ -69,8 +69,13 @@ $(document).ready(function(){
             url:url,
             type:"post",
             data: $(this).parents("form:first").serialize()
+            
         }).done(function(response){
+<<<<<<< HEAD
 			
+=======
+//            alert(response);
+>>>>>>> d4a3f25a475e9823c4bb8976fcdf2e2ea7247580
             var respuesta = $.parseJSON(response);
             if(respuesta.accion===true){
                 Materialize.toast(respuesta.mensajes, 1500, 'rounded col green');

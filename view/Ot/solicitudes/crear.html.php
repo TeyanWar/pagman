@@ -15,13 +15,20 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
+<<<<<<< HEAD
      <div class="card red">
 		<div id="cont_errors_ajax" class="card-content white-text"></div>
 	 </div>
         <form class="col s12" id="crearSolicitud" method="POST"  action="<?php echo crearUrl("Ot", "solicitudes", "postCrear", array('noVista' => 'noVista')) ?>">
+=======
+        <div class="card red">
+            <div id="cont_errors_ajax" class="card-content white-text"></div>
+        </div>        
+        <form class="col s12" id="crearSolicitud" method="POST" action="<?php echo crearUrl('Ot', 'solicitudes', 'postCrear', array('noVista' => 'noVista')) ?>" >
+>>>>>>> d4a3f25a475e9823c4bb8976fcdf2e2ea7247580
             <div class="row">
                 <div class="col s12 m4 l4">                
-                    <label>(*) Centro</label>
+                    <label>(*) Centro de formaci&oacute;n</label>
                     <select class="select2" id="selectCen" name="centro"  data-url="<?php echo crearUrl('Ot', 'solicitudes', 'selectCen', array('noVista' => 'noVista')) ?>">
                         <option value="" disabled selected>Seleccione</option>
                         <?php foreach ($centros as $centro) { ?>
@@ -54,7 +61,11 @@
                         <option value="" disabled selected>Seleccione</option>
                         <?php foreach ($personas as $persona) { ?>
                             <option value="<?php echo $persona['per_id'] ?>"><?php echo $persona['per_nombre'] . " " . $persona['per_apellido'] ?></option>
+<<<<<<< HEAD
 							<?php } ?>
+=======
+                        <?php } ?>
+>>>>>>> d4a3f25a475e9823c4bb8976fcdf2e2ea7247580
                     </select>
                 </div>
 
@@ -67,18 +78,22 @@
             <input type="hidden" value="7" name="estado" />
 
             <div class="row">
-                <div class="input-field col m2 offset-m8">
-                    <button class="btn teal waves-effect waves-light right" type="submit" name="action">Cancelar
-                        <!-- <i class="mdi-content-send right"></i> -->
-                    </button>
-                </div>
                 <div class="input-field col m2">
+<<<<<<< HEAD
                     <button class="btn teal waves-effect waves-light right btn_submit_modal" type="submit" id="btn-crear-solicitud" name="action">Crear
+=======
+                    <button class="btn_submit_modal" type="submit" id="btn-crear-solicitud" name="action">Crear
+>>>>>>> d4a3f25a475e9823c4bb8976fcdf2e2ea7247580
                         <i class="mdi-content-send right"></i>
                     </button>
                 </div>
             </div>
+<<<<<<< HEAD
         </form>	
     </div>
 </div>    
     
+=======
+        </form>    
+    </div>
+>>>>>>> d4a3f25a475e9823c4bb8976fcdf2e2ea7247580

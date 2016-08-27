@@ -56,6 +56,7 @@ class SolicitudesController {
         
         
         $errores= array();
+<<<<<<< HEAD
             $centro = isset($_POST['centro'])? $_POST['centro'] : ''; 
             $equipo = isset($_POST['equipo'])? $_POST['equipo'] : '';
             $tipoFalla = isset($_POST['tipoFalla'])? $_POST['tipoFalla'] : '';
@@ -63,6 +64,15 @@ class SolicitudesController {
             $descripcion = isset($_POST['descripcion'])? $_POST['descripcion'] : '';
 	
         $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
+=======
+        $centro = isset($_POST['centro']) ? $_POST['centro'] : '';
+        $equipo = isset($_POST['equipo']) ? $_POST['equipo'] : '';
+        $tipo_falla = isset($_POST['tipo_falla']) ? $_POST['tipo_falla'] : '';
+        $solicitante = isset($_POST['solicitante']) ? $_POST['solicitante'] : '';
+        $descripcion = isset($_POST['descripcion'])? $_POST['descripcion'] : '';
+        
+        $patronLetras = "/^[a-zA-Z áéíóúñ\s]*$/";
+>>>>>>> d4a3f25a475e9823c4bb8976fcdf2e2ea7247580
         $patronCorreo = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
         $patronDireccion = "/^[0-9a-zA-Z]+$/";
 		
@@ -82,18 +92,47 @@ class SolicitudesController {
             $errores[]="Debe seleccionar un <code><b>Solicitante</b></code>";
 	}
         
+<<<<<<< HEAD
         if(empty($descripcion)){
             $errores[]="El campo <code><b>descripci&oacute;n</b></code> Debe ser Diligenciado";
 	}
 		
+=======
+        if (empty ($centro)){
+            $errores[]="Debe seleccionar un <code><b>Centro de formaci&oacute;n</b></code>";
+        }
+        
+        if (empty ($equipo)){
+            $errores[]="Debe seleccionar un <code><b>Equipo</b></code>";
+        }
+        
+        if (empty ($tipo_falla)){
+            $errores[]="Debe seleccionar un <code><b>Tipo de falla</b></code>";
+        }
+        
+        if (empty ($solicitante)){
+            $errores[]="Debe seleccionar un <code><b>Solicitante</b></code>";
+        }
+    
+        if(empty ($descripcion)){
+            $errores[]="El campo <code><b>Descripci&oacute;n</b></code> debe ser diligenciado";
+        }    
+>>>>>>> d4a3f25a475e9823c4bb8976fcdf2e2ea7247580
         if(count($errores)>0){
 		
             setErrores($errores);
             
+<<<<<<< HEAD
         }else{
 			
             $objSolicitudes = new SolicitudesModel();
 			
+=======
+            }else{
+            
+            $objSolicitudes = new SolicitudesModel();
+                
+>>>>>>> d4a3f25a475e9823c4bb8976fcdf2e2ea7247580
             $cen_id = $_POST['centro'];
             $equi_id = $_POST['equipo'];
             $sserv_descripcion = $_POST['descripcion'];
@@ -102,6 +141,7 @@ class SolicitudesController {
             $tfa_id = $_POST['tipo_falla'];
 
             $insertSolicitudes = "INSERT INTO pag_solicitud_servicio (cen_id,equi_id,sserv_descripcion,per_id,est_id,tfa_id)"
+<<<<<<< HEAD
 		. " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
 
             $insertar = $objSolicitudes->insertar($insertSolicitudes);
@@ -113,6 +153,18 @@ class SolicitudesController {
 			
 	}
 	echo getRespuestaAccion('listar');
+=======
+                    . " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
+
+            $insertar = $objSolicitudes->insertar($insertSolicitudes);
+            
+            // Cierra la conexion
+            $objSolicitudes->cerrar();             
+            
+        }
+        
+        echo getRespuestaAccion('listar');
+>>>>>>> d4a3f25a475e9823c4bb8976fcdf2e2ea7247580
     }
     
     function listar() {

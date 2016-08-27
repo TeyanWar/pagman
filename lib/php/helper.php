@@ -57,8 +57,7 @@ function setErrores($errores =  array()){
         foreach ($errores as $error){
             
             $mensajeError .= "<li>* ".$error."</li>";
-        }
-        
+        }        
         $mensajeError .= "</ul>";
 
     }
