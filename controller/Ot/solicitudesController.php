@@ -54,24 +54,34 @@ class SolicitudesController {
 
     function postCrear() {
         
+        
         $errores= array();
         
-        $centro= isset($_POST['centro']) ? $_POST['centro'] : '';
-        $descripcion= isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
-        
-        
+        $centro = isset($_POST['centro']) ? $_POST['centro'] : '';
+        $equipo = isset($_POST['equipo']) ? $_POST['equipo'] : '';
+        $tipo_falla = isset($_POST['tipo_falla']) ? $_POST['tipo_falla'] : '';
+        $solicitante = isset($_POST['solicitante']) ? $_POST['solicitante'] : '';
+        $descripcion = isset($_POST['descripcion'])? $_POST['descripcion'] : '';
+
         $patronLetras = "/^[a-zA-Z áéíóúñ\s]*$/";
         $patronCorreo = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
         $patronDireccion = "/^[0-9a-zA-Z]+$/";
-        
-        
-        if(empty($centro)){
-            $errores[]="El campo <code><b>centro</b></code> debe ser diligenciado. ";
-        }
-        
-        if(empty($descripcion)){
-            $errores[]="El campo <code><b>descripci&oacute;n</b></code> debe ser diligenciado. ";
-        }
+		
+	if(empty ($centro)){
+            $errores[]="Debe seleccionar un <code><b>Centro de Formaci&oacute;n</b></code>"; 
+	}
+		
+	if(empty ($equipo)){
+            $errores[]="Debe seleccionar un <code><b>Equipo</b></code>";
+	}
+		
+	if(empty ($tipo_falla)){
+            $errores[]="El campo <code><b>Tipo de Falla</b></code> Debe ser Diligenciado";
+	}
+		
+	if(empty ($solicitante)){
+            $errores[]="Debe seleccionar un <code><b>Solicitante</b></code>";
+	}
         
         if(!between($descripcion,3,5)){
             $errores[]="El campo <code><b>descripci&oacute;n</b></code> debe contener entre 3 y 5 caracteres. ";
@@ -82,7 +92,7 @@ class SolicitudesController {
         }else{
             
             $objSolicitudes = new SolicitudesModel();
-            
+                
             $cen_id = $_POST['centro'];
             $equi_id = $_POST['equipo'];
             $sserv_descripcion = $_POST['descripcion'];
@@ -91,6 +101,7 @@ class SolicitudesController {
             $tfa_id = $_POST['tipo_falla'];
 
             $insertSolicitudes = "INSERT INTO pag_solicitud_servicio (cen_id,equi_id,sserv_descripcion,per_id,est_id,tfa_id)"
+
                     . " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
 
             $insertar = $objSolicitudes->insertar($insertSolicitudes);
@@ -101,6 +112,7 @@ class SolicitudesController {
         }
         
         echo getRespuestaAccion('listar');
+        
     }
     
     function listar() {
