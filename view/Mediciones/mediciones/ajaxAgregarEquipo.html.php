@@ -44,11 +44,10 @@ al igual de los campos a diligenciar: medida actual y fecha
                                 <div class="input-field col s12">
                                     <select name="tipoMedidor" id="tipoMedidor">
                                         <?php
-                                        foreach ($_SESSION['medidores'] as $medidor) {;?>
+                                        foreach ($medidores as $medidor) {;?>
                                         
                                         <option value=<?php echo $medidor['tmed_id'] ?>> <?php echo $medidor['tmed_acronimo']?></option>
                                         <?php } 
-                                        unset($_SESSION['medidores']);
                                         ?>
                                     </select>
                                     <label for="fecha"></label>
@@ -57,7 +56,7 @@ al igual de los campos a diligenciar: medida actual y fecha
                         </td>
                     </div>
                     <td>
-                        <a class="btn-agregar btn-floating btn-small waves-effect waves-light right teal">
+                        <a class="btn-agregar btn-floating btn-small waves-effect waves-light right teal" data-url="<?php echo crearUrl("Mediciones", "mediciones", "ajaxListarEquipos", array('noVista' => "noVista")) ?>">
                             <i class="mdi-action-add-shopping-cart"></i>
                         </a>
                     </td>

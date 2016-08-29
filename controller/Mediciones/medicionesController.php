@@ -10,152 +10,111 @@ class MedicionesController {
     public function crear() {
 
         $objEquipos = new EquiposModel();
-        $sql = "SELECT * FROM pag_equipo";
+        $sql = "SELECT * FROM pag_equipo order by equi_nombre asc";
         $equipos = $objEquipos->select($sql);
         $objEquipos->cerrar();
 
         $objPersona = new personasModel();
-        $sql = "SELECT * FROM pag_persona";
+        $sql = "SELECT * FROM pag_persona order by per_nombre asc";
         $personas = $objPersona->select($sql);
         $objPersona->cerrar();
-        
-        $objMedidor= new medidoresModel();
-        $sql= "SELECT tmed_id,tmed_acronimo from pag_tipo_medidor where tmed_estado=0";
-        $medidores= $objMedidor->select($sql);
-        $_SESSION['medidores']=$medidores;
-        $objMedidor->cerrar();
+
 
         include_once '../view/Mediciones/mediciones/crear.html.php';
     }
 
-   
-    public function editar($parametros = false) {
-        $objMediciones = new MedicionesModel();
-        $id = $parametros[1];
 
-        $sql = "SELECT pag_control_medidas.ctrmed_id,pag_persona.per_id,"
-                . "pag_persona.per_nombre,pag_equipo.equi_id,pag_equipo.equi_nombre,"
-                . "pag_control_medidas.ctrmed_fecha,pag_control_medidas.ctrmed_medida_actual "
-                . "FROM pag_persona,pag_equipo,pag_control_medidas "
-                . "WHERE pag_control_medidas.per_id=pag_persona.per_id "
-                . "AND pag_control_medidas.equi_id=pag_equipo.equi_id "
-                . "AND pag_control_medidas.ctrmed_id=$id";
-
-        $mediciones = $objMediciones->find($sql);
-        $objMediciones->cerrar();
-        include_once '../view/Mediciones/mediciones/editar.html.php';
-    }
-
-    public function postEditar() {
-        //die(print_r($_POST));
-
-        $errores = array();
-        $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
-        $patronNumeros = "/^[0-9]*$/";
-
-        if (!isset($_POST['id']) or $_POST['id'] == "") {
-            $errores[] = "Debe existir el Id, no puede estar vacio";
-        }
-        if(isset($_POST['id']) && !preg_match($patronNumeros,$_POST['id'])){
-            $errores[]="El id debe ser numerico";
-        }
-        if (!isset($_POST['equipo']) or $_POST['equipo'] == "") {
-            $errores[] = "El campo Equipo no puede estar vacio";
-        }
-        if (isset($_POST['equipo']) && !is_numeric($_POST['equipo'])) {
-            $errores[] = "El campo Equipo admiten Letras y numeros Unicamente";
-        }
-        if (!isset($_POST['medidaActual']) or $_POST['medidaActual'] == "") {
-            $errores[] = "El campo Medida no puede estar vacio";
-        }
-        if (isset($_POST['medidaActual']) && !is_numeric($_POST['medidaActual'])) {
-            $errores[] = "El campo Medida debe ser numerico unicamente";
-        }
-        if (count($errores) > 0) {
-            setErrores($errores);
-            redirect(crearUrl('mediciones', 'mediciones', 'listar'));
-        } else {
-            $id = $_POST['id'];
-            $equipo = $_POST['equipo'];
-            $persona = $_POST['persona'];
-            $medidaActual = $_POST['medidaActual'];
-            explodeFecha($_POST['fechaMedicion']);
-            $fechaMedicion=  getFecha();
-            $objMediciones = new MedicionesModel();
-
-            $sql = "UPDATE pag_control_medidas SET "
-                    . "ctrmed_fecha = '$fechaMedicion',"
-                    . "ctrmed_medida_actual = '$medidaActual',"
-                    . "equi_id=$equipo,"
-                    . "per_id = $persona "
-                    . "WHERE ctrmed_id = $id";
-            $mediciones = $objMediciones->update($sql);
-            redirect(crearUrl('mediciones', 'mediciones', 'listar'));
-        }
-
-        $objMediciones->cerrar();
-    }
-
-    public function listar() {
-        $objMediciones = new MedicionesModel();
-        $sql="SELECT cm.equi_id, e.equi_nombre FROM pag_control_medidas cm, pag_equipo e 
-              WHERE e.equi_id=cm.equi_id GROUP BY cm.equi_id" ;
-        $equipos=$objMediciones->select($sql);
-        
-        //Para cada equipo seleccionar los tipos de medidores
-        foreach($equipos as $keyEquipo=>$equipo){
-            $sql="SELECT tm.tmed_id, tm.tmed_nombre FROM pag_control_medidas cm, pag_tipo_medidor tm 
-                  WHERE cm.tmed_id=tm.tmed_id AND equi_id='".$equipo['equi_id']."' GROUP BY tmed_id";
-            $tiposMedidores=$objMediciones->select($sql);
-
-            //Para cada tipo de medidor seleccionar el último registro y el total de mediciones
-            foreach($tiposMedidores as $keyTipoMedidor=>$tipoMedidor){
-                $sql="SELECT cm.ctrmed_fecha, cm.ctrmed_medida_actual,  
-                CONCAT(p.per_nombre,' ',p.per_apellido) AS responsable 
-                FROM pag_control_medidas cm, pag_tipo_medidor tm, pag_persona p    
-                WHERE tm.tmed_id=cm.tmed_id AND cm.per_id=p.per_id AND cm.tmed_id='".$tipoMedidor['tmed_id']."' 
-                AND cm.equi_id='".$equipo['equi_id']."' AND cm.ctrmed_fecha=
-                    (SELECT MAX(ctrmed_fecha) FROM pag_control_medidas WHERE tmed_id='".$tipoMedidor['tmed_id']."' 
-                    AND equi_id='".$equipo['equi_id']."')";
-                $ultimaMedicion=$objMediciones->find($sql);
-                $tiposMedidores[$keyTipoMedidor]['ultimaMedicion']=$ultimaMedicion;
-                                
-                $sql="SELECT SUM(ctrmed_medida_actual) AS totalMediciones FROM pag_control_medidas 
-                WHERE tmed_id='".$tipoMedidor['tmed_id']."' AND equi_id='".$equipo['equi_id']."'";
-                $totalMediciones=$objMediciones->select($sql);
-                $tiposMedidores[$keyTipoMedidor]['totalMediciones']=$totalMediciones[0]['totalMediciones'];
-            }
-            $equipos[$keyEquipo]['tiposMedidores']=$tiposMedidores;
-        }
-//        dd($equipos);
-        $objMediciones->cerrar();
-        include_once '../view/Mediciones/mediciones/listar.html.php';
-    }
-//    public function listar() {
+//   /* public function listar() {
 //        $objMediciones = new MedicionesModel();
-//        
-////        $equipos= array('equipo'=>'','tipos_medida'=>array(),'fecha'=);
-//        $sql = "SELECT * FROM pag_control_medidas, pag_persona, pag_equipo,pag_tipo_medidor WHERE pag_control_medidas.per_id=pag_persona.per_id AND
-//                pag_control_medidas.equi_id=pag_equipo.equi_id and pag_control_medidas.tmed_id=pag_tipo_medidor.tmed_id order by ctrmed_fecha desc ";
+//        $sql = "SELECT cm.equi_id, e.equi_nombre FROM pag_control_medidas cm, pag_equipo e 
+//              WHERE e.equi_id=cm.equi_id GROUP BY cm.equi_id";
+//        $equipos = $objMediciones->select($sql);
 //
-//        $mediciones = $objMediciones->select($sql);
+//        //Para cada equipo seleccionar los tipos de medidores
+//        foreach ($equipos as $keyEquipo => $equipo) {
+//            $sql = "SELECT tm.tmed_id, tm.tmed_nombre FROM pag_control_medidas cm, pag_tipo_medidor tm 
+//                  WHERE cm.tmed_id=tm.tmed_id AND equi_id='" . $equipo['equi_id'] . "' GROUP BY tmed_id";
+//            $tiposMedidores = $objMediciones->select($sql);
 //
-//        /*
-//         * Paginado
-//         */
-//        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
-//        $url = crearUrl('mediciones', 'mediciones', 'listar');
-//        
-//        $paginado = new Paginado($mediciones, $pagina, $url);
-//        
-//        $mediciones = $paginado->getDatos();
-//        /*
-//         * Fin paginado
-//         */
-//        
+//            //Para cada tipo de medidor seleccionar el último registro y el total de mediciones
+//            foreach ($tiposMedidores as $keyTipoMedidor => $tipoMedidor) {
+//                $sql = "SELECT cm.ctrmed_fecha, cm.ctrmed_medida_actual,  
+//                CONCAT(p.per_nombre,' ',p.per_apellido) AS responsable 
+//                FROM pag_control_medidas cm, pag_tipo_medidor tm, pag_persona p    
+//                WHERE tm.tmed_id=cm.tmed_id AND cm.per_id=p.per_id AND cm.tmed_id='" . $tipoMedidor['tmed_id'] . "' 
+//                AND cm.equi_id='" . $equipo['equi_id'] . "' AND cm.ctrmed_fecha=
+//                    (SELECT MAX(ctrmed_fecha) FROM pag_control_medidas WHERE tmed_id='" . $tipoMedidor['tmed_id'] . "' 
+//                    AND equi_id='" . $equipo['equi_id'] . "')";
+//                $ultimaMedicion = $objMediciones->find($sql);
+//                $tiposMedidores[$keyTipoMedidor]['ultimaMedicion'] = $ultimaMedicion;
+//
+//                $sql = "SELECT SUM(ctrmed_medida_actual) AS totalMediciones FROM pag_control_medidas 
+//                WHERE tmed_id='" . $tipoMedidor['tmed_id'] . "' AND equi_id='" . $equipo['equi_id'] . "'";
+//                $totalMediciones = $objMediciones->select($sql);
+//                $tiposMedidores[$keyTipoMedidor]['totalMediciones'] = $totalMediciones[0]['totalMediciones'];
+//            }
+//
+//            $equipos[$keyEquipo]['tiposMedidores'] = $tiposMedidores;
+            
+//        }
+////        dd($equipos);
 //        $objMediciones->cerrar();
 //        include_once '../view/Mediciones/mediciones/listar.html.php';
 //    }
+
+    public function listar() {
+        $objMediciones = new MedicionesModel();
+        //$varMedicion=$_POST['med_id'];
+        $sql="Select pe.equi_id,pe.equi_nombre,pc.ctrmed_fecha,pc.ctrmed_medida_actual,sum(ctrmed_medida_actual) as totalMedicion,ptm.tmed_nombre,concat(pp.per_nombre,' ',pp.per_apellido) as responsable "
+                . "from pag_control_medidas pc,pag_tipo_medidor ptm,pag_persona pp,pag_equipo pe "
+                . "where pc.tmed_id=ptm.tmed_id and pc.per_id=pp.per_id and pc.equi_id=pe.equi_id "
+                . "group by equi_nombre order by ctrmed_fecha desc";
+        
+        $equipos = $objMediciones->select($sql);
+        
+        /*
+             * Paginado
+             */
+            $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+            $url = crearUrl('mediciones', 'mediciones', 'listar');
+
+            $paginado = new Paginado($equipos, $pagina, $url);
+
+            $equipos = $paginado->getDatos();
+            /*
+             * Fin paginado
+             */
+        
+        $objMediciones->cerrar();
+        include_once '../view/Mediciones/mediciones/listar.html.php';
+    }
+
+    function detalle($parametros) {
+
+        $objDetalle = new MedicionesModel();
+        $id = $parametros[1];
+
+        $sql = "SELECT * FROM pag_control_medidas, pag_persona, pag_equipo,pag_tipo_medidor WHERE pag_control_medidas.per_id=pag_persona.per_id AND
+                pag_control_medidas.equi_id=pag_equipo.equi_id and pag_control_medidas.tmed_id=pag_tipo_medidor.tmed_id and pag_control_medidas.equi_id='$id' order by ctrmed_fecha desc";
+
+        $detalleOrdenes = $objDetalle->select($sql);
+            /*
+             * Paginado
+             */
+            $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+            $url = crearUrl('mediciones', 'mediciones', 'detalle');
+
+            $paginado = new Paginado($detalleOrdenes, $pagina, $url);
+
+            $detalleOrdenes = $paginado->getDatos();
+            /*
+             * Fin paginado
+             */
+        // Cierra la conexion
+        $objDetalle->cerrar();
+
+        include_once("../view/Mediciones/mediciones/detalle.html.php");
+    }
 
     public function eliminar($parametros) {
         $objMediciones = new MedicionesModel();
@@ -175,34 +134,38 @@ class MedicionesController {
         redirect(crearUrl('mediciones', 'mediciones', 'listar'));
     }
 
-    public function ajaxAgregarEquipo($parametros) {
-        $idsEquipos = $_POST['ids'];
+    public function ajaxAgregarEquipo() {
+        $idEquipo = $_POST['ids'];
+       // die(print_r("codigo".$idEquipo));
         $equipos = array();
         $objEquipos = new EquiposModel();
-        foreach ($idsEquipos as $idEquipo) {
+        $objMedidor = new MedidoresModel();
             $sql = "SELECT equi_id, equi_nombre FROM pag_equipo WHERE equi_id = '$idEquipo'";
-            $equipo = $objEquipos->select($sql);
-            $equipos[$equipo[0]['equi_id']] = $equipo[0];
-        }
+            $equipos = $objEquipos->select($sql);
+            //$equipos[$equipo[0]['equi_id']] = $equipo[0];
 
+        $objMedidor = new medidoresModel();
+        $sql = "SELECT tmed_id,tmed_acronimo from pag_tipo_medidor where tmed_estado=0";
+        $medidores = $objMedidor->select($sql);
+        
         $objEquipos->cerrar();
         include_once '../view/Mediciones/mediciones/ajaxAgregarEquipo.html.php';
     }
 
     public function ajaxListarEquipos() {
-        $objMedidores=New MedidoresModel();
-        
+        $objMedidores = New MedidoresModel();
+
         $equi_id = $_POST['equi_id'];
         $equi_nombre = $_POST['equi_nombre'];
         $medicion = $_POST['medicion'];
         $fecha = $_POST['fecha'];
         $tipoMedidor = $_POST['tipo_medidor'];
         $consecutivo = $_POST['consecutivo'];
-        
+
         $sql = "Select * from pag_tipo_medidor";
-                
-        $medidores=$objMedidores->select($sql);
-        
+
+        $medidores = $objMedidores->select($sql);
+
         include_once '../view/Mediciones/mediciones/ajaxListarEquipos.html.php';
     }
 
@@ -210,18 +173,19 @@ class MedicionesController {
         $errores = array();
         $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
         $patronLetrasNumeros = "/^[0-9a-zA-Z]+$/";
+        $patronLetrasNumerosGuiones = "/^[0-9a-zA-Z(-_)-áéíóúñ\s]+$/";
 
         if (!isset($_POST['personas']) or $_POST['personas'] == "") {
-            $errores[] = "El campo <code><b>Responsable</b></code> es Obligatorio";
+            $errores[] = "El campo Responsable es Obligatorio";
         }
         if (isset($_POST['personas']) && !is_numeric($_POST['personas'])) {
             $errores[] = "En el campo Responsable unicamente se aceptan letras";
         }
         if (!isset($_POST['equipos']) or $_POST['equipos'] == "") {
-            $errores[] = "El campo <b><code>Equipo</b></code> no puede estar vacio";
+            $errores[] = "El campo Equipo no puede estar vacio";
         }
-        if (!isset($_POST['equipos'])) {
-            $errores[] = "En el campo <b><code>Equipo</b></code> unicamente se aceptan letras";
+        if (isset($_POST['equipos']) && (!preg_match($patronLetrasNumerosGuiones,$_POST['equipos']))) {
+            $errores[] = "En el campo Equipo unicamente se aceptan letras";
         }
         if (!isset($_POST['medidaActual']) or $_POST['medidaActual'] == "") {
             $errores[] = "El campo Medidas no puede estar vacio";
@@ -238,7 +202,7 @@ class MedicionesController {
 //            }
         }
         if (!isset($_POST['medidas']) or $_POST['medidas'] == "") {
-            $errores[] = "Debe agregar al menos 1 medici&oacute;n";
+            $errores[] = "Debe agregar al menos 1 medicion";
         } else {
             $medidas = $_POST['medidas'];
             foreach ($medidas as $medida) {
@@ -247,6 +211,9 @@ class MedicionesController {
                 } else {
                     if (!is_numeric($medida['medicion'])) {
                         $errores[] = "En el campo Medidas unicamente se aceptan Numeros";
+                    }
+                    if (!preg_match($patronLetrasNumerosGuiones,$medida['equi_id'])) {
+                        $errores[] = "El codigo del equipo debe ser Numerico unicamente";
                     }
                     if (!preg_match($patronLetras, $medida['equi_nombre'])) {
                         $errores[] = "SOLO LETRAS";
@@ -267,20 +234,48 @@ class MedicionesController {
 
             foreach ($medidas as $medida) {
                 explodeFecha($medida['fecha']);
-                $fecha=  getFecha();
+                $fecha = getFecha();
                 $sql = "INSERT INTO pag_control_medidas (per_id,equi_id,ctrmed_medida_actual,ctrmed_fecha,tmed_id)"
-                        . "VALUES ($personaId,"
-                        . "'".$medida['equi_id']."',"
-                        . "'".$medida['medicion']."',"
+                        . "VALUES ('$personaId',"
+                        . "'$medida[equi_id]',"
+                        . "'$medida[medicion]',"
                         . "'$fecha',"
-                        . "'".$medida['tipo_medidor']."')";
+                        . "'$medida[tipo_medidor]')";
                 $objMediciones->insertar($sql);
             }
 
-//            dd($sql);
             $objMediciones->cerrar();
             redirect(crearUrl('mediciones', 'mediciones', 'listar'));
         }
     }
 
+    function buscador() {
+
+        $objMediciones = new medicionesModel();
+
+        $mediciones = $_POST['med_id'];
+
+         $sql="Select pe.equi_id,pe.equi_nombre,pc.ctrmed_fecha,pc.ctrmed_medida_actual,sum(ctrmed_medida_actual) as totalMedicion,ptm.tmed_nombre,concat(pp.per_nombre,' ',pp.per_apellido) as responsable "
+                . "from pag_control_medidas pc,pag_tipo_medidor ptm,pag_persona pp,pag_equipo pe "
+                . "where pc.tmed_id=ptm.tmed_id and pc.per_id=pp.per_id and pc.equi_id=pe.equi_id and equi_nombre LIKE '%" . $mediciones . "%'" 
+                . "group by equi_nombre order by ctrmed_fecha asc";
+         
+        $equipos = $objMediciones->select($sql);
+         
+        /*
+         * Paginado
+         */
+        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
+        $url = crearUrl('mediciones', 'mediciones', 'listarMed');
+        
+        $paginado = new Paginado($equipos, $pagina, $url);
+        
+        $equipos = $paginado->getDatos();
+        /*
+         * Fin paginado
+         */
+
+        $objMediciones->cerrar();
+        include_once("../view/Mediciones/mediciones/listarMed.html.php");
+    }
 }
