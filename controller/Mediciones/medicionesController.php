@@ -130,18 +130,18 @@ class MedicionesController {
                 pag_control_medidas.equi_id=pag_equipo.equi_id and pag_control_medidas.tmed_id=pag_tipo_medidor.tmed_id and pag_control_medidas.equi_id='$id' order by ctrmed_fecha desc";
 
         $detalleOrdenes = $objDetalle->select($sql);
-        /*
-         * Paginado
-         */
-        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-        $url = crearUrl('mediciones', 'mediciones', 'detalle');
+            /*
+             * Paginado
+             */
+            $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+            $url = crearUrl('mediciones', 'mediciones', 'detalle');
 
-        $paginado = new Paginado($detalleOrdenes, $pagina, $url);
+            $paginado = new Paginado($detalleOrdenes, $pagina, $url);
 
-        $mediciones = $paginado->getDatos();
-        /*
-         * Fin paginado
-         */
+            $mediciones = $paginado->getDatos();
+            /*
+             * Fin paginado
+             */
         // Cierra la conexion
         $objDetalle->cerrar();
 
@@ -167,14 +167,13 @@ class MedicionesController {
     }
 
     public function ajaxAgregarEquipo() {
-        $idsEquipos = $_POST['ids'];
+        $idEquipo = $_POST['ids'];
+        die(print_r($idEquipo));
         $equipos = array();
         $objEquipos = new EquiposModel();
-        foreach ($idsEquipos as $idEquipo) {
             $sql = "SELECT equi_id, equi_nombre FROM pag_equipo WHERE equi_id = $idEquipo";
             $equipo = $objEquipos->select($sql);
-            $equipos[$equipo[0]['equi_id']] = $equipo[0];
-        }
+//            $equipos[$equipo[0]['equi_id']] = $equipo[0];
 
         $objEquipos->cerrar();
         include_once '../view/Mediciones/mediciones/ajaxAgregarEquipo.html.php';

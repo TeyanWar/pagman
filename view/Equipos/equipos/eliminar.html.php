@@ -10,7 +10,7 @@
 
     
     <div class="col s6">
-        <h4><?php echo $equipos['equi_noplaca']; ?><h4>
+        <h4><?php echo $equipos['equi_id']; ?><h4>
     </div>
     <!-- Campo para almacenar el id del equipo -->
     <input type="hidden" name="id" value="<?php echo $equipos['equi_noplaca']; ?>">

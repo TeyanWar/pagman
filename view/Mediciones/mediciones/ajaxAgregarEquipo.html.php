@@ -3,6 +3,11 @@ DIV que muestra en una tabla el ID y NOMBRE de un equipo,
 al igual de los campos a diligenciar: medida actual y fecha
 =============================================================-->
 <div id="lista-equipos">
+    <?php foreach ($equipo as $equi){
+        echo $equi['equi_id'];
+        echo $equi['equi_nombre'];
+        
+    }die(); ?>
     <div class="card-panel">
         <div>
             <table class="striped">
@@ -17,7 +22,8 @@ al igual de los campos a diligenciar: medida actual y fecha
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($equipos as $equipo) { ?>
+                    <?php 
+                    foreach ($equipos as $equipo) { ?>
                         <tr>
                     <div>
                         <td id="equi_id"><?php echo $equipo['equi_id'] ?></td>
@@ -42,12 +48,11 @@ al igual de los campos a diligenciar: medida actual y fecha
                             <div class="row">
                                 <div class="input-field col s12">
                                     <select name="tipoMedidor" id="tipoMedidor">
-                                        <?php foreach ($_SESSION['medidores'] as $medidor) {
-; ?>
-
-                                            <option value=<?php echo $medidor['tmed_id'] ?>> <?php echo $medidor['tmed_acronimo'] ?></option>
                                         <?php
-                                        }
+                                        foreach ($_SESSION['medidores'] as $medidor) {;?>
+                                        
+                                        <option value=<?php echo $medidor['tmed_id'] ?>> <?php echo $medidor['tmed_acronimo']?></option>
+                                        <?php } 
                                         unset($_SESSION['medidores']);
                                         ?>
                                     </select>
@@ -57,12 +62,12 @@ al igual de los campos a diligenciar: medida actual y fecha
                         </td>
                     </div>
                     <td>
-                        <a class="btn-agregar btn-floating btn-small waves-effect waves-light right teal">
+                        <a class="btn-agregar btn-floating btn-small waves-effect waves-light right teal" data-url="<?php echo crearUrl("Mediciones", "mediciones", "ajaxListarEquipos", array('noVista' => "noVista")) ?>">
                             <i class="mdi-action-add-shopping-cart"></i>
                         </a>
                     </td>
                     </tr>
-<?php } ?>
+                <?php } ?>
                 </tbody>
             </table>
         </div> 

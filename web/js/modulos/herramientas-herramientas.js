@@ -18,7 +18,7 @@ $(document).ready(function () {
                 minlength: 6,
                 maxlength: 40
             },
-            ther_id: "required",
+            ther_id: "requerid"
         },
         //mensajes para cada dato validado
         messages: {
@@ -36,7 +36,7 @@ $(document).ready(function () {
                 maxlength: "Debe tener maximo: 40 caracteres"
             },
             ther_id: {
-                required: "Este campo es obligatorio seleccionar",
+                required: "Este campo es obligatorio seleccionar"
             }
         },
         errorElement: 'div',
@@ -55,6 +55,7 @@ $(document).ready(function () {
         e.preventDefault();
         var url = $('#crearHer').attr("data-url");
         var redirect = $('#crearHer').attr("data-redirect");
+        alert($(this).serialize());
         $.ajax({
             type: "POST",
             url: url,
@@ -62,7 +63,7 @@ $(document).ready(function () {
         }).done(function (respuesta) {
             console.log(respuesta);
             alert(respuesta);
-            if (respuesta==true) {
+            if (respuesta == true) {
                 Materialize.toast("<i class= 'material-icons' ></i> Herramienta registrada exitosamente", 2000, 'green');
                 setTimeout(
                         function () {
@@ -120,7 +121,7 @@ $(document).ready(function () {
             text: "La información que estas apunto de eliminar no aparecera en pantalla!",
             type: "warning",
             showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
+            confirmButtonColor: "red",
             confirmButtonText: "Si, Elimine el Registro!",
             closeOnConfirm: false},
         function () {
@@ -130,9 +131,15 @@ $(document).ready(function () {
                 data: {
                     id: her_id
                 }
+            }).done(function (data) {
+                if (data == true) {
+                    swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
+                    window.setTimeout('location.reload()', 1000);
+                } else {
+                    swal("No se pudo eliminar el registro", "error");
+                }
             });
-            swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
-            window.location.href = "listar";
+//            window.location.href = "listar";
         });
     });
     // aqui termina el sweetAlert de herramientas

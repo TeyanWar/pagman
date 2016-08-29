@@ -1,29 +1,20 @@
+<div class="title center"><h5>Detalle Ciudad</h5></div>
+<br>
 <div class="row">
-     <form class="col s12">
-         <center> <h5 class="header2"> Ver Detalle </h5></center>
-         <br>
-         <br>
-         
-            <div class="row">
-             
-                <div class="input-field col s4">
-                    <input readonly=""  type="text" id="ciud_id" class="validate" value="<?php echo $ciudad['ciud_id'] ?>">
-                    <label style="color:#448aff;" for="ciud_id" class="active">Codigo de ciudad:</label>
-                </div>
-                <div class="input-field col s4">
-                    <input readonly=""  type="text" id="ciud_nom" class="validate"  value="<?php echo $ciudad['ciud_nombre'] ?>">
-                    <label style="color:#448aff;" for="ciud_nombre" class="active" >Nombre ciudad :</label>
-                    
-                </div>
-                <div class="input-field col s4">
-                    <input readonly  type="text" id="dept_nombre" class="validate"  value="<?php echo $ciudad['dept_nombre'] ?>">
-                    <label style="color:#448aff;"  for="dept_id" class="active" >Nombre departamento :</label>
 
-                </div>
-                
-            </div>
-            
-       
-    </form>
+    <div class="col s4">
+        <label style="color: #448aff;"><h6>Codigo de ciudad:</h6></label> 
+        <?php echo $ciudad['ciud_id'] ?>
+    </div>
+
+    <div class="col s4">
+        <label style="color: #448aff;"><h6>Nombre ciudad:</h6></label> 
+        <?php echo $ciudad['ciud_nombre'] ?>
+    </div>
+
+    <div class="col s4">
+        <label style="color: #448aff;"><h6>Nombre departamento:</h6></label> 
+        <?php echo $ciudad['dept_nombre'] ?>
+    </div>
+
 </div>
-

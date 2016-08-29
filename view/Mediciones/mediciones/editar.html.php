@@ -5,7 +5,7 @@
         <div class="col s6">
             <label for="nombreResponsable">Nombre</label>
             <input disabled id="disabled" type="text" class="validate" value="<?php echo $mediciones['per_nombre'] ?>">
-        </div>
+         </div>
 
         <div class="col s6">
             <label for="nombreEquipo" align="center">Nombre equipo</label>
@@ -41,7 +41,7 @@
 </form>
 
 <script type="text/javascript">
-
+    
     $(document).ready(function () {
         $('select').material_select('destroy');
         $('select').material_select();
@@ -51,7 +51,7 @@
         });
 
     });
-
+    
     $(".modal-trigger").leanModal({
         dismissible: true,
         opacity: .5,

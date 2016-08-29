@@ -30,18 +30,17 @@ $(document).ready(function () {
         });
     });
 
-        $(document).on("click", ".editar1", function () {
-            var url = $(this).attr("data-url");
+    $(document).on("click", ".editar1", function () {
+        var url = $(this).attr("data-url");
 
-            $.ajax({
-                url: url,
-                type: "get",
-                success: function (data) {
-                    $("#modalUpdate1 > .modal-content").html(data);
-                }
-            });
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#modalUpdate1 > .modal-content").html(data);
+            }
         });
-        
+    });
     $(document).on("click", ".eliminar1", function () {
         var url = $(this).attr("data-url");
 

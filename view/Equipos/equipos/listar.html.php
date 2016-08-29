@@ -33,8 +33,8 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a class=" btn-floating waves-effect waves-light modal-eliminar red
-                                       darken-4 eliminar" data-equi_id="<?php echo $equipo['equi_id'] ?>"  data-url="<?php echo crearUrl('equipos', 'equipos', 'postEliminar', array('noVista' => 'noVista', 'id' => $equipo['equi_id'])) ?>">
+                                    <a class="btn-floating waves-effect modal-eliminar waves-light red darken-4" data-id="<?php echo $equipo['equi_id'] ?>" 
+                                     data-url="<?php echo crearUrl('equipos', 'equipos', 'eliminar', array('noVista' => 'noVista', 'id' => $equipo['equi_id'])) ?>">
                                         <i class="mdi-action-delete small red "></i>
                                     </a>
 
@@ -58,26 +58,21 @@
                     <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           
                 </div>
             </div>
-            <div id="modaleliminar1" class="modal modal-fixed-footer">
-                <div class="modal-content"></div>
-                <div class="modal-footer">
-                    <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>
-    <script type="text/javascript">
-        $('.modal-trigger').leanModal({
-            dismissible: true, // Modal can be dismissed by clicking outside of the modal
-            opacity: .5, // Opacity of modal background
-            in_duration: 300, // Transition in duration
-            out_duration: 200, // Transition out duration
-            ready: function () {
-                //alert('Ready'); 
-            }, // Callback for Modal open
-            complete: function () {
-                //alert('Closed'); 
-            } // Callback for Modal close
-        });
-    </script>
+<script type="text/javascript">
+    $('.modal-trigger').leanModal({
+        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        in_duration: 300, // Transition in duration
+        out_duration: 200, // Transition out duration
+        ready: function () {
+            //alert('Ready'); 
+        }, // Callback for Modal open
+        complete: function () {
+            //alert('Closed'); 
+        } // Callback for Modal close
+    });
+</script>

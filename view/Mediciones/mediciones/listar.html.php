@@ -19,20 +19,19 @@
             </button>
         </div>
         <?php
-        $errores = getErrores();
-        if (!$errores == "") {
-            ?>
-            <div id="prueba">
-                <div id="card-alert" class="card red">
-                    <div class="card-content white-text">
-                        <p><i class="mdi-alert-error"></i> 
-                        <p><?php echo $errores ?></p>
+            $errores = getErrores();
+            if (!$errores == "") { ?>
+                <div id="prueba">
+                    <div id="card-alert" class="card red">
+                        <div class="card-content white-text">
+                            <p><i class="mdi-alert-error"></i> 
+                            <p><?php echo $errores ?></p>
+                        </div>
+                        <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
-                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
                 </div>
-            </div>
         <?php } ?>
 
         <!--Fin mensaje de campos obligatorios-->
@@ -40,58 +39,53 @@
         <table class="highlight center striped bordered">
             <div class="row">
                 <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Equipo</th>
+                    <th>Fecha Última(s) Medicion(es)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Medida y Tipo Medidor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Responsable</th>
+                    <th>Medicion Total</th>
+                    <th>Ver Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $count = 1;
+                foreach ($equipos as $equipo) { ?>
                     <tr>
-                        <th>#</th>
-                        <th>Equipo</th>
-                        <th>Fecha Última(s) Medicion(es)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            Medida y Tipo Medidor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            Responsable</th>
-                        <th>Medicion Total</th>
-                        <th>Ver Detalle</th>
+                        <td><?php echo $count++; ?></td>
+                        <td><?php echo $equipo['equi_nombre'] ?></td>
+                        <td>
+                            <?php foreach($equipo['tiposMedidores'] as $tipoMedidor){ 
+                                explodeFecha($tipoMedidor['ultimaMedicion']['ctrmed_fecha']);
+                                $fecha=getfecha();
+                                echo "&nbsp;&nbsp;&nbsp;&nbsp;".$fecha."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
+                                     $tipoMedidor['ultimaMedicion']['ctrmed_medida_actual']." ".$tipoMedidor['tmed_nombre']."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
+                                     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#160;&#160;&#160;&#160;".$tipoMedidor['ultimaMedicion']['responsable']."<br>"; 
+                            } ?>
+                        </td>
+                        <td>
+                            <?php foreach($equipo['tiposMedidores'] as $tipoMedidor){ 
+                                echo $tipoMedidor['totalMediciones']."  ".$tipoMedidor['tmed_nombre']."<br>";
+                            } ?>
+                        </td>
+                        <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
+                            href="#modal_detalle_mediciones" 
+                            data-url="<?php echo crearUrl("Mediciones", "mediciones", "detalle", array('noVista' => 'noVista', 'id' => $equipo['equi_id'])); ?>"><i class="mdi-action-find-in-page tiny"></i></a></td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $count = 1;
-                    foreach ($equipos as $equipo) {
-                        ?>
-                        <tr>
-                            <td><?php echo $count++; ?></td>
-                            <td><?php echo $equipo['equi_nombre'] ?></td>
-                            <td>
-                                <?php
-                                foreach ($equipo['tiposMedidores'] as $tipoMedidor) {
-                                    explodeFecha($tipoMedidor['ultimaMedicion']['ctrmed_fecha']);
-                                    $fecha = getfecha();
-                                    echo "&nbsp;&nbsp;&nbsp;&nbsp;" . $fecha . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" .
-                                    $tipoMedidor['ultimaMedicion']['ctrmed_medida_actual'] . " " . $tipoMedidor['tmed_nombre'] . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" .
-                                    "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#160;&#160;&#160;&#160;" . $tipoMedidor['ultimaMedicion']['responsable'] . "<br>";
-                                }
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                foreach ($equipo['tiposMedidores'] as $tipoMedidor) {
-                                    echo $tipoMedidor['totalMediciones'] . "  " . $tipoMedidor['tmed_nombre'] . "<br>";
-                                }
-                                ?>
-                            </td>
-                            <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
-                                   href="#modal_detalle_mediciones" 
-                                   data-url="<?php echo crearUrl("Mediciones", "mediciones", "detalle", array('noVista' => 'noVista', 'id' => $equipo['equi_id'])); ?>"><i class="mdi-action-find-in-page tiny"></i></a></td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
+            <?php } ?>
+            </tbody>
             </div>
-
+            
         </table>
-
+        
         <div class="modal close" id="modal_detalle_mediciones" style="z-index: 1003; display: none; 
-             opacity: 0; transform: scaleX(0.7); top: 341.06px; height:auto; width: 75%;" >
+     opacity: 0; transform: scaleX(0.7); top: 341.06px; height:auto; width: 75%;" >
             <div class="modal-content" id="model-data"></div>
         </div>
-        <?php $paginado->render() ?>
-
+        <?php  $paginado->render() ?>
+        
     </div>
 </div>
 <script type="text/javascript">
