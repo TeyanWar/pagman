@@ -53,44 +53,54 @@ class SolicitudesController {
     }
 
     function postCrear() {
-        $objSolicitudes = new SolicitudesModel();
         
         $errores= array();
+        
+        $centro= isset($_POST['centro']) ? $_POST['centro'] : '';
+        $descripcion= isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
+        
+        
         $patronLetras = "/^[a-zA-Z áéíóúñ\s]*$/";
         $patronCorreo = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
         $patronDireccion = "/^[0-9a-zA-Z]+$/";
         
-        if(!isset($_POST['descripcion']) or $_POST['descripcion']==""){
-            $errores[]="El campo DESCRIPCION debe ser diligenciado";
-                
+        
+        if(empty($centro)){
+            $errores[]="El campo <code><b>centro</b></code> debe ser diligenciado. ";
+        }
+        
+        if(empty($descripcion)){
+            $errores[]="El campo <code><b>descripci&oacute;n</b></code> debe ser diligenciado. ";
+        }
+        
+        if(!between($descripcion,3,5)){
+            $errores[]="El campo <code><b>descripci&oacute;n</b></code> debe contener entre 3 y 5 caracteres. ";
+        }
+
         if(count($errores)>0){
-            setErrores($errores);
-            redirect(crearUrl('Ot','solicitudes','crear'));
-        }
+            setErrores($errores);            
         }else{
+            
+            $objSolicitudes = new SolicitudesModel();
+            
+            $cen_id = $_POST['centro'];
+            $equi_id = $_POST['equipo'];
+            $sserv_descripcion = $_POST['descripcion'];
+            $per_id = $_POST['solicitante'];
+            $estado_id = $_POST['estado'];
+            $tfa_id = $_POST['tipo_falla'];
 
-        $cen_id = $_POST['centro'];
-        $equi_id = $_POST['equipo'];
-        $sserv_descripcion = $_POST['descripcion'];
-        $per_id = $_POST['solicitante'];
-        $estado_id = $_POST['estado'];
-        $tfa_id = $_POST['tipo_falla'];
+            $insertSolicitudes = "INSERT INTO pag_solicitud_servicio (cen_id,equi_id,sserv_descripcion,per_id,est_id,tfa_id)"
+                    . " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
 
-        $insertSolicitudes = "INSERT INTO pag_solicitud_servicio (cen_id,equi_id,sserv_descripcion,per_id,est_id,tfa_id)"
-                . " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
+            $insertar = $objSolicitudes->insertar($insertSolicitudes);
 
-        $insertar = $objSolicitudes->insertar($insertSolicitudes);
+            // Cierra la conexion
+            $objSolicitudes->cerrar();
 
-        if ($insertar) {
-            echo true;
-        } else {
-            echo false;
         }
-        // Cierra la conexion
-        $objSolicitudes->cerrar();
-
-        //redirect(crearUrl("Ot", "solicitudes", "listar"));
-    }
+        
+        echo getRespuestaAccion('listar');
     }
     
     function listar() {

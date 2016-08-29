@@ -296,12 +296,12 @@ class OtController {
         $id = $parametros[1];
 
         $sql = "UPDATE pag_orden_trabajo SET estado = NOW() WHERE ot_id=$id";
-        $eliminarOt = $objOt->find($sql);
+        $eliminarOt = $objOt->update($sql);
 
         if ($eliminarOt) {
-            echo "OK";
+            echo true;
         } else {
-            echo "NO";
+            echo false;
         }
         // Cierra la conexion
         $objOt->cerrar();

@@ -63,6 +63,7 @@ $(document).ready(function(){
     $(document).on('click','.btn_submit_modal',function(e){
        e.preventDefault();
        var url=$(this).parents("form:first").attr("action");
+//       alert(url);
         $(this).prop('disabled',true);
         $.ajax({
             url:url,
