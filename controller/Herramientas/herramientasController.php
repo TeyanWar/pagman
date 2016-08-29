@@ -61,7 +61,6 @@ class HerramientasController {
                 $rutaImagen = "/pagman/web/img/" . $_FILES["her_imagen"]["name"];
                 // Si no es un archivo repetido y no hubo error, subimos a la carpeta /Imagenes para luego ser mostrada 
                 move_uploaded_file($_FILES["her_imagen"]["tmp_name"], $rutaImagen);
-                //die();
 //                    echo "Archivo Subido ";
             }
             $insertHerramientas = "INSERT INTO pag_herramienta "

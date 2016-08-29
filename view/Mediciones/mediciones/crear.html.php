@@ -8,7 +8,7 @@
                 <ol class="breadcrumbs">
                     <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
                     <li><a href="#">Mediciones</a></li>
-                    <li class="active">Registrar medici&oacute;n</li>
+                    <li class="active">Crear medici&oacute;n</li>
                 </ol>
                 <!--Fin rastro de miga-->
 
@@ -42,7 +42,8 @@
 
                 <div class="row">
                     <div class="input-field col s6">
-                        <select class="select2" multiple name="personas" id="personas" data-error=".errorTxt1">
+                        <select required name="personas" class="select2" id="personas" data-error=".errorTxt1">
+                            <option value="" disabled selected>Escoja un Encargado...</option>
                             <?php foreach ($personas as $persona) { ?>
                                 <option value="<?php echo $persona['per_id'] ?>"><?php echo $persona['per_nombre'] ?></option>
                             <?php } ?>
@@ -51,7 +52,7 @@
                         <label class="active">&nbsp;(*) Nombre del responsable</label>
 
                         <!--INICIO Div que Lista los equipos y su medicion-->
-                        <div id="contenedor-equipos">
+                        <div id="contenedor-equipos" display="none">
                             <table class="striped">
                                 <thead>
                                     <tr>
@@ -74,7 +75,12 @@
                     </div>
 
                     <div class="input-field col s6">
+<<<<<<< HEAD
                         <select class="select2"  name="equipos" id="equipos" data-error=".errorTxt2" data-url="<?php echo crearUrl("Mediciones", "mediciones", "ajaxAgregarEquipo", array('noVista' => "noVista")) ?>">
+=======
+                        <select required name="equipos" id="equipos" data-error=".errorTxt2" data-url="<?php echo crearUrl("Mediciones", "mediciones", "ajaxAgregarEquipo", array('noVista' => "noVista")) ?>" class="select2">
+                            <option disabled selected>Escoja un Equipo...</option>
+>>>>>>> 6d233e9926c3d920cbc0afd4f665ecbc1c0d25e8
                             <?php foreach ($equipos as $equipo) { ?>
                                 <option value="<?php echo $equipo['equi_id'] ?>"><?php echo $equipo['equi_nombre'] ?></option>
                             <?php } ?>
@@ -84,20 +90,7 @@
 
                         <!--Inicion div que contiene los equipos que se van agregando-->
                         <div id="equipos-agregados">
-                            <table class="striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th data-field="nom_equ">Nombre equ&iacute;po</th>
-                                        <th data-field="medicion">Medici&oacute;n actual</th>
-                                        <th data-field="fecha_med">Fecha Medici&oacute;n</th>
-                                        <th>Agregar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
 
-                                </tbody>
-                            </table>
                         </div>
 
                         <!--Fin div que contiene los equipos que se van agregando-->
@@ -108,7 +101,7 @@
                 <div class="row">
                     <div class="input-field col s7 ">
                         <input data-url="<?php echo crearUrl('mediciones', 'mediciones', 'ajaxGuardarMedidas', array('noVista' => 'noVista')) ?>" data-redirect="<?php echo crearUrl('mediciones', 'mediciones', 'listar') ?>" 
-                               id="btn-guardar-medidas" class="btn waves-effect waves-light teal darken-2 right" type="submit" name="action" value="Registrar medici&oacute;n"/>
+                               id="btn-guardar-medidas" class="btn waves-effect waves-light teal darken-2 right" type="submit" name="action" value="Registrar medici&oacute;n" />
 
                     </div>
                 </div>
@@ -136,3 +129,14 @@
     });//Fin código modal tipo medidor para actualizacion
 
 </script>
+<style>
+    select:required:invalid {
+        color: gray;
+    }
+    option[value=""][disabled] {
+        display: none;
+    }
+    option {
+        color: black;
+    }
+</style>

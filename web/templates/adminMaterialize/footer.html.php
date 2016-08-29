@@ -1,3 +1,4 @@
+
 </div>
 <!-- END WRAPPER -->
 
@@ -58,6 +59,9 @@ Scripts
 <?php if (isset($modulo) && file_exists('js/modulos/' . (strtolower($modulo)) . '-' . (strtolower($controller)) . '.js')) { ?>
     <script type="text/javascript" src="<?php echo addLib('js/modulos/' . (strtolower($modulo)) . '-' . (strtolower($controller)) . '.js') ?>"></script>
 <?php } // if ?>
+    
+<!-- Scripts PrintArea -->
+<script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>
 
 <script type="text/javascript" src="<?php echo addLib('js/global.js') ?>"></script>
 </body>

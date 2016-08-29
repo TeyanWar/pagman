@@ -49,11 +49,10 @@ al igual de los campos a diligenciar: medida actual y fecha
                                 <div class="input-field col s12">
                                     <select name="tipoMedidor" id="tipoMedidor">
                                         <?php
-                                        foreach ($_SESSION['medidores'] as $medidor) {;?>
+                                        foreach ($medidores as $medidor) {;?>
                                         
                                         <option value=<?php echo $medidor['tmed_id'] ?>> <?php echo $medidor['tmed_acronimo']?></option>
                                         <?php } 
-                                        unset($_SESSION['medidores']);
                                         ?>
                                     </select>
                                     <label for="fecha"></label>

@@ -19,22 +19,24 @@
             </button>
         </div>
         <?php
-            $errores = getErrores();
-            if (!$errores == "") { ?>
-                <div id="prueba">
-                    <div id="card-alert" class="card red">
-                        <div class="card-content white-text">
-                            <p><i class="mdi-alert-error"></i> 
-                            <p><?php echo $errores ?></p>
-                        </div>
-                        <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+        $errores = getErrores();
+        if (!$errores == "") {
+            ?>
+            <div id="prueba">
+                <div id="card-alert" class="card red">
+                    <div class="card-content white-text">
+                        <p><i class="mdi-alert-error"></i> 
+                        <p><?php echo $errores ?></p>
                     </div>
+                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
+            </div>
         <?php } ?>
 
         <!--Fin mensaje de campos obligatorios-->
+<<<<<<< HEAD
 
         <table class="highlight center striped bordered">
             <div class="row">
@@ -102,3 +104,18 @@
         } // Callback for Modal close
     });
 </script>
+=======
+        <div id="right-search" class="row">
+            <form class="col s12">
+                <div class="input-field">
+                    <i class="mdi-action-search prefix"></i>
+                    <input type="text" class="validate" id="buscarMed" name='buscarMed' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Mediciones", "Mediciones", "buscador", array('noVista' => "noVista")) ?>" />
+                    <label for="icon_prefix" class="active">Buscador de Mediciones</label>
+                </div>
+            </form>
+        </div>
+        
+        <div id="listadoMediciones">
+            
+        </div>
+>>>>>>> 6d233e9926c3d920cbc0afd4f665ecbc1c0d25e8

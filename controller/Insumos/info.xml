@@ -38,7 +38,6 @@
                     <descripcion>Listar Insumos</descripcion>
                 </funcion>
             </funciones>
-            
         </controlador>
     </controladores>
 </modulos>

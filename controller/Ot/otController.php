@@ -30,15 +30,16 @@ class OtController {
 
 //        echo $sql; die();
         $ordenes = $objBuscar->select($sql);
+//        dd($ordenes);
 		
 //Paginado
 		
-		$pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1);
-		$url = crearUrl('ot', 'ot', 'listar');
-		
-		$paginado = new Paginado($ordenes, $pagina, $url);
-		
-		$ordenes = $paginado->getDatos();
+        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1);
+        $url = crearUrl('ot', 'ot', 'listar');
+
+        $paginado = new Paginado($ordenes, $pagina, $url);
+
+        $ordenes = $paginado->getDatos();
 //Fin		
 //        dd($ordenes);
         // Cierra la conexion
@@ -49,7 +50,7 @@ class OtController {
     function detalle($parametros) {
 
         $id = $parametros[1];
-
+        
         $objDetalle = new OtModel();
 
         $sql = "SELECT * FROM pag_orden_trabajo, pag_insumo, pag_tipo_falla, pag_regional,"
@@ -93,11 +94,11 @@ class OtController {
         //Llegó un id de solicitud?
         if(isset($parametros[1])){
             $id_solicitud=$parametros[1];
-
+  
             $sql = "SELECT * FROM pag_centro pc, pag_solicitud_servicio pss WHERE pss.cen_id=pc.cen_id AND pss.sserv_id=$id_solicitud";
             $centrosFormacion = $objCentroFormacion->select($sql);
             //select Centro de Formación
-
+            
             $objEquipos = new OtModel();
 
             $sql = "SELECT * FROM pag_equipo pe, pag_solicitud_servicio pss WHERE pss.equi_id=pe.equi_id AND pss.sserv_id=$id_solicitud";
@@ -106,7 +107,8 @@ class OtController {
 
             $sql = "SELECT * FROM pag_tipo_falla tf, pag_solicitud_servicio pss WHERE pss.tfa_id=tf.tfa_id AND pss.sserv_id=$id_solicitud";
             $fallas = $objTipoFalla->select($sql);
-                    
+            //select Tipo de falla
+            
         }else{
             
             $sql = "SELECT * FROM pag_centro";
@@ -240,7 +242,6 @@ class OtController {
                 . "AND pag_orden_trabajo.ins_id = pag_insumo.ins_id "
                 . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
                 . "AND pag_orden_trabajo.per_id=pag_persona.per_id "
-//                . "AND pag_orden_trabajo.reg_id = pag_regional.reg_id "
                 . "AND pag_orden_trabajo.ot_prioridad=pag_prioridad_trabajo.priotra_id "
                 . "AND pag_orden_trabajo.est_id=pag_estado.est_id "
                 . "AND pag_estado.tdoc_id=pag_tipo_doc.tdoc_id "
@@ -296,12 +297,12 @@ class OtController {
         $id = $parametros[1];
 
         $sql = "UPDATE pag_orden_trabajo SET estado = NOW() WHERE ot_id=$id";
-        $eliminarOt = $objOt->find($sql);
+        $eliminarOt = $objOt->update($sql);
 
         if ($eliminarOt) {
-            echo "OK";
+            echo true;
         } else {
-            echo "NO";
+            echo false;
         }
         // Cierra la conexion
         $objOt->cerrar();
