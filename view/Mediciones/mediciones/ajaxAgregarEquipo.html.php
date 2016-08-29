@@ -3,11 +3,6 @@ DIV que muestra en una tabla el ID y NOMBRE de un equipo,
 al igual de los campos a diligenciar: medida actual y fecha
 =============================================================-->
 <div id="lista-equipos">
-    <?php foreach ($equipo as $equi){
-        echo $equi['equi_id'];
-        echo $equi['equi_nombre'];
-        
-    }die(); ?>
     <div class="card-panel">
         <div>
             <table class="striped">

@@ -35,76 +35,6 @@
             </div>
         <?php } ?>
 
-        <!--Fin mensaje de campos obligatorios-->
-<<<<<<< HEAD
-
-        <table class="highlight center striped bordered">
-            <div class="row">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Equipo</th>
-                    <th>Fecha Última(s) Medicion(es)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Medida y Tipo Medidor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        Responsable</th>
-                    <th>Medicion Total</th>
-                    <th>Ver Detalle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $count = 1;
-                foreach ($equipos as $equipo) { ?>
-                    <tr>
-                        <td><?php echo $count++; ?></td>
-                        <td><?php echo $equipo['equi_nombre'] ?></td>
-                        <td>
-                            <?php foreach($equipo['tiposMedidores'] as $tipoMedidor){ 
-                                explodeFecha($tipoMedidor['ultimaMedicion']['ctrmed_fecha']);
-                                $fecha=getfecha();
-                                echo "&nbsp;&nbsp;&nbsp;&nbsp;".$fecha."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
-                                     $tipoMedidor['ultimaMedicion']['ctrmed_medida_actual']." ".$tipoMedidor['tmed_nombre']."&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".
-                                     "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#160;&#160;&#160;&#160;".$tipoMedidor['ultimaMedicion']['responsable']."<br>"; 
-                            } ?>
-                        </td>
-                        <td>
-                            <?php foreach($equipo['tiposMedidores'] as $tipoMedidor){ 
-                                echo $tipoMedidor['totalMediciones']."  ".$tipoMedidor['tmed_nombre']."<br>";
-                            } ?>
-                        </td>
-                        <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
-                            href="#modal_detalle_mediciones" 
-                            data-url="<?php echo crearUrl("Mediciones", "mediciones", "detalle", array('noVista' => 'noVista', 'id' => $equipo['equi_id'])); ?>"><i class="mdi-action-find-in-page tiny"></i></a></td>
-                    </tr>
-            <?php } ?>
-            </tbody>
-            </div>
-            
-        </table>
-        
-        <div class="modal close" id="modal_detalle_mediciones" style="z-index: 1003; display: none; 
-     opacity: 0; transform: scaleX(0.7); top: 341.06px; height:auto; width: 75%;" >
-            <div class="modal-content" id="model-data"></div>
-        </div>
-        <?php  $paginado->render() ?>
-        
-    </div>
-</div>
-<script type="text/javascript">
-    $('.modal-trigger').leanModal({
-        dismissible: true, // Modal can be dismissed by clicking outside of the modal
-        opacity: .5, // Opacity of modal background
-        in_duration: 300, // Transition in duration
-        out_duration: 200, // Transition out duration
-        ready: function () {
-            //alert('Ready'); 
-        }, // Callback for Modal open
-        complete: function () {
-            //alert('Closed'); 
-        } // Callback for Modal close
-    });
-</script>
-=======
         <div id="right-search" class="row">
             <form class="col s12">
                 <div class="input-field">
@@ -118,4 +48,3 @@
         <div id="listadoMediciones">
             
         </div>
->>>>>>> 6d233e9926c3d920cbc0afd4f665ecbc1c0d25e8

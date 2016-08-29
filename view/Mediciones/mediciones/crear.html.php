@@ -75,12 +75,8 @@
                     </div>
 
                     <div class="input-field col s6">
-<<<<<<< HEAD
-                        <select class="select2"  name="equipos" id="equipos" data-error=".errorTxt2" data-url="<?php echo crearUrl("Mediciones", "mediciones", "ajaxAgregarEquipo", array('noVista' => "noVista")) ?>">
-=======
                         <select required name="equipos" id="equipos" data-error=".errorTxt2" data-url="<?php echo crearUrl("Mediciones", "mediciones", "ajaxAgregarEquipo", array('noVista' => "noVista")) ?>" class="select2">
                             <option disabled selected>Escoja un Equipo...</option>
->>>>>>> 6d233e9926c3d920cbc0afd4f665ecbc1c0d25e8
                             <?php foreach ($equipos as $equipo) { ?>
                                 <option value="<?php echo $equipo['equi_id'] ?>"><?php echo $equipo['equi_nombre'] ?></option>
                             <?php } ?>
