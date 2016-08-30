@@ -50,15 +50,12 @@ class PrestamoController {
             foreach ($herramientas as $her_id => $detPrestamo) {
                 $insertDetalleprestamo = "INSERT INTO pag_det_prestamo_herramienta (pher_id,her_id,est_id,detph_cant_solicita,detph_cant_entrega) "
                         . "VALUES(" . $pher_id[0]['pher_id'] . ",'$detPrestamo', 1,$her_id,$cantidadSolicitada, $cantidadEntregada)";
-
-                $insertar = $objPrestamo->insertar($insertDetalleprestamo);
+//                $insertar = $objPrestamo->insertar($insertDetalleprestamo);
             }
             $insertar = $objPrestamo->insertar($insertDetalleprestamo);
-
-//            echo "<script language='JavaScript'> alert('su registro fue exitoso'); </script>";
+//                dd($insertDetalleprestamo);
             // Cierra la conexion   
             $objPrestamo->cerrar();
-
             redirect(crearUrl("prestamo", "prestamo", "listar"));
         }
     }

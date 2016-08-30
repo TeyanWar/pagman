@@ -17,8 +17,7 @@ $(document).ready(function () {
                 letterswithbasicpunc: true,
                 minlength: 6,
                 maxlength: 40
-            },
-            ther_id: "requerid"
+            }
         },
         //mensajes para cada dato validado
         messages: {
@@ -50,33 +49,7 @@ $(document).ready(function () {
         }
     });
     //-------------------------------------------------------------------------------//
-    //aqui empieza el toast para cuando se crea una herramienta
-    $(document).on('submit', '#crearHer', function (e) {
-        e.preventDefault();
-        var url = $('#crearHer').attr("data-url");
-        var redirect = $('#crearHer').attr("data-redirect");
-        alert($(this).serialize());
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: $(this).serialize()
-        }).done(function (respuesta) {
-            console.log(respuesta);
-            alert(respuesta);
-            if (respuesta == true) {
-                Materialize.toast("<i class= 'material-icons' ></i> Herramienta registrada exitosamente", 2000, 'green');
-                setTimeout(
-                        function () {
-                            window.location.href = (redirect);
-                        }, 2000);
-            }
-            else {
-                Materialize.toast("<i class= 'material-icons' ></i> Error al registrar la herramienta.", 3000, 'red');
-            }
-        });
-    });
 
-    //-------------------------------------------------------------------------------//
 
     //aqui terminan las validaciones del formulario de herramientas
     //------------------------------------------------------------------------------//
@@ -121,7 +94,7 @@ $(document).ready(function () {
             text: "La información que estas apunto de eliminar no aparecera en pantalla!",
             type: "warning",
             showCancelButton: true,
-            confirmButtonColor: "red",
+            confirmButtonColor: "#DD6B55",
             confirmButtonText: "Si, Elimine el Registro!",
             closeOnConfirm: false},
         function () {
@@ -131,15 +104,9 @@ $(document).ready(function () {
                 data: {
                     id: her_id
                 }
-            }).done(function (data) {
-                if (data == true) {
-                    swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
-                    window.setTimeout('location.reload()', 1000);
-                } else {
-                    swal("No se pudo eliminar el registro", "error");
-                }
             });
-//            window.location.href = "listar";
+            swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
+            window.location.href = "listar";
         });
     });
     // aqui termina el sweetAlert de herramientas

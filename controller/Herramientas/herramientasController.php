@@ -57,15 +57,17 @@ class HerramientasController {
             if (file_exists("imagenes/" . $_FILES["her_imagen"]["name"])) {
                 echo $_FILES["her_imagen"]["name"] . " ya existe. ";
             } else {
-                //$rutaImagen=$_FILES["her_imagen"]["name"];
-                $rutaImagen = "/pagman/web/img/" . $_FILES["her_imagen"]["name"];
+//                $rutaImagen=$_FILES["her_imagen"]["name"];
+                $rutaImagen = $_SERVER['DOCUMENT_ROOT']. '/pagman/web/img/' . $_FILES["her_imagen"]["name"];
+//                die(print_r($rutaImagen));
                 // Si no es un archivo repetido y no hubo error, subimos a la carpeta /Imagenes para luego ser mostrada 
                 move_uploaded_file($_FILES["her_imagen"]["tmp_name"], $rutaImagen);
 //                    echo "Archivo Subido ";
+
+                $insertHerramientas = "INSERT INTO pag_herramienta "
+                        . "(her_id,her_nombre,her_descripcion,her_imagen,her_fecha_ingreso,ther_id) "
+                        . "VALUES('$her_id','$her_nombre','$her_descripcion','" . $_FILES["her_imagen"]["name"] . "','$her_fecha_ingreso','$ther_id')";
             }
-            $insertHerramientas = "INSERT INTO pag_herramienta "
-                    . "(her_id,her_nombre,her_descripcion,her_imagen,her_fecha_ingreso,ther_id) "
-                    . "VALUES('$her_id','$her_nombre','$her_descripcion','" . $_FILES["her_imagen"]["name"] . "','$her_fecha_ingreso','$ther_id')";
         }
 
         $insertar = $objHerramientas->insertar($insertHerramientas);

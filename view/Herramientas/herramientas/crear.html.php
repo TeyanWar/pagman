@@ -1,6 +1,5 @@
-<div class="col s12 m12 l6">
-    <form class="col s12 F_registrar_her" action="<?php echo crearUrl("Herramientas", "herramientas", "postCrear") ?>" 
-          method="POST" enctype="multipart/form-data" novalidate="novalidate">
+<div class="col s12 m12">
+    <form class="col s12 m12 l12 F_registrar_her" action="<?php echo crearUrl("Herramientas", "herramientas", "postCrear") ?>" method="POST" enctype="multipart/form-data" novalidate="novalidate">
         <div class="card-panel">
             <h4 class="header2">Registrar herramienta</h4>
             <ol class="breadcrumbs">
@@ -33,29 +32,27 @@
             <?php }
             ?>
             <div class="row">
-                <div class="row">
-                    <div class="input-field col s6">
-                        <label class="active"> *Fecha ingreso de herramienta: </label>
-                        <input id="her_fecha_ingreso" placeholder="dd/mm/aaaa" name="her_fecha_ingreso" type="date" class="datepicker">
-                    </div>
-                    <div class="input-field col s6">
-                        <label for="tipo_Herramienta" class="active"> (*)Seleccione el tipo de herramienta: </label>
-                        <select class="error browser-default valid select2 required" aria-required="true" aria-invalid="false" data-error=".errorTxt3" id="ther_id" name="ther_id">
-                            <?php
-                            foreach ($tipos as $tipo) {
+                <div class="input-field col s6">
+                    <label class="active"> *Fecha ingreso de herramienta: </label>
+                    <input id="her_fecha_ingreso" placeholder="dd/mm/aaaa" name="her_fecha_ingreso" type="date" class="datepicker">
+                </div>
+                <div class="input-field col s6">
+                    <label for="tipo_Herramienta" class="active"> (*)Seleccione el tipo de herramienta: </label>
+                    <select class="error browser-default valid select2" aria-required="true" aria-invalid="false" data-error=".errorTxt3" id="ther_id" name="ther_id">
+                        <?php
+                        foreach ($tipos as $tipo) {
 
-                                echo "<option value=" . $tipo['ther_id'] . ">" . $tipo['ther_descripcion'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                        <div class="input-field">
-                            <div class="errorTxt3"></div>
-                        </div>
+                            echo "<option value=" . $tipo['ther_id'] . ">" . $tipo['ther_descripcion'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                    <div class="input-field">
+                        <div class="errorTxt3"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6">
-                        <input type="text" id="her_id" data-error=".errorTxt1" name="her_id" length="40" class="required">
+                        <input type="text" id="her_id" data-error=".errorTxt1" name="her_id" length="40">
                         <div class="errorTxt1"></div>
                         <label for="her_id" class=""> (*)N&uacute;mero placa: </label>
                         <span class="help-block">
@@ -64,7 +61,7 @@
                         </span>
                     </div>
                     <div class="input-field col s6">
-                        <input type="text" id="her_nombre" data-error=".errorTxt2" name="her_nombre" length="20" class="required"/>
+                        <input type="text" id="her_nombre" data-error=".errorTxt2" name="her_nombre" length="20" />
                         <div class="errorTxt2"></div>
                         <label for="her_nombre" class=""> (*)Nombre de herramienta: </label>
                     </div>

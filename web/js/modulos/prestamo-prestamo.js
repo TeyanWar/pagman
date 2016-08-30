@@ -99,7 +99,7 @@ $(document).ready(function () {
                 }
             });
             swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
-            window.location.href = "listarPrestamo";
+            window.location.href = "listar";
         });
     });
     // aqui termina el sweetAlert de herramientas
