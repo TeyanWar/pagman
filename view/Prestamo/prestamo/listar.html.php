@@ -31,7 +31,7 @@
     <tbody>
         <?php
         $count = 1;
-        foreach ($listarPrestamo as $prestamo) {
+        foreach ($listar as $prestamo) {
             ?>
             <tr>
                 <td><?php echo $paginado->count++ ?></td>

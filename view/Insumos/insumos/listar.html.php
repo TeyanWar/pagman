@@ -1,5 +1,5 @@
-<div class="col s12 m12">
-    <table class="bordered">
+<div class="col s12">
+    <table class="centered striped card-panel">
         <thead>             
             <tr>
                 <th>#</th>
@@ -17,7 +17,8 @@
             <?php
             $count = 1;
             foreach ($insumos as $insumo) {
-                if($insumo['estado']!=null) continue; 
+                if ($insumo['estado'] != null)
+                    continue;
                 ?>
                 <tr>
                     <td><?php echo $count++ ?></td>
@@ -29,14 +30,11 @@
 
                     <td><a class="btn-floating waves-effect waves-light modal-trigger teal" href="#editar" data-url="<?php echo crearUrl('insumos', 'insumos', 'editar', array('noVista' => "noVista", 'ins_id' => $insumo['ins_id'])) ?>" > <i class="mdi-content-create small"/></a></td>
 
-                    <td><a class="btn-floating waves-effect waves-light eliminarinsumo red darken-4" data-eliminarinsumo="<?php echo $insumo['ins_id']?>" data-url="<?php echo crearUrl('insumos', 'insumos', 'eliminar', array('noVista' => "noVista", 'ins_id' => $insumo['ins_id'])) ?>"> <i class="mdi-action-delete small"></i> </a></td>
+                    <td><a class="btn-floating waves-effect waves-light eliminarinsumo red darken-4" data-eliminarinsumo="<?php echo $insumo['ins_id'] ?>" data-url="<?php echo crearUrl('insumos', 'insumos', 'eliminar', array('noVista' => "noVista", 'ins_id' => $insumo['ins_id'])) ?>"> <i class="mdi-action-delete small"></i> </a></td>
                 </tr>   
-            <?php } ?>
+<?php } ?>
         </tbody>
     </table>
-
-    
-    
     <div class="modal" id="editar" style="display: none; opacity: 1; top: 0px;">
         <div class="modal-content" id="model-data">
 

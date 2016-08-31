@@ -35,7 +35,6 @@
             </div>
         <?php } ?>
 
-        <!--Fin mensaje de campos obligatorios-->
         <div id="right-search" class="row">
             <form class="col s12">
                 <div class="input-field">

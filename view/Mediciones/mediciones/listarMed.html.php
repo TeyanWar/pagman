@@ -22,7 +22,7 @@
                                 <?php echo $equipo['equi_nombre'] ?></td>
                             <td>
                                 <?php
-                                explodeFecha($equipo['ctrmed_fecha']) .
+                                explodeFecha($equipo['maxFecha']) .
                                         $fecha = getFecha();
                                 echo $fecha;
                                 ?>

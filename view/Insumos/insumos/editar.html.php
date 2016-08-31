@@ -5,8 +5,6 @@
 
 <div class="col s12 m12">
     <h4 class="header2">Editar insumo</h4>
-    
-        
 
         <div class="row">
             <form class="col s12" action="<?php echo crearUrl("insumos", "insumos", "postEditar") ?>" method="post">

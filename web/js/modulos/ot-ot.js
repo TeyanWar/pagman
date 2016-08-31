@@ -148,7 +148,10 @@ $(document).ready(function () {
                 url: url,
                 type: 'get'
             }).done(function (respuesta) {
+<<<<<<< HEAD
+=======
 //                alert(respuesta);
+>>>>>>> 1c020b2a2e67aa1098aa04645ada2b1839e0e689
                 if (respuesta == true) {
                     swal("¡Eliminado!", "Su registro se ha eliminado exitosamente.", 'success');
                     $('#buscador').trigger('keyup');

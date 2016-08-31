@@ -26,6 +26,7 @@ class PrestamoController {
     }
 
     function postCrear() {
+
         $pher_fecha = $_POST['pher_fecha'];
 //      $pher_fecha_devolucion = $_POST['pher_fecha_devolucion'];
         $alma_id = $_POST['alma_id'];
@@ -34,7 +35,7 @@ class PrestamoController {
         $herramientas = $_POST['id_herramienta'];
         $cantidadEntregada = $_POST['cantidadEntregada'];
         $cantidadSolicitada = $_POST['cantidadSolicitada'];
-        
+
         $objPrestamo = new PrestamoModel();
         $insertPrestamo = "INSERT INTO pag_prestamo_herramienta (pher_fecha,alm_id,jor_id,pher_observaciones)"
                 . " VALUES('$pher_fecha','$alma_id','$jor_id','$pher_observaciones')";
@@ -44,42 +45,39 @@ class PrestamoController {
         $sql = "select MAX(pher_id) as pher_id from pag_prestamo_herramienta";
         $pher_id = $objPrestamo->select($sql);
 
-//        print_r($pher_id);
-        echo ($pher_id[0]['pher_id']);
+//        echo ($pher_id[0]['pher_id']);
         if ($insertPrestamo) {
             foreach ($herramientas as $her_id => $detPrestamo) {
                 $insertDetalleprestamo = "INSERT INTO pag_det_prestamo_herramienta (pher_id,her_id,est_id,detph_cant_solicita,detph_cant_entrega) "
                         . "VALUES(" . $pher_id[0]['pher_id'] . ",'$detPrestamo', 1,$her_id,$cantidadSolicitada, $cantidadEntregada)";
-
-                $insertar = $objPrestamo->insertar($insertDetalleprestamo);
+//                $insertar = $objPrestamo->insertar($insertDetalleprestamo);
             }
             $insertar = $objPrestamo->insertar($insertDetalleprestamo);
-//            echo "<script language='JavaScript'> alert('su registro fue exitoso'); </script>";
+//                dd($insertDetalleprestamo);
             // Cierra la conexion   
             $objPrestamo->cerrar();
-
-            redirect(crearUrl("prestamo", "prestamo", "listarPrestamo"));
+            redirect(crearUrl("prestamo", "prestamo", "listar"));
         }
     }
 
-    function listarPrestamo() {
+    function listar() {
         $objPrestamo = new PrestamoModel();
 
         $sql = "SELECT * FROM pag_prestamo_herramienta";
-        $listarPrestamo = $objPrestamo->select($sql);
+        $listar = $objPrestamo->select($sql);
 
         //aqui empieza el paginado
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-        $url = crearUrl('prestamo', 'prestamo', 'listarPrestamo');
+        $url = crearUrl('prestamo', 'prestamo', 'listar');
 
-        $paginado = new Paginado($listarPrestamo, $pagina, $url);
+        $paginado = new Paginado($listar, $pagina, $url);
 
-        $listarPrestamo = $paginado->getDatos();
+        $listar = $paginado->getDatos();
 //        // fin paginado
         // Cierra la conexion
         $objPrestamo->cerrar();
 
-        include_once("../view/Prestamo/prestamo/listarPrestamo.html.php");
+        include_once("../view/Prestamo/prestamo/listar.html.php");
     }
 
     function editar($parametros = false) {
@@ -196,9 +194,7 @@ class PrestamoController {
         $cantS = $parametros[3];
         $cantE = $parametros[4];
 
-        $sql = "SELECT * FROM  pag_herramienta"
-                . " WHERE her_id='$id'";
-
+        $sql = "SELECT * FROM  pag_herramienta WHERE her_id='$id'";
         $agregarHer = $objPrestamo->find($sql);
         // Cierra la conexion
         $objPrestamo->cerrar();

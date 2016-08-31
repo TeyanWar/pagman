@@ -211,6 +211,7 @@ class OtController {
             $objOt = new OtModel();
             $insertar = $objOt->insertar($insertOt);
         }// if de validacion
+        
 
         if ($insertar) {
             $objDetalle = new OtModel();

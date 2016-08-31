@@ -255,10 +255,10 @@ class MedicionesController {
 
         $mediciones = $_POST['med_id'];
 
-         $sql="Select pe.equi_id,pe.equi_nombre,pc.ctrmed_fecha,pc.ctrmed_medida_actual,sum(ctrmed_medida_actual) as totalMedicion,ptm.tmed_nombre,concat(pp.per_nombre,' ',pp.per_apellido) as responsable "
+         $sql="Select pe.equi_id,pe.equi_nombre,max(ctrmed_fecha) as maxFecha,pc.ctrmed_medida_actual,sum(ctrmed_medida_actual) as totalMedicion,ptm.tmed_nombre,concat(pp.per_nombre,' ',pp.per_apellido) as responsable "
                 . "from pag_control_medidas pc,pag_tipo_medidor ptm,pag_persona pp,pag_equipo pe "
                 . "where pc.tmed_id=ptm.tmed_id and pc.per_id=pp.per_id and pc.equi_id=pe.equi_id and equi_nombre LIKE '%" . $mediciones . "%'" 
-                . "group by equi_nombre order by ctrmed_fecha asc";
+                . "group by equi_nombre order by maxFecha desc";
          
         $equipos = $objMediciones->select($sql);
          
@@ -279,3 +279,4 @@ class MedicionesController {
         include_once("../view/Mediciones/mediciones/listarMed.html.php");
     }
 }
+
