@@ -40,7 +40,11 @@
 
             <div class="row">
                 <div class="input-field col s12">
+<<<<<<< HEAD
+                    <button name="action" type="submit" class="btn cyan waves-effect waves-light right btn_submit_modal">Crear
+=======
                     <button name="action" type="submit" class="btn cyan waves-effect waves-light teal right btn_submit_modal">Crear
+>>>>>>> 8e4c7fac5d2fb02e6af11b3cd5dea8c6b7e962fa
                         <i class="mdi-content-send right"></i>
                     </button>
                 </div>

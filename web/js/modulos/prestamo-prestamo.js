@@ -6,23 +6,19 @@ $(document).ready(function () {
                 required: true
             },
             alma_id: "required",
-            jor_id: "required",
-            buscarHerramienta: "required",
+            jor_id: "required"
         },
         //mensajes para cada validacion del prestamo de herramientas
         messages: {
             pher_observaciones: {
-                required: "Este campo es obligatorio",
+                required: "Este campo es obligatorio"
             },
             alma_id: {
-                required: "Este campo es obligatorio seleccionar",
+                required: "Este campo es obligatorio seleccionar"
             },
             jor_id: {
-                required: "Este campo es obligatorio seleccionar",
-            },
-            buscarHerramienta: {
-                required: "Este campo es obligatorio seleccionar",
-            },
+                required: "Este campo es obligatorio seleccionar"
+            }
         },
         errorElement: 'div',
         errorPlacement: function (error, element) {
@@ -71,7 +67,7 @@ $(document).ready(function () {
         });
         $('#RespuestaHerramienta').fadeOut("slow");
     });
-//    $("#agregarPrestamo").show();
+    $("#agregarPrestamo").show();
     //------------------------------------------------------------------------------//
     //esta es la funcion para remover cada registro del carrito de compras
     $(document).on('click', '.removeFila', function (e) {
@@ -103,7 +99,7 @@ $(document).ready(function () {
                 }
             });
             swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
-            window.location.href = "listarPrestamo";
+            window.location.href = "listar";
         });
     });
     // aqui termina el sweetAlert de herramientas

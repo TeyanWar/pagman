@@ -9,38 +9,40 @@
                         <input type="text" class="form-control" id="her_id" name="her_id" readonly="" value="<?php echo $herramienta['her_id'] ?>">
                     </div>
                     <div class="input-field col s4">
-                        <label class="active"> *Fecha ingreso de herramienta: </label>
-                        <input name="her_fecha_ingreso" type="date" id="her_fecha_ingreso" class="form-control datepicker" value="<?php echo $herramienta['her_fecha_ingreso'] ?>">
+                        <label for="her_nombre" class="active">Nombre de herramienta</label>
+                        <input type="text" class="form-control" id="her_nombre" name="her_nombre"value="<?php echo $herramienta['her_nombre'] ?>" length="40">
                     </div>
                     <div class="input-field col s4">
-                        <label for="her_nombre" class="active">Nombre de herramienta</label>
-                        <input type="text" class="form-control" id="her_nombre" name="her_nombre"value="<?php echo $herramienta['her_nombre'] ?>">
+                        <label class="active"> *Fecha ingreso de herramienta: </label>
+                        <input name="her_fecha_ingreso" type="date" id="her_fecha_ingreso" class="form-control datepicker" value="<?php echo $herramienta['her_fecha_ingreso'] ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <label for="her_descripcion" class="active">Descripci&oacute;n de la Herramienta</label>
-                        <input type="text" id="her_descripcion" class="form-control" name="her_descripcion" value="<?php echo $herramienta['her_descripcion'] ?>">
+                        <input type="text" id="her_descripcion" class="form-control" name="her_descripcion" value="<?php echo $herramienta['her_descripcion'] ?>" length="200">
                     </div>
                 </div>
-<!--                <div class="file-field input-field col s6">
-                    <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
-                        <span>Subir imagen</span>
-                        <input type="file" name="her_imagen" id="her_imagen"/>
-                    </div>  
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Eliga la imagen">
-                    </div>
-                </div>-->
+                <!--                <div class="file-field input-field col s6">
+                                    <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
+                                        <span>Subir imagen</span>
+                                        <input type="file" name="her_imagen" id="her_imagen"/>
+                                    </div>  
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text" placeholder="Eliga la imagen">
+                                    </div>
+                                </div>-->
                 <!-- Campo para almacenar el id de la herramienta -->
                 <input type="hidden" name="id" value="<?php echo $herramienta['her_id'] ?>">
 
                 <!--botonera de la ventana de editar-->
-                <div class="row">
-                    <div class="col s12">
-                        <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Actualizar
-                            <i class="mdi-action-autorenew left"></i>
-                        </button>
+                <div class="row center" >
+                    <div class="input-field col  m3 "></div>
+                    <div class="input-field col  m3 "> 
+                        <button type="button" class="btn blue cerrar" value="">Cancelar</button>
+                    </div>
+                    <div class="input-field col  m3"> 
+                        <button type="submit" class="btn blue " value="submit" >Actualizar</button>
                     </div>
                 </div>
             </form>
@@ -53,29 +55,24 @@
     $("#F_editar_herramienta").validate({
         rules: {
             her_nombre: {
-                required: true,
                 minlength: 10,
                 maxlength: 40
             },
             her_descripcion: {
-                required: true,
                 minlength: 20,
                 maxlength: 200
-            },
-            ther_id: "required",
+            }
         },
         //mensajes para cada dato validado
         messages: {
             her_nombre: {
-                required: "Este campo es obligatorio",
                 minlength: "Debe tener minimo: 10 caracteres",
                 maxlength: "Debe tener maximo: 40 caracteres"
             },
             her_descripcion: {
-                required: "Este campo es obligatorio",
                 minlength: "debe tener minimo: 20 caracteres",
                 maxlength: "debe tener maximo: 200 caracteres"
-            },
+            }
         },
         errorElement: 'div',
         errorPlacement: function (error, element) {

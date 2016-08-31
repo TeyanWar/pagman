@@ -63,14 +63,13 @@ $(document).ready(function(){
     $(document).on('click','.btn_submit_modal',function(e){
        e.preventDefault();
        var url=$(this).parents("form:first").attr("action");
+//       alert(url);
         $(this).prop('disabled',true);
         $.ajax({
             url:url,
             type:"post",
             data: $(this).parents("form:first").serialize()
-            
         }).done(function(response){
-//            alert(response);
             var respuesta = $.parseJSON(response);
             if(respuesta.accion===true){
                 Materialize.toast(respuesta.mensajes, 1500, 'rounded col green');

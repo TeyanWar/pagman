@@ -57,7 +57,8 @@ function setErrores($errores =  array()){
         foreach ($errores as $error){
             
             $mensajeError .= "<li>* ".$error."</li>";
-        }        
+        }
+        
         $mensajeError .= "</ul>";
 
     }
@@ -105,54 +106,43 @@ function explodeFecha($cadena) {
     }else{
         $fecha = explode(" ", $cadena);
         setFechaNumeros($fecha[0], $fecha[1], $fecha[2]);
+        
     }
 }
 
-function setFechaNumeros($dia, $mes, $año) {
-
+function setFechaNumeros($dia,$mes,$año) {
     if ($mes == "January,") {
-        $mes = 01;
-    }
-    if ($mes == "February,") {
-        $mes = 02;
-    }
-    if ($mes == "March,") {
-        $mes = 03;
-    }
-    if ($mes == "April,") {
-        $mes = 04;
-    }
-    if ($mes == "May,") {
-        $mes = 05;
-    }
-    if ($mes == "June,") {
-        $mes = 06;
-    }
-    if ($mes == "July,") {
-        $mes = 07;
-    }
-    if ($mes == "August,") {
-        $mes = 08;
-    }
-    if ($mes == "September,") {
-        $mes = 09;
-    }
-    if ($mes == "October,") {
-        $mes = 10;
-    }
-    if ($mes == "November,") {
-        $mes = 11;
-    }
-    if ($mes == "December,") {
-        $mes = 12;
+        $mes ="01";
+    }if ($mes == "February,") {
+        $mes ="02";
+    }if ($mes == "March,") {
+        $mes ="03";
+    }if ($mes == "April,") {
+        $mes ="04";
+    }if ($mes == "May,") {
+        $mes ="05";
+    }if ($mes == "June,") {
+        $mes ="06";
+    }if ($mes == "July,") {
+        $mes ="07";
+    }if ($mes == "August,") {
+        $mes ="08";
+    }if ($mes == "September,") {
+        $mes ="09";
+    }if ($mes == "October,") {
+        $mes ="10";
+    }if ($mes == "November,") {
+        $mes ="11";
+    }if ($mes == "December,") {
+        $mes ="12";
     }
 
     $fecha = $año . "-" . $mes . "-" . $dia;
     $_SESSION['fecha'] = $fecha;
 }
-function setFechaLetras($año, $mes, $dia) {
+function setFechaLetras($año,$mes,$dia) {
     
-    if ($mes==01 or $mes==1) {
+     if ($mes==01 or $mes==1) {
         $mes = "Enero";
     }elseif ($mes==02 or $mes==2) {
         $mes = "Febrero";
@@ -176,7 +166,7 @@ function setFechaLetras($año, $mes, $dia) {
         $mes = "Noviembre";
     }elseif ($mes==12) {
         $mes = "Diciembre";
-    }
+    } 
     $fecha = $dia." de ".$mes." del ".$año;
     $_SESSION['fecha'] = $fecha;
 }

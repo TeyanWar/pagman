@@ -61,7 +61,27 @@ $(document).ready(function () {
         }
      });
    
-    
+     //------------------------------------------------------------------------------//
+    // aqui empieza el filtro de busqueda de medidores 
+    //$('#buscarMed').focus();
+    $("#buscarMed").keyup(function () {
+        var Medidor = $("#buscarMed").val();
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "medidor_id=" + Medidor,
+            success: function (data) {
+                $("#buscarMedidor").html(data);
+            }
+        });
+    });
+    //aqui termina el filtro de busqueda de las herramientas
+    // --------------------------------------------//--------------------
+    $('#buscarMed').trigger('keyup');// function_trigger para visualizar las herramientas existentes
+    $("#buscarMed").focus();
+   
+   
 //Inicio Validacion de formulario Editar Medidor
 
    $("#editarMedidores").validate({

@@ -54,7 +54,7 @@ $(document).ready(function () {
             url: url,
             data: $(this).serialize(),
         }).done(function (respuesta) {
-//            alert(respuesta);
+           //alert(respuesta);
             if (respuesta == true)
             {
                 Materialize.toast("<i class='material-icons'></i>Registro exitoso", 2000, 'green');
@@ -72,9 +72,36 @@ $(document).ready(function () {
                 .fail(function () {
                     Materialize.toast("<i class='material-icons'>warning</i>", 2000, 'blue');
                 });
-
+		
     });//fin: crear solicitud
 
+	
+	//Validation
+		
+		/*$("#crearSolicitud").validate({
+			rules: {
+				
+				descripcion:{
+					required:true
+				}
+			},
+			messages: {
+				descripcion: {
+					required: "obligatorio",
+				}
+			},
+			errorElement : 'em',
+			errorPlacement: function(error, element){
+				var placement = $(element).data('error');
+				if (placement){
+					$(placement).append(error)
+				} else{
+					error.insertAfter(element);
+				}
+			}
+		
+		});*/
+	
 //editar solicitud
     $(document).on('submit', '#editarSolicitud', function (e) {
 

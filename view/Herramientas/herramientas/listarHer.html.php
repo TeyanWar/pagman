@@ -30,10 +30,10 @@
         </tbody>
     </table>
     <!--aqui empieza la estructura de mi ventana modal para editar herramientas-->
-    <div id="modalEditar" class="modal close" style="display: none; opacity: 1; top: 10px; transform: scaleX(1);">
+    <div id="modalEditar" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 318.246px;">
         <div class="modal-content" id="model-data"></div>
 <!--        <div class="modal-footer">
-            <a class="waves-effect waves-red btn-flat modal-action modal-close" href="#!">Cancelar</a>
+            <a class="waves-effect waves-red btn-flat modal-action">Cancelar</a>
             <a class="waves-effect waves-green btn-flat modal-action modal-close" href="#">Actualizar</a>
         </div>-->
     </div>

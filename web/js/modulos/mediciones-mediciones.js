@@ -1,16 +1,16 @@
+$("#contenedor-equipos").hide();
+
 $(document).ready(function () {
-    
+
     $.validator.setDefaults({
         ignore: []
     });
-    
     //validacion formulario Crear mediciones
     //validacion para letras
-    jQuery.validator.addMethod("lettersonly", function (value, element){
+    jQuery.validator.addMethod("lettersonly", function (value, element) {
         return this.optional(element) || /^[a-zA-Z_áéíóúñ\s]*$/.test(value);
-    },"Unicamente se admiten letras");
-    
-   //Inicio Validacion de formulario Crear Medidor
+    }, "Unicamente se admiten letras");
+
     $("#formMediciones").validate({
         rules: {
             personas: {
@@ -19,45 +19,44 @@ $(document).ready(function () {
             equipos: {
                 required: true
             },
-            medidaActual:{
-                required:true,
-                numeric:true,
-                minlength:1,
-                maxlength:10
+            medidaActual: {
+                required: true,
+                numeric: true,
+                minlength: 1,
+                maxlength: 10
             },
-            fecha:{
-                required:true
+            fecha: {
+                required: true
             }
         },
         //For custom messages
         messages: {
-            personas:{
-                required:   "Este campo es obligatorio",
+            personas: {
+                required: "Este campo es obligatorio",
             },
-            equipos:{
-                required:   "Este campo es obligatorio",
+            equipos: {
+                required: "Este campo es obligatorio",
             },
-            medidaActual:{
-                required:   "Este campo es obligatorio",
-                numeric:    "Este campo es numerico unicamente",
-                minlength:  "Deber ingresar minimo 1 caracter",
-                maxlength:  "No puede sobrepasar los 10 caracteres"
+            medidaActual: {
+                required: "Este campo es obligatorio",
+                numeric: "Este campo es numerico unicamente",
+                minlength: "Deber ingresar minimo 1 caracter",
+                maxlength: "No puede sobrepasar los 10 caracteres"
             },
-            fecha:{
-                required:   "Este campo obligatorio"
+            fecha: {
+                required: "Este campo obligatorio"
             }
         },
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error);
-          } else {
-            error.insertAfter(element);
-          }
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error);
+            } else {
+                error.insertAfter(element);
+            }
         }
-     });
-      
+    });
     //Inicio código modal tipo medidor para actualizacion
     $(".modificar").click(function () {
         var url = $(this).attr("data-url");
@@ -68,47 +67,52 @@ $(document).ready(function () {
                 $("#modalModificar > .modal-content").html(data);
             }
         });
-    });//Fin código modal tipo medidor para actualizacion
+    }); //Fin código modal tipo medidor para actualizacion
 
-    //Inicio código filtro tipo de medidor
-    $("#busquedaMedidor").keyup(function () {
-        var medidor = $("#busquedaMedidor").val();
+    $("#buscarMed").keyup(function () {
+        var Medicion = $("#buscarMed").val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaMedidor=" + medidor,
+            data: "med_id=" + Medicion,
             success: function (data) {
-                $("#tabla").html(data);
+                $("#listadoMediciones").html(data);
             }
         });
-    });//Fin código filtro tipo de medidor
+    });
+    //aqui termina el filtro de busqueda de las herramientas
+    // --------------------------------------------//--------------------
+    $('#buscarMed').trigger('keyup'); // function_trigger para visualizar las herramientas existentes
+    //Inicio código filtro tipo de medidor
 
     //Inicio código agregar equipos(mediciones)
     $("#equipos").change(function () {
-        var idsEquipos = $(this).val();//Captura id's (El  método .val () se utiliza principalmente para obtener los valores de los elementos de formulario)
-        ajaxAgregarEquipo(idsEquipos);//Muestra los equipos que se han seleccionado
+        var idsEquipos = $(this).val(); //Captura id's (El  método .val () se utiliza principalmente para obtener los valores de los elementos de formulario)
+        var url = $(this).attr("data-url");
+        ajaxAgregarEquipo(idsEquipos, url); //Muestra los equipos que se han seleccionado
     });
-
-    function ajaxAgregarEquipo(idsEquipos) {
-//        alert(idsEquipos);
+    function ajaxAgregarEquipo(idsEquipos, url) {
         $.post(
-                'http://pagman/index.php/mediciones/mediciones/ajaxAgregarEquipo',{ids: idsEquipos},
+                url, {ids: idsEquipos},
         function (data) {
             var elements = $(data).find('#lista-equipos');
-            $("#equipos-agregados").html(elements.html());
+            $("#equipos-agregados").html(data);
             $(".btn-agregar").click(function () {
-                ajaxListarEquipos($(this).parent().parent());
+                $("#contenedor-equipos").show();
+                var urlListar = $(this).attr("data-url");
+                ajaxListarEquipos($(this).parent().parent(), urlListar);
+
             });
         });
     }//fin código agregar equipos(mediciones)
 
-    //inicio código listar equipo y su medicion
-    function ajaxListarEquipos(tr) {
+//inicio código listar equipo y su medicion
+    function ajaxListarEquipos(tr, urlListar) {
+//var urlListar1="http://localhost"+urlListar;
         var consecutivo = $("#consecutivo").val();
-        
         $.post(
-                'http://pagman/index.php/mediciones/mediciones/ajaxListarEquipos/noVista',
+                urlListar,
                 {
                     equi_id: tr.children('#equi_id').html(),
                     equi_nombre: tr.children('#equi_nombre').html(),
@@ -119,16 +123,15 @@ $(document).ready(function () {
                 },
         function (data) {
             $("#contenedor-equipos > table").prepend(data);
-            $("#consecutivo").val(parseInt(consecutivo)+1);
+            $("#consecutivo").val(parseInt(consecutivo) + 1);
         }
         );
     }//Fin código listar equipo y su medicion
 
-    //Inicio código mensaje de alerta 
+//Inicio código mensaje de alerta 
     $(document).on('click', '.editarSweetAlert', function (e) {
 
         e.preventDefault();
-
         swal({title: "¿Esta seguro?",
             text: "¿Esta seguro que desea actualizar la informacion?",
             type: "warning",
@@ -143,7 +146,6 @@ $(document).ready(function () {
             var descripcion = $('#descripcion').val();
             var estado = $('#estado').val();
             var id = $('#nombre').attr('data-id');
-
             $.ajax({
                 url: url,
                 type: 'post',
@@ -160,7 +162,7 @@ $(document).ready(function () {
             });
             //$(url).submit();
         });
-    });//Fin código mensaje de alerta
+    }); //Fin código mensaje de alerta
 
     //Guardar medidas
 //    $("#btn-guardar-medidas").click(function (e) {
@@ -180,16 +182,13 @@ $(document).ready(function () {
 //        return;
 //    });
     //Fin código modal tipo medidor para actualizacion
-    
-    $(document).on("click",".remove", function(){
+
+    $(document).on("click", ".remove", function () {
         var id = $(this).attr("data-id");
-        
-        $("#row-"+id).remove();
+        $("#row-" + id).remove();
     });
-    
     $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
-
         $(".modal-data").html('Cargando ....');
         $.ajax({
             url: url,
@@ -198,7 +197,5 @@ $(document).ready(function () {
                 $("#editar> .modal-content").html(data);
             }
         });
-
     });
-
 });

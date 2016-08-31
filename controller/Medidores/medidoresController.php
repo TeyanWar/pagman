@@ -137,14 +137,26 @@ class MedidoresController {
     
     public function listar(){
         $objMedidores = new MedidoresModel();
-        $sql = "SELECT * FROM pag_tipo_medidor WHERE tmed_estado=0";
+       
+        $objMedidores->cerrar();
+        include_once '../view/Medidores/medidores/listar.html.php';
+    }
+    
+    function buscador() {
+
+        $objMedidores = new MedidoresModel();
+
+        $medidor = $_POST['medidor_id'];
+
+        $sql = "SELECT * FROM pag_tipo_medidor WHERE tmed_nombre LIKE '%" . $medidor . "%' or tmed_acronimo LIKE '%" . $medidor . "%'";
+
         $medidores = $objMedidores->select($sql);
         
-        /*
+         /*
          * Paginado
          */
         $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
-        $url = crearUrl('medidores', 'medidores', 'listar');
+        $url = crearUrl('medidores', 'medidores', 'listarMed');
         
         $paginado = new Paginado($medidores, $pagina, $url);
         
@@ -152,20 +164,8 @@ class MedidoresController {
         /*
          * Fin paginado
          */
-        $objMedidores->cerrar();
-        include_once '../view/Medidores/medidores/listar.html.php';
-    }
-    
-    function buscar() {
-        include_once "../view/Medidores/medidores/buscar.html.php";
-    }
 
-    function buscarAjax() {
-        $objMedidores = new MedidoresModel();
-        $busqueda = $_POST['busquedaMedidor'];
-        $sql = "SELECT * from pag_tipo_medidor WHERE tmed_nombre LIKE '%" . $busqueda . "%' or id LIKE '%" . $busqueda . "%'";
-        $medidores = $objMedidores->select($sql);
         $objMedidores->cerrar();
-        include_once "../view/Medidores/medidores/listar.html.php";
+        include_once("../view/Medidores/Medidores/listarMed.html.php");
     }
 }

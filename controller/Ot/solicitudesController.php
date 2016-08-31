@@ -10,7 +10,7 @@ class SolicitudesController {
     function crear() {
 
         //Consulta de regionales
-        $objCentro= new SolicitudesModel();
+        $objCentro = new SolicitudesModel();
 
         $sql = "SELECT * FROM pag_centro";
         $centros = $objCentro->select($sql);
@@ -19,7 +19,7 @@ class SolicitudesController {
         $objCentro->cerrar();
 
         //Consulta de tipos de falla
-         
+
         $objTipoFalla = new TipoFallaModel();
 
         $sql = "SELECT * FROM pag_tipo_falla";
@@ -29,7 +29,7 @@ class SolicitudesController {
         $objTipoFalla->cerrar();
 
         //Consulta de estado
-       
+
         $objEstado = new EstadoModel();
 
         $sql = "SELECT * FROM pag_estado where tdoc_id=4";
@@ -39,7 +39,7 @@ class SolicitudesController {
         $objEstado->cerrar();
 
         //Consulta de persona
-        
+
         $objPersona = new PersonasModel();
 
         $sql = "SELECT * FROM pag_persona";
@@ -47,39 +47,48 @@ class SolicitudesController {
 
         // Cierra la conexion
         $objPersona->cerrar();
-        
-        include_once("../view/Ot/solicitudes/crear.html.php");
 
+        include_once("../view/Ot/solicitudes/crear.html.php");
     }
 
+<<<<<<< HEAD
     function postCrear() {       
+=======
+    function postCrear() {
+>>>>>>> 1c020b2a2e67aa1098aa04645ada2b1839e0e689
         
         $errores= array();
+        
         $centro = isset($_POST['centro']) ? $_POST['centro'] : '';
         $equipo = isset($_POST['equipo']) ? $_POST['equipo'] : '';
         $tipo_falla = isset($_POST['tipo_falla']) ? $_POST['tipo_falla'] : '';
         $solicitante = isset($_POST['solicitante']) ? $_POST['solicitante'] : '';
         $descripcion = isset($_POST['descripcion'])? $_POST['descripcion'] : '';
-        
+
         $patronLetras = "/^[a-zA-Z áéíóúñ\s]*$/";
         $patronCorreo = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
         $patronDireccion = "/^[0-9a-zA-Z]+$/";
-        
-        if (empty ($centro)){
-            $errores[]="Debe seleccionar un <code><b>Centro de formaci&oacute;n</b></code>";
-        }
-        
-        if (empty ($equipo)){
+		
+	if(empty ($centro)){
+            $errores[]="Debe seleccionar un <code><b>Centro de Formaci&oacute;n</b></code>"; 
+	}
+		
+	if(empty ($equipo)){
             $errores[]="Debe seleccionar un <code><b>Equipo</b></code>";
-        }
-        
-        if (empty ($tipo_falla)){
-            $errores[]="Debe seleccionar un <code><b>Tipo de falla</b></code>";
-        }
-        
-        if (empty ($solicitante)){
+	}
+		
+	if(empty ($tipo_falla)){
+            $errores[]="El campo <code><b>Tipo de Falla</b></code> Debe ser Diligenciado";
+	}
+		
+	if(empty ($solicitante)){
             $errores[]="Debe seleccionar un <code><b>Solicitante</b></code>";
+	}
+        
+        if(!between($descripcion,3,5)){
+            $errores[]="El campo <code><b>descripci&oacute;n</b></code> debe contener entre 3 y 5 caracteres. ";
         }
+<<<<<<< HEAD
     
 //        if(empty ($descripcion)){
 //            $errores[]="El campo <code><b>Descripci&oacute;n</b></code> debe ser diligenciado";
@@ -89,10 +98,12 @@ class SolicitudesController {
             $errores[]="El campo <code><b>Descripci&oacute;n</b></code> debe contener entre 3 y 120 caracteres";
         }
         
+=======
+
+>>>>>>> 1c020b2a2e67aa1098aa04645ada2b1839e0e689
         if(count($errores)>0){
-            setErrores($errores);
-            
-            }else{
+            setErrores($errores);            
+        }else{
             
             $objSolicitudes = new SolicitudesModel();
                 
@@ -104,18 +115,20 @@ class SolicitudesController {
             $tfa_id = $_POST['tipo_falla'];
 
             $insertSolicitudes = "INSERT INTO pag_solicitud_servicio (cen_id,equi_id,sserv_descripcion,per_id,est_id,tfa_id)"
+
                     . " VALUES('$cen_id','$equi_id','$sserv_descripcion','$per_id','$estado_id','$tfa_id')";
 
             $insertar = $objSolicitudes->insertar($insertSolicitudes);
-            
+
             // Cierra la conexion
-            $objSolicitudes->cerrar();             
-            
+            $objSolicitudes->cerrar();
+
         }
         
         echo getRespuestaAccion('listar');
+
     }
-    
+
     function listar() {
         include_once("../view/Ot/solicitudes/buscador.html.php");
     }
@@ -144,16 +157,16 @@ class SolicitudesController {
                     ) order by sserv_id desc ";
 
         $solicitudes = $objBuscar->select($sql);
-        
+
         // Paginado
-        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1);
-        $url = crearUrl('ot','solicitudes','listar');
-        
-        $paginado = new Paginado($solicitudes,$pagina,$url);
-        
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+        $url = crearUrl('ot', 'solicitudes', 'listar');
+
+        $paginado = new Paginado($solicitudes, $pagina, $url);
+
         $solicitudes = $paginado->getDatos();
         // Fin paginado
-       
+
         // Cierra la conexion
         $objBuscar->cerrar();
 
@@ -224,7 +237,7 @@ class SolicitudesController {
         // Cierra la conexión
 
         $objEstados->cerrar();
-        
+
         // Consulta de equipos
 
         $objEquipos = new SolicitudesModel();
@@ -277,6 +290,5 @@ class SolicitudesController {
         $objEliminar->cerrar();
 
         //redirect(crearUrl("Ot", "solicitudes", "listar"));
-
     }
 }

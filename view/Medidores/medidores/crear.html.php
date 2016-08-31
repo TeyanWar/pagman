@@ -54,13 +54,13 @@
 
             <div class="row">
 
-                <div class="input-field col s6">
+                <div class="input-field col s12">
                     <textarea id="descripcion" name="descripcion" class="materialize-textarea" length="100" data-error=".errorTxt4" ></textarea>
                     <label for="descripcion">&nbsp;(*) Descripci&oacute;n</label>
                     <div class="errorTxt4"></div>
                 </div>
-                <div class="col s12">
-                <button class="btn teal waves-effect waves-light right" type="submit" name="action" id="enviar"<!--onclick="Materialize.toast('¡Registro exitos!', 4000, 'rounded')"-->>
+                <div class="col s7">
+                <button class="btn teal waves-effect waves-light right" type="submit" name="action" id="enviar"<!--onclick="Materialize.toast('¡Registro exitos!', 4000, 'rounded')"-->
                         Crear medidor
                         <i class="mdi-content-add left"> </i>
                 </button>

@@ -15,10 +15,14 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
+        <!--Inicio contenedor mensajes de error-->
         <div class="card red">
-            <div id="cont_errors_ajax" class="card-content white-text"></div>
-        </div>        
-        <form class="col s12" id="crearSolicitud" method="POST" action="<?php echo crearUrl('Ot', 'solicitudes', 'postCrear', array('noVista' => 'noVista')) ?>" >
+            <div id="cont_errors_ajax" class="card-content white-text">
+            </div>
+        </div>
+        <!--Fin contenedor mensajes de error-->
+        <form class="col s12" id="crearSolicitud" method="POST" action="<?php echo crearUrl("Ot", "solicitudes", "postCrear", array('noVista' => 'noVista')) ?>">
+
             <div class="row">
                 <div class="col s12 m4 l4">                
                     <label>(*) Centro de formaci&oacute;n</label>
@@ -54,6 +58,7 @@
                         <option value="" disabled selected>Seleccione</option>
                         <?php foreach ($personas as $persona) { ?>
                             <option value="<?php echo $persona['per_id'] ?>"><?php echo $persona['per_nombre'] . " " . $persona['per_apellido'] ?></option>
+
                         <?php } ?>
                     </select>
                 </div>
@@ -68,10 +73,19 @@
 
             <div class="row">
                 <div class="input-field col m2">
+<<<<<<< HEAD
                     <button class="btn teal waves-effect waves-light right btn_submit_modal " type="submit" id="btn-crear-solicitud" name="action">Crear
+=======
+
+                    <button class="btn teal waves-effect waves-light right btn_submit_modal" type="submit" id="btn-crear-solicitud" name="action">Crear
+
+>>>>>>> 1c020b2a2e67aa1098aa04645ada2b1839e0e689
                         <i class="mdi-content-send right"></i>
                     </button>
                 </div>
             </div>
-        </form>    
+
+        </form>
     </div>
+</div>
+
