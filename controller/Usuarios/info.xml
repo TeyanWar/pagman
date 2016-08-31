@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<modulos>
+    <nombre>Usuarios</nombre>
+    <icono>mdi-action-account-circle</icono>
+    <sitioMenu>configuracion</sitioMenu>
+    <descripcion>Modulo Usuarios</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>usuariosController</nombre>
+            <icono>mdi-action-account-circle</icono>
+            <display>Usuarios</display>
+            <descripcion>Controlador de Usuarios</descripcion>
+            
+            <funciones>
+                
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Usuario</display>
+                    <descripcion>Crear Usuario</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Usuario</display>
+                    <descripcion>Editar Usuario</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Usuarios</display>
+                    <descripcion>Listar Usuarios</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Usuario</display>
+                    <descripcion>Eliminar Usuario</descripcion>
+                </funcion>
+                
+            </funciones>
+            
+        </controlador>
+        
+        <controlador>
+            <nombre>personasController</nombre>
+            <icono>mdi-action-perm-identity</icono>
+            <display>Personas</display>
+            <descripcion>Controlador de personas</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Importar Archivo Plano</display>
+                    <descripcion>Importar Plano</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>

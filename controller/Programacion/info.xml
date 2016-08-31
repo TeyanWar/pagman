@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<modulos>
+    <nombre>Programacion</nombre>
+    <icono>mdi-editor-insert-invitation</icono>
+    <sitioMenu>principal</sitioMenu>
+    <descripcion>Modulo Programacion</descripcion>
+   
+    <controladores>
+        <controlador>
+            <nombre>programacionController</nombre>
+            <icono>mdi-editor-insert-invitation</icono>
+            <display>Programacion</display>
+            <descripcion>Controlador de Programacion</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Programacion</display>
+                    <descripcion>Crear Programacion</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Programacion</display>
+                    <descripcion>Editar Programacion</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Programacion</display>
+                    <descripcion>Listar Programacion</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Programacion</display>
+                    <descripcion>Eliminar Programacion</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+        
+        <controlador>
+            <nombre>ordenController</nombre>
+            <icono>mdi-action-description</icono>
+            <display>Ordenes Prog</display>
+            <descripcion>Controlador de ordenprog</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear orden</display>
+                    <descripcion>Crear orden programada</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+    </controladores>
+</modulos>
