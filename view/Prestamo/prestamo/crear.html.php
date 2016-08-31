@@ -32,10 +32,11 @@
                     <label for="Almacenista" class="active"> (*) Seleccione el almacenista: </label>
                     <select class="error browser-default select2" data-error=".errorTxt2" name="alma_id" id="alma_id" multiple="multiple">
                         <?php
+                        
                         foreach ($almacenista as $trabajador) {
-
-                            echo "<option value=" . $trabajador['alma_id'] . ">" . $trabajador['alma_descripcion'] . "</option>";
-                        }
+                          
+                            echo "<option value=" . $trabajador['alma_id'] . ">" . $trabajador['alma_nombre'] . "</option>";
+                        }n
                         ?>
                     </select>
                     <div class="input-field">
