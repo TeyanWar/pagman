@@ -63,10 +63,8 @@ $(document).ready(function () {
                         window.location.href = (redirect);
                     }, 2000);
             }
-            else
-            {
-//                $('#errores').();
-//                
+            else {
+//                $('#errores').();                
 //                Materialize.toast("<i class='material-icons'></i>Ocurrio algun error ", 2000, 'red');
                     $("#btn-crear-solicitud").attr('disabled',false);
             }

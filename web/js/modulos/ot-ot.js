@@ -148,7 +148,7 @@ $(document).ready(function () {
                 url: url,
                 type: 'get'
             }).done(function (respuesta) {
-                if (respuesta === "NO") {
+                if (respuesta == true) {
                     swal("¡Eliminado!", "Su registro se ha eliminado exitosamente.", 'success');
                     $('#buscador').trigger('keyup');
                 } else {

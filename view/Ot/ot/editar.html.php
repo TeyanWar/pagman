@@ -94,7 +94,7 @@
     <div class="row">
         <div class="col s12 m8 l8">
             <label style="color: #448aff;"><h6>Insumo</h6></label> 
-            <input id="input_text" name="ins_id" type="text" length="10" value="<?php echo $editarOt['ins_id'] ?>"> 
+            <input id="input_text" name="ins_id" type="text" length="10" value="<?php echo $editarOt['ins_nombre'] ?>"> 
         </div>
     </div>
     <div class="row">

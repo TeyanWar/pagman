@@ -30,7 +30,12 @@
                             <td><?php echo $orden['equi_nombre'] ?></td>
                             <td><?php echo $orden['est_descripcion'] ?></td>
                             <td><?php echo $orden['priotra_descripcion'] ?></td>
+                            
+                            <?php if ($orden['est_descripcion']=="Cerrada") { ?>
+                            <td><a class="btn-floating waves-effect waves-light modal-trigger teal disabled" href="#modal_editar" data-url="<?php echo crearUrl("Ot", "ot", "editar", array('noVista' => 'noVista', 'ot_id' => $orden['ot_id'])); ?>"> <i class="mdi-content-create small"/></a></td>
+                            <?php } else { ?> 
                             <td><a class="btn-floating waves-effect waves-light modal-trigger teal" href="#modal_editar" data-url="<?php echo crearUrl("Ot", "ot", "editar", array('noVista' => 'noVista', 'ot_id' => $orden['ot_id'])); ?>"> <i class="mdi-content-create small"/></a></td>
+                            <?php } ?>
                             <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" href="#modal_detalle" data-url="<?php echo crearUrl("Ot", "ot", "detalle", array('noVista' => 'noVista', 'ot_id' => $orden['ot_id'])); ?>"><i class="mdi-action-find-in-page tiny"></i></a></td>                      
                             <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" href="#modal_detalle" data-url="<?php echo crearUrl("Ot", "ot", "detalle", array('noVista' => 'noVista', 'ot_id' => $orden['ot_id'])); ?>"><i class="mdi-maps-local-print-shop tiny"></i></a></td>
                             <td><a class="btn-floating waves-effect waves-light modal-eliminar red darken-4" data-url="<?php echo crearUrl("Ot", "ot", "eliminar", array('noVista' => 'noVista', 'ot_id' => $orden['ot_id'])); ?>"> <i class="mdi-action-delete small"></i></a></td>                          

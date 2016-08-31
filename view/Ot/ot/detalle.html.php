@@ -78,10 +78,10 @@
 <div class="row">
     <div class="col s12 m8 l8">
         <label style="color: #448aff;"><h6>Insumos</h6></label> 
-        <?php echo $detalleOrdenes['ins_id'] ?>
+        <?php echo $detalleOrdenes['ins_nombre'] ?>
     </div>
 </div>
+
 <div class="row center-align fixed">
     <br>
 </div>
-
