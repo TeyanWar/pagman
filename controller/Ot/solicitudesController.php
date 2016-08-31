@@ -51,11 +51,8 @@ class SolicitudesController {
         include_once("../view/Ot/solicitudes/crear.html.php");
     }
 
-<<<<<<< HEAD
-    function postCrear() {       
-=======
+
     function postCrear() {
->>>>>>> 1c020b2a2e67aa1098aa04645ada2b1839e0e689
         
         $errores= array();
         
@@ -88,8 +85,7 @@ class SolicitudesController {
         if(!between($descripcion,3,5)){
             $errores[]="El campo <code><b>descripci&oacute;n</b></code> debe contener entre 3 y 5 caracteres. ";
         }
-<<<<<<< HEAD
-    
+
 //        if(empty ($descripcion)){
 //            $errores[]="El campo <code><b>Descripci&oacute;n</b></code> debe ser diligenciado";
 //        }
@@ -98,9 +94,6 @@ class SolicitudesController {
             $errores[]="El campo <code><b>Descripci&oacute;n</b></code> debe contener entre 3 y 120 caracteres";
         }
         
-=======
-
->>>>>>> 1c020b2a2e67aa1098aa04645ada2b1839e0e689
         if(count($errores)>0){
             setErrores($errores);            
         }else{
