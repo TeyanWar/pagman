@@ -214,7 +214,7 @@ CREATE TABLE `pag_componente` (
 
 LOCK TABLES `pag_componente` WRITE;
 /*!40000 ALTER TABLE `pag_componente` DISABLE KEYS */;
-INSERT INTO `pag_componente` VALUES ('1','Polea',NULL),('2','Piñón',NULL);
+INSERT INTO `pag_componente` VALUES ('1','Polea',NULL),('2','Pi&ntilde;&oacute;n',NULL);
 /*!40000 ALTER TABLE `pag_componente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -300,6 +300,34 @@ LOCK TABLES `pag_departamento` WRITE;
 /*!40000 ALTER TABLE `pag_departamento` DISABLE KEYS */;
 INSERT INTO `pag_departamento` VALUES (1,'VALLE DEL CAUCA',0,NULL),(2,'Buenaventura',3,NULL),(3,'Atlantico',4,NULL);
 /*!40000 ALTER TABLE `pag_departamento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_det_equipo_medidor`
+--
+
+DROP TABLE IF EXISTS `pag_det_equipo_medidor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_det_equipo_medidor` (
+  `dequimed_id` int(11) NOT NULL AUTO_INCREMENT,
+  `equi_id` varchar(45) NOT NULL,
+  `tmed_id` int(11) NOT NULL,
+  PRIMARY KEY (`dequimed_id`),
+  KEY `equi_id` (`equi_id`),
+  KEY `tmed_id` (`tmed_id`),
+  CONSTRAINT `pag_det_equipo_medidor_ibfk_1` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`),
+  CONSTRAINT `pag_det_equipo_medidor_ibfk_2` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_det_equipo_medidor`
+--
+
+LOCK TABLES `pag_det_equipo_medidor` WRITE;
+/*!40000 ALTER TABLE `pag_det_equipo_medidor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_det_equipo_medidor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -763,28 +791,33 @@ DROP TABLE IF EXISTS `pag_orden_trabajo`;
 CREATE TABLE `pag_orden_trabajo` (
   `ot_id` int(11) NOT NULL AUTO_INCREMENT,
   `ot_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `cen_id` int(11) NOT NULL,
-  `equi_id` varchar(45) NOT NULL,
-  `tfa_id` int(11) NOT NULL,
   `ot_prioridad` varchar(30) NOT NULL,
   `ot_desc_falla` varchar(400) NOT NULL,
-  `ot_desc_trabajo` varchar(400) NOT NULL,
-  `est_id` int(11) NOT NULL,
   `ot_fecha_inicio` varchar(15) DEFAULT NULL,
   `ot_fecha_fin` varchar(15) DEFAULT NULL,
   `ot_ayudantes` varchar(100) DEFAULT NULL,
-  `ins_id` int(11) NOT NULL,
+  `ot_desc_trabajo` varchar(400) DEFAULT NULL,
+  `ot_observacion` varchar(100) DEFAULT NULL,
+  `est_id` int(11) NOT NULL,
+  `cen_id` int(11) NOT NULL,
+  `equi_id` varchar(45) NOT NULL,
+  `comp_id` varchar(45) NOT NULL,
+  `tfa_id` int(11) NOT NULL,
   `per_id` bigint(20) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`ot_id`),
   KEY `est_id` (`est_id`),
-  KEY `tfa_id` (`tfa_id`),
+  KEY `cen_id` (`cen_id`),
   KEY `equi_id` (`equi_id`),
+  KEY `comp_id` (`comp_id`),
+  KEY `tfa_id` (`tfa_id`),
   KEY `per_id` (`per_id`),
   CONSTRAINT `pag_orden_trabajo_ibfk_1` FOREIGN KEY (`est_id`) REFERENCES `pag_estado` (`est_id`),
-  CONSTRAINT `pag_orden_trabajo_ibfk_2` FOREIGN KEY (`tfa_id`) REFERENCES `pag_tipo_falla` (`tfa_id`),
+  CONSTRAINT `pag_orden_trabajo_ibfk_2` FOREIGN KEY (`cen_id`) REFERENCES `pag_centro` (`cen_id`),
   CONSTRAINT `pag_orden_trabajo_ibfk_3` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`),
-  CONSTRAINT `pag_orden_trabajo_ibfk_4` FOREIGN KEY (`per_id`) REFERENCES `pag_persona` (`per_id`)
+  CONSTRAINT `pag_orden_trabajo_ibfk_4` FOREIGN KEY (`comp_id`) REFERENCES `pag_componente` (`comp_id`),
+  CONSTRAINT `pag_orden_trabajo_ibfk_5` FOREIGN KEY (`tfa_id`) REFERENCES `pag_tipo_falla` (`tfa_id`),
+  CONSTRAINT `pag_orden_trabajo_ibfk_6` FOREIGN KEY (`per_id`) REFERENCES `pag_persona` (`per_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -794,7 +827,6 @@ CREATE TABLE `pag_orden_trabajo` (
 
 LOCK TABLES `pag_orden_trabajo` WRITE;
 /*!40000 ALTER TABLE `pag_orden_trabajo` DISABLE KEYS */;
-INSERT INTO `pag_orden_trabajo` VALUES (1,'2016-04-27 15:03:26',3,'1',2,'Alta',' Necesita lubricación en las poleas y piñones',' Desarmar la maquina para afinar los filtros',3,'8 April, 2016','15 April, 2016','Alex Romero, Nicolas Gaviria, Javier Perezs',0,1144125473,'2016-04-15 21:20:31'),(2,'2016-04-27 15:03:42',4,'EP_003',2,'Media','Falla de mantenimiento','Reparar piñones',3,'8 April, 2016','15 April, 2016','Esteban, Ceron, Cortes',0,1144125473,NULL),(3,'2016-04-07 22:34:53',1,'EP_003',1,'Media',' Hay cortos en la maquina y sonidos.',' Revisar el cableado de la maquina.',3,'7 April, 2016','21 April, 2016','Yan Carlo, Anibal, David.',0,1144125473,'2016-04-07 22:34:53'),(4,'2016-04-27 15:04:03',4,'EP_003',2,'Media',' sfhdgfvclk,.',' Cambiar aceite, calibrar vÃ¡lvulas',3,'14 April, 2016','16 April, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez, Edinson Martinez',0,1144125473,NULL),(5,'2016-04-21 21:33:56',1,'EP_003',2,'Media','Calibrar llantas','Cambiar aceite',3,'21 April, 2016','23 April, 2016','Gloria, Edinson',0,1144125472,NULL),(6,'2016-04-29 18:19:12',1,'1',1,'Media','Sonido','Cambiar aceite',3,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125472,NULL),(7,'2016-04-29 18:19:38',1,'1',1,'Media','Sonido','Cambiar aceite',3,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125472,NULL),(8,'2016-04-29 18:20:07',1,'1',1,'Media','Sonido','Cambiar aceite',3,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125472,NULL),(9,'2016-05-06 17:46:34',1,'TC001',2,'Media','Sonido','Cambiar aceite',2,'28 April, 2016','29 April, 2016','Gloria, Edinson',0,1144125473,'2016-05-06 17:46:34'),(10,'2016-05-06 17:46:18',2,'0123',2,'Media',' Sonido',' Cambiar aceite',2,'26 April, 2016','30 April, 2016','Gloria, Edinson',0,1143830254,'2016-05-06 17:46:18'),(11,'2016-05-06 17:41:59',2,'0123',2,'<br />\r\n<b>Notice</b>:  Undefi','  Sonido raro','  Cambiar aceite, montar llantas',2,'6 May, 2016','7 May, 2016','Gloria, Edinson',0,1144125473,'2016-05-06 17:41:59'),(12,'2016-05-06 17:58:49',2,'0123',2,'<br />\r\n<b>Notice</b>:  Undefi','awertfh','rtrtgjh',2,'6 May, 2016','7 May, 2016','Gloria, Edinson',0,234567,NULL),(13,'2016-05-06 18:10:31',1,'PC_002',2,'<br />\r\n<b>Notice</b>:  Undefi',' srtghg',' sfgh',2,'6 May, 2016','6 May, 2016','Gloria, Edinson',0,1144125445,'2016-05-06 18:10:31'),(14,'2016-05-06 18:14:18',1,'1',1,'<br />\r\n<b>Notice</b>:  Undefi',' lkfÃ±',' erfc',2,'6 May, 2016','6 May, 2016','Gloria, Edinson',0,1144125473,NULL),(15,'2016-05-06 19:21:10',1,'1',1,'<br />\r\n<b>Notice</b>:  Undefi','cvbn','dfgh',2,'6 May, 2016','8 May, 2016','ertyhj',0,234567,NULL),(16,'2016-05-06 18:23:38',2,'0123',2,'<br />\r\n<b>Notice</b>:  Undefi','jjjjjj','sfdsfv',3,'7 May, 2016','13 May, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez',0,1144125473,NULL),(17,'2016-05-11 02:17:17',1,'EP_003',1,'2','   jjjjjj','   sfdsfv',3,'18 May, 2016','18 May, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez',0,1144125473,NULL),(18,'2016-06-14 02:17:50',2,'0123',1,'1','   Mundo','   Hola',5,'6 May, 2016','6 May, 2016','Gloria, Edinson',0,234567,'2016-06-14 02:17:50'),(19,'2016-06-10 01:50:00',1,'1',2,'3','     srtyuj Gloria','  Mundo   Hola',6,'6 May, 2016','6 May, 2016','Gloria, Edinson, Javier',0,234567,'2016-06-10 01:50:00'),(20,'2016-06-14 02:17:47',1,'EP_003',2,'3','Revisar frenos','Cambiar aceite y tensionar frenos',3,'13 June, 2016','18 June, 2016','Edinson Martinez',0,1144125473,'2016-06-14 02:17:47'),(21,'2016-06-14 02:17:43',2,'0123',1,'3','asdfghnm','asdfgh',3,'13 June, 2016','17 June, 2016','Gloria, Edinson',0,1143830254,'2016-06-14 02:17:43'),(22,'2016-06-14 02:17:40',1,'EP_003',2,'3','ertykunbv','ygkjhnbvc',3,'13 June, 2016','18 June, 2016','Ninson Ibarra, Yuliana Ocoro, Gloria TrÃ³chez',9998,1143830254,'2016-06-14 02:17:40'),(23,'2016-06-14 02:22:11',1,'TC001',1,'1',' asdfgh. Fin',' ,gfvc . Fin',3,'13 June, 2016','18 June, 2016','Gloria, Edinson, Valentina',9998,1143830254,NULL),(24,'2016-06-14 02:23:17',1,'EP_003',1,'2',' yujfhgxv. Hola',' ipouityuh. Mundo',3,'13 June, 2016','14 June, 2016','Ninson Ibarra, Gloria TrÃ³chez',9998,1143830254,'2016-06-14 02:23:17'),(25,'2016-06-17 14:02:29',1,'EP_003',2,'1','  kjhgnbvc','  pki`p',6,'13 June, 2016','13 June, 2016','Gloria, Edinson',9998,1144125445,NULL),(26,'2016-06-17 14:33:30',1,'EP_003',2,'1','Sonido raro','Calibrar llantas, cambiar aceite',3,'17 June, 2016','23 June, 2016','Gloria',9998,1144125473,NULL),(27,'2016-06-17 14:37:02',1,'EP_003',2,'2','rethgdfvc','Cambiar aceite, ajustar freno',3,'17 June, 2016','22 June, 2016','Gloria',9998,1144125473,NULL),(28,'2016-07-21 15:55:27',1,'PC_002',2,'3',' asfdgfh',' thgbv',3,'17 June, 2016','20 June, 2016','Gloria, Edinson',9998,1143830254,NULL);
 /*!40000 ALTER TABLE `pag_orden_trabajo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1005,7 +1037,8 @@ CREATE TABLE `pag_solicitud_servicio` (
   `sserv_fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `cen_id` int(11) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
-  `sserv_descripcion` varchar(100) NOT NULL,
+  `sserv_descripcion` varchar(100) DEFAULT NULL,
+  `sserv_observacion` varchar(100) DEFAULT NULL,
   `per_id` int(11) NOT NULL,
   `est_id` int(11) NOT NULL,
   `tfa_id` int(11) NOT NULL,
@@ -1020,7 +1053,7 @@ CREATE TABLE `pag_solicitud_servicio` (
 
 LOCK TABLES `pag_solicitud_servicio` WRITE;
 /*!40000 ALTER TABLE `pag_solicitud_servicio` DISABLE KEYS */;
-INSERT INTO `pag_solicitud_servicio` VALUES (55,'2016-07-19 18:25:19',1,'1','Hola mundo',1143830254,7,1,NULL),(56,'2016-07-19 18:25:52',1,'EP_003','Hola mundo 2',234567,7,1,NULL),(57,'2016-07-19 18:26:18',2,'0123','Hola mundo 3',1144125473,7,2,NULL),(58,'2016-07-19 18:26:48',1,'PC_002','Hola mundo 4',1151956249,7,2,NULL),(59,'2016-07-19 18:27:16',1,'TC001','Hola mundo 6',1144125445,7,1,NULL),(60,'2016-07-19 18:27:42',2,'0123','Hola mundo 9',234567,7,1,NULL),(61,'2016-07-19 18:29:12',1,'1','Hola mundo 7',0,7,2,NULL),(62,'2016-07-19 18:29:17',1,'1','Hola mundo 7',0,7,2,NULL),(63,'2016-07-19 18:29:59',1,'EP_003','Hola mundo 8',1144125445,7,2,NULL);
+INSERT INTO `pag_solicitud_servicio` VALUES (55,'2016-07-19 18:25:19',1,'1','Hola mundo','',1143830254,7,1,NULL),(56,'2016-07-19 18:25:52',1,'EP_003','Hola mundo 2','',234567,7,1,NULL),(57,'2016-07-19 18:26:18',2,'0123','Hola mundo 3','',1144125473,7,2,NULL),(58,'2016-07-19 18:26:48',1,'PC_002','Hola mundo 4','',1151956249,7,2,NULL),(59,'2016-07-19 18:27:16',1,'TC001','Hola mundo 6','',1144125445,7,1,NULL),(60,'2016-07-19 18:27:42',2,'0123','Hola mundo 9','',234567,7,1,NULL),(61,'2016-07-19 18:29:12',1,'1','Hola mundo 7','',0,7,2,NULL),(62,'2016-07-19 18:29:17',1,'1','Hola mundo 7','',0,7,2,NULL),(63,'2016-07-19 18:29:59',1,'EP_003','Hola mundo 8','',1144125445,7,2,NULL);
 /*!40000 ALTER TABLE `pag_solicitud_servicio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1287,4 +1320,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-08-30 22:38:50
+-- Dump completed on 2016-08-31 18:06:41
