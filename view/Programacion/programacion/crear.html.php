@@ -34,17 +34,6 @@
            <?php } ?>
 
                 <div class="row">  
-                    <div class="col s3">
-                        <label>(*) Regional</label>
-                        <select class="error browser-default select2" id="regional" name="regional" data-error=".errorTxt1">
-                            <option value="">(Vacio)</option>
-                            <?php foreach ($regionales as $region) { ?>
-                                <option value="<?php echo $region['reg_id']; ?>" ><?php echo $region['reg_nombre']; ?></option>
-                            <?php } ?>
-                        </select>
-
-                        <div class="errorTxt1"></div>
-                    </div>
 
                     <div class="col s4">
                         <label>(*) Centro de formacion</label>
@@ -57,11 +46,11 @@
 
                         <div class="errorTxt2"></div>
                     </div>
-                    <div class="input-field col ">
+                    <div class="input-field col s1">
                         <i class="mdi-action-search  small" > </i>
                     </div>
 
-                    <div class="input-field col s4">
+                    <div class="input-field col s7">
                         <input type="text" id="equipo"  data-url="<?php echo crearUrl('Programacion', 'programacion', 'listarEquipo', array('noVista' => "noVista")) ?>">
                         <label form="equipo">Equipos</label>
                         <div id="conte" class="conte" style="z-index: 4; position: absolute; width: 90%;">
@@ -77,7 +66,7 @@
 
                     <div class=" col s3">
                         <label for="inicio">(*) Fecha Inicio Programacion</label>
-                        <input id="inicio" type="date" name="inicio" data-error=".errorTxt4">
+                        <input id="inicio" type="date" class="datepicker" required="true" name="inicio" data-error=".errorTxt4">
                         <div class="errorTxt4"></div>
                     </div>
 

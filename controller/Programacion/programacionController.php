@@ -151,7 +151,9 @@ class ProgramacionController {
             $tareas = $_POST['tareas'];
             
             $fechareg = mktime();
-            $fechaini = date("U",strtotime($inicio));
+            explodeFecha($inicio);
+            $expfech = getFecha();
+            $fechaini = date("U",strtotime($expfech));
             
             if(isset($placas) && ($equipos) &&
                     ($tipos) && ($medidores) && ($inicio) && 
