@@ -88,9 +88,6 @@ $(document).ready(function () {
     
     $("#formValid").validate({
         rules: {
-            regional: {
-                required: true
-            },
             centro: {
                 required: true
             },
@@ -102,9 +99,6 @@ $(document).ready(function () {
         },
         //For custom messages
         messages: {
-            regional:{
-                required: "La regional es obligatorio."
-            },
             centro:{
                 required: "El centro es obligatorio."
             },

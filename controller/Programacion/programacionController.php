@@ -41,6 +41,13 @@ class ProgramacionController {
     
     function crear() {
         $objProgramacion = new ProgramacionModel();
+        //----------------comprobar mantenimiento----------
+        $sqma = "SELECT tman_id FROM pag_tipo_mantenimiento WHERE tman_descripcion='preventivo'";
+        $mant= $objProgramacion->find($sqma);
+        if(empty($mant)){
+            $insmant = "INSERT INTO pag_tipo_mantenimiento (tman_id,tman_descripcion) VALUES (1,'preventivo')";
+            $objProgramacion->insertar($insmant);
+        }
         //----------------comprobar componente----------
         $comprot = "SELECT comp_id FROM pag_componente WHERE comp_descripcion='INDEFINIDO'";
         $compnte= $objProgramacion->find($comprot);
@@ -62,10 +69,6 @@ class ProgramacionController {
         //--------expresiones regulares--------------------
         $patronNumeros="/[0-9]{1,9}(\.[0-9]{0,2})?$/";
         $errores=array();
-        
-        if(!isset($_POST['regional']) or $_POST['regional']==""){
-            $errores[]='(*) El campo "Regional" es obligatorio';
-        }
         
         if(!isset($_POST['centro']) or $_POST['centro']==""){
             $errores[]='(*) El campo "Centro de Formacion" es obligatorio';

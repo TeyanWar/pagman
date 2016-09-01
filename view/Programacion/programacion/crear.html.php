@@ -46,10 +46,10 @@
 
                         <div class="errorTxt2"></div>
                     </div>
+                    
                     <div class="input-field col s1">
                         <i class="mdi-action-search  small" > </i>
                     </div>
-
                     <div class="input-field col s7">
                         <input type="text" id="equipo"  data-url="<?php echo crearUrl('Programacion', 'programacion', 'listarEquipo', array('noVista' => "noVista")) ?>">
                         <label form="equipo">Equipos</label>

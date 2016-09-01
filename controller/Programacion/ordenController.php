@@ -100,8 +100,13 @@ class OrdenController {
             }
 
             if (isset($_POST['inicio']) && isset($_POST['ot_fin'])) {
-                $timestamp1 = date("U", strtotime($_POST['inicio']));
-                $timestamp2 = date("U", strtotime($_POST['ot_fin']));
+                explodeFecha($_POST['inicio']);
+                $iniciof = getFecha();
+                $timestamp1 = date("U", strtotime($iniciof));
+                
+                explodeFecha($_POST['ot_fin']);
+                $finf = getFecha();
+                $timestamp2 = date("U", strtotime($finf));
 
                 if ($timestamp1 >= $timestamp2) {
                     $errores[] = '<strong>(*) El campo "Fecha Fin" debe ser mayor que la "fecha de Inicio"</strong>';
@@ -136,57 +141,80 @@ class OrdenController {
                 $fechaInicio = $_POST['inicio'];
                 $fechaFin = $_POST['ot_fin'];
                 $ayudantes = $_POST['ot_ayudantes'];
-                $idns = $_POST['idns'];
-                $cantidades = $_POST['cantidad'];
                 
                 $objOrden = new OrdenModel();
                 
-                if (isset($encargado) && ($fechaInicio) && ($fechaFin) && ($ayudantes) && ($idns) && ($cantidades)) {
+                if (isset($encargado) && ($fechaInicio) && ($fechaFin) && ($ayudantes)) {
+                    
 
                     if(isset($_POST['id'])){
                         $ids = $_POST['id'];
                     
                         foreach ($ids as $id) {
 
-                            $ins = "SELECT pag_centro.cen_id,pag_equipo.equi_id,"
+                            $ins = "SELECT pag_centro.cen_id,pag_equipo.equi_id,pag_componente.comp_id,"
                                     . "pag_tarea.tar_nombre,pag_det_programacion.detprog_id,"
                                     . "pag_prioridad_trabajo.priotra_descripcion "
                                     . "FROM pag_det_programacion,pag_programacion_equipo,pag_centro,pag_equipo,"
-                                    . "pag_tarea,pag_prioridad_trabajo "
+                                    . "pag_tarea,pag_componente,pag_prioridad_trabajo "
                                     . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
                                     . "AND pag_programacion_equipo.cen_id=pag_centro.cen_id "
                                     . "AND pag_det_programacion.equi_id=pag_equipo.equi_id "
                                     . "AND pag_det_programacion.tar_id=pag_tarea.tar_id "
+                                    . "AND pag_det_programacion.comp_id=pag_componente.comp_id "
                                     . "AND pag_det_programacion.priotra_id=pag_prioridad_trabajo.priotra_id "
                                     . "AND pag_det_programacion.detprog_id=$id";
 
                             $orden = $objOrden->find($ins);
+
                             //--------------------------insercion------------------------------------
 
                             $insertOt = "INSERT INTO pag_orden_trabajo(cen_id,"
                                     . "equi_id,tfa_id, ot_prioridad, per_id,"
                                     . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes,"
-                                    . "ot_desc_falla,ot_desc_trabajo, est_id)"
+                                    . "ot_desc_falla,ot_desc_trabajo,comp_id,est_id)"
                                     . "VALUES($orden[cen_id],'$orden[equi_id]', "
                                     . "'1', '$orden[priotra_descripcion]', '$encargado', '$fechaInicio', "
-                                    . "'$fechaFin', '$ayudantes','mantenimiento preventivo', '$orden[tar_nombre]', '3')";
+                                    . "'$fechaFin', '$ayudantes','mantenimiento preventivo',"
+                                    . "'$orden[tar_nombre]','$orden[comp_id]','3')";
 
                             $insertar = $objOrden->insertar($insertOt);
                             
                             $otidsql = "select max(ot_id) as ot_id from pag_orden_trabajo";
 
                             $otid = $objOrden->find($otidsql);
+                            //---------------insumos-----------------
+                            if(!empty($_POST['idns'])){
+                                $idns = $_POST['idns'];
+                                $cantidades = $_POST['cantidad'];
+                                $i=0;
+                                foreach ($idns as $insid){
 
-                            $i=0;
-                            foreach ($idns as $insid){
-                                
-                                $det = "INSERT INTO pag_detalle_ot (ot_id,ins_id,cantidad) "
-                                        . "VALUES ($otid[ot_id],$insid,$cantidades[$i])";
+                                    $det = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,cantidad) "
+                                            . "VALUES ($otid[ot_id],$insid,$cantidades[$i])";
 
-                                $insedet = $objOrden->insertar($det);
-                                
-                                $i++;
+                                    $insedet = $objOrden->insertar($det);
+
+                                    $i++;
+                                }
                             }
+                            
+                            //---------------herramientas-----------------
+                            if(!empty($_POST['idher'])){
+                                $idher = $_POST['idher'];
+                                $cantidadher = $_POST['cantidadher'];
+                                $x=0;
+                                foreach ($idher as $her){
+
+                                    $dether = "INSERT INTO pag_det_herramienta_ot (ot_id,her_id,cantidad) "
+                                            . "VALUES ($otid[ot_id],'$her',$cantidadher[$x])";
+
+                                    $inseher = $objOrden->insertar($dether);
+
+                                    $x++;
+                                }
+                            }
+                            
                             
                         }
                     }
@@ -211,27 +239,49 @@ class OrdenController {
                             $medr = "INSERT INTO pag_orden_trabajo(cen_id,"
                                     . "equi_id,tfa_id, ot_prioridad, per_id,"
                                     . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes,"
-                                    . "ot_desc_falla,ot_desc_trabajo, est_id)"
+                                    . "ot_desc_falla,ot_desc_trabajo,comp_id,est_id)"
                                     . "VALUES($ormed[cen_id],'$ormed[equi_id]', "
                                     . "'1', 'Alta', '$encargado', '$fechaInicio', "
-                                    . "'$fechaFin', '$ayudantes','mantenimiento preventivo', 'cambio de aceite', '3')";
+                                    . "'$fechaFin', '$ayudantes','mantenimiento preventivo',"
+                                    . " 'cambio de aceite','9999', '3')";
 
                             $insermed = $objOrden->insertar($medr);
                             
                             $otidsq = "select max(ot_id) as ot_id from pag_orden_trabajo";
                             
                             $otidn = $objOrden->find($otidsq);
-                            
-                            $a=0;
-                            foreach ($idns as $insi){
-                                
-                                $dets = "INSERT INTO pag_detalle_ot (ot_id,ins_id,cantidad) "
-                                        . "VALUES ($otidn[ot_id],$insi,$cantidades[$a])";
-                                
-                                $insed = $objOrden->insertar($dets);
-                                
-                                $a++;
+                            //--------------insumos-----------------------
+                            if(!empty($_POST['idns'])){
+                                $idns = $_POST['idns'];
+                                $cantidades = $_POST['cantidad'];
+                                $a=0;
+                                foreach ($idns as $insi){
+
+                                    $dets = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,cantidad) "
+                                            . "VALUES ($otidn[ot_id],$insi,$cantidades[$a])";
+
+                                    $insed = $objOrden->insertar($dets);
+
+                                    $a++;
+                                }
                             }
+                            
+                            //---------------herramientas-----------------
+                            if(!empty($_POST['idher'])){
+                                $idher = $_POST['idher'];
+                                $cantidadher = $_POST['cantidadher'];
+                                $x=0;
+                                foreach ($idher as $her){
+
+                                    $dether = "INSERT INTO pag_det_herramienta_ot (ot_id,her_id,cantidad) "
+                                            . "VALUES ($otid[ot_id],'$her',$cantidadher[$x])";
+
+                                    $inseher = $objOrden->insertar($dether);
+
+                                    $x++;
+                                }
+                            }
+                            
                             
                         }
                     }
@@ -260,7 +310,7 @@ class OrdenController {
 
         $ins = "SELECT ins_id,ins_nombre FROM pag_insumo "
                 . "WHERE pag_insumo.ins_nombre LIKE '%" . $insumo . "%' "
-                . "ORDER BY pag_insumo.ins_id LIMIT 0,2";
+                . "ORDER BY pag_insumo.ins_id LIMIT 0,1";
 
         $insumos = $objOrden->select($ins);
 
@@ -286,6 +336,42 @@ class OrdenController {
         $objOrden->cerrar();
         
         include_once '../view/Programacion/orden/filains.html.php';
+    }
+    
+    //------------------------carrito de herramientas-----------------------
+    function listarherramientas() {
+
+        $objOrden = new OrdenModel();
+
+        $herrami = $_POST['herrami'];
+
+        $sqlher = "SELECT her_id,her_nombre FROM pag_herramienta "
+                . "WHERE pag_herramienta.her_nombre LIKE '%" . $herrami . "%' "
+                . "ORDER BY pag_herramienta.her_id LIMIT 0,1";
+
+        $herramientas = $objOrden->select($sqlher);
+
+        // Cierra la conexion
+        $objOrden->cerrar();
+
+        include_once("../view/Programacion/orden/listarHer.html.php");
+    }
+    
+    function añadirFher() {
+        
+        $objOrden = new OrdenModel();
+
+        $idher = $_POST['cod_her'];
+
+        $inher = "SELECT her_id,her_nombre,her_descripcion FROM pag_herramienta "
+                . "WHERE pag_herramienta.her_id='$idher'";
+
+        $herrafila = $objOrden->find($inher);
+
+        // Cierra la conexion
+        $objOrden->cerrar();
+        
+        include_once '../view/Programacion/orden/filaher.html.php';
     }
 
 

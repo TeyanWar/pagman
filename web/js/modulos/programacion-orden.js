@@ -47,7 +47,12 @@ $(document).ready(function () {
             "cantidad[]": {
                 required: true,
                 digits: true,
-                maxlength: 4
+                maxlength: 2
+            },
+            "cantidadher[]": {
+                required: true,
+                digits: true,
+                maxlength: 2
             },
             inicio: {
                 required: true
@@ -78,13 +83,18 @@ $(document).ready(function () {
             "cantidad[]":{
                 required: "La Cantidad Del Insumo es obligatorio.",
                 digits: "La Cantidad Del Insumo debe ser: NUMERICO.",
-                maxlength: "Solo se permite introducir maximo 4 caracteres."
+                maxlength: "Solo se permite introducir maximo 2 caracteres."
+            },
+            "cantidadher[]":{
+                required: "La Cantidad De La Herramienta es obligatorio.",
+                digits: "La Cantidad De La Herramienta debe ser: NUMERICO.",
+                maxlength: "Solo se permite introducir maximo 2 caracteres."
             },
             inicio:{
-                required: "La Fecha Inicio es obligatorio."
+                required: "La Fecha es obligatorio."
             },
             ot_fin:{
-                required: "La Fecha Fin es obligatorio."
+                required: "La Fecha es obligatorio."
             },
             ot_encargado:{
                 required: "El Encargado es obligatorio."
@@ -204,36 +214,44 @@ $(document).ready(function () {
 
     });
     
-    //------mensaje validado de registro------------
-//    $(document).on('submit', '#formt', function (e) {
-//        e.preventDefault();
-//        var url = $('#formt').attr("data-url");
-//        var redirect = $('#formt').attr("data-redirect");
-//        var redirecturl = $('#formt').attr("action");
-//        $.ajax({
-//            type: "POST",
-//            url: url,
-//            data: $(this).serialize()
-//        }).done(function (respuesta) {
-//
-//            if (respuesta === "OK") {
-//                Materialize.toast("<i class= 'material-icons' ></i> Registro exitoso.", 2000, 'green');
-//                setTimeout(
-//                        function () {
-//                            window.location.href = (redirect);
-//                        }, 2000);
-//
-//            }
-//            else {
-//                Materialize.toast("<i class= 'material-icons' ></i> Error al registrar.", 3000, 'red');
-//                setTimeout(
-//                        function () {
-//                            window.location.href = (redirecturl);
-//                        }, 1000);
-//            }
-//
-//        });
-//    });
+
+    //----------filtro de herramientas--------------
+    $("#herrm").keyup(function () {
+        var herrami = $("#herrm").val();
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "herrami=" + herrami,
+            success: function (data) {
+                $("#conteher").html(data);
+            }
+        });
+    });
+    
+    //---------------herramientas------------------
+    $(document).on('click', '.carherra', function () {
+        var cod_her = $(this).attr("data-id");
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                cod_her: cod_her
+            }
+        }).done(function (data) {
+            $("#herramientasprog").append(data);
+        });
+    });
+    
+    $(document).on('click', '.remoher', function () {
+        var id = $(this).attr('data-id');
+
+        $("#filaher-" + id).remove();
+
+    });
+    
+
 
 
 });
