@@ -12,8 +12,9 @@
                 <th>Nombre Encargado</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody> 
             <?php
+            die(print_r($detalleOrden));
             $count = 1;
             $totalMedida = 0;
             foreach ($detalleOrdenes as $detalleOrden) {

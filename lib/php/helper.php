@@ -142,29 +142,29 @@ function setFechaNumeros($dia,$mes,$año) {
 }
 function setFechaLetras($año,$mes,$dia) {
     
-     if ($mes==01 or $mes==1) {
+     if ($mes=='01' or $mes=='1') {
         $mes = "Enero";
-    }elseif ($mes==02 or $mes==2) {
+    }elseif ($mes=='02' or $mes=='2') {
         $mes = "Febrero";
-    }elseif ($mes==03 or $mes==3) {
+    }elseif ($mes=='03' or $mes=='3') {
         $mes = "Marzo";
-    }elseif ($mes==04 or $mes==4) {
+    }elseif ($mes=='04' or $mes=='4') {
         $mes = "Abril";
-    }elseif ($mes==05 or $mes==5) {
+    }elseif ($mes=='05' or $mes=='5') {
         $mes = "Mayo";
-    }elseif ($mes==06 or $mes==6) {
+    }elseif ($mes=='06' or $mes=='6') {
         $mes = "Junio";
-    }elseif ($mes==07 or $mes==7) {
+    }elseif ($mes=='07' or $mes=='7') {
         $mes = "Julio";
-    }elseif ($mes==08 or $mes==8) {
+    }elseif ($mes=='08' or $mes=='8') {
         $mes = "Agosto";
-    }elseif ($mes==09 or $mes==9) {
+    }elseif ($mes=='09' or $mes=='9') {
         $mes = "Septiembre";
-    }elseif ($mes==10) {
+    }elseif ($mes=='10') {
         $mes = "Octubre";
-    }elseif ($mes==11) {
+    }elseif ($mes=='11') {
         $mes = "Noviembre";
-    }elseif ($mes==12) {
+    }elseif ($mes=='12') {
         $mes = "Diciembre";
     } 
     $fecha = $dia." de ".$mes." del ".$año;
