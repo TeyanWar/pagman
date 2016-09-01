@@ -24,70 +24,70 @@ class MedicionesController {
     }
 
 
-//   /* public function listar() {
-//        $objMediciones = new MedicionesModel();
-//        $sql = "SELECT cm.equi_id, e.equi_nombre FROM pag_control_medidas cm, pag_equipo e 
-//              WHERE e.equi_id=cm.equi_id GROUP BY cm.equi_id";
-//        $equipos = $objMediciones->select($sql);
-//
-//        //Para cada equipo seleccionar los tipos de medidores
-//        foreach ($equipos as $keyEquipo => $equipo) {
-//            $sql = "SELECT tm.tmed_id, tm.tmed_nombre FROM pag_control_medidas cm, pag_tipo_medidor tm 
-//                  WHERE cm.tmed_id=tm.tmed_id AND equi_id='" . $equipo['equi_id'] . "' GROUP BY tmed_id";
-//            $tiposMedidores = $objMediciones->select($sql);
-//
-//            //Para cada tipo de medidor seleccionar el último registro y el total de mediciones
-//            foreach ($tiposMedidores as $keyTipoMedidor => $tipoMedidor) {
-//                $sql = "SELECT cm.ctrmed_fecha, cm.ctrmed_medida_actual,  
-//                CONCAT(p.per_nombre,' ',p.per_apellido) AS responsable 
-//                FROM pag_control_medidas cm, pag_tipo_medidor tm, pag_persona p    
-//                WHERE tm.tmed_id=cm.tmed_id AND cm.per_id=p.per_id AND cm.tmed_id='" . $tipoMedidor['tmed_id'] . "' 
-//                AND cm.equi_id='" . $equipo['equi_id'] . "' AND cm.ctrmed_fecha=
-//                    (SELECT MAX(ctrmed_fecha) FROM pag_control_medidas WHERE tmed_id='" . $tipoMedidor['tmed_id'] . "' 
-//                    AND equi_id='" . $equipo['equi_id'] . "')";
-//                $ultimaMedicion = $objMediciones->find($sql);
-//                $tiposMedidores[$keyTipoMedidor]['ultimaMedicion'] = $ultimaMedicion;
-//
-//                $sql = "SELECT SUM(ctrmed_medida_actual) AS totalMediciones FROM pag_control_medidas 
-//                WHERE tmed_id='" . $tipoMedidor['tmed_id'] . "' AND equi_id='" . $equipo['equi_id'] . "'";
-//                $totalMediciones = $objMediciones->select($sql);
-//                $tiposMedidores[$keyTipoMedidor]['totalMediciones'] = $totalMediciones[0]['totalMediciones'];
-//            }
-//
-//            $equipos[$keyEquipo]['tiposMedidores'] = $tiposMedidores;
-            
-//        }
-////        dd($equipos);
-//        $objMediciones->cerrar();
-//        include_once '../view/Mediciones/mediciones/listar.html.php';
-//    }
-
     public function listar() {
         $objMediciones = new MedicionesModel();
-        //$varMedicion=$_POST['med_id'];
-        $sql="Select pe.equi_id,pe.equi_nombre,pc.ctrmed_fecha,pc.ctrmed_medida_actual,sum(ctrmed_medida_actual) as totalMedicion,ptm.tmed_nombre,concat(pp.per_nombre,' ',pp.per_apellido) as responsable "
-                . "from pag_control_medidas pc,pag_tipo_medidor ptm,pag_persona pp,pag_equipo pe "
-                . "where pc.tmed_id=ptm.tmed_id and pc.per_id=pp.per_id and pc.equi_id=pe.equi_id "
-                . "group by equi_nombre order by ctrmed_fecha desc";
-        
+        $sql = "SELECT cm.equi_id, e.equi_nombre FROM pag_control_medidas cm, pag_equipo e 
+              WHERE e.equi_id=cm.equi_id GROUP BY cm.equi_id";
         $equipos = $objMediciones->select($sql);
-        
-        /*
-             * Paginado
-             */
-            $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-            $url = crearUrl('mediciones', 'mediciones', 'listar');
 
-            $paginado = new Paginado($equipos, $pagina, $url);
+        //Para cada equipo seleccionar los tipos de medidores
+        foreach ($equipos as $keyEquipo => $equipo) {
+            $sql = "SELECT tm.tmed_id, tm.tmed_nombre FROM pag_control_medidas cm, pag_tipo_medidor tm 
+                  WHERE cm.tmed_id=tm.tmed_id AND equi_id='" . $equipo['equi_id'] . "' GROUP BY tmed_id";
+            $tiposMedidores = $objMediciones->select($sql);
 
-            $equipos = $paginado->getDatos();
-            /*
-             * Fin paginado
-             */
-        
+            //Para cada tipo de medidor seleccionar el último registro y el total de mediciones
+            foreach ($tiposMedidores as $keyTipoMedidor => $tipoMedidor) {
+                $sql = "SELECT cm.ctrmed_fecha, cm.ctrmed_medida_actual,  
+               CONCAT(p.per_nombre,' ',p.per_apellido) AS responsable 
+                FROM pag_control_medidas cm, pag_tipo_medidor tm, pag_persona p    
+                WHERE tm.tmed_id=cm.tmed_id AND cm.per_id=p.per_id AND cm.tmed_id='" . $tipoMedidor['tmed_id'] . "' 
+                AND cm.equi_id='" . $equipo['equi_id'] . "' AND cm.ctrmed_fecha=
+                   (SELECT MAX(ctrmed_fecha) FROM pag_control_medidas WHERE tmed_id='" . $tipoMedidor['tmed_id'] . "' 
+                   AND equi_id='" . $equipo['equi_id'] . "')";
+                $ultimaMedicion = $objMediciones->find($sql);
+                $tiposMedidores[$keyTipoMedidor]['ultimaMedicion'] = $ultimaMedicion;
+
+                $sql = "SELECT SUM(ctrmed_medida_actual) AS totalMediciones FROM pag_control_medidas 
+                WHERE tmed_id='" . $tipoMedidor['tmed_id'] . "' AND equi_id='" . $equipo['equi_id'] . "'";
+                $totalMediciones = $objMediciones->select($sql);
+                $tiposMedidores[$keyTipoMedidor]['totalMediciones'] = $totalMediciones[0]['totalMediciones'];
+            }
+
+            $equipos[$keyEquipo]['tiposMedidores'] = $tiposMedidores;
+            
+       }
+        //dd($equipos);
         $objMediciones->cerrar();
         include_once '../view/Mediciones/mediciones/listar.html.php';
     }
+
+//    public function listar() {
+//        $objMediciones = new MedicionesModel();
+//        //$varMedicion=$_POST['med_id'];
+//        $sql="Select pe.equi_id,pe.equi_nombre,pc.ctrmed_fecha,pc.ctrmed_medida_actual,sum(ctrmed_medida_actual) as totalMedicion,ptm.tmed_nombre,concat(pp.per_nombre,' ',pp.per_apellido) as responsable "
+//                . "from pag_control_medidas pc,pag_tipo_medidor ptm,pag_persona pp,pag_equipo pe "
+//                . "where pc.tmed_id=ptm.tmed_id and pc.per_id=pp.per_id and pc.equi_id=pe.equi_id "
+//                . "group by equi_nombre order by ctrmed_fecha desc";
+//        
+//        $equipos = $objMediciones->select($sql);
+//        
+//        /*
+//             * Paginado
+//             */
+//            $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+//            $url = crearUrl('mediciones', 'mediciones', 'listar');
+//
+//            $paginado = new Paginado($equipos, $pagina, $url);
+//
+//            $equipos = $paginado->getDatos();
+//            /*
+//             * Fin paginado
+//             */
+//        
+//        $objMediciones->cerrar();
+//        include_once '../view/Mediciones/mediciones/listar.html.php';
+//    }
 
     function detalle($parametros) {
 
@@ -145,7 +145,7 @@ class MedicionesController {
             //$equipos[$equipo[0]['equi_id']] = $equipo[0];
 
         $objMedidor = new medidoresModel();
-        $sql = "SELECT tmed_id,tmed_acronimo from pag_tipo_medidor where tmed_estado=0";
+        $sql = "SELECT tmed_id,tmed_acronimo from pag_tipo_medidor where estado is null";
         $medidores = $objMedidor->select($sql);
         
         $objEquipos->cerrar();

@@ -51,6 +51,7 @@ class SolicitudesController {
         include_once("../view/Ot/solicitudes/crear.html.php");
     }
 
+
     function postCrear() {
         
         $errores= array();
@@ -85,6 +86,14 @@ class SolicitudesController {
             $errores[]="El campo <code><b>descripci&oacute;n</b></code> debe contener entre 3 y 5 caracteres. ";
         }
 
+//        if(empty ($descripcion)){
+//            $errores[]="El campo <code><b>Descripci&oacute;n</b></code> debe ser diligenciado";
+//        }
+//        
+        if(!between($descripcion, 3, 120)){
+            $errores[]="El campo <code><b>Descripci&oacute;n</b></code> debe contener entre 3 y 120 caracteres";
+        }
+        
         if(count($errores)>0){
             setErrores($errores);            
         }else{
@@ -240,6 +249,7 @@ class SolicitudesController {
         $sserv_id = $_POST['sserv_id'];
         $est_id = $_POST['est_id'];
         $sserv_observaciones = $_POST['sserv_observaciones'];
+//        $sserv_observaciones = isset($_POST['sserv_observaciones']) ? $_POST['sserv_observaciones'] : '';
         
         $objPostEditar = new SolicitudesModel();
 

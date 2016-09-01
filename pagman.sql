@@ -1,0 +1,1323 @@
+-- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
+--
+-- Host: localhost    Database: pagman
+-- ------------------------------------------------------
+-- Server version	10.1.13-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `pag_almacen`
+--
+
+DROP TABLE IF EXISTS `pag_almacen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_almacen` (
+  `alm_id` int(11) NOT NULL AUTO_INCREMENT,
+  `alm_descripcion` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`alm_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_almacen`
+--
+
+LOCK TABLES `pag_almacen` WRITE;
+/*!40000 ALTER TABLE `pag_almacen` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_almacen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_almacenista`
+--
+
+DROP TABLE IF EXISTS `pag_almacenista`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_almacenista` (
+  `alma_id` int(11) NOT NULL AUTO_INCREMENT,
+  `alma_nombre` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`alma_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_almacenista`
+--
+
+LOCK TABLES `pag_almacenista` WRITE;
+/*!40000 ALTER TABLE `pag_almacenista` DISABLE KEYS */;
+INSERT INTO `pag_almacenista` VALUES (1,'Alvaro',NULL),(2,'Tejada',NULL);
+/*!40000 ALTER TABLE `pag_almacenista` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_area`
+--
+
+DROP TABLE IF EXISTS `pag_area`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_area` (
+  `area_id` int(11) NOT NULL AUTO_INCREMENT,
+  `area_descripcion` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`area_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_area`
+--
+
+LOCK TABLES `pag_area` WRITE;
+/*!40000 ALTER TABLE `pag_area` DISABLE KEYS */;
+INSERT INTO `pag_area` VALUES (1,'Mecatrónica',NULL),(2,'Refrigeración',NULL);
+/*!40000 ALTER TABLE `pag_area` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_campos_personalizados`
+--
+
+DROP TABLE IF EXISTS `pag_campos_personalizados`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_campos_personalizados` (
+  `cp_id` int(11) NOT NULL,
+  `cp_nombre` varchar(45) DEFAULT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`cp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_campos_personalizados`
+--
+
+LOCK TABLES `pag_campos_personalizados` WRITE;
+/*!40000 ALTER TABLE `pag_campos_personalizados` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_campos_personalizados` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_cargo`
+--
+
+DROP TABLE IF EXISTS `pag_cargo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_cargo` (
+  `car_id` int(11) NOT NULL AUTO_INCREMENT,
+  `car_descripcion` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`car_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_cargo`
+--
+
+LOCK TABLES `pag_cargo` WRITE;
+/*!40000 ALTER TABLE `pag_cargo` DISABLE KEYS */;
+INSERT INTO `pag_cargo` VALUES (1,'Instructor',NULL);
+/*!40000 ALTER TABLE `pag_cargo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_centro`
+--
+
+DROP TABLE IF EXISTS `pag_centro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_centro` (
+  `cen_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cen_codigo` varchar(10) NOT NULL,
+  `cen_nombre` varchar(45) NOT NULL,
+  `cen_dir` varchar(45) NOT NULL,
+  `cen_telefono` varchar(45) NOT NULL,
+  `reg_id` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`cen_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_centro`
+--
+
+LOCK TABLES `pag_centro` WRITE;
+/*!40000 ALTER TABLE `pag_centro` DISABLE KEYS */;
+INSERT INTO `pag_centro` VALUES (1,'9229','CDTI','Pondaje','3275647',3,NULL),(2,'4893','CEAI','Salomia','2345',4,NULL),(3,'7846','ASTIN','Salomia','5678',5,NULL);
+/*!40000 ALTER TABLE `pag_centro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_ciudad`
+--
+
+DROP TABLE IF EXISTS `pag_ciudad`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_ciudad` (
+  `ciud_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ciud_nombre` varchar(45) NOT NULL,
+  `dept_id` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`ciud_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_ciudad`
+--
+
+LOCK TABLES `pag_ciudad` WRITE;
+/*!40000 ALTER TABLE `pag_ciudad` DISABLE KEYS */;
+INSERT INTO `pag_ciudad` VALUES (1,'Cali',3,NULL);
+/*!40000 ALTER TABLE `pag_ciudad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_componente`
+--
+
+DROP TABLE IF EXISTS `pag_componente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_componente` (
+  `comp_id` varchar(45) NOT NULL,
+  `comp_descripcion` varchar(100) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`comp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_componente`
+--
+
+LOCK TABLES `pag_componente` WRITE;
+/*!40000 ALTER TABLE `pag_componente` DISABLE KEYS */;
+INSERT INTO `pag_componente` VALUES ('1','Polea',NULL),('2','Pi&ntilde;&oacute;n',NULL);
+/*!40000 ALTER TABLE `pag_componente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_control_medidas`
+--
+
+DROP TABLE IF EXISTS `pag_control_medidas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_control_medidas` (
+  `ctrmed_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ctrmed_fecha` varchar(15) NOT NULL,
+  `ctrmed_medida_actual` varchar(100) NOT NULL,
+  `equi_id` varchar(45) NOT NULL,
+  `per_id` bigint(20) NOT NULL,
+  `tmed_id` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`ctrmed_id`),
+  KEY `tmed_id` (`tmed_id`),
+  KEY `equi_id` (`equi_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_control_medidas`
+--
+
+LOCK TABLES `pag_control_medidas` WRITE;
+/*!40000 ALTER TABLE `pag_control_medidas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_control_medidas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_controlador`
+--
+
+DROP TABLE IF EXISTS `pag_controlador`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_controlador` (
+  `cont_id` int(11) NOT NULL AUTO_INCREMENT,
+  `mod_id` int(11) NOT NULL,
+  `cont_nombre` varchar(40) NOT NULL,
+  `cont_icono` varchar(40) NOT NULL,
+  `cont_display` varchar(40) NOT NULL,
+  `cont_descripcion` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`cont_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_controlador`
+--
+
+LOCK TABLES `pag_controlador` WRITE;
+/*!40000 ALTER TABLE `pag_controlador` DISABLE KEYS */;
+INSERT INTO `pag_controlador` VALUES (1,1,'costosController','mdi-editor-attach-money','Costos','Controlador de Costos'),(2,2,'equiposController','mdi-hardware-desktop-windows','Equipos','Controlador de Equipos'),(3,2,'tipoEquipoController','mdi-hardware-phonelink','Tipos de equipo','Controlador de Tipos de equipos'),(4,3,'herramientasController','mdi-action-wallet-travel','Herramientas','Controlador de Herramientas'),(5,4,'insumosController','mdi-maps-local-gas-station','Insumos','Controlador de Insumos'),(6,5,'regionalController','mdi-communication-location-on','Regionales','Controlador de Regionales'),(7,5,'departamentoController','mdi-image-filter-hdr','Departamentos','Controlador de Departamentos'),(8,5,'ciudadController','mdi-image-assistant-photo','Ciudades','Controlador de Ciudades'),(9,5,'centroController','mdi-image-center-focus-strong','Centros','Controlador de Centros'),(10,6,'medicionesController','mdi-av-timer','Mediciones','Controlador de Mediciones'),(11,7,'medidoresController','mdi-image-timer','Medidor','Controlador de Medidores'),(12,8,'otController','mdi-action-assignment','Ordenes','Controlador de ot'),(13,8,'solicitudesController','mdi-communication-quick-contacts-mail','Solicitudes','Controlador de solicitudes'),(14,9,'permisosController','mdi-action-lock','Permisos','Controlador de Permisos'),(15,10,'personasController','mdi-social-person-outline','Personas','Controlador de Personas'),(16,11,'prestamoController','mdi-action-shopping-cart','Prestamo','Controlador de Prestamos'),(17,12,'programacionController','mdi-editor-insert-invitation','Programacion','Controlador de Programacion'),(18,13,'rolesController','mdi-social-group','Roles','Controlador de Roles'),(19,14,'usuariosController','mdi-action-account-circle','Usuarios','Controlador de Usuarios');
+/*!40000 ALTER TABLE `pag_controlador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_departamento`
+--
+
+DROP TABLE IF EXISTS `pag_departamento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_departamento` (
+  `dept_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dept_nombre` varchar(45) NOT NULL,
+  `reg_id` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`dept_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_departamento`
+--
+
+LOCK TABLES `pag_departamento` WRITE;
+/*!40000 ALTER TABLE `pag_departamento` DISABLE KEYS */;
+INSERT INTO `pag_departamento` VALUES (1,'VALLE DEL CAUCA',0,NULL),(2,'Buenaventura',3,NULL),(3,'Atlantico',4,NULL);
+/*!40000 ALTER TABLE `pag_departamento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_det_equipo_medidor`
+--
+
+DROP TABLE IF EXISTS `pag_det_equipo_medidor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_det_equipo_medidor` (
+  `dequimed_id` int(11) NOT NULL AUTO_INCREMENT,
+  `equi_id` varchar(45) NOT NULL,
+  `tmed_id` int(11) NOT NULL,
+  PRIMARY KEY (`dequimed_id`),
+  KEY `equi_id` (`equi_id`),
+  KEY `tmed_id` (`tmed_id`),
+  CONSTRAINT `pag_det_equipo_medidor_ibfk_1` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`),
+  CONSTRAINT `pag_det_equipo_medidor_ibfk_2` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_det_equipo_medidor`
+--
+
+LOCK TABLES `pag_det_equipo_medidor` WRITE;
+/*!40000 ALTER TABLE `pag_det_equipo_medidor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_det_equipo_medidor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_det_herramienta_ot`
+--
+
+DROP TABLE IF EXISTS `pag_det_herramienta_ot`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_det_herramienta_ot` (
+  `dherot_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ot_id` int(11) NOT NULL,
+  `her_id` varchar(40) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  PRIMARY KEY (`dherot_id`),
+  KEY `ot_id` (`ot_id`),
+  KEY `her_id` (`her_id`),
+  CONSTRAINT `pag_det_herramienta_ot_ibfk_1` FOREIGN KEY (`ot_id`) REFERENCES `pag_orden_trabajo` (`ot_id`),
+  CONSTRAINT `pag_det_herramienta_ot_ibfk_2` FOREIGN KEY (`her_id`) REFERENCES `pag_herramienta` (`her_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_det_herramienta_ot`
+--
+
+LOCK TABLES `pag_det_herramienta_ot` WRITE;
+/*!40000 ALTER TABLE `pag_det_herramienta_ot` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_det_herramienta_ot` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_det_insumo_ot`
+--
+
+DROP TABLE IF EXISTS `pag_det_insumo_ot`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_det_insumo_ot` (
+  `dinsot_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ot_id` int(11) NOT NULL,
+  `ins_id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  PRIMARY KEY (`dinsot_id`),
+  KEY `ot_id` (`ot_id`),
+  KEY `ins_id` (`ins_id`),
+  CONSTRAINT `pag_det_insumo_ot_ibfk_1` FOREIGN KEY (`ot_id`) REFERENCES `pag_orden_trabajo` (`ot_id`),
+  CONSTRAINT `pag_det_insumo_ot_ibfk_2` FOREIGN KEY (`ins_id`) REFERENCES `pag_insumo` (`ins_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_det_insumo_ot`
+--
+
+LOCK TABLES `pag_det_insumo_ot` WRITE;
+/*!40000 ALTER TABLE `pag_det_insumo_ot` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_det_insumo_ot` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_det_prestamo_herramienta`
+--
+
+DROP TABLE IF EXISTS `pag_det_prestamo_herramienta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_det_prestamo_herramienta` (
+  `detph_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pher_id` int(11) NOT NULL,
+  `her_id` varchar(40) NOT NULL,
+  `detph_cant_solicita` int(11) NOT NULL,
+  `detph_cant_entrega` int(11) NOT NULL,
+  `est_id` int(11) NOT NULL,
+  `detph_observacion` varchar(100) NOT NULL,
+  PRIMARY KEY (`detph_id`),
+  KEY `pher_id` (`pher_id`),
+  KEY `her_id` (`her_id`),
+  KEY `est_id` (`est_id`),
+  CONSTRAINT `pag_det_prestamo_herramienta_ibfk_1` FOREIGN KEY (`pher_id`) REFERENCES `pag_prestamo_herramienta` (`pher_id`),
+  CONSTRAINT `pag_det_prestamo_herramienta_ibfk_3` FOREIGN KEY (`est_id`) REFERENCES `pag_estado` (`est_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_det_prestamo_herramienta`
+--
+
+LOCK TABLES `pag_det_prestamo_herramienta` WRITE;
+/*!40000 ALTER TABLE `pag_det_prestamo_herramienta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_det_prestamo_herramienta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_det_programacion`
+--
+
+DROP TABLE IF EXISTS `pag_det_programacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_det_programacion` (
+  `detprog_id` int(11) NOT NULL AUTO_INCREMENT,
+  `proequi_id` int(11) NOT NULL,
+  `ttra_id` int(11) NOT NULL,
+  `detprog_duracion_horas` int(11) NOT NULL,
+  `equi_id` varchar(45) NOT NULL,
+  `comp_id` varchar(45) NOT NULL,
+  `priotra_id` int(11) NOT NULL,
+  `tar_id` int(11) NOT NULL,
+  `tmed_id` int(11) DEFAULT NULL,
+  `frecuencia` int(11) DEFAULT NULL,
+  `est_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`detprog_id`),
+  KEY `proequi_id` (`proequi_id`),
+  KEY `ttra_id` (`ttra_id`),
+  KEY `equi_id` (`equi_id`),
+  KEY `comp_id` (`comp_id`),
+  KEY `priotra_id` (`priotra_id`),
+  KEY `tar_id` (`tar_id`),
+  CONSTRAINT `pag_det_programacion_ibfk_1` FOREIGN KEY (`proequi_id`) REFERENCES `pag_programacion_equipo` (`proequi_id`),
+  CONSTRAINT `pag_det_programacion_ibfk_2` FOREIGN KEY (`ttra_id`) REFERENCES `pag_tipo_trabajo` (`ttra_id`),
+  CONSTRAINT `pag_det_programacion_ibfk_3` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`),
+  CONSTRAINT `pag_det_programacion_ibfk_4` FOREIGN KEY (`comp_id`) REFERENCES `pag_componente` (`comp_id`),
+  CONSTRAINT `pag_det_programacion_ibfk_5` FOREIGN KEY (`priotra_id`) REFERENCES `pag_prioridad_trabajo` (`priotra_id`),
+  CONSTRAINT `pag_det_programacion_ibfk_6` FOREIGN KEY (`tar_id`) REFERENCES `pag_tarea` (`tar_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_det_programacion`
+--
+
+LOCK TABLES `pag_det_programacion` WRITE;
+/*!40000 ALTER TABLE `pag_det_programacion` DISABLE KEYS */;
+INSERT INTO `pag_det_programacion` VALUES (1,1,2,34,'1','2',1,2,1,10,1),(2,2,1,100,'1','1',1,1,1,200,1),(3,3,1,8,'1','1',1,1,1,10,2),(4,4,1,10,'1','1',1,1,1,200,1);
+/*!40000 ALTER TABLE `pag_det_programacion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_equipo`
+--
+
+DROP TABLE IF EXISTS `pag_equipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_equipo` (
+  `equi_id` varchar(45) NOT NULL,
+  `per_id` bigint(20) NOT NULL,
+  `equi_nombre` varchar(100) NOT NULL,
+  `est_id` int(11) NOT NULL,
+  `cen_id` int(11) NOT NULL,
+  `equi_foto` varchar(100) DEFAULT NULL,
+  `tmed_id` int(11) DEFAULT NULL,
+  `equi_valor_tmed` int(11) DEFAULT NULL,
+  `equi_fabricante` varchar(45) NOT NULL,
+  `equi_marca` varchar(45) NOT NULL,
+  `equi_modelo` varchar(45) NOT NULL,
+  `equi_serie` varchar(45) NOT NULL,
+  `equi_ubicacion` varchar(45) NOT NULL,
+  `equi_fecha_compra` varchar(15) NOT NULL,
+  `equi_fecha_instalacion` varchar(15) NOT NULL,
+  `equi_vence_garantia` varchar(15) NOT NULL,
+  `area_id` int(11) NOT NULL,
+  `tequi_id` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`equi_id`),
+  KEY `per_id` (`per_id`),
+  KEY `cen_id` (`cen_id`),
+  CONSTRAINT `pag_equipo_ibfk_1` FOREIGN KEY (`per_id`) REFERENCES `pag_persona` (`per_id`),
+  CONSTRAINT `pag_equipo_ibfk_2` FOREIGN KEY (`cen_id`) REFERENCES `pag_centro` (`cen_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_equipo`
+--
+
+LOCK TABLES `pag_equipo` WRITE;
+/*!40000 ALTER TABLE `pag_equipo` DISABLE KEYS */;
+INSERT INTO `pag_equipo` VALUES ('0123',1143830254,'Fresadora',1,2,'',NULL,NULL,'Asus','wert','2016','12245','Cali','2016-04-27','2016-04-27','2016-10-25',1,1,NULL),('1',1144125473,'Torno CNC',0,1,'',1,1,'Mazda','Mazda','Mazda','Mazda 123','Cali','2016-03-01','2016-03-02','2016-03-31',1,1,NULL),('EP_003',1144125472,'Equipo de computo MAC',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-EP_003',NULL,NULL,'HP','HP','HP','3456','Salomia','2016-02-02','2016-03-02','2018-02-02',1,2,NULL),('PC_002',1144125473,'Portatil Linux',1,1,'/srv/www/htdocs/localhost/pagman/web/media/img/Equipos/equipo-PC_002',NULL,NULL,'Lenovo','Lenovo','Lenovo','7431','Sena','2016-04-08','2016-04-08','2016-04-15',2,1,NULL),('TC001',1144125473,'Torno Convencional',1,1,'',NULL,NULL,'Tornos Technologies IbÃ©rica, S.A','Valor','2016','123456','CDTI','2014-04-12','2014-05-12','2020-04-12',1,1,NULL);
+/*!40000 ALTER TABLE `pag_equipo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_equipo_componente`
+--
+
+DROP TABLE IF EXISTS `pag_equipo_componente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_equipo_componente` (
+  `equicomp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `comp_id` varchar(45) NOT NULL,
+  `equi_id` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`equicomp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_equipo_componente`
+--
+
+LOCK TABLES `pag_equipo_componente` WRITE;
+/*!40000 ALTER TABLE `pag_equipo_componente` DISABLE KEYS */;
+INSERT INTO `pag_equipo_componente` VALUES (1,'1','1',NULL),(2,'2','1',NULL);
+/*!40000 ALTER TABLE `pag_equipo_componente` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_equipo_cp`
+--
+
+DROP TABLE IF EXISTS `pag_equipo_cp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_equipo_cp` (
+  `equicp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `equi_id` varchar(45) NOT NULL,
+  `cp_id` int(11) NOT NULL,
+  `equicp_valor` varchar(100) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`equicp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_equipo_cp`
+--
+
+LOCK TABLES `pag_equipo_cp` WRITE;
+/*!40000 ALTER TABLE `pag_equipo_cp` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_equipo_cp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_equipo_planos`
+--
+
+DROP TABLE IF EXISTS `pag_equipo_planos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_equipo_planos` (
+  `equipla_id` int(11) NOT NULL AUTO_INCREMENT,
+  `equi_id` varchar(45) NOT NULL,
+  `equipla_descripcion` varchar(100) NOT NULL,
+  `equipla_ruta` varchar(100) NOT NULL,
+  PRIMARY KEY (`equipla_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_equipo_planos`
+--
+
+LOCK TABLES `pag_equipo_planos` WRITE;
+/*!40000 ALTER TABLE `pag_equipo_planos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_equipo_planos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_estado`
+--
+
+DROP TABLE IF EXISTS `pag_estado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_estado` (
+  `est_id` int(11) NOT NULL AUTO_INCREMENT,
+  `est_descripcion` varchar(45) NOT NULL,
+  `tdoc_id` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`est_id`),
+  KEY `tdoc_id` (`tdoc_id`),
+  CONSTRAINT `pag_estado_ibfk_1` FOREIGN KEY (`tdoc_id`) REFERENCES `pag_tipo_doc` (`tdoc_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_estado`
+--
+
+LOCK TABLES `pag_estado` WRITE;
+/*!40000 ALTER TABLE `pag_estado` DISABLE KEYS */;
+INSERT INTO `pag_estado` VALUES (1,'Activo',1,NULL),(2,'Inactivo',1,NULL),(3,'Creada',2,NULL),(4,'En ejecución',2,NULL),(5,'Gestionada',2,NULL),(6,'Cerrada',2,NULL),(7,'Por atender',4,NULL),(8,'Atendida',4,NULL);
+/*!40000 ALTER TABLE `pag_estado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_funcion`
+--
+
+DROP TABLE IF EXISTS `pag_funcion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_funcion` (
+  `func_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cont_id` int(11) NOT NULL,
+  `func_nombre` varchar(40) NOT NULL,
+  `func_display` varchar(40) NOT NULL,
+  `func_descripcion` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`func_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_funcion`
+--
+
+LOCK TABLES `pag_funcion` WRITE;
+/*!40000 ALTER TABLE `pag_funcion` DISABLE KEYS */;
+INSERT INTO `pag_funcion` VALUES (1,1,'crear','Crear Costos','Crear Costos'),(2,1,'editar','Editar Costos','Editar Costos'),(3,1,'eliminar','Eliminar Costos','Eliminar Costos'),(4,1,'listar','Listar Costos','Listar Costos'),(5,2,'crear','Crear Equipos','Crear Equipos'),(6,2,'editar','Editar Equipos','Editar Equipos '),(7,2,'eliminar','Eliminar Equipos','Eliminar Equipos'),(8,2,'Listar','Listar Equipos','Listar Equipos'),(9,3,'crear','Crear Tipo equipo','Crear Tipo equipo'),(10,3,'editar','Editar Tipo equipo','Editar Tipo equipo'),(11,3,'eliminar','Eliminar Tipo equipo','Eliminar Tipo equipo'),(12,3,'listar','Listar Tipos de equipos','Listar Tipos de equipos'),(13,4,'crear','Crear Herramientas','Crear Herramientas'),(14,4,'editar','Editar Herramientas','Editar Herramientas'),(15,4,'eliminar','Eliminar Herramientas','Eliminar Herramientas'),(16,4,'Listar','Listar Herramientas','Listar Herramientas'),(17,5,'crear','Crear Insumos','Crear Insumos'),(18,5,'editar','Editar Insumos','Editar Insumos'),(19,5,'eliminar','Eliminar Insumos','Eliminar Insumos'),(20,5,'Listar','Listar Insumos','Listar Insumos'),(21,6,'crear','Crear Regional','Crear Regional'),(22,6,'editar','Editar Regional','Editar Regional'),(23,6,'eliminar','Eliminar Regional','Eliminar Regional'),(24,6,'listar','Listar Regionales','Listar Regionales'),(25,7,'crear','Crear Departamento','Crear Departamento'),(26,7,'editar','Editar Departamento','Editar Departamento'),(27,7,'eliminar','Eliminar Departamento','Eliminar Departamento'),(28,7,'listar','Listar Departamentos','Listar '),(29,8,'crear','Crear Ciudad','Crear Ciudad'),(30,8,'editar','Editar Ciudad','Editar Ciudad'),(31,8,'eliminar','Eliminar Ciudad','Eliminar Ciudad'),(32,8,'listar','Listar Ciudades','Listar Ciudades'),(33,9,'crear','Crear Centro','Crear Centro'),(34,9,'editar','Editar Centro','Editar Centro'),(35,9,'eliminar','Eliminar Centro','Eliminar Centro'),(36,9,'listar','Listar Centros','Listar Centros'),(37,10,'crear','Crear Mediciones','Crear Mediciones'),(38,10,'editar','Editar Mediciones','Editar Mediciones'),(39,10,'eliminar','Eliminar Mediciones','Eliminar Mediciones'),(40,10,'Listar','Listar Mediciones','Listar Mediciones'),(41,11,'crear','Crear Medidores','Crear Medidores'),(42,11,'editar','Editar Medidores','Editar Medidores'),(43,11,'eliminar','Eliminar Medidores','Eliminar Medidores'),(44,11,'Listar','Listar Medidores','Listar Medidores'),(45,12,'crear','Crear ot','Crear ot'),(46,12,'editar','Editar ot','Editar ot'),(47,12,'eliminar','Eliminar ot','Eliminar ot'),(48,12,'listar','Listar ot','Listar ot'),(49,13,'crear','Crear solicitud','Crear solicitud de servicio'),(50,13,'editar','Editar solicitud','Editar solicitud'),(51,13,'eliminar','Eliminar solicitud','Eliminar solicitud'),(52,13,'listar','Listar solicitud','Listar solicitud'),(53,14,'crear','Asignar','Asignar Permisos'),(54,15,'crear','Crear Personas','Crear Personas'),(55,15,'editar','Editar Personas','Editar Personas'),(56,15,'eliminar','Eliminar Personas','Eliminar Personas'),(57,15,'Listar','Listar Personas','Listar Personas'),(58,16,'crear','Crear Prestamos','Crear Prestamo'),(59,16,'eliminar','Eliminar Prestamo','Eliminar Prestamo'),(60,16,'Listar','Listar Prestamos','Listar Prestamos'),(61,17,'crear','Crear Programacion','Crear Programacion'),(62,17,'editar','Editar Programacion','Editar Programacion'),(63,17,'listar','Listar Programacion','Listar Programacion'),(64,17,'eliminar','Eliminar Programacion','Eliminar Programacion'),(65,18,'crear','Crear Rol','Crear Rol'),(66,18,'editar','Editar Rol','Editar Rol'),(67,18,'listar','Listar roles','Lista los roles'),(68,18,'eliminar','ELiminar Rol','ELiminar Rol'),(69,19,'crear','Crear Usuario','Crear Usuario'),(70,19,'editar','Editar Usuario','Editar Usuario'),(71,19,'listar','Listar Usuarios','Listar Usuarios'),(72,19,'eliminar','Eliminar Usuario','Eliminar Usuario');
+/*!40000 ALTER TABLE `pag_funcion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_herramienta`
+--
+
+DROP TABLE IF EXISTS `pag_herramienta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_herramienta` (
+  `her_id` varchar(40) NOT NULL,
+  `ther_id` int(11) NOT NULL,
+  `her_nombre` varchar(45) NOT NULL,
+  `her_descripcion` varchar(45) NOT NULL,
+  `her_fecha_ingreso` varchar(15) NOT NULL,
+  `est_id` int(11) DEFAULT NULL,
+  `her_imagen` varchar(45) DEFAULT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`her_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_herramienta`
+--
+
+LOCK TABLES `pag_herramienta` WRITE;
+/*!40000 ALTER TABLE `pag_herramienta` DISABLE KEYS */;
+INSERT INTO `pag_herramienta` VALUES ('01',2,'Martillo','Martillo 01','2016-08-16 21:0',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `pag_herramienta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_insumo`
+--
+
+DROP TABLE IF EXISTS `pag_insumo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_insumo` (
+  `ins_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ins_nombre` varchar(45) NOT NULL,
+  `ins_descripcion` varchar(45) NOT NULL,
+  `ins_valor` int(11) NOT NULL,
+  `umed_id` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`ins_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_insumo`
+--
+
+LOCK TABLES `pag_insumo` WRITE;
+/*!40000 ALTER TABLE `pag_insumo` DISABLE KEYS */;
+INSERT INTO `pag_insumo` VALUES (1,'Aceite','Aceite 3 en 1',23000,1,NULL),(2,'Gasolina','Gasolina x Litro',21001,1,NULL);
+/*!40000 ALTER TABLE `pag_insumo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_inventario`
+--
+
+DROP TABLE IF EXISTS `pag_inventario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_inventario` (
+  `inv_id` int(11) NOT NULL AUTO_INCREMENT,
+  `inv_fecha` varchar(15) NOT NULL,
+  `inv_movimiento` varchar(45) NOT NULL,
+  `ins_id` int(11) NOT NULL,
+  `inv_cant` int(11) NOT NULL,
+  `inv_saldo` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`inv_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_inventario`
+--
+
+LOCK TABLES `pag_inventario` WRITE;
+/*!40000 ALTER TABLE `pag_inventario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_inventario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_jornada`
+--
+
+DROP TABLE IF EXISTS `pag_jornada`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_jornada` (
+  `jor_id` int(11) NOT NULL AUTO_INCREMENT,
+  `jor_descripcion` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`jor_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_jornada`
+--
+
+LOCK TABLES `pag_jornada` WRITE;
+/*!40000 ALTER TABLE `pag_jornada` DISABLE KEYS */;
+INSERT INTO `pag_jornada` VALUES (1,'Ma&ntilde;ana',NULL),(2,'Tarde',NULL),(3,'Noche',NULL);
+/*!40000 ALTER TABLE `pag_jornada` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_modulo`
+--
+
+DROP TABLE IF EXISTS `pag_modulo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_modulo` (
+  `mod_id` int(11) NOT NULL AUTO_INCREMENT,
+  `mod_nombre` varchar(20) NOT NULL,
+  `mod_icono` varchar(40) NOT NULL,
+  `mod_sitio_menu` varchar(20) NOT NULL,
+  `mod_descripcion` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`mod_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_modulo`
+--
+
+LOCK TABLES `pag_modulo` WRITE;
+/*!40000 ALTER TABLE `pag_modulo` DISABLE KEYS */;
+INSERT INTO `pag_modulo` VALUES (1,'Costos','mdi-editor-attach-money','principal','Modulo de Costos'),(2,'Equipos','mdi-hardware-desktop-windows','principal','Modulo de Equipos'),(3,'Herramientas','mdi-action-wallet-travel','principal','Modulo de Herramientas'),(4,'Insumos','mdi-maps-local-gas-station','principal','Modulo de Insumos'),(5,'Localizacion','mdi-maps-my-location','configuracion','Modulo de Localizacion'),(6,'Mediciones','mdi-av-timer','principal','Modulo de Mediciones'),(7,'Medidores','mdi-image-timer','principal','Modulo de Medidores'),(8,'OT','mdi-action-assignment','principal','Modulo de OT'),(9,'Permisos','mdi-action-lock','configuracion','Modulo de Permisos'),(10,'Personas','mdi-social-person-outline','configuracion','Modulo de Personas'),(11,'Prestamo','mdi-action-shopping-cart','principal','Modulo de prestamos'),(12,'Programacion','mdi-editor-insert-invitation','principal','Modulo Programacion'),(13,'Roles','mdi-social-group','configuracion','Modulo asignar Roles a un usuario'),(14,'Usuarios','mdi-action-account-circle','configuracion','Modulo Usuarios');
+/*!40000 ALTER TABLE `pag_modulo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_orden_trabajo`
+--
+
+DROP TABLE IF EXISTS `pag_orden_trabajo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_orden_trabajo` (
+  `ot_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ot_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ot_prioridad` varchar(30) NOT NULL,
+  `ot_desc_falla` varchar(400) NOT NULL,
+  `ot_fecha_inicio` varchar(15) DEFAULT NULL,
+  `ot_fecha_fin` varchar(15) DEFAULT NULL,
+  `ot_ayudantes` varchar(100) DEFAULT NULL,
+  `ot_desc_trabajo` varchar(400) DEFAULT NULL,
+  `ot_observacion` varchar(100) DEFAULT NULL,
+  `est_id` int(11) NOT NULL,
+  `cen_id` int(11) NOT NULL,
+  `equi_id` varchar(45) NOT NULL,
+  `comp_id` varchar(45) NOT NULL,
+  `tfa_id` int(11) NOT NULL,
+  `per_id` bigint(20) DEFAULT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`ot_id`),
+  KEY `est_id` (`est_id`),
+  KEY `cen_id` (`cen_id`),
+  KEY `equi_id` (`equi_id`),
+  KEY `comp_id` (`comp_id`),
+  KEY `tfa_id` (`tfa_id`),
+  KEY `per_id` (`per_id`),
+  CONSTRAINT `pag_orden_trabajo_ibfk_1` FOREIGN KEY (`est_id`) REFERENCES `pag_estado` (`est_id`),
+  CONSTRAINT `pag_orden_trabajo_ibfk_2` FOREIGN KEY (`cen_id`) REFERENCES `pag_centro` (`cen_id`),
+  CONSTRAINT `pag_orden_trabajo_ibfk_3` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`),
+  CONSTRAINT `pag_orden_trabajo_ibfk_4` FOREIGN KEY (`comp_id`) REFERENCES `pag_componente` (`comp_id`),
+  CONSTRAINT `pag_orden_trabajo_ibfk_5` FOREIGN KEY (`tfa_id`) REFERENCES `pag_tipo_falla` (`tfa_id`),
+  CONSTRAINT `pag_orden_trabajo_ibfk_6` FOREIGN KEY (`per_id`) REFERENCES `pag_persona` (`per_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_orden_trabajo`
+--
+
+LOCK TABLES `pag_orden_trabajo` WRITE;
+/*!40000 ALTER TABLE `pag_orden_trabajo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_orden_trabajo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_permisos`
+--
+
+DROP TABLE IF EXISTS `pag_permisos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_permisos` (
+  `perm_id` int(11) NOT NULL AUTO_INCREMENT,
+  `func_id` int(11) NOT NULL,
+  `rol_id` int(11) NOT NULL,
+  PRIMARY KEY (`perm_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_permisos`
+--
+
+LOCK TABLES `pag_permisos` WRITE;
+/*!40000 ALTER TABLE `pag_permisos` DISABLE KEYS */;
+INSERT INTO `pag_permisos` VALUES (1,1,1),(2,2,1),(3,3,1),(4,4,1),(5,5,1),(6,6,1),(7,7,1),(8,8,1),(9,9,1),(10,10,1),(11,11,1),(12,12,1),(13,13,1),(14,14,1),(15,15,1),(16,16,1),(17,17,1),(18,18,1),(19,19,1),(20,20,1),(21,21,1),(22,22,1),(23,23,1),(24,24,1),(25,25,1),(26,26,1),(27,27,1),(28,28,1),(29,29,1),(30,30,1),(31,31,1),(32,32,1),(33,33,1),(34,34,1),(35,35,1),(36,36,1),(37,37,1),(38,38,1),(39,39,1),(40,40,1),(41,41,1),(42,42,1),(43,43,1),(44,44,1),(45,45,1),(46,46,1),(47,47,1),(48,48,1),(49,49,1),(50,50,1),(51,51,1),(52,52,1),(53,53,1),(54,54,1),(55,55,1),(56,56,1),(57,57,1),(58,58,1),(59,59,1),(60,60,1),(61,61,1),(62,62,1),(63,63,1),(64,64,1),(65,65,1),(66,66,1),(67,67,1),(68,68,1),(69,69,1),(70,70,1),(71,71,1),(72,72,1);
+/*!40000 ALTER TABLE `pag_permisos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_persona`
+--
+
+DROP TABLE IF EXISTS `pag_persona`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_persona` (
+  `per_id` bigint(20) NOT NULL,
+  `per_nombre` varchar(45) NOT NULL,
+  `per_apellido` varchar(45) NOT NULL,
+  `per_telefono` varchar(45) NOT NULL,
+  `per_movil` varchar(45) NOT NULL,
+  `per_email` varchar(45) NOT NULL,
+  `per_direccion` varchar(45) DEFAULT NULL,
+  `dept_id` int(11) NOT NULL,
+  `per_valor_hora` int(11) NOT NULL,
+  `car_id` int(11) NOT NULL,
+  `cen_id` int(11) NOT NULL,
+  `per_tipo` varchar(50) DEFAULT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`per_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_persona`
+--
+
+LOCK TABLES `pag_persona` WRITE;
+/*!40000 ALTER TABLE `pag_persona` DISABLE KEYS */;
+INSERT INTO `pag_persona` VALUES (1143830254,'Alejandro','Yepes','3243452','3183452354','alejandro@gmail.com','Terron Colorado',1,28000,1,1,'usuario del sistema',NULL),(1144125445,'Jhonatan','Tavera','3213423','3154352342','jtavera@gmail.com','Sena',1,23000,1,1,'usuario del sistema',NULL),(1144125472,'Anibal','Silva','3124534','3128546345','silvin@gmail.com','Cra 45 45 567',1,300000,1,1,'usuario del sistema',NULL),(1144125473,'David Fernando','Barona','4434564','3185235463','dferbac@gmail.com','Calle 8A 45 106',1,200000,1,1,'usuario del sistema',NULL),(1151956249,'Super','Administrador','3845030','3135396721','esteban@gmail.com',NULL,1,5000,1,1,'usuario del sistema',NULL);
+/*!40000 ALTER TABLE `pag_persona` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_prestamo_herramienta`
+--
+
+DROP TABLE IF EXISTS `pag_prestamo_herramienta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_prestamo_herramienta` (
+  `pher_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pher_fecha` varchar(15) NOT NULL,
+  `per_id_solicita` int(11) NOT NULL,
+  `pher_fecha_devolucion` varchar(15) NOT NULL,
+  `pher_observaciones` varchar(100) NOT NULL,
+  `alm_id` int(11) NOT NULL,
+  `jor_id` int(11) NOT NULL,
+  `per_id_entrega` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`pher_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_prestamo_herramienta`
+--
+
+LOCK TABLES `pag_prestamo_herramienta` WRITE;
+/*!40000 ALTER TABLE `pag_prestamo_herramienta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_prestamo_herramienta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_prioridad_trabajo`
+--
+
+DROP TABLE IF EXISTS `pag_prioridad_trabajo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_prioridad_trabajo` (
+  `priotra_id` int(11) NOT NULL AUTO_INCREMENT,
+  `priotra_descripcion` varchar(20) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`priotra_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_prioridad_trabajo`
+--
+
+LOCK TABLES `pag_prioridad_trabajo` WRITE;
+/*!40000 ALTER TABLE `pag_prioridad_trabajo` DISABLE KEYS */;
+INSERT INTO `pag_prioridad_trabajo` VALUES (1,'Alta',NULL),(2,'Baja',NULL),(3,'Media',NULL);
+/*!40000 ALTER TABLE `pag_prioridad_trabajo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_programacion_equipo`
+--
+
+DROP TABLE IF EXISTS `pag_programacion_equipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_programacion_equipo` (
+  `proequi_id` int(11) NOT NULL AUTO_INCREMENT,
+  `proequi_fecha` varchar(15) NOT NULL,
+  `cen_id` int(11) NOT NULL,
+  `proequi_fecha_inicio` varchar(15) NOT NULL,
+  `tman_id` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`proequi_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_programacion_equipo`
+--
+
+LOCK TABLES `pag_programacion_equipo` WRITE;
+/*!40000 ALTER TABLE `pag_programacion_equipo` DISABLE KEYS */;
+INSERT INTO `pag_programacion_equipo` VALUES (1,'5 April, 2016',1,'29 April, 2016',1,NULL);
+/*!40000 ALTER TABLE `pag_programacion_equipo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_regional`
+--
+
+DROP TABLE IF EXISTS `pag_regional`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_regional` (
+  `reg_id` int(11) NOT NULL AUTO_INCREMENT,
+  `reg_codigo` varchar(10) NOT NULL,
+  `reg_nombre` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`reg_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_regional`
+--
+
+LOCK TABLES `pag_regional` WRITE;
+/*!40000 ALTER TABLE `pag_regional` DISABLE KEYS */;
+INSERT INTO `pag_regional` VALUES (1,'76','Valle del Cauca',NULL),(2,'93','Zona Caribe',NULL),(3,'56','Zona Sur',NULL);
+/*!40000 ALTER TABLE `pag_regional` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_rol`
+--
+
+DROP TABLE IF EXISTS `pag_rol`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_rol` (
+  `rol_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rol_nombre` varchar(20) NOT NULL,
+  `rol_descripcion` varchar(100) DEFAULT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`rol_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_rol`
+--
+
+LOCK TABLES `pag_rol` WRITE;
+/*!40000 ALTER TABLE `pag_rol` DISABLE KEYS */;
+INSERT INTO `pag_rol` VALUES (1,'Administrador','Tiene acceso a todo el sistema',NULL);
+/*!40000 ALTER TABLE `pag_rol` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_solicitud_servicio`
+--
+
+DROP TABLE IF EXISTS `pag_solicitud_servicio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_solicitud_servicio` (
+  `sserv_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sserv_fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `cen_id` int(11) NOT NULL,
+  `equi_id` varchar(45) NOT NULL,
+  `sserv_descripcion` varchar(100) DEFAULT NULL,
+  `sserv_observacion` varchar(100) DEFAULT NULL,
+  `per_id` int(11) NOT NULL,
+  `est_id` int(11) NOT NULL,
+  `tfa_id` int(11) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`sserv_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_solicitud_servicio`
+--
+
+LOCK TABLES `pag_solicitud_servicio` WRITE;
+/*!40000 ALTER TABLE `pag_solicitud_servicio` DISABLE KEYS */;
+INSERT INTO `pag_solicitud_servicio` VALUES (55,'2016-07-19 18:25:19',1,'1','Hola mundo','',1143830254,7,1,NULL),(56,'2016-07-19 18:25:52',1,'EP_003','Hola mundo 2','',234567,7,1,NULL),(57,'2016-07-19 18:26:18',2,'0123','Hola mundo 3','',1144125473,7,2,NULL),(58,'2016-07-19 18:26:48',1,'PC_002','Hola mundo 4','',1151956249,7,2,NULL),(59,'2016-07-19 18:27:16',1,'TC001','Hola mundo 6','',1144125445,7,1,NULL),(60,'2016-07-19 18:27:42',2,'0123','Hola mundo 9','',234567,7,1,NULL),(61,'2016-07-19 18:29:12',1,'1','Hola mundo 7','',0,7,2,NULL),(62,'2016-07-19 18:29:17',1,'1','Hola mundo 7','',0,7,2,NULL),(63,'2016-07-19 18:29:59',1,'EP_003','Hola mundo 8','',1144125445,7,2,NULL);
+/*!40000 ALTER TABLE `pag_solicitud_servicio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_tarea`
+--
+
+DROP TABLE IF EXISTS `pag_tarea`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_tarea` (
+  `tar_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tar_nombre` varchar(200) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`tar_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_tarea`
+--
+
+LOCK TABLES `pag_tarea` WRITE;
+/*!40000 ALTER TABLE `pag_tarea` DISABLE KEYS */;
+INSERT INTO `pag_tarea` VALUES (1,'Cambiar piezas',NULL),(2,'Lubricación',NULL);
+/*!40000 ALTER TABLE `pag_tarea` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_tipo_doc`
+--
+
+DROP TABLE IF EXISTS `pag_tipo_doc`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_tipo_doc` (
+  `tdoc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tdoc_descripcion` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`tdoc_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_tipo_doc`
+--
+
+LOCK TABLES `pag_tipo_doc` WRITE;
+/*!40000 ALTER TABLE `pag_tipo_doc` DISABLE KEYS */;
+INSERT INTO `pag_tipo_doc` VALUES (1,'General',NULL),(2,'Orden de trabajo',NULL),(3,'Programación equipos',NULL),(4,'Solicitudes de servicio',NULL);
+/*!40000 ALTER TABLE `pag_tipo_doc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_tipo_equipo`
+--
+
+DROP TABLE IF EXISTS `pag_tipo_equipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_tipo_equipo` (
+  `tequi_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tequi_descripcion` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`tequi_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_tipo_equipo`
+--
+
+LOCK TABLES `pag_tipo_equipo` WRITE;
+/*!40000 ALTER TABLE `pag_tipo_equipo` DISABLE KEYS */;
+INSERT INTO `pag_tipo_equipo` VALUES (1,'Electromecanico',NULL),(2,'Hidraulico',NULL),(3,'Refrigeración',NULL);
+/*!40000 ALTER TABLE `pag_tipo_equipo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_tipo_falla`
+--
+
+DROP TABLE IF EXISTS `pag_tipo_falla`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_tipo_falla` (
+  `tfa_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tfa_descripcion` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`tfa_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_tipo_falla`
+--
+
+LOCK TABLES `pag_tipo_falla` WRITE;
+/*!40000 ALTER TABLE `pag_tipo_falla` DISABLE KEYS */;
+INSERT INTO `pag_tipo_falla` VALUES (1,'Mecanica',NULL),(2,'Hidraulica',NULL);
+/*!40000 ALTER TABLE `pag_tipo_falla` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_tipo_herramienta`
+--
+
+DROP TABLE IF EXISTS `pag_tipo_herramienta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_tipo_herramienta` (
+  `ther_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ther_descripcion` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`ther_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_tipo_herramienta`
+--
+
+LOCK TABLES `pag_tipo_herramienta` WRITE;
+/*!40000 ALTER TABLE `pag_tipo_herramienta` DISABLE KEYS */;
+INSERT INTO `pag_tipo_herramienta` VALUES (1,'Digital',NULL),(2,'Análoga',NULL),(3,'Pesada',NULL),(4,'Otra...',NULL);
+/*!40000 ALTER TABLE `pag_tipo_herramienta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_tipo_mantenimiento`
+--
+
+DROP TABLE IF EXISTS `pag_tipo_mantenimiento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_tipo_mantenimiento` (
+  `tman_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tman_descripcion` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`tman_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_tipo_mantenimiento`
+--
+
+LOCK TABLES `pag_tipo_mantenimiento` WRITE;
+/*!40000 ALTER TABLE `pag_tipo_mantenimiento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pag_tipo_mantenimiento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_tipo_medidor`
+--
+
+DROP TABLE IF EXISTS `pag_tipo_medidor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_tipo_medidor` (
+  `tmed_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tmed_nombre` varchar(45) NOT NULL,
+  `tmed_descripcion` varchar(45) NOT NULL,
+  `tmed_acronimo` varchar(45) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`tmed_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_tipo_medidor`
+--
+
+LOCK TABLES `pag_tipo_medidor` WRITE;
+/*!40000 ALTER TABLE `pag_tipo_medidor` DISABLE KEYS */;
+INSERT INTO `pag_tipo_medidor` VALUES (1,'Kilometros','Kilometros por hora','Km',NULL);
+/*!40000 ALTER TABLE `pag_tipo_medidor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_tipo_trabajo`
+--
+
+DROP TABLE IF EXISTS `pag_tipo_trabajo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_tipo_trabajo` (
+  `ttra_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ttra_descripcion` varchar(100) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`ttra_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_tipo_trabajo`
+--
+
+LOCK TABLES `pag_tipo_trabajo` WRITE;
+/*!40000 ALTER TABLE `pag_tipo_trabajo` DISABLE KEYS */;
+INSERT INTO `pag_tipo_trabajo` VALUES (1,'Hidraulico',NULL),(2,'Limpieza',NULL);
+/*!40000 ALTER TABLE `pag_tipo_trabajo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_unidad_medida`
+--
+
+DROP TABLE IF EXISTS `pag_unidad_medida`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_unidad_medida` (
+  `umed_id` int(11) NOT NULL AUTO_INCREMENT,
+  `umed_descripcion` varchar(20) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`umed_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_unidad_medida`
+--
+
+LOCK TABLES `pag_unidad_medida` WRITE;
+/*!40000 ALTER TABLE `pag_unidad_medida` DISABLE KEYS */;
+INSERT INTO `pag_unidad_medida` VALUES (1,'Litro',NULL),(2,'Centímetros cúbicos',NULL),(3,'Gramos',NULL),(4,'Libra',NULL);
+/*!40000 ALTER TABLE `pag_unidad_medida` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pag_usuario`
+--
+
+DROP TABLE IF EXISTS `pag_usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pag_usuario` (
+  `per_id` bigint(20) NOT NULL,
+  `usu_usuario` varchar(45) NOT NULL,
+  `usu_clave` varchar(45) NOT NULL,
+  `usu_estado` varchar(45) NOT NULL,
+  `rol_id` int(11) NOT NULL,
+  PRIMARY KEY (`per_id`),
+  UNIQUE KEY `usu_usuario_UNIQUE` (`usu_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pag_usuario`
+--
+
+LOCK TABLES `pag_usuario` WRITE;
+/*!40000 ALTER TABLE `pag_usuario` DISABLE KEYS */;
+INSERT INTO `pag_usuario` VALUES (1143830254,'ayepes','123456','activo',1),(1144125445,'jtavera','123456','activo',1),(1144125473,'dbarona','1234','activo',1),(1151956249,'admin','0000','activo',1);
+/*!40000 ALTER TABLE `pag_usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2016-08-31 18:06:41

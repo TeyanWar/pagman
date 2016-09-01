@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <!--================================================================================
 	Item Name: Materialize - Material Design Admin Template
@@ -15,6 +15,8 @@
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="description" content="Aplicativo para la administracion y gestion del mantenimiento">
   <meta name="keywords" content="Mantenimiento industrial, Sena, CDTI">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  
   <title><?php echo NOMBRE_APLICATIVO." | ".NOMBRE_COMPLETO_APLICATIVO ?></title>
 
   <!-- Favicons-->

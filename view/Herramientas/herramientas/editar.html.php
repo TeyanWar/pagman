@@ -14,7 +14,7 @@
                     </div>
                     <div class="input-field col s4">
                         <label class="active"> *Fecha ingreso de herramienta: </label>
-                        <input name="her_fecha_ingreso" type="date" id="her_fecha_ingreso" class="form-control datepicker" value="<?php echo $herramienta['her_fecha_ingreso'] ?>">
+                        <input name="her_fecha_ingreso" type="date" id="her_fecha_ingreso" readonly="disable" class="form-control datepicker" value="<?php echo $herramienta['her_fecha_ingreso'] ?>">
                     </div>
                 </div>
                 <div class="row">
@@ -55,22 +55,18 @@
     $("#F_editar_herramienta").validate({
         rules: {
             her_nombre: {
-                minlength: 10,
-                maxlength: 40
+                maxlength: 25
             },
             her_descripcion: {
-                minlength: 20,
                 maxlength: 200
             }
         },
         //mensajes para cada dato validado
         messages: {
             her_nombre: {
-                minlength: "Debe tener minimo: 10 caracteres",
-                maxlength: "Debe tener maximo: 40 caracteres"
+                maxlength: "Debe tener maximo: 25 caracteres"
             },
             her_descripcion: {
-                minlength: "debe tener minimo: 20 caracteres",
                 maxlength: "debe tener maximo: 200 caracteres"
             }
         },
