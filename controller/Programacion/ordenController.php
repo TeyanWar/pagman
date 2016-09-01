@@ -274,7 +274,7 @@ class OrdenController {
                                 foreach ($idher as $her){
 
                                     $dether = "INSERT INTO pag_det_herramienta_ot (ot_id,her_id,cantidad) "
-                                            . "VALUES ($otid[ot_id],'$her',$cantidadher[$x])";
+                                            . "VALUES ($otidn[ot_id],'$her',$cantidadher[$x])";
 
                                     $inseher = $objOrden->insertar($dether);
 

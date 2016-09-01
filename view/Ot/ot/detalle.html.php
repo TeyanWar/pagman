@@ -82,58 +82,64 @@
     <div class="divider"></div>
     <br>
     <div class="row">
-        <?php if(!empty($detalleinsumos)){ ?>
-            <div class="col s6">
-                <label style="color: #448aff;"><h6>INSUMOS</h6></label>
-                <table class="striped">
-                    <thead>
+        
+        <div class="col s6">
+            <label style="color: #448aff;"><h6>INSUMOS</h6></label>
+            <?php if(!empty($detalleinsumos)){ ?>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th data-field="registro">Nombre</th>
+                        <th data-field="name">Unidad Medida</th>
+                        <th data-field="id">Valor</th>
+                        <th data-field="name">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php					
+                    foreach ($detalleinsumos as $detins) {
+                        ?>
                         <tr>
-                            <th data-field="registro">Nombre</th>
-                            <th data-field="name">Unidad Medida</th>
-                            <th data-field="id">Valor</th>
-                            <th data-field="name">Cantidad</th>
+                            <td><?php echo $detins['ins_nombre'] ?></td>
+                            <td><?php echo $detins['umed_descripcion'] ?></td>
+                            <td><?php echo $detins['ins_valor'] ?></td>
+                            <td><?php echo $detins['cantidad'] ?></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php					
-                        foreach ($detalleinsumos as $detins) {
-                            ?>
-                            <tr>
-                                <td><?php echo $detins['ins_nombre'] ?></td>
-                                <td><?php echo $detins['umed_descripcion'] ?></td>
-                                <td><?php echo $detins['ins_valor'] ?></td>
-                                <td><?php echo $detins['cantidad'] ?></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-        <?php } ?>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <?php }else{ ?>
+            <h6 style="color: red;">Esta ot no cuenta con insumos</h6>
+            <?php } ?>
+        </div>
 
-        <?php if(!empty($detalleherramientas)){ ?>
-            <div class="col s6">
-                <label style="color: #448aff;"><h6>HERRAMIENTAS</h6></label>
-                <table class="striped">
-                    <thead>
+        <div class="col s6">
+            <label style="color: #448aff;"><h6>HERRAMIENTAS</h6></label>
+            <?php if(!empty($detalleherramientas)){ ?>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th data-field="registro">Nombre</th>
+                        <th data-field="name">Descripcion</th>
+                        <th data-field="name">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php					
+                    foreach ($detalleherramientas as $dether) {
+                        ?>
                         <tr>
-                            <th data-field="registro">Nombre</th>
-                            <th data-field="name">Descripcion</th>
-                            <th data-field="name">Cantidad</th>
+                            <td><?php echo $dether['her_nombre'] ?></td>
+                            <td><?php echo $dether['her_descripcion'] ?></td>
+                            <td><?php echo $dether['cantidad'] ?></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php					
-                        foreach ($detalleherramientas as $dether) {
-                            ?>
-                            <tr>
-                                <td><?php echo $dether['her_nombre'] ?></td>
-                                <td><?php echo $dether['her_descripcion'] ?></td>
-                                <td><?php echo $dether['cantidad'] ?></td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-        <?php } ?>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <?php }else{ ?>
+                <h6 style="color: red;">Esta ot no cuenta con herramientas</h6>
+            <?php } ?>
+        </div>
+        
     </div>
 </div>

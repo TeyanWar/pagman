@@ -55,8 +55,6 @@ class ProgramacionController {
             $insertcom = "INSERT INTO pag_componente (comp_id,comp_descripcion) VALUES ('9999','INDEFINIDO')";
             $objProgramacion->insertar($insertcom);
         }
-        $reg = "SELECT * FROM pag_regional";
-        $regionales = $objProgramacion->select($reg);
         $cen = "SELECT  *FROM pag_centro";
         $centros = $objProgramacion->select($cen);
         
