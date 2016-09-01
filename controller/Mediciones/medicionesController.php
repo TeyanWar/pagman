@@ -96,7 +96,7 @@ class MedicionesController {
 
         $sql = "SELECT * FROM pag_control_medidas, pag_persona, pag_equipo,pag_tipo_medidor WHERE pag_control_medidas.per_id=pag_persona.per_id AND
                 pag_control_medidas.equi_id=pag_equipo.equi_id and pag_control_medidas.tmed_id=pag_tipo_medidor.tmed_id and pag_control_medidas.equi_id='$id' order by ctrmed_fecha desc";
-
+die($sql);
         $detalleOrdenes = $objDetalle->select($sql);
             /*
              * Paginado

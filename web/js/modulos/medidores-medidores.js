@@ -66,11 +66,16 @@ $(document).ready(function () {
     //$('#buscarMed').focus();
     $("#buscarMed").keyup(function () {
         var Medidor = $("#buscarMed").val();
+        
+        if(Medidor != ""){
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "medidor_id=" + Medidor,
+            data: "medidor_id=" + Medidor+"&pagina="+pagina,
             success: function (data) {
                 $("#buscarMedidor").html(data);
             }

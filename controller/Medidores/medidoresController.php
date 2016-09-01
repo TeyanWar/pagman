@@ -53,11 +53,11 @@ class MedidoresController {
             $acronimo = $_POST['acronimo'];
             $descripcion = $_POST['descripcion'];
             $objMedidores = new MedidoresModel();
-            $sql = "INSERT INTO pag_tipo_medidor (tmed_nombre, tmed_acronimo, tmed_descripcion,tmed_estado)"
+            $sql = "INSERT INTO pag_tipo_medidor (tmed_nombre, tmed_acronimo, tmed_descripcion,estado)"
                     . "VALUES ('$nombre',"
                     . "'$acronimo',"
                     . "'$descripcion',"
-                    . "0)";
+                    . "null)";
             $medidores = $objMedidores->insertar($sql);
             $objMedidores->cerrar();
             redirect(crearUrl('medidores', 'medidores', 'listar'));
@@ -136,10 +136,7 @@ class MedidoresController {
     }
     
     public function listar(){
-        $objMedidores = new MedidoresModel();
-       
-        $objMedidores->cerrar();
-        include_once '../view/Medidores/medidores/listar.html.php';
+        include_once '../view/Medidores/medidores/buscador.html.php';
     }
     
     function buscador() {
@@ -156,7 +153,7 @@ class MedidoresController {
          * Paginado
          */
         $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
-        $url = crearUrl('medidores', 'medidores', 'listarMed');
+        $url = crearUrl('medidores', 'medidores', 'listar');
         
         $paginado = new Paginado($medidores, $pagina, $url);
         
@@ -166,6 +163,6 @@ class MedidoresController {
          */
 
         $objMedidores->cerrar();
-        include_once("../view/Medidores/Medidores/listarMed.html.php");
+        include_once("../view/Medidores/Medidores/listar.html.php");
     }
 }
