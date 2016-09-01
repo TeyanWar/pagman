@@ -36,6 +36,13 @@
         <input type="text" id="cate" name='usuario' value="" class="validate" data-url="<?php echo crearUrl("Usuarios", "usuarios", "consultarAjax", array('noVista' => "noVista")) ?>" >
 
     </div>
+    
+    <?php if(isset($_REQUEST['pagina'])){ ?>
+        <input type="hidden" id="pagina" name="pagina" value="<?php echo $_REQUEST['pagina']?>">
+    <?php } else{ ?>
+        <input type="hidden" id="pagina" name="pagina" value="1">
+    <?php } ?>
+        
 </div>
 
 <table id="tabla" class="table table-striped "></table>

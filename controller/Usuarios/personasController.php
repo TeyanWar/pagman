@@ -51,7 +51,7 @@ class PersonasController
         
         if(count($errores)>0){
             setErrores($errores);
-            redirect(crearUrl('usuarios', 'usuarios', 'consultar'));
+            redirect(crearUrl('usuarios', 'usuarios', 'listar'));
             //----------------fin validaciones-----------------
         }  else {
 
@@ -89,14 +89,13 @@ class PersonasController
             $PersonasModel->cerrar();
             //----------------------------------------------------------
 
-            redirect(crearUrl("usuarios", "usuarios", "consultar"));
+            redirect(crearUrl("usuarios", "usuarios", "listar"));
         }
     }
     
-    
     //--------- REGISTRO DE PERSONAS POR MEDIO DE ARCHIVOS PLANOS ------------------
     
-    function planos()
+    function crear()
     {
         include_once("../view/Usuarios/personas/planos.html.php");
     }
@@ -115,7 +114,7 @@ class PersonasController
         
         if(count($errores)>0){
             setErrores($errores);
-            redirect(crearUrl('usuarios', 'personas', 'planos'));
+            redirect(crearUrl('usuarios', 'personas', 'crear'));
             //----------------fin validaciones-----------------
         }else{
     //        die(print_r($plano));
@@ -176,7 +175,7 @@ class PersonasController
                 fclose($gestor);
             }
             //----------------------------------------------------------------------
-            redirect(crearUrl("usuarios", "usuarios", "consultar"));
+            redirect(crearUrl("usuarios", "usuarios", "listar"));
         }
         
     }

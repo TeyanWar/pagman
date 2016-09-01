@@ -1,15 +1,4 @@
 <div class="row">
-    
-    <div id="card-alert" class="card teal">
-        <div class="card-content white-text">
-            <p><i class="mdi-action-info-outline"></i> IMPORTANTE : Los campos marcados con (*) son obligatorios.</p>
-            <br>
-            <p> <?php echo getErrores(); ?> </p>
-        </div>
-        <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div>
 
     <form id="form4" class="col s12" action="<?php echo crearUrl("usuarios", "usuarios", "postEditar") ?>" method="post" novalidate>
         <h4 class="header2">Modificar Persona</h4>
@@ -132,12 +121,20 @@
 
             <div class="input-field col s4 offset-s4">
                 <div class="input-field col s12">
-                    <button class="btn cyan waves-effect waves-light" type="submit"><i class="mdi-action-perm-identity"></i>Guardar Cambios</button>
+                    <button class="btn cyan waves-effect waves-light teal" type="submit"><i class="mdi-action-perm-identity"></i>Guardar Cambios</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+
+<style>
+    #modalUpdate{
+        top: 2% !important;
+        max-height: 100%;
+        height: 80%;
+    }
+</style>
 
 <script>
     $(document).ready(function () {

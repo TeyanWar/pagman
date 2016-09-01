@@ -14,6 +14,7 @@
             <descripcion>Controlador de Usuarios</descripcion>
             
             <funciones>
+                
                 <funcion>
                     <nombre>crear</nombre>
                     <display>Crear Usuario</display>
@@ -38,6 +39,22 @@
                     <descripcion>Eliminar Usuario</descripcion>
                 </funcion>
                 
+            </funciones>
+            
+        </controlador>
+        
+        <controlador>
+            <nombre>personasController</nombre>
+            <icono>mdi-action-perm-identity</icono>
+            <display>Personas</display>
+            <descripcion>Controlador de personas</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Importar Archivo Plano</display>
+                    <descripcion>Importar Plano</descripcion>
+                </funcion>
             </funciones>
             
         </controlador>

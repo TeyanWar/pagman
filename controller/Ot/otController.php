@@ -20,13 +20,14 @@ class OtController {
 //                . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
                 . "AND pag_orden_trabajo.per_id=pag_persona.per_id "
                 . "AND pag_orden_trabajo.est_id=pag_estado.est_id "
-                . "AND pag_orden_trabajo.ot_prioridad=pag_prioridad_trabajo.priotra_id "
                 . "AND pag_estado.tdoc_id=pag_tipo_doc.tdoc_id "
                 . "AND pag_orden_trabajo.estado IS NULL AND (ot_id LIKE "
                 . "'%" . $buscar . "%' OR equi_nombre LIKE "
                 . "'" . $buscar . "%' OR per_nombre LIKE "
                 . "'" . $buscar . "%' OR est_descripcion LIKE "
-                . "'%" . $buscar . "%') order by ot_id desc LIMIT 0,10";
+                . "'%" . $buscar . "%') "
+                . "GROUP BY pag_equipo.equi_nombre"
+                . "  ORDER BY pag_equipo.equi_id DESC";
 
 //        echo $sql; die();
         $ordenes = $objBuscar->select($sql);
@@ -53,18 +54,41 @@ class OtController {
         
         $objDetalle = new OtModel();
 
-        $sql = "SELECT * FROM pag_orden_trabajo, pag_insumo, pag_tipo_falla, pag_regional,"
-                . " pag_centro, pag_equipo, pag_persona,pag_estado,pag_tipo_doc "
-                . "WHERE  pag_orden_trabajo.tfa_id = pag_tipo_falla.tfa_id "
+        $sql = "SELECT * FROM pag_orden_trabajo,pag_tipo_falla,pag_centro,"
+                . "pag_equipo,pag_persona,pag_estado,pag_tipo_doc,pag_componente "
+                . "WHERE  pag_orden_trabajo.tfa_id=pag_tipo_falla.tfa_id "
+                . "AND pag_orden_trabajo.cen_id=pag_centro.cen_id "
                 . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
                 . "AND pag_orden_trabajo.per_id=pag_persona.per_id "
-//                . "AND pag_orden_trabajo.reg_id = pag_regional.reg_id "
                 . "AND pag_orden_trabajo.est_id=pag_estado.est_id "
-//                . "AND pag_orden_trabajo.ins_id=pag_insumo.ins_nombre "
                 . "AND pag_estado.tdoc_id=pag_tipo_doc.tdoc_id "
-                . "AND pag_orden_trabajo.estado IS NULL AND ot_id = $id";
+                . "AND pag_orden_trabajo.comp_id=pag_componente.comp_id "
+                . "AND pag_orden_trabajo.estado IS NULL AND ot_id=$id";
 
         $detalleOrdenes = $objDetalle->find($sql);
+        
+        //----------------------consulta de insumos---------------------
+        $sql = "SELECT pag_insumo.ins_nombre,pag_insumo.ins_valor,"
+                . "pag_unidad_medida.umed_descripcion,pag_det_insumo_ot.cantidad "
+                . "FROM pag_det_insumo_ot,pag_insumo,pag_unidad_medida,pag_orden_trabajo "
+                . "WHERE pag_det_insumo_ot.ot_id=pag_orden_trabajo.ot_id "
+                . "AND pag_det_insumo_ot.ins_id=pag_insumo.ins_id "
+                . "AND pag_insumo.umed_id=pag_unidad_medida.umed_id "
+                . "AND pag_orden_trabajo.estado IS NULL "
+                . "AND pag_det_insumo_ot.ot_id=$id";
+
+        $detalleinsumos = $objDetalle->select($sql);
+        
+        //----------------------consulta de herramientas---------------------
+        $sql = "SELECT pag_herramienta.her_nombre,pag_herramienta.her_descripcion,"
+                . "pag_det_herramienta_ot.cantidad "
+                . "FROM pag_det_herramienta_ot,pag_herramienta,pag_orden_trabajo "
+                . "WHERE pag_det_herramienta_ot.ot_id=pag_orden_trabajo.ot_id "
+                . "AND pag_det_herramienta_ot.her_id=pag_herramienta.her_id "
+                . "AND pag_orden_trabajo.estado IS NULL "
+                . "AND pag_det_herramienta_ot.ot_id=$id";
+
+        $detalleherramientas = $objDetalle->select($sql);
 
         // Cierra la conexion
         $objDetalle->cerrar();

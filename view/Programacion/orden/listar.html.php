@@ -102,5 +102,26 @@
             </tr>
             
         <?php } ?>
+            
+        <?php foreach ($mediciones as $med) { ?>
+
+            <tr class="#c0ca33 lime darken-1">
+                
+                <td><input type="checkbox" name="me[]" id="<?php echo -$med['ctrmed_id'] ?>" value="<?php echo $med['ctrmed_id'] ?>" data-error=".errorTxt218"><label for="<?php echo -$med['ctrmed_id'] ?>"></label></td>
+                <div class="errorTxt218"></div>
+                <td><input type="hidden" value="<?php echo $med['cen_id'] ?>" ><?php echo $med['cen_nombre'] ?></td>
+                <td><input type="hidden" value="<?php echo $med['equi_id'] ?>" ><?php echo $med['equi_nombre'] ?></td>
+                <td><input type="hidden" value="<?php echo "motor"; ?>" ><?php echo "motor"; ?></td>
+                <td><input type="hidden" value="<?php echo "mecanico"; ?>" ><?php echo "mecanico"; ?></td>
+                <td><input type="hidden" value="<?php echo "cambio de aceite"; ?>" ><?php echo "cambio de aceite"; ?></td>
+                <td><input type="hidden" value="<?php echo "preventivo"; ?>" ><?php echo "preventivo"; ?></td>
+                <td><input type="hidden" value="<?php echo $med['ctrmed_medida_actual'] ?>" ><?php echo $med['ctrmed_medida_actual'] ?></td>
+                <td><input type="hidden" value="<?php echo $med['tmed_id'] ?>" ><?php echo $med['tmed_nombre'] ?></td>
+                <td><input type="hidden" value="<?php echo "pendiente"; ?>" ><?php echo "pendiente"; ?></td>
+                
+            </tr>
+            
+        <?php } ?>
+            
     </tbody>
 </table>
