@@ -50,9 +50,9 @@ $(document).ready(function(){
                     //alert(window.location);
                     window.location.reload();
                 } else if (data == 0) {
-                    Materialize.toast('El usuario se encuentra temporalmente Bloqueado o no tiene permisos de Administrador', 3000, 'rounded col red');
+                    Materialize.toast('El Usuario o la contraseña ingresada es incorrecta', 3000, 'rounded col red');
                 } else {
-                    Materialize.toast('Error de Informacion', 2000, 'rounded col red');
+                    Materialize.toast('Usuario esta Bloqueado o no tiene permisos de administrador', 2000, 'rounded col red');
                 }
             }
         });

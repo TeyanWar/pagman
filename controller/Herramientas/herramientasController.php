@@ -19,7 +19,6 @@ class HerramientasController {
 
     function postCrear() {
 
-        $objHerramientas = new HerramientasModel();
         $errores = array();
         $expresion = '/^[A-Z]{2}-[0-9]{4}$/';
         $cadena = "/^[a-zA-Z]+/";
@@ -27,6 +26,27 @@ class HerramientasController {
         if (!isset($_POST['her_id']) or $_POST['her_id'] == "") {
             $errores[] = "El campo numero placa no debe estar vacio";
         }
+
+        $sql = "SELECT her_id FROM pag_herramienta";
+        $objHerramientas = new HerramientasModel();
+
+        $consulta = $objHerramientas->select($sql);
+
+        $objHerramientas->cerrar();
+
+        foreach ($consulta as $id) {
+            //die(print_r($consulta));
+            if ($id['her_id'] == $_POST['her_id']) {
+                //die(print_r($_POST['her_id']));
+                $errores[] = "La placa Nro. <code>" . $id['her_id'] . "</code> ya se encuentra registrada.";
+            }
+        }
+
+        if ($_POST['her_fecha_ingreso'] == date('Y-m-d')) {
+            $errores[] = "La fecha ingresada, NO debe ser superior a la fecha actual (<code>" . date('Y-m-d') . "</code>)";
+        }
+
+
 //        if (isset($_POST['her_id']) && !preg_match($expresion, $_POST['her_id'])) {
 //            $errores[] = "El campo numero placa debe ser de tipo alfanumerico";
 //        }
@@ -38,38 +58,63 @@ class HerramientasController {
         }
         if (count($errores) > 0) {
             setErrores($errores);
-            redirect(crearUrl('herramientas', 'herramientas', 'crear'));
+            redirect(crearUrl('Herramientas', 'herramientas', 'crear'));
+        }
+        
+        if($_POST['her_fecha_ingreso'] == ""){
+            $errores[] = "Por favor selecciona una fecha de ingreso";
         }
         // estos son los pos que llegan de los formularios.
+
+
+
         $her_id = $_POST['her_id'];
         $her_nombre = $_POST['her_nombre'];
         $her_descripcion = $_POST['her_descripcion'];
         $her_fecha_ingreso = $_POST['her_fecha_ingreso'];
         $ther_id = $_POST['ther_id'];
+
+        //die(print_r($_FILES));
         $her_imagen = $_FILES['her_imagen']['name'];
 
-        //aqui empieza la carga de archivos
-        //Si es que hubo un error en la subida, mostrarlo, de la variable $_FILES podemos extraer el valor de [error], que almacena un valor booleano (1 o 0).
-        if ($_FILES["her_imagen"]["error"] > 0) {
-            echo $_FILES["her_imagen"]["error"] . "";
-        } else {
-            // Si no hubo error, hacemos otra condicion para asegurar que el archivo no este repetido
-            if (file_exists("imagenes/" . $_FILES["her_imagen"]["name"])) {
-                echo $_FILES["her_imagen"]["name"] . " ya existe. ";
-            } else {
-//                $rutaImagen=$_FILES["her_imagen"]["name"];
-                $rutaImagen = $_SERVER['DOCUMENT_ROOT']. '/pagman/web/img/' . $_FILES["her_imagen"]["name"];
-//                die(print_r($rutaImagen));
-                // Si no es un archivo repetido y no hubo error, subimos a la carpeta /Imagenes para luego ser mostrada 
-                move_uploaded_file($_FILES["her_imagen"]["tmp_name"], $rutaImagen);
-//                    echo "Archivo Subido ";
+        //Asigno el nombre de la foto segun numero de placa
+        $herramienta_foto = "Herramienta-" . $her_id;
 
-                $insertHerramientas = "INSERT INTO pag_herramienta "
-                        . "(her_id,her_nombre,her_descripcion,her_imagen,her_fecha_ingreso,ther_id) "
-                        . "VALUES('$her_id','$her_nombre','$her_descripcion','" . $_FILES["her_imagen"]["name"] . "','$her_fecha_ingreso','$ther_id')";
+        //Hago un explode para capturar la extension de IMAGEN
+        $fotoHerramienta = explode(".", $_FILES['her_imagen']['name']);
+        //die(print_r($fotoHerramienta));
+
+        //Nombre de la foto con la extension capturada
+        $nombreFoto = $herramienta_foto . "." . end($fotoHerramienta);
+        //die($nombreFoto);
+        
+        $ruta = $_FILES['her_imagen']['tmp_name'];
+        //Capturo la ruta donde guardare la Imagen
+        $rutaydoc = getDocumentRoot() . "/web/media/img/Herramientas/" . $nombreFoto;
+
+        if ($ruta <> "") {
+            if (move_uploaded_file($ruta, $rutaydoc)) {
+                
             }
+        } else {
+            $rutaydoc = NULL;
         }
 
+        $insertHerramientas = "INSERT INTO pag_herramienta "
+                . "(her_id,"
+                . "ther_id,"
+                . "her_nombre,"
+                . "her_descripcion,"
+                . "her_fecha_ingreso,"
+                . "her_imagen) "
+                . "VALUES('$her_id',"
+                . "'$ther_id',"
+                . "'$her_nombre',"
+                . "'$her_descripcion',"
+                . "'$her_fecha_ingreso',"
+                . "'$nombreFoto')";
+        $objHerramientas = new HerramientasModel();
+        //die(print_r($insertHerramientas));
         $insertar = $objHerramientas->insertar($insertHerramientas);
         // Cierra la conexion
         $objHerramientas->cerrar();

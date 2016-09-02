@@ -29,7 +29,7 @@
         </div>
         <div class="row">
           <div class="input-field col s12" id="loginAjax">
-             <input type="button"  value="Enviar" class="btn waves-effect waves-light col s12">
+             <input type="button"  value="ENTRAR" class="btn waves-effect waves-light col s12">
           </div>
         </div>
         <div class="row">

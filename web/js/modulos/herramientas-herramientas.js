@@ -17,6 +17,9 @@ $(document).ready(function () {
                 letterswithbasicpunc: true,
                 minlength: 6,
                 maxlength: 40
+            },
+            her_fecha_ingreso: {
+                required: true
             }
         },
         //mensajes para cada dato validado
@@ -36,6 +39,9 @@ $(document).ready(function () {
             },
             ther_id: {
                 required: "Este campo es obligatorio seleccionar"
+            },
+            her_fecha_ingreso: {
+                required: "Por favor selecciona una fecha de Ingreso"
             }
         },
         errorElement: 'div',
