@@ -36,7 +36,7 @@
         <form class="col s12">
             <div class="input-field">
                 <i class="mdi-action-search prefix"></i>
-                <input type="text" class="active" id="buscarMed" name='buscarMed' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Medidores", "Medidores", "buscador", array('noVista' => "noVista")) ?>" />
+                <input type="text" class="active" id="buscarMed" name='buscarMed' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Medidores", "medidores", "buscador", array('noVista' => "noVista")) ?>" />
                 <label for="icon_prefix" class="active">Buscador de Medidores</label>
             </div>
         </form>

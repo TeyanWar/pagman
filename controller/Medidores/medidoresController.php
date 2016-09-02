@@ -2,7 +2,7 @@
 
 include_once '../model/Medidores/medidoresModel.php';
 
-class MedidoresController {
+class medidoresController {
     
     public function crear(){
         include_once '../view/Medidores/medidores/crear.html.php';
@@ -153,7 +153,7 @@ class MedidoresController {
          * Paginado
          */
         $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
-        $url = crearUrl('medidores', 'medidores', 'listar');
+        $url = crearUrl('Medidores', 'medidores', 'listar');
         
         $paginado = new Paginado($medidores, $pagina, $url);
         
@@ -163,6 +163,6 @@ class MedidoresController {
          */
 
         $objMedidores->cerrar();
-        include_once("../view/Medidores/Medidores/listar.html.php");
+        include_once("../view/Medidores/medidores/listar.html.php");
     }
 }
