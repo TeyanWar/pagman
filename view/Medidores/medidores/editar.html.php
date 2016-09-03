@@ -76,7 +76,7 @@
         //For custom messages
         messages: {
             tmed_nombre:{
-                required:   "Este campo no puede estar vacio",
+                required:   "Este campo no puede estar vac&iacute;o",
                 minlength:  "Debe contener minimo 2 caracteres",
                 maxlength:  "En este campo solo se admiten 44 caracteres"
             },

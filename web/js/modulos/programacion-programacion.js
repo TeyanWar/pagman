@@ -1,5 +1,60 @@
 $(document).ready(function () {
     
+    $(document).on('submit', '#formValid', function (e) {
+        e.preventDefault();
+        var url = $('#formValid').attr("data-url");
+        var redirect = $('#formValid').attr("data-redirect");
+        var error = $('#formValid').attr("action");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize()
+        }).done(function (respuesta) {
+            console.log(respuesta);
+            if (respuesta==true) {
+                Materialize.toast("<i class= 'material-icons' ></i> Registro exitoso.", 2000, 'green');
+                setTimeout(
+                        function () {
+                            window.location.href = (redirect);
+                        }, 2000);
+            }
+            else {
+                Materialize.toast("<i class= 'material-icons' ></i> Error al registrar.", 3000, 'red');
+                setTimeout(
+                        function () {
+                            window.location.href = (error);
+                        }, 1000);
+            }
+        });
+    });
+    
+    $(document).on('submit', '#formulario1', function (e) {
+        e.preventDefault();
+        var url = $('#formulario1').attr("data-url");
+        var redirect = $('#formulario1').attr("data-redirect");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize()
+        }).done(function (respuesta) {
+
+            if (respuesta == true) {
+                Materialize.toast("<i class= 'material-icons' ></i> Actualizacion exitosa.", 2000, 'green');
+                setTimeout(
+                    function () {
+                        window.location.href = (redirect);
+                    }, 1000);
+            }
+            else {
+                Materialize.toast("<i class= 'material-icons' ></i> Error en la actualización.", 3000, 'red');
+                setTimeout(
+                        function () {
+                            window.location.href = (redirect);
+                        }, 1000);
+            }
+        });
+    });
+    
     //------ paginador ------------------
     
     function mostrardatos(pagina){
@@ -33,13 +88,7 @@ $(document).ready(function () {
     
     $("#formValid").validate({
         rules: {
-            regional: {
-                required: true
-            },
             centro: {
-                required: true
-            },
-            fecha: {
                 required: true
             },
             inicio: {
@@ -50,14 +99,8 @@ $(document).ready(function () {
         },
         //For custom messages
         messages: {
-            regional:{
-                required: "La regional es obligatorio."
-            },
             centro:{
                 required: "El centro es obligatorio."
-            },
-            fecha:{
-                required: "La fecha es obligatorio."
             },
             inicio:{
                 required: "La fecha de inicio es obligatorio."
@@ -76,6 +119,19 @@ $(document).ready(function () {
     });
     
     //----------- fin validations ---------------
+    
+//    $("#centro").change(function () {
+//        var centro = $("#centro").val();
+//        var url = $(this).attr("data-url");
+//        $.ajax({
+//            url: url,
+//            type: "POST",
+//            data: "centro=" + centro,
+//            success: function (data) {
+//                $("#equipo").html(data);
+//            }
+//        });
+//    });
 
     $("#equipo").keyup(function () {
         var equipo = $("#equipo").val();
@@ -236,21 +292,46 @@ $(document).ready(function () {
         $("#fila-" + id).remove();
 
     });
+    
+    //----consulta ajax ajajaj programacion-----------
+//    $("#pro").keyup(function () {
+//        var program = $("#pro").val();
+//        var url = $(this).attr("data-url");
+//        $.ajax({
+//            url: url,
+//            type: "POST",
+//            data: "program=" + program,
+//            success: function (data) {
+//                $("#tabla").html(data);
+//            }
+//        });
+//    });
+//    $("#pro").trigger("keyup");
+
+
 
     //----consulta ajax programacion-----------
     $("#pro").keyup(function () {
         var program = $("#pro").val();
+        
+        if(program != ""){
+            $('#pagina').val(1);
+        }
+        
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
+        
         $.ajax({
             url: url,
             type: "POST",
-            data: "program=" + program,
+            data: "program=" + program+"&pagina="+pagina,
             success: function (data) {
                 $("#tabla").html(data);
             }
         });
     });
     $("#pro").trigger("keyup");
+ 
 
 });
 

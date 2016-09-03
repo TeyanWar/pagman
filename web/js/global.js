@@ -50,9 +50,9 @@ $(document).ready(function(){
                     //alert(window.location);
                     window.location.reload();
                 } else if (data == 0) {
-                    Materialize.toast('El usuario se encuentra temporalmente Bloqueado o no tiene permisos de Administrador', 3000, 'rounded col red');
+                    Materialize.toast('El Usuario o la contraseña ingresada es incorrecta', 3000, 'rounded col red');
                 } else {
-                    Materialize.toast('Error de Informacion', 2000, 'rounded col red');
+                    Materialize.toast('Usuario esta Bloqueado o no tiene permisos de administrador', 2000, 'rounded col red');
                 }
             }
         });
@@ -63,23 +63,24 @@ $(document).ready(function(){
     $(document).on('click','.btn_submit_modal',function(e){
        e.preventDefault();
        var url=$(this).parents("form:first").attr("action");
-//       alert(url);
+       alert(url);
         $(this).prop('disabled',true);
         $.ajax({
             url:url,
             type:"post",
             data: $(this).parents("form:first").serialize()
         }).done(function(response){
-            var respuesta = $.parseJSON(response);
-            if(respuesta.accion===true){
-                Materialize.toast(respuesta.mensajes, 1500, 'rounded col green');
-                window.setTimeout("location.href='"+respuesta.redirect+"'", 1500);
-            }else{
-                $('#cont_errors_ajax').html(respuesta.mensajes);
-                $('#cont_errors_ajax').css('display','block');
-                $('.btn_submit_modal').prop('disabled',false);
-                $('.modal-content').animate({scrollTop:$('#cont_errors_ajax').position().top}, 'slow');
-            }
+            alert(response);
+//            var respuesta = $.parseJSON(response);
+//            if(respuesta.accion===true){
+//                Materialize.toast(respuesta.mensajes, 1500, 'rounded col green');
+//                window.setTimeout("location.href='"+respuesta.redirect+"'", 1500);
+//            }else{
+//                $('#cont_errors_ajax').html(respuesta.mensajes);
+//                $('#cont_errors_ajax').css('display','block');
+//                $('.btn_submit_modal').prop('disabled',false);
+//                $('.modal-content').animate({scrollTop:$('#cont_errors_ajax').position().top}, 'slow');
+//            }
         });
     });
     

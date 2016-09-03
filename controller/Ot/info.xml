@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <modulos>
-    <nombre>OT</nombre>
+    <nombre>Ot</nombre>
     <icono>mdi-action-assignment</icono>
     <sitioMenu>principal</sitioMenu>
     <descripcion>Modulo de OT</descripcion>

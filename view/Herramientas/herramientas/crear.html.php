@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <label class="active"> *Fecha ingreso de herramienta: </label>
-                    <input id="her_fecha_ingreso" placeholder="dd/mm/aaaa" name="her_fecha_ingreso" type="date" class="datepicker">
+                    <input id="her_fecha_ingreso" placeholder="dd/mm/aaaa" name="her_fecha_ingreso" type="date">
                 </div>
                 <div class="input-field col s6">
                     <label for="tipo_Herramienta" class="active"> (*)Seleccione el tipo de herramienta: </label>
@@ -50,35 +50,36 @@
                         <div class="errorTxt3"></div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s6">
-                        <input type="text" id="her_id" data-error=".errorTxt1" name="her_id" length="40">
-                        <div class="errorTxt1"></div>
-                        <label for="her_id" class=""> (*)N&uacute;mero placa: </label>
-                        <span class="help-block">
-                            Por favor digite el numero de la placa de la herramienta a registrar, recuerde que el <code>n&uacute;mero de la placa</code> 
-                            debe corresponder al siguiente patron: <code>PCHP_001XXXX</code>
-                        </span>
-                    </div>
-                    <div class="input-field col s6">
-                        <input type="text" id="her_nombre" data-error=".errorTxt2" name="her_nombre" length="20" />
-                        <div class="errorTxt2"></div>
-                        <label for="her_nombre" class=""> (*)Nombre de herramienta: </label>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="text" id="her_id" data-error=".errorTxt1" name="her_id" length="40" placeholder="PCHP_001XXXX">
+                    <div class="errorTxt1"></div>
+                    <label for="her_id" class=""> (*)N&uacute;mero placa: </label>
+                    <span class="help-block">
+                        Por favor digite el numero de la placa de la herramienta a registrar, recuerde que el <code>n&uacute;mero de la placa</code> 
+                        debe corresponder al siguiente patron: <code>PCHP_001XXXX</code>
+                    </span>
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <textarea  id="her_descripcion" name="her_descripcion" class="materialize-textarea validate" length="200"></textarea>
-                        <label for="her_descripcion"> (*)Descripci&oacute;n: </label>
-                    </div>
+                <div class="input-field col s6">
+                    <input type="text" id="her_nombre" data-error=".errorTxt2" name="her_nombre" length="20" />
+                    <div class="errorTxt2"></div>
+                    <label for="her_nombre" class=""> (*)Nombre de herramienta: </label>
                 </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea  id="her_descripcion" name="her_descripcion" class="materialize-textarea validate" length="200"></textarea>
+                    <label for="her_descripcion"> (*)Descripci&oacute;n: </label>
+                </div>
+
                 <div class="file-field input-field col s6">
                     <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
                         <span>Subir imagen</span>
                         <input type="file" name="her_imagen" id="her_imagen"/>
                     </div>  
                     <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Eliga la imagen">
+                        <input class="file-path validate" type="text" placeholder="Eliga la imagen" readonly="">
                     </div>
                 </div>
                 <div class="row">
@@ -90,5 +91,6 @@
                 </div>
             </div>
         </div>
-    </form>
+</div>
+</form>
 </div>

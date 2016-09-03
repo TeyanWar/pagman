@@ -63,6 +63,7 @@
 
     </div> 
 
-    <div><a onclick="$('.orden').printArea();" class="btn-floating waves-effect"><i class="mdi-maps-local-print-shop"></i></a></div>
+<!--	<div><a onclick="$('.orden').printArea();" class="btn-floating waves-effect"><i class="mdi-maps-local-print-shop"></i></a></div>-->
+
 </div>
 <!-- <a href="#" class="modal-action modal-close"><i class="mdi-action-delete small"></i></a>&nbsp;&nbsp; -->

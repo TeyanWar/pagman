@@ -1,5 +1,35 @@
 $(document).ready(function () {
     
+    //----------------------respuesta registro-------------------
+    $(document).on('submit', '#formValidate', function (e) {
+        e.preventDefault();
+        var url = $('#formValidate').attr("data-url");
+        var redirect = $('#formValidate').attr("data-redirect");
+        var error = $('#formValidate').attr("action");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize()
+        }).done(function (respuesta) {
+            console.log(respuesta);
+            if (respuesta==true) {
+                Materialize.toast("<i class= 'material-icons' ></i> Registro exitoso.", 2000, 'green');
+                setTimeout(
+                        function () {
+                            window.location.href = (redirect);
+                        }, 2000);
+            }
+            else {
+                Materialize.toast("<i class= 'material-icons' ></i> Error al registrar.", 3000, 'red');
+                setTimeout(
+                        function () {
+                            window.location.href = (error);
+                        }, 1000);
+            }
+        });
+    });
+    
+    
     //----------------- validaciones ---------------
     
     /* Incluimos un método para validar el campo nombre */
@@ -139,40 +169,40 @@ $(document).ready(function () {
           }
         }
     });
-
-    //-----mensaje de respuesta------------
-    $(document).on('submit', '#Registrar', function (e) {
-        e.preventDefault();
-        var url = $('#Registrar').attr("data-url");
-        var redirect = $('#Registrar').attr("data-redirect");
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: $(this).serialize()
-        }).done(function (respuesta) {
-
-            if (respuesta === "OK") {
-                Materialize.toast("<i class= 'material-icons' ></i> Registro exitoso.", 2000, 'green');
-                setTimeout(
-                        function () {
-                            window.location.href = (redirect);
-                        }, 2000);
-
-            } else {
-                Materialize.toast("<i class= 'material-icons' ></i> Error al registrar.", 3000, 'red');
-            }
-
-        });
-    });
+    
+    //select dependiente de select
+//    $(document).on('change', '#departamento', function () {
+//        var url = $('#departamento').attr("data-url");
+//        var id = $(this).val();
+//
+//        $.ajax({
+//            url: url,
+//            type: 'POST',
+//            data: 'id=' + id,
+//            success: function (data) {
+//                $("#selectCentro").html(data);
+//                $('select').material_select();
+//            }
+//        });
+//    });  
+    
+    //fin: select dependiente de select
 
     //----consulta ajax usuarios-----------
     $("#cate").keyup(function () {
         var usuario = $("#cate").val();
+        
+        if(usuario != ""){
+            $('#pagina').val(1);
+        }
+        
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
+        
         $.ajax({
             url: url,
             type: "POST",
-            data: "usuario=" + usuario,
+            data: "usuario=" + usuario+"&pagina="+pagina,
             success: function (data) {
                 $("#tabla").html(data);
             }

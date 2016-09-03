@@ -3,7 +3,7 @@
         <div class="card-panel">
             <div class="row">
 
-                <h4 class="header">Registrar Personas</h4>
+                <h4 class="header">Importar Personas A Traves De Archivo Plano</h4>
 
                 <ol class="breadcrumbs">
                     <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
@@ -38,7 +38,7 @@
                 <?php } ?>
 
 
-                <form name="form" class="col s12" action="<?php echo crearUrl("usuarios", "personas", "postPlanos") ?>" enctype="multipart/form-data" method="post" onsubmit="return validar(this)">
+                <form name="form" class="col s12" action="<?php echo crearUrl("usuarios", "personas", "postPlanos") ?>" enctype="multipart/form-data" method="POST" onsubmit="return validar(this)">
 
                     <div class="row">
                         <div class="col s12 m8 l9">

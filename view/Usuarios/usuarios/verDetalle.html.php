@@ -93,3 +93,11 @@
         <?php echo $usu['rol_nombre']; ?>
     </div>
 </div>
+
+<style>
+    #modalDetalle{
+        top: 2% !important;
+        max-height: 100%;
+        height: 90%;
+    }
+</style>

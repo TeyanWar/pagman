@@ -15,10 +15,11 @@
 
                 <tbody>
                     <?php
-                        $count = 1;
+//                        $count = 1;
                         foreach($usuar as $user) {?>
                         <tr>
-                            <td><?php echo $count++ ?></td>
+<!--                            <td><?php // echo $count++ ?></td>-->
+                            <td><?php echo $paginado->count++; ?></td>
                             <td><?php echo $user['per_id'] ?></td>
                             <td><?php echo $user['per_nombre'] ?></td>
                             <td><?php echo $user['per_apellido'] ?></td>
@@ -61,15 +62,7 @@
                 </tbody>
             </table>
 
-            <ul class="pagination center">
-                <li class="disabled"><a href="#!"><i class="mdi-navigation-chevron-left"></i></a></li>
-                <li class="active"><a href="#!">1</a></li>
-                <li class="waves-effect"><a href="#!">2</a></li>
-                <li class="waves-effect"><a href="#!">3</a></li>
-                <li class="waves-effect"><a href="#!">4</a></li>
-                <li class="waves-effect"><a href="#!">5</a></li>
-                <li class="waves-effect"><a href="#!"><i class="mdi-navigation-chevron-right"></i></a></li>
-            </ul>
+            <?php $paginado->render() ?>
         </div>
     </div>
 </div>
