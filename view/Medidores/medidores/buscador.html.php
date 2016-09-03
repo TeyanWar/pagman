@@ -1,6 +1,7 @@
 <div class="card-panel">
     <div class="container">
         <h5 class="header2">LISTA DE MEDIDORES</h5>
+
         <!--Inicio rastro de miga-->
         <ol class="breadcrumbs">
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>

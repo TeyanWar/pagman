@@ -51,11 +51,13 @@ class medidoresController {
             $objMedidores = new MedidoresModel();
             $nombre = $_POST['nombre'];
             $acronimo = $_POST['acronimo'];
-            $descripcion = $_POST['descripci&oacute;n'];
-            $sql = "INSERT INTO pag_tipo_medidor (tmed_nombre, tmed_acronimo, tmed_descripcion, estado)"
+
+            $descripcion = $_POST['descripcion'];
+            $objMedidores = new MedidoresModel();
+            $sql = "INSERT INTO pag_tipo_medidor (tmed_nombre, tmed_acronimo, tmed_descripcion,estado)"
                     . "VALUES ('$nombre',"
                     . "'$acronimo',"
-                    . "'$descripci&oacute;n',"
+                    . "'$descripcion',"
                     . "null)";
             $medidores = $objMedidores->insertar($sql);
             $objMedidores->cerrar();
