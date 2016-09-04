@@ -58,15 +58,15 @@
                     <?php $paginado->render() ?>
                 </div>
             </div>
-        </div>     
-        <div id="modalDetalleRol" class="modal modal-fixed-footer">
+        </div> 
+        <div id="modalUpdateRoles" class="modal modal-fixed-footer">
 
             <div class="modal-content"></div>
             <div class="modal-footer">
                 <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
             </div>
         </div>
-        <div id="modalUpdateRoles" class="modal modal-fixed-footer">
+        <div id="modalDetalleRol" class="modal modal-fixed-footer">
 
             <div class="modal-content"></div>
             <div class="modal-footer">

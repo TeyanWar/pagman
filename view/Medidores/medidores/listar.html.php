@@ -8,7 +8,7 @@
                             <th>Acr&oacute;nimo</th>
                             <th>Descripci&oacute;n</th>
                             <th>Estado</th>
-                            <th>Opciones</th>
+                            <th>Editar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,8 +28,8 @@
                                 echo $medidor['tmed_estado'];
                                 ?>
                                 </td>
-                                <td><a class="btn-floating waves-effect waves-light modal-trigger teal" 
-                               href="#editar" data-url="<?php echo crearUrl('medidores', 'medidores', 'editar', array('noVista' => 'noVista', 'id' => $medidor['tmed_id']));?>"> 
+                                <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" 
+                                 href="#editar" data-url="<?php echo crearUrl('medidores', 'medidores', 'editar', array('noVista' => "noVista", 'id' => $medidor['tmed_id'])) ?>">
                                 <i class="mdi-content-create small"></i></a></td>
                             </tr>
                         <?php } ?>
@@ -38,11 +38,26 @@
             </div>
             
         </div>
-        
-        <div class="modal" id="editar">
-            <div class="modal-content ">
 
+<!--        <div class="modal" id="editar">
+            <div class="modal-content ">
             </div> 
-        </div>
+        </div>-->
         
         <?php $paginado->render();?>
+
+
+<script type="text/javascript">
+    $('.modal-trigger').leanModal({
+        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        in_duration: 300, // Transition in duration
+        out_duration: 200, // Transition out duration
+        ready: function() {
+            //alert('Ready'); 
+        }, // Callback for Modal open
+        complete: function() {
+            //alert('Closed'); 
+        } // Callback for Modal close
+    });
+</script>

@@ -45,7 +45,7 @@ class UsuariosController
 
             $comprobar = $UsuariosModel->find($sql);
         
-            if($comprobar['per_tipo'] == 'persona') {
+            if($comprobar['per_tipo']==='persona') {
 
                 $sql = "SELECT pag_persona.per_id,pag_persona.per_nombre,pag_persona.per_apellido,"
                         . "pag_persona.per_telefono,pag_persona.per_movil,"
@@ -122,7 +122,7 @@ class UsuariosController
             
             //--------------VALIDACIONES---------------------------------------
 
-                if($comprobar['per_tipo'] == 'usuario del sistema'){
+                if($comprobar['per_tipo']==='usuario del sistema'){
                     
                     if(!isset($_POST['login']) or $_POST['login']==""){
                     $errores[]='<h6><strong>(*) Para editar usuario el campo "login" es obligatorio</strong><h6>';
@@ -597,7 +597,7 @@ class UsuariosController
                 $ids = $objUsuarios->select($doc);
                 
                 foreach($ids as $id){
-                    if($id['per_id']== $_POST['identificacion']){
+                    if($id['per_id']===$_POST['identificacion']){
                         $errores[]='<strong>(*) El No. Identificacion ingresado ya se encuentra registrado</strong>';
                     }
                 }
@@ -766,7 +766,7 @@ class UsuariosController
 
             $comprobar = $UsuariosModel->find($sql);
         
-            if($comprobar['per_tipo'] == 'persona') {
+            if($comprobar['per_tipo']==='persona') {
 
                 $sql = "SELECT pag_persona.per_id,pag_persona.per_nombre,pag_persona.per_apellido,"
                         . "pag_persona.per_telefono,pag_persona.per_movil,"

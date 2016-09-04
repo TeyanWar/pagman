@@ -3,20 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
             <file>file:/C:/xampp/htdocs/pagman/view/Medidores/medidores/listar.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/view/Medidores/medidores/crear.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/view/Usuarios/roles/crear.html.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/controller/Medidores/medidoresController.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/view/Usuarios/roles/listar.html.php</file>
             <file>file:/C:/xampp/htdocs/pagman/view/Medidores/medidores/editar.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/roles-roles.js</file>
             <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/medidores-medidores.js</file>
             <file>file:/C:/xampp/htdocs/pagman/view/Medidores/medidores/buscador.html.php</file>
-=======
-            <file>file:/opt/lampp/htdocs/pagman/controller/Medidores/medidoresController.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/web/templates/adminMaterialize/login/login.html.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/view/Medidores/medidores/buscar.html.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/web/js/global.js</file>
->>>>>>> 355455b0a02eced231b60764a2b1ade3351d7ff2
         </group>
     </open-files>
 </project-private>

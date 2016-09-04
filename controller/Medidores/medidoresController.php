@@ -15,32 +15,32 @@ class medidoresController {
         $patronLetrasNumeros="/^[0-9a-zA-Z ]+$/";
         
         if(!isset($_POST['nombre']) or $_POST['nombre']==""){
-            $errores[]="El campo nombre no puede estar vac&iacute;o";
+            $errores[]="El campo <code><b>nombre</b></code> no puede estar vac&iacute;o";
         }//Valida que el campo nombre medidor no llegue vac&iacute;o
         
         if(isset($_POST['nombre']) && !preg_match($patronLetras,$_POST['nombre'])){
-            $errores[]="En el campo nombre &uacute;nicamente se admiten letras";
+            $errores[]="En el campo <code><b>nombre</b></code> &uacute;nicamente se admiten letras";
         }//Valida que el campo nombre medidor contenga letras &uacute;nicamente
         
         if(!isset($_POST['acronimo']) or $_POST['acronimo']==""){
-            $errores[]="El campo acr&oacute;nimo no puede estar vac&iacute;o";
+            $errores[]="El campo <code><b>acr&oacute;nimo</b></code> no puede estar vac&iacute;o";
         }//Valida que el campo acronimo no llegue vac&iacute;o
         
         if(isset($_POST['acronimo']) && !preg_match($patronLetras,$_POST['acronimo'])){
-            $errores[]="En el campo acr&oacute;nimo &uacute;nicamente se admiten letras";
+            $errores[]="En el campo <code><b>acr&oacute;nimo</b></code> &uacute;nicamente se admiten letras";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
         
         if(isset($_POST['acronimo']) && strlen($_POST['acronimo'])>3){
-            $errores[]="El campo acronimo no debe sobrepasar los 4 caracteres";
+            $errores[]="El campo <code><b>acr&oacute;nimo</b></code> no debe sobrepasar los 4 caracteres";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
         
 
-        if(!isset($_POST['descripci&oacute;n']) or $_POST['descripci&oacute;n']==""){
-            $errores[]="El campo descripci&oacute;n no puede estar vac&iacute;o";
+        if(!isset($_POST['descripcion']) or $_POST['descripcion']==""){
+            $errores[]="El campo <code><b>descripci&oacute;n</b></code> no puede estar vac&iacute;o";
         }//Valida que el campo acronimo no llegue vac&iacute;o
         
-        if(isset($_POST['descripci&oacute;n']) && !preg_match($patronLetrasNumeros,$_POST['descripci&oacute;n'])){
-            $errores[]="En el campo descripci&oacute;n &uacute;nicamente se admiten letras y numeros";
+        if(isset($_POST['descripcion']) && !preg_match($patronLetrasNumeros,$_POST['descripcion'])){
+            $errores[]="En el campo <code><b>descripci&oacute;n</b></code> &uacute;nicamente se admiten letras y numeros";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
         
         
@@ -84,31 +84,34 @@ class medidoresController {
         $patronLetras="/^[a-zA-Z_áéíóúñ\s]*$/";
         $patronLetrasNumeros="/^[0-9a-zA-Z]+$/";
         
+        
+        
         if(!isset($_POST['tmed_nombre']) or $_POST['tmed_nombre']==""){
-            $errores[]="El campo nombre no puede estar vac&iacute;o";
+            $errores[]="El campo <code><b>nombre</b></code> no puede estar vac&iacute;o";
         }//Valida que el campo nombre medidor no llegue vac&iacute;o
         
         if(isset($_POST['tmed_nombre']) && !preg_match($patronLetras,$_POST['tmed_nombre'])){
-            $errores[]="En el campo nombre &uacute;nicamente se admiten Letras";
+            $errores[]="En el campo <code>nombre<b></b></code> &uacute;nicamente se admiten Letras";
         }//Valida que el campo nombre medidor contenga letras &uacute;nicamente
         
         if(!isset($_POST['tmed_acronimo']) or $_POST['tmed_acronimo']==""){
-            $errores[]="El campo acr&oacute;nimo no puede estar vac&iacute;o";
+            $errores[]="El campo <code><b>acr&oacute;nimo</b></code> no puede estar vac&iacute;o";
         }//Valida que el campo acronimo no llegue vac&iacute;o
         
         if(isset($_POST['tmed_acronimo']) && !preg_match($patronLetras,$_POST['tmed_acronimo'])){
-            $errores[]="En el campo acr&oacute;nimo &uacute;nicamente se admiten Letras";
+            $errores[]="En el campo <code><b>acr&oacute;nimo</b></code> &uacute;nicamente se admiten Letras";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
         
         if(isset($_POST['tmed_acronimo']) && strlen($_POST['tmed_acronimo'])>3){
-            $errores[]="El campo acronimo no debe sobrepasar los 4 caracteres";
+            $errores[]="El campo <code><b>acr&oacute;nimo</b></code> no debe sobrepasar los 4 caracteres";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
         
-        if(!isset($_POST['tmed_descripci&oacute;n']) or $_POST['tmed_descripci&oacute;n']==""){
+        if(!isset($_POST['tmed_descripcion']) or $_POST['tmed_descripcion']==""){
+
             $errores[]="El campo descripci&oacute;n no puede estar vac&iacute;o";
         }//Valida que el campo acronimo no llegue vac&iacute;o
         
-        if(isset($_POST['tmed_descripci&oacute;n']) && !preg_match($patronLetras,$_POST['tmed_descripci&oacute;n'])){
+        if(isset($_POST['tmed_descripcion']) && !preg_match($patronLetras,$_POST['tmed_descripcion'])){
             $errores[]="En el campo descripci&oacute;n &uacute;nicamente se admiten letras y numeros";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
         
@@ -121,15 +124,15 @@ class medidoresController {
         $id = $_POST['id'];
         $tmed_nombre = $_POST['tmed_nombre'];
         $tmed_acronimo = $_POST['tmed_acronimo'];
-        $tmed_descripcion = $_POST['tmed_descripci&oacute;n'];
+        $tmed_descripcion = $_POST['tmed_descripcion'];
         $objMedidores = new MedidoresModel();
         
         $sql = "UPDATE pag_tipo_medidor SET "
                 . "tmed_nombre = '$tmed_nombre',"
                 . "tmed_acronimo = '$tmed_acronimo',"
-                . "tmed_descripci&oacute;n = '$tmed_descripcion'"
+                . "tmed_descripcion = '$tmed_descripcion'"
                 . " WHERE tmed_id = $id";
-//        die($sql);
+        
         
         $medidores = $objMedidores->update($sql);
         $objMedidores->cerrar();
