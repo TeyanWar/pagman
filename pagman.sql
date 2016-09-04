@@ -654,7 +654,7 @@ CREATE TABLE `pag_herramienta` (
   `her_id` varchar(40) NOT NULL,
   `ther_id` int(11) NOT NULL,
   `her_nombre` varchar(45) NOT NULL,
-  `her_descripcion` varchar(45) NOT NULL,
+  `her_descripcion` varchar(100) NOT NULL,
   `her_fecha_ingreso` varchar(15) NOT NULL,
   `est_id` int(11) DEFAULT NULL,
   `her_imagen` varchar(45) DEFAULT NULL,

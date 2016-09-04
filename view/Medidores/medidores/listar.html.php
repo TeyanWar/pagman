@@ -8,7 +8,7 @@
                             <th>Acr&oacute;nimo</th>
                             <th>Descripci&oacute;n</th>
                             <th>Estado</th>
-                            <th>Opciones</th>
+                            <th>Editar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,9 +28,12 @@
                                 echo $medidor['tmed_estado'];
                                 ?>
                                 </td>
-                                <td><a class="btn-floating waves-effect waves-light modal-trigger teal" 
-                               href="#editar" data-url="<?php echo crearUrl('medidores', 'medidores', 'editar', array('noVista' => 'noVista', 'id' => $medidor['tmed_id']));?>"> 
-                                <i class="mdi-content-create small"></i></a></td>
+                                <td>
+                                    <a class="btn-floating teal modal-trigger editarMedidor" 
+                                        href="#editarMedidor" data-url="<?php echo crearUrl('medidores', 'medidores', 'editar', array('noVista', 'id' => $medidor['tmed_id']));?>"> 
+                                        <i class="mdi-content-create small"></i>
+                                    </a>
+                                </td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -38,11 +41,10 @@
             </div>
             
         </div>
-        
-        <div class="modal" id="editar">
-            <div class="modal-content ">
 
+<!--        <div class="modal" id="editar">
+            <div class="modal-content ">
             </div> 
-        </div>
+        </div>-->
         
         <?php $paginado->render();?>

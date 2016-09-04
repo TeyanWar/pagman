@@ -165,19 +165,17 @@ $(document).ready(function () {
     
      $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
-       
-    $(".modal-data").html('Cargando ....');
+//        alert(url);
         $.ajax({
             url: url,
             type: "get",
             success: function (data) {
-                $("#editar> .modal-content").html(data);
+//                alert(data);
+                $("#editarMedidor > .modal-content").html(data);
+                
             }
         });
 
     });
-    
-       
-     
     
 });
