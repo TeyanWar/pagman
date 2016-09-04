@@ -79,7 +79,6 @@
         
         <div class="modal" id="modal_detalle_mediciones">
             <div class="modal-content ">
-                        HOLA
             </div> 
         </div>
         

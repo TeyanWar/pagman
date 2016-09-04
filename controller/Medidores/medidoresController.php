@@ -84,6 +84,8 @@ class medidoresController {
         $patronLetras="/^[a-zA-Z_áéíóúñ\s]*$/";
         $patronLetrasNumeros="/^[0-9a-zA-Z]+$/";
         
+        
+        
         if(!isset($_POST['tmed_nombre']) or $_POST['tmed_nombre']==""){
             $errores[]="El campo <code><b>nombre</b></code> no puede estar vac&iacute;o";
         }//Valida que el campo nombre medidor no llegue vac&iacute;o
@@ -105,11 +107,12 @@ class medidoresController {
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
         
         if(!isset($_POST['tmed_descripcion']) or $_POST['tmed_descripcion']==""){
-            $errores[]="El campo <code><b>descripci&oacute;n</b></code> no puede estar vac&iacute;o";
+
+            $errores[]="El campo descripci&oacute;n no puede estar vac&iacute;o";
         }//Valida que el campo acronimo no llegue vac&iacute;o
         
         if(isset($_POST['tmed_descripcion']) && !preg_match($patronLetras,$_POST['tmed_descripcion'])){
-            $errores[]="En el campo <code><b>descripci&oacute;n</b></code> &uacute;nicamente se admiten letras y numeros";
+            $errores[]="En el campo descripci&oacute;n &uacute;nicamente se admiten letras y numeros";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
         
         
@@ -121,15 +124,15 @@ class medidoresController {
         $id = $_POST['id'];
         $tmed_nombre = $_POST['tmed_nombre'];
         $tmed_acronimo = $_POST['tmed_acronimo'];
-        $tmed_descripcion = $_POST['tmed_descripci&oacute;n'];
+        $tmed_descripcion = $_POST['tmed_descripcion'];
         $objMedidores = new MedidoresModel();
         
         $sql = "UPDATE pag_tipo_medidor SET "
                 . "tmed_nombre = '$tmed_nombre',"
                 . "tmed_acronimo = '$tmed_acronimo',"
-                . "tmed_descripci&oacute;n = '$tmed_descripcion'"
+                . "tmed_descripcion = '$tmed_descripcion'"
                 . " WHERE tmed_id = $id";
-//        die($sql);
+        
         
         $medidores = $objMedidores->update($sql);
         $objMedidores->cerrar();
