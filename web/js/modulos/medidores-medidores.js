@@ -1,5 +1,7 @@
 $(document).ready(function () {
     
+    
+    
     //validacion para letras
     jQuery.validator.addMethod("lettersonly", function (value, element){
         return this.optional(element) || /^[a-zA-Z_áéíóúñ\s]*$/.test(value);
@@ -33,7 +35,7 @@ $(document).ready(function () {
         messages: {
             nombre:{
                 required:   "Este campo es obligatorio",
-                minlength:  "Debe contener minimo 2 caracteres",
+                minlength:  "Debe contener m&iacute;nimo 2 caracteres",
                 maxlength:  "En este campo solo se admiten 44 caracteres"
             },
             acronimo: {
@@ -84,7 +86,10 @@ $(document).ready(function () {
     //aqui termina el filtro de busqueda de las herramientas
     // --------------------------------------------//--------------------
     $('#buscarMed').trigger('keyup');// function_trigger para visualizar las herramientas existentes
-    $("#buscarMed").focus();
+    $('.formValidate').ready(function(){
+        $("#buscarMed").focus();
+    });
+    
    
    
 //Inicio Validacion de formulario Editar Medidor
@@ -115,8 +120,8 @@ $(document).ready(function () {
         //For custom messages
         messages: {
             tmed_nombre:{
-                required:   "Este campo no puede estar vacio",
-                minlength:  "Debe contener minimo 2 caracteres",
+                required:   "Este campo no puede estar vac&iacute;o",
+                minlength:  "Debe contener m&iacute;nimo 2 caracteres",
                 maxlength:  "En este campo solo se admiten 44 caracteres"
             },
             tmed_acronimo: {
