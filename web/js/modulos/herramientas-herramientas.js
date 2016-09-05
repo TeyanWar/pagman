@@ -56,6 +56,7 @@ $(document).ready(function () {
     // aqui empieza la modal para editar herramientas
     $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
+//        alert(url);
         $.ajax({
             url: url,
             type: "get",
@@ -112,7 +113,21 @@ $(document).ready(function () {
     // aqui termina el sweetAlert de herramientas
     //------------------------------------------------------------------------------//
 //efecto para ampliar las imagenes en el listado de herramientas
-    $('.fancybox').fancybox();
+    $('.fancybox').fancybox({
+        openEffect: 'elastic', //'fade', 'elastic'
+        closeEffect: 'elastic',
+        openSpeed: 'normal', //ms, slow, normal, fast (default 250ms)
+        closeSpeed: 'normal',
+        helpers: {
+            title: {
+                type: 'inside' //'float', 'inside', 'outside' or 'over'
+            },
+            overlay: {
+                closeClick: true  // if true, se cierra al hacer click fuera de la imagen
+            }
+        },
+        padding: 11
+    });
 
     //Botón para cerrar modales
     $(document).on('click', '.cerrar', function () {

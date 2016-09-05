@@ -22,7 +22,7 @@
                     <td><?php echo $herramienta['her_id'] ?></td>
                     <td><?php echo $herramienta['her_nombre'] ?></td>
                     <td><?php echo $herramienta['her_descripcion'] ?></td>
-                    <td><a class="fancybox" href="../../../img/<?php echo $herramienta['her_imagen'] ?>"><img id="her_imagen" width="100px" height="100px" src="../../../img/<?php echo $herramienta['her_imagen'] ?>"></a></td>
+                    <td><a id="her_imagen" class="fancybox" href="../../../img/<?php echo $herramienta['her_imagen'] ?>"><img name="her_imagen" width="100px" height="100px" src="../../../img/<?php echo $herramienta['her_imagen'] ?>" /></a></td>
                     <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" href="#modalEditar" data-url="<?php echo crearUrl('herramientas', 'herramientas', 'editar', array('noVista' => "noVista", 'id' => $herramienta['her_id'])) ?>"><i class="mdi-content-create small"></i></a></td>
                     <td><a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" data-her_id="<?php echo $herramienta['her_id'] ?>" data-url="<?php echo crearUrl('herramientas', 'herramientas', 'postEliminar', array('noVista' => 'noVista', 'id' => $herramienta['her_id'])) ?>"><i class="mdi-action-delete small"></i></a></td>
                 </tr>

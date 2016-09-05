@@ -14,7 +14,7 @@
                     </div>
                     <div class="input-field col s4">
                         <label class="active"> *Fecha ingreso de herramienta: </label>
-                        <input name="her_fecha_ingreso" type="date" id="her_fecha_ingreso" readonly="disable" class="form-control datepicker" value="<?php echo $herramienta['her_fecha_ingreso'] ?>">
+                        <input name="her_fecha_ingreso" type="text" id="her_fecha_ingreso" readonly="" class="form-control" value="<?php echo $herramienta['her_fecha_ingreso'] ?>">
                     </div>
                 </div>
                 <div class="row">
@@ -23,26 +23,28 @@
                         <input type="text" id="her_descripcion" class="form-control" name="her_descripcion" value="<?php echo $herramienta['her_descripcion'] ?>" length="200">
                     </div>
                 </div>
-                <!--                <div class="file-field input-field col s6">
-                                    <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
-                                        <span>Subir imagen</span>
-                                        <input type="file" name="her_imagen" id="her_imagen"/>
-                                    </div>  
-                                    <div class="file-path-wrapper">
-                                        <input class="file-path validate" type="text" placeholder="Eliga la imagen">
-                                    </div>
-                                </div>-->
+<!--                <div class="row">
+                    <div class="file-field input-field col s6">
+                        <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
+                            <span>Actualizar imagen</span>
+                            <input type="file" name="her_imagen" id="her_imagen" value="<?php  //echo $herramienta['her_imagen'] ?>">
+                        </div>  
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text" placeholder="Eliga la imagen">
+                        </div>
+                    </div>
+                </div><br />-->
                 <!-- Campo para almacenar el id de la herramienta -->
-                <input type="hidden" name="id" value="<?php echo $herramienta['her_id'] ?>">
+                <input type="hidden" name="id" value="<?php echo $herramienta['her_id'] ?>" />
 
                 <!--botonera de la ventana de editar-->
                 <div class="row center" >
                     <div class="input-field col  m3 "></div>
                     <div class="input-field col  m3 "> 
-                        <button type="button" class="btn blue cerrar" value="">Cancelar</button>
+                        <button type="button" class="btn teal waves-effect waves-light right animated infinite rubberBand cerrar" value="">Cancelar</button>
                     </div>
                     <div class="input-field col  m3"> 
-                        <button type="submit" class="btn blue " value="submit" >Actualizar</button>
+                        <button type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand" value="submit" >Actualizar</button>
                     </div>
                 </div>
             </form>

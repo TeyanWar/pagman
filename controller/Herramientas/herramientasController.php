@@ -58,7 +58,7 @@ class HerramientasController {
                 echo $_FILES["her_imagen"]["name"] . " ya existe. ";
             } else {
 //                $rutaImagen=$_FILES["her_imagen"]["name"];
-                $rutaImagen = $_SERVER['DOCUMENT_ROOT']. '/pagman/web/img/' . $_FILES["her_imagen"]["name"];
+                $rutaImagen = $_SERVER['DOCUMENT_ROOT'] . '/pagman/web/img/' . $_FILES["her_imagen"]["name"];
 //                die(print_r($rutaImagen));
                 // Si no es un archivo repetido y no hubo error, subimos a la carpeta /Imagenes para luego ser mostrada 
                 move_uploaded_file($_FILES["her_imagen"]["tmp_name"], $rutaImagen);
@@ -90,25 +90,29 @@ class HerramientasController {
 
     function postEditar() {
         $objHerramientas = new HerramientasModel();
+
         $her_id = $_POST['id'];
         $her_nombre = $_POST['her_nombre'];
         $her_descripcion = $_POST['her_descripcion'];
         $her_fecha_ingreso = $_POST['her_fecha_ingreso'];
-//        $her_imagen = $_FILES['her_imagen'];
-////        $ther_id = $_POST['ther_id'];
-//        //$rutaImagen=$_FILES["her_imagen"]["name"];
-//        $rutaImagen = $_SERVER['DOCUMENT_ROOT'] . "/pagman/web/img/" . $_FILES["her_imagen"];
+//        $her_imagen = $_FILES['her_imagen']['name'];
+
+////                $rutaImagen=$_FILES["her_imagen"]["name"];
+//        $rutaImagen = $_SERVER['DOCUMENT_ROOT'] . '/pagman/web/img/' . $_FILES["her_imagen"]["name"];
+//                
 //        // Si no es un archivo repetido y no hubo error, subimos a la carpeta /Imagenes para luego ser mostrada 
-//        move_uploaded_file($_FILES["her_imagen"], $rutaImagen);
+//        move_uploaded_file($_FILES["her_imagen"]["name"], $rutaImagen);
+////                    echo "Archivo Subido ";
 
         $sql = "UPDATE "
                 . "pag_herramienta "
                 . "SET "
                 . "her_nombre='$her_nombre', "
                 . "her_descripcion='$her_descripcion', "
-//                . "her_imagen='" . $_POST["her_imagen"] . "', "
+//                . "her_imagen='" . $_FILES["her_imagen"]["name"] . "', "
                 . "her_fecha_ingreso='$her_fecha_ingreso'  "
                 . "WHERE her_id='$her_id'";
+
 //        die(print_r($sql));
         $respuesta = $objHerramientas->update($sql);
         // Cierra la conexion
