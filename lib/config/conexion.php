@@ -4,7 +4,7 @@ class Conexion {
     
     private $host="localhost";
     private $user="root";
-    private $password="";
+    private $password="root";
     private $database="pagman";
     private $conn;
     
