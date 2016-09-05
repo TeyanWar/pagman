@@ -1,5 +1,5 @@
 <div class="title center"><h5>Historial de Mediciones de <?php echo $detalleOrdenes[0]['equi_nombre'] ?></h5></div>
-<br>
+
 <table class="highlight center striped bordered">
     <div class="row">
         <thead>

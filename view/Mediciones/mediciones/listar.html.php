@@ -66,7 +66,7 @@
                             } ?>
                         </td>
                         <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
-                                   href="#modal_detalle_mediciones" 
+                                   href="#modal_detalle_medicion" 
                                    data-url="<?php echo crearUrl("Mediciones", "mediciones", "detalle", array('noVista' => 'noVista', 'id' => $equipo['equi_id'])); ?>"><i class="mdi-action-find-in-page tiny"></i></a>
                         </td>
                     </tr>
@@ -77,7 +77,7 @@
         </table>
         
         
-        <div class="modal" id="modal_detalle_mediciones">
+        <div class="modal" id="modal_detalle_medicion">
             <div class="modal-content ">
             </div> 
         </div>

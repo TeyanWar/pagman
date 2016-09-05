@@ -46,18 +46,10 @@
 
         </div>
         
-        <a class="btn-floating teal modal-trigger editarMedidor" 
-            href="#editarMedidor" data-url="<?php echo crearUrl('medidores', 'medidores', 'editar', array('noVista', 'id' => 2));?>"> 
-            <i class="mdi-content-create small"></i>
-        </a>
-        
-        <div id="editarMedidor" class="modal modal-fixed-footer">
+        <div id="editarMedidor" class="modal">
 
             <div class="modal-content"></div>
-            <div class="modal-footer">
-                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
             </div>
-        </div>
         
         
 
