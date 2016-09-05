@@ -13,7 +13,7 @@
         <!--Inicio mensaje de campos obligatorios-->
         <div id="card-alert" class="card teal">
             <div class="card-content white-text">
-                <p><i class="mdi-action-info-outline"></i> IMPORTANTE : A continuaci&oacute;n podr&aacute; buscar o editar un medidor.</p>
+                <p><i class="mdi-action-info-outline"></i> IMPORTANTE : A continuaci&oacute;n podr&aacute; buscar, eliminar o editar un medidor.</p>
             </div>
             <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>

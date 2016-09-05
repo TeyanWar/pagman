@@ -1,7 +1,7 @@
 <div class="card-panel">
     <div class="container">
         <div class="row">  
-            <h4 class="header2">Registrar medici&oacute;n</h4>
+            <h5 class="header2">CREACI&Oacute;N DE MEDICI&Oacute;N</h5>
             <form class="col s12" role="form" action="<?php echo crearUrl('mediciones', 'mediciones', 'ajaxGuardarMedidas', array('noVista' => 'noVista')) ?>" method="post" id="formMediciones">
 
                 <!--Inicio rastro de miga-->
@@ -57,8 +57,8 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th data-field="cod_equ">C&oacute;digo equ&iacute;po</th>
-                                        <th data-field="nom_equ">Nombre equ&iacute;po</th>
+                                        <th data-field="cod_equ">C&oacute;digo equipo</th>
+                                        <th data-field="nom_equ">Nombre equipo</th>
                                         <th data-field="medicion">Medici&oacute;n actual</th>
                                         <th data-field="medicion">Tipo Medidor</th>
                                         <th data-field="fecha_med">Fecha Medici&oacute;n</th>
@@ -82,7 +82,7 @@
                             <?php } ?>
                         </select>
                         <div class="errorTxt2"></div>
-                        <label class="active">&nbsp;(*) Seleccione un equ&iacute;po</label>
+                        <label class="active">&nbsp;(*) Seleccione un equipo</label>
 
                         <!--Inicion div que contiene los equipos que se van agregando-->
                         <div id="equipos-agregados">
