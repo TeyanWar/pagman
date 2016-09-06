@@ -1,4 +1,4 @@
-<div class="title center"><h5>Historial de Mediciones de <?php echo $detalleOrdenes[0]['equi_nombre'] ?></h5></div>
+<div class="title center"><h5>Historial de Mediciones del equipo: <b><code><?php echo $equi_nombre ?></code></b></h5></div>
 <br>
 <table class="highlight center striped bordered">
     <div class="row">
@@ -8,32 +8,35 @@
                 <th>Fecha</th>
                 <th>Medida Tomada</th>
                 <th>Tipo Medida</th>
-                <th>Equipo</th>
-                <th>Nombre Encargado</th>
+                <th>Encargado</th>
             </tr>
         </thead>
         <tbody> 
             <?php
-            die(print_r($detalleOrden));
             $count = 1;
             $totalMedida = 0;
-            foreach ($detalleOrdenes as $detalleOrden) {
-                $totalMedida = $totalMedida + $detalleOrden['ctrmed_medida_actual'];
-                explodeFecha($detalleOrden['ctrmed_fecha']);
+            foreach ($detalleMediciones as $detalleMedicion) {
+                $totalMedida = $totalMedida + $detalleMedicion['valor_medicion'];
+                explodeFecha($detalleMedicion['fecha_medicion']);
                 $fecha = getFecha();
                 ?>
                 <tr>
                     <td><?php echo $count++; ?></td>
-                    <td><?php echo $fecha ?></td>
-                    <td><?php echo $detalleOrden['ctrmed_medida_actual'] ?></td>
-                    <td><?php echo $detalleOrden['tmed_acronimo'] ?></td>
-                    <td><?php echo $detalleOrden['equi_nombre'] ?></td>
-                    <td><?php echo $detalleOrden['per_nombre'] ?></td>
+                    <td><?php echo $detalleMedicion['fecha_medicion'] ?></td>
+                    <td><?php echo $detalleMedicion['valor_medicion'] ?></td>
+                    <td><?php echo $detalleMedicion['tipo_medida'] ?></td>
+                    <td><?php echo $detalleMedicion['encargado'] ?></td>
                 </tr>
             <?php } ?>
-        <center><b><font color="Navy"><?php echo "Medida Total :" . $totalMedida . " " . $detalleOrden['tmed_acronimo']; ?></font></b></center><br>        
+        <center> 
+            <font color="Navy">Total por tipo de medidor</font><br>
+            <?php foreach($totalPorMedidores as $totalPorMedidor){?>
+                <b><font color="Navy"><?php echo $totalPorMedidor['total'] . " " . $totalPorMedidor['medidor']; ?></font>
+                </b>
+        <br>        
+            <?php }?>
+        </center>
         </tbody>
-    </div>
 
 </table>
 

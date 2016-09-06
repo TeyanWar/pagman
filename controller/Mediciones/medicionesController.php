@@ -93,26 +93,40 @@ class MedicionesController {
 
         $objDetalle = new MedicionesModel();
         $id = $parametros[1];
-
-        $sql = "SELECT * FROM pag_control_medidas, pag_persona, pag_equipo,pag_tipo_medidor WHERE pag_control_medidas.per_id=pag_persona.per_id AND
-                pag_control_medidas.equi_id=pag_equipo.equi_id and pag_control_medidas.tmed_id=pag_tipo_medidor.tmed_id and pag_control_medidas.equi_id='$id' order by ctrmed_fecha desc";
-die($sql);
-        $detalleOrdenes = $objDetalle->select($sql);
+        $equi_nombre = $parametros[2];
+//        $sql="SELECT DATE_FORMAT(cm.ctrmed_fecha,'%d/%m/%Y %H:%i:%s') AS fecha, cm.ctrmed_fecha, cm.ctrmed_medida_actual AS valor_medicion, tm.tmed_nombre, 
+//        $sql="SELECT DATE_FORMAT(cm.ctrmed_fecha,'%d-%m-%Y') AS fecha, cm.ctrmed_fecha, cm.ctrmed_medida_actual AS valor_medicion, tm.tmed_nombre, 
+        $sql="SELECT cm.ctrmed_fecha AS fecha_medicion, cm.ctrmed_medida_actual AS valor_medicion, tm.tmed_nombre AS tipo_medida, 
+                CONCAT(p.per_nombre,' ',p.per_apellido) AS encargado 
+              FROM pag_control_medidas cm, pag_tipo_medidor tm, pag_persona p  
+              WHERE cm.tmed_id=tm.tmed_id AND cm.per_id=p.per_id AND cm.equi_id='$id' 
+              ORDER BY fecha_medicion DESC;";
+//              ORDER BY cm.ctrmed_fecha ASC;";
+        
+        // ORGANIZAR CON EL MÉTODO BURBUJA //
+        
+        $detalleMediciones = $objDetalle->select($sql);
             /*
              * Paginado
              */
             $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
             $url = crearUrl('mediciones', 'mediciones', 'detalle');
 
-            $paginado = new Paginado($detalleOrdenes, $pagina, $url);
+            $paginado = new Paginado($detalleMediciones, $pagina, $url);
 
-            $detalleOrdenes = $paginado->getDatos();
+            $detalleMediciones = $paginado->getDatos();
             /*
              * Fin paginado
              */
         // Cierra la conexion
+        
+        $sql="SELECT tm.tmed_nombre AS medidor, SUM(cm.ctrmed_medida_actual) AS total 
+              FROM pag_control_medidas cm, pag_tipo_medidor tm 
+              WHERE cm.tmed_id=tm.tmed_id AND equi_id='$id' 
+              GROUP BY cm.tmed_id; ";
+        $totalPorMedidores=$objDetalle->select($sql);
+        
         $objDetalle->cerrar();
-
         include_once("../view/Mediciones/mediciones/detalle.html.php");
     }
 

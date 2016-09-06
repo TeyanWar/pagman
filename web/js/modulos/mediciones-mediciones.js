@@ -194,7 +194,7 @@ $(document).ready(function () {
             url: url,
             type: "get",
             success: function (data) {
-                $("#editar> .modal-content").html(data);
+                $("#modal_detalle_mediciones> .modal-content").html(data);
             }
         });
     });
