@@ -1,43 +1,64 @@
 $(document).ready(function () {
-     //consulta Ciudad
-    $("#busquedaAjax5").keyup(function () {
-        var usuario = $("#busquedaAjax5").val();
+    $("#buscarCiu").keyup(function () {
+        var Ciu = $("#buscarCiu").val();
+
+        if (Ciu != "") {
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaciudad=" + usuario,
+            data: "buscarCiu=" + Ciu + "&pagina=" + pagina,
             success: function (data) {
-                $("#tabla5").html(data);
+                $("#buscarCiudad").html(data);
             }
         });
     });
 
-    $("#busquedaAjax5").trigger("keyup");
+    $('#buscarCiu').trigger('keyup');// function_trigger para visualizar las herramientas existentes
 
-    $(document).on("click", ".ver-detalle5", function () {
+
+//Inicio Modal Editar Ciudad
+    $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
-
+//        alert(url);
         $.ajax({
             url: url,
             type: "get",
             success: function (data) {
-                $("#modalDetalle5 > .modal-content").html(data);
+//                alert(data);
+                $("#editarCiu > .modal-content").html(data);
+
             }
         });
+
     });
 
-    $(document).on("click", ".editar5", function () {
-        var url = $(this).attr("data-url");
 
+//Inicio Modal Detalle ciudad
+    $(document).on('click', ".modal-trigger", function () {
+        var url = $(this).attr("data-url");
+//        alert(url);
         $.ajax({
             url: url,
             type: "get",
             success: function (data) {
-                $("#modalUpdate5 > .modal-content").html(data);
+//                alert(data);
+                $("#detalleCiu > .modal-content").html(data);
+
             }
         });
+
     });
+
+    //Botón para cerrar modales
+    $(document).on('click', '.cerrar', function () {
+        $(".modal").closeModal();
+        $(".lean-overlay").remove();
+    });
+
 
     $(document).on('click', '.eliminar2', function (e) {
         e.preventDefault();
@@ -62,19 +83,19 @@ $(document).ready(function () {
 
             });
             swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
-          $("#busquedaAjax5").trigger('keyup');
+            $("#busquedaAjax5").trigger('keyup');
         });
     });
-    
-    
-        //----------------- validaciones ---------------
-    
+
+
+    //----------------- validaciones ---------------
+
     /* Incluimos un método para validar el campo nombre */
 
-    jQuery.validator.addMethod("letra", function(value, element) {
+    jQuery.validator.addMethod("letra", function (value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
-    
+
     $("#formciudad").validate({
         rules: {
             dept_id: {
@@ -83,37 +104,37 @@ $(document).ready(function () {
             ciud_nombre: {
                 required: true,
                 letra: true,
-                minlength: 5,
-                maxlength: 20
+                minlength: 3,
+                maxlength: 15
             },
-            cgender:"required",
-			cagree:"required",
+            cgender: "required",
+            cagree: "required",
         },
         //For custom messages
         messages: {
-            dept_id:{
+            dept_id: {
                 required: "El Departamento es obligatorio."
             },
-            ciud_nombre:{
+            ciud_nombre: {
                 required: "El Nombre De La ciudad es obligatorio.",
                 letra: "Solo se permiten letras",
-                minlength: "Introduzca al menos 5 caracteres",
-                maxlength: "Solo se permite introducir maximo 20 caracteres"
+                minlength: "Introduzca al menos 3 caracteres",
+                maxlength: "Solo se permite introducir maximo 15 caracteres"
             },
             curl: "Enter your website",
         },
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
         }
     });
-    
-    
-    
+
+
+
 });
 
