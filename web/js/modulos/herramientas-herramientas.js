@@ -17,6 +17,9 @@ $(document).ready(function () {
                 letterswithbasicpunc: true,
                 minlength: 6,
                 maxlength: 40
+            },
+            her_fecha_ingreso: {
+                required: true
             }
         },
         //mensajes para cada dato validado
@@ -36,6 +39,9 @@ $(document).ready(function () {
             },
             ther_id: {
                 required: "Este campo es obligatorio seleccionar"
+            },
+            her_fecha_ingreso: {
+                required: "Por favor selecciona una fecha de Ingreso"
             }
         },
         errorElement: 'div',
@@ -56,7 +62,6 @@ $(document).ready(function () {
     // aqui empieza la modal para editar herramientas
     $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
-//        alert(url);
         $.ajax({
             url: url,
             type: "get",
@@ -114,6 +119,8 @@ $(document).ready(function () {
     //------------------------------------------------------------------------------//
 //efecto para ampliar las imagenes en el listado de herramientas
     $('.fancybox').fancybox({
+        width: '75%',
+        height: '75%',
         openEffect: 'elastic', //'fade', 'elastic'
         closeEffect: 'elastic',
         openSpeed: 'normal', //ms, slow, normal, fast (default 250ms)
@@ -133,5 +140,4 @@ $(document).ready(function () {
     $(document).on('click', '.cerrar', function () {
         $(".modal").closeModal();
     });
-});
-    
+});    

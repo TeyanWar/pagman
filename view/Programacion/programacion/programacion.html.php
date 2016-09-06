@@ -1,3 +1,27 @@
+<?php if(isset($infogarantia)) { ?>
+    <div class="container"><!--start container-->
+
+        <div class="card red" id="card-alert">
+            <div class="card-content white-text">
+              <h4><i class="mdi-alert-warning" style="font-size: 30px;"></i> Cuidado </h4>
+              <p>
+                  Actualmente el equipo <code><b><?php echo $infogarantia; ?></b></code> cuenta con 
+                  una fecha de garantia vigente.
+                  <br>
+                  Fecha Vecimiento De Garantia: <?php echo $vencegarantia; ?>
+                  <br>
+                  <br>
+                  <code><b>PAGMAN no se hace responsable del mal uso que le den</b></code>
+              </p>
+            </div>
+            <button aria-label="Close" data-dismiss="alert" class="close white-text" type="button">
+              <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    </div>
+<?php } ?>
+
+
 <form  id="progr" novalidate>
     <div class='row' id="tabla">
         <div class='col s6' id="codigo">
@@ -12,12 +36,13 @@
     <div class='row'>
         <div class="input-field col s4">
             <select id="componente">
+                <option value="INDEFINIDO">(Vacio)</option>
                 <?php foreach ($componentes as $componente) { ?>
                     <option  ><?php echo $componente['comp_descripcion']; ?></option>
                 <?php } ?>
 
             </select>
-            <label>(*) Componente</label>
+            <label>Componente</label>
         </div>
         <div class="input-field col s4">
             <select id="tra">
@@ -94,6 +119,14 @@
 
 </form>
 
+<style>
+    #mod{
+        top: 17% !important;
+        max-height: 100%;
+        height: 65%;
+    }
+</style>
+
 <script>
     $(document).ready(function () {
         $('select').material_select('destroy');
@@ -113,13 +146,11 @@
             hora: {
                 required: true,
                 digits: true,
-                minlength: 1,
                 maxlength: 10
             },
             frecuencia: {
                 required: true,
                 digits: true,
-                minlength: 1,
                 maxlength: 10
             },
             cgender:"required",
@@ -128,15 +159,13 @@
         //For custom messages
         messages: {
             hora:{
-                required: "El telefono es obligatorio.",
+                required: "Duracion horas es obligatorio.",
                 digits: "El valor debe ser numerico",
-                minlength: "Introduzca al menos 1 caracter",
                 maxlength: "Solo se permite introducir maximo 10 caracteres"
             },
             frecuencia:{
-                required: "El movil es obligatorio.",
+                required: "Frecuencia es obligatorio.",
                 digits: "El valor debe ser numerico",
-                minlength: "Introduzca al menos 1 caracter",
                 maxlength: "Solo se permite introducir maximo 10 caracteres"
             },
             curl: "Enter your website",

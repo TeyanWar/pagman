@@ -76,13 +76,8 @@
         </div>
 
     </div>
-        
-<!--        action="<?php echo crearUrl('programacion', 'orden', 'Postordenpro') ?>"-->
-        
-        
-<!--        data-url="<?php echo crearUrl("Programacion", "orden", "Postordenpro", array('noVista' => 'noVista')) ?>" data-redirect="<?php echo crearUrl("Ot", "ot", "listar") ?>"-->
 
-    <form  id="formt" class="col s12" action="<?php echo crearUrl('programacion', 'orden', 'Postordenpro') ?>" method="POST" novalidate>
+    <form  id="formt" class="col s12" action="<?php echo crearUrl('programacion', 'orden', 'crear') ?>" data-url="<?php echo crearUrl("Programacion", "orden", "Postordenpro", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Ot", "ot", "listar") ?>" method="POST" novalidate>
         <?php echo '<br />'; ?>
         <div class="divider"></div>
         <div id="tabla"></div>
@@ -91,22 +86,7 @@
         <?php echo '<br /><br />'; ?>
 
         <div class="row">
-            <div class=" col s3">
-                <label for="fechaorden">(*) Fecha Registro Orden</label>
-                <input readonly="" type="text" value="<?php echo date('d-m-Y'); ?>">
-            </div>
-
-            <div class=" col s3">
-                <label for="ot_fecha_inicio">(*) Fecha Inicio</label>
-                <input id="inicio" type="date" id="ot_fecha_inicio" name="ot_fecha_inicio" data-error=".errorTxt211">
-                <div class="errorTxt211"></div>
-            </div>
-
-            <div class="col s3">
-                <label for="ot_fecha_fin">(*) Fecha Fin</label>
-                <input id="inicio" type="date" id="ot_fecha_fin" name="ot_fecha_fin" data-error=".errorTxt212">
-                <div class="errorTxt212"></div>
-            </div>
+            
 
             <div class="col s3">
                 <label>(*) Encargado</label>
@@ -120,10 +100,8 @@
                 </select>
                 <div class="errorTxt213"></div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col s12">
+            
+            <div class="col s9">
                 <label for="input_text">(*) Ayudantes</label>
                 <input name= "ot_ayudantes" id="ot_ayudantes" type="text" length="100" class="validate" placeholder="
                        D&iacute;gite los ayudantes de la OT separados por coma: Ejemplo, ejemplo 2, ejemplo3." data-error=".errorTxt214">
@@ -132,11 +110,90 @@
         </div>
 
         <div class="row">
-            <div class="input-field col m2 offset-m8">
+            <div class=" col s2">
+                <label for="fechaorden">(*) Fecha Registro Orden</label>
+                <input readonly="" type="text" value="<?php echo date('d-m-Y'); ?>">
+            </div>
+
+            <div class=" col s2">
+                <label for="ot_fecha_inicio">(*) Fecha Inicio</label>
+                <input id="inicio" type="date" id="inicio" class="datepicker" required="true" name="inicio" data-error=".errorTxt324">
+                <div class="errorTxt324"></div>
+            </div>
+
+            <div class="col s2">
+                <label for="ot_fecha_fin">(*) Fecha Fin</label>
+                <input id="inicio" type="date" id="ot_fin" class="datepicker" required="true" name="ot_fin" data-error=".errorTxt212">
+                <div class="errorTxt212"></div>
+            </div>
+
+            <div class="input-field col s3">
+                <i class="mdi-action-search prefix"></i>
+                <input placeholder="Buscar Insumos" id="insum" name="insumo" type="text" data-url="<?php  echo crearUrl("Programacion", "orden", "listarInsumos", array('noVista'=>"noVista"))?>" >
+                <label for="insumo" class="active">Busqueda De Insumos</label>
+                <div id="conte" class="conte" style="z-index: 4; position: absolute; width: 90%;"></div>
+            </div>
+            
+            <div class="input-field col s3">
+                <i class="mdi-action-search prefix"></i>
+                <input placeholder="Buscar Herramientas" id="herrm" name="herrami" type="text" data-url="<?php  echo crearUrl("Programacion", "orden", "listarherramientas", array('noVista'=>"noVista"))?>" >
+                <label for="herrm" class="active">Busqueda De Herramientas</label>
+                <div id="conteher" class="conteher" style="z-index: 4; position: absolute; width: 90%;"></div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="input-field col s6">
+                <label><h6>(*) INSUMOS:</h6></label>
+                <br>
+                <br>
+                <table class="striped" id="insumosprog" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>(*) Nombre</th>
+                            <th>(*) Descripcion</th>
+                            <th>(*) Valor</th>
+                            <th>(*) Unidad Medida</th>
+                            <th>(*) Cantidad</th>
+                            <th>Quitar</th>
+                        </tr>
+                    </thead>                  
+                </table>
+                <div class="row"><div class="errorTxt99"></div></div>
+            </div>
+            <div class="input-field col s1"></div>
+            <div class="input-field col s5">
+                <label><h6>(*) HERRAMIENTAS:</h6></label>
+                <br>
+                <br>
+                <table class="striped" id="herramientasprog" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>(*) Nombre</th>
+                            <th>(*) Descripcion</th>
+                            <th>(*) Cantidad</th>
+                            <th>Quitar</th>
+                        </tr>
+                    </thead>                  
+                </table>
+                <div class="row"><div class="errorTxt90"></div></div>
+            </div>
+        </div>
+        
+        
+        <br>
+        <br>
+        <div class="row">
+            <div class="input-field col s4 "></div>
+            <div class="input-field col s2">
                 <button class="btn teal waves-effect waves-light" type="submit"><i class="mdi-content-add"></i>CREAR OT</button>
             </div>
-            <div class="input-field col m2">
-                <button class="btn teal waves-effect waves-light" target="_blank" name="pdf"><i class="mdi-action-get-app"></i>EXPORTAR PDF</button>
+            <div class="input-field col s2">
+                <a class="btn teal waves-effect waves-light" target="_blank" name="pdf"><i class="mdi-action-get-app"></i>EXPORTAR PDF</a>
             </div>
         </div>
     </form>

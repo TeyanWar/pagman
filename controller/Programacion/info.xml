@@ -40,5 +40,21 @@
             </funciones>
             
         </controlador>
+        
+        <controlador>
+            <nombre>ordenController</nombre>
+            <icono>mdi-action-description</icono>
+            <display>Ordenes Prog</display>
+            <descripcion>Controlador de ordenprog</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear orden</display>
+                    <descripcion>Crear orden programada</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
     </controladores>
 </modulos>

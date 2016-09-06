@@ -39,6 +39,12 @@
        <input type="text" id="pro" name='program' class="form-control" data-url="<?php  echo crearUrl("Programacion", "programacion", "consultarAjax", array('noVista'=>"noVista"))?>" >
         <label  for="pro">BUSCAR EQUIPO CON MANTENIMIENTOS</label>  
     </div>
+        
+    <?php if(isset($_REQUEST['pagina'])){ ?>
+        <input type="hidden" id="pagina" name="pagina" value="<?php echo $_REQUEST['pagina']?>">
+    <?php } else{ ?>
+        <input type="hidden" id="pagina" name="pagina" value="1">
+    <?php } ?>
 
    
 </div>

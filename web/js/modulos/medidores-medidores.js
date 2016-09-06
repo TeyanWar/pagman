@@ -1,5 +1,7 @@
 $(document).ready(function () {
     
+    
+    
     //validacion para letras
     jQuery.validator.addMethod("lettersonly", function (value, element){
         return this.optional(element) || /^[a-zA-Z_áéíóúñ\s]*$/.test(value);
@@ -33,7 +35,7 @@ $(document).ready(function () {
         messages: {
             nombre:{
                 required:   "Este campo es obligatorio",
-                minlength:  "Debe contener minimo 2 caracteres",
+                minlength:  "Debe contener m&iacute;nimo 2 caracteres",
                 maxlength:  "En este campo solo se admiten 44 caracteres"
             },
             acronimo: {
@@ -66,11 +68,16 @@ $(document).ready(function () {
     //$('#buscarMed').focus();
     $("#buscarMed").keyup(function () {
         var Medidor = $("#buscarMed").val();
+        
+        if(Medidor != ""){
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "medidor_id=" + Medidor,
+            data: "medidor_id=" + Medidor+"&pagina="+pagina,
             success: function (data) {
                 $("#buscarMedidor").html(data);
             }
@@ -79,8 +86,14 @@ $(document).ready(function () {
     //aqui termina el filtro de busqueda de las herramientas
     // --------------------------------------------//--------------------
     $('#buscarMed').trigger('keyup');// function_trigger para visualizar las herramientas existentes
-    $("#buscarMed").focus();
-   
+    $('.formValidate').ready(function(){
+        $("#buscarMed").focus();
+    });
+    
+   //Botón para cerrar modales
+    $(document).on('click', '.cerrar', function () {
+        $(".modal").closeModal();
+    });
    
 //Inicio Validacion de formulario Editar Medidor
 
@@ -110,8 +123,8 @@ $(document).ready(function () {
         //For custom messages
         messages: {
             tmed_nombre:{
-                required:   "Este campo no puede estar vacio",
-                minlength:  "Debe contener minimo 2 caracteres",
+                required:   "Este campo no puede estar vac&iacute;o",
+                minlength:  "Debe contener m&iacute;nimo 2 caracteres",
                 maxlength:  "En este campo solo se admiten 44 caracteres"
             },
             tmed_acronimo: {
@@ -139,35 +152,20 @@ $(document).ready(function () {
         }
      });
 
-    //Inicio código modal tipo medidor para actualizacion
-    $(".modificar").click(function () {
-        var url = $(this).attr("data-url");
-        $.ajax({
-            url: url,
-            type: "get",
-            success: function (data) {
-                $("#modalModificar > .modal-content").html(data);
-            }
-        });
-    });//Fin código modal tipo medidor para actualizacion
-
-
     
      $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
-       
-    $(".modal-data").html('Cargando ....');
+//        alert(url);
         $.ajax({
             url: url,
             type: "get",
             success: function (data) {
-                $("#editar> .modal-content").html(data);
+//                alert(data);
+                $("#editarMedidor > .modal-content").html(data);
+                
             }
         });
 
     });
-    
-       
-     
     
 });

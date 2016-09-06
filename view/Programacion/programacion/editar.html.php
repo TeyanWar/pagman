@@ -1,7 +1,7 @@
 
 <div class="row">
 
-    <form  id="formulario1" class="col s12" action="<?php echo crearUrl("programacion", "programacion", "postEditar") ?>" method="post" novalidate>
+    <form  id="formulario1" class="col s12" data-url="<?php echo crearUrl("Programacion", "programacion", "postEditar", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Programacion", "programacion", "listar") ?>" method="post" novalidate>
         <h5><?php echo $parametros[2]; ?></h5>
 
         <table class="bordered centered hoverable" >

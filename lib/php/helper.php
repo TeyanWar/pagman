@@ -177,3 +177,95 @@ function getFecha() {
     return $fecha;
 }
 //------------------ Fin formato fechas -----------------------------------
+
+//-----------------------consulta # progamaciones-------------------------
+
+include_once('../model/Sesion/sesionModel.php');
+
+function programaciones()
+{
+    $objinicio = new sesionModel();
+
+    $result = "SELECT COUNT(*) AS total "
+            . "FROM pag_programacion_equipo,pag_det_programacion,pag_centro,pag_equipo,"
+            . "pag_componente,pag_tipo_trabajo,pag_tarea,pag_tipo_mantenimiento,pag_tipo_medidor "
+            . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
+            . "AND pag_programacion_equipo.cen_id=pag_centro.cen_id "
+            . "AND pag_det_programacion.equi_id=pag_equipo.equi_id "
+            . "AND pag_det_programacion.comp_id=pag_componente.comp_id "
+            . "AND pag_det_programacion.ttra_id=pag_tipo_trabajo.ttra_id "
+            . "AND pag_det_programacion.tar_id=pag_tarea.tar_id "
+            . "AND pag_programacion_equipo.tman_id=pag_tipo_mantenimiento.tman_id "
+            . "AND pag_det_programacion.tmed_id=pag_tipo_medidor.tmed_id "
+            . "AND pag_det_programacion.est_id=1";
+
+        $row = $objinicio->find($result);
+//        die(print_r($row));
+    // Cierra la conexion
+    $objinicio->cerrar();
+
+    $numero = $row['total'];
+    return $numero;
+}
+
+//-----------------------consulta # mediciones-------------------------
+
+function mediciones()
+{
+    $objinicio = new sesionModel();
+
+    $result = "SELECT COUNT(*) AS total "
+            . "FROM pag_control_medidas";
+
+        $row = $objinicio->find($result);
+    
+    // Cierra la conexion
+    $objinicio->cerrar();
+
+    $numero = $row['total'];
+    return $numero;
+}
+
+//-----------------------consulta # solicitudes-------------------------
+
+function solicitudes()
+{
+    $objinicio = new sesionModel();
+
+    $result = "SELECT COUNT(*) AS total "
+            . "FROM pag_solicitud_servicio, pag_tipo_falla, pag_persona, "
+            . "pag_equipo, pag_centro, pag_estado "
+            . "where  pag_solicitud_servicio.per_id=pag_persona.per_id "
+            . "and pag_solicitud_servicio.equi_id=pag_equipo.equi_id "
+            . "and pag_solicitud_servicio.cen_id=pag_centro.cen_id "
+            . "and pag_solicitud_servicio.tfa_id=pag_tipo_falla.tfa_id "
+            . "and pag_solicitud_servicio.est_id=pag_estado.est_id "
+            . "and pag_solicitud_servicio.estado IS NULL";
+
+        $row = $objinicio->find($result);
+    
+    // Cierra la conexion
+    $objinicio->cerrar();
+
+    $numero = $row['total'];
+    return $numero;
+}
+
+//-----------------------consulta # ordenes trabajo-------------------------
+
+function ot()
+{
+    $objinicio = new sesionModel();
+
+    $result = "SELECT COUNT(*) AS total "
+            . "FROM pag_orden_trabajo "
+            . "WHERE pag_orden_trabajo.estado IS NULL";
+
+        $row = $objinicio->find($result);
+    
+    // Cierra la conexion
+    $objinicio->cerrar();
+
+    $numero = $row['total'];
+    return $numero;
+}

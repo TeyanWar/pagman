@@ -1,50 +1,63 @@
-<div class="card-panel">
-    <div class="container">
-        <h4 class="header2">Listado de t&iacute;pos de medidor</h4>
-        <!--Inicio rastro de miga-->
-        <ol class="breadcrumbs">
-            <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
-            <li><a href="#">Medidores</a></li>
-            <li class="active">Listado T&iacute;pos de medidor</li>
-        </ol>
-        <!--Fin rastro de miga-->
+<div id="bordered-table">
+            <div class="row">
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre Medidor</th>
+                            <th>Acr&oacute;nimo</th>
+                            <th>Descripci&oacute;n</th>
+                            <th>Estado</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($medidores as $medidor) {
+                            ?>
+                            <tr>
+                                <td><?php echo $paginado->count++ ?></td>
+                                <td><?php echo $medidor['tmed_nombre'] ?></td>
+                                <td><?php echo $medidor['tmed_acronimo'] ?></td>
+                                <td><?php echo $medidor['tmed_descripcion'] ?></td>
+                                <td><?php if($medidor['estado'] ==""){
+                                    $medidor['tmed_estado']='Activo';
+                                }else{
+                                    $medidor['tmed_estado']='Inactivo';
+                                }
+                                echo $medidor['tmed_estado'];
+                                ?>
+                                </td>
+                                <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" 
+                                 href="#editar" data-url="<?php echo crearUrl('medidores', 'medidores', 'editar', array('noVista' => "noVista", 'id' => $medidor['tmed_id'])) ?>">
+                                <i class="mdi-content-create small"></i></a></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
 
-        <!--Inicio mensaje de campos obligatorios-->
-        <div id="card-alert" class="card teal">
-            <div class="card-content white-text">
-                <p><i class="mdi-action-info-outline"></i> IMPORTANTE : Recuerde que si va modificar un t&iacute;po de medidor, el campo Acr&oacute;nimo s&oacute;lo permite 3 caracteres</p>
-            </div>
-            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <?php $errores=getErrores();
-        if(!$errores==""){?>
-            <div id="card-alert" class="card red">
-                <div class="card-content white-text">
-                    <p><i class="mdi-alert-error"></i> 
-                        <?php echo $errores?>
-                    </p>
-                </div>
-                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-        <?php } ?>
-        <!--Fin mensaje de campos obligatorios-->
-        <form class="col s12">
-                <div class="input-field">
-                    <i class="mdi-action-search prefix"></i>
-                    <input type="text" class="active" id="buscarMed" name='buscarMed' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Medidores", "Medidores", "buscador", array('noVista' => "noVista")) ?>" />
-                    <label for="icon_prefix" class="active">Buscador de Medidores</label>
-                </div>
-            </form>
+<!--        <div class="modal" id="editar">
+            <div class="modal-content ">
+            </div> 
+        </div>-->
         
-        <div id="buscarMedidor">
-            
-        </div>
-        
-            
-                <?php //$paginado->render();?>
-    </div>
-</div>
+        <?php $paginado->render();?>
+
+
+<script type="text/javascript">
+    $('.modal-trigger').leanModal({
+        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        in_duration: 300, // Transition in duration
+        out_duration: 200, // Transition out duration
+        ready: function() {
+            //alert('Ready'); 
+        }, // Callback for Modal open
+        complete: function() {
+            //alert('Closed'); 
+        } // Callback for Modal close
+    });
+</script>

@@ -2,7 +2,6 @@
 
 include_once('../model/Usuarios/usuariosModel.php');
 
-
 class UsuariosController
 {
     
@@ -207,7 +206,7 @@ class UsuariosController
                     
                     if(count($errores)>0){
                         setErrores($errores);
-                        redirect(crearUrl("usuarios", "usuarios", "consultar"));
+                        redirect(crearUrl("usuarios", "usuarios", "listar"));
                         //----------------fin validaciones-----------------
                     }  else {
 
@@ -226,7 +225,7 @@ class UsuariosController
                         . "cen_id='$centro' "
                         . "WHERE per_id='$id'";
 
-                        $respuesta = $objUsuarios->update($sql);
+                        $respuesta1 = $objUsuarios->update($sql);
 
                         if ($comprobar['per_tipo'] == 'usuario del sistema' &&
                             isset($_POST['login']) &&
@@ -249,12 +248,12 @@ class UsuariosController
                                 . "WHERE per_id='$id'";
 
                             $respuesta = $objUsuarios->update($sqls);
-
+                            
                         }
                     }
                     
-                }  else{
-                    
+                } else {
+  
                     if(!isset($_POST['departamento']) or $_POST['departamento']==""){
                         $errores[]='(*) El campo "departamento" es obligatorio';
                     }
@@ -325,7 +324,7 @@ class UsuariosController
                     
                     if(count($errores)>0){
                         setErrores($errores);
-                        redirect(crearUrl("usuarios", "usuarios", "consultar"));
+                        redirect(crearUrl("usuarios", "usuarios", "listar"));
                         //----------------fin validaciones-----------------
                     }  else {
 
@@ -344,20 +343,19 @@ class UsuariosController
                         . "cen_id='$centro' "
                         . "WHERE per_id='$id'";
 
-                        $respuesta = $objUsuarios->update($sql);
+                        $respuesta2 = $objUsuarios->update($sql);
 
                     }
-                    
                 }
 
         // Cierra la conexion
         $objUsuarios->cerrar();
         
-        redirect(crearUrl("usuarios", "usuarios", "consultar"));
+        redirect(crearUrl("usuarios", "usuarios", "listar"));
  
     }
     
-    function consultar()
+    function listar()
     {   
         include_once("../view/Usuarios/usuarios/consultar.html.php");
     }
@@ -377,6 +375,17 @@ class UsuariosController
                     . "ORDER BY pag_persona.per_id ASC";
 
             $usuar = $objUsuarios->select($sql);
+            
+            /*
+            * Paginado
+            */
+            $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1);
+            $url = crearUrl('usuarios', 'usuarios', 'listar');
+            $paginado = new Paginado($usuar, $pagina, $url);
+            $usuar = $paginado->getDatos();
+            /*
+            * Fin paginado
+            */
         
         // Cierra la conexion
         $objUsuarios->cerrar();
@@ -384,7 +393,7 @@ class UsuariosController
         include_once("../view/Usuarios/usuarios/listar.html.php");
     }
             
-    function listar()
+    function consultar()
     {
         $objUsuarios = new UsuariosModel();
         
@@ -400,6 +409,21 @@ class UsuariosController
         include_once("../view/Usuarios/usuarios/listar.html.php");
     }
     
+    //------no se puede hacer select dependiente
+    //la tabla pag_centro y pag_departamento no estan relacionados
+//    function selectCentro() {
+//        $id = $_POST['id'];
+//
+//        $objUsuarios = new UsuariosModel();
+//
+//        $sql = "";
+//
+//        $centros = $objUsuarios->select($sql);
+//
+//        $objUsuarios->cerrar();
+//
+//        include_once("../view/Usuarios/usuarios/selectCentro.html.php");
+//    }
 
     
     function crear()
@@ -631,7 +655,8 @@ class UsuariosController
             
             if(count($errores)>0){
                 setErrores($errores);
-                redirect(crearUrl('usuarios', 'usuarios', 'crear'));
+                echo false;
+//                redirect(crearUrl('usuarios', 'usuarios', 'crear'));
                 //----------------fin validaciones-----------------
             }  else {
 
@@ -691,6 +716,8 @@ class UsuariosController
                             . "'$perfil')";
 
                     $insertar = $objUsuarios->insertar($insertusu);
+                    
+                    echo true;
 
                 }
                 else {
@@ -713,10 +740,12 @@ class UsuariosController
                         . "'persona')";
 
                     $insertar = $objUsuarios->insertar($insertper);
+                    
+                    echo true;
 
                 }
 
-                redirect(crearUrl("usuarios", "usuarios", "consultar")); 
+//                redirect(crearUrl("usuarios", "usuarios", "listar")); 
 
                 // Cierra la conexion
                 $objUsuarios->cerrar();
@@ -783,6 +812,8 @@ class UsuariosController
         //*---------------------------------------------------------
 
     }
+
+    
 
     
 }
