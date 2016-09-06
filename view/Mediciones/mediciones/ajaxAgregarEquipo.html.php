@@ -8,8 +8,8 @@ al igual de los campos a diligenciar: medida actual y fecha
             <table class="striped">
                 <thead>
                     <tr>
-                        <th data-field="cod_equ">C&oacute;digo equ&iacute;po</th>
-                        <th data-field="nom_equ">Nombre equ&iacute;po</th>
+                        <th data-field="cod_equ">C&oacute;digo equipo</th>
+                        <th data-field="nom_equ">Nombre equipo</th>
                         <th data-field="medicion">Medici&oacute;n actual</th>
                         <th data-field="fecha_med">Fecha Medici&oacute;n</th>
                         <th>Tipo Medidor</th>

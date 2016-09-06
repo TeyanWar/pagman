@@ -195,6 +195,7 @@ $(document).ready(function () {
             type: "get",
             success: function (data) {
                 $("#modal_detalle_mediciones> .modal-content").html(data);
+
             }
         });
     });

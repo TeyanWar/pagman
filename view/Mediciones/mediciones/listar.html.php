@@ -1,11 +1,11 @@
 <div class="card-panel">
     <div class="container">
-        <h4 class="header2">Listado de mediciones</h4>
+        <h5 class="header2">LISTA DE MEDICIONES</h5>
         <!--Inicio rastro de miga-->
         <ol class="breadcrumbs">
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
             <li><a href="#">Mediciones</a></li>
-            <li class="active">Listado mediciones</li>
+            <li class="active">Listar mediciones</li>
         </ol>
         <!--Fin rastro de miga-->
 
@@ -74,13 +74,11 @@
                     </tr>
             <?php } ?>
             </tbody>
-            </div>
-            
         </table>
         
         
         <div class="modal" id="modal_detalle_mediciones">
-            <div class="modal-content ">
+            <div class="modal-content">
             </div> 
         </div>
         

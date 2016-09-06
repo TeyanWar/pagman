@@ -13,7 +13,7 @@
         <!--Inicio mensaje de campos obligatorios-->
         <div id="card-alert" class="card teal">
             <div class="card-content white-text">
-                <p><i class="mdi-action-info-outline"></i> IMPORTANTE : A continuaci&oacute;n podr&aacute; buscar o editar un medidor.</p>
+                <p><i class="mdi-action-info-outline"></i> IMPORTANTE : A continuaci&oacute;n podr&aacute; buscar, eliminar o editar un medidor.</p>
             </div>
             <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>
@@ -46,18 +46,10 @@
 
         </div>
         
-        <a class="btn-floating teal modal-trigger editarMedidor" 
-            href="#editarMedidor" data-url="<?php echo crearUrl('medidores', 'medidores', 'editar', array('noVista', 'id' => 2));?>"> 
-            <i class="mdi-content-create small"></i>
-        </a>
-        
-        <div id="editarMedidor" class="modal modal-fixed-footer">
+        <div id="editarMedidor" class="modal">
 
             <div class="modal-content"></div>
-            <div class="modal-footer">
-                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
             </div>
-        </div>
         
         
 
