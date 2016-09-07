@@ -163,23 +163,7 @@ class HerramientasController {
     }
 
     function listar() {
-        $objHerramientas = new HerramientasModel();
-
-        $sql = "SELECT * FROM pag_herramienta";
-        $listarHer = $objHerramientas->select($sql);
-
-        //aqui empieza el paginado
-        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-        $url = crearUrl('herramientas', 'herramientas', 'listarHer');
-
-        $paginado = new Paginado($listarHer, $pagina, $url);
-//        dd($paginado);
-        $listarHer = $paginado->getDatos();
-//        // fin paginado
-        // Cierra la conexion
-        $objHerramientas->cerrar();
-
-        include_once("../view/Herramientas/herramientas/listar.html.php");
+        include_once("../view/Herramientas/herramientas/buscador.html.php");
     }
 
     function eliminar($parametros) {
@@ -215,9 +199,22 @@ class HerramientasController {
         $sql = "SELECT * FROM pag_herramienta WHERE her_id LIKE '%" . $herramienta . "%' or her_nombre LIKE '%" . $herramienta . "%'";
 
         $listarHer = $objherramientas->select($sql);
+           /*
+         * Paginado
+         */
+        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
+        $url = crearUrl('Herramientas', 'herramientas', 'listar');
+        
+        $paginado = new Paginado($listarHer, $pagina, $url);
+        
+        $listarHer = $paginado->getDatos();
+        /*
+         * Fin paginado
+         */
+
 
         $objherramientas->cerrar();
-        include_once("../view/Herramientas/herramientas/listarHer.html.php");
+        include_once("../view/Herramientas/herramientas/listar.html.php");
     }
 
 }

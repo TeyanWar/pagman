@@ -76,11 +76,16 @@ $(document).ready(function () {
     //$('#buscarHer').focus();
     $("#buscarHer").keyup(function () {
         var Herramienta = $("#buscarHer").val();
+        
+        if(Herramienta != ""){
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "her_id=" + Herramienta,
+            data: "her_id=" + Herramienta+"&pagina="+pagina,
             success: function (data) {
                 $("#buscarHerramienta").html(data);
             }
