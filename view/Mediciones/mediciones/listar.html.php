@@ -46,7 +46,7 @@
             </div> 
         </div>
         
-        <?php  $paginado->render() ?>
+        <?php $paginado->render() ?>
         
     </div>
 </div>

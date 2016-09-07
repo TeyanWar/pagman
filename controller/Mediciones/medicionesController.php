@@ -207,7 +207,6 @@ class MedicionesController {
         }
         if (count($errores) > 0) {
             setErrores($errores);
-            redirect(crearUrl('mediciones', 'mediciones', 'crear'));
         } else {
             $medidas = $_POST['medidas'];
             $personaId = $_POST['personas'];
@@ -226,8 +225,9 @@ class MedicionesController {
             }
 
             $objMediciones->cerrar();
-            redirect(crearUrl('mediciones', 'mediciones', 'listar'));
+            
         }
+        echo getRespuestaAccion('listar');
     }
 
     function buscador() {
@@ -235,7 +235,7 @@ class MedicionesController {
         $objMediciones = new MedicionesModel();
         $medicion = $_POST['med_id'];
         $sql = "SELECT cm.equi_id, e.equi_nombre FROM pag_control_medidas cm, pag_equipo e 
-              WHERE e.equi_id=cm.equi_id and e.equi_nombre LIKE '%" . $medicion . "%' GROUP BY cm.equi_id";
+              WHERE e.equi_id=cm.equi_id and e.equi_nombre LIKE '%" . $medicion . "%'GROUP BY cm.equi_id";
         $equipos = $objMediciones->select($sql);
 
         //Para cada equipo seleccionar los tipos de medidores
