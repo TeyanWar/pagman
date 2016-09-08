@@ -61,6 +61,6 @@
         }, // Callback for Modal open
         complete: function () {
             //alert('Closed'); 
-        } // Callback for Modal close
+        } // Callback for Modal close.
     });
 </script>

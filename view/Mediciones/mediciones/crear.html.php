@@ -10,7 +10,7 @@
                     <li><a href="#">Mediciones</a></li>
                     <li class="active">Crear medici&oacute;n</li>
                 </ol>
-                <!--Fin rastro de miga-->
+                <!--Fin rastro de miga.-->
 
                 <!--Inicio mensaje de campos obligatorios-->
                 <div id="card-alert" class="card teal">

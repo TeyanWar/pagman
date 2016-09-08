@@ -274,7 +274,7 @@ class MedicionesController {
         
         $equipos[$keyEquipo]['tiposMedidores'] = $paginado->getDatos();
         /*
-         * Fin paginado
+         * Fin paginado.
          */
             
        }
