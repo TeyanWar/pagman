@@ -22,7 +22,7 @@
                 ?>
                 <tr>
                     <td><?php echo $count++; ?></td>
-                    <td><?php echo $detalleMedicion['fecha_medicion'] ?></td>
+                    <td><?php echo $fecha ?></td>
                     <td><?php echo $detalleMedicion['valor_medicion'] ?></td>
                     <td><?php echo $detalleMedicion['tipo_medida'] ?></td>
                     <td><?php echo $detalleMedicion['encargado'] ?></td>
