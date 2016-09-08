@@ -3,11 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/pagman/controller/Herramientas/herramientasController.php</file>
             <file>file:/C:/xampp/htdocs/pagman/view/Herramientas/herramientas/listarHer.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/view/Herramientas/herramientas/listar.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/view/Herramientas/herramientas/crear.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/herramientas-herramientas.js</file>
+            <file>file:/C:/xampp/htdocs/pagman/web/templates/adminMaterialize/sidebar-left.html.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/lib/php/helper.php</file>
         </group>
     </open-files>
 </project-private>

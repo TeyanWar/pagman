@@ -69,7 +69,6 @@ class medidoresController {
     public function editar($parametros=false){
         $objMedidores = new MedidoresModel();
         $id = $parametros[1];
-
         $sql = "SELECT * FROM pag_tipo_medidor WHERE tmed_id = $id";
 
         $medidores = $objMedidores->find($sql);
@@ -169,5 +168,14 @@ class medidoresController {
 
         $objMedidores->cerrar();
         include_once("../view/Medidores/medidores/listar.html.php");
+    }
+    function postEliminar() {
+        $id = $_POST['id'];
+        $objMedidor = new MedidoresModel();
+
+        $sql = "UPDATE pag_tipo_medidor SET estado=now() WHERE tmed_id='$id'";
+        $medidor = $objMedidor->update($sql);
+        // Cierra la conexion
+        $objMedidor->cerrar();
     }
 }
