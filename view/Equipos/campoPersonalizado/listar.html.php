@@ -4,28 +4,29 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombre de la Ciudad</th>                    
+                    <th>Codigo Campo Personalizado</th>                    
+                    <th>Nombre Campo Personalizado</th>
                     <th>Editar</th>
                     <th>Detalle</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($ciudades as $ciudad) {
+                foreach ($consultaCampoAjax as $datosCP) {
                     ?>
 
                     <tr>
                         <td><?php echo $paginado->count++ ?></td>
     <!--                        <td><?php //echo $depto['dept_id']          ?></td>-->
-                        <td><?php echo $ciudad['ciud_nombre'] ?></td>
+                        <td><?php echo $datosCP['cp_id'] ?></td>
+                        <td><?php echo $datosCP['cp_nombre'] ?></td>
                         <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" 
-                               href="#editarDepto" data-url="<?php echo crearUrl('localizacion', 'ciudad', 'editar', array('noVista' => "noVista", 'id' => $ciudad['ciud_id'])) ?>">
+                               href="#editarDepto" data-url="<?php echo crearUrl('localizacion', 'departamento', 'editar', array('noVista' => "noVista", 'id' => $depto['dept_id'])) ?>">
                                 <i class="mdi-content-create small"></i></a>
                         </td>                        
                         <td>
-
                             <a class="btn-floating cyan darken-1 modal-trigger" 
-                               href="#detalleCiu" data-url="<?php echo crearUrl('localizacion', 'ciudad', 'detalle', array('noVista' => "noVista", 'id' => $ciudad['ciud_id'])) ?>">
+                               href="#detalleDepto" data-url="<?php echo crearUrl('localizacion', 'departamento', 'detalle', array('noVista' => "noVista", 'id' => $depto['dept_id'])) ?>">
                                 <i class="mdi-action-find-in-page tiny"></i>
                             </a>
                         </td>
@@ -36,6 +37,7 @@
         </table>
         <?php $paginado->render(); ?>
     </div>
+</div>
 
     <script type="text/javascript">
         $('.modal-trigger').leanModal({

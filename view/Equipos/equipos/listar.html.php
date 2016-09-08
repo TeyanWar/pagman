@@ -34,7 +34,7 @@
                                 </td>
                                 <td>
                                     <a class="btn-floating waves-effect modal-eliminar waves-light red darken-4" data-id="<?php echo $equipo['equi_id'] ?>" 
-                                     data-url="<?php echo crearUrl('equipos', 'equipos', 'eliminar', array('noVista' => 'noVista', 'id' => $equipo['equi_id'])) ?>">
+                                       data-url="<?php echo crearUrl('equipos', 'equipos', 'eliminar', array('noVista' => 'noVista', 'id' => $equipo['equi_id'])) ?>">
                                         <i class="mdi-action-delete small red "></i>
                                     </a>
 
@@ -45,7 +45,7 @@
                     </tbody>
                 </table>
                 <div id="modalDetalle1" class="modal modal-fixed-footer">
-                    
+
                     <div class="modal-content"></div>
                     <div class="modal-footer">
                         <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
@@ -58,7 +58,8 @@
                     <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           
                 </div>
             </div>
-            
+            <?php $paginado->render(); ?>
+
         </div>
     </div>
 </div>

@@ -31,7 +31,14 @@
             </div>
         </div>
     </div>
+</div>-->
+<?php if (isset($_REQUEST['pagina'])) { ?>
+    <input type="hidden" id="pagina" name="pagina" value="<?php echo $_REQUEST['pagina'] ?>">
+<?php } else { ?>
+    <input type="hidden" id="pagina" name="pagina" value="1">
+<?php } ?>
 
+<?php //$paginado->render();  ?>
 </div>
 <div>
     <table id="tabla" class="table table-striped ">

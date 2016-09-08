@@ -50,11 +50,10 @@ class RegionalController {
         // Cierra la conexion
         $objRegional->cerrar();
 
-        include_once("../view/Localizacion/regional/listar.html.php");
+        include_once("../view/Localizacion/regional/consulta.html.php");
     }
 
     function crear() {
-
         include_once("../view/Localizacion/regional/crear.html.php");
     }
 
@@ -74,6 +73,22 @@ class RegionalController {
             $errores[] = '(*) El campo "Nombre De La Regional" debe contener letras unicamente';
         }
         
+        $regional = "Region ".$_POST['reg_nombre'];
+        
+        $sql = "SELECT reg_nombre FROM pag_regional WHERE reg_nombre='".$regional."'";
+        //die(print_r($sql));
+        $objRegional = new RegionalModel();
+        
+        $consulta = $objRegional->select($sql);
+        $objRegional->cerrar();
+        
+        foreach($consulta as $region){
+            //die(print_r($regional));
+            if($region['reg_nombre'] = $regional){
+                //die(print_r($regional));
+                $errores[] = "La <code>".$regional."</code> ya se encuentra registrada.";
+            }
+        }
         //----------------------------------------------
         if (count($errores) > 0) {
             setErrores($errores);

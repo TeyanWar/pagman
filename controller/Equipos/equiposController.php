@@ -49,7 +49,6 @@ class EquiposController {
         $objEquipos->cerrar();
 
         include_once("../view/Equipos/equipos/editar.html.php");
-
     }
 
     function postEditar() {
@@ -93,7 +92,6 @@ class EquiposController {
         $objEquipos->cerrar();
 
         redirect(crearUrl("equipos", "equipos", "consulta"));
-
     }
 
     function crear() {
@@ -133,93 +131,92 @@ class EquiposController {
 
 
         include_once("../view/Equipos/equipos/crear.html.php");
-
     }
 
     function postCrear() {
 
         //--------expresiones regulares--------------------
-        $errores=array();
-        $patronNumeros="/[0-9]{1,9}(\.[0-9]{0,2})?$/";
-        $patronLetras="/^[a-zA-Z_áéíóúñ\s]*$/";
-        
+        $errores = array();
+        $patronNumeros = "/[0-9]{1,9}(\.[0-9]{0,2})?$/";
+        $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
+
         //-----------------validaciones--------------------
 
-        if(!isset($_POST['equi_id']) or $_POST['equi_id']==""){
-            $errores[]='(*) El campo "N.Placa" es obligatorio';
+        if (!isset($_POST['equi_id']) or $_POST['equi_id'] == "") {
+            $errores[] = '(*) El campo "N.Placa" es obligatorio';
         }
         //-------------------------------------------------------------
         $doc = "SELECT equi_id FROM pag_equipo";
         $objEquipos = new EquiposModel();
-            $ids = $objEquipos->select($doc);
+        $ids = $objEquipos->select($doc);
         // Cierra la conexion
         $objEquipos->cerrar();
 
-        foreach($ids as $id){
-            if($id['equi_id']== $_POST['equi_id']){
-                $errores[]='<strong>(*) El N.Placa ingresado ya se encuentra registrado</strong>';
+        foreach ($ids as $id) {
+            if ($id['equi_id'] == $_POST['equi_id']) {
+                $errores[] = '<strong>(*) El N.Placa ingresado ya se encuentra registrado</strong>';
             }
         }
         //-------------------------------------------------------------
 
-        if(!isset($_POST['per_id']) or $_POST['per_id']==""){
-            $errores[]='(*) El campo "Encargado" es obligatorio';
-        }
-        
-        if(!isset($_POST['equi_nombre']) or $_POST['equi_nombre']==""){
-            $errores[]='(*) El campo "Nombre Del Equipo" es obligatorio';
-        }
-        if(isset($_POST['equi_nombre']) && !preg_match($patronLetras,$_POST['equi_nombre'])){
-            $errores[]='(*) El campo "Nombre Del Equipo" debe contener letras unicamente';
+        if (!isset($_POST['per_id']) or $_POST['per_id'] == "") {
+            $errores[] = '(*) El campo "Encargado" es obligatorio';
         }
 
-        if(!isset($_POST['est_id']) or $_POST['est_id']==""){
-            $errores[]='(*) El campo "Estado Del Equipo" es obligatorio';
+        if (!isset($_POST['equi_nombre']) or $_POST['equi_nombre'] == "") {
+            $errores[] = '(*) El campo "Nombre Del Equipo" es obligatorio';
+        }
+        if (isset($_POST['equi_nombre']) && !preg_match($patronLetras, $_POST['equi_nombre'])) {
+            $errores[] = '(*) El campo "Nombre Del Equipo" debe contener letras unicamente';
         }
 
-        if(!isset($_POST['equi_modelo']) or $_POST['equi_modelo']==""){
-            $errores[]='(*) El campo "Modelo" es obligatorio';
+        if (!isset($_POST['est_id']) or $_POST['est_id'] == "") {
+            $errores[] = '(*) El campo "Estado Del Equipo" es obligatorio';
         }
 
-        if(!isset($_POST['equi_serie']) or $_POST['equi_serie']==""){
-            $errores[]='(*) El campo "No. Serie" es obligatorio';
+        if (!isset($_POST['equi_modelo']) or $_POST['equi_modelo'] == "") {
+            $errores[] = '(*) El campo "Modelo" es obligatorio';
         }
 
-        if(!isset($_POST['equi_fabricante']) or $_POST['equi_fabricante']==""){
-            $errores[]='(*) El campo "Fabricante" es obligatorio';
+        if (!isset($_POST['equi_serie']) or $_POST['equi_serie'] == "") {
+            $errores[] = '(*) El campo "No. Serie" es obligatorio';
         }
 
-        if(!isset($_POST['equi_marca']) or $_POST['equi_marca']==""){
-            $errores[]='(*) El campo "Marca" es obligatorio';
+        if (!isset($_POST['equi_fabricante']) or $_POST['equi_fabricante'] == "") {
+            $errores[] = '(*) El campo "Fabricante" es obligatorio';
         }
 
-        if(!isset($_POST['equi_ubicacion']) or $_POST['equi_ubicacion']==""){
-            $errores[]='(*) El campo "Ubicacion" es obligatorio';
+        if (!isset($_POST['equi_marca']) or $_POST['equi_marca'] == "") {
+            $errores[] = '(*) El campo "Marca" es obligatorio';
         }
 
-        if(!isset($_POST['equi_fecha_compra']) or $_POST['equi_fecha_compra']==""){
-            $errores[]='(*) El campo "Fecha De Compra" es obligatorio';
-        }
-        if(!isset($_POST['equi_fecha_instalacion']) or $_POST['equi_fecha_instalacion']==""){
-            $errores[]='(*) El campo "Fecha De Instalacion" es obligatorio';
+        if (!isset($_POST['equi_ubicacion']) or $_POST['equi_ubicacion'] == "") {
+            $errores[] = '(*) El campo "Ubicacion" es obligatorio';
         }
 
-        if(!isset($_POST['equi_vence_garantia']) or $_POST['equi_vence_garantia']==""){
-            $errores[]='(*) El campo "Vecimiento De Garantia" es obligatorio';
+        if (!isset($_POST['equi_fecha_compra']) or $_POST['equi_fecha_compra'] == "") {
+            $errores[] = '(*) El campo "Fecha De Compra" es obligatorio';
         }
-        if(!isset($_POST['cen_id']) or $_POST['cen_id']==""){
-            $errores[]='(*) El campo "Centro De Formacion" es obligatorio';
-        }
-        
-        if(!isset($_POST['tequi_id']) or $_POST['tequi_id']==""){
-            $errores[]='(*) El campo "Tipo De Equipo" es obligatorio';
-        }
-        
-        if(!isset($_POST['area_id']) or $_POST['area_id']==""){
-            $errores[]='(*) El campo "Area" es obligatorio';
+        if (!isset($_POST['equi_fecha_instalacion']) or $_POST['equi_fecha_instalacion'] == "") {
+            $errores[] = '(*) El campo "Fecha De Instalacion" es obligatorio';
         }
 
-        if(count($errores)>0){
+        if (!isset($_POST['equi_vence_garantia']) or $_POST['equi_vence_garantia'] == "") {
+            $errores[] = '(*) El campo "Vecimiento De Garantia" es obligatorio';
+        }
+        if (!isset($_POST['cen_id']) or $_POST['cen_id'] == "") {
+            $errores[] = '(*) El campo "Centro De Formacion" es obligatorio';
+        }
+
+        if (!isset($_POST['tequi_id']) or $_POST['tequi_id'] == "") {
+            $errores[] = '(*) El campo "Tipo De Equipo" es obligatorio';
+        }
+
+        if (!isset($_POST['area_id']) or $_POST['area_id'] == "") {
+            $errores[] = '(*) El campo "Area" es obligatorio';
+        }
+
+        if (count($errores) > 0) {
             setErrores($errores);
             redirect(crearUrl("equipos", "equipos", "crear"));
             //----------------fin validaciones-----------------
@@ -238,12 +235,12 @@ class EquiposController {
             $equi_vence_garantia = $_POST['equi_vence_garantia'];
             $cen_id = $_POST['cen_id'];
 
-            $equi_foto = "equipo-".$equi_id;
+            $equi_foto = "equipo-" . $equi_id;
             $ruta = $_FILES['ruta']['tmp_name'];
-            $rutaydoc = getDocumentRoot()."/web/media/img/Equipos/" . $equi_foto;
+            $rutaydoc = getDocumentRoot() . "/web/media/img/Equipos/" . $equi_foto;
             if ($ruta <> "") {
                 if (move_uploaded_file($ruta, $rutaydoc)) {
-
+                    
                 }
             } else {
                 $rutaydoc = NULL;
@@ -254,38 +251,38 @@ class EquiposController {
 
 
             $insertEquipos = "INSERT INTO pag_equipo "
-                        . "(equi_id,"
-                        . "per_id,"
-                        . "equi_nombre,"
-                        . "cen_id,"
-                        . "est_id,"
-                        . "equi_foto,"
-                        . "equi_fabricante,"
-                        . "equi_marca,"
-                        . "equi_modelo,"
-                        . "equi_serie,"
-                        . "equi_ubicacion,"
-                        . "equi_fecha_compra,"
-                        . "equi_fecha_instalacion,"
-                        . "equi_vence_garantia,"
-                        . "area_id,"
-                        . "tequi_id)"
+                    . "(equi_id,"
+                    . "per_id,"
+                    . "equi_nombre,"
+                    . "cen_id,"
+                    . "est_id,"
+                    . "equi_foto,"
+                    . "equi_fabricante,"
+                    . "equi_marca,"
+                    . "equi_modelo,"
+                    . "equi_serie,"
+                    . "equi_ubicacion,"
+                    . "equi_fecha_compra,"
+                    . "equi_fecha_instalacion,"
+                    . "equi_vence_garantia,"
+                    . "area_id,"
+                    . "tequi_id)"
                     . " VALUES('$equi_id', "
-                        . "$per_id, "
-                        . "'$equi_nombre', "
-                        . "'$cen_id', "
-                        . "$est_id, "
-                        . "'$rutaydoc', "
-                        . "'$equi_fabricante', "
-                        . "'$equi_marca', "
-                        . "'$equi_modelo', "
-                        . "'$equi_serie', "
-                        . "'$equi_ubicacion', "
-                        . "'$equi_fecha_compra', "
-                        . "'$equi_fecha_instalacion', "
-                        . "'$equi_vence_garantia', "
-                        . "$area_id,"
-                        . "$tequi_id)";
+                    . "$per_id, "
+                    . "'$equi_nombre', "
+                    . "'$cen_id', "
+                    . "$est_id, "
+                    . "'$rutaydoc', "
+                    . "'$equi_fabricante', "
+                    . "'$equi_marca', "
+                    . "'$equi_modelo', "
+                    . "'$equi_serie', "
+                    . "'$equi_ubicacion', "
+                    . "'$equi_fecha_compra', "
+                    . "'$equi_fecha_instalacion', "
+                    . "'$equi_vence_garantia', "
+                    . "$area_id,"
+                    . "$tequi_id)";
 
             $objEquipos = new EquiposModel();
 
@@ -297,8 +294,7 @@ class EquiposController {
             redirect(crearUrl("equipos", "equipos", "Consulta"));
         }
     }
-    
-    
+
     function eliminar($parametros) {
         $objEquipos = new EquiposModel();
 
@@ -310,7 +306,6 @@ class EquiposController {
 
         // Cierra la conexion
         $objEquipos->cerrar();
-
     }
 
     function detalle($parametros = false) {
@@ -321,14 +316,13 @@ class EquiposController {
                 . " WHERE pag_equipo.per_id=pag_persona.per_id "
                 . "AND pag_equipo.est_id=pag_estado.est_id "
                 . "AND tdoc_id=1 AND equi_id='$id'";
-        
+
         $equipo = $objEquipos->find($sql);
 
         // Cierra la conexion
         $objEquipos->cerrar();
 
         include_once("../view/Equipos/equipos/detalle.html.php");
-
     }
 
     function listar() {
@@ -341,13 +335,11 @@ class EquiposController {
         // Cierra la conexion
         $objEquipos->cerrar();
 
-        include_once("../view/Equipos/equipos/listar.html.php");
-
+        include_once("../view/Equipos/equipos/consulta.html.php");
     }
 
     function Consulta() {
         include_once("../view/Equipos/equipos/consulta.html.php");
-
     }
 
     function buscarAjax() {
@@ -359,10 +351,19 @@ class EquiposController {
                 . "AND equi_nombre LIKE '%" . $buscarEquipo . "%' or equi_id LIKE '%" . $buscarEquipo . "%'";
 
         $equipos = $objEquipos->select($sql3);
+
+
+        //aqui empieza el paginado       
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+        $url = crearUrl('equipos', 'equipos', 'listar');
+
+        $paginado = new Paginado($equipos, $pagina, $url);
+
+        $$equipos = $paginado->getDatos();
+
         $objEquipos->cerrar();
 
         include_once("../view/Equipos/equipos/listar.html.php");
-
     }
 
 }

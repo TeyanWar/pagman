@@ -60,8 +60,8 @@ class HerramientasController {
             setErrores($errores);
             redirect(crearUrl('Herramientas', 'herramientas', 'crear'));
         }
-        
-        if($_POST['her_fecha_ingreso'] == ""){
+
+        if ($_POST['her_fecha_ingreso'] == "") {
             $errores[] = "Por favor selecciona una fecha de ingreso";
         }
         // estos son los pos que llegan de los formularios.
@@ -83,11 +83,10 @@ class HerramientasController {
         //Hago un explode para capturar la extension de IMAGEN
         $fotoHerramienta = explode(".", $_FILES['her_imagen']['name']);
         //die(print_r($fotoHerramienta));
-
         //Nombre de la foto con la extension capturada
         $nombreFoto = $herramienta_foto . "." . end($fotoHerramienta);
         //die($nombreFoto);
-        
+
         $ruta = $_FILES['her_imagen']['tmp_name'];
         //Capturo la ruta donde guardare la Imagen
         $rutaydoc = getDocumentRoot() . "/web/media/img/Herramientas/" . $nombreFoto;
@@ -117,6 +116,7 @@ class HerramientasController {
         //die(print_r($insertHerramientas));
         $insertar = $objHerramientas->insertar($insertHerramientas);
         // Cierra la conexion
+//        dd($insertar);
         $objHerramientas->cerrar();
 
         redirect(crearUrl("herramientas", "herramientas", "listar"));
@@ -173,13 +173,13 @@ class HerramientasController {
         $url = crearUrl('herramientas', 'herramientas', 'listarHer');
 
         $paginado = new Paginado($listarHer, $pagina, $url);
-//        dd($paginado);
         $listarHer = $paginado->getDatos();
 //        // fin paginado
         // Cierra la conexion
+//        dd();
         $objHerramientas->cerrar();
 
-        include_once("../view/Herramientas/herramientas/listar.html.php");
+        include_once("../view/Herramientas/herramientas/buscador.html.php");
     }
 
     function eliminar($parametros) {
@@ -215,9 +215,22 @@ class HerramientasController {
         $sql = "SELECT * FROM pag_herramienta WHERE her_id LIKE '%" . $herramienta . "%' or her_nombre LIKE '%" . $herramienta . "%'";
 
         $listarHer = $objherramientas->select($sql);
+           /*
+         * Paginado
+         */
+        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
+        $url = crearUrl('Herramientas', 'herramientas', 'listar');
+        
+        $paginado = new Paginado($listarHer, $pagina, $url);
+        
+        $listarHer = $paginado->getDatos();
+        /*
+         * Fin paginado
+         */
+
 
         $objherramientas->cerrar();
-        include_once("../view/Herramientas/herramientas/listarHer.html.php");
+        include_once("../view/Herramientas/herramientas/listar.html.php");
     }
 
 }

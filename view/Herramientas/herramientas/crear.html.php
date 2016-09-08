@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="input-field col s6">
                     <label class="active"> *Fecha ingreso de herramienta: </label>
-                    <input id="her_fecha_ingreso" placeholder="dd/mm/aaaa" name="her_fecha_ingreso" type="date">
+                    <input id="her_fecha_ingreso" class="datepicker" placeholder="dd/mm/aaaa" name="her_fecha_ingreso" type="date">
                 </div>
                 <div class="input-field col s6">
                     <label for="tipo_Herramienta" class="active"> (*)Seleccione el tipo de herramienta: </label>
@@ -91,6 +91,5 @@
                 </div>
             </div>
         </div>
-</div>
-</form>
+    </form>
 </div>

@@ -3,11 +3,15 @@ $(document).ready(function () {
     //consulta Equipos
     $("#busquedaAjax").keyup(function () {
         var usuario = $("#busquedaAjax").val();
+            
+        if (usuario != "") {
+            $('#pagina').val(1);
+        }
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaEquipos=" + usuario,
+            data: "busquedaEquipos=" + usuario +"&pagina"+pagina,
             success: function (data) {
                 $("#tabla").html(data);
             }
@@ -41,7 +45,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
 
     $(document).on('click', '.modal-eliminar', function (e) {
         e.preventDefault();
@@ -62,21 +66,21 @@ $(document).ready(function () {
                     id: equi_id
                 }
             });
-    //       alert(equi_id);
+            //       alert(equi_id);
             swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
-          $("#busquedaAjax").trigger('keyup');
+            $("#busquedaAjax").trigger('keyup');
         });
     });
-    
-    
+
+
     //----------------- validaciones ---------------
-    
+
     /* Incluimos un método para validar el campo nombre */
 
-    jQuery.validator.addMethod("letra", function(value, element) {
+    jQuery.validator.addMethod("letra", function (value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
-    
+
     $("#formequipo").validate({
         rules: {
             equi_id: {
@@ -139,81 +143,81 @@ $(document).ready(function () {
             area_id: {
                 required: true
             },
-            cgender:"required",
-			cagree:"required",
+            cgender: "required",
+            cagree: "required",
         },
         //For custom messages
         messages: {
-            equi_id:{
+            equi_id: {
                 required: "El N.Placa es obligatorio.",
                 minlength: "Introduzca al menos 3 caracteres",
                 maxlength: "Sólo se permite introducir máximo 20 caracteres"
             },
-            per_id:{
+            per_id: {
                 required: "El encargado del centro es obligatorio."
             },
-            equi_nombre:{
+            equi_nombre: {
                 required: "El nombre del equipo es obligatorio.",
                 letra: "Sólo se permiten letras",
                 minlength: "Introduzca al menos 3 caracteres",
                 maxlength: "Sólo se permite introducir máximo 20 caracteres"
             },
-            est_id:{
+            est_id: {
                 required: "El estado del equipo es obligatorio."
             },
-            equi_modelo:{
+            equi_modelo: {
                 required: "El modelo es obligatorio.",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Sólo se permite introducir máximo 20 caracteres"
             },
-            equi_serie:{
+            equi_serie: {
                 required: "El número de serie es obligatorio.",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Sólo se permite introducir máximo 20 caracteres"
             },
-            equi_fabricante:{
+            equi_fabricante: {
                 required: "El fabricante es obligatorio.",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Sólo se permite introducir máximo 20 caracteres"
             },
-            equi_marca:{
+            equi_marca: {
                 required: "La marca es obligatoria.",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Sólo se permite introducir máximo 20 caracteres"
             },
-            equi_ubicacion:{
+            equi_ubicacion: {
                 required: "La ubicación es obligatoria.",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Sólo se permite introducir máximo 20 caracteres"
             },
-            equi_fecha_compra:{
+            equi_fecha_compra: {
                 required: "La fecha de compra es obligatoria."
             },
-            equi_fecha_instalacion:{
+            equi_fecha_instalacion: {
                 required: "La fecha de instalacion es obligatoria."
             },
-            equi_vence_garantia:{
+            equi_vence_garantia: {
                 required: "La Fecha Vecimiento De Garantia es obligatorio."
             },
-            cen_id:{
+            cen_id: {
                 required: "El dentro de formación es obligatorio."
             },
-            tequi_id:{
+            tequi_id: {
                 required: "El tipo de equipo es obligatorio."
             },
-            area_id:{
+            area_id: {
                 required: "El área es obligatoria."
             },
             curl: "Enter your website"
         },
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
         }
     });
 

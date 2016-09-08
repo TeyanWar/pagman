@@ -1,7 +1,7 @@
 <div class="card-panel">
     <div class="container">
         <div class="row">  
-            <h4 class="header2">Registrar medici&oacute;n</h4>
+            <h5 class="header2">CREACI&Oacute;N DE MEDICI&Oacute;N</h5>
             <form class="col s12" role="form" action="<?php echo crearUrl('mediciones', 'mediciones', 'ajaxGuardarMedidas', array('noVista' => 'noVista')) ?>" method="post" id="formMediciones">
 
                 <!--Inicio rastro de miga-->
@@ -10,7 +10,7 @@
                     <li><a href="#">Mediciones</a></li>
                     <li class="active">Crear medici&oacute;n</li>
                 </ol>
-                <!--Fin rastro de miga-->
+                <!--Fin rastro de miga.-->
 
                 <!--Inicio mensaje de campos obligatorios-->
                 <div id="card-alert" class="card teal">
@@ -40,6 +40,13 @@
 
                 <!--Fin mensaje de campos obligatorios-->
 
+                <!--Inicio contenedor mensajes de error-->
+                <div class="card red">
+                    <div id="cont_errors_ajax" class="card-content white-text">
+                    </div>
+                </div>
+                <!--Fin contenedor mensajes de error-->
+
                 <div class="row">
                     <div class="input-field col s6">
                         <select required name="personas" class="select2" id="personas" data-error=".errorTxt1">
@@ -57,8 +64,8 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th data-field="cod_equ">C&oacute;digo equ&iacute;po</th>
-                                        <th data-field="nom_equ">Nombre equ&iacute;po</th>
+                                        <th data-field="cod_equ">C&oacute;digo equipo</th>
+                                        <th data-field="nom_equ">Nombre equipo</th>
                                         <th data-field="medicion">Medici&oacute;n actual</th>
                                         <th data-field="medicion">Tipo Medidor</th>
                                         <th data-field="fecha_med">Fecha Medici&oacute;n</th>
@@ -82,7 +89,7 @@
                             <?php } ?>
                         </select>
                         <div class="errorTxt2"></div>
-                        <label class="active">&nbsp;(*) Seleccione un equ&iacute;po</label>
+                        <label class="active">&nbsp;(*) Seleccione un equipo</label>
 
                         <!--Inicion div que contiene los equipos que se van agregando-->
                         <div id="equipos-agregados">
@@ -97,8 +104,8 @@
                 <div class="row">
                     <div class="input-field col s7 ">
                         <input data-url="<?php echo crearUrl('mediciones', 'mediciones', 'ajaxGuardarMedidas', array('noVista' => 'noVista')) ?>" data-redirect="<?php echo crearUrl('mediciones', 'mediciones', 'listar') ?>" 
-                               id="btn-guardar-medidas" class="btn waves-effect waves-light teal darken-2 right" type="submit" name="action" value="Registrar medici&oacute;n" />
-
+                               id="btn-guardar-medidas" class="btn waves-effect waves-light teal darken-2 right btn_submit_modal" type="submit" name="action" value="Registrar medici&oacute;n" />
+                                                                
                     </div>
                 </div>
                 <input type="hidden" id="consecutivo" value="0" />
