@@ -46,7 +46,24 @@
             </div> 
         </div>
         
-        <?php $paginado->render() ?>
+        <?php if(isset($paginado)){
+        $paginado->render();
+        }else{
+            echo'<div id="card-alert" class="card orange">
+                      <div class="card-content white-text">
+                      <center>
+                        <p><i class="mdi-alert-warning">
+                        </i> 
+                        ATENCI&Oacute;N :No se encontraron registros,Por favor dirijase a la opci&oacute;n "Crear" 
+                        del modulo para realizar un registro.</p></center>
+                      </div>
+                      <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>';
+            
+        }?>
+                            
         
     </div>
 </div>
