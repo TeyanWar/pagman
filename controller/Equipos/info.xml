@@ -26,13 +26,13 @@
                     <descripcion>Editar Equipos </descripcion>
                 </funcion>
                 
-                 <funcion>
+                <funcion>
                     <nombre>eliminar</nombre>
                     <display>Eliminar Equipos</display>
                     <descripcion>Eliminar Equipos</descripcion>
                 </funcion>
                 
-                 <funcion>
+                <funcion>
                     <nombre>Listar</nombre>
                     <display>Listar Equipos</display>
                     <descripcion>Listar Equipos</descripcion>
@@ -59,16 +59,50 @@
                     <descripcion>Editar Tipo equipo</descripcion>
                 </funcion>
                 
-                 <funcion>
+                <funcion>
                     <nombre>eliminar</nombre>
                     <display>Eliminar Tipo equipo</display>
                     <descripcion>Eliminar Tipo equipo</descripcion>
                 </funcion>
                 
-                 <funcion>
+                <funcion>
                     <nombre>listar</nombre>
                     <display>Listar Tipos de equipos</display>
                     <descripcion>Listar Tipos de equipos</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+        
+        <controlador>
+            <nombre>campoPersonalizadoController</nombre>
+            <display>Personalizado</display>
+            <icono>mdi-notification-folder-special</icono>
+            <descripcion>Controlador de Campo personalizado</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Campo personalizado</display>
+                    <descripcion>Crear Campo personalizado</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Campo personalizado</display>
+                    <descripcion>Editar Campo personalizado</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Campo personalizado</display>
+                    <descripcion>Eliminar Campo personalizado</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Campo personalizado</display>
+                    <descripcion>Listar Campo personalizado</descripcion>
                 </funcion>
             </funciones>
             

@@ -36,7 +36,7 @@ Scripts
 <!--scrollbar-->
 <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js') ?>"></script>
 <!-- chartist -->
-<!--<script type="text/javascript" src="<?php // echo addLib('templates/adminMaterialize/js/plugins/js/plugins/chartist-js/chartist.min.js') ?>"></script>-->
+<!--<script type="text/javascript" src="<?php // echo addLib('templates/adminMaterialize/js/plugins/js/plugins/chartist-js/chartist.min.js')   ?>"></script>-->
 
 <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/sweetalert/dist/sweetalert.min.js') ?>"></script>
 
@@ -45,8 +45,8 @@ Scripts
 <!--<script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/custom-script.js') ?>"></script>-->
 
 <!-- plugins.js funciones para las imagenes  -->
-<script src="<?php echo addLib('templates/adminMaterialize/js/plugins/fancybox/jquery.fancybox.js')?>" type="text/javascript"></script>
-<script src="<?php echo addLib('templates/adminMaterialize/js/plugins/fancybox/jquery.fancybox.pack.js')?>" type="text/javascript"></script>
+<script src="<?php echo addLib('templates/adminMaterialize/js/plugins/fancybox/jquery.fancybox.js') ?>" type="text/javascript"></script>
+<script src="<?php echo addLib('templates/adminMaterialize/js/plugins/fancybox/jquery.fancybox.pack.js') ?>" type="text/javascript"></script>
 
 <!-- Plugin chosen select2 -->
 <script type="text/javascript" src="<?php echo addLib('js/select2.full.min.js') ?>"></script>
@@ -59,7 +59,11 @@ Scripts
 <?php if (isset($modulo) && file_exists('js/modulos/' . (strtolower($modulo)) . '-' . (strtolower($controller)) . '.js')) { ?>
     <script type="text/javascript" src="<?php echo addLib('js/modulos/' . (strtolower($modulo)) . '-' . (strtolower($controller)) . '.js') ?>"></script>
 <?php } // if ?>
-    
+<!--INGRESO DE JS CAMPO PERSONALIZADO-->
+
+<script type="text/javascript" src="<?php echo addLib('js/modulos/equipos-campoPersonalizado.js') ?>"></script>
+<!--fin-->
+<script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>
 <!-- Scripts PrintArea -->
 <script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>
 
