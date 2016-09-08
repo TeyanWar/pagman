@@ -108,6 +108,23 @@ class OtController {
 
         include_once("../view/Ot/ot/selectEquipo.html.php");
     }
+    
+    function selectComp() {
+        $id = $_POST['id'];
+
+        $objSubSelect = new OtModel();
+
+        $sqlcomp = "SELECT pag_componente.comp_id,comp_descripcion FROM pag_equipo,pag_equipo_componente,pag_componente "
+                . "WHERE pag_equipo_componente.equi_id=pag_equipo.equi_id "
+                . "AND pag_equipo_componente.comp_id=pag_componente.comp_id "
+                . "AND pag_equipo.equi_id='$id'";
+
+        $selectcomp = $objSubSelect->select($sqlcomp);
+
+        $objSubSelect->cerrar();
+
+        include_once("../view/Ot/ot/selectComponente.html.php");
+    }
 
     function crear($parametros=false) {
         
@@ -140,8 +157,8 @@ class OtController {
 
             $objRegional = new OtModel();
 
-            $sql = "SELECT * FROM pag_regional";
-            $regionales = $objRegional->select($sql);
+//            $sql = "SELECT * FROM pag_regional";
+//            $regionales = $objRegional->select($sql);
             //select Regionales
 
             $objEquipos = new OtModel();
@@ -353,5 +370,80 @@ class OtController {
         
         include_once("../view/Ot/ot/agregar.html.php");
     }
+    
+    //-----------------------carritos de compras---------------------
+        //------------------------carrito de insumos-----------------------
+    function listarInsumos() {
+
+        $objOt = new OtModel();
+
+        $insumo = $_POST['insumo'];
+
+        $ins = "SELECT ins_id,ins_nombre FROM pag_insumo "
+                . "WHERE pag_insumo.ins_nombre LIKE '%" . $insumo . "%' "
+                . "ORDER BY pag_insumo.ins_id LIMIT 0,1";
+
+        $insumos = $objOt->select($ins);
+
+        // Cierra la conexion
+        $objOt->cerrar();
+
+        include_once("../view/Ot/ot/listarIns.html.php");
+    }
+    
+    function añadirFila() {
+        
+        $objOt = new OtModel();
+
+        $id = $_POST['cod'];
+
+        $inf = "SELECT * FROM pag_insumo,pag_unidad_medida "
+                . "WHERE pag_insumo.umed_id=pag_unidad_medida.umed_id "
+                . "AND pag_insumo.ins_id=$id ";
+
+        $insumofila = $objOt->find($inf);
+
+        // Cierra la conexion
+        $objOt->cerrar();
+        
+        include_once '../view/Ot/ot/filains.html.php';
+    }
+    
+    //------------------------carrito de herramientas-----------------------
+    function listarherramientas() {
+
+        $objOt = new OtModel();
+
+        $herrami = $_POST['herrami'];
+
+        $sqlher = "SELECT her_id,her_nombre FROM pag_herramienta "
+                . "WHERE pag_herramienta.her_nombre LIKE '%" . $herrami . "%' "
+                . "ORDER BY pag_herramienta.her_id LIMIT 0,1";
+
+        $herramientas = $objOt->select($sqlher);
+
+        // Cierra la conexion
+        $objOt->cerrar();
+
+        include_once("../view/Ot/ot/listarHer.html.php");
+    }
+    
+    function añadirFher() {
+        
+        $objOt = new OtModel();
+
+        $idher = $_POST['cod_her'];
+
+        $inher = "SELECT her_id,her_nombre,her_descripcion FROM pag_herramienta "
+                . "WHERE pag_herramienta.her_id='$idher'";
+
+        $herrafila = $objOt->find($inher);
+
+        // Cierra la conexion
+        $objOt->cerrar();
+        
+        include_once '../view/Ot/ot/filaher.html.php';
+    }
+
 
 }

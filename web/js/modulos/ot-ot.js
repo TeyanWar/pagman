@@ -56,7 +56,22 @@ $(document).ready(function () {
                 $('select').material_select();
             }
         });
-    });  
+    });
+    
+    $(document).on('change', '#selectEqui', function () {
+        var url = $('#selectEqui').attr("data-url");
+        var id = $(this).val();
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: 'id=' + id,
+            success: function (data) {
+                $("#selecomp").html(data);
+                $('select').material_select();
+            }
+        });
+    });
     
 //fin: select dependiente de select
 
@@ -201,5 +216,80 @@ $(document).ready(function () {
 		$('#orden').printArea();
 		
 	});
+        
+    //----------------carritos de compras----------------------
+    
+        //----------filtro de insumos--------------
+    $("#insum").keyup(function () {
+        var insumo = $("#insum").val();
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "insumo=" + insumo,
+            success: function (data) {
+                $("#conte").html(data);
+            }
+        });
+    });
+    
+    //-----------insumos------------------
+    $(document).on('click', '.carro', function () {
+        var cod = $(this).attr("data-id");
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                cod: cod
+            }
+        }).done(function (data) {
+            $("#insumosprog").append(data);
+        });
+    });
+    
+    $(document).on('click', '.remove', function () {
+        var id = $(this).attr('data-id');
+
+        $("#filain-" + id).remove();
+
+    });
+    
+
+    //----------filtro de herramientas--------------
+    $("#herrm").keyup(function () {
+        var herrami = $("#herrm").val();
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "herrami=" + herrami,
+            success: function (data) {
+                $("#conteher").html(data);
+            }
+        });
+    });
+    
+    //---------------herramientas------------------
+    $(document).on('click', '.carherra', function () {
+        var cod_her = $(this).attr("data-id");
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                cod_her: cod_her
+            }
+        }).done(function (data) {
+            $("#herramientasprog").append(data);
+        });
+    });
+    
+    $(document).on('click', '.remoher', function () {
+        var id = $(this).attr('data-id');
+
+        $("#filaher-" + id).remove();
+
+    });
 	
 });
