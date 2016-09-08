@@ -5,7 +5,7 @@
                 <tr>
                     <th>#</th>
                     <th>Codigo Campo Personalizado</th>                    
-                    <th>NOmbre Campo Personalizado</th>
+                    <th>Nombre Campo Personalizado</th>
                     <th>Editar</th>
                     <th>Detalle</th>
                 </tr>

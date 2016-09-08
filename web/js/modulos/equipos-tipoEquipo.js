@@ -1,22 +1,53 @@
 $(document).ready(function () {
 
-    //consulta Equipos
-    $("#busquedaAjax").keyup(function () {
-        var usuario = $("#busquedaAjax").val();
+    $("#buscarTipoEquipo").keyup(function () {
+        var tipoEquipo = $("#buscarTipoEquipo").val();
+
+        if (tipoEquipo != "") {
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaEquipos=" + usuario,
+            data: "tipoEquipo_id=" + tipoEquipo + "&pagina=" + pagina,
             success: function (data) {
-                $("#tabla").html(data);
+                $("#buscarTipoDeEquipo").html(data);
+            }
+        });
+    });
+    //aqui termina el filtro de busqueda de Tipo de Equipo
+    // --------------------------------------------//--------------------
+    $('#buscarTipoEquipo').trigger('keyup');// function_trigger para visualizar las herramientas existentes
+
+//EMPIEZA EL LISTAR DE CAMPOS PERSONALIZADOS EN EL CREAR TIPO EQUIPO
+
+
+
+
+    $("#agregarCampoPer_Tipo_equipo").keyup(function () {
+        var tipoEquipo = $("#agregarCampoPer_Tipo_equipo").val();
+
+        if (tipoEquipo != "") {
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val();
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "tipoEquipo_id=" + tipoEquipo + "&pagina=" + pagina,
+            success: function (data) {
+                $("#tablaCampoPersonalizado").html(data);
             }
         });
     });
 
-    $("#busquedaAjax").trigger("keyup");
+    $('#agregarCampoPer_Tipo_equipo').trigger('keyup');// function_trigger para visualizar las herramientas existentes
 
 
+//------------------AQUI TERMINA EL LISTAR -----------------------------------------------------
 
     $(document).on("click", ".ver-detalle1", function () {
         var url = $(this).attr("data-url");
@@ -63,9 +94,9 @@ $(document).ready(function () {
             confirmButtonText: 'Yes, delete it!',
             closeOnConfirm: false
         },
-                function () {
-                    swal("Deleted!", "Your imaginary file has been deleted!", "success");
-                });
+        function () {
+            swal("Deleted!", "Your imaginary file has been deleted!", "success");
+        });
     });
 
     $(document).on('click', '.eliminar', function (e) {
@@ -80,19 +111,19 @@ $(document).ready(function () {
             confirmButtonColor: "Red ",
             confirmButtonText: "si,eliminar registro",
             closeOnConfirm: false},
-                function () {
-                    $.ajax({
-                        url: url,
-                        type: 'post',
-                        data: {
-                            id: equi_id
-                        }
-                    }).done(function (data) {
+        function () {
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {
+                    id: equi_id
+                }
+            }).done(function (data) {
 
-                    });
-                    swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
-                    window.location.href = "listar";
-                });
+            });
+            swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
+            window.location.href = "listar";
+        });
     });
 
 });

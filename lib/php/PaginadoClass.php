@@ -5,7 +5,7 @@ class Paginado {
 
     private $datos;
     private $offset;
-    private $porPagina = 2;
+    private $porPagina = 10;
     private $paginaActual;
     private $cantidad;
     private $url;

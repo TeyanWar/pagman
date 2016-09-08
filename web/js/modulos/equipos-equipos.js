@@ -11,7 +11,7 @@ $(document).ready(function () {
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaEquipos=" + usuario +"&pagina" + pagina;
+            data: "busquedaEquipos=" + usuario +"&pagina"+pagina,
             success: function (data) {
                 $("#tabla").html(data);
             }

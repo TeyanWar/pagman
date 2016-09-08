@@ -63,6 +63,8 @@ Scripts
 
 <script type="text/javascript" src="<?php echo addLib('js/modulos/equipos-campoPersonalizado.js') ?>"></script>
 <!--fin-->
+<script type="text/javascript" src="<?php echo addLib('js/modulos/equipos-tipoEquipo.js') ?>"></script>
+
 <script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>
 <!-- Scripts PrintArea -->
 <script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>
