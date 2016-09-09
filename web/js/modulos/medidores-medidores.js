@@ -27,6 +27,16 @@ $(document).ready(function () {
                 maxlength: 44,
                 lettersonly:true
             },
+            tipomed:{
+                required:true
+            },
+            numerotim:{
+                required:true,
+                digits: true
+            },
+            tiempo:{
+                required:true
+            },
             estado:{
                 required:true
             }
@@ -47,6 +57,16 @@ $(document).ready(function () {
                 required:   "Este campo es obligatorio",
                 minlength:  "Debe contener al menos 5 caracteres",
                 maxlength:  "No puede sobrepasar los 44 caracteres"
+            },
+            tipomed:{
+                required:   "Este campo es obligatorio"
+            },
+            numerotim:{
+                required:   "Este campo es obligatorio",
+                digits: "El valor debe ser numerico"
+            },
+            tiempo:{
+                required:   "Este campo es obligatorio"
             },
             estado:{
                 required:   "Este campo es obligatorio"
@@ -195,6 +215,21 @@ $(document).ready(function () {
             });
             swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
             window.location.href = "listar";
+        });
+    });
+    
+    //-----------vista de asignar tiempo---------------
+    
+    $("#tipomed").change(function () {
+        var tipomed = $("#tipomed").val();
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "tipomed=" + tipomed,
+            success: function (data) {
+                $("#vistatiempo").html(data);
+            }
         });
     });
     
