@@ -136,7 +136,9 @@ class TipoEquipoController {
 
         $cp_id = $_POST['cp_id'];
         $cp_nombre = $_POST['cp_nombre'];
-        $consecutivo = $_POST['cp_id'];
+        $consecutivo = $_POST['consecutivo'];
+
+        //die(print_r($consecutivo));
 
         include_once '../view/Equipos/tipoEquipo/ajaxListarCamposPersonalizados.html.php';
     }
@@ -147,6 +149,31 @@ class TipoEquipoController {
         $patronLetrasNumeros = "/^[0-9a-zA-Z]+$/";
         $patronLetrasNumerosGuiones = "/^[0-9a-zA-Z(-_)-áéíóúñ\s]+$/";
         $patronFecha = "/^[0-9( )a-zA-Z(,)0-9]+$/";
+
+        $errores = array();
+        $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
+
+
+        $sql = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='" . $_POST['id_tipo_Equipo'] . "'";
+        $objTipoEquipo = new TipoEquipoModel();
+
+        $consulta = $objTipoEquipo->select($sql);
+
+        $objTipoEquipo->cerrar();
+
+        foreach ($consulta as $campoId) {
+            if ($_POST['id_tipo_Equipo'] = $campoId['tequi_id']) {
+                $errores[] = "¡ERROR! El identificador de tipo de equipo <code>" . $campoId['tequi_id'] . "</code> se encuentra registrado";
+            }
+        }
+        
+        if(!isset($_POST['camposPersonalizados']) or $_POST['camposPersonalizados'] == ""){
+            $errores[] = "Por favor, debe de <code>agregar al menos un Campo personalizado</code> a este Tipo de equipo";
+        }
+
+        if (!isset($_POST['id_tipo_Equipo']) or $_POST['id_tipo_Equipo'] == "") {
+            $errores[] = "El campo <code><b>Equipo</code></b> no puede estar vac&iacute;o";
+        }
 
         $id_tipo_Equipo = $_POST['id_tipo_Equipo'];
         //DIE(PRINT_R($id_tipo_Equipo)); 
@@ -159,23 +186,30 @@ class TipoEquipoController {
         $sql = "INSERT INTO pag_tipo_equipo (tequi_id,tequi_descripcion)VALUES('$id_tipo_Equipo','$tipo_Equipo')";
         $objTipoEquipo = New TipoEquipoModel();
         $insert = $objTipoEquipo->insertar($sql);
-        
-        //DIE(PRINT_R($sql)); 
-        if ($insert == true) {
-            foreach ($id_campo as $campo) {
-                $sqlDetalle = "INSERT INTO pag_detalle_tipoEquipo_campoPersonalizado ("
-                        . "tequi_id,"
-                        . "cp_id) VALUES("
-                        . "'$id_tipo_Equipo',"
-                        . "'$campo[cp_id]')";
 
-                $insertCampo = $objTipoEquipo->insertar($sqlDetalle);
-            }
+        if (count($errores) > 0) {
+            setErrores($errores);
+        } else {
+
+            //DIE(PRINT_R($sql)); 
+            if ($insert == true) {
+                foreach ($id_campo as $campo) {
+                    $sqlDetalle = "INSERT INTO pag_detalle_tipoEquipo_campoPersonalizado ("
+                            . "tequi_id,"
+                            . "cp_id) VALUES("
+                            . "'$id_tipo_Equipo',"
+                            . "'$campo[cp_id]')";
+
+                    $insertCampo = $objTipoEquipo->insertar($sqlDetalle);
+                }
 //            if ($insertCampo = true) {
 //                DIE(print_r("INSERTO DETALLE"));
 //            }
-            
+            }
+            $objTipoEquipo->cerrar();
         }
+
+
         redirect(crearUrl('Equipos', 'tipoEquipo', 'crear'));
     }
 

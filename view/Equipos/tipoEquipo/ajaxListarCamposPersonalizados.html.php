@@ -1,8 +1,8 @@
-<tr id="row-<?php //echo //$consecutivo ?>">
+<tr id="row-<?php echo $consecutivo ?>">
     <td>
         <?php
         $count = 1;
-        echo $count++
+        //echo $count++
         ?>
     </td>
 
@@ -14,7 +14,6 @@
 
     <td>
         
-    <td><a href="#" class="remove" data-id="<?php echo $consecutivo ?>"><i class="mdi-action-highlight-remove small" ></i></a></td>
     </td>
     <td><a href="#" class="remove" data-id="<?php echo $consecutivo; ?>"><i class="mdi-action-highlight-remove small" ></i></a></td>
 </tr>

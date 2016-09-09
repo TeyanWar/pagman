@@ -15,13 +15,29 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
+        <?php
+        $errores = getErrores();
+        if (!$errores == "") {
+            ?>
+            <div id="card-alert" class="card red">
+                <div class="card-content white-text">
+                    <p><i class="mdi-alert-error"></i> 
+                    <p><?php echo $errores ?></p>
+                </div>
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+        <?php } ?>
         <div class="row">
-            <form class="col s12" action="<?php echo crearUrl("equipos", "tipoEquipo", "ajaxGuardarCampoPersonalizado") ?>" method="POST">
+            <form class="col s12" action="<?php echo crearUrl("equipos", "tipoEquipo", "ajaxGuardarCampoPersonalizado") ?>" method="POST" id="formTipoEquipo">
                 <div class="row col s6">
                     <div class="input-field">
-                        <input type="text" id="id_tipo_Equipo" name="id_tipo_Equipo" class="validate" required>
+                        <input type="text" id="id_tipo_Equipo" name="id_tipo_Equipo" class="validate" data-error=".errorTxt1">
                         <label for="tequi_descripcion" class="active" >(*)Codigo Tipo de Equipo:</label>
                     </div>
+                    <div class="errorTxt1"></div>
                 </div>
                 <div class="row col s6">
                     <div class="input-field">
@@ -33,7 +49,7 @@
                     <div id="card-alert" class="card teal">
                         <div class="card-content white-text">
                             <span class="card-title white-text darken-1">Señor <code><?php echo $_SESSION['login']['rol_nombre'] ?></code></span>
-                            <p>En esta sección usted podrá buscar los campos personalizados para este tipo de equipo.</p>
+                            <p>En esta sección podrá ver los campos personalizados que usted a agregado a este tipo de equipo.</p><br>
                             <p> <code>IMPORTANTE</code> debes seleccionar al menos un campo personalizado.</p>
 
                             <div class="card-panel black-text">
@@ -75,22 +91,7 @@
                     <div id="campos-agregados">
 
                     </div>
-
-                    <!--Fin div que contiene los equipos que se van agregando-->
-
                 </div>
-                <div class="col s7">
-                    <div id='tablaCampoPersonalizado'>
-
-                    </div>
-                </div>
-                <?php if (isset($_REQUEST['pagina'])) { ?>
-                    <input type="hidden" id="pagina" name="pagina" value="<?php echo $_REQUEST['pagina'] ?>">
-                <?php } else { ?>
-                    <input type="hidden" id="pagina" name="pagina" value="1">
-                <?php } ?>
-
-                <?php //$paginado->render();  ?>
                 <div class="row">
                     <div class="input-field col s12">
                         <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Crear
@@ -98,6 +99,18 @@
                         </button>
                     </div>
                 </div>
+                <input type="hidden" id="consecutivo" value="0" />
             </form>
         </div><!--Cierre del ROW de tipo de equipo-->
     </div><!--Cierre del card panel-->
+    <style>
+        select:required:invalid {
+            color: gray;
+        }
+        option[value=""][disabled] {
+            display: none;
+        }
+        option {
+            color: black;
+        }
+    </style>

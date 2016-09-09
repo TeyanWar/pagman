@@ -25,7 +25,7 @@
                 $errores = getErrores();
                 if (!$errores == "") {
                     ?>
-                    <div id="prueba">
+                    <div id="">
                         <div id="card-alert" class="card red">
                             <div class="card-content white-text">
                                 <p><i class="mdi-alert-error"></i> 
