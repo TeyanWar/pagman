@@ -5,6 +5,12 @@ include_once('../model/Equipos/tipoEquipoModel.php');
 class TipoEquipoController {
 
     function crear() {
+        $objTipoEquipos = new TipoEquipoModel();
+
+        $sql = "SELECT * FROM pag_campos_personalizados";
+        $campoPer = $objTipoEquipos->select($sql);
+
+        $objTipoEquipos->cerrar();
         include_once("../view/Equipos/tipoEquipo/crear.html.php");
     }
 
@@ -111,26 +117,66 @@ class TipoEquipoController {
         include_once("../view/Equipos/tipoEquipo/listar.html.php");
     }
 
-    
-    public function buscarAjaxCampoPersonalizado() {
+    public function ajaxAgregarCampoPersonalizado() {
+
+        $idCampoPer = $_POST['ids'];
+
+        $camposPersonalizados = array();
         $objTipoEquipo = new TipoEquipoModel();
 
-        $tipoEquipo = $_POST['tipoEquipo_id'];
-
-        $sql = "SELECT * FROM pag_campos_personalizados WHERE cp_nombre LIKE '%" . $tipoEquipo . "%' or cp_id LIKE '%" . $tipoEquipo . "%' ORDER BY cp_nombre ASC ";
-        $consultaCampoAjax = $objTipoEquipo->select($sql);
-
-//        //aqui empieza el paginado       
-        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-        $url = crearUrl('equipos', 'tipoEquipo', 'crear');
-
-        $paginado = new Paginado($consultaCampoAjax, $pagina, $url);
-
-        $consultaCampoAjax = $paginado->getDatos();
+        $sql = "SELECT * FROM pag_campos_personalizados WHERE cp_id = '$idCampoPer'";
+        $camposPersonalizados = $objTipoEquipo->select($sql);
 
         $objTipoEquipo->cerrar();
+        include_once '../view/Equipos/tipoEquipo/ajaxAgregarCampoPersonalizado.html.php';
+    }
 
-        include_once("../view/Equipos/tipoEquipo/listarCamposPersonalizados.html.php");
+    public function ajaxListarCampoPersonalizado() {
+        $objTipoEquipo = New TipoEquipoModel();
+
+        $cp_id = $_POST['cp_id'];
+        $cp_nombre = $_POST['cp_nombre'];
+        $consecutivo = $_POST['cp_id'];
+
+        include_once '../view/Equipos/tipoEquipo/ajaxListarCamposPersonalizados.html.php';
+    }
+
+    public function ajaxGuardarCampoPersonalizado() {
+        $errores = array();
+        $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
+        $patronLetrasNumeros = "/^[0-9a-zA-Z]+$/";
+        $patronLetrasNumerosGuiones = "/^[0-9a-zA-Z(-_)-áéíóúñ\s]+$/";
+        $patronFecha = "/^[0-9( )a-zA-Z(,)0-9]+$/";
+
+        $id_tipo_Equipo = $_POST['id_tipo_Equipo'];
+        //DIE(PRINT_R($id_tipo_Equipo)); 
+        $tipo_Equipo = $_POST['tequi_descripcion'];
+        $id_campo = $_POST['camposPersonalizados'];
+        //die(print_r($tipo_Equipo));
+        //die(print_r($id_campo));
+        $objTipoEquipo = New TipoEquipoModel();
+
+        $sql = "INSERT INTO pag_tipo_equipo (tequi_id,tequi_descripcion)VALUES('$id_tipo_Equipo','$tipo_Equipo')";
+        $objTipoEquipo = New TipoEquipoModel();
+        $insert = $objTipoEquipo->insertar($sql);
+        
+        //DIE(PRINT_R($sql)); 
+        if ($insert == true) {
+            foreach ($id_campo as $campo) {
+                $sqlDetalle = "INSERT INTO pag_detalle_tipoEquipo_campoPersonalizado ("
+                        . "tequi_id,"
+                        . "cp_id) VALUES("
+                        . "'$id_tipo_Equipo',"
+                        . "'$campo[cp_id]')";
+
+                $insertCampo = $objTipoEquipo->insertar($sqlDetalle);
+            }
+//            if ($insertCampo = true) {
+//                DIE(print_r("INSERTO DETALLE"));
+//            }
+            
+        }
+        redirect(crearUrl('Equipos', 'tipoEquipo', 'crear'));
     }
 
 }

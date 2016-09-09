@@ -16,9 +16,15 @@
             </button>
         </div>
         <div class="row">
-            <form class="col s12" action="<?php echo crearUrl("equipos", "tipoEquipo", "postCrear") ?>" method="POST">
-                <div class="row">
-                    <div class="input-field col s12">
+            <form class="col s12" action="<?php echo crearUrl("equipos", "tipoEquipo", "ajaxGuardarCampoPersonalizado") ?>" method="POST">
+                <div class="row col s6">
+                    <div class="input-field">
+                        <input type="text" id="id_tipo_Equipo" name="id_tipo_Equipo" class="validate" required>
+                        <label for="tequi_descripcion" class="active" >(*)Codigo Tipo de Equipo:</label>
+                    </div>
+                </div>
+                <div class="row col s6">
+                    <div class="input-field">
                         <input type="text" id="tequi_descripcion" name="tequi_descripcion" class="validate" required>
                         <label for="tequi_descripcion" class="active" >(*)Descripción del Tipo de Equipo:</label>
                     </div>
@@ -32,12 +38,46 @@
 
                             <div class="card-panel black-text">
                                 <div class="input-field">
-                                    <input type="text" class="active" id="agregarCampoPer_Tipo_equipo" name='agregarCampoPer_Tipo_equipo' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Equipos", "tipoEquipo", "buscarAjaxCampoPersonalizado", array('noVista' => "noVista")) ?>" />
-                                    <label for="agregarCampoPer_Tipo_equipo" class="active">Digite el nombre y/o codigo del Campo personalizado</label>
+                                    <div id="contenedor-campos" display="none">
+                                        <table class="striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th data-field="cod_campo">C&oacute;digo campo</th>
+                                                    <th data-field="nom_campo">Nombre equipo</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                </div>
+
+                <div class="input-field col s6">
+                    <select required name="idCampoSelec" id="idCampoSelec" data-error=".errorTxt2" data-url="<?php echo crearUrl("Equipos", "tipoEquipo", "ajaxAgregarCampoPersonalizado", array('noVista' => "noVista")) ?>" class="select2">
+                        <option disabled selected>Seleccione un Campo...</option>
+                        <?php foreach ($campoPer as $personalizado) { ?>
+                            <option value="<?php echo $personalizado['cp_id'] ?>"><?php echo $personalizado['cp_nombre'] ?></option>
+                        <?php } ?>
+                    </select>
+                    <div class="errorTxt2"></div>
+                    <label class="active">&nbsp;(*) Seleccione un Campo personalizado</label>
+
+                    <!--Inicion div que contiene los equipos que se van agregando-->
+                    <div id="campos-agregados">
+
+                    </div>
+
+                    <!--Fin div que contiene los equipos que se van agregando-->
+
                 </div>
                 <div class="col s7">
                     <div id='tablaCampoPersonalizado'>

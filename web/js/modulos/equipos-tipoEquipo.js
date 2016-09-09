@@ -1,25 +1,41 @@
 $(document).ready(function () {
-
-    $("#buscarTipoEquipo").keyup(function () {
-        var tipoEquipo = $("#buscarTipoEquipo").val();
-
-        if (tipoEquipo != "") {
-            $('#pagina').val(1);
-        }
-        var pagina = $('#pagina').val();
+    $("#idCampoSelec").change(function () {
+        var idsCampo = $(this).val(); //Captura id's (El  método .val () se utiliza principalmente para obtener los valores de los elementos de formulario)
         var url = $(this).attr("data-url");
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: "tipoEquipo_id=" + tipoEquipo + "&pagina=" + pagina,
-            success: function (data) {
-                $("#buscarTipoDeEquipo").html(data);
-            }
-        });
+        ajaxAgregarCampoPersonalizado(idsCampo, url); //Muestra los equipos que se han seleccionado
     });
-    //aqui termina el filtro de busqueda de Tipo de Equipo
-    // --------------------------------------------//--------------------
-    $('#buscarTipoEquipo').trigger('keyup');// function_trigger para visualizar las herramientas existentes
+    function ajaxAgregarCampoPersonalizado(idsCampo, url) {
+        $.post(
+                url, {ids: idsCampo},
+        function (data) {
+            var elements = $(data).find('#lista-campos');
+            $("#campos-agregados").html(data);
+            $(".btn-agregar-campos").click(function () {
+                $("#contenedor-campos").show();
+                var urlListar = $(this).attr("data-url");
+                ajaxListarCampoPersonalizado($(this).parent().parent(), urlListar);
+
+            });
+        });
+    }//fin código agregar Campo Personalizado(Tipo equipo)
+
+//inicio código listar Tipo de equipo y su Campo personalizado
+    function ajaxListarCampoPersonalizado(tr, urlListar) {
+
+        var consecutivo = $("#consecutivo").val();
+        $.post(
+                urlListar,
+                {
+                    cp_id: tr.children('#cp_id').html(),
+                    cp_nombre: tr.children('#cp_nombre').html(),
+                    consecutivo: consecutivo
+                },
+        function (data) {
+            $("#contenedor-campos > table").prepend(data);
+            $("#consecutivo").val(parseInt(consecutivo) + 1);
+        }
+        );
+    }//Fin código listar equipo y su medicion
 
 //EMPIEZA EL LISTAR DE CAMPOS PERSONALIZADOS EN EL CREAR TIPO EQUIPO
 

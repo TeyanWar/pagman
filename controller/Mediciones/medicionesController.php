@@ -116,7 +116,7 @@ class MedicionesController {
 
     public function ajaxAgregarEquipo() {
         $idEquipo = $_POST['ids'];
-       // die(print_r("codigo".$idEquipo));
+       //die(print_r("codigo".$idEquipo));
         $equipos = array();
         $objEquipos = new EquiposModel();
         $objMedidor = new MedidoresModel();
