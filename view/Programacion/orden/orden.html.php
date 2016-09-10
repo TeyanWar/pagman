@@ -4,7 +4,8 @@
         <ol class="breadcrumbs">
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
             <li><a href="#">Programacion</a></li>
-            <li class="active">Ordenes Programadas</li>
+            <li><a href="#">Ordenes Programadas</a></li>
+            <li class="active">Crear orden</li>
         </ol>
 
     <div class="col-lg-6">
@@ -188,13 +189,13 @@
         <br>
         <br>
         <div class="row">
-            <div class="input-field col s4 "></div>
-            <div class="input-field col s2">
+            <div class="input-field col s5 "></div>
+            <div class="input-field col s4">
                 <button class="btn teal waves-effect waves-light" type="submit"><i class="mdi-content-add"></i>CREAR OT</button>
             </div>
-            <div class="input-field col s2">
+<!--            <div class="input-field col s2">
                 <a class="btn teal waves-effect waves-light" target="_blank" name="pdf"><i class="mdi-action-get-app"></i>EXPORTAR PDF</a>
-            </div>
+            </div>-->
         </div>
     </form>
 

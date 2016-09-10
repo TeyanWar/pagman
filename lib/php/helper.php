@@ -113,27 +113,27 @@ function explodeFecha($cadena) {
 function setFechaNumeros($dia,$mes,$año) {
     if ($mes == "January,") {
         $mes ="01";
-    }if ($mes == "February,") {
+    }elseif ($mes == "February,") {
         $mes ="02";
-    }if ($mes == "March,") {
+    }elseif ($mes == "March,") {
         $mes ="03";
-    }if ($mes == "April,") {
+    }elseif ($mes == "April,") {
         $mes ="04";
-    }if ($mes == "May,") {
+    }elseif ($mes == "May,") {
         $mes ="05";
-    }if ($mes == "June,") {
+    }elseif ($mes == "June,") {
         $mes ="06";
-    }if ($mes == "July,") {
+    }elseif ($mes == "July,") {
         $mes ="07";
-    }if ($mes == "August,") {
+    }elseif ($mes == "August,") {
         $mes ="08";
-    }if ($mes == "September,") {
+    }elseif ($mes == "September,") {
         $mes ="09";
-    }if ($mes == "October,") {
+    }elseif ($mes == "October,") {
         $mes ="10";
-    }if ($mes == "November,") {
+    }elseif ($mes == "November,") {
         $mes ="11";
-    }if ($mes == "December,") {
+    }elseif ($mes == "December,") {
         $mes ="12";
     }
 
@@ -188,14 +188,12 @@ function programaciones()
 
     $result = "SELECT COUNT(*) AS total "
             . "FROM pag_programacion_equipo,pag_det_programacion,pag_centro,pag_equipo,"
-            . "pag_componente,pag_tipo_trabajo,pag_tarea,pag_tipo_mantenimiento,pag_tipo_medidor "
+            . "pag_tipo_trabajo,pag_tarea,pag_tipo_medidor "
             . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
             . "AND pag_programacion_equipo.cen_id=pag_centro.cen_id "
             . "AND pag_det_programacion.equi_id=pag_equipo.equi_id "
-            . "AND pag_det_programacion.comp_id=pag_componente.comp_id "
             . "AND pag_det_programacion.ttra_id=pag_tipo_trabajo.ttra_id "
             . "AND pag_det_programacion.tar_id=pag_tarea.tar_id "
-            . "AND pag_programacion_equipo.tman_id=pag_tipo_mantenimiento.tman_id "
             . "AND pag_det_programacion.tmed_id=pag_tipo_medidor.tmed_id "
             . "AND pag_det_programacion.est_id=1";
 
