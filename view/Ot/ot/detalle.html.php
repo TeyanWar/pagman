@@ -25,12 +25,16 @@
                 <?php echo $detalleOrdenes['tfa_descripcion'] ?>
         </div>
 
-        <?php if($detalleOrdenes['comp_descripcion'] != "INDEFINIDO"){ ?>
         <div class="col s12 m8 l4">
-                <label style="color: #448aff;"><h6>Componente</h6></label> 
-                <?php echo $detalleOrdenes['comp_descripcion']; ?>
+            <?php foreach ($detcomponentes as $detcomp) {
+                if($detcomp['comp_descripcion'] != "INDEFINIDO"){
+                    echo '<label style="color: #448aff;"><h6>Componentes</h6></label>';
+                    echo $detcomp['comp_descripcion']." "."<br>";
+                }
+            }
+            ?>
         </div>
-        <?php } ?>
+
     </div>
     <div class="row">
         <div class="col s12 m8 l4">
@@ -109,7 +113,7 @@
                 </tbody>
             </table>
             <?php }else{ ?>
-            <h6 style="color: red;">Esta ot no cuenta con insumos</h6>
+            <h6 style="color: #FF0000;">Esta ot no cuenta con insumos</h6>
             <?php } ?>
         </div>
 
@@ -137,7 +141,7 @@
                 </tbody>
             </table>
             <?php }else{ ?>
-                <h6 style="color: red;">Esta ot no cuenta con herramientas</h6>
+                <h6 style="color: #FF0000;">Esta ot no cuenta con herramientas</h6>
             <?php } ?>
         </div>
         

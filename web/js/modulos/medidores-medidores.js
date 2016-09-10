@@ -218,7 +218,7 @@ $(document).ready(function () {
         });
     });
     
-    //-----------vista de asignar tiempo---------------
+    //-----------vista de asignar tiempo para medidores automaticos---------------
     
     $("#tipomed").change(function () {
         var tipomed = $("#tipomed").val();
