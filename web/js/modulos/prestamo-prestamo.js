@@ -4,20 +4,12 @@ $(document).ready(function () {
         rules: {
             pher_observaciones: {
                 required: true
-            },
-            alma_id: "required",
-            jor_id: "required"
+            }
         },
         //mensajes para cada validacion del prestamo de herramientas
         messages: {
             pher_observaciones: {
                 required: "Este campo es obligatorio"
-            },
-            alma_id: {
-                required: "Este campo es obligatorio seleccionar"
-            },
-            jor_id: {
-                required: "Este campo es obligatorio seleccionar"
             }
         },
         errorElement: 'div',

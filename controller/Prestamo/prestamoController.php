@@ -7,11 +7,11 @@ class PrestamoController {
 
     function crear() {
         //aqui empieza el select para el almacenista que este en ese momento registrado
-        $objAlmacenista = new PrestamoModel();
+        $objPersona = new PrestamoModel();
 
-        $sql = "SELECT * FROM pag_almacenista";
+        $sql = "SELECT * FROM pag_persona";
 
-        $almacenista = $objAlmacenista->select($sql);
+        $persona = $objPersona->select($sql);
 
         $objAlmacenista->cerrar();
         //aqui empieza el select para la jornada
@@ -37,7 +37,7 @@ class PrestamoController {
         $cantidadSolicitada = $_POST['cantidadSolicitada'];
 
         $objPrestamo = new PrestamoModel();
-        $insertPrestamo = "INSERT INTO pag_prestamo_herramienta (pher_fecha,alm_id,jor_id,pher_observaciones)"
+        $insertPrestamo = "INSERT INTO pag_prestamo_herramienta (pher_fecha,alma_id,jor_id,pher_observaciones)"
                 . " VALUES('$pher_fecha','$alma_id','$jor_id','$pher_observaciones')";
 //        //-----------------------------------------------------------------------//
 //        //aqui empieza el insert a la tabla detalle del prestamo (pag_det_prestamo_herramienta)
@@ -45,7 +45,7 @@ class PrestamoController {
         $sql = "select MAX(pher_id) as pher_id from pag_prestamo_herramienta";
         $pher_id = $objPrestamo->select($sql);
 
-//        echo ($pher_id[0]['pher_id']);
+        echo ($pher_id[0]['pher_id']);
         if ($insertPrestamo) {
             foreach ($herramientas as $her_id => $detPrestamo) {
                 $insertDetalleprestamo = "INSERT INTO pag_det_prestamo_herramienta (pher_id,her_id,est_id,detph_cant_solicita,detph_cant_entrega) "
@@ -53,10 +53,9 @@ class PrestamoController {
 //                $insertar = $objPrestamo->insertar($insertDetalleprestamo);
             }
             $insertar = $objPrestamo->insertar($insertDetalleprestamo);
-//                dd($insertDetalleprestamo);
             // Cierra la conexion   
             $objPrestamo->cerrar();
-            redirect(crearUrl("prestamo", "prestamo", "listar"));
+//            redirect(crearUrl("prestamo", "prestamo", "listar"));
         }
     }
 

@@ -30,14 +30,12 @@
                   </div>-->
                 <div class="input-field col s6">
                     <label for="Almacenista" class="active"> (*) Seleccione el almacenista: </label>
-                    <select class="error browser-default select2" data-error=".errorTxt2" name="alma_id" id="alma_id"   >
+                    <select class="error browser-default select2" data-error=".errorTxt2" name="alma_id" id="alma_id">
                         <?php
-                        
                         foreach ($almacenista as $trabajador) {
-                          
+
                             echo "<option value=" . $trabajador['alma_id'] . ">" . $trabajador['alma_nombre'] . "</option>";
                         }
-
                         ?>
                     </select>
                     <div class="input-field">
@@ -46,7 +44,7 @@
                 </div>
                 <div class="input-field col s6">
                     <label for="Jornada" class="active"> (*) Seleccione la jornada: </label>
-                    <select class="error browser-default valid select2 required" aria-required="true" aria-invalid="false" data-error=".errorTxt3" name="jor_id" id="jor_id">
+                    <select class="error browser-default select2" data-error=".errorTxt3" name="jor_id" id="jor_id">
                         <?php
                         foreach ($jornada as $jor) {
 
@@ -66,7 +64,7 @@
                     <input name="buscarHerramienta" type="text" id="buscarHerramienta" data-url="<?php echo crearUrl("Prestamo", "prestamo", "buscarHerramientas", array('noVista' => "noVista")) ?>">
                 </div>
             </div>
-            <div style="position: relative;" class="col s9" id="RespuestaHerramienta"></div>
+            <div style="position: absolute;"  class="col s9" id="RespuestaHerramienta"></div>
         </div>
 </div>
 <!-- aqui agrego lo que necesite para el prestamo de herramientas --> 
