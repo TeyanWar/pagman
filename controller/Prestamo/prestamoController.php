@@ -6,6 +6,7 @@ include_once('../model/Herramientas/HerramientasModel.php');
 class PrestamoController {
 
     function crear() {
+        $per_id=$_SESSION['login']['per_id'];
         //aqui empieza el select para el almacenista que este en ese momento registrado
         $objPersona = new PrestamoModel();
 
