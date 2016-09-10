@@ -14,8 +14,8 @@
                 <tr>
                     <td><?php echo $herra['her_nombre'] ?></td>
                     <td>
-                        <a class="btn-floating waves-effect waves-light carherra" data-id="<?php echo $herra['her_id'] ?>"
-                           data-url="<?php echo crearUrl("Ot", "ot", "añadirFher", array('noVista'=>'noVista')) ?>">
+                        <a class="btn-floating waves-effect waves-light codherraOT" data-id="<?php echo $herra['her_id'] ?>"
+                           data-url="<?php echo crearUrl("Ot", "ot", "filaHerramienta", array('noVista'=>'noVista')) ?>">
                             <i class="teal mdi-action-add-shopping-cart"></i>
                         </a>
                     </td>

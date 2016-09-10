@@ -26,13 +26,13 @@
         </div>
 
         <div class="col s12 m8 l4">
-            <?php foreach ($detcomponentes as $detcomp) {
-                if($detcomp['comp_descripcion'] != "INDEFINIDO"){
-                    echo '<label style="color: #448aff;"><h6>Componentes</h6></label>';
-                    echo $detcomp['comp_descripcion']." "."<br>";
-                }
-            }
-            ?>
+        <?php if(!empty($detcomponentes) && $detcomponentes[0][0]!='INDEFINIDO'){ ?>
+                  <label style="color: #448aff;"><h6>Componentes</h6></label>
+                  <?php foreach ($detcomponentes as $detcomp) {
+                           echo $detcomp['comp_descripcion']." "."";
+                        }
+                  ?>
+        <?php } ?>
         </div>
 
     </div>

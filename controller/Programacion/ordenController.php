@@ -197,7 +197,7 @@ class OrdenController {
                         $otid = $objOrden->find($otidsql);
                         //--------------componete----------------
                         $compdet = "INSERT INTO pag_det_componente_ot (ot_id,comp_id) "
-                                . "VALUES ($otid[ot_id],$orden[comp_id])";
+                                . "VALUES ($otid[ot_id],'$orden[comp_id]')";
 
                         $insertcomp = $objOrden->insertar($compdet);
 

@@ -72,7 +72,7 @@ $(document).ready(function () {
         //For custom messages
         messages: {
             "id[]":{
-                required: "Debe elegir al menos una orden programada."
+                required: "Debe seleccionar al menos una orden programada."
             },
             "cantidad[]":{
                 required: "La Cantidad Del Insumo es obligatorio.",

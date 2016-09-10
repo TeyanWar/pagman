@@ -43,7 +43,6 @@
                                 <option value="<?php echo $centro['cen_id']; ?>" ><?php echo $centro['cen_nombre']; ?></option>
                             <?php } ?>
                         </select>
-
                         <div class="errorTxt2"></div>
                     </div>
                     

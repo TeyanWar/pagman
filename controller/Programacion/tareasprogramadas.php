@@ -4,6 +4,7 @@ include_once '../model/Programacion/programacionModel.php';
 
 $objProgramacion = new ProgramacionModel();
 
+//---------------------programaciones automaticas----------------------------------------------
         $sql = "SELECT pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
                 . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
                 . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
@@ -51,6 +52,44 @@ $objProgramacion = new ProgramacionModel();
             }//cerrar if
         }//cerrar foreach
 
+//---------------------------programaciones manuales-------------------------------
 
+        $sqlm = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) AS totalMediciones,"
+                . "pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
+                . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
+                . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
+                . "pag_det_programacion.frecuencia,pag_tipo_medidor.tmed_id,tmed_nombre,tmed_tipo,tmed_tiempo,"
+                . "pag_det_programacion.detprog_id,pag_programacion_equipo.proequi_fecha_inicio,"
+                . "pag_programacion_equipo.proequi_id,proequi_fecha,pag_det_programacion.frec_actual "
+                . "FROM pag_programacion_equipo,pag_det_programacion,pag_control_medidas,pag_centro,pag_equipo,"
+                . "pag_componente,pag_tipo_trabajo,pag_tarea,pag_tipo_mantenimiento,pag_tipo_medidor "
+                . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
+                . "AND pag_programacion_equipo.cen_id=pag_centro.cen_id "
+                . "AND pag_det_programacion.equi_id=pag_equipo.equi_id "
+                . "AND pag_control_medidas.equi_id=pag_equipo.equi_id "
+                . "AND pag_det_programacion.comp_id=pag_componente.comp_id "
+                . "AND pag_det_programacion.ttra_id=pag_tipo_trabajo.ttra_id "
+                . "AND pag_det_programacion.tar_id=pag_tarea.tar_id "
+                . "AND pag_programacion_equipo.tman_id=pag_tipo_mantenimiento.tman_id "
+                . "AND pag_det_programacion.tmed_id=pag_tipo_medidor.tmed_id "
+                . "AND pag_det_programacion.est_id=1 "
+                . "AND (pag_equipo.equi_nombre LIKE "
+                . "'%" . $program . "%' OR pag_tipo_trabajo.ttra_descripcion LIKE "
+                . "'%" . $program . "%' OR pag_tipo_medidor.tmed_nombre LIKE "
+                . "'%" . $program . "%') "
+                . "GROUP BY pag_det_programacion.detprog_id "
+                . "ORDER BY pag_det_programacion.detprog_id DESC";
+
+        $mediciones = $objProgramacion->select($sqlm);
+        
+        //-----------------------------------------------------
+        foreach ($mediciones as $med) {
+            if($med['tmed_tipo']=='Manual'){
+                
+                if($med['frecuencia'] <= $med['totalMediciones']){//hoy
+
+                }
+            }
+        } 
 // Cierra la conexion
 $objProgramacion->cerrar();

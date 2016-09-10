@@ -26,8 +26,8 @@ class OtController {
                 . "'" . $buscar . "%' OR per_nombre LIKE "
                 . "'" . $buscar . "%' OR est_descripcion LIKE "
                 . "'%" . $buscar . "%') "
-                . "GROUP BY pag_equipo.equi_nombre"
-                . "  ORDER BY pag_equipo.equi_id DESC";
+                . "GROUP BY pag_orden_trabajo.ot_id "
+                . "ORDER BY pag_orden_trabajo.ot_id DESC";
 
         $ordenes = $objBuscar->select($sql);
 
@@ -72,7 +72,7 @@ class OtController {
                 . "AND pag_det_componente_ot.ot_id=$id";
 
         $detcomponentes = $objDetalle->select($sqlc);
-        
+
         //----------------------consulta de insumos---------------------
         $sqlin = "SELECT pag_insumo.ins_nombre,pag_insumo.ins_valor,"
                 . "pag_unidad_medida.umed_descripcion,pag_det_insumo_ot.cantidad "
@@ -229,52 +229,90 @@ class OtController {
     }
 
     function postCrear() {
+        
         $centro_formacion = $_POST['ot_centro_formacion'];
         $equipo = $_POST['ot_equipo'];
         $tipoFalla = $_POST['ot_tipo_falla'];
-        $prioridad = $_POST['ot_prioridad'];
-        $encargado = $_POST['ot_encargado'];
         $fechaInicio = $_POST['ot_fecha_inicio'];
         $fechaFin = $_POST['ot_fecha_fin'];
+        $prioridad = $_POST['ot_prioridad'];
+        $encargado = $_POST['ot_encargado'];
         $ayudantes = $_POST['ot_ayudantes'];
-        $ins_id = $_POST['ins_id'];
         $descripcionFalla = $_POST['ot_desc_falla'];
         $descripcionTrabajo = $_POST['ot_desc_trabajo'];
         //Post para insercion a la tabla pag_orden_trabajo
-
-        $componentes = $_POST ['componente'];
-        //POST para insercion a tabla detalle
         
-        if (isset($centro_formacion) && ($equipo) && ($tipoFalla) && ($prioridad) && ($encargado) && ($fechaInicio) && ($fechaFin) && ($ayudantes) && ($ins_id) && ($descripcionFalla) && ($descripcionTrabajo)) {
+        if (isset($centro_formacion) && ($equipo) && ($tipoFalla) && ($fechaInicio) && 
+                ($fechaFin) && ($prioridad) && ($encargado) && ($ayudantes) && 
+                ($descripcionFalla) && ($descripcionTrabajo)) {
 
             $insertOt = "INSERT INTO pag_orden_trabajo(cen_id,"
-                    . "equi_id,tfa_id, ot_prioridad, per_id,"
-                    . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes,ins_id, ot_desc_falla,"
-                    . "ot_desc_trabajo, est_id)"
-                    . "VALUES('$centro_formacion','$equipo', "
-                    . "'$tipoFalla', '$prioridad', '$encargado', '$fechaInicio', "
-                    . "'$fechaFin', '$ayudantes','$ins_id', '$descripcionFalla', '$descripcionTrabajo', '3')";
+                . "equi_id,tfa_id, ot_prioridad, per_id,"
+                . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes, ot_desc_falla,"
+                . "ot_desc_trabajo, est_id)"
+                . "VALUES('$centro_formacion','$equipo', "
+                . "'$tipoFalla', '$prioridad', '$encargado', '$fechaInicio', "
+                . "'$fechaFin', '$ayudantes','$descripcionFalla', '$descripcionTrabajo', '3')";
 
             $objOt = new OtModel();
             $insertar = $objOt->insertar($insertOt);
-        }// if de validacion
-        
-
-        if ($insertar) {
+            // Cierra la conexion
+            $objOt->cerrar();
+            //-------------insercion a tablas detalle--------------
             $objDetalle = new OtModel();
-            foreach ($componentes as $componente) {
-                $insertDetalle = "INSERT INTO pag_detalle_ot (comp_id) VALUES ('$componente')";
-                $insertarDetalle = $objDetalle->insertar($insertDetalle);
+            
+            $idsql = "select max(ot_id) as ot_id from pag_orden_trabajo";
+
+            $otid = $objDetalle->find($idsql);//------capturamos el codigo de la ot
+            //--------------componete----------------
+            if(!empty($_POST['componente'])){
+                $idcomps = $_POST['componente'];
+                foreach ($idcomps as $comp){
+                    $compdet = "INSERT INTO pag_det_componente_ot (ot_id,comp_id) "
+                            . "VALUES ($otid[ot_id],'$comp')";
+
+                    $objDetalle->insertar($compdet);
+                }
+            }
+            //---------------insumos-----------------
+            if(!empty($_POST['codinsumo'])){
+                $codinsumo = $_POST['codinsumo'];
+                $cantins = $_POST['cantins'];
+                $f=0;
+                foreach ($codinsumo as $insumo){
+
+                    $det = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,cantidad) "
+                            . "VALUES ($otid[ot_id],$insumo,$cantins[$f])";
+
+                    $objDetalle->insertar($det);
+
+                    $f++;
+                }
             }
 
+            //---------------herramientas-----------------
+            if(!empty($_POST['codher'])){
+                $codhers = $_POST['codher'];
+                $cantherra = $_POST['cantherra'];
+                $a=0;
+                foreach ($codhers as $herr){
+
+                    $dether = "INSERT INTO pag_det_herramienta_ot (ot_id,her_id,cantidad) "
+                            . "VALUES ($otid[ot_id],'$herr',$cantherra[$a])";
+
+                    $objDetalle->insertar($dether);
+
+                    $a++;
+                }//cerrar foreach
+            }//cerrar if
+            
+            // Cierra la conexion
+            $objDetalle->cerrar();
             echo true;
         } else {
             echo false;
-        }
+        }//cerrar else
 
-        // Cierra la conexion
-        $objOt->cerrar();
-        $objDetalle->cerrar();
     }
 
     function editar($parametros) {
@@ -380,7 +418,7 @@ class OtController {
     
     //-----------------------carritos de compras---------------------
         //------------------------carrito de insumos-----------------------
-    function listarInsumos() {
+    function listainsOT() {
 
         $objOt = new OtModel();
 
@@ -395,10 +433,10 @@ class OtController {
         // Cierra la conexion
         $objOt->cerrar();
 
-        include_once("../view/Ot/ot/listarIns.html.php");
+        include_once("../view/Ot/ot/InsumoOT.html.php");
     }
     
-    function añadirFila() {
+    function FilaInsumo() {
         
         $objOt = new OtModel();
 
@@ -413,11 +451,11 @@ class OtController {
         // Cierra la conexion
         $objOt->cerrar();
         
-        include_once '../view/Ot/ot/filains.html.php';
+        include_once '../view/Ot/ot/FinsOT.html.php';
     }
     
     //------------------------carrito de herramientas-----------------------
-    function listarherramientas() {
+    function listaherOT() {
 
         $objOt = new OtModel();
 
@@ -432,10 +470,10 @@ class OtController {
         // Cierra la conexion
         $objOt->cerrar();
 
-        include_once("../view/Ot/ot/listarHer.html.php");
+        include_once("../view/Ot/ot/HerramientaOT.html.php");
     }
     
-    function añadirFher() {
+    function filaHerramienta() {
         
         $objOt = new OtModel();
 
@@ -449,7 +487,7 @@ class OtController {
         // Cierra la conexion
         $objOt->cerrar();
         
-        include_once '../view/Ot/ot/filaher.html.php';
+        include_once '../view/Ot/ot/FherOT.html.php';
     }
 
 
