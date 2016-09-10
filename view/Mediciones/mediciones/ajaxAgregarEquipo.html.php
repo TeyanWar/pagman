@@ -17,8 +17,7 @@ al igual de los campos a diligenciar: medida actual y fecha
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                    foreach ($equipos as $equipo) { ?>
+                    <?php foreach ($equipos as $equipo) { ?>
                         <tr>
                     <div>
                         <td id="equi_id"><?php echo $equipo['equi_id'] ?></td>
@@ -43,11 +42,11 @@ al igual de los campos a diligenciar: medida actual y fecha
                             <div class="row">
                                 <div class="input-field col s12">
                                     <select name="tipoMedidor" id="tipoMedidor">
-                                        <?php
-                                        foreach ($medidores as $medidor) {;?>
-                                        
-                                        <option value=<?php echo $medidor['tmed_id'] ?>> <?php echo $medidor['tmed_acronimo']?></option>
-                                        <?php } 
+                                        <?php foreach ($medidores as $medidor) {
+; ?>
+
+                                            <option value=<?php echo $medidor['tmed_id'] ?>> <?php echo $medidor['tmed_acronimo'] ?></option>
+                                        <?php }
                                         ?>
                                     </select>
                                     <label for="fecha"></label>

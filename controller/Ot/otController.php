@@ -26,8 +26,8 @@ class OtController {
                 . "'" . $buscar . "%' OR per_nombre LIKE "
                 . "'" . $buscar . "%' OR est_descripcion LIKE "
                 . "'%" . $buscar . "%') "
-                . "GROUP BY pag_equipo.equi_nombre"
-                . "  ORDER BY pag_equipo.equi_id DESC";
+                . "GROUP BY pag_orden_trabajo.ot_id "
+                . "ORDER BY pag_orden_trabajo.ot_id DESC";
 
         $ordenes = $objBuscar->select($sql);
 
@@ -54,20 +54,27 @@ class OtController {
         $objDetalle = new OtModel();
 
         $sql = "SELECT * FROM pag_orden_trabajo,pag_tipo_falla,pag_centro,"
-                . "pag_equipo,pag_persona,pag_estado,pag_tipo_doc,pag_componente "
+                . "pag_equipo,pag_persona,pag_estado,pag_tipo_doc "
                 . "WHERE  pag_orden_trabajo.tfa_id=pag_tipo_falla.tfa_id "
                 . "AND pag_orden_trabajo.cen_id=pag_centro.cen_id "
                 . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
                 . "AND pag_orden_trabajo.per_id=pag_persona.per_id "
                 . "AND pag_orden_trabajo.est_id=pag_estado.est_id "
                 . "AND pag_estado.tdoc_id=pag_tipo_doc.tdoc_id "
-                . "AND pag_orden_trabajo.comp_id=pag_componente.comp_id "
                 . "AND pag_orden_trabajo.estado IS NULL AND ot_id=$id";
 
         $detalleOrdenes = $objDetalle->find($sql);
-        
+        //----------------------consulta de componentes---------------------
+        $sqlc = "SELECT pag_componente.comp_descripcion "
+                . "FROM pag_det_componente_ot,pag_orden_trabajo,pag_componente "
+                . "WHERE pag_det_componente_ot.ot_id=pag_orden_trabajo.ot_id "
+                . "AND pag_det_componente_ot.comp_id=pag_componente.comp_id "
+                . "AND pag_det_componente_ot.ot_id=$id";
+
+        $detcomponentes = $objDetalle->select($sqlc);
+
         //----------------------consulta de insumos---------------------
-        $sql = "SELECT pag_insumo.ins_nombre,pag_insumo.ins_valor,"
+        $sqlin = "SELECT pag_insumo.ins_nombre,pag_insumo.ins_valor,"
                 . "pag_unidad_medida.umed_descripcion,pag_det_insumo_ot.cantidad "
                 . "FROM pag_det_insumo_ot,pag_insumo,pag_unidad_medida,pag_orden_trabajo "
                 . "WHERE pag_det_insumo_ot.ot_id=pag_orden_trabajo.ot_id "
@@ -76,10 +83,10 @@ class OtController {
                 . "AND pag_orden_trabajo.estado IS NULL "
                 . "AND pag_det_insumo_ot.ot_id=$id";
 
-        $detalleinsumos = $objDetalle->select($sql);
+        $detalleinsumos = $objDetalle->select($sqlin);
         
         //----------------------consulta de herramientas---------------------
-        $sql = "SELECT pag_herramienta.her_nombre,pag_herramienta.her_descripcion,"
+        $sqlher = "SELECT pag_herramienta.her_nombre,pag_herramienta.her_descripcion,"
                 . "pag_det_herramienta_ot.cantidad "
                 . "FROM pag_det_herramienta_ot,pag_herramienta,pag_orden_trabajo "
                 . "WHERE pag_det_herramienta_ot.ot_id=pag_orden_trabajo.ot_id "
@@ -87,7 +94,7 @@ class OtController {
                 . "AND pag_orden_trabajo.estado IS NULL "
                 . "AND pag_det_herramienta_ot.ot_id=$id";
 
-        $detalleherramientas = $objDetalle->select($sql);
+        $detalleherramientas = $objDetalle->select($sqlher);
 
         // Cierra la conexion
         $objDetalle->cerrar();
@@ -107,6 +114,23 @@ class OtController {
         $objSubSelect->cerrar();
 
         include_once("../view/Ot/ot/selectEquipo.html.php");
+    }
+    
+    function selectComp() {
+        $id = $_POST['id'];
+
+        $objSubSelect = new OtModel();
+
+        $sqlcomp = "SELECT pag_componente.comp_id,comp_descripcion FROM pag_equipo,pag_equipo_componente,pag_componente "
+                . "WHERE pag_equipo_componente.equi_id=pag_equipo.equi_id "
+                . "AND pag_equipo_componente.comp_id=pag_componente.comp_id "
+                . "AND pag_equipo.equi_id='$id'";
+
+        $selectcomp = $objSubSelect->select($sqlcomp);
+
+        $objSubSelect->cerrar();
+
+        include_once("../view/Ot/ot/selectComponente.html.php");
     }
 
     function crear($parametros=false) {
@@ -140,8 +164,8 @@ class OtController {
 
             $objRegional = new OtModel();
 
-            $sql = "SELECT * FROM pag_regional";
-            $regionales = $objRegional->select($sql);
+//            $sql = "SELECT * FROM pag_regional";
+//            $regionales = $objRegional->select($sql);
             //select Regionales
 
             $objEquipos = new OtModel();
@@ -205,52 +229,90 @@ class OtController {
     }
 
     function postCrear() {
+        
         $centro_formacion = $_POST['ot_centro_formacion'];
         $equipo = $_POST['ot_equipo'];
         $tipoFalla = $_POST['ot_tipo_falla'];
-        $prioridad = $_POST['ot_prioridad'];
-        $encargado = $_POST['ot_encargado'];
         $fechaInicio = $_POST['ot_fecha_inicio'];
         $fechaFin = $_POST['ot_fecha_fin'];
+        $prioridad = $_POST['ot_prioridad'];
+        $encargado = $_POST['ot_encargado'];
         $ayudantes = $_POST['ot_ayudantes'];
-        $ins_id = $_POST['ins_id'];
         $descripcionFalla = $_POST['ot_desc_falla'];
         $descripcionTrabajo = $_POST['ot_desc_trabajo'];
         //Post para insercion a la tabla pag_orden_trabajo
-
-        $componentes = $_POST ['componente'];
-        //POST para insercion a tabla detalle
         
-        if (isset($centro_formacion) && ($equipo) && ($tipoFalla) && ($prioridad) && ($encargado) && ($fechaInicio) && ($fechaFin) && ($ayudantes) && ($ins_id) && ($descripcionFalla) && ($descripcionTrabajo)) {
+        if (isset($centro_formacion) && ($equipo) && ($tipoFalla) && ($fechaInicio) && 
+                ($fechaFin) && ($prioridad) && ($encargado) && ($ayudantes) && 
+                ($descripcionFalla) && ($descripcionTrabajo)) {
 
             $insertOt = "INSERT INTO pag_orden_trabajo(cen_id,"
-                    . "equi_id,tfa_id, ot_prioridad, per_id,"
-                    . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes,ins_id, ot_desc_falla,"
-                    . "ot_desc_trabajo, est_id)"
-                    . "VALUES('$centro_formacion','$equipo', "
-                    . "'$tipoFalla', '$prioridad', '$encargado', '$fechaInicio', "
-                    . "'$fechaFin', '$ayudantes','$ins_id', '$descripcionFalla', '$descripcionTrabajo', '3')";
+                . "equi_id,tfa_id, ot_prioridad, per_id,"
+                . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes, ot_desc_falla,"
+                . "ot_desc_trabajo, est_id)"
+                . "VALUES('$centro_formacion','$equipo', "
+                . "'$tipoFalla', '$prioridad', '$encargado', '$fechaInicio', "
+                . "'$fechaFin', '$ayudantes','$descripcionFalla', '$descripcionTrabajo', '3')";
 
             $objOt = new OtModel();
             $insertar = $objOt->insertar($insertOt);
-        }// if de validacion
-        
-
-        if ($insertar) {
+            // Cierra la conexion
+            $objOt->cerrar();
+            //-------------insercion a tablas detalle--------------
             $objDetalle = new OtModel();
-            foreach ($componentes as $componente) {
-                $insertDetalle = "INSERT INTO pag_detalle_ot (comp_id) VALUES ('$componente')";
-                $insertarDetalle = $objDetalle->insertar($insertDetalle);
+            
+            $idsql = "select max(ot_id) as ot_id from pag_orden_trabajo";
+
+            $otid = $objDetalle->find($idsql);//------capturamos el codigo de la ot
+            //--------------componete----------------
+            if(!empty($_POST['componente'])){
+                $idcomps = $_POST['componente'];
+                foreach ($idcomps as $comp){
+                    $compdet = "INSERT INTO pag_det_componente_ot (ot_id,comp_id) "
+                            . "VALUES ($otid[ot_id],'$comp')";
+
+                    $objDetalle->insertar($compdet);
+                }
+            }
+            //---------------insumos-----------------
+            if(!empty($_POST['codinsumo'])){
+                $codinsumo = $_POST['codinsumo'];
+                $cantins = $_POST['cantins'];
+                $f=0;
+                foreach ($codinsumo as $insumo){
+
+                    $det = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,cantidad) "
+                            . "VALUES ($otid[ot_id],$insumo,$cantins[$f])";
+
+                    $objDetalle->insertar($det);
+
+                    $f++;
+                }
             }
 
+            //---------------herramientas-----------------
+            if(!empty($_POST['codher'])){
+                $codhers = $_POST['codher'];
+                $cantherra = $_POST['cantherra'];
+                $a=0;
+                foreach ($codhers as $herr){
+
+                    $dether = "INSERT INTO pag_det_herramienta_ot (ot_id,her_id,cantidad) "
+                            . "VALUES ($otid[ot_id],'$herr',$cantherra[$a])";
+
+                    $objDetalle->insertar($dether);
+
+                    $a++;
+                }//cerrar foreach
+            }//cerrar if
+            
+            // Cierra la conexion
+            $objDetalle->cerrar();
             echo true;
         } else {
             echo false;
-        }
+        }//cerrar else
 
-        // Cierra la conexion
-        $objOt->cerrar();
-        $objDetalle->cerrar();
     }
 
     function editar($parametros) {
@@ -353,5 +415,80 @@ class OtController {
         
         include_once("../view/Ot/ot/agregar.html.php");
     }
+    
+    //-----------------------carritos de compras---------------------
+        //------------------------carrito de insumos-----------------------
+    function listainsOT() {
+
+        $objOt = new OtModel();
+
+        $insumo = $_POST['insumo'];
+
+        $ins = "SELECT ins_id,ins_nombre FROM pag_insumo "
+                . "WHERE pag_insumo.ins_nombre LIKE '%" . $insumo . "%' "
+                . "ORDER BY pag_insumo.ins_id LIMIT 0,1";
+
+        $insumos = $objOt->select($ins);
+
+        // Cierra la conexion
+        $objOt->cerrar();
+
+        include_once("../view/Ot/ot/InsumoOT.html.php");
+    }
+    
+    function FilaInsumo() {
+        
+        $objOt = new OtModel();
+
+        $id = $_POST['cod'];
+
+        $inf = "SELECT * FROM pag_insumo,pag_unidad_medida "
+                . "WHERE pag_insumo.umed_id=pag_unidad_medida.umed_id "
+                . "AND pag_insumo.ins_id=$id ";
+
+        $insumofila = $objOt->find($inf);
+
+        // Cierra la conexion
+        $objOt->cerrar();
+        
+        include_once '../view/Ot/ot/FinsOT.html.php';
+    }
+    
+    //------------------------carrito de herramientas-----------------------
+    function listaherOT() {
+
+        $objOt = new OtModel();
+
+        $herrami = $_POST['herrami'];
+
+        $sqlher = "SELECT her_id,her_nombre FROM pag_herramienta "
+                . "WHERE pag_herramienta.her_nombre LIKE '%" . $herrami . "%' "
+                . "ORDER BY pag_herramienta.her_id LIMIT 0,1";
+
+        $herramientas = $objOt->select($sqlher);
+
+        // Cierra la conexion
+        $objOt->cerrar();
+
+        include_once("../view/Ot/ot/HerramientaOT.html.php");
+    }
+    
+    function filaHerramienta() {
+        
+        $objOt = new OtModel();
+
+        $idher = $_POST['cod_her'];
+
+        $inher = "SELECT her_id,her_nombre,her_descripcion FROM pag_herramienta "
+                . "WHERE pag_herramienta.her_id='$idher'";
+
+        $herrafila = $objOt->find($inher);
+
+        // Cierra la conexion
+        $objOt->cerrar();
+        
+        include_once '../view/Ot/ot/FherOT.html.php';
+    }
+
 
 }

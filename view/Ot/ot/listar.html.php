@@ -28,7 +28,7 @@
                             <td><?php echo $orden['ot_fecha_creacion'] ?></td>
                             <td><?php echo $orden['equi_nombre'] ?></td>
                             <td><?php echo $orden['est_descripcion'] ?></td>
-                            <td><?php echo $orden['priotra_descripcion'] ?></td>
+                            <td><?php echo $orden['ot_prioridad'] ?></td>
                             
 
                             <?php if ($orden['est_descripcion']=="Cerrada") { ?>

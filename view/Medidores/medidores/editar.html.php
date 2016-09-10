@@ -23,6 +23,19 @@
                 <div class="errorTxt3"></div>
             </div>
         </div>
+        <div class="divider"></div>
+        <div class="row">
+            <div class="col s4">
+                <label style="color: #448aff;"><h6>Tipo Medidor</h6></label> 
+                <?php echo $medidores['tmed_tipo'] ?>
+            </div>
+            <?php if($medidores['tmed_tipo']==='Automatico'){ ?>
+                <div class="col s4">
+                    <label style="color: #448aff;"><h6>Tiempo que equivale</h6></label>
+                    <?php echo $medida['tmed_numt']." ".$medida['tm_nombre'] ?>
+                </div>
+            <?php } ?>
+        </div>
 
         <input type="hidden" name="id" value="<?php echo $medidores['tmed_id'] ?>">
         <!--

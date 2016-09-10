@@ -13,7 +13,6 @@
         </thead>
         <tbody> 
             <?php
-            $count = 1;
             $totalMedida = 0;
             foreach ($detalleMediciones as $detalleMedicion) {
                 $totalMedida = $totalMedida + $detalleMedicion['valor_medicion'];
@@ -21,7 +20,7 @@
                 $fecha = getFecha();
                 ?>
                 <tr>
-                    <td><?php echo $count++; ?></td>
+                    <td><?php echo $paginado->count++ ?></td>
                     <td><?php echo $fecha ?></td>
                     <td><?php echo $detalleMedicion['valor_medicion'] ?></td>
                     <td><?php echo $detalleMedicion['tipo_medida'] ?></td>

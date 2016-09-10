@@ -1,14 +1,28 @@
-<div class="row">
-    <form class="col s12" role="form" action="<?php echo crearUrl("equipos", "tipoEquipo", "postEditar") ?>" method="post">
-        <div class="row">
-            <div class="input-field col s6">
-                <input readonly type="text" id="tequi_id" name="tequi_id" value="<?php echo $tEquipo['tequi_id']; ?>">
-                <label for="tequi_id" class="active">Codigo del Tipo de Equipo:</label>
-            </div>
-            <div class="input-field col s6">
-                <input readonly type="text" id="tequi_descripcion" name="tequi_descripcion" value="<?php echo $tEquipo['tequi_descripcion']; ?>">
-                <label for="tequi_descripcion" class="active">Codigo del Tipo de Equipo:</label>
-            </div>
-        </div>
-    </form>
-</div>
+<center>
+    <h5>
+        Campos Personalizados del Tipo de Equipo: <b><code><?php echo $consultaEquipo['tequi_descripcion']; ?></code></b>
+    </h5>
+</center>
+<table class="striped">
+    <thead>
+        <tr>
+            <th data-field="name">Código del campo</th>
+            <th data-field="price">Nombre/Descripción del campo</th>
+        </tr>
+    </thead>
+    <?php
+//die(print_R($consulta));
+//echo $consultaEquipo['tequi_id'];
+    ?>
+
+    <tbody>
+        <?php foreach ($consulta as $tipoEquipo) { ?>
+            <tr>
+                <?php //die(print_r($tipoEquipo['cp_nombre']));   ?>
+                <td><?php echo $tipoEquipo['cp_id']; ?></td>
+                <td><?php echo $tipoEquipo['cp_nombre']; ?></td>
+                <td>Agregado</td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>

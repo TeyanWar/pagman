@@ -13,8 +13,9 @@ class OrdenController {
         $sql = "SELECT pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
                 . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
                 . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
-                . "pag_det_programacion.frecuencia,pag_tipo_medidor.tmed_id,tmed_nombre,"
-                . "pag_det_programacion.detprog_id,pag_programacion_equipo.proequi_fecha_inicio "
+                . "pag_det_programacion.frecuencia,pag_tipo_medidor.tmed_id,tmed_nombre,tmed_tipo,tmed_tiempo,"
+                . "pag_det_programacion.detprog_id,pag_programacion_equipo.proequi_fecha_inicio,"
+                . "pag_programacion_equipo.proequi_id,proequi_fecha,pag_det_programacion.frec_actual "
                 . "FROM pag_programacion_equipo,pag_det_programacion,pag_centro,pag_equipo,"
                 . "pag_componente,pag_tipo_trabajo,pag_tarea,pag_tipo_mantenimiento,pag_tipo_medidor "
                 . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
@@ -35,17 +36,31 @@ class OrdenController {
         $programaciones = $objOrden->select($sql);
         
         //----------------los de mediciones-----------------------------------------
-        $sqlm = "SELECT pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,"
-                . "pag_tipo_medidor.tmed_id,tmed_nombre,"
-                . "pag_control_medidas.ctrmed_id,ctrmed_medida_actual "
-                . "FROM pag_control_medidas,pag_centro,pag_equipo,pag_tipo_medidor "
-                . "WHERE pag_control_medidas.equi_id=pag_equipo.equi_id "
-                . "AND pag_equipo.cen_id=pag_centro.cen_id "
-                . "AND pag_control_medidas.tmed_id=pag_tipo_medidor.tmed_id "
+        $sqlm = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) AS totalMediciones,"
+                . "pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
+                . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
+                . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
+                . "pag_det_programacion.frecuencia,pag_tipo_medidor.tmed_id,tmed_nombre,tmed_tipo,tmed_tiempo,"
+                . "pag_det_programacion.detprog_id,pag_programacion_equipo.proequi_fecha_inicio,"
+                . "pag_programacion_equipo.proequi_id,proequi_fecha,pag_det_programacion.frec_actual "
+                . "FROM pag_programacion_equipo,pag_det_programacion,pag_control_medidas,pag_centro,pag_equipo,"
+                . "pag_componente,pag_tipo_trabajo,pag_tarea,pag_tipo_mantenimiento,pag_tipo_medidor "
+                . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
+                . "AND pag_programacion_equipo.cen_id=pag_centro.cen_id "
+                . "AND pag_det_programacion.equi_id=pag_equipo.equi_id "
+                . "AND pag_control_medidas.equi_id=pag_equipo.equi_id "
+                . "AND pag_det_programacion.comp_id=pag_componente.comp_id "
+                . "AND pag_det_programacion.ttra_id=pag_tipo_trabajo.ttra_id "
+                . "AND pag_det_programacion.tar_id=pag_tarea.tar_id "
+                . "AND pag_programacion_equipo.tman_id=pag_tipo_mantenimiento.tman_id "
+                . "AND pag_det_programacion.tmed_id=pag_tipo_medidor.tmed_id "
+                . "AND pag_det_programacion.est_id=1 "
                 . "AND (pag_equipo.equi_nombre LIKE "
+                . "'%" . $program . "%' OR pag_tipo_trabajo.ttra_descripcion LIKE "
                 . "'%" . $program . "%' OR pag_tipo_medidor.tmed_nombre LIKE "
                 . "'%" . $program . "%') "
-                . "ORDER BY pag_control_medidas.tmed_id DESC";
+                . "GROUP BY pag_det_programacion.detprog_id "
+                . "ORDER BY pag_det_programacion.detprog_id DESC";
 
         $mediciones = $objOrden->select($sqlm);
 
@@ -127,7 +142,7 @@ class OrdenController {
                 $errores[] = '(*) El campo "Ayudantes" debe contener letras unicamente';
             }
 
-            if (!isset($_POST['id']) && !isset($_POST['me'])) {
+            if (!isset($_POST['id']) or $_POST['id'] == "") {
                 $errores[] = '<strong>(*) Debe elegir al menos una orden programada</strong>';
             }
             //----------------------------------------------
@@ -137,6 +152,7 @@ class OrdenController {
                 //----------------fin validaciones-----------------
             } else {
                 
+                $ids = $_POST['id'];
                 $encargado = $_POST['ot_encargado'];
                 $fechaInicio = $_POST['inicio'];
                 $fechaFin = $_POST['ot_fin'];
@@ -144,148 +160,80 @@ class OrdenController {
                 
                 $objOrden = new OrdenModel();
                 
-                if (isset($encargado) && ($fechaInicio) && ($fechaFin) && ($ayudantes)) {
-                    
+                if (isset($ids) && ($encargado) && ($fechaInicio) && ($fechaFin) && ($ayudantes)) {
 
-                    if(isset($_POST['id'])){
-                        $ids = $_POST['id'];
-                    
-                        foreach ($ids as $id) {
+                    foreach ($ids as $id) {
 
-                            $ins = "SELECT pag_centro.cen_id,pag_equipo.equi_id,pag_componente.comp_id,"
-                                    . "pag_tarea.tar_nombre,pag_det_programacion.detprog_id,"
-                                    . "pag_prioridad_trabajo.priotra_descripcion "
-                                    . "FROM pag_det_programacion,pag_programacion_equipo,pag_centro,pag_equipo,"
-                                    . "pag_tarea,pag_componente,pag_prioridad_trabajo "
-                                    . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
-                                    . "AND pag_programacion_equipo.cen_id=pag_centro.cen_id "
-                                    . "AND pag_det_programacion.equi_id=pag_equipo.equi_id "
-                                    . "AND pag_det_programacion.tar_id=pag_tarea.tar_id "
-                                    . "AND pag_det_programacion.comp_id=pag_componente.comp_id "
-                                    . "AND pag_det_programacion.priotra_id=pag_prioridad_trabajo.priotra_id "
-                                    . "AND pag_det_programacion.detprog_id=$id";
+                        $ins = "SELECT pag_centro.cen_id,pag_equipo.equi_id,pag_componente.comp_id,"
+                                . "pag_tarea.tar_nombre,pag_det_programacion.detprog_id,"
+                                . "pag_prioridad_trabajo.priotra_descripcion "
+                                . "FROM pag_det_programacion,pag_programacion_equipo,pag_centro,pag_equipo,"
+                                . "pag_tarea,pag_componente,pag_prioridad_trabajo "
+                                . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
+                                . "AND pag_programacion_equipo.cen_id=pag_centro.cen_id "
+                                . "AND pag_det_programacion.equi_id=pag_equipo.equi_id "
+                                . "AND pag_det_programacion.tar_id=pag_tarea.tar_id "
+                                . "AND pag_det_programacion.comp_id=pag_componente.comp_id "
+                                . "AND pag_det_programacion.priotra_id=pag_prioridad_trabajo.priotra_id "
+                                . "AND pag_det_programacion.detprog_id=$id";
 
-                            $orden = $objOrden->find($ins);
+                        $orden = $objOrden->find($ins);
 
-                            //--------------------------insercion------------------------------------
+                        //--------------------------insercion------------------------------------
 
-                            $insertOt = "INSERT INTO pag_orden_trabajo(cen_id,"
-                                    . "equi_id,tfa_id, ot_prioridad, per_id,"
-                                    . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes,"
-                                    . "ot_desc_falla,ot_desc_trabajo,comp_id,est_id)"
-                                    . "VALUES($orden[cen_id],'$orden[equi_id]', "
-                                    . "'1', '$orden[priotra_descripcion]', '$encargado', '$fechaInicio', "
-                                    . "'$fechaFin', '$ayudantes','mantenimiento preventivo',"
-                                    . "'$orden[tar_nombre]','$orden[comp_id]','3')";
+                        $insertOt = "INSERT INTO pag_orden_trabajo(cen_id,"
+                                . "equi_id,tfa_id, ot_prioridad, per_id,"
+                                . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes,"
+                                . "ot_desc_falla,ot_desc_trabajo,est_id)"
+                                . "VALUES($orden[cen_id],'$orden[equi_id]', "
+                                . "'1', '$orden[priotra_descripcion]', '$encargado', '$fechaInicio', "
+                                . "'$fechaFin', '$ayudantes','mantenimiento preventivo',"
+                                . "'$orden[tar_nombre]','3')";
 
-                            $insertar = $objOrden->insertar($insertOt);
-                            
-                            $otidsql = "select max(ot_id) as ot_id from pag_orden_trabajo";
+                        $insertar = $objOrden->insertar($insertOt);
 
-                            $otid = $objOrden->find($otidsql);
-                            //---------------insumos-----------------
-                            if(!empty($_POST['idns'])){
-                                $idns = $_POST['idns'];
-                                $cantidades = $_POST['cantidad'];
-                                $i=0;
-                                foreach ($idns as $insid){
+                        $otidsql = "select max(ot_id) as ot_id from pag_orden_trabajo";
 
-                                    $det = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,cantidad) "
-                                            . "VALUES ($otid[ot_id],$insid,$cantidades[$i])";
+                        $otid = $objOrden->find($otidsql);
+                        //--------------componete----------------
+                        $compdet = "INSERT INTO pag_det_componente_ot (ot_id,comp_id) "
+                                . "VALUES ($otid[ot_id],'$orden[comp_id]')";
 
-                                    $insedet = $objOrden->insertar($det);
+                        $insertcomp = $objOrden->insertar($compdet);
 
-                                    $i++;
-                                }
+                        //---------------insumos-----------------
+                        if(!empty($_POST['idns'])){
+                            $idns = $_POST['idns'];
+                            $cantidades = $_POST['cantidad'];
+                            $i=0;
+                            foreach ($idns as $insid){
+
+                                $det = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,cantidad) "
+                                        . "VALUES ($otid[ot_id],$insid,$cantidades[$i])";
+
+                                $insedet = $objOrden->insertar($det);
+
+                                $i++;
                             }
-                            
-                            //---------------herramientas-----------------
-                            if(!empty($_POST['idher'])){
-                                $idher = $_POST['idher'];
-                                $cantidadher = $_POST['cantidadher'];
-                                $x=0;
-                                foreach ($idher as $her){
-
-                                    $dether = "INSERT INTO pag_det_herramienta_ot (ot_id,her_id,cantidad) "
-                                            . "VALUES ($otid[ot_id],'$her',$cantidadher[$x])";
-
-                                    $inseher = $objOrden->insertar($dether);
-
-                                    $x++;
-                                }
-                            }
-                            
-                            
                         }
-                    }
-                    
-                    //------------------------------los de mediciones-------------------------------
-                    if(isset($_POST['me'])){
-                        $idms = $_POST['me'];
-                        
-                        foreach ($idms as $idm) {
 
-                            $inmed = "SELECT pag_centro.cen_id,pag_equipo.equi_id,"
-                                    . "pag_tipo_medidor.tmed_id,tmed_nombre,pag_control_medidas.ctrmed_id "
-                                    . "FROM pag_control_medidas,pag_centro,pag_equipo,pag_tipo_medidor "
-                                    . "WHERE pag_control_medidas.equi_id=pag_equipo.equi_id "
-                                    . "AND pag_equipo.cen_id=pag_centro.cen_id "
-                                    . "AND pag_control_medidas.tmed_id=pag_tipo_medidor.tmed_id "
-                                    . "AND pag_control_medidas.ctrmed_id=$idm";
+                        //---------------herramientas-----------------
+                        if(!empty($_POST['idher'])){
+                            $idher = $_POST['idher'];
+                            $cantidadher = $_POST['cantidadher'];
+                            $x=0;
+                            foreach ($idher as $her){
 
-                            $ormed = $objOrden->find($inmed);
-                            //--------------------------insercion------------------------------------
+                                $dether = "INSERT INTO pag_det_herramienta_ot (ot_id,her_id,cantidad) "
+                                        . "VALUES ($otid[ot_id],'$her',$cantidadher[$x])";
 
-                            $medr = "INSERT INTO pag_orden_trabajo(cen_id,"
-                                    . "equi_id,tfa_id, ot_prioridad, per_id,"
-                                    . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes,"
-                                    . "ot_desc_falla,ot_desc_trabajo,comp_id,est_id)"
-                                    . "VALUES($ormed[cen_id],'$ormed[equi_id]', "
-                                    . "'1', 'Alta', '$encargado', '$fechaInicio', "
-                                    . "'$fechaFin', '$ayudantes','mantenimiento preventivo',"
-                                    . " 'cambio de aceite','9999', '3')";
+                                $inseher = $objOrden->insertar($dether);
 
-                            $insermed = $objOrden->insertar($medr);
-                            
-                            $otidsq = "select max(ot_id) as ot_id from pag_orden_trabajo";
-                            
-                            $otidn = $objOrden->find($otidsq);
-                            //--------------insumos-----------------------
-                            if(!empty($_POST['idns'])){
-                                $idns = $_POST['idns'];
-                                $cantidades = $_POST['cantidad'];
-                                $a=0;
-                                foreach ($idns as $insi){
+                                $x++;
+                            }//cerrar foreach
+                        }//cerrar if
+                    }//cerrar foreach
 
-                                    $dets = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,cantidad) "
-                                            . "VALUES ($otidn[ot_id],$insi,$cantidades[$a])";
-
-                                    $insed = $objOrden->insertar($dets);
-
-                                    $a++;
-                                }
-                            }
-                            
-                            //---------------herramientas-----------------
-                            if(!empty($_POST['idher'])){
-                                $idher = $_POST['idher'];
-                                $cantidadher = $_POST['cantidadher'];
-                                $x=0;
-                                foreach ($idher as $her){
-
-                                    $dether = "INSERT INTO pag_det_herramienta_ot (ot_id,her_id,cantidad) "
-                                            . "VALUES ($otidn[ot_id],'$her',$cantidadher[$x])";
-
-                                    $inseher = $objOrden->insertar($dether);
-
-                                    $x++;
-                                }
-                            }
-                            
-                            
-                        }
-                    }
-                    
                     //Cierra la conexion
                     $objOrden->cerrar();
                 

@@ -71,18 +71,13 @@ $(document).ready(function () {
 
     $("#buscarMed").keyup(function () {
         var Medicion = $("#buscarMed").val();
-        
-        if(Medicion != ""){
-            $('#pagina').val(1);
-        }
-        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "med_id=" + Medicion+"&pagina="+pagina,
+            data: "med_id=" + Medicion,
             success: function (data) {
-                $("#busquedaMediciones").html(data);
+                $("#listadoMediciones").html(data);
             }
         });
     });
@@ -199,8 +194,7 @@ $(document).ready(function () {
             url: url,
             type: "get",
             success: function (data) {
-                $("#modal_detalle_mediciones> .modal-content").html(data);
-
+                $("#editar> .modal-content").html(data);
             }
         });
     });

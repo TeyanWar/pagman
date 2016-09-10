@@ -3,7 +3,8 @@
 
     <form  id="formulario1" class="col s12" data-url="<?php echo crearUrl("Programacion", "programacion", "postEditar", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Programacion", "programacion", "listar") ?>" method="post" novalidate>
         <h5><?php echo $parametros[2]; ?></h5>
-
+        <div class="errorTxt97"></div>
+        <div class="errorTxt98"></div>
         <table class="bordered centered hoverable" >
             <tr>
                 <td>Componente</td>
@@ -21,14 +22,11 @@
                 <tr>
                     <td><input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" name="cod[]"><?php echo $programacion['comp_descripcion'] ?></td>
                     <td><input type="hidden" value="<?php echo $programacion['tar_nombre'] ?>" name="tareas[]"><?php echo $programacion['tar_nombre'] ?></td>
-                    <td><input id="horas" type="text" value="<?php echo $programacion['detprog_duracion_horas'] ?>" name="horas[]" data-error=".errorTxt97"></td> 
-                <div class="errorTxt97"></div>
-                <td><input id="frecuencia"  type="text" value="<?php echo $programacion['frecuencia'] ?>" name="frecuencia[]" data-error=".errorTxt98"></td>
-                <div class="errorTxt98"></div>
-                <td><?php echo $programacion['tmed_nombre'] ?></td>
-                <td><input type="hidden" value="<?php echo $programacion['est_id'] ?>" ><?php echo $programacion['est_descripcion'] ?></td>   
-
-                <td><p><input type="checkbox" name="id[]" id="<?php echo $i ?>" value="<?php echo $programacion['detprog_id'] ?>"> <label for="<?php echo $i ?>"></label></p></td>
+                    <td><input id="horas" type="text" value="<?php echo $programacion['detprog_duracion_horas'] ?>" name="horas[]" data-error=".errorTxt97"></td>
+                    <td><input id="frecuencia"  type="text" value="<?php echo $programacion['frecuencia'] ?>" name="frecuencia[]" data-error=".errorTxt98"></td>
+                    <td><?php echo $programacion['tmed_nombre'] ?></td>
+                    <td><input type="hidden" value="<?php echo $programacion['est_id'] ?>" ><?php echo $programacion['est_descripcion'] ?></td>   
+                    <td><p><input type="checkbox" name="id[]" id="<?php echo $i ?>" value="<?php echo $programacion['detprog_id'] ?>"> <label for="<?php echo $i ?>"></label></p></td>
                 </tr>
 
                 <?php
@@ -69,28 +67,28 @@
                     required: true,
                     digits: true,
                     minlength: 1,
-                    maxlength: 10
+                    maxlength: 2
                 },
                 "frecuencia[]": {
                     required: true,
                     digits: true,
                     minlength: 1,
-                    maxlength: 10
+                    maxlength: 2
                 }
             },
             //For custom messages
             messages: {
                 "horas[]": {
                     required: "La hora debe ser obligatorio.",
-                    digits: "El valor debe ser numerico",
+                    digits: "La hora debe ser numerico",
                     minlength: "Introduzca al menos 1 caracteres",
-                    maxlength: "Solo se permite introducir maximo 10 caracteres"
+                    maxlength: "Solo se permite introducir maximo 2 caracteres"
                 },
                 "frecuencia[]": {
                     required: "La frecuencia es obligatorio.",
-                    digits: "El valor debe ser numerico",
+                    digits: "La frecuencia debe ser numerico",
                     minlength: "Introduzca al menos 1 caracteres",
-                    maxlength: "Solo se permite introducir maximo 10 caracteres"
+                    maxlength: "Solo se permite introducir maximo 2 caracteres"
                 }
             },
             errorElement: 'div',

@@ -10,7 +10,7 @@
                     <li><a href="#">Mediciones</a></li>
                     <li class="active">Crear medici&oacute;n</li>
                 </ol>
-                <!--Fin rastro de miga-->
+                <!--Fin rastro de miga.-->
 
                 <!--Inicio mensaje de campos obligatorios-->
                 <div id="card-alert" class="card teal">
@@ -25,7 +25,7 @@
                 $errores = getErrores();
                 if (!$errores == "") {
                     ?>
-                    <div id="prueba">
+                    <div id="">
                         <div id="card-alert" class="card red">
                             <div class="card-content white-text">
                                 <p><i class="mdi-alert-error"></i> 
