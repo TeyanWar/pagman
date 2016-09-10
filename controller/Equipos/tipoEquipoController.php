@@ -66,13 +66,21 @@ class TipoEquipoController {
         redirect(crearUrl("equipos", "tipoEquipo", "listar"));
     }
 
-    function detalle($parametros = false) {
+    function verDetalle($parametros = false) {
         $objTipoEquipos = new TipoEquipoModel();
 
         $id = $parametros[1];
 
-        $sql = "SELECT * FROM pag_tipo_de_equipo WHERE tequi_id='" . $id . "'";
-        $tEquipo = $objTipoEquipos->find($sql);
+        $sqlEquipo = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='" . $id . "'";
+        $consultaEquipo = $objTipoEquipos->find($sqlEquipo);
+
+
+//die(print_r($id));
+        $sql = "SELECT * FROM pag_tipo_equipo,pag_detalle_tipoEquipo_campoPersonalizado,pag_campos_personalizados "
+                . "WHERE pag_detalle_tipoEquipo_campoPersonalizado.cp_id=pag_campos_personalizados.cp_id AND "
+                . "pag_detalle_tipoEquipo_campoPersonalizado.tequi_id=pag_tipo_equipo.tequi_id AND "
+                . "pag_detalle_tipoEquipo_campoPersonalizado.tequi_id='$id'";
+        $consulta = $objTipoEquipos->select($sql);
 
         // Cierra la conexion
         $objTipoEquipos->cerrar();
@@ -101,7 +109,7 @@ class TipoEquipoController {
 
         $tipoEquipo = $_POST['tipoEquipo_id'];
 
-        $sql = "SELECT * FROM pag_tipo_equipo WHERE tequi_descripcion LIKE '%" . $tipoEquipo . "%' or tequi_descripcion LIKE '%" . $tipoEquipo . "%' ORDER BY tequi_id ASC ";
+        $sql = "SELECT * FROM pag_tipo_equipo WHERE tequi_descripcion LIKE '%" . $tipoEquipo . "%' or tequi_id LIKE '%" . $tipoEquipo . "%'  ORDER BY tequi_descripcion ASC";
         $consultaCampoAjax = $objTipoEquipo->select($sql);
 
         //aqui empieza el paginado       
@@ -166,8 +174,8 @@ class TipoEquipoController {
                 $errores[] = "¡ERROR! El identificador de tipo de equipo <code>" . $campoId['tequi_id'] . "</code> se encuentra registrado";
             }
         }
-        
-        if(!isset($_POST['camposPersonalizados']) or $_POST['camposPersonalizados'] == ""){
+
+        if (!isset($_POST['camposPersonalizados']) or $_POST['camposPersonalizados'] == "") {
             $errores[] = "Por favor, debe de <code>agregar al menos un Campo personalizado</code> a este Tipo de equipo";
         }
 

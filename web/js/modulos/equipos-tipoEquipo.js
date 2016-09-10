@@ -95,8 +95,8 @@ $(document).ready(function () {
 
 
 
-    $("#agregarCampoPer_Tipo_equipo").keyup(function () {
-        var tipoEquipo = $("#agregarCampoPer_Tipo_equipo").val();
+    $("#buscarTipoEquipo").keyup(function () {
+        var tipoEquipo = $("#buscarTipoEquipo").val();
         if (tipoEquipo != "") {
             $('#pagina').val(1);
         }
@@ -107,11 +107,11 @@ $(document).ready(function () {
             type: "POST",
             data: "tipoEquipo_id=" + tipoEquipo + "&pagina=" + pagina,
             success: function (data) {
-                $("#tablaCampoPersonalizado").html(data);
+                $("#buscarTipoDeEquipo").html(data);
             }
         });
     });
-    $('#agregarCampoPer_Tipo_equipo').trigger('keyup'); // function_trigger para visualizar las herramientas existentes
+    $('#buscarTipoEquipo').trigger('keyup'); // function_trigger para visualizar las herramientas existentes
 
 
 //------------------AQUI TERMINA EL LISTAR -----------------------------------------------------
@@ -189,6 +189,19 @@ $(document).ready(function () {
     $(document).on("click", ".remove", function () {
         var id = $(this).attr("data-id");
         $("#row-" + id).remove();
+    });
+
+    $(document).on('click', ".modal-trigger", function () {
+        var url = $(this).attr("data-url");
+        $(".modal-data").html('Cargando ....');
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#modal_detalle_tipoEquipo> .modal-content").html(data);
+
+            }
+        });
     });
 
 });
