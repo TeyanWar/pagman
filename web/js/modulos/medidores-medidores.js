@@ -93,7 +93,6 @@ $(document).ready(function () {
    //Botón para cerrar modales
     $(document).on('click', '.cerrar', function () {
         $(".modal").closeModal();
-        $(".lean-overlay").remove();
     });
    
 //Inicio Validacion de formulario Editar Medidor
@@ -154,10 +153,6 @@ $(document).ready(function () {
      });
 
     
-//     $(document).on('click', ".modal-close", function () {
-//        $(".lean-overlay").remove();
-//     });
-     
      $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
 //        alert(url);
@@ -171,31 +166,6 @@ $(document).ready(function () {
             }
         });
 
-    });
-    
-    $(document).on('click', '.modal-eliminar', function (e) {
-        e.preventDefault();
-        var url = $(this).attr("data-url");
-        var tmed_id = $(this).attr("data-tmed_id");
-        swal({
-            title: "Esta seguro de eliminar el medidor?",
-            text: "La información que estas apunto de eliminar no aparecera en pantalla!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Si, Elimine el Registro!",
-            closeOnConfirm: false},
-        function () {
-            $.ajax({
-                url: url,
-                type: "post",
-                data: {
-                    id: tmed_id
-                }
-            });
-            swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
-            window.location.href = "listar";
-        });
     });
     
 });

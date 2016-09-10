@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
@@ -8,23 +7,11 @@
             <file>file:/C:/xampp/htdocs/pagman/controller/Medidores/medidoresController.php</file>
             <file>file:/C:/xampp/htdocs/pagman/view/Usuarios/roles/listar.html.php</file>
             <file>file:/C:/xampp/htdocs/pagman/view/Medidores/medidores/editar.html.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/web/js/global.js</file>
             <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/medidores-medidores.js</file>
             <file>file:/C:/xampp/htdocs/pagman/view/Medidores/medidores/buscador.html.php</file>
             <file>file:/C:/xampp/htdocs/pagman/pagman.sql</file>
+            <file>file:/C:/xampp/htdocs/pagman/view/Mediciones/mediciones/crear.html.php</file>
         </group>
     </open-files>
 </project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/pagman/view/Mediciones/mediciones/listar.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/controller/Medidores/medidoresController.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/view/Medidores/medidores/editar.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/medidores-medidores.js</file>
-        </group>
-    </open-files>
-</project-private>
->>>>>>> 89a3d36c813c895fb21379f52165036de4d3749d

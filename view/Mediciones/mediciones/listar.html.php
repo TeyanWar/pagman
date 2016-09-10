@@ -1,41 +1,3 @@
-<div class="card-panel">
-    <div class="container">
-        <h5 class="header2">LISTA DE MEDICIONES</h5>
-        <!--Inicio rastro de miga-->
-        <ol class="breadcrumbs">
-            <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
-            <li><a href="#">Mediciones</a></li>
-            <li class="active">Listar mediciones</li>
-        </ol>
-        <!--Fin rastro de miga-->
-
-        <!--Inicio mensaje de campos obligatorios-->
-        <div id="card-alert" class="card teal">
-            <div class="card-content white-text">
-                <p><i class="mdi-action-info-outline"></i> IMPORTANTE : A continuaci&oacute;n podr&aacute; consultar buscar un equipo y consultar su historial de mediciones. </p>
-            </div>
-            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <?php
-            $errores = getErrores();
-            if (!$errores == "") { ?>
-                <div id="prueba">
-                    <div id="card-alert" class="card red">
-                        <div class="card-content white-text">
-                            <p><i class="mdi-alert-error"></i> 
-                            <p><?php echo $errores ?></p>
-                        </div>
-                        <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                </div>
-        <?php } ?>
-
-        <!--Fin mensaje de campos obligatorios-->
-
         <table class="highlight center striped bordered">
             <div class="row">
                 <thead>
@@ -56,14 +18,16 @@
                         <td><?php echo $equipo['equi_nombre'] ?></td>
                         <td>
                             <?php foreach($equipo['tiposMedidores'] as $tipoMedidor){ 
+                                  explodeFecha($tipoMedidor['ultimaMedicion']['ctrmed_fecha']);
+                                  $fecha=  getFecha();
                                 echo "<code><b>".$tipoMedidor['tmed_nombre']."</code></b>: ".$tipoMedidor['ultimaMedicion']['ctrmed_medida_actual']
-                                     ." ".$tipoMedidor['ultimaMedicion']['responsable']." ".$tipoMedidor['ultimaMedicion']['ctrmed_fecha']."<br>"; 
+                                     ." ".$tipoMedidor['ultimaMedicion']['responsable']." ".$fecha."<br>"; 
                             } ?>
                         </td>
                         <td>
                             <?php foreach($equipo['tiposMedidores'] as $tipoMedidor){ ?>
                                 <div class="col s2">
-                                    <span style="font-size: 16px" class="task-cat yellow darken-4"><?php echo $tipoMedidor['totalMediciones']; ?></span>
+                                    <span style="font-size: 16px" class="task-cat yellow darken-4"><?php echo $tipoMedidor['totalMediciones']." ".$tipoMedidor['tmed_nombre']; ?></span>
                                 </div>
                             <?php } ?>
                         </td>
@@ -82,21 +46,21 @@
             </div> 
         </div>
         
-        <?php // $paginado->render() ?>
+        <?php  $paginado->render() ?>
         
     </div>
 </div>
 <script type="text/javascript">
-//    $('.modal-trigger').leanModal({
-//        dismissible: true, // Modal can be dismissed by clicking outside of the modal
-//        opacity: .5, // Opacity of modal background
-//        in_duration: 300, // Transition in duration
-//        out_duration: 200, // Transition out duration
-//        ready: function () {
-//            //alert('Ready'); 
-//        }, // Callback for Modal open
-//        complete: function () {
-//            //alert('Closed'); 
-//        } // Callback for Modal close
-//    });
+    $('.modal-trigger').leanModal({
+        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+        opacity: .5, // Opacity of modal background
+        in_duration: 300, // Transition in duration
+        out_duration: 200, // Transition out duration
+        ready: function () {
+            //alert('Ready'); 
+        }, // Callback for Modal open
+        complete: function () {
+            //alert('Closed'); 
+        } // Callback for Modal close
+    });
 </script>

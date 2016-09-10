@@ -1,14 +1,14 @@
 <div class="col s12 m12 l6">
     <div class="card-panel">
         <h4 class="header">Crear Regional </h4>
-       
+
         <ol class="breadcrumbs">
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
-            <li><a href="<?php  echo crearUrl("localizacion", "regional", "consulta")?>">Listar regional</a></li>
-           
+            <li><a href="<?php echo crearUrl("localizacion", "regional", "consulta") ?>">Listar regional</a></li>
+
             <li class="active">Crear regional </li>
         </ol>
-         <div id="card-alert" class="card teal">
+        <div id="card-alert" class="card teal">
             <div class="card-content white-text">
                 <p><i class="mdi-action-info-outline"></i> IMPORTANTE : Los campos marcados con (*) son obligatorios.</p>
             </div>
@@ -16,9 +16,9 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
-        
-        <?php $error=getErrores(); ?>
-         <?php if (!$error=="") { ?>
+
+        <?php $error = getErrores(); ?>
+        <?php if (!$error == "") { ?>
             <div id="card-alert" class="card red">
                 <div class="card-content white-text">
                     <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
@@ -31,13 +31,17 @@
         <?php } ?>
 
         <form id="formreg" class="col s12" action="<?php echo crearUrl("localizacion", "regional", "postCrear") ?>" method="POST" novalidate>
-            <div class="row">
-                <div class="input-field col s6">
-
+            <div class="row col s2">
+                <div class="input-field col s2" readonly>
+                    <input type="text" class="validate" value="Región" readonly="">
+                    <label for="reg_nombre" class="active">(*)Nombre De La regional </label>
+                </div>
+                <div class="input-field col s8" style="margin-left: -50px;">
                     <input placeholder="Registre el nombre de la regional " id="reg_nombre" name="reg_nombre" type="text" class="validate" data-error=".errorTxt1">
-                    <label  for="reg_nombre" class="active">(*)Nombre De La regional </label>
                     <div class="errorTxt1"></div>
-                    
+                    <span class="help-block">
+                        En este campo puedes crear una Nueva <code>Region</code>, Ejemplo: <code>Andina</code>
+                    </span>
                 </div>    
             </div>
             <div class="row">

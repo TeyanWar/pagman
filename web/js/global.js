@@ -82,7 +82,6 @@ $(document).ready(function(){
         });
     });
     
-    $('#formLoginAjax').ready(function(){$('#username').focus();});
     //Bajar el scroll de menú cuando se selecciona una opción
 //    $(document).on('click','.module_menu',function(){
 //        var elemento=$(this).children("a:first").attr('id');
