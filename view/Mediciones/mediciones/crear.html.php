@@ -10,7 +10,7 @@
                     <li><a href="#">Mediciones</a></li>
                     <li class="active">Crear medici&oacute;n</li>
                 </ol>
-                <!--Fin rastro de miga-->
+                <!--Fin rastro de miga.-->
 
                 <!--Inicio mensaje de campos obligatorios-->
                 <div id="card-alert" class="card teal">
@@ -25,7 +25,7 @@
                 $errores = getErrores();
                 if (!$errores == "") {
                     ?>
-                    <div id="prueba">
+                    <div id="">
                         <div id="card-alert" class="card red">
                             <div class="card-content white-text">
                                 <p><i class="mdi-alert-error"></i> 
@@ -39,6 +39,13 @@
                 <?php } ?>
 
                 <!--Fin mensaje de campos obligatorios-->
+
+                <!--Inicio contenedor mensajes de error-->
+                <div class="card red">
+                    <div id="cont_errors_ajax" class="card-content white-text">
+                    </div>
+                </div>
+                <!--Fin contenedor mensajes de error-->
 
                 <div class="row">
                     <div class="input-field col s6">
@@ -97,8 +104,8 @@
                 <div class="row">
                     <div class="input-field col s7 ">
                         <input data-url="<?php echo crearUrl('mediciones', 'mediciones', 'ajaxGuardarMedidas', array('noVista' => 'noVista')) ?>" data-redirect="<?php echo crearUrl('mediciones', 'mediciones', 'listar') ?>" 
-                               id="btn-guardar-medidas" class="btn waves-effect waves-light teal darken-2 right" type="submit" name="action" value="Registrar medici&oacute;n" />
-
+                               id="btn-guardar-medidas" class="btn waves-effect waves-light teal darken-2 right btn_submit_modal" type="submit" name="action" value="Registrar medici&oacute;n" />
+                                                                
                     </div>
                 </div>
                 <input type="hidden" id="consecutivo" value="0" />

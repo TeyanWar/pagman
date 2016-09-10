@@ -155,7 +155,9 @@ CREATE TABLE `pag_componente` (
 
 INSERT INTO `pag_componente` (`comp_id`, `comp_descripcion`, `estado`) VALUES
 ('1', 'Polea', NULL),
-('2', 'Pi&ntilde;&oacute;n', NULL);
+('2', 'Pi&ntilde;&oacute;n', NULL),
+('3', 'motor', NULL),
+('9999', 'INDEFINIDO', NULL);
 
 -- --------------------------------------------------------
 
@@ -410,7 +412,8 @@ CREATE TABLE `pag_equipo_componente` (
 
 INSERT INTO `pag_equipo_componente` (`equicomp_id`, `comp_id`, `equi_id`, `estado`) VALUES
 (1, '1', '1', NULL),
-(2, '2', '1', NULL);
+(2, '2', '1', NULL),
+(3, '3', 'EP_003', NULL);
 
 -- --------------------------------------------------------
 
@@ -962,7 +965,30 @@ CREATE TABLE `pag_tarea` (
 
 INSERT INTO `pag_tarea` (`tar_id`, `tar_nombre`, `estado`) VALUES
 (1, 'Cambiar piezas', NULL),
-(2, 'Lubricación', NULL);
+(2, 'Lubricacion', NULL),
+(3, 'Limpieza', NULL),
+(4, 'Cambio de aceite', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pag_tiempo_medidor`
+--
+
+CREATE TABLE `pag_tiempo_medidor` (
+  `tm_id` int(11) NOT NULL,
+  `tm_nombre` varchar(45) NOT NULL,
+  `tm_seg` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pag_tiempo_medidor`
+--
+
+INSERT INTO `pag_tiempo_medidor` (`tm_id`, `tm_nombre`, `tm_seg`) VALUES
+(1, 'dias', '86400'),
+(2, 'semana', '604800'),
+(3, 'mes', '2678400');
 
 -- --------------------------------------------------------
 
@@ -1082,6 +1108,13 @@ CREATE TABLE `pag_tipo_mantenimiento` (
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `pag_tipo_mantenimiento`
+--
+
+INSERT INTO `pag_tipo_mantenimiento` (`tman_id`, `tman_descripcion`, `estado`) VALUES
+(1, 'preventivo', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -1099,6 +1132,14 @@ CREATE TABLE `pag_tipo_medidor` (
   `tm_id` int(11) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--
+-- Volcado de datos para la tabla `pag_tipo_medidor`
+--
+
+INSERT INTO `pag_tipo_medidor` (`tmed_id`, `tmed_nombre`, `tmed_descripcion`, `tmed_acronimo`, `tmed_tipo`, `tmed_tiempo`, `tmed_numt`, `tm_id`, `estado`) VALUES
+(9, 'meses', 'meses es un medidor automatico', 'ms', 'Automatico', '2678400', '31', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1118,7 +1159,9 @@ CREATE TABLE `pag_tipo_trabajo` (
 
 INSERT INTO `pag_tipo_trabajo` (`ttra_id`, `ttra_descripcion`, `estado`) VALUES
 (1, 'Hidraulico', NULL),
-(2, 'Limpieza', NULL);
+(2, 'Limpieza', NULL),
+(3, 'Electrico', NULL),
+(4, 'Mecanico', NULL);
 
 -- --------------------------------------------------------
 
@@ -1522,7 +1565,12 @@ ALTER TABLE `pag_control_medidas`
 -- AUTO_INCREMENT de la tabla `pag_departamento`
 --
 ALTER TABLE `pag_departamento`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+--
+-- AUTO_INCREMENT de la tabla `pag_det_componente_ot`
+--
+ALTER TABLE `pag_det_componente_ot`
+  MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_componente_ot`
 --
@@ -1537,12 +1585,12 @@ ALTER TABLE `pag_det_equipo_medidor`
 -- AUTO_INCREMENT de la tabla `pag_det_herramienta_ot`
 --
 ALTER TABLE `pag_det_herramienta_ot`
-  MODIFY `dherot_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dherot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_insumo_ot`
 --
 ALTER TABLE `pag_det_insumo_ot`
-  MODIFY `dinsot_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dinsot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_prestamo_herramienta`
 --
@@ -1552,12 +1600,12 @@ ALTER TABLE `pag_det_prestamo_herramienta`
 -- AUTO_INCREMENT de la tabla `pag_det_programacion`
 --
 ALTER TABLE `pag_det_programacion`
-  MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `pag_equipo_componente`
 --
 ALTER TABLE `pag_equipo_componente`
-  MODIFY `equicomp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `equicomp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `pag_equipo_cp`
 --
@@ -1602,7 +1650,7 @@ ALTER TABLE `pag_modulo`
 -- AUTO_INCREMENT de la tabla `pag_orden_trabajo`
 --
 ALTER TABLE `pag_orden_trabajo`
-  MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `pag_permisos`
 --
@@ -1627,7 +1675,7 @@ ALTER TABLE `pag_programacion_equipo`
 -- AUTO_INCREMENT de la tabla `pag_regional`
 --
 ALTER TABLE `pag_regional`
-  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `pag_rol`
 --
@@ -1637,12 +1685,17 @@ ALTER TABLE `pag_rol`
 -- AUTO_INCREMENT de la tabla `pag_solicitud_servicio`
 --
 ALTER TABLE `pag_solicitud_servicio`
-  MODIFY `sserv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `sserv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT de la tabla `pag_tarea`
 --
 ALTER TABLE `pag_tarea`
-  MODIFY `tar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `pag_tiempo_medidor`
+--
+ALTER TABLE `pag_tiempo_medidor`
+  MODIFY `tm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `pag_tiempo_medidor`
 --
@@ -1672,17 +1725,17 @@ ALTER TABLE `pag_tipo_herramienta`
 -- AUTO_INCREMENT de la tabla `pag_tipo_mantenimiento`
 --
 ALTER TABLE `pag_tipo_mantenimiento`
-  MODIFY `tman_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_medidor`
 --
 ALTER TABLE `pag_tipo_medidor`
-  MODIFY `tmed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tmed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_trabajo`
 --
 ALTER TABLE `pag_tipo_trabajo`
-  MODIFY `ttra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ttra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `pag_unidad_medida`
 --

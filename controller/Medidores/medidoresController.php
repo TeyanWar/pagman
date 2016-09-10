@@ -4,6 +4,23 @@ include_once '../model/Medidores/medidoresModel.php';
 
 class medidoresController {
     
+    function selectTiempo() {
+        $tipomedidor = $_POST['tipomed'];
+        
+        if($tipomedidor==='Automatico'){
+            
+            $objMedidores = new MedidoresModel();
+
+            $sqltm = "SELECT tm_id,tm_nombre FROM pag_tiempo_medidor";
+
+            $tiempo = $objMedidores->select($sqltm);
+
+            $objMedidores->cerrar();
+
+            include_once("../view/Medidores/medidores/medautomatico.html.php");
+        }
+    }
+    
     public function crear(){
         include_once '../view/Medidores/medidores/crear.html.php';
     }
@@ -13,6 +30,7 @@ class medidoresController {
         $errores=array();
         $patronLetras="/^[a-zA-Z_áéíóúñ\s]*$/";
         $patronLetrasNumeros="/^[0-9a-zA-Z ]+$/";
+        $patronNumeros="/[0-9]{1,9}(\.[0-9]{0,2})?$/";
         
         if(!isset($_POST['nombre']) or $_POST['nombre']==""){
             $errores[]="El campo <code><b>nombre</b></code> no puede estar vac&iacute;o";
@@ -43,6 +61,28 @@ class medidoresController {
             $errores[]="En el campo <code><b>descripci&oacute;n</b></code> &uacute;nicamente se admiten letras y numeros";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
         
+        if(!isset($_POST['tipomed']) or $_POST['tipomed']==""){
+            $errores[]="El campo <code><b>Tipo Medidor</b></code> no puede estar vac&iacute;o";
+        }//Valida que el campo Tipo Medidor
+        
+        if(isset($_POST['tipomed']) && !preg_match($patronLetrasNumeros,$_POST['tipomed'])){
+            $errores[]="En el campo <code><b>Tipo Medidor</b></code> &uacute;nicamente se admiten letras y numeros";
+        }//Valida que el campo Tipo Medidor contenga letras &uacute;nicamente
+        
+        if(isset($_POST['tipomed']) && $_POST['tipomed']==="Automatico"){
+            if(!isset($_POST['numerotim']) or $_POST['numerotim']==""){
+                $errores[]="El campo <code><b>Numero</b></code> no puede estar vac&iacute;o";
+            }//Valida que el campo Tipo Medidor
+
+            if(isset($_POST['numerotim']) && !preg_match($patronNumeros,$_POST['numerotim'])){
+                $errores[]="En el campo <code><b>Numero</b></code> &uacute;nicamente se admiten numeros";
+            }//Valida que el campo Tipo Medidor contenga letras &uacute;nicamente
+            
+            if(!isset($_POST['tiempo']) or $_POST['tiempo']==""){
+                $errores[]="El campo <code><b>Tiempo</b></code> no puede estar vac&iacute;o";
+            }//Valida que el campo Tipo Medidor
+        }
+        
         
         if(count($errores)>0){
             setErrores($errores);
@@ -51,16 +91,43 @@ class medidoresController {
             $objMedidores = new MedidoresModel();
             $nombre = $_POST['nombre'];
             $acronimo = $_POST['acronimo'];
-
             $descripcion = $_POST['descripcion'];
-            $objMedidores = new MedidoresModel();
-            $sql = "INSERT INTO pag_tipo_medidor (tmed_nombre, tmed_acronimo, tmed_descripcion,estado)"
-                    . "VALUES ('$nombre',"
-                    . "'$acronimo',"
-                    . "'$descripcion',"
-                    . "null)";
-            $medidores = $objMedidores->insertar($sql);
-            $objMedidores->cerrar();
+            $tmedidor = $_POST['tipomed'];
+            
+            //--------si el medidor es automatico------------------
+            if($tmedidor==='Automatico'){
+                $idtiempo = $_POST['tiempo'];
+                $tnum = $_POST['numerotim'];
+                $objMedidores = new MedidoresModel();
+                    $sqltim = "SELECT tm_id,tm_seg FROM pag_tiempo_medidor WHERE tm_id=$idtiempo";
+                    $tms = $objMedidores->find($sqltim);
+                    $totaltms = $tnum * $tms['tm_seg'];//calculo de tiempo de medidor automatico
+                    
+                    $sql = "INSERT INTO pag_tipo_medidor (tmed_nombre,tmed_acronimo,tmed_descripcion,"
+                        . "tmed_tipo,tmed_tiempo,tmed_numt,tm_id,estado)"
+                        . "VALUES ('$nombre',"
+                        . "'$acronimo',"
+                        . "'$descripcion',"
+                        . "'$tmedidor',"
+                        . "'$totaltms',"
+                        . "'$tnum',"
+                        . "$idtiempo,"
+                        . "null)";
+                    $medidores = $objMedidores->insertar($sql);
+                    
+                $objMedidores->cerrar();
+            }else{
+                $objMedidores = new MedidoresModel();
+                $sql = "INSERT INTO pag_tipo_medidor (tmed_nombre, tmed_acronimo, tmed_descripcion, tmed_tipo,estado)"
+                        . "VALUES ('$nombre',"
+                        . "'$acronimo',"
+                        . "'$descripcion',"
+                        . "'$tmedidor',"
+                        . "null)";
+                $medidores = $objMedidores->insertar($sql);
+                $objMedidores->cerrar();
+            }
+
         }
         
         echo getRespuestaAccion('listar');
@@ -72,6 +139,15 @@ class medidoresController {
         $sql = "SELECT * FROM pag_tipo_medidor WHERE tmed_id = $id";
 
         $medidores = $objMedidores->find($sql);
+        
+        if($medidores['tmed_tipo']=='Automatico'){
+            $mp = "SELECT pag_tipo_medidor.tmed_numt,pag_tiempo_medidor.tm_nombre "
+                . "FROM pag_tipo_medidor,pag_tiempo_medidor "
+                . "WHERE pag_tipo_medidor.tm_id=pag_tiempo_medidor.tm_id "
+                . "AND pag_tipo_medidor.tmed_id=$id";
+
+            $medida = $objMedidores->find($mp);
+        }
 //        die(print_r($medidores));
         $objMedidores->cerrar();
         include_once '../view/Medidores/medidores/editar.html.php';

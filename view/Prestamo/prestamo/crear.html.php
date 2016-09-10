@@ -66,7 +66,7 @@
                     <input name="buscarHerramienta" type="text" id="buscarHerramienta" data-url="<?php echo crearUrl("Prestamo", "prestamo", "buscarHerramientas", array('noVista' => "noVista")) ?>">
                 </div>
             </div>
-            <div style="position: absolute;" class="col s9" id="RespuestaHerramienta"></div>
+            <div style="position: relative;" class="col s9" id="RespuestaHerramienta"></div>
         </div>
 </div>
 <!-- aqui agrego lo que necesite para el prestamo de herramientas --> 

@@ -1,7 +1,7 @@
 <div class="card-panel">
     <div class="container">
         <h5 class="header2">LISTA DE MEDICIONES</h5>
-        <!--Inicio rastro de miga-->
+        <!--Inicio rastro de miga...-->
         <ol class="breadcrumbs">
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
             <li><a href="#">Mediciones</a></li>

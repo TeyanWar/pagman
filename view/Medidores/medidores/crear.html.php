@@ -43,12 +43,31 @@
             </div>
 
             <div class="row">
-
                 <div class="input-field col s12">
                     <textarea id="descripcion" name="descripcion" class="materialize-textarea" length="100" data-error=".errorTxt4" ></textarea>
                     <label for="descripcion">&nbsp;(*) Descripci&oacute;n</label>
                     <div class="errorTxt4"></div>
                 </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s3">
+                    <label>Tipo Medidor</label>
+                    <select class="error browser-default" id="tipomed" name="tipomed" data-url="<?php  echo crearUrl("medidores", "medidores", "selectTiempo", array('noVista'=>"noVista"))?>" data-error=".errorTxt5" >
+                        <option value="" disabled selected>Seleccione</option>
+                        <option value="Automatico">Automatico</option>
+                        <option value="Manual">Manual</option>
+                    </select>
+                    <div class="errorTxt5"></div>
+                </div>
+                
+                <div class="col s9" id="vistatiempo">
+                  <div class="errorTxt7"></div>
+                  <div class="errorTxt8"></div>
+                </div>
+            </div>
+            
+            <div class="row">
                 <div class="col s12">
                     <button class="btn teal waves-effect waves-light right btn_submit_modal" type="submit" name="action" id="enviar"<!--onclick="Materialize.toast('¡Registro exitos!', 4000, 'rounded')"-->
                             Crear

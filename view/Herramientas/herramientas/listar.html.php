@@ -1,30 +1,57 @@
-<div class="row">
-    <div class="card-panel col s12">
-        <ol class="breadcrumbs">
-            <h4 class="header2">Listado de herramientas</h4>
-            <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
-            <li><a href="#">herramientas</a></li>
-            <li class="active">Listado de herramientas</li>
-        </ol>
-        <div id="card-alert" class="card teal">
-            <div class="card-content white-text">
-                <p><i class="mdi-action-info-outline"></i> IMPORTANTE:
-                    Este es el listado de Herramientas, aqui podras consultar las herramientas por Nº de placa &oacute; nombre herramienta .</p>
-            </div>
-            <button type="button" class="close white-text" data- dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div id="right-search" class="row">
-            <form class="col s12">
-                <div class="input-field">
-                    <i class="mdi-action-search prefix"></i>
-                    <input type="text" class="validate" id="buscarHer" name='buscarHer' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Herramientas", "herramientas", "buscador", array('noVista' => "noVista")) ?>" />
-                    <label for="icon_prefix" class="active">buscador de herramientas</label>
-                </div>
-            </form>
-        </div>
+<div class="col s12">
+    <table class="centered striped card-panel">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Fecha ing. her</th>
+                <th>N&uacute;mero de placa</th>
+                <th>Nombre Herramienta</th>
+                <th>Descripci&oacute;n</th>
+                <th>Imagen</th>
+                <th colspan="2">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $count = 1;
+            foreach ($listarHer as $herramienta) {
+                ?>
+                <tr>
+                    <td><?php echo $count++ ?></td>
+                    <td><?php echo $herramienta['her_fecha_ingreso'] ?></td>
+                    <td><?php echo $herramienta['her_id'] ?></td>
+                    <td><?php echo $herramienta['her_nombre'] ?></td>
+                    <td><?php echo $herramienta['her_descripcion'] ?></td>
+                    <td><a class="fancybox" href="<?php echo addLib("media/img/Herramientas/".$herramienta['her_imagen']); ?>"><img src="<?php echo addLib("media/img/Herramientas/".$herramienta['her_imagen']); ?>" width="100" height="100"></a></td>
+                    <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" href="#modalEditar" data-url="<?php echo crearUrl('herramientas', 'herramientas', 'editar', array('noVista' => "noVista", 'id' => $herramienta['her_id'])) ?>"><i class="mdi-content-create small"></i></a></td>
+                    <td><a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" data-her_id="<?php echo $herramienta['her_id'] ?>" data-url="<?php echo crearUrl('herramientas', 'herramientas', 'postEliminar', array('noVista' => 'noVista', 'id' => $herramienta['her_id'])) ?>"><i class="mdi-action-delete small"></i></a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <!--aqui empieza la estructura de mi ventana modal para editar herramientas-->
+    <div id="modalEditar" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 318.246px;">
+        <div class="modal-content" id="model-data"></div>
+<!--        <div class="modal-footer">
+            <a class="waves-effect waves-red btn-flat modal-action">Cancelar</a>
+            <a class="waves-effect waves-green btn-flat modal-action modal-close" href="#">Actualizar</a>
+        </div>-->
     </div>
 </div>
-<div id="buscarHerramienta"></div>
-<?php $paginado->render() ?>
+
+    <?php $paginado->render(); ?>   
+
+<script type="text/javascript">
+    $('.modal-trigger').leanModal({
+        dismissible: false,
+        opacity: .5,
+        in_duration: 300,
+        out_duration: 200,
+        ready: function () {
+
+        },
+        complete: function () {
+
+        }
+    });
+</script>

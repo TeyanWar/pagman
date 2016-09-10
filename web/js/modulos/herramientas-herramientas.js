@@ -76,11 +76,16 @@ $(document).ready(function () {
     //$('#buscarHer').focus();
     $("#buscarHer").keyup(function () {
         var Herramienta = $("#buscarHer").val();
+        
+        if(Herramienta != ""){
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "her_id=" + Herramienta,
+            data: "her_id=" + Herramienta+"&pagina="+pagina,
             success: function (data) {
                 $("#buscarHerramienta").html(data);
             }
@@ -118,11 +123,26 @@ $(document).ready(function () {
     // aqui termina el sweetAlert de herramientas
     //------------------------------------------------------------------------------//
 //efecto para ampliar las imagenes en el listado de herramientas
-    $('.fancybox').fancybox();
+    $('.fancybox').fancybox({
+        width: '75%',
+        height: '75%',
+        openEffect: 'elastic', //'fade', 'elastic'
+        closeEffect: 'elastic',
+        openSpeed: 'normal', //ms, slow, normal, fast (default 250ms)
+        closeSpeed: 'normal',
+        helpers: {
+            title: {
+                type: 'inside' //'float', 'inside', 'outside' or 'over'
+            },
+            overlay: {
+                closeClick: true  // if true, se cierra al hacer click fuera de la imagen
+            }
+        },
+        padding: 11
+    });
 
     //Botón para cerrar modales
     $(document).on('click', '.cerrar', function () {
         $(".modal").closeModal();
     });
-});
-    
+});    
