@@ -993,27 +993,6 @@ INSERT INTO `pag_tiempo_medidor` (`tm_id`, `tm_nombre`, `tm_seg`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `pag_tiempo_medidor`
---
-
-CREATE TABLE `pag_tiempo_medidor` (
-  `tm_id` int(11) NOT NULL,
-  `tm_nombre` varchar(45) NOT NULL,
-  `tm_seg` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `pag_tiempo_medidor`
---
-
-INSERT INTO `pag_tiempo_medidor` (`tm_id`, `tm_nombre`, `tm_seg`) VALUES
-(1, 'dia', '86400'),
-(2, 'semana', '604800'),
-(3, 'mes', '2678400');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `pag_tipo_doc`
 --
 
