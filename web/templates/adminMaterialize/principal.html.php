@@ -12,40 +12,75 @@
                         <div class="card-move-up waves-effect waves-block waves-light">
                             <div class="move-up cyan darken-1">
                                 <div>
-                                    <span class="chart-title white-text">Revenue</span>
-                                    <div class="chart-revenue cyan darken-2 white-text">
-                                        <p class="chart-revenue-total">$4,500.85</p>
-                                        <p class="chart-revenue-per"><i class="mdi-navigation-arrow-drop-up"></i> 21.80 %</p>
-                                    </div>
-                                    <div class="switch chart-revenue-switch right">
-                                        <label class="cyan-text text-lighten-5">
-                                            Month
-                                            <input type="checkbox">
-                                            <span class="lever"></span> Year
-                                        </label>
-                                    </div>
+                                    <span class="chart-title white-text"><h5>MEDICIONES CREADAS ESTE ESTE MES DE &nbsp;<code><?php
+                                                setlocale(LC_ALL, "es_ES");
+                                                echo strftime("%B del %Y");
+                                                ?></code></h5></span>
                                 </div>
-                                <div class="trending-line-chart-wrapper">
-                                    <canvas id="trending-line-chart" height="70"></canvas>
-                                </div>
+                                <?php
+                                // foreach (medicionesCreadas() as $medi) {
+//                                    echo $medi['equi_id'] . "<br>";
+//                                    echo $medi['equi_nombre'];
+                                //}
+                                ?>
                             </div>
                         </div>
                         <div class="card-content">
-                            <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
-                            <div class="col s12 m3 l3">
-                                <div id="doughnut-chart-wrapper">
-                                    <canvas id="doughnut-chart" height="200"></canvas>
-                                    <div class="doughnut-chart-status">4500
-                                        <p class="ultra-small center-align">Sold</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m2 l2">
-                                <ul class="doughnut-chart-legend">
-                                    <li class="mobile ultra-small"><span class="legend-color"></span>Mobile</li>
-                                    <li class="kitchen ultra-small"><span class="legend-color"></span> Kitchen</li>
-                                    <li class="home ultra-small"><span class="legend-color"></span> Home</li>
-                                </ul>
+                            <!--<a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>-->
+                            <div class="col s6 m12 20" style="margin-bottom: -70px;">
+                                <table class="striped">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="id">Codigo del Equipo</th>
+                                            <th data-field="name">Nombre del Equipo</th>
+                                            <th data-field="price">Fecha de la Creacion</th>
+                                            <th data-field="price">Encargado</th>
+                                            <th data-field="price">Fin de la Garantia del Equipo</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <?php
+                                        foreach (medicionesCreadas() as $medi) {
+                                            $arrayFecha = explode("-", $medi['ctrmed_fecha']);
+                                            //die(print_r(date('m')));
+                                            //echo count($arrayFecha);
+                                            if ($arrayFecha[1] == date('m')) {
+                                                ?>
+                                                <tr>
+                                                    <td>
+                                                        <?php echo $medi['equi_id']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $medi['equi_nombre']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $medi['ctrmed_fecha']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $medi['per_nombre']; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        $arrayFechaGarantia = explode('-', $medi['equi_vence_garantia']);
+                                                        if ($medi['equi_vence_garantia'] < date('Y-m-d')) {
+                                                            echo "<code>VENCIDA</code> - " . $medi['equi_vence_garantia'];
+                                                        } else {
+                                                            echo $medi['equi_vence_garantia'];
+                                                        }
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        }
+                                        ?>                             
+                                    </tbody>
+                                </table>
+                                <br>
+                                <a class="btn waves-effect indigo" href="<?php echo crearUrl('Mediciones', 'mediciones', 'listar')?>">VER MÁS</a>
+                                <p style="margin-left: 650px; margin-top: -30px;"><b><font color="Navy">Total Mediciones: <?php echo mediciones(); ?></p></b>
                             </div>
                             <div class="col s12 m5 l6">
                                 <div class="trending-bar-chart-wrapper">
@@ -53,10 +88,9 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">Revenue by Month <i class="mdi-navigation-close right"></i></span>
-                            <table class="responsive-table">
+                            <!--<span class="card-title grey-text text-darken-4">Revenue by Month <i class="mdi-navigation-close right"></i></span>-->
+<!--                            <table class="responsive-table">
                                 <thead>
                                     <tr>
                                         <th data-field="id">ID</th>
@@ -152,10 +186,8 @@
                                         <td>$122,00.00</td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table>-->
                         </div>
-
-
                     </div>
                 </div>
 
@@ -245,7 +277,7 @@
                         <div class="card-content  green white-text">
                             <p class="card-stats-title"><i class="mdi-editor-insert-invitation"></i>Programaciones</p>
                             <h4 class="card-stats-number"><?php echo programaciones(); ?></h4>
-                            
+
                         </div>
                         <div class="card-action  green darken-2">
                             <div id="clients-bar" class="center-align"></div>
@@ -257,7 +289,7 @@
                         <div class="card-content pink lighten-1 white-text">
                             <p class="card-stats-title"><i class="mdi-av-timer"></i>Mediciones</p>
                             <h4 class="card-stats-number"><?php echo mediciones(); ?></h4>
-                            
+
                         </div>
                         <div class="card-action  pink darken-2">
                             <div id="invoice-line" class="center-align"></div>
@@ -269,7 +301,7 @@
                         <div class="card-content blue-grey white-text">
                             <p class="card-stats-title"><i class="mdi-communication-quick-contacts-mail"></i> Solicitudes</p>
                             <h4 class="card-stats-number"><?php echo solicitudes(); ?></h4>
-                            
+
                         </div>
                         <div class="card-action blue-grey darken-2">
                             <div id="profit-tristate" class="center-align"></div>
@@ -281,7 +313,7 @@
                         <div class="card-content purple white-text">
                             <p class="card-stats-title"><i class="mdi-action-assignment"></i>Ordenes de Trabajo</p>
                             <h4 class="card-stats-number"><?php echo ot(); ?></h4>
-                            
+
                         </div>
                         <div class="card-action purple darken-2">
                             <div id="sales-compositebar" class="center-align"></div>

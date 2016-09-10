@@ -6,14 +6,8 @@
         <group/>
 =======
         <group>
-            <file>file:/opt/lampp/htdocs/pagman/view/Equipos/equipos/consulta.html.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/view/Equipos/campoPersonalizado/consulta.html.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/web/js/modulos/equipos-campoPersonalizado.js</file>
-            <file>file:/opt/lampp/htdocs/pagman/web/js/modulos/equipos-equipos.js</file>
-            <file>file:/opt/lampp/htdocs/pagman/controller/Equipos/equiposController.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/controller/Equipos/campoPersonalizadoController.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/view/Equipos/equipos/listar.html.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/view/Equipos/campoPersonalizado/listar.html.php</file>
+            <file>file:/opt/lampp/htdocs/pagman/controller/Equipos/tipoEquipoController.php</file>
+            <file>file:/opt/lampp/htdocs/pagman/view/Equipos/tipoEquipo/listar.html.php</file>
         </group>
 >>>>>>> b481ea23df56ea7231ff4debe78f8d7a6c28c3e5
     </open-files>

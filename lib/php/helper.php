@@ -269,3 +269,20 @@ function ot()
     $numero = $row['total'];
     return $numero;
 }
+
+
+//---------------------Consulta Mediciones Creadas CADA mes------------->
+
+function medicionesCreadas(){
+    
+    $objinicio = new SesionModel();
+    
+    $sql = "SELECT * FROM pag_control_medidas,pag_equipo,pag_persona WHERE "
+            . "pag_control_medidas.equi_id=pag_equipo.equi_id AND "
+            . "pag_control_medidas.per_id=pag_persona.per_id";
+    
+    $consultaMedicion = $objinicio->select($sql);
+    
+    return $consultaMedicion;
+    
+}
