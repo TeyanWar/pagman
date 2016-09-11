@@ -220,7 +220,7 @@
             },
             login: {
                 required: true,
-                minlength: 5,
+                minlength: 3,
                 maxlength: 20
             },
             clave: {
@@ -291,7 +291,7 @@
             },
             login:{
                 required: "El login es obligatorio.",
-                minlength: "Introduzca al menos 5 caracteres",
+                minlength: "Introduzca al menos 3 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
             clave:{
