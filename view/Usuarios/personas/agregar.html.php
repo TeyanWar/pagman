@@ -11,7 +11,7 @@
         </button>
     </div>
 
-    <form id="agregar" class="col s12" action="<?php echo crearUrl("usuarios", "personas", "postAgregaruser")?>" method="post" novalidate>
+    <form id="agregar" class="col s12" data-url="<?php echo crearUrl("Usuarios", "personas", "postAgregaruser", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Usuarios", "usuarios", "listar") ?>" method="post" novalidate>
 
         <div class="row">
 
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <input type="hidden" name="id" value="<?php echo $usuar['per_id'] ?>">
+        <input type="hidden" name="idper" value="<?php echo $usuar['per_id'] ?>">
 
         <div class="row">
             <button name="action" type="submit" class="btn teal waves-effect waves-light right submit_ot animated infinite rubberBand">Registrar

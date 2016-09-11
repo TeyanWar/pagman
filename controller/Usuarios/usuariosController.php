@@ -758,11 +758,11 @@ class UsuariosController
         
         $UsuariosModel = new UsuariosModel();
         
-            $id = $parametros[1];
+            $codver = $parametros[1];
         
             $sql = "SELECT pag_persona.per_tipo "
                     . "FROM pag_persona "
-                    . "WHERE pag_persona.per_id='$id'";
+                    . "WHERE pag_persona.per_id='$codver'";
 
             $comprobar = $UsuariosModel->find($sql);
         
@@ -776,7 +776,7 @@ class UsuariosController
                         . "FROM pag_persona,pag_cargo,pag_departamento,pag_centro "
                         . "WHERE pag_persona.dept_id=pag_departamento.dept_id "
                         . "and pag_persona.car_id=pag_cargo.car_id "
-                        . "and pag_persona.cen_id=pag_centro.cen_id and pag_persona.per_id='$id'";
+                        . "and pag_persona.cen_id=pag_centro.cen_id and pag_persona.per_id='$codver'";
 
                 $per = $UsuariosModel->find($sql);
               
@@ -800,7 +800,7 @@ class UsuariosController
                 . "and pag_usuario.per_id=pag_persona.per_id "
                 . "and pag_persona.dept_id=pag_departamento.dept_id "
                 . "and pag_persona.car_id=pag_cargo.car_id "
-                . "and pag_persona.cen_id=pag_centro.cen_id and pag_persona.per_id='$id'";
+                . "and pag_persona.cen_id=pag_centro.cen_id and pag_persona.per_id='$codver'";
                 
                 $usu = $UsuariosModel->find($sql);
                 

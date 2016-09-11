@@ -5,7 +5,6 @@ $(document).ready(function () {
         e.preventDefault();
         var url = $('#agregar').attr("data-url");
         var redirect = $('#agregar').attr("data-redirect");
-        var error = $('#agregar').attr("action");
         $.ajax({
             type: "POST",
             url: url,
@@ -21,10 +20,6 @@ $(document).ready(function () {
             }
             else {
                 Materialize.toast("<i class= 'material-icons' ></i> Error al registrar.", 3000, 'rounded col red');
-                setTimeout(
-                        function () {
-                            window.location.href = (error);
-                        }, 1000);
             }
         });
     });
