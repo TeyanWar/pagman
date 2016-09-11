@@ -12,7 +12,7 @@
                         <div class="card-move-up waves-effect waves-block waves-light">
                             <div class="move-up cyan darken-1">
                                 <div>
-                                    <span class="chart-title white-text"><h5>MEDICIONES CREADAS ESTE ESTE MES DE &nbsp;<code><?php
+                                    <span class="chart-title white-text"><h5>MEDICIONES CREADAS ESTE MES DE &nbsp;<code><?php
                                                 setlocale(LC_ALL, "es_ES");
                                                 echo strftime("%B del %Y");
                                                 ?></code></h5></span>
@@ -273,7 +273,7 @@
         <div id="card-stats">
             <div class="row">
                 <div class="col s12 m6 l3">
-                    <div class="card">
+                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Programacion', 'programacion', 'listar')?>">
                         <div class="card-content  green white-text">
                             <p class="card-stats-title"><i class="mdi-editor-insert-invitation"></i>Programaciones</p>
                             <h4 class="card-stats-number"><?php echo programaciones(); ?></h4>
@@ -282,10 +282,10 @@
                         <div class="card-action  green darken-2">
                             <div id="clients-bar" class="center-align"></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col s12 m6 l3">
-                    <div class="card">
+                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Mediciones', 'mediciones', 'listar')?>">
                         <div class="card-content pink lighten-1 white-text">
                             <p class="card-stats-title"><i class="mdi-av-timer"></i>Mediciones</p>
                             <h4 class="card-stats-number"><?php echo mediciones(); ?></h4>
@@ -294,10 +294,10 @@
                         <div class="card-action  pink darken-2">
                             <div id="invoice-line" class="center-align"></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col s12 m6 l3">
-                    <div class="card">
+                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Ot', 'solicitudes', 'listar')?>">
                         <div class="card-content blue-grey white-text">
                             <p class="card-stats-title"><i class="mdi-communication-quick-contacts-mail"></i> Solicitudes</p>
                             <h4 class="card-stats-number"><?php echo solicitudes(); ?></h4>
@@ -306,10 +306,10 @@
                         <div class="card-action blue-grey darken-2">
                             <div id="profit-tristate" class="center-align"></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col s12 m6 l3">
-                    <div class="card">
+                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Ot', 'ot', 'listar')?>">
                         <div class="card-content purple white-text">
                             <p class="card-stats-title"><i class="mdi-action-assignment"></i>Ordenes de Trabajo</p>
                             <h4 class="card-stats-number"><?php echo ot(); ?></h4>
@@ -318,12 +318,11 @@
                         <div class="card-action purple darken-2">
                             <div id="sales-compositebar" class="center-align"></div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
         <!--card stats end-->
-
         <!-- //////////////////////////////////////////////////////////////////////////// -->
 
         <!--card widgets start-->
