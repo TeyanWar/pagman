@@ -1,4 +1,4 @@
-<div class="title center"><h5>EDITAR ORDEN DE TRABAJO # <?php echo $editarOt ['ot_id']; ?></h5></div>
+<div class="title center"><h5>Editar orden de trabajo No. <?php echo $editarOt ['ot_id']; ?></h5></div>
 <br>
 <form class="col s12" data-url="
       <?php echo crearUrl("Ot", "ot", "postEditar", array('noVista' => 'noVista')) ?>" 
@@ -16,37 +16,41 @@
             <?php echo $editarOt['ot_fecha_creacion']; ?>
         </div>
         <div class="col s12 m8 l4">
-            <label style="color: #448aff;"><h6>Regional</h6></label> 
-            <?php echo $editarOt['reg_nombre']; ?>
+            <label style="color: #448aff;"><h6>Centro de formaci&oacute;n</h6></label> 
+            <?php echo $editarOt['cen_nombre'] ?>
         </div>
     </div>
 
     <div class=" row">
-        <div class="col s12 m8 l4">
-            <label style="color: #448aff;"><h6>Centro de formaci&oacute;n</h6></label> 
-            <?php echo $editarOt['cen_nombre'] ?>
-        </div>
-        <div class="col s12 m8 l4">
+        <div class="col s4 m4 l4">
             <label style="color: #448aff;"><h6>Equipo</h6></label> 
             <?php echo $editarOt['equi_nombre'] ?>
         </div>
-
-        <div class="col s12 m8 l4">
+        <div class="col s4 m4 l4">
             <label style="color: #448aff;"><h6>Tipo de falla</h6></label> 
             <?php echo $editarOt['tfa_descripcion'] ?>
+        </div>
+        <div class="col s4 m4 l4">
+        <?php if(!empty($detcomponentes) && $detcomponentes[0][0]!='INDEFINIDO'){ ?>
+                  <label style="color: #448aff;"><h6>Componentes</h6></label>
+                  <?php foreach ($detcomponentes as $detcomp) {
+                           echo $detcomp['comp_descripcion']." "."";
+                        }
+                  ?>
+        <?php } ?>
         </div>
     </div>
     <div class="row">
         <div class="col s12 m8 l4">
             <label style="color: #448aff;"><h6>Prioridad</h6></label> 
-            <?php echo $editarOt['priotra_descripcion'] ?>
+            <?php echo $editarOt['ot_prioridad'] ?>
         </div>
         <div class="col s12 m8 l4">
             <label style="color: #448aff;"><h6>Encargado</h6></label> 
             <?php echo $editarOt['per_nombre'] ?>
         </div>
-        <div class="input-field col s12 m4 l4">
-            <label class="active">Estado</label>
+        <div class="col s12 m4 l4">
+            <label class="active" style="color: #448aff;"><h6>Estado</h6></label>
             <select name="est_id" class="browser-default">
                 <option value="" disabled selected>Seleccione</option>
                 <?php foreach ($estados as $estado) { ?>
@@ -91,15 +95,81 @@
             <input id="input_text" name="ayudantes" type="text" length="10" value="<?php echo $editarOt['ot_ayudantes'] ?>"> 
         </div>
     </div>
+    
     <div class="row">
-        <div class="col s12 m8 l8">
-            <label style="color: #448aff;"><h6>Insumo</h6></label> 
-            <input id="input_text" name="ins_id" type="text" length="10" value="<?php echo $editarOt['ins_nombre'] ?>"> 
+        <div class="input-field col s12 m12 l12">
+            <input value="<?php echo $editarOt['ot_observacion'] ?>" id="ot_observacion" type="text" name="ot_observacion" class="validate">
+            <label for="ot_observacion" class="active" style="color: #448aff;"><h6>Observaciones</h6></label>                    
         </div>
     </div>
+    
+    <br>
+    <div class="divider"></div>
+    <br>
     <div class="row">
-        <button name="action" type="submit" class="btn teal waves-effect waves-light submit_editarOt" style="margin-left: 40%;">Guardar
-            <i class="mdi-editor-border-color small left"> </i>
-        </button>
+        
+        <div class="col s6">
+            <label style="color: #448aff;"><h6>INSUMOS</h6></label>
+            <?php if(!empty($detalleinsumos)){ ?>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th data-field="registro">Nombre</th>
+                        <th data-field="name">Unidad Medida</th>
+                        <th data-field="id">Valor</th>
+                        <th data-field="name">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php					
+                    foreach ($detalleinsumos as $detins) {
+                        ?>
+                        <tr>
+                            <td><?php echo $detins['ins_nombre'] ?></td>
+                            <td><?php echo $detins['umed_descripcion'] ?></td>
+                            <td><?php echo $detins['ins_valor'] ?></td>
+                            <td><?php echo $detins['cantidad'] ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <?php }else{ ?>
+            <h6 style="color: #FF0000;">Esta ot no cuenta con insumos</h6>
+            <?php } ?>
+        </div>
+
+        <div class="col s6">
+            <label style="color: #448aff;"><h6>HERRAMIENTAS</h6></label>
+            <?php if(!empty($detalleherramientas)){ ?>
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th data-field="registro">Nombre</th>
+                        <th data-field="name">Descripcion</th>
+                        <th data-field="name">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php					
+                    foreach ($detalleherramientas as $dether) {
+                        ?>
+                        <tr>
+                            <td><?php echo $dether['her_nombre'] ?></td>
+                            <td><?php echo $dether['her_descripcion'] ?></td>
+                            <td><?php echo $dether['cantidad'] ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+            <?php }else{ ?>
+                <h6 style="color: #FF0000;">Esta ot no cuenta con herramientas</h6>
+            <?php } ?>
+        </div>
     </div>
+    <br>
+        <div class="row">
+            <button name="action" type="submit" class="btn teal waves-effect waves-light submit_editarOt" style="margin-left: 40%;">Guardar
+                <i class="mdi-editor-border-color small left"> </i>
+            </button>
+        </div>
 </form>

@@ -321,26 +321,53 @@ class OtController {
 
         $id = $parametros[1];
 
-        $sql = "SELECT * FROM pag_orden_trabajo, pag_tipo_falla, pag_regional, pag_prioridad_trabajo, "
-                . "pag_centro, pag_equipo, pag_persona, pag_insumo,pag_estado,pag_tipo_doc "
+        $sql = "SELECT * FROM pag_orden_trabajo, pag_tipo_falla, pag_centro, "
+                . " pag_equipo, pag_persona, pag_estado,pag_tipo_doc "
                 . "WHERE  pag_orden_trabajo.tfa_id = pag_tipo_falla.tfa_id "
-                . "AND pag_orden_trabajo.ins_id = pag_insumo.ins_id "
+                . "AND pag_orden_trabajo.cen_id = pag_centro.cen_id "
                 . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
                 . "AND pag_orden_trabajo.per_id=pag_persona.per_id "
-                . "AND pag_orden_trabajo.ot_prioridad=pag_prioridad_trabajo.priotra_id "
-                . "AND pag_orden_trabajo.est_id=pag_estado.est_id "
+                . "AND pag_orden_trabajo.est_id=pag_estado.est_id "                
                 . "AND pag_estado.tdoc_id=pag_tipo_doc.tdoc_id "
                 . "AND pag_orden_trabajo.estado IS NULL AND ot_id=$id";
 
         $sql2 = "SELECT * FROM pag_estado where tdoc_id=2";
-
         $estados = $objEditar->select($sql2);
-//        echo "<pre>";
-//        die(print_r($estados));
         $editarOt = $objEditar->find($sql);
-//            echo "<pre>";
-//            die (print_r($editarOt));
-            
+ 
+        //--------------------------- Componentes ------------------------------//
+        
+        $sqlc = "SELECT pag_componente.comp_descripcion "
+                . "FROM pag_det_componente_ot,pag_orden_trabajo,pag_componente "
+                . "WHERE pag_det_componente_ot.ot_id=pag_orden_trabajo.ot_id "
+                . "AND pag_det_componente_ot.comp_id=pag_componente.comp_id "
+                . "AND pag_det_componente_ot.ot_id=$id";
+
+        $detcomponentes = $objEditar->select($sqlc);
+
+        //----------------------consulta de insumos---------------------
+        $sqlin = "SELECT pag_insumo.ins_nombre,pag_insumo.ins_valor,"
+                . "pag_unidad_medida.umed_descripcion,pag_det_insumo_ot.cantidad "
+                . "FROM pag_det_insumo_ot,pag_insumo,pag_unidad_medida,pag_orden_trabajo "
+                . "WHERE pag_det_insumo_ot.ot_id=pag_orden_trabajo.ot_id "
+                . "AND pag_det_insumo_ot.ins_id=pag_insumo.ins_id "
+                . "AND pag_insumo.umed_id=pag_unidad_medida.umed_id "
+                . "AND pag_orden_trabajo.estado IS NULL "
+                . "AND pag_det_insumo_ot.ot_id=$id";
+
+        $detalleinsumos = $objEditar->select($sqlin);
+        
+        //----------------------consulta de herramientas---------------------
+        $sqlher = "SELECT pag_herramienta.her_nombre,pag_herramienta.her_descripcion,"
+                . "pag_det_herramienta_ot.cantidad "
+                . "FROM pag_det_herramienta_ot,pag_herramienta,pag_orden_trabajo "
+                . "WHERE pag_det_herramienta_ot.ot_id=pag_orden_trabajo.ot_id "
+                . "AND pag_det_herramienta_ot.her_id=pag_herramienta.her_id "
+                . "AND pag_orden_trabajo.estado IS NULL "
+                . "AND pag_det_herramienta_ot.ot_id=$id";
+
+        $detalleherramientas = $objEditar->select($sqlher);
+        
         //Cierra la conexion
         $objEditar->cerrar();
 
@@ -351,16 +378,12 @@ class OtController {
 
         $ot_id = $_POST['ot_id'];
         $est_id = $_POST['est_id'];
-        $ayudantes = $_POST['ayudantes'];
-        $ins_id = $_POST['ins_id'];
-        $descripcionFalla = $_POST['ot_desc_falla'];
-        $descripcionTrabajo = $_POST['ot_desc_trabajo'];
-
+        $ot_observacion = $_POST['ot_observacion'];
+        
         $objPostEditar = new OtModel();
 
-        $sql = "UPDATE  pag_orden_trabajo SET  est_id='$est_id', ot_desc_falla ='$descripcionFalla',
-                ot_desc_trabajo ='$descripcionTrabajo',
-                ot_ayudantes ='$ayudantes', ins_id ='$ins_id' WHERE  pag_orden_trabajo.ot_id =$ot_id";
+        $sql = "UPDATE  pag_orden_trabajo SET est_id=$est_id, ot_observacion ='$ot_observacion' "
+                . "WHERE  pag_orden_trabajo.ot_id=$ot_id";
 
         $editarOt = $objPostEditar->update($sql);
 
