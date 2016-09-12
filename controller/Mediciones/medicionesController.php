@@ -56,12 +56,10 @@ class MedicionesController {
 //    }
 
     function detalle($parametros) {
-
+        
         $objDetalle = new MedicionesModel();
         $id = $parametros[1];
         $equi_nombre = $parametros[2];
-//        $sql="SELECT DATE_FORMAT(cm.ctrmed_fecha,'%d/%m/%Y %H:%i:%s') AS fecha, cm.ctrmed_fecha, cm.ctrmed_medida_actual AS valor_medicion, tm.tmed_nombre, 
-//        $sql="SELECT DATE_FORMAT(cm.ctrmed_fecha,'%d-%m-%Y') AS fecha, cm.ctrmed_fecha, cm.ctrmed_medida_actual AS valor_medicion, tm.tmed_nombre, 
         $sql="SELECT cm.ctrmed_fecha AS fecha_medicion, cm.ctrmed_medida_actual AS valor_medicion, tm.tmed_nombre AS tipo_medida, 
                 CONCAT(p.per_nombre,' ',p.per_apellido) AS encargado 
               FROM pag_control_medidas cm, pag_tipo_medidor tm, pag_persona p  
@@ -76,10 +74,9 @@ class MedicionesController {
              * Paginado
              */
             $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-            $url = crearUrl('mediciones', 'mediciones', 'detalle');
+            $url = crearUrl('mediciones', 'mediciones', 'detalle',array('noVista',$id,$equi_nombre));
 
-            $paginado = new Paginado($detalleMediciones, $pagina, $url);
-
+            $paginado = new Paginado($detalleMediciones, $pagina, $url,3);
             $detalleMediciones = $paginado->getDatos();
             /*
              * Fin paginado
@@ -263,22 +260,23 @@ class MedicionesController {
             }
 
             $equipos[$keyEquipo]['tiposMedidores'] = $tiposMedidores;
+        }
             
-             /*
+        /*
          * Paginado
          */
         $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
         $url = crearUrl('mediciones', 'mediciones', 'listar');
         
-        $paginado = new Paginado($equipos[$keyEquipo]['tiposMedidores'], $pagina, $url);
+//        $paginado = new Paginado($equipos[$keyEquipo]['tiposMedidores'], $pagina, $url);
+            $paginado = new Paginado($equipos, $pagina, $url,2);
         
-        $equipos[$keyEquipo]['tiposMedidores'] = $paginado->getDatos();
+        $equipos= $paginado->getDatos();
         /*
          * Fin paginado.
          */
-            
-       }
-        //dd($equipos);
+
+//        dd($equipos[0]);
         $objMediciones->cerrar();
         include_once("../view/Mediciones/mediciones/listar.html.php");
     }

@@ -11,14 +11,16 @@ class Paginado {
     private $url;
     public $count;
 
-    function __construct($datos, $paginaActual = 1, $url) {
+    function __construct($datos, $paginaActual = 1, $url, $porPagina=10) {
 
+        $this->setPorPagina($porPagina);
+        
         $this->setCantidad(count($datos));
 
         $this->setUrl($url);
 
         $this->setPaginaActual($paginaActual);
-
+        
         $offset = ($this->getPaginaActual() * $this->getPorPagina()) - $this->getPorPagina();
 
         $this->count = $offset + 1;
