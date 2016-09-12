@@ -67,8 +67,8 @@
         
         <div class="row">
             <div class="input-field col s12 m12 l12">
-                <input value="<?php echo $registro['sserv_observaciones'] ?>" id="sserv_observaciones" type="text" name="sserv_observaciones" class="validate">
-                <label for="sserv_observaciones" class="active">Observaciones</label>                    
+                <input value="<?php echo $registro['sserv_observacion'] ?>" id="sserv_observacion" type="text" name="sserv_observacion" class="validate">
+                <label for="sserv_observacion" class="active">Observaciones</label>                    
             </div>
         </div>
                 

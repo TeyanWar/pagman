@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/xampp/htdocs/pagman/view/Mediciones/mediciones/ajaxAgregarEquipo.html.php</file>
             <file>file:/C:/xampp/htdocs/pagman/lib/php/PaginadoClass.php</file>
             <file>file:/C:/xampp/htdocs/pagman/controller/Mediciones/medicionesController.php</file>
+=======
+            <file>file:/opt/lampp/htdocs/pagman/view/Equipos/tipoEquipo/editar.html.php</file>
+            <file>file:/opt/lampp/htdocs/pagman/controller/Equipos/tipoEquipoController.php</file>
+>>>>>>> b463e39a57d70c0e71198c0df627ef352c754764
         </group>
     </open-files>
 </project-private>

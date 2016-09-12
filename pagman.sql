@@ -1173,7 +1173,7 @@ INSERT INTO `pag_unidad_medida` (`umed_id`, `umed_descripcion`, `estado`) VALUES
 CREATE TABLE `pag_usuario` (
   `per_id` bigint(20) NOT NULL,
   `usu_usuario` varchar(45) NOT NULL,
-  `usu_clave` varchar(45) NOT NULL,
+  `usu_clave` varchar(200) NOT NULL,
   `usu_estado` varchar(45) NOT NULL,
   `rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

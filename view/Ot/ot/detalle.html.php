@@ -1,5 +1,5 @@
 <div class="orden col s12 m12 l12">
-    <div class="title center"><h5>ORDEN DE TRABAJO # <?php echo $detalleOrdenes['ot_id'];?></h5></div>
+    <div class="title center"><h5>Orden de trabajo No. <?php echo $detalleOrdenes['ot_id'];?></h5></div>
     <br>
     <div class=" row">
         <div class="col s12 m8 l4">
@@ -82,11 +82,18 @@
             <?php echo $detalleOrdenes['ot_ayudantes'] ?>
         </div>
     </div>
+    <div class="row">
+        <?php if($detalleOrdenes['ot_observacion']!=""){ ?>
+            <div class="col s12 m8 l12">
+                <label style="color: #448aff;"><h6>Observaci&oacute;n</h6></label> 
+                <?php echo $detalleOrdenes['ot_observacion'] ?>
+            </div>
+        <?php } ?>
+    </div>
     <br>
     <div class="divider"></div>
     <br>
-    <div class="row">
-        
+    <div class="row">        
         <div class="col s6">
             <label style="color: #448aff;"><h6>INSUMOS</h6></label>
             <?php if(!empty($detalleinsumos)){ ?>

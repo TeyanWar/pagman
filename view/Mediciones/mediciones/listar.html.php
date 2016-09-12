@@ -1,4 +1,4 @@
-        <table class="highlight center striped bordered">
+<table class="highlight center striped bordered">
             <div class="row">
                 <thead>
                 <tr>

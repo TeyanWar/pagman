@@ -30,7 +30,7 @@ class EquiposController {
         $areas = $objArea->select($sql4);
 
         //$sql5 = "select tequi_id, tequi_descripcion from pag_tipo_de_equipo WHERE estado = 0";
-        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_de_equipo";
+        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo";
         $tEquipos = $objT_equipo->select($sql5);
 
         $objPersona->cerrar();
@@ -100,6 +100,7 @@ class EquiposController {
         $objCentro = new EquiposModel();
         $objArea = new EquiposModel();
         $objT_equipo = new EquiposModel();
+        $objMedidores=new EquiposModel();
 
         // Corregir: debe filtrar solo por NULL
         // $sql1 = "Select per_id, per_nombre from pag_persona WHERE estado = NULL ";
@@ -119,14 +120,18 @@ class EquiposController {
         $areas = $objArea->select($sql4);
 
         //$sql5 = "select tequi_id, tequi_descripcion from pag_tipo_de_equipo WHERE estado = 0";
-        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_de_equipo";
+        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo";
         $tEquipos = $objT_equipo->select($sql5);
-
+        
+        $sql6= "SELECT * from pag_tipo_medidor where estado IS NULL";
+        $medidores=$objMedidores->select($sql6);
+        
         $objPersona->cerrar();
         $objEstado->cerrar();
         $objCentro->cerrar();
         $objArea->cerrar();
         $objT_equipo->cerrar();
+        $objMedidores->cerrar();
 
 
 
@@ -215,7 +220,9 @@ class EquiposController {
         if (!isset($_POST['area_id']) or $_POST['area_id'] == "") {
             $errores[] = '(*) El campo "Area" es obligatorio';
         }
-
+        if (!isset($_POST['medidores']) or $_POST['medidores'] == "") {
+            $errores[] = '(*) Añadir los medidores es Obligatorio';
+        }
         if (count($errores) > 0) {
             setErrores($errores);
             redirect(crearUrl("equipos", "equipos", "crear"));
@@ -245,6 +252,7 @@ class EquiposController {
             } else {
                 $rutaydoc = NULL;
             }
+            $objEquipos = new EquiposModel();
 
             $area_id = $_POST['area_id'];
             $tequi_id = $_POST['tequi_id'];
@@ -284,10 +292,18 @@ class EquiposController {
                     . "$area_id,"
                     . "$tequi_id)";
 
-            $objEquipos = new EquiposModel();
-
             $insertar = $objEquipos->insertar($insertEquipos);
 
+            if($insertar){
+                foreach($_POST['medidores'] as $medidor){
+                    $sql="INSERT INTO pag_det_equipo_medidor (equi_id,tmed_id) "
+                            . "values('$equi_id',$medidor)";
+                    $insert=$objEquipos->insertar($sql);
+                }
+            }
+            
+
+            
             // Cierra la conexion
             $objEquipos->cerrar();
 
@@ -359,11 +375,13 @@ class EquiposController {
 
         $paginado = new Paginado($equipos, $pagina, $url);
 
-        $$equipos = $paginado->getDatos();
+        $equipos = $paginado->getDatos();
 
         $objEquipos->cerrar();
 
         include_once("../view/Equipos/equipos/listar.html.php");
     }
+
+
 
 }
