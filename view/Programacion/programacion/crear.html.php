@@ -1,7 +1,7 @@
 <form id="formValid" class="col s12" action="<?php echo crearUrl('programacion', 'programacion', 'crear') ?>" data-url="<?php echo crearUrl("Programacion", "programacion", "postCrear", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Programacion", "programacion", "listar") ?>" method="post" novalidate>
     <div class="card-panel">
         <div class="container">
-             <h4 class="header">Crear nuevo mantenimiento</h4>
+            <h4 class="header">Crear nuevo mantenimiento</h4>
 
             <ol class="breadcrumbs">
                 <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
@@ -46,24 +46,22 @@
                         <div class="errorTxt2"></div>
                     </div>
                     
-                    <div class="input-field col s1">
-                        <i class="mdi-action-search  small" > </i>
-                    </div>
-                    <div class="input-field col s7">
+                    <div class="input-field col s8">
+                        <i class="mdi-action-search prefix"></i>
                         <input type="text" id="equipo"  data-url="<?php echo crearUrl('Programacion', 'programacion', 'listarEquipo', array('noVista' => "noVista")) ?>">
                         <label form="equipo">Equipos</label>
                         <div id="conte" class="conte" style="z-index: 4; position: absolute; width: 90%;">
 
                         </div>
-                    </div>               
+                    </div>
                 </div>   
                 <div class="row">
-                    <div class=" col s3">
+                    <div class=" col s2">
                         <label for="fecha">(*) Fecha Registro Programacion</label>
                         <input readonly="" type="text"class="validate" value="<?php echo date('d-m-Y'); ?>" >
                     </div>
 
-                    <div class=" col s3">
+                    <div class=" col s2">
                         <label for="inicio">(*) Fecha Inicio Programacion</label>
                         <input id="inicio" type="date" class="datepicker" required="true" name="inicio" data-error=".errorTxt4">
                         <div class="errorTxt4"></div>
