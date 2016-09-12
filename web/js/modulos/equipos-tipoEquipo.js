@@ -203,5 +203,17 @@ $(document).ready(function () {
             }
         });
     });
+    $(document).on('click', ".modal-trigger", function () {
+        var url = $(this).attr("data-url");
+        $(".modal-data").html('Cargando ....');
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#modal_editar_tipoEquipo> .modal-content").html(data);
+
+            }
+        });
+    });
 
 });

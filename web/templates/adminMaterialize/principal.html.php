@@ -77,10 +77,21 @@
                                         }
                                         ?>                             
                                     </tbody>
+
                                 </table>
                                 <br>
-                                <a class="btn waves-effect indigo" href="<?php echo crearUrl('Mediciones', 'mediciones', 'listar')?>">VER MÁS</a>
-                                <p style="margin-left: 650px; margin-top: -30px;"><b><font color="Navy">Total Mediciones: <?php echo mediciones(); ?></p></b>
+                                <center>
+                                </center>
+                                <div class="col s12 m5 16">
+                                    <?php if (medicionesCreadas() == false) { ?>
+                                        <a class="btn waves-effect indigo" href="<?php echo crearUrl('Mediciones', 'mediciones', 'crear') ?>">CREAR MEDICION</a>
+                                    <?php } ?>
+                                </div>
+                                <div class="col s12 m5 16">
+                                    <?php if (medicionesCreadas() == true) { ?>
+                                        <a class="btn waves-effect indigo" href="<?php echo crearUrl('Mediciones', 'mediciones', 'listar') ?>">VER MÁS</a>
+                                    <?php } ?>
+                                </div>
                             </div>
                             <div class="col s12 m5 l6">
                                 <div class="trending-bar-chart-wrapper">
@@ -273,7 +284,7 @@
         <div id="card-stats">
             <div class="row">
                 <div class="col s12 m6 l3">
-                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Programacion', 'programacion', 'listar')?>">
+                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Programacion', 'programacion', 'listar') ?>">
                         <div class="card-content  green white-text">
                             <p class="card-stats-title"><i class="mdi-editor-insert-invitation"></i>Programaciones</p>
                             <h4 class="card-stats-number"><?php echo programaciones(); ?></h4>
@@ -285,7 +296,7 @@
                     </a>
                 </div>
                 <div class="col s12 m6 l3">
-                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Mediciones', 'mediciones', 'listar')?>">
+                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Mediciones', 'mediciones', 'listar') ?>">
                         <div class="card-content pink lighten-1 white-text">
                             <p class="card-stats-title"><i class="mdi-av-timer"></i>Mediciones</p>
                             <h4 class="card-stats-number"><?php echo mediciones(); ?></h4>
@@ -297,7 +308,7 @@
                     </a>
                 </div>
                 <div class="col s12 m6 l3">
-                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Ot', 'solicitudes', 'listar')?>">
+                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Ot', 'solicitudes', 'listar') ?>">
                         <div class="card-content blue-grey white-text">
                             <p class="card-stats-title"><i class="mdi-communication-quick-contacts-mail"></i> Solicitudes</p>
                             <h4 class="card-stats-number"><?php echo solicitudes(); ?></h4>
@@ -309,7 +320,7 @@
                     </a>
                 </div>
                 <div class="col s12 m6 l3">
-                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Ot', 'ot', 'listar')?>">
+                    <a class="card hoverable waves-block" href="<?php echo crearUrl('Ot', 'ot', 'listar') ?>">
                         <div class="card-content purple white-text">
                             <p class="card-stats-title"><i class="mdi-action-assignment"></i>Ordenes de Trabajo</p>
                             <h4 class="card-stats-number"><?php echo ot(); ?></h4>

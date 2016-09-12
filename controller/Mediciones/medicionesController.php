@@ -143,7 +143,7 @@ class MedicionesController {
         $tipoMedidor = $_POST['tipo_medidor'];
         $consecutivo = $_POST['consecutivo'];
 
-        $sql = "Select * from pag_tipo_medidor";
+        $sql = "select * from pag_tipo_medidor";
 
         $medidores = $objMedidores->select($sql);
 

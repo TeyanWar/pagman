@@ -1,4 +1,4 @@
-<center><h5>EDITAR TIPO DE EQUIPO CON CÓDIGO <code><?php echo $tEquipo['tequi_id']; ?></code></h5></center><br>
+<center><h5>EDITAR CAMPO PERSONALIZADO Código <code><?php echo $consulta['cp_id']; ?></code></h5></center><br>
 </div>
 <?php
 $miserrores = getErrores();
@@ -13,11 +13,11 @@ if (!$miserrores == "") {
     </div>
 <?php }
 ?>
-<form class="col s12" id="formEditarCamposPersonalizados" action="<?php echo crearUrl("Equipos", "tipoEquipo", "postEditar") ?>" method="POST">
+<form class="col s12" id="formEditarCamposPersonalizados" action="<?php echo crearUrl("Equipos", "campoPersonalizado", "postEditar") ?>" method="POST">
     <div class="row">
         <div class="input-field col s12">
-            <input type="text" id="tipoEquipoNombre" data-error=".errorTxt2" name="tipoEquipoNombre" class="validate" value="<?php echo $tEquipo['tequi_descripcion']; ?>">
-            <label for="tipoEquipoNombre" class="active" >(*)Nombre Tipo de Equipo:</label>
+            <input type="text" id="nombreCP" data-error=".errorTxt2" name="nombreCP" class="validate" value="<?php echo $consulta['cp_nombre']; ?>">
+            <label for="nombreCP" class="active" >(*)Nombre campo personalizado:</label>
             <div class="errorTxt2"></div>
         </div>
     </div>

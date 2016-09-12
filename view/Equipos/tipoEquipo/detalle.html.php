@@ -21,7 +21,6 @@
                 <?php //die(print_r($tipoEquipo['cp_nombre']));   ?>
                 <td><?php echo $tipoEquipo['cp_id']; ?></td>
                 <td><?php echo $tipoEquipo['cp_nombre']; ?></td>
-                <td>Agregado</td>
             </tr>
         <?php } ?>
     </tbody>

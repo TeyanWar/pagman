@@ -36,10 +36,12 @@ class TipoEquipoController {
         $objTipoEquipos = new TipoEquipoModel();
 
         $id = $parametros[1];
-
-        $sql = "SELECT * FROM pag_tipo_de_equipo WHERE tequi_id='" . $id . "'";
+        //die(print_r($id));
+        $sql = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='".$id."'";
+        //die(print_r($sql));
         $tEquipo = $objTipoEquipos->find($sql);
-
+        
+        $sqlCP = "select * from pag_campos_personalizados WHERE ";
         // Cierra la conexion
         $objTipoEquipos->cerrar();
 
