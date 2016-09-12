@@ -43,6 +43,8 @@
 
                                         <?php
                                         foreach (medicionesCreadas() as $medi) {
+                                            explodeFecha($medi['ctrmed_fecha']);
+                                            $fechaCreacion=  getFecha();
                                             $arrayFecha = explode("-", $medi['ctrmed_fecha']);
                                             //die(print_r(date('m')));
                                             //echo count($arrayFecha);
@@ -56,7 +58,7 @@
                                                         <?php echo $medi['equi_nombre']; ?>
                                                     </td>
                                                     <td>
-                                                        <?php echo $medi['ctrmed_fecha']; ?>
+                                                        <?php echo $fechaCreacion; ?>
                                                     </td>
                                                     <td>
                                                         <?php echo $medi['per_nombre']; ?>
@@ -64,10 +66,12 @@
                                                     <td>
                                                         <?php
                                                         $arrayFechaGarantia = explode('-', $medi['equi_vence_garantia']);
+                                                        explodeFecha($medi['equi_vence_garantia']);
+                                                        $fechaGarantia=  getFecha();
                                                         if ($medi['equi_vence_garantia'] < date('Y-m-d')) {
-                                                            echo "<code>VENCIDA</code> - " . $medi['equi_vence_garantia'];
+                                                            echo "<code>VENCIDA</code> - " . $fechaGarantia;
                                                         } else {
-                                                            echo $medi['equi_vence_garantia'];
+                                                            echo $fechaGarantia;
                                                         }
                                                         ?>
                                                     </td>

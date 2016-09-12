@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col s12 m12 g12">
-        <table class="striped hoverable centered">
+        <table class="striped centered">
             <thead>
                 <tr>
                     <th>#</th>

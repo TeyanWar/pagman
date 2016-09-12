@@ -1,5 +1,4 @@
-<center><h5>EDITAR TIPO DE EQUIPO CON CÓDIGO <code><?php echo $tEquipo['tequi_id']; ?></code></h5></center><br>
-</div>
+<center><h5>EDITAR TIPO DE EQUIPO </h5></center><br>
 <?php
 $miserrores = getErrores();
 if (!$miserrores == "") {
@@ -15,7 +14,12 @@ if (!$miserrores == "") {
 ?>
 <form class="col s12" id="formEditarCamposPersonalizados" action="<?php echo crearUrl("Equipos", "tipoEquipo", "postEditar") ?>" method="POST">
     <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s6">
+            <input type="text" id="tipoEquipoNombre" data-error=".errorTxt2" name="tipoEquipoNombre" class="validate" value="<?php echo $tEquipo['tequi_id']; ?>">
+            <label for="tipoEquipoNombre" class="active" >(*)Código Tipo de Equipo:</label>
+            <div class="errorTxt2"></div>
+        </div>
+        <div class="input-field col s6">
             <input type="text" id="tipoEquipoNombre" data-error=".errorTxt2" name="tipoEquipoNombre" class="validate" value="<?php echo $tEquipo['tequi_descripcion']; ?>">
             <label for="tipoEquipoNombre" class="active" >(*)Nombre Tipo de Equipo:</label>
             <div class="errorTxt2"></div>
@@ -29,7 +33,7 @@ if (!$miserrores == "") {
         </div>
     </div>
 
-            <input type="hidden" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" value="<?php echo $consulta['cp_id']; ?>">
+    <input type="hidden" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" value="<?php echo $consulta['cp_id']; ?>">
 
 </form>
 <script>
