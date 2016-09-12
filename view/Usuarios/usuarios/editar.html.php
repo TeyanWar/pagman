@@ -12,10 +12,9 @@
             </div>
 
             <div class="col s4">
-                <label>(*) Clave</label>
-                <input id="clave" type="text" class="validate" length="30" name="clave" value="<?php echo $usu['usu_clave'] ?>" data-error=".errorTxt32">
+                <label>Clave (opcional)</label>
+                <input id="clave" type="text" class="validate" length="30" name="clave" data-error=".errorTxt32">
                 <div class="errorTxt32"></div>
-
             </div>
 
             <div class="col s4">
@@ -157,7 +156,7 @@
 
         <div class="row">
             <div class="col s4">
-                <label>(*) Perfil</label>
+                <label>(*) Rol</label>
                 <select id="perfil" class="error browser-default select2" name="perfil" data-error=".errorTxt45">
                     <option value="" disabled selected>-Seleccione perfil-</option>
                     <?php 
@@ -205,6 +204,11 @@
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
     
+    //----------------------expresion para validar solo numeros y letras----------------
+    jQuery.validator.addMethod("password", function(value, element) {
+        return this.optional(element) || /^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i.test(value);
+    });
+    
         //----------------------validate editar----------------------------
     
     $("#form2").validate({
@@ -224,7 +228,7 @@
                 maxlength: 20
             },
             clave: {
-                required: true,
+                password: true,
                 minlength: 4,
                 maxlength: 20
             },
@@ -295,7 +299,7 @@
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
             clave:{
-                required: "El clave es obligatorio.",
+                password: "Solo se permiten numeros y letras.",
                 minlength: "Introduzca al menos 4 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },

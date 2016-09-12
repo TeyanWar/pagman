@@ -113,6 +113,7 @@ class UsuariosController {
         $errores = array();
         $patronNumeros = "/[0-9]{1,9}(\.[0-9]{0,2})?$/";
         $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
+        $NumerosLetras = "/^[0-9a-zA-Z]+$/";
         $patronCorreo = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
         $patronDireccio = "/^.*(?=.*[0-9])(?=.*[a-zA-ZñÑ\s]).*$/";
 
@@ -123,9 +124,9 @@ class UsuariosController {
             if (!isset($_POST['login']) or $_POST['login'] == "") {
                 $errores[] = '<h6><strong>(*) Para editar usuario el campo "login" es obligatorio</strong><h6>';
             }
-
-            if (!isset($_POST['clave']) or $_POST['clave'] == "") {
-                $errores[] = '<h6><strong>(*) Para editar usuario el campo "clave" es obligatorio</strong><h6>';
+            
+            if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
+                $errores[] = '<h6><strong>(*) Para editar usuario el campo "clave" debe contener numeros o letras unicamente</strong><h6>';
             }
 
             if (!isset($_POST['perfil']) or $_POST['perfil'] == "") {
@@ -457,6 +458,7 @@ class UsuariosController {
         $errores = array();
         $patronNumeros = "/[0-9]{1,9}(\.[0-9]{0,2})?$/";
         $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
+        $NumerosLetras = "/^[0-9a-zA-Z]+$/";
         $patronCorreo = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/";
         $patronDireccio = "/^.*(?=.*[0-9])(?=.*[a-zA-ZñÑ\s]).*$/";
 
@@ -473,6 +475,10 @@ class UsuariosController {
 
             if (!isset($_POST['clave']) or $_POST['clave'] == "") {
                 $errores[] = '<h6><strong>(*) Para el registro de usuario el campo "clave" es obligatorio</strong><h6>';
+            }
+            
+            if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
+                $errores[] = '<h6><strong>(*) Para el registro de usuario el campo "clave" debe contener numeros o letras unicamente</strong><h6>';
             }
 
             if (!isset($_POST['estado']) or $_POST['estado'] == "") {
@@ -672,7 +678,7 @@ class UsuariosController {
                 $login = $_POST['login'];
                 $clave = $_POST['clave'];
                 $salt = '$bgr$/';
-                $password = sha1(md5($salt . $clave));
+                $passwd = sha1(md5($salt . $clave));
                 $estado = $_POST['estado'];
                 $perfil = $_POST['perfil'];
 
@@ -704,7 +710,7 @@ class UsuariosController {
                         . "usu_estado,rol_id) "
                         . " VALUES('$identificacion',"
                         . "'$login',"
-                        . "'$password',"
+                        . "'$passwd',"
                         . "'$estado',"
                         . "'$perfil')";
 
