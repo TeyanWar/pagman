@@ -45,7 +45,7 @@
   <link href="<?php echo addLib('css/global.css') ?>" type="text/css" rel="stylesheet" media="screen,projection">
 </head>
 
-<body class="cyan">
+<body class="verde_oscuro">
   <!-- Start Page Loading -->
   <div id="loader-wrapper">
       <div id="loader"></div>        
