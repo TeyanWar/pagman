@@ -177,12 +177,11 @@
         <input type="hidden" name="id" value="<?php echo $usu['per_id'] ?>">
 
         <div class="row">
-
-            <div class="input-field col s4 offset-s4">
-                <div class="input-field col s12">
-                    <button class="btn cyan waves-effect waves-light teal" type="submit"><i class="mdi-action-perm-identity"></i>Guardar Cambios</button>
-                </div>
+            <div class="input-field col s4 "></div>
+            <div class="input-field col s5">
+                <button class="btn cyan waves-effect waves-light teal" type="submit"><i class="mdi-action-perm-identity"></i>Guardar</button>
             </div>
+            
         </div>
     </form>
 </div>
@@ -191,7 +190,7 @@
     #modalUpdate{
         top: 2% !important;
         max-height: 100%;
-        height: 94%;
+        height: 97%;
     }
 </style>
 
@@ -299,7 +298,7 @@
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
             clave:{
-                password: "Solo se permiten numeros y letras.",
+                password: "El valor debe ser alfanumerico.",
                 minlength: "Introduzca al menos 4 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },

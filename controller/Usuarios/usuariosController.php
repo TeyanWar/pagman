@@ -125,8 +125,11 @@ class UsuariosController {
                 $errores[] = '<h6><strong>(*) Para editar usuario el campo "login" es obligatorio</strong><h6>';
             }
             
-            if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
-                $errores[] = '<h6><strong>(*) Para editar usuario el campo "clave" debe contener numeros o letras unicamente</strong><h6>';
+            if(!empty($_POST['clave'])){
+                
+                if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
+                    $errores[] = '<h6><strong>(*) Para editar usuario el campo "clave" debe ser alfanumerico</strong><h6>';
+                }
             }
 
             if (!isset($_POST['perfil']) or $_POST['perfil'] == "") {
@@ -232,10 +235,6 @@ class UsuariosController {
 
                     $login = $_POST['login'];
                     $clave = $_POST['clave'];
-                    //aqui Inicia encriptacion de Password
-                    $salt = '$bgr$/';
-                    $password = sha1(md5($salt . $clave));
-                    //aqui termina encriptacion password
                     $estado = $_POST['estado'];
                     $perfil = $_POST['perfil'];
 
@@ -243,12 +242,26 @@ class UsuariosController {
                             . "pag_usuario "
                             . "SET "
                             . "usu_usuario='$login',"
-                            . "usu_clave='$password',"
                             . "usu_estado='$estado',"
                             . "rol_id='$perfil' "
                             . "WHERE per_id='$id'";
 
                     $respuesta = $objUsuarios->update($sqls);
+                    
+                    if(!empty($clave)){
+                        //aqui Inicia encriptacion de Password
+                        $salt = '$bgr$/';
+                        $password = sha1(md5($salt . $clave));
+                        //aqui termina encriptacion password
+                        $scla = "UPDATE "
+                            . "pag_usuario "
+                            . "SET "
+                            . "usu_clave='$password' "
+                            . "WHERE per_id='$id'";
+
+                    $upclave = $objUsuarios->update($scla);
+                        
+                    }
                 }
             }
         } else {
@@ -478,7 +491,7 @@ class UsuariosController {
             }
             
             if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
-                $errores[] = '<h6><strong>(*) Para el registro de usuario el campo "clave" debe contener numeros o letras unicamente</strong><h6>';
+                $errores[] = '<h6><strong>(*) Para el registro de usuario el campo "clave" debe ser alfanumerico</strong><h6>';
             }
 
             if (!isset($_POST['estado']) or $_POST['estado'] == "") {
