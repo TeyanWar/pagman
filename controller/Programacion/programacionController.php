@@ -209,17 +209,13 @@ class ProgramacionController {
                     $deta = $objProgramacion->insertar($detalle);
                     $a++;
                 }
-                
-                echo true;
-                
+
                 $objProgramacion->cerrar();
-//                redirect(crearUrl("programacion", "programacion", "listar"));
-                
-            }  else {
-                echo false;
-            }
+
+            } 
             
         }
+        echo getRespuestaAccion('listar');
     }
     
     function verDetalle($parametros = false) {

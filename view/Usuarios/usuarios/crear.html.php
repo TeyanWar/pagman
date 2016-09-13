@@ -22,20 +22,14 @@
                     </button>
                 </div>
                 
-                <?php $error=getErrores(); ?>
-                 <?php if (!$error=="") { ?>
-                    <div id="card-alert" class="card red">
-                        <div class="card-content white-text">
-                            <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
-                        </div>
-
-                        <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+                <!--Inicio contenedor mensajes de error-->
+                <div class="card red">
+                    <div id="cont_errors_ajax" class="card-content white-text">
                     </div>
-                <?php } ?>
+                </div>
+                <!--Fin contenedor mensajes de error-->
 
-                <form id="formValidate" class="col s12 formValidate" action="<?php echo crearUrl("usuarios", "usuarios", "crear") ?>" data-url="<?php echo crearUrl("usuarios", "usuarios", "postCrear", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("usuarios", "usuarios", "listar") ?>" method="post" novalidate>
+                <form id="formValidate" class="col s12 formValidate" action="<?php echo crearUrl("usuarios", "usuarios", "postCrear",array('noVista')) ?>" method="post" novalidate>
                     
                     <div class="row">
                         
@@ -198,7 +192,7 @@
 
                     
                     <div class="row">
-                        <button name="action" type="submit" class="btn teal waves-effect waves-light right submit_ot animated infinite rubberBand">Registrar
+                        <button name="action" id="enviar" type="submit" class="btn teal waves-effect waves-light right btn_submit_modal">Registrar
                             <i class="mdi-content-add left"> </i>
                         </button>
                     </div>

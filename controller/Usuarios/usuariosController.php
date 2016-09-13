@@ -122,86 +122,86 @@ class UsuariosController {
         if ($comprobar['per_tipo'] === 'usuario del sistema') {
 
             if (!isset($_POST['login']) or $_POST['login'] == "") {
-                $errores[] = '<h6><strong>(*) Para editar usuario el campo "login" es obligatorio</strong><h6>';
+                $errores[] = '<h6><strong>Para editar usuario el campo <code><b>login</b></code> es obligatorio</strong><h6>';
             }
             
             if(!empty($_POST['clave'])){
                 
                 if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
-                    $errores[] = '<h6><strong>(*) Para editar usuario el campo "clave" debe ser alfanumerico</strong><h6>';
+                    $errores[] = '<h6><strong>(*) Para editar usuario el campo <code><b>clave</b></code> debe contener numeros o letras</strong><h6>';
                 }
             }
 
             if (!isset($_POST['perfil']) or $_POST['perfil'] == "") {
-                $errores[] = '<h6><strong>(*) Para editar usuario el campo "perfil" es obligatorio</strong><h6>';
+                $errores[] = '<h6><strong>(*) Para editar usuario el campo <code><b>perfil</b></code> es obligatorio</strong><h6>';
             }
 
             if (!isset($_POST['departamento']) or $_POST['departamento'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "departamento" es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>departamento</b></code> es obligatorio';
             }
 
             if (!isset($_POST['centro']) or $_POST['centro'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "centro" es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>centro</b></code> es obligatorio';
             }
 
             if (!isset($_POST['cargo']) or $_POST['cargo'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "cargo" es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>cargo</b></code> es obligatorio';
             }
 
             if (!isset($_POST['id']) or $_POST['id'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "identificacion" es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>identificacion</b></code> es obligatorio';
             }
             if (isset($_POST['id']) && !preg_match($patronNumeros, $_POST['id'])) {
-                $errores[] = '(*) Para editar usuario el campo "identificacion" debe contener numeros unicamente';
+                $errores[] = 'Para editar usuario el campo <code><b>identificacion</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['nombre']) or $_POST['nombre'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "nombre" es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>nombre</b></code> es obligatorio';
             }
             if (isset($_POST['nombre']) && !preg_match($patronLetras, $_POST['nombre'])) {
-                $errores[] = '(*) Para editar usuario el campo "nombre" debe contener letras unicamente';
+                $errores[] = '(*) Para editar usuario el campo <code><b>nombre</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['apellido']) or $_POST['apellido'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "apellido" es obligatorio';
+                $errores[] = '(*) Para editar usuario el campo <code><b>apellido</b></code> es obligatorio';
             }
             if (isset($_POST['apellido']) && !preg_match($patronLetras, $_POST['apellido'])) {
-                $errores[] = '(*) Para editar usuario el campo "apellido" debe contener letras unicamente';
+                $errores[] = '(*) Para editar usuario el campo <code><b>apellido</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['telefono']) or $_POST['telefono'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "telefono" es obligatorio';
+                $errores[] = '(*) Para editar usuario el campo <code><b>telefono</b></code> es obligatorio';
             }
             if (isset($_POST['telefono']) && !preg_match($patronNumeros, $_POST['telefono'])) {
-                $errores[] = '(*) Para editar usuario el campo "telefono" debe contener numeros unicamente';
+                $errores[] = 'Para editar usuario el campo <code><b>telefono</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['movil']) or $_POST['movil'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "movil" es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>movil</b></code> es obligatorio';
             }
             if (isset($_POST['movil']) && !preg_match($patronNumeros, $_POST['movil'])) {
-                $errores[] = '(*) Para editar usuario el campo "movil" debe contener numeros unicamente';
+                $errores[] = 'Para editar usuario el campo <code><b>movil</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['email']) or $_POST['email'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "email" es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>email</b></code> es obligatorio';
             }
             if (isset($_POST['email']) && !preg_match($patronCorreo, $_POST['email'])) {
-                $errores[] = '(*) Para editar usuario el campo "email" debe ser valido';
+                $errores[] = 'Para editar usuario el campo <code><b>email</b></code> debe ser valido';
             }
 
             if (!isset($_POST['direccion']) or $_POST['direccion'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "direccion" es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>direccion</b></code> es obligatorio';
             }
             if (isset($_POST['direccion']) && !preg_match($patronDireccio, $_POST['direccion'])) {
-                $errores[] = '(*) Para editar usuario el campo "direccion" debe ser valido';
+                $errores[] = 'Para editar usuario el campo <code><b>direccion</b></code> debe ser valido';
             }
 
             if (!isset($_POST['valorhora']) or $_POST['valorhora'] == "") {
-                $errores[] = '(*) Para editar usuario el campo "valor hora" es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>valor hora</b></code> es obligatorio';
             }
             if (isset($_POST['valorhora']) && !preg_match($patronNumeros, $_POST['valorhora'])) {
-                $errores[] = '(*) Para editar usuario el campo "valor hora" debe contener numeros unicamente';
+                $errores[] = 'Para editar usuario el campo <code><b>valor hora</b></code> debe contener numeros unicamente';
             }
 
             if (count($errores) > 0) {
@@ -267,71 +267,71 @@ class UsuariosController {
         } else {
 
             if (!isset($_POST['departamento']) or $_POST['departamento'] == "") {
-                $errores[] = '(*) El campo "departamento" es obligatorio';
+                $errores[] = 'El campo <code><b>departamento</b></code> es obligatorio';
             }
 
             if (!isset($_POST['centro']) or $_POST['centro'] == "") {
-                $errores[] = '(*) El campo "centro" es obligatorio';
+                $errores[] = 'El campo <code><b>centro</b></code> es obligatorio';
             }
 
             if (!isset($_POST['cargo']) or $_POST['cargo'] == "") {
-                $errores[] = '(*) El campo "cargo" es obligatorio';
+                $errores[] = 'El campo <code><b>cargo</b></code> es obligatorio';
             }
 
             if (!isset($_POST['id']) or $_POST['id'] == "") {
-                $errores[] = '(*) El campo "identificacion" es obligatorio';
+                $errores[] = 'El campo <code><b>identificacion</b></code> es obligatorio';
             }
             if (isset($_POST['id']) && !preg_match($patronNumeros, $_POST['id'])) {
-                $errores[] = '(*) El campo "identificacion" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>identificacion</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['nombre']) or $_POST['nombre'] == "") {
-                $errores[] = '(*) El campo "nombre" es obligatorio';
+                $errores[] = 'El campo <code><b>nombre</b></code> es obligatorio';
             }
             if (isset($_POST['nombre']) && !preg_match($patronLetras, $_POST['nombre'])) {
-                $errores[] = '(*) El campo "nombre" debe contener letras unicamente';
+                $errores[] = 'El campo <code><b>nombre</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['apellido']) or $_POST['apellido'] == "") {
-                $errores[] = '(*) El campo "apellido" es obligatorio';
+                $errores[] = 'El campo <code><b>apellido</b></code> es obligatorio';
             }
             if (isset($_POST['apellido']) && !preg_match($patronLetras, $_POST['apellido'])) {
-                $errores[] = '(*) El campo "apellido" debe contener letras unicamente';
+                $errores[] = 'El campo <code><b>apellido</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['telefono']) or $_POST['telefono'] == "") {
-                $errores[] = '(*) El campo "telefono" es obligatorio';
+                $errores[] = 'El campo <code><b>telefono</b></code> es obligatorio';
             }
             if (isset($_POST['telefono']) && !preg_match($patronNumeros, $_POST['telefono'])) {
-                $errores[] = '(*) El campo "telefono" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>telefono</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['movil']) or $_POST['movil'] == "") {
-                $errores[] = '(*) El campo "movil" es obligatorio';
+                $errores[] = 'El campo <code><b>movil</b></code> es obligatorio';
             }
             if (isset($_POST['movil']) && !preg_match($patronNumeros, $_POST['movil'])) {
-                $errores[] = '(*) El campo "movil" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>movil</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['email']) or $_POST['email'] == "") {
-                $errores[] = '(*) El campo "email" es obligatorio';
+                $errores[] = 'El campo <code><b>email</b></code> es obligatorio';
             }
             if (isset($_POST['email']) && !preg_match($patronCorreo, $_POST['email'])) {
-                $errores[] = '(*) El campo "email" debe ser valido';
+                $errores[] = 'El campo <code><b>email</b></code> debe ser valido';
             }
 
             if (!isset($_POST['direccion']) or $_POST['direccion'] == "") {
-                $errores[] = '(*) El campo "direccion" es obligatorio';
+                $errores[] = 'El campo <code><b>direccion</b></code> es obligatorio';
             }
             if (isset($_POST['direccion']) && !preg_match($patronDireccio, $_POST['direccion'])) {
-                $errores[] = '(*) El campo "direccion" debe ser valido';
+                $errores[] = 'El campo <code><b>direccion</b></code> debe ser valido';
             }
 
             if (!isset($_POST['valorhora']) or $_POST['valorhora'] == "") {
-                $errores[] = '(*) El campo "valor hora" es obligatorio';
+                $errores[] = 'El campo <code><b>valor hora</b></code> es obligatorio';
             }
             if (isset($_POST['valorhora']) && !preg_match($patronNumeros, $_POST['valorhora'])) {
-                $errores[] = '(*) El campo "valor hora" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>valor hora</b></code> debe contener numeros unicamente';
             }
 
             if (count($errores) > 0) {
@@ -417,23 +417,6 @@ class UsuariosController {
         include_once("../view/Usuarios/usuarios/listar.html.php");
     }
 
-    //------no se puede hacer select dependiente
-    //la tabla pag_centro y pag_departamento no estan relacionados
-//    function selectCentro() {
-//        $id = $_POST['id'];
-//
-//        $objUsuarios = new UsuariosModel();
-//
-//        $sql = "";
-//
-//        $centros = $objUsuarios->select($sql);
-//
-//        $objUsuarios->cerrar();
-//
-//        include_once("../view/Usuarios/usuarios/selectCentro.html.php");
-//    }
-
-
     function crear() {
 
         $objUsuarios = new UsuariosModel();
@@ -462,7 +445,7 @@ class UsuariosController {
         include_once("../view/Usuarios/usuarios/crear.html.php");
     }
 
-    function postCrear() {
+    function postCrear(){
 
         $objUsuarios = new UsuariosModel();
 
@@ -483,42 +466,42 @@ class UsuariosController {
                 isset($_POST['perfil']) && $_POST['perfil'] != "") {
 
             if (!isset($_POST['login']) or $_POST['login'] == "") {
-                $errores[] = '<h6><strong>(*) Para el registro de usuario el campo "login" es obligatorio</strong><h6>';
+                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>login</b></code> es obligatorio</strong><h6>';
             }
 
             if (!isset($_POST['clave']) or $_POST['clave'] == "") {
-                $errores[] = '<h6><strong>(*) Para el registro de usuario el campo "clave" es obligatorio</strong><h6>';
+                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>clave</b></code> es obligatorio</strong><h6>';
             }
             
             if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
-                $errores[] = '<h6><strong>(*) Para el registro de usuario el campo "clave" debe ser alfanumerico</strong><h6>';
+                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>clave</b></code> debe contener numeros o letras</strong><h6>';
             }
 
             if (!isset($_POST['estado']) or $_POST['estado'] == "") {
-                $errores[] = '<h6><strong>(*) Para el registro de usuario el campo "estado" es obligatorio</strong><h6>';
+                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>estado</b></code> es obligatorio</strong><h6>';
             }
 
             if (!isset($_POST['perfil']) or $_POST['perfil'] == "") {
-                $errores[] = '<h6><strong>(*) Para el registro de usuario el campo "perfil" es obligatorio</strong><h6>';
+                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>perfil</b></code> es obligatorio</strong><h6>';
             }
 
             if (!isset($_POST['departamento']) or $_POST['departamento'] == "") {
-                $errores[] = '(*) El campo departamento es obligatorio';
+                $errores[] = 'El campo <code><b>departamento</b></code> es obligatorio';
             }
 
             if (!isset($_POST['centro']) or $_POST['centro'] == "") {
-                $errores[] = '(*) El campo "centro" es obligatorio';
+                $errores[] = 'El campo <code><b>centro</b></code> es obligatorio';
             }
 
             if (!isset($_POST['cargo']) or $_POST['cargo'] == "") {
-                $errores[] = '(*) El campo "cargo" es obligatorio';
+                $errores[] = 'El campo <code><b>cargo</b></code> es obligatorio';
             }
 
             if (!isset($_POST['identificacion']) or $_POST['identificacion'] == "") {
-                $errores[] = '(*) El campo "identificacion" es obligatorio';
+                $errores[] = 'El campo <code><b>identificacion</b></code> es obligatorio';
             }
             if (isset($_POST['identificacion']) && !preg_match($patronNumeros, $_POST['identificacion'])) {
-                $errores[] = '(*) El campo "identificacion" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>identificacion</b></code> debe contener numeros unicamente';
             }
 
             //-------------------------------------------------------------
@@ -527,79 +510,79 @@ class UsuariosController {
 
             foreach ($ids as $id) {
                 if ($id['per_id'] == $_POST['identificacion']) {
-                    $errores[] = '<strong>(*) El No. Identificacion ingresado ya se encuentra registrado</strong>';
+                    $errores[] = '<strong>El <code><b>No. Identificacion</b></code> ingresado ya se encuentra registrado</strong>';
                 }
             }
             //-------------------------------------------------------------
 
             if (!isset($_POST['nombre']) or $_POST['nombre'] == "") {
-                $errores[] = '(*) El campo "nombre" es obligatorio';
+                $errores[] = 'El campo <code><b>nombre</b></code> es obligatorio';
             }
             if (isset($_POST['nombre']) && !preg_match($patronLetras, $_POST['nombre'])) {
-                $errores[] = '(*) El campo "nombre" debe contener letras unicamente';
+                $errores[] = 'El campo <code><b>nombre</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['apellido']) or $_POST['apellido'] == "") {
-                $errores[] = '(*) El campo "apellido" es obligatorio';
+                $errores[] = 'El campo <code><b>apellido</b></code> es obligatorio';
             }
             if (isset($_POST['apellido']) && !preg_match($patronLetras, $_POST['apellido'])) {
-                $errores[] = '(*) El campo "apellido" debe contener letras unicamente';
+                $errores[] = 'El campo <code><b>apellido</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['telefono']) or $_POST['telefono'] == "") {
-                $errores[] = '(*) El campo "telefono" es obligatorio';
+                $errores[] = 'El campo <code><b>telefono</b></code> es obligatorio';
             }
             if (isset($_POST['telefono']) && !preg_match($patronNumeros, $_POST['telefono'])) {
-                $errores[] = '(*) El campo "telefono" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>telefono</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['movil']) or $_POST['movil'] == "") {
-                $errores[] = '(*) El campo "movil" es obligatorio';
+                $errores[] = 'El campo <code><b>movil</b></code> es obligatorio';
             }
             if (isset($_POST['movil']) && !preg_match($patronNumeros, $_POST['movil'])) {
-                $errores[] = '(*) El campo "movil" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>movil</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['email']) or $_POST['email'] == "") {
-                $errores[] = '(*) El campo "email" es obligatorio';
+                $errores[] = 'El campo <code><b>email</b></code> es obligatorio';
             }
             if (isset($_POST['email']) && !preg_match($patronCorreo, $_POST['email'])) {
-                $errores[] = '(*) El campo "email" debe ser valido';
+                $errores[] = 'El campo <code><b>email</b></code> debe ser valido';
             }
 
             if (!isset($_POST['direccion']) or $_POST['direccion'] == "") {
-                $errores[] = '(*) El campo "direccion" es obligatorio';
+                $errores[] = 'El campo <code><b>direccion</b></code> es obligatorio';
             }
             if (isset($_POST['direccion']) && !preg_match($patronDireccio, $_POST['direccion'])) {
-                $errores[] = '(*) El campo "direccion" debe ser valido';
+                $errores[] = 'El campo <code><b>direccion</b></code> debe ser valido';
             }
 
             if (!isset($_POST['valorhora']) or $_POST['valorhora'] == "") {
-                $errores[] = '(*) El campo "valor hora" es obligatorio';
+                $errores[] = 'El campo <code><b>valor hora</b></code> es obligatorio';
             }
             if (isset($_POST['valorhora']) && !preg_match($patronNumeros, $_POST['valorhora'])) {
-                $errores[] = '(*) El campo "valor hora" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>valor hora</b></code> debe contener numeros unicamente';
             }
         } else {
             //-----------------validaciones para persona--------------------
 
             if (!isset($_POST['departamento']) or $_POST['departamento'] == "") {
-                $errores[] = '(*) El campo "departamento" es obligatorio';
+                $errores[] = 'El campo <code><b>departamento</b></code> es obligatorio';
             }
 
             if (!isset($_POST['centro']) or $_POST['centro'] == "") {
-                $errores[] = '(*) El campo "centro" es obligatorio';
+                $errores[] = 'El campo <code><b>centro</b></code> es obligatorio';
             }
 
             if (!isset($_POST['cargo']) or $_POST['cargo'] == "") {
-                $errores[] = '(*) El campo "cargo" es obligatorio';
+                $errores[] = 'El campo <code><b>cargo</b></code> es obligatorio';
             }
 
             if (!isset($_POST['identificacion']) or $_POST['identificacion'] == "") {
-                $errores[] = '(*) El campo "identificacion" es obligatorio';
+                $errores[] = 'El campo <code><b>identificacion</b></code> es obligatorio';
             }
             if (isset($_POST['identificacion']) && !preg_match($patronNumeros, $_POST['identificacion'])) {
-                $errores[] = '(*) El campo "identificacion" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>identificacion</b></code> debe contener numeros unicamente';
             }
 
             //-------------------------------------------------------------
@@ -608,64 +591,64 @@ class UsuariosController {
 
             foreach ($ids as $id) {
                 if ($id['per_id'] === $_POST['identificacion']) {
-                    $errores[] = '<strong>(*) El No. Identificacion ingresado ya se encuentra registrado</strong>';
+                    $errores[] = '<strong>El <code><b>No. Identificacion</b></code> ingresado ya se encuentra registrado</strong>';
                 }
             }
             //-------------------------------------------------------------
 
             if (!isset($_POST['nombre']) or $_POST['nombre'] == "") {
-                $errores[] = '(*) El campo "nombre" es obligatorio';
+                $errores[] = 'El campo <code><b>nombre</b></code> es obligatorio';
             }
             if (isset($_POST['nombre']) && !preg_match($patronLetras, $_POST['nombre'])) {
-                $errores[] = '(*) El campo "nombre" debe contener letras unicamente';
+                $errores[] = 'El campo <code><b>nombre</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['apellido']) or $_POST['apellido'] == "") {
-                $errores[] = '(*) El campo "apellido" es obligatorio';
+                $errores[] = 'El campo <code><b>apellido</b></code> es obligatorio';
             }
             if (isset($_POST['apellido']) && !preg_match($patronLetras, $_POST['apellido'])) {
-                $errores[] = '(*) El campo "apellido" debe contener letras unicamente';
+                $errores[] = 'El campo <code><b>apellido</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['telefono']) or $_POST['telefono'] == "") {
-                $errores[] = '(*) El campo "telefono" es obligatorio';
+                $errores[] = 'El campo <code><b>telefono</b></code> es obligatorio';
             }
             if (isset($_POST['telefono']) && !preg_match($patronNumeros, $_POST['telefono'])) {
-                $errores[] = '(*) El campo "telefono" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>telefono</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['movil']) or $_POST['movil'] == "") {
-                $errores[] = '(*) El campo "movil" es obligatorio';
+                $errores[] = 'El campo <code><b>movil</b></code> es obligatorio';
             }
             if (isset($_POST['movil']) && !preg_match($patronNumeros, $_POST['movil'])) {
-                $errores[] = '(*) El campo "movil" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>movil</b></code> debe contener numeros unicamente';
             }
 
             if (!isset($_POST['email']) or $_POST['email'] == "") {
-                $errores[] = '(*) El campo "email" es obligatorio';
+                $errores[] = 'El campo <code><b>email</b></code> es obligatorio';
             }
             if (isset($_POST['email']) && !preg_match($patronCorreo, $_POST['email'])) {
-                $errores[] = '(*) El campo "email" debe ser valido';
+                $errores[] = 'El campo <code><b>email</b></code> debe ser valido';
             }
 
             if (!isset($_POST['direccion']) or $_POST['direccion'] == "") {
-                $errores[] = '(*) El campo "direccion" es obligatorio';
+                $errores[] = 'El campo <code><b>direccion</b></code> es obligatorio';
             }
             if (isset($_POST['direccion']) && !preg_match($patronDireccio, $_POST['direccion'])) {
-                $errores[] = '(*) El campo "direccion" debe ser valido';
+                $errores[] = 'El campo <code><b>direccion</b></code> debe ser valido';
             }
 
             if (!isset($_POST['valorhora']) or $_POST['valorhora'] == "") {
-                $errores[] = '(*) El campo "valor hora" es obligatorio';
+                $errores[] = 'El campo <code><b>valor hora</b></code> es obligatorio';
             }
             if (isset($_POST['valorhora']) && !preg_match($patronNumeros, $_POST['valorhora'])) {
-                $errores[] = '(*) El campo "valor hora" debe contener numeros unicamente';
+                $errores[] = 'El campo <code><b>valor hora</b></code> debe contener numeros unicamente';
             }
         }
 
         if (count($errores) > 0) {
             setErrores($errores);
-            echo false;
+            
 //                redirect(crearUrl('usuarios', 'usuarios', 'crear'));
             //----------------fin validaciones-----------------
         } else {
@@ -729,7 +712,7 @@ class UsuariosController {
 
                 $insertar = $objUsuarios->insertar($insertusu);
 
-                echo true;
+               
             } else {
 
                 $insertper = "INSERT INTO pag_persona "
@@ -751,13 +734,14 @@ class UsuariosController {
 
                 $insertar = $objUsuarios->insertar($insertper);
 
-                echo true;
+                
             }
 
 //                redirect(crearUrl("usuarios", "usuarios", "listar")); 
             // Cierra la conexion
             $objUsuarios->cerrar();
         }
+        echo getRespuestaAccion('listar');
     }
 
     function verDetalle($parametros = false) {

@@ -138,7 +138,7 @@
 
             <div class="col s4">
                 <label>(*) Cargo</label>
-                <select id="cargo" class="error browser-default select2" name="cargo" data-error=".errorTxt44">
+                <select id="cargo" class="error browser-default" name="cargo" data-error=".errorTxt44">
                     <option value="" disabled selected>-Seleccione Cargo-</option>
                     <?php 
                         foreach($cargos as $car){
@@ -205,7 +205,7 @@
     
     //----------------------expresion para validar solo numeros y letras----------------
     jQuery.validator.addMethod("password", function(value, element) {
-        return this.optional(element) || /^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i.test(value);
+        return this.optional(element) || /^[0-9a-zA-Z]+$/i.test(value);
     });
     
         //----------------------validate editar----------------------------
@@ -298,7 +298,7 @@
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
             clave:{
-                password: "El valor debe ser alfanumerico.",
+                password: "Solo se permiten numeros o letras.",
                 minlength: "Introduzca al menos 4 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
