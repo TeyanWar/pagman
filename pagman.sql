@@ -1236,7 +1236,7 @@ CREATE TABLE `pag_usuario` (
 --
 
 INSERT INTO `pag_usuario` (`per_id`, `usu_usuario`, `usu_clave`, `usu_estado`, `rol_id`) VALUES
-(1151956249, 'admin', '0000', 'activo', 1);
+(1151956249, 'admin', 'b9ddaf31e98e6d249804d3f7a9e936f82a12af32', 'activo', 1);
 
 --
 -- Índices para tablas volcadas
@@ -1259,6 +1259,12 @@ ALTER TABLE `pag_campos_personalizados`
 --
 ALTER TABLE `pag_tipo_equipo`
   ADD PRIMARY KEY (`tequi_id`);
+
+--
+-- Indices de la tabla `pag_tipo_equipo`
+--
+ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
+  ADD PRIMARY KEY (`idDetalle`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
