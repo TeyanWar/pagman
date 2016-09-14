@@ -30,13 +30,13 @@
             </div>
 
         <?php } ?>
+        
         <div class="row">
             <form class="col s12" action="<?php echo crearUrl("equipos", "tipoEquipo", "ajaxGuardarCampoPersonalizado") ?>" method="POST" id="formTipoEquipo">
                 <div class="row col s6">
                     <div class="input-field">
                         <input type="text" id="id_tipo_Equipo" name="id_tipo_Equipo" class="validate" data-error=".errorTxt1">
-                        <label for="tequi_descripcion" class="active" >(*)Codigo Tipo de Equipo:</label>
-                    </div>
+                        <label for="tequi_descripcion" class="active" >(*)Codigo Tipo de Equipo:</label>                    </div>
                     <div class="errorTxt1"></div>
                 </div>
                 <div class="row col s6">
@@ -45,7 +45,13 @@
                         <label for="tequi_descripcion" class="active" >(*)Descripción del Tipo de Equipo:</label>
                     </div>
                 </div>
-                <div class="col s5">
+                <div class=" row col s12" style="margin-bottom: 20px;">
+                    <span class="help-block col s6" >
+                        Por favor digite el codigo del Tipo de Equipo a registrar, recuerde que el <code>codigo del Tipo de Equipo</code> 
+                        debe corresponder al siguiente patron: <code>TEXXXX</code>
+                    </span>
+                </div>
+                <div class="col s6">
                     <div id="card-alert" class="card teal">
                         <div class="card-content white-text">
                             <span class="card-title white-text darken-1">Señor <code><?php echo $_SESSION['login']['rol_nombre'] ?></code></span>
@@ -78,7 +84,7 @@
                 </div>
 
                 <div class="input-field col s6">
-                    <select required name="idCampoSelec" id="idCampoSelec" data-error=".errorTxt2" data-url="<?php echo crearUrl("Equipos", "tipoEquipo", "ajaxAgregarCampoPersonalizado", array('noVista' => "noVista")) ?>" class="select2">
+                    <select required name="idCampoSelec[]" id="idCampoSelec" data-error=".errorTxt2" data-url="<?php echo crearUrl("Equipos", "tipoEquipo", "ajaxAgregarCampoPersonalizado", array('noVista' => "noVista")) ?>" class="select2">
                         <option disabled selected>Seleccione un Campo...</option>
                         <?php foreach ($campoPer as $personalizado) { ?>
                             <option value="<?php echo $personalizado['cp_id'] ?>"><?php echo $personalizado['cp_nombre'] ?></option>

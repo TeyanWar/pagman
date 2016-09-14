@@ -24,7 +24,7 @@ $(document).ready(function () {
     $(document).on('click', '.modal-eliminar', function (e) {
         e.preventDefault();
         var url = $(this).attr("data-url");
-        var her_id = $(this).attr("data-id");
+        var cp_id = $(this).attr("data-id");
         swal({
             title: "Estas seguro de eliminar el registro?",
             text: "La información que estas apunto de eliminar no aparecera en pantalla!",
@@ -38,7 +38,7 @@ $(document).ready(function () {
                 url: url,
                 type: "post",
                 data: {
-                    id: her_id
+                    id: cp_id
                 }
             });
             swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
