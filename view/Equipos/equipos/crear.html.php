@@ -94,7 +94,7 @@
                     </div>
                     <div class="input-field col s4">
                         <input type="text" id="equi_ubicacion" name="equi_ubicacion" class="validate" data-error=".errorTxt9">
-                        <label for="equi_ubicacion">(*) Ubicacion:</label>
+                        <label for="equi_ubicacion">(*) Ubicacion en el centro:</label>
                         <div class="errorTxt9"></div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                         <div class="errorTxt13"></div>
                         <label for="cen_id" class="active">(*) Seleccione El Centro De Formacion:</label>
                     </div>
-                    <div class="file-field input-field col s4">
+                    <div class="file-field input-field col s4" id="tequi_id" name="tequi_id" data-url="<?php echo crearUrl("equipos", "campoPersonalizado", "editar", array('noVista', 'novVista')); ?>">
                         <select id="tequi_id" name="tequi_id" class="error browser-default select2" data-error=".errorTxt14">
                             <option value="" >(Vacio)</option>
                             <?php
@@ -140,7 +140,7 @@
                             ?>
                         </select>
                         <div class="errorTxt14"></div>
-                        <label for="tequi_id" class="active">(*) Seleccione El Tipo De Equipo:</label>
+                        <label id="tequi_id"  for="tequi_id" class="active">(*) Seleccione El Tipo De Equipo:</label>
                     </div>
                     <div class="input-field col s4">
                         <select name="area_id" class="error browser-default select2" data-error=".errorTxt15">

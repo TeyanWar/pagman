@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-</div>-->
+</div>
 <?php if (isset($_REQUEST['pagina'])) { ?>
     <input type="hidden" id="pagina" name="pagina" value="<?php echo $_REQUEST['pagina'] ?>">
 <?php } else { ?>

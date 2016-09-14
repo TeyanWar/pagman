@@ -37,12 +37,13 @@ if (!$miserrores == "") {
             </tr>
         </thead>
         <tbody>
+        <div class="col s6">
             <?php foreach ($sqlDetalle as $detalle) { ?>
             
                 <tr>
                     <td>
-                        <input type="checkbox" id="<?php echo $detalle['cp_id']; ?>" value="<?php echo $detalle['cp_id']; ?>"/>
-                        <label for="<?php $detalle['cp_id']; ?>" value="<?php echo $detalle['cp_id']; ?>"></label>
+                        <input style="display: none" class="filled-in"  id="<?php echo $detalle['cp_id']; ?>" value="<?php echo $detalle['cp_id']; ?>" type="checkbox">
+                        <label for="<?php $detalle['cp_id']; ?>"></label>
 
                     </td>
 
@@ -53,6 +54,7 @@ if (!$miserrores == "") {
                 <?php
             }
             ?>
+        </div>
         </tbody>
     </table>
     <!--<input type="hidden" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" value="<?php //echo $consulta['cp_id'];           ?>">-->
