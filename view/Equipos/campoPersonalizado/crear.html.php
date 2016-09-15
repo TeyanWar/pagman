@@ -7,7 +7,7 @@
         <h5>CREAR UN CAMPO PERSONALIZADO</h5>
         <ol class="breadcrumbs">
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
-            <li><a href="<?php echo crearUrl("equipos", "campoPersonalizado", "Consultar") ?>">Listar/Consultar</a></li>
+            <li><a href="<?php echo crearUrl("equipos", "campoPersonalizado", "listar") ?>">Listar/Consultar</a></li>
             <li class="active">Crear campo personalizado</li>
         </ol>
         <div id="card-alert" class="card teal">
@@ -32,7 +32,7 @@
         <?php }
         ?>
         <div class="row">
-            <form class="col s12" action="<?php echo crearUrl("Equipos", "campoPersonalizado", "postCrear") ?>" method="POST">
+            <form class="col s12" id="formCamposPersonalizados" action="<?php echo crearUrl("Equipos", "campoPersonalizado", "postCrear") ?>" method="POST">
                 <div class="row col s6">
                     <div class="input-field col s12">
                         <input type="text" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" required>

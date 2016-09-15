@@ -15,11 +15,10 @@
 
                 <tbody>
                     <?php
-//                        $count = 1;
+                        $count = 1;
                         foreach($usuar as $user) {?>
                         <tr>
-<!--                            <td><?php // echo $count++ ?></td>-->
-                            <td><?php echo $paginado->count++; ?></td>
+                            <td><?php echo $count++ ?></td>
                             <td><?php echo $user['per_id'] ?></td>
                             <td><?php echo $user['per_nombre'] ?></td>
                             <td><?php echo $user['per_apellido'] ?></td>
@@ -33,7 +32,7 @@
                             </td>
                             <td>
                                 <a class="btn-floating waves-effect waves-light cyan modal-trigger ver-detalle"
-                                   href="#modalDetalle" data-url="<?php echo crearUrl('usuarios', 'usuarios', 'verDetalle', array('noVista' => 'noVista', 'id' => $user['per_id'])) ?>">
+                                   href="#modalDetalle" data-url="<?php echo crearUrl('usuarios', 'usuarios', 'verDetalle', array('noVista' => 'noVista', 'codver' => $user['per_id'])) ?>">
                                    <i class="mdi-action-find-in-page tiny"></i>
                                 </a>
                             </td>
@@ -41,7 +40,7 @@
                     <?php if($user['per_tipo'] == 'persona') { ?>
                             <td>
                                 <a class="btn-floating waves-effect waves-light teal modal-trigger agregar" 
-                                   href="#modalAgregar" data-url="<?php echo crearUrl('usuarios', 'personas', 'agregaruser', array('noVista' => 'noVista', 'id' => $user['per_id'])) ?>">
+                                   href="#modalAgregar" data-url="<?php echo crearUrl('usuarios', 'personas', 'agregaruser', array('noVista' => 'noVista', 'agre' => $user['per_id'])) ?>">
                                    <i class="small mdi-social-person-add"></i>
                                 </a>
                             </td>

@@ -66,11 +66,11 @@
   <header id="header" class="page-topbar">
         <!-- start header nav-->
         <div class="navbar-fixed">
-            <nav class="navbar-color">
+            <nav class="navbar-color verde_oscuro">
                 <div class="nav-wrapper">
                     <ul class="left">  
                                     <li class="no-hover">
-                                        <a class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light cyan" data-activates="slide-out" href="#">
+                                        <a class="menu-sidebar-collapse btn-floating btn-flat btn-medium waves-effect waves-light gris" data-activates="slide-out" href="#">
                                             <i class="mdi-navigation-menu"></i>
                                         </a>
                                     </li>
@@ -78,7 +78,7 @@
                           <h1 class="logo-wrapper">
                               <a class="brand-logo darken-1" href="<?php echo addLib('') ?>">
                                   <span class="logo-text">Pagman</span>
-<!--                                  <img alt="materialize logo" src="<?php echo addLib('templates/adminMaterialize/images/materialize-logo.png') ?>">-->
+<!--                                  <img alt="materialize logo" src="<?php echo addLib('img/avatar/male1.png') ?>">-->
                               </a> 
                               <span class="logo-text">Pagman</span>
                           </h1>
@@ -97,8 +97,8 @@
                         
                         </a>
                         </li>                        
-                        <li><a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse"><i class="mdi-communication-chat"></i></a>
-                        </li>
+<!--                        <li><a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse"><i class="mdi-communication-chat"></i></a>
+                        </li>-->
                     </ul>
                     
                     <!-- notifications-dropdown -->

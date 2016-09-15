@@ -1,11 +1,13 @@
 <div class="row">
     <div class="col s12 m12 g12">
-        <table class="striped hoverable centered">
+        <table class="striped centered">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Tipo de Equipo</th>
-                    <th colspan="3">Acciones</th>
+                    <th>Editar</th>
+                    <th>Ver Detalle</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,19 +18,27 @@
                     <tr>
                         <td><?php echo $count++ ?></td>
                         <td><?php echo $tEquipo['tequi_descripcion'] ?></td>
-                        <td>Editar</td>
+                        <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
+                               href="#modal_editar_tipoEquipo" 
+                               data-url="<?php echo crearUrl("equipos", "tipoEquipo", "editar", array('noVista', 'id' => $tEquipo['tequi_id'])); ?>">
+                                <i class="mdi-content-create teal"></i></a>
+                        </td>
                         <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
                                href="#modal_detalle_tipoEquipo" 
                                data-url="<?php echo crearUrl("equipos", "tipoEquipo", "verDetalle", array('noVista', 'id' => $tEquipo['tequi_id'])); ?>">
                                 <i class="mdi-action-find-in-page tiny"></i></a>
                         </td>
-                        <td>Eliminar</td>
+                        <td><a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" data-id="<?php echo $tEquipo['tequi_id'] ?>" data-url="<?php echo crearUrl('Equipos', 'tipoEquipo', 'postEliminar', array('noVista' => 'noVista', 'id' => $tEquipo['tequi_id'])) ?>"><i class="mdi-action-delete small"></i></a></td>
                     </tr>
                 <?php } ?>
 
             </tbody>
         </table>
         <div class="modal" id="modal_detalle_tipoEquipo">
+            <div class="modal-content">
+            </div> 
+        </div>
+        <div class="modal" id="modal_editar_tipoEquipo">
             <div class="modal-content">
             </div> 
         </div>

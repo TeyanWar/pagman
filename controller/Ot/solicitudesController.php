@@ -117,9 +117,7 @@ class SolicitudesController {
             $objSolicitudes->cerrar();
 
         }
-        
         echo getRespuestaAccion('listar');
-
     }
 
     function listar() {
@@ -150,7 +148,7 @@ class SolicitudesController {
                     ) order by sserv_id desc ";
 
         $solicitudes = $objBuscar->select($sql);
-
+                
         // Paginado
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
         $url = crearUrl('ot', 'solicitudes', 'listar');
@@ -248,12 +246,12 @@ class SolicitudesController {
 //        dd($_POST); 
         $sserv_id = $_POST['sserv_id'];
         $est_id = $_POST['est_id'];
-        $sserv_observaciones = $_POST['sserv_observaciones'];
-//        $sserv_observaciones = isset($_POST['sserv_observaciones']) ? $_POST['sserv_observaciones'] : '';
+        $sserv_observacion = $_POST['sserv_observacion'];
+//        $sserv_observacion = isset($_POST['sserv_observacion']) ? $_POST['sserv_observacion'] : '';
         
         $objPostEditar = new SolicitudesModel();
 
-        $sql = "UPDATE pag_solicitud_servicio SET sserv_observaciones='" . $sserv_observaciones . "', est_id='" . $est_id . "', estado=NULL 
+        $sql = "UPDATE pag_solicitud_servicio SET sserv_observacion='" . $sserv_observacion . "', est_id='" . $est_id . "', estado=NULL 
                  WHERE pag_solicitud_servicio.sserv_id=" . $sserv_id;
         
         $respuesta = $objPostEditar->update($sql);        

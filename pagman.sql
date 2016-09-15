@@ -1,19 +1,20 @@
--- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: pagman
--- ------------------------------------------------------
--- Server version	10.1.13-MariaDB
+-- Servidor: localhost
+-- Tiempo de generación: 14-09-2016 a las 06:27:06
+-- Versión del servidor: 10.1.16-MariaDB
+-- Versión de PHP: 7.0.9
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `pagman`
@@ -58,10 +59,23 @@ INSERT INTO `pag_area` (`area_id`, `area_descripcion`, `estado`) VALUES
 --
 
 CREATE TABLE `pag_campos_personalizados` (
-  `cp_id` int(11) NOT NULL,
+  `cp_id` varchar(11) NOT NULL,
   `cp_nombre` varchar(45) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pag_campos_personalizados`
+--
+
+INSERT INTO `pag_campos_personalizados` (`cp_id`, `cp_nombre`, `estado`) VALUES
+('0', 'Tonel', '0000-00-00 00:00:00'),
+('CP001', 'Metros', '0000-00-00 00:00:00'),
+('CP002', 'Prueba uno', '0000-00-00 00:00:00'),
+('CP003', 'Centimetros', '0000-00-00 00:00:00'),
+('CP004', 'Decametros', '0000-00-00 00:00:00'),
+('CP005', 'Metros cuadrados', '0000-00-00 00:00:00'),
+('CP012', 'Kilometros', NULL);
 
 -- --------------------------------------------------------
 
@@ -353,6 +367,39 @@ CREATE TABLE `pag_det_programacion` (
   `frec_actual` int(11) NOT NULL,
   `est_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+
+CREATE TABLE `pag_det_tipoEquipo_camposPersonalizados` (
+  `idDetalle` int(11) NOT NULL,
+  `tequi_id` varchar(12) NOT NULL,
+  `cp_id` varchar(20) NOT NULL,
+  `estado` timestamp(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ;
+
+--
+-- Volcado de datos para la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+
+INSERT INTO `pag_det_tipoEquipo_camposPersonalizados` (`idDetalle`, `tequi_id`, `cp_id`, `estado`) VALUES
+(29, 'CTE002', 'CP004', NULL),
+(30, 'CTE002', 'CP003', NULL),
+(31, 'CTE002', 'CP002', NULL),
+(32, 'CTE002', 'CP001', NULL),
+(33, 'TE01', 'CP004', NULL),
+(34, 'TE01', 'CP001', NULL),
+(35, 'T', 'CP003', NULL),
+(36, 'TE001', 'CP004', NULL),
+(37, 'TE001', 'CP004', NULL),
+(38, 'TE002', 'CP004', NULL),
+(39, 'TE003', 'CP004', NULL),
+(40, 'TE01', 'CP004', NULL),
+(41, 'TE00', 'CP004', NULL),
+(42, 'TE002', 'CP004', NULL);
 
 -- --------------------------------------------------------
 
@@ -721,76 +768,80 @@ CREATE TABLE `pag_permisos` (
 --
 
 INSERT INTO `pag_permisos` (`perm_id`, `func_id`, `rol_id`) VALUES
-(142, 73, 1),
-(141, 74, 1),
-(140, 75, 1),
-(139, 76, 1),
-(138, 77, 1),
-(137, 68, 1),
-(136, 67, 1),
-(135, 66, 1),
-(134, 65, 1),
-(133, 86, 1),
-(132, 85, 1),
-(131, 84, 1),
-(130, 83, 1),
-(129, 82, 1),
-(128, 60, 1),
-(127, 59, 1),
-(126, 58, 1),
-(125, 53, 1),
-(124, 52, 1),
-(123, 51, 1),
-(122, 50, 1),
-(121, 49, 1),
-(120, 48, 1),
-(119, 47, 1),
-(118, 46, 1),
-(117, 45, 1),
-(116, 44, 1),
-(115, 43, 1),
-(114, 42, 1),
-(113, 41, 1),
-(112, 40, 1),
-(111, 39, 1),
-(110, 38, 1),
-(109, 37, 1),
-(108, 36, 1),
-(107, 35, 1),
-(106, 34, 1),
-(105, 33, 1),
-(104, 32, 1),
-(103, 31, 1),
-(102, 30, 1),
-(101, 29, 1),
-(100, 28, 1),
-(99, 27, 1),
-(98, 26, 1),
-(97, 25, 1),
-(96, 24, 1),
-(95, 23, 1),
-(94, 22, 1),
-(93, 21, 1),
-(92, 20, 1),
-(91, 19, 1),
-(90, 18, 1),
-(89, 17, 1),
-(88, 16, 1),
-(87, 15, 1),
-(86, 14, 1),
-(85, 13, 1),
-(84, 12, 1),
-(83, 11, 1),
-(82, 10, 1),
-(81, 9, 1),
-(80, 8, 1),
-(79, 7, 1),
-(78, 6, 1),
-(77, 5, 1),
-(76, 4, 1),
-(75, 3, 1),
-(74, 2, 1),
-(73, 1, 1);
+(0, 77, 1),
+(0, 68, 1),
+(0, 67, 1),
+(0, 66, 1),
+(0, 65, 1),
+(0, 86, 1),
+(0, 85, 1),
+(0, 84, 1),
+(0, 83, 1),
+(0, 82, 1),
+(0, 60, 1),
+(0, 59, 1),
+(0, 58, 1),
+(0, 53, 1),
+(0, 52, 1),
+(0, 51, 1),
+(0, 50, 1),
+(0, 49, 1),
+(0, 48, 1),
+(0, 47, 1),
+(0, 46, 1),
+(0, 45, 1),
+(0, 44, 1),
+(0, 43, 1),
+(0, 42, 1),
+(0, 41, 1),
+(0, 40, 1),
+(0, 39, 1),
+(0, 38, 1),
+(0, 37, 1),
+(0, 36, 1),
+(0, 35, 1),
+(0, 34, 1),
+(0, 33, 1),
+(0, 32, 1),
+(0, 31, 1),
+(0, 30, 1),
+(0, 29, 1),
+(0, 28, 1),
+(0, 27, 1),
+(0, 26, 1),
+(0, 25, 1),
+(0, 24, 1),
+(0, 23, 1),
+(0, 22, 1),
+(0, 21, 1),
+(0, 20, 1),
+(0, 19, 1),
+(0, 18, 1),
+(0, 17, 1),
+(0, 16, 1),
+(0, 15, 1),
+(0, 14, 1),
+(0, 13, 1),
+(0, 81, 1),
+(0, 78, 1),
+(0, 79, 1),
+(0, 80, 1),
+(0, 12, 1),
+(0, 11, 1),
+(0, 10, 1),
+(0, 9, 1),
+(0, 8, 1),
+(0, 7, 1),
+(0, 6, 1),
+(0, 5, 1),
+(0, 4, 1),
+(0, 3, 1),
+(0, 2, 1),
+(0, 1, 1),
+(0, 76, 1),
+(0, 75, 1),
+(0, 74, 1),
+(0, 73, 1);
 
 -- --------------------------------------------------------
 
@@ -1019,7 +1070,7 @@ INSERT INTO `pag_tipo_doc` (`tdoc_id`, `tdoc_descripcion`, `estado`) VALUES
 --
 
 CREATE TABLE `pag_tipo_equipo` (
-  `tequi_id` int(11) NOT NULL,
+  `tequi_id` varchar(11) NOT NULL,
   `tequi_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1029,9 +1080,12 @@ CREATE TABLE `pag_tipo_equipo` (
 --
 
 INSERT INTO `pag_tipo_equipo` (`tequi_id`, `tequi_descripcion`, `estado`) VALUES
-(1, 'Electromecanico', NULL),
-(2, 'Hidraulico', NULL),
-(3, 'Refrigeración', NULL);
+('T', 'Unidad de Medida', '0000-00-00 00:00:00'),
+('TE00', 'Mecanico', NULL),
+('TE001', 'Mecatronico', '0000-00-00 00:00:00'),
+('TE002', 'Mecanico Automotriz', '0000-00-00 00:00:00'),
+('TE003', 'Metros', '0000-00-00 00:00:00'),
+('TE01', 'Mecanico', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -1112,7 +1166,6 @@ CREATE TABLE `pag_tipo_medidor` (
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 --
 -- Volcado de datos para la tabla `pag_tipo_medidor`
 --
@@ -1173,7 +1226,7 @@ INSERT INTO `pag_unidad_medida` (`umed_id`, `umed_descripcion`, `estado`) VALUES
 CREATE TABLE `pag_usuario` (
   `per_id` bigint(20) NOT NULL,
   `usu_usuario` varchar(45) NOT NULL,
-  `usu_clave` varchar(45) NOT NULL,
+  `usu_clave` varchar(200) NOT NULL,
   `usu_estado` varchar(45) NOT NULL,
   `rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1183,7 +1236,7 @@ CREATE TABLE `pag_usuario` (
 --
 
 INSERT INTO `pag_usuario` (`per_id`, `usu_usuario`, `usu_clave`, `usu_estado`, `rol_id`) VALUES
-(1151956249, 'admin', '0000', 'activo', 1);
+(1151956249, 'admin', 'b9ddaf31e98e6d249804d3f7a9e936f82a12af32', 'activo', 1);
 
 --
 -- Índices para tablas volcadas
@@ -1196,260 +1249,10 @@ ALTER TABLE `pag_almacen`
   ADD PRIMARY KEY (`alm_id`);
 
 --
--- Indices de la tabla `pag_area`
---
-ALTER TABLE `pag_area`
-  ADD PRIMARY KEY (`area_id`);
-
---
 -- Indices de la tabla `pag_campos_personalizados`
 --
 ALTER TABLE `pag_campos_personalizados`
   ADD PRIMARY KEY (`cp_id`);
-
---
--- Indices de la tabla `pag_cargo`
---
-ALTER TABLE `pag_cargo`
-  ADD PRIMARY KEY (`car_id`);
-
---
--- Indices de la tabla `pag_centro`
---
-ALTER TABLE `pag_centro`
-  ADD PRIMARY KEY (`cen_id`);
-
---
--- Indices de la tabla `pag_ciudad`
---
-ALTER TABLE `pag_ciudad`
-  ADD PRIMARY KEY (`ciud_id`),
-  ADD KEY `dept_id` (`dept_id`);
-
---
--- Indices de la tabla `pag_componente`
---
-ALTER TABLE `pag_componente`
-  ADD PRIMARY KEY (`comp_id`);
-
---
--- Indices de la tabla `pag_controlador`
---
-ALTER TABLE `pag_controlador`
-  ADD PRIMARY KEY (`cont_id`);
-
---
--- Indices de la tabla `pag_control_medidas`
---
-ALTER TABLE `pag_control_medidas`
-  ADD PRIMARY KEY (`ctrmed_id`),
-  ADD KEY `tmed_id` (`tmed_id`),
-  ADD KEY `equi_id` (`equi_id`);
-
---
--- Indices de la tabla `pag_departamento`
---
-ALTER TABLE `pag_departamento`
-  ADD PRIMARY KEY (`dept_id`),
-  ADD KEY `reg_id` (`reg_id`);
-
---
--- Indices de la tabla `pag_det_componente_ot`
---
-ALTER TABLE `pag_det_componente_ot`
-  ADD PRIMARY KEY (`comp_ot_id`);
-
---
--- Indices de la tabla `pag_det_equipo_medidor`
---
-ALTER TABLE `pag_det_equipo_medidor`
-  ADD PRIMARY KEY (`dequimed_id`),
-  ADD KEY `equi_id` (`equi_id`),
-  ADD KEY `tmed_id` (`tmed_id`);
-
---
--- Indices de la tabla `pag_det_herramienta_ot`
---
-ALTER TABLE `pag_det_herramienta_ot`
-  ADD PRIMARY KEY (`dherot_id`),
-  ADD KEY `ot_id` (`ot_id`),
-  ADD KEY `her_id` (`her_id`);
-
---
--- Indices de la tabla `pag_det_insumo_ot`
---
-ALTER TABLE `pag_det_insumo_ot`
-  ADD PRIMARY KEY (`dinsot_id`),
-  ADD KEY `ot_id` (`ot_id`),
-  ADD KEY `ins_id` (`ins_id`);
-
---
--- Indices de la tabla `pag_det_prestamo_herramienta`
---
-ALTER TABLE `pag_det_prestamo_herramienta`
-  ADD PRIMARY KEY (`detph_id`),
-  ADD KEY `pher_id` (`pher_id`),
-  ADD KEY `her_id` (`her_id`),
-  ADD KEY `est_id` (`est_id`);
-
---
--- Indices de la tabla `pag_det_programacion`
---
-ALTER TABLE `pag_det_programacion`
-  ADD PRIMARY KEY (`detprog_id`),
-  ADD KEY `proequi_id` (`proequi_id`),
-  ADD KEY `ttra_id` (`ttra_id`),
-  ADD KEY `equi_id` (`equi_id`),
-  ADD KEY `comp_id` (`comp_id`),
-  ADD KEY `priotra_id` (`priotra_id`),
-  ADD KEY `tar_id` (`tar_id`);
-
---
--- Indices de la tabla `pag_equipo`
---
-ALTER TABLE `pag_equipo`
-  ADD PRIMARY KEY (`equi_id`),
-  ADD KEY `per_id` (`per_id`),
-  ADD KEY `cen_id` (`cen_id`);
-
---
--- Indices de la tabla `pag_equipo_componente`
---
-ALTER TABLE `pag_equipo_componente`
-  ADD PRIMARY KEY (`equicomp_id`);
-
---
--- Indices de la tabla `pag_equipo_cp`
---
-ALTER TABLE `pag_equipo_cp`
-  ADD PRIMARY KEY (`equicp_id`);
-
---
--- Indices de la tabla `pag_equipo_planos`
---
-ALTER TABLE `pag_equipo_planos`
-  ADD PRIMARY KEY (`equipla_id`);
-
---
--- Indices de la tabla `pag_estado`
---
-ALTER TABLE `pag_estado`
-  ADD PRIMARY KEY (`est_id`),
-  ADD KEY `tdoc_id` (`tdoc_id`);
-
---
--- Indices de la tabla `pag_funcion`
---
-ALTER TABLE `pag_funcion`
-  ADD PRIMARY KEY (`func_id`);
-
---
--- Indices de la tabla `pag_herramienta`
---
-ALTER TABLE `pag_herramienta`
-  ADD PRIMARY KEY (`her_id`);
-
---
--- Indices de la tabla `pag_insumo`
---
-ALTER TABLE `pag_insumo`
-  ADD PRIMARY KEY (`ins_id`);
-
---
--- Indices de la tabla `pag_inventario`
---
-ALTER TABLE `pag_inventario`
-  ADD PRIMARY KEY (`inv_id`);
-
---
--- Indices de la tabla `pag_jornada`
---
-ALTER TABLE `pag_jornada`
-  ADD PRIMARY KEY (`jor_id`);
-
---
--- Indices de la tabla `pag_modulo`
---
-ALTER TABLE `pag_modulo`
-  ADD PRIMARY KEY (`mod_id`);
-
---
--- Indices de la tabla `pag_orden_trabajo`
---
-ALTER TABLE `pag_orden_trabajo`
-  ADD PRIMARY KEY (`ot_id`),
-  ADD KEY `est_id` (`est_id`),
-  ADD KEY `cen_id` (`cen_id`),
-  ADD KEY `equi_id` (`equi_id`),
-  ADD KEY `tfa_id` (`tfa_id`),
-  ADD KEY `per_id` (`per_id`);
-
---
--- Indices de la tabla `pag_permisos`
---
-ALTER TABLE `pag_permisos`
-  ADD PRIMARY KEY (`perm_id`);
-
---
--- Indices de la tabla `pag_persona`
---
-ALTER TABLE `pag_persona`
-  ADD PRIMARY KEY (`per_id`);
-
---
--- Indices de la tabla `pag_prestamo_herramienta`
---
-ALTER TABLE `pag_prestamo_herramienta`
-  ADD PRIMARY KEY (`pher_id`),
-  ADD KEY `jor_id` (`jor_id`);
-
---
--- Indices de la tabla `pag_prioridad_trabajo`
---
-ALTER TABLE `pag_prioridad_trabajo`
-  ADD PRIMARY KEY (`priotra_id`);
-
---
--- Indices de la tabla `pag_programacion_equipo`
---
-ALTER TABLE `pag_programacion_equipo`
-  ADD PRIMARY KEY (`proequi_id`);
-
---
--- Indices de la tabla `pag_regional`
---
-ALTER TABLE `pag_regional`
-  ADD PRIMARY KEY (`reg_id`);
-
---
--- Indices de la tabla `pag_rol`
---
-ALTER TABLE `pag_rol`
-  ADD PRIMARY KEY (`rol_id`);
-
---
--- Indices de la tabla `pag_solicitud_servicio`
---
-ALTER TABLE `pag_solicitud_servicio`
-  ADD PRIMARY KEY (`sserv_id`);
-
---
--- Indices de la tabla `pag_tarea`
---
-ALTER TABLE `pag_tarea`
-  ADD PRIMARY KEY (`tar_id`);
-
---
--- Indices de la tabla `pag_tiempo_medidor`
---
-ALTER TABLE `pag_tiempo_medidor`
-  ADD PRIMARY KEY (`tm_id`);
-
---
--- Indices de la tabla `pag_tipo_doc`
---
-ALTER TABLE `pag_tipo_doc`
-  ADD PRIMARY KEY (`tdoc_id`);
 
 --
 -- Indices de la tabla `pag_tipo_equipo`
@@ -1458,318 +1261,20 @@ ALTER TABLE `pag_tipo_equipo`
   ADD PRIMARY KEY (`tequi_id`);
 
 --
--- Indices de la tabla `pag_tipo_falla`
+-- Indices de la tabla `pag_tipo_equipo`
 --
-ALTER TABLE `pag_tipo_falla`
-  ADD PRIMARY KEY (`tfa_id`);
-
---
--- Indices de la tabla `pag_tipo_herramienta`
---
-ALTER TABLE `pag_tipo_herramienta`
-  ADD PRIMARY KEY (`ther_id`);
-
---
--- Indices de la tabla `pag_tipo_mantenimiento`
---
-ALTER TABLE `pag_tipo_mantenimiento`
-  ADD PRIMARY KEY (`tman_id`);
-
---
--- Indices de la tabla `pag_tipo_medidor`
---
-ALTER TABLE `pag_tipo_medidor`
-  ADD PRIMARY KEY (`tmed_id`),
-  ADD KEY `tm_id` (`tm_id`);
-
---
--- Indices de la tabla `pag_tipo_trabajo`
---
-ALTER TABLE `pag_tipo_trabajo`
-  ADD PRIMARY KEY (`ttra_id`);
-
---
--- Indices de la tabla `pag_unidad_medida`
---
-ALTER TABLE `pag_unidad_medida`
-  ADD PRIMARY KEY (`umed_id`);
-
---
--- Indices de la tabla `pag_usuario`
---
-ALTER TABLE `pag_usuario`
-  ADD PRIMARY KEY (`per_id`),
-  ADD UNIQUE KEY `usu_usuario_UNIQUE` (`usu_usuario`);
+ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
+  ADD PRIMARY KEY (`idDetalle`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `pag_almacen`
+-- AUTO_INCREMENT de la tabla `pag_det_tipoEquipo_camposPersonalizados`
 --
-ALTER TABLE `pag_almacen`
-  MODIFY `alm_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pag_area`
---
-ALTER TABLE `pag_area`
-  MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT de la tabla `pag_cargo`
---
-ALTER TABLE `pag_cargo`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `pag_centro`
---
-ALTER TABLE `pag_centro`
-  MODIFY `cen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `pag_ciudad`
---
-ALTER TABLE `pag_ciudad`
-  MODIFY `ciud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT de la tabla `pag_controlador`
---
-ALTER TABLE `pag_controlador`
-  MODIFY `cont_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
---
--- AUTO_INCREMENT de la tabla `pag_control_medidas`
---
-ALTER TABLE `pag_control_medidas`
-  MODIFY `ctrmed_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pag_departamento`
---
-ALTER TABLE `pag_departamento`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
---
--- AUTO_INCREMENT de la tabla `pag_det_componente_ot`
---
-ALTER TABLE `pag_det_componente_ot`
-  MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de la tabla `pag_det_componente_ot`
---
-ALTER TABLE `pag_det_componente_ot`
-  MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pag_det_equipo_medidor`
---
-ALTER TABLE `pag_det_equipo_medidor`
-  MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pag_det_herramienta_ot`
---
-ALTER TABLE `pag_det_herramienta_ot`
-  MODIFY `dherot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `pag_det_insumo_ot`
---
-ALTER TABLE `pag_det_insumo_ot`
-  MODIFY `dinsot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `pag_det_prestamo_herramienta`
---
-ALTER TABLE `pag_det_prestamo_herramienta`
-  MODIFY `detph_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pag_det_programacion`
---
-ALTER TABLE `pag_det_programacion`
-  MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `pag_equipo_componente`
---
-ALTER TABLE `pag_equipo_componente`
-  MODIFY `equicomp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `pag_equipo_cp`
---
-ALTER TABLE `pag_equipo_cp`
-  MODIFY `equicp_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pag_equipo_planos`
---
-ALTER TABLE `pag_equipo_planos`
-  MODIFY `equipla_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pag_estado`
---
-ALTER TABLE `pag_estado`
-  MODIFY `est_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT de la tabla `pag_funcion`
---
-ALTER TABLE `pag_funcion`
-  MODIFY `func_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
---
--- AUTO_INCREMENT de la tabla `pag_insumo`
---
-ALTER TABLE `pag_insumo`
-  MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT de la tabla `pag_inventario`
---
-ALTER TABLE `pag_inventario`
-  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pag_jornada`
---
-ALTER TABLE `pag_jornada`
-  MODIFY `jor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `pag_modulo`
---
-ALTER TABLE `pag_modulo`
-  MODIFY `mod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
---
--- AUTO_INCREMENT de la tabla `pag_orden_trabajo`
---
-ALTER TABLE `pag_orden_trabajo`
-  MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT de la tabla `pag_permisos`
---
-ALTER TABLE `pag_permisos`
-  MODIFY `perm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
---
--- AUTO_INCREMENT de la tabla `pag_prestamo_herramienta`
---
-ALTER TABLE `pag_prestamo_herramienta`
-  MODIFY `pher_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `pag_prioridad_trabajo`
---
-ALTER TABLE `pag_prioridad_trabajo`
-  MODIFY `priotra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `pag_programacion_equipo`
---
-ALTER TABLE `pag_programacion_equipo`
-  MODIFY `proequi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `pag_regional`
---
-ALTER TABLE `pag_regional`
-  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de la tabla `pag_rol`
---
-ALTER TABLE `pag_rol`
-  MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `pag_solicitud_servicio`
---
-ALTER TABLE `pag_solicitud_servicio`
-  MODIFY `sserv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
---
--- AUTO_INCREMENT de la tabla `pag_tarea`
---
-ALTER TABLE `pag_tarea`
-  MODIFY `tar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `pag_tiempo_medidor`
---
-ALTER TABLE `pag_tiempo_medidor`
-  MODIFY `tm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `pag_tiempo_medidor`
---
-ALTER TABLE `pag_tiempo_medidor`
-  MODIFY `tm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `pag_tipo_doc`
---
-ALTER TABLE `pag_tipo_doc`
-  MODIFY `tdoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `pag_tipo_equipo`
---
-ALTER TABLE `pag_tipo_equipo`
-  MODIFY `tequi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `pag_tipo_falla`
---
-ALTER TABLE `pag_tipo_falla`
-  MODIFY `tfa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT de la tabla `pag_tipo_herramienta`
---
-ALTER TABLE `pag_tipo_herramienta`
-  MODIFY `ther_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `pag_tipo_mantenimiento`
---
-ALTER TABLE `pag_tipo_mantenimiento`
-  MODIFY `tman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `pag_tipo_medidor`
---
-ALTER TABLE `pag_tipo_medidor`
-  MODIFY `tmed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT de la tabla `pag_tipo_trabajo`
---
-ALTER TABLE `pag_tipo_trabajo`
-  MODIFY `ttra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `pag_unidad_medida`
---
-ALTER TABLE `pag_unidad_medida`
-  MODIFY `umed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `pag_ciudad`
---
-ALTER TABLE `pag_ciudad`
-  ADD CONSTRAINT `pag_ciudad_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `pag_departamento` (`dept_id`);
-
---
--- Filtros para la tabla `pag_departamento`
---
-ALTER TABLE `pag_departamento`
-  ADD CONSTRAINT `pag_departamento_ibfk_1` FOREIGN KEY (`reg_id`) REFERENCES `pag_regional` (`reg_id`);
-
---
--- Filtros para la tabla `pag_det_equipo_medidor`
---
-ALTER TABLE `pag_det_equipo_medidor`
-  ADD CONSTRAINT `pag_det_equipo_medidor_ibfk_1` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`),
-  ADD CONSTRAINT `pag_det_equipo_medidor_ibfk_2` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`);
-
---
--- Filtros para la tabla `pag_det_herramienta_ot`
---
-ALTER TABLE `pag_det_herramienta_ot`
-  ADD CONSTRAINT `pag_det_herramienta_ot_ibfk_1` FOREIGN KEY (`ot_id`) REFERENCES `pag_orden_trabajo` (`ot_id`),
-  ADD CONSTRAINT `pag_det_herramienta_ot_ibfk_2` FOREIGN KEY (`her_id`) REFERENCES `pag_herramienta` (`her_id`);
-
---
--- Filtros para la tabla `pag_det_insumo_ot`
---
-ALTER TABLE `pag_det_insumo_ot`
-  ADD CONSTRAINT `pag_det_insumo_ot_ibfk_1` FOREIGN KEY (`ot_id`) REFERENCES `pag_orden_trabajo` (`ot_id`),
-  ADD CONSTRAINT `pag_det_insumo_ot_ibfk_2` FOREIGN KEY (`ins_id`) REFERENCES `pag_insumo` (`ins_id`);
-
---
--- Filtros para la tabla `pag_det_prestamo_herramienta`
---
-ALTER TABLE `pag_det_prestamo_herramienta`
-  ADD CONSTRAINT `pag_det_prestamo_herramienta_ibfk_1` FOREIGN KEY (`pher_id`) REFERENCES `pag_prestamo_herramienta` (`pher_id`),
-  ADD CONSTRAINT `pag_det_prestamo_herramienta_ibfk_3` FOREIGN KEY (`est_id`) REFERENCES `pag_estado` (`est_id`);
-
---
--- Filtros para la tabla `pag_tipo_medidor`
---
-ALTER TABLE `pag_tipo_medidor`
-  ADD CONSTRAINT `pag_tipo_medidor_ibfk_1` FOREIGN KEY (`tm_id`) REFERENCES `pag_tiempo_medidor` (`tm_id`);
-
+ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

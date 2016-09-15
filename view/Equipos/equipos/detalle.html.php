@@ -53,7 +53,7 @@
     </div>
 
     <div class="col s4">
-        <label style="color: #448aff;"><h6>Ubicacion:</h6></label> 
+        <label style="color: #448aff;"><h6>Ubicacion en el centro:</h6></label> 
         <?php echo $equipo['equi_ubicacion']; ?>
     </div>
 

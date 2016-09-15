@@ -14,20 +14,6 @@ class TipoEquipoController {
         include_once("../view/Equipos/tipoEquipo/crear.html.php");
     }
 
-    function postCrear() {
-        $tequi_descripcion = $_POST['tequi_descripcion'];
-
-        $insertTipoEquipo = "INSERT INTO pag_tipo_de_equipo (tequi_descripcion) values ('$tequi_descripcion')";
-
-        $objTipoEquipos = new TipoEquipoModel();
-        $insertar = $objTipoEquipos->insertar($insertTipoEquipo);
-
-        //cierre de la conexion
-        $objTipoEquipos->cerrar();
-
-        redirect(crearUrl("equipos", "tipoEquipo", "listar"));
-    }
-
     function listar() {
         include_once("../view/Equipos/tipoEquipo/consultar.html.php");
     }
@@ -35,10 +21,19 @@ class TipoEquipoController {
     function editar($parametros = false) {
         $objTipoEquipos = new TipoEquipoModel();
 
+
         $id = $parametros[1];
 
-        $sql = "SELECT * FROM pag_tipo_de_equipo WHERE tequi_id='" . $id . "'";
-        $tEquipo = $objTipoEquipos->find($sql);
+
+
+        $sqlEquipo = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='$id'";
+        $tEquipo = $objTipoEquipos->find($sqlEquipo);
+
+        //die(print_r($id));
+        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoEquipo_camposPersonalizados WHERE "
+                . "pag_det_tipoEquipo_camposPersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
+                . "pag_det_tipoEquipo_camposPersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoEquipo_camposPersonalizados.tequi_id='$id'";
+        $sqlDetalle = $objTipoEquipos->select($sqlCP);
 
         // Cierra la conexion
         $objTipoEquipos->cerrar();
@@ -53,7 +48,7 @@ class TipoEquipoController {
         $objTipoEquipos = new TipoEquipoModel();
 
         $sql = "UPDATE "
-                . "pag_tipo_de_equipo "
+                . "pag_tipo_equipo "
                 . "SET "
                 . "tequi_descripcion = '$tequi_descripcion' "
                 . "WHERE tequi_id = $tequi_id";
@@ -69,18 +64,19 @@ class TipoEquipoController {
     function verDetalle($parametros = false) {
         $objTipoEquipos = new TipoEquipoModel();
 
+
         $id = $parametros[1];
 
-        $sqlEquipo = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='" . $id . "'";
-        $consultaEquipo = $objTipoEquipos->find($sqlEquipo);
 
 
-//die(print_r($id));
-        $sql = "SELECT * FROM pag_tipo_equipo,pag_detalle_tipoEquipo_campoPersonalizado,pag_campos_personalizados "
-                . "WHERE pag_detalle_tipoEquipo_campoPersonalizado.cp_id=pag_campos_personalizados.cp_id AND "
-                . "pag_detalle_tipoEquipo_campoPersonalizado.tequi_id=pag_tipo_equipo.tequi_id AND "
-                . "pag_detalle_tipoEquipo_campoPersonalizado.tequi_id='$id'";
-        $consulta = $objTipoEquipos->select($sql);
+        $sqlEquipo = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='$id'";
+        $tEquipo = $objTipoEquipos->find($sqlEquipo);
+
+        //die(print_r($id));
+        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoEquipo_camposPersonalizados WHERE "
+                . "pag_det_tipoEquipo_camposPersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
+                . "pag_det_tipoEquipo_camposPersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoEquipo_camposPersonalizados.tequi_id='$id'";
+        $sqlDetalle = $objTipoEquipos->select($sqlCP);
 
         // Cierra la conexion
         $objTipoEquipos->cerrar();
@@ -89,19 +85,16 @@ class TipoEquipoController {
     }
 
     function postEliminar() {
-        $objTipoEquipos = new TipoEquipoModel();
-
         $id = $_POST['id'];
+        //die(print_r($id));
 
-        $sql = "UPDATE pag_tipo_de_equipo SET estado = 1 WHERE equi_id='" . $id . "'";
-        //die(print_r($sql));
+        $objTipoEquipo = new TipoEquipoModel();
 
-        $respuesta = $objTipoEquipos->update($sql);
 
+        $sql = "UPDATE pag_tipo_equipo SET estado=false WHERE tequi_id='$id'";
+        $campos = $objTipoEquipo->update($sql);
         // Cierra la conexion
-        $objTipoEquipos->cerrar();
-
-        redirect(crearUrl("equipos", "equipos", "listar"));
+        $objTipoEquipo->cerrar();
     }
 
     public function buscarAjax() {
@@ -191,34 +184,30 @@ class TipoEquipoController {
         //die(print_r($id_campo));
         $objTipoEquipo = New TipoEquipoModel();
 
-        $sql = "INSERT INTO pag_tipo_equipo (tequi_id,tequi_descripcion)VALUES('$id_tipo_Equipo','$tipo_Equipo')";
+        $sql = "INSERT INTO pag_tipo_equipo (tequi_id,tequi_descripcion,estado)VALUES('$id_tipo_Equipo','$tipo_Equipo',NULL)";
         $objTipoEquipo = New TipoEquipoModel();
         $insert = $objTipoEquipo->insertar($sql);
 
         if (count($errores) > 0) {
             setErrores($errores);
-        } else {
-
-            //DIE(PRINT_R($sql)); 
-            if ($insert == true) {
-                foreach ($id_campo as $campo) {
-                    $sqlDetalle = "INSERT INTO pag_detalle_tipoEquipo_campoPersonalizado ("
-                            . "tequi_id,"
-                            . "cp_id) VALUES("
-                            . "'$id_tipo_Equipo',"
-                            . "'$campo[cp_id]')";
-
-                    $insertCampo = $objTipoEquipo->insertar($sqlDetalle);
-                }
-//            if ($insertCampo = true) {
-//                DIE(print_r("INSERTO DETALLE"));
-//            }
-            }
-            $objTipoEquipo->cerrar();
+            redirect(crearUrl('Equipos', 'tipoEquipo', 'crear'));
+        }
+        //DIE(PRINT_R($sql)); 
+        foreach ($id_campo as $campo) {
+            $id_tipo_Equipo = $_POST['id_tipo_Equipo'];
+            //DIE(PRINT_R($id_tipo_Equipo)); 
+            $tipo_Equipo = $_POST['tequi_descripcion'];
+            $id_campo = $_POST['camposPersonalizados'];
+            $sqlDetalle = "INSERT INTO pag_det_tipoEquipo_camposPersonalizados ("
+                    . "tequi_id,"
+                    . "cp_id) VALUES("
+                    . "'$id_tipo_Equipo',"
+                    . "'$campo[cp_id]')";
+            $insertCampo = $objTipoEquipo->insertar($sqlDetalle);
         }
 
-
-        redirect(crearUrl('Equipos', 'tipoEquipo', 'crear'));
+        $objTipoEquipo->cerrar();
+        redirect(crearUrl('Equipos', 'tipoEquipo', 'listar'));
     }
 
 }

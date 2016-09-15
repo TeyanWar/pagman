@@ -209,17 +209,13 @@ class ProgramacionController {
                     $deta = $objProgramacion->insertar($detalle);
                     $a++;
                 }
-                
-                echo true;
-                
+
                 $objProgramacion->cerrar();
-//                redirect(crearUrl("programacion", "programacion", "listar"));
-                
-            }  else {
-                echo false;
-            }
+
+            } 
             
         }
+        echo getRespuestaAccion('listar');
     }
     
     function verDetalle($parametros = false) {
@@ -406,11 +402,18 @@ class ProgramacionController {
         }
         //--------------------------------------------
         
-        $sql=" SELECT pag_componente.comp_id,comp_descripcion from pag_equipo_componente,pag_componente where pag_equipo_componente.comp_id=pag_componente.comp_id and equi_id='".$_POST['equipo']."' ";  
+        $sql=" SELECT pag_componente.comp_id,comp_descripcion "
+                . "from pag_equipo_componente,pag_componente "
+                . "where pag_equipo_componente.comp_id=pag_componente.comp_id "
+                . "and equi_id='".$_POST['equipo']."' ";
         $componentes=$tipos = $objProgramacion->select($sql);
         $tip = "SELECT * FROM pag_tipo_trabajo";
         $tipos = $objProgramacion->select($tip);
-        $med = "SELECT* FROM pag_tipo_medidor";
+        $med = "SELECT pag_tipo_medidor.tmed_id,tmed_nombre "
+                . "FROM pag_tipo_medidor,pag_det_equipo_medidor,pag_equipo "
+                . "WHERE pag_det_equipo_medidor.equi_id=pag_equipo.equi_id "
+                . "AND pag_det_equipo_medidor.tmed_id=pag_tipo_medidor.tmed_id "
+                . "AND pag_equipo.equi_id='".$_POST['equipo']."' ";
         $medidores = $objProgramacion->select($med);
         $prio = "SELECT* FROM pag_prioridad_trabajo";
         $prioridades = $objProgramacion->select($prio);

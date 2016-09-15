@@ -11,7 +11,7 @@
         </button>
     </div>
 
-    <form id="agregar" class="col s12" action="<?php echo crearUrl("usuarios", "personas", "postAgregaruser")?>" method="post" novalidate>
+    <form id="agregar" class="col s12" data-url="<?php echo crearUrl("Usuarios", "personas", "postAgregaruser", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Usuarios", "usuarios", "listar") ?>" method="post" novalidate>
 
         <div class="row">
 
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <input type="hidden" name="id" value="<?php echo $usuar['per_id'] ?>">
+        <input type="hidden" name="idper" value="<?php echo $usuar['per_id'] ?>">
 
         <div class="row">
             <button name="action" type="submit" class="btn teal waves-effect waves-light right submit_ot animated infinite rubberBand">Registrar
@@ -76,6 +76,10 @@
     jQuery.validator.addMethod("letra", function(value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
+    //----------------------expresion para validar solo numeros y letras----------------
+    jQuery.validator.addMethod("password", function(value, element) {
+        return this.optional(element) || /^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i.test(value);
+    });
     
         //----------------------validate editar----------------------------
     
@@ -88,6 +92,7 @@
             },
             clave: {
                 required: true,
+                password: true,
                 minlength: 5,
                 maxlength: 20
             },
@@ -109,6 +114,7 @@
             },
             clave:{
                 required: "El clave es obligatorio.",
+                password: "El valor debe ser alfanumerico.",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },

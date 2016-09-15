@@ -1,4 +1,5 @@
-<center><h5>EDITAR TIPO DE EQUIPO </h5></center><br>
+<center><h5>EDITAR CAMPO PERSONALIZADO Código <code><?php echo $consulta['cp_id']; ?></code></h5></center><br>
+</div>
 <?php
 $miserrores = getErrores();
 if (!$miserrores == "") {
@@ -12,62 +13,26 @@ if (!$miserrores == "") {
     </div>
 <?php }
 ?>
-<form class="col s12" id="formEditarCamposPersonalizados" action="<?php echo crearUrl("Equipos", "tipoEquipo", "postEditar") ?>" method="POST">
+<form class="col s12" id="formEditarCamposPersonalizados" action="<?php echo crearUrl("Equipos", "campoPersonalizado", "postEditar") ?>" method="POST">
     <div class="row">
-        <div class="input-field col s6">
-            <input type="text" id="tipoEquipoNombre" data-error=".errorTxt2" name="tipoEquipoNombre" class="validate" value="<?php echo $tEquipo['tequi_id']; ?>">
-            <label for="tipoEquipoNombre" class="active" >(*)Código Tipo de Equipo:</label>
-            <div class="errorTxt2"></div>
-        </div>
-        <div class="input-field col s6">
-            <input type="text" id="tipoEquipoNombre" data-error=".errorTxt2" name="tipoEquipoNombre" class="validate" value="<?php echo $tEquipo['tequi_descripcion']; ?>">
-            <label for="tipoEquipoNombre" class="active" >(*)Nombre Tipo de Equipo:</label>
+        <div class="input-field col s12">
+            <input type="text" id="nombreCP" data-error=".errorTxt2" name="nombreCP" class="validate" value="<?php echo $consulta['cp_nombre']; ?>">
+            <label for="nombreCP" class="active" >(*)Nombre campo personalizado:</label>
             <div class="errorTxt2"></div>
         </div>
     </div>
-    <table class="striped">
-        <thead>
-            <tr>
-                <th>
-                    Seleccionado
-                </th>
-                <th>
-                    Nombre del Campo
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        <div class="col s6">
-            <?php foreach ($sqlDetalle as $detalle) { ?>
-            
-                <tr>
-                    <td>
-                        <input style="display: none" class="filled-in"  id="<?php echo $detalle['cp_id']; ?>" value="<?php echo $detalle['cp_id']; ?>" type="checkbox">
-                        <label for="<?php $detalle['cp_id']; ?>"></label>
-
-                    </td>
-
-                    <td>
-                        <?php echo $detalle['cp_nombre']; ?>
-                    </td>
-                </tr>
-                <?php
-            }
-            ?>
-        </div>
-        </tbody>
-    </table>
-    <!--<input type="hidden" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" value="<?php //echo $consulta['cp_id'];           ?>">-->
     <div class="row">
         <div class="input-field col s12">
             <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Editar
                 <i class="mdi-content-add right"></i>
             </button>
         </div>
-    </div><br>
+    </div>
+
+            <input type="hidden" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" value="<?php echo $consulta['cp_id']; ?>">
+
 </form>
 <script>
-
     jQuery.validator.addMethod("letra", function (value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
@@ -112,4 +77,7 @@ if (!$miserrores == "") {
             }
         }
     });
+
+
+
 </script>

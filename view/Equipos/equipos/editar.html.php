@@ -1,5 +1,5 @@
 <div class="row">
-    <form class="col s12" role="form" action="<?php echo crearUrl("equipos", "equipos", "postEditar") ?>" method="post">
+    <form  id="formedi" class="col s12" role="form" action="<?php echo crearUrl("equipos", "equipos", "postEditar") ?>" method="post">
         <div class="row">
             <div class="input-field col s4">
                 <input readonly type="text" id="equi_noplaca" name="equi_noplaca" value="<?php echo $equipo['equi_id']; ?>">
@@ -96,5 +96,154 @@
     </form>
 </div>
 <script>
+     jQuery.validator.addMethod("letra", function (value, element) {
+        return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
+    });
+
+    $("#formedi").validate({
+        rules: {
+            equi_id: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            per_id: {
+                required: true
+            },
+            equi_nombre: {
+                required: true,
+                letra: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            est_id: {
+                required: true
+            },
+            equi_modelo: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            equi_serie: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            equi_fabricante: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            equi_marca: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            equi_ubicacion: {
+                required: true,
+                minlength: 3,
+                maxlength: 20
+            },
+            equi_fecha_compra: {
+                required: true
+            },
+            equi_fecha_instalacion: {
+                required: true
+            },
+            equi_vence_garantia: {
+                required: true
+            },
+            cen_id: {
+                required: true
+            },
+            tequi_id: {
+                required: true
+            },
+            area_id: {
+                required: true
+            },
+            cgender: "required",
+            cagree: "required",
+        },
+        //For custom messages
+        messages: {
+            equi_id: {
+                required: "El N.Placa es obligatorio.",
+                minlength: "Introduzca al menos 3 caracteres",
+                maxlength: "Sólo se permite introducir máximo 20 caracteres"
+            },
+            per_id: {
+                required: "El encargado del centro es obligatorio."
+            },
+            equi_nombre: {
+                required: "El nombre del equipo es obligatorio.",
+                letra: "Sólo se permiten letras",
+                minlength: "Introduzca al menos 3 caracteres",
+                maxlength: "Sólo se permite introducir máximo 20 caracteres"
+            },
+            est_id: {
+                required: "El estado del equipo es obligatorio."
+            },
+            equi_modelo: {
+                required: "El modelo es obligatorio.",
+                minlength: "Introduzca al menos 5 caracteres",
+                maxlength: "Sólo se permite introducir máximo 20 caracteres"
+            },
+            equi_serie: {
+                required: "El número de serie es obligatorio.",
+                minlength: "Introduzca al menos 5 caracteres",
+                maxlength: "Sólo se permite introducir máximo 20 caracteres"
+            },
+            equi_fabricante: {
+                required: "El fabricante es obligatorio.",
+                minlength: "Introduzca al menos 5 caracteres",
+                maxlength: "Sólo se permite introducir máximo 20 caracteres"
+            },
+            equi_marca: {
+                required: "La marca es obligatoria.",
+                minlength: "Introduzca al menos 5 caracteres",
+                maxlength: "Sólo se permite introducir máximo 20 caracteres"
+            },
+            equi_ubicacion: {
+                required: "La ubicación es obligatoria.",
+                minlength: "Introduzca al menos 5 caracteres",
+                maxlength: "Sólo se permite introducir máximo 20 caracteres"
+            },
+            equi_fecha_compra: {
+                required: "La fecha de compra es obligatoria."
+            },
+            equi_fecha_instalacion: {
+                required: "La fecha de instalacion es obligatoria."
+            },
+            equi_vence_garantia: {
+                required: "La Fecha Vecimiento De Garantia es obligatorio."
+            },
+            cen_id: {
+                required: "El dentro de formación es obligatorio."
+            },
+            tequi_id: {
+                required: "El tipo de equipo es obligatorio."
+            },
+            area_id: {
+                required: "El área es obligatoria."
+            },
+            curl: "Enter your website"
+        },
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+    
+   
+    
+    
+    
+    
     $('select').material_select();
 </script>

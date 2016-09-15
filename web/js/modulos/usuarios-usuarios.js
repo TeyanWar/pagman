@@ -1,35 +1,5 @@
 $(document).ready(function () {
-    
-    //----------------------respuesta registro-------------------
-    $(document).on('submit', '#formValidate', function (e) {
-        e.preventDefault();
-        var url = $('#formValidate').attr("data-url");
-        var redirect = $('#formValidate').attr("data-redirect");
-        var error = $('#formValidate').attr("action");
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: $(this).serialize()
-        }).done(function (respuesta) {
-            console.log(respuesta);
-            if (respuesta==true) {
-                Materialize.toast("<i class= 'material-icons' ></i> Registro exitoso.", 2000, 'rounded col green');
-                setTimeout(
-                        function () {
-                            window.location.href = (redirect);
-                        }, 2000);
-            }
-            else {
-                Materialize.toast("<i class= 'material-icons' ></i> Error al registrar.", 3000, 'rounded col red');
-                setTimeout(
-                        function () {
-                            window.location.href = (error);
-                        }, 1000);
-            }
-        });
-    });
-    
-    
+
     //----------------- validaciones ---------------
     
     /* Incluimos un método para validar el campo nombre */
@@ -212,31 +182,36 @@ $(document).ready(function () {
 
 
     //---------------funcion modal---------------------------
-
+    
     $(document).on("click", ".editar", function () {
 
         var url = $(this).attr("data-url");
         $("#modalUpdate > .modal-content").html("Cargando ...");
-
-        $.ajax({
-            url: url,
-            type: "get",
-            success: function (data) {
-                $("#modalUpdate > .modal-content").html(data);
-            }
-        });
+        setTimeout(
+            function () {
+                $.ajax({
+                    url: url,
+                    type: "get",
+                    success: function (data) {
+                        $("#modalUpdate > .modal-content").html(data);
+                    }
+                });
+            }, 950);
     });
 
     $(document).on("click", ".ver-detalle", function () {
         var url = $(this).attr("data-url");
-
-        $.ajax({
-            url: url,
-            type: "get",
-            success: function (data) {
-                $("#modalDetalle > .modal-content").html(data);
-            }
-        });
+        $("#modalDetalle > .modal-content").html("Cargando ...");
+        setTimeout(
+            function () {
+                $.ajax({
+                    url: url,
+                    type: "get",
+                    success: function (data) {
+                        $("#modalDetalle > .modal-content").html(data);
+                    }
+                });
+            }, 950);
     });
 
     $(document).on("click", ".agregar", function () {

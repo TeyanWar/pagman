@@ -1,9 +1,8 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
-    //consulta Equipos
-    $("#busquedaAjax").keyup(function () {
+//consulta Equipos
+    $("#busquedaAjax").keyup(function() {
         var usuario = $("#busquedaAjax").val();
-            
         if (usuario != "") {
             $('#pagina').val(1);
         }
@@ -11,43 +10,51 @@ $(document).ready(function () {
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaEquipos=" + usuario +"&pagina"+pagina,
-            success: function (data) {
+            data: "busquedaEquipos=" + usuario + "&pagina" + pagina,
+            success: function(data) {
                 $("#tabla").html(data);
             }
         });
     });
-
     $("#busquedaAjax").trigger("keyup");
+    //Ver detalle//
 
-
-
-    $(document).on("click", ".ver-detalle1", function () {
+    $(document).on("click", ".ver-detalle1", function() {
         var url = $(this).attr("data-url");
-
         $.ajax({
             url: url,
             type: "get",
-            success: function (data) {
+            success: function(data) {
                 $("#modalDetalle1 > .modal-content").html(data);
             }
         });
     });
-
-    $(document).on("click", ".editar1", function () {
+    //Capturamos el ID del select de formulario CREAR EQUIPO
+    $("#tequi_id").change(function() {
+        //capturamos el ID del select
+        var id = $(this).val();
+        
+        //capturamos la URL del SELECT
         var url = $(this).attr("data-url");
+        alert(url);
+        $.ajax({
+            id: id,
+            url: url,
+        });
+    })
 
+    //editar//
+    $(document).on("click", ".editar1", function() {
+        var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "get",
-            success: function (data) {
+            success: function(data) {
                 $("#modalUpdate1 > .modal-content").html(data);
             }
         });
     });
-
-
-    $(document).on('click', '.modal-eliminar', function (e) {
+    $(document).on('click', '.modal-eliminar', function(e) {
         e.preventDefault();
         var url = $(this).attr('data-url');
         var equi_id = $(this).attr('data-id');
@@ -58,7 +65,7 @@ $(document).ready(function () {
             confirmButtonColor: "Red ",
             confirmButtonText: "si,eliminar registro",
             closeOnConfirm: false},
-        function () {
+        function() {
             $.ajax({
                 url: url,
                 type: 'post',
@@ -71,16 +78,13 @@ $(document).ready(function () {
             $("#busquedaAjax").trigger('keyup');
         });
     });
-
-
     //----------------- validaciones ---------------
 
     /* Incluimos un método para validar el campo nombre */
 
-    jQuery.validator.addMethod("letra", function (value, element) {
+    jQuery.validator.addMethod("letra", function(value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
-
     $("#formequipo").validate({
         rules: {
             equi_id: {
@@ -211,7 +215,7 @@ $(document).ready(function () {
             curl: "Enter your website"
         },
         errorElement: 'div',
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
                 $(placement).append(error)
@@ -220,5 +224,4 @@ $(document).ready(function () {
             }
         }
     });
-
 });

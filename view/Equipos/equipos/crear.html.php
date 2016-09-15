@@ -16,8 +16,8 @@
             </button>
         </div>
 
-        <?php $error=getErrores(); ?>
-         <?php if (!$error=="") { ?>
+        <?php $error = getErrores(); ?>
+        <?php if (!$error == "") { ?>
             <div id="card-alert" class="card red">
                 <div class="card-content white-text">
                     <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
@@ -30,7 +30,7 @@
         <?php } ?>
 
         <div class="row">
-            <form id="formequipo" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear") ?>" method="POST" enctype='multipart/form-data' novalidate>
+            <form id="formequiposs" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear") ?>" method="POST" enctype='multipart/form-data' novalidate>
                 <div class="row">
                     <div class="input-field col s4">
                         <input type="text" id="equi_id" name="equi_id" class="validate" data-error=".errorTxt1">
@@ -94,7 +94,7 @@
                     </div>
                     <div class="input-field col s4">
                         <input type="text" id="equi_ubicacion" name="equi_ubicacion" class="validate" data-error=".errorTxt9">
-                        <label for="equi_ubicacion">(*) Ubicacion:</label>
+                        <label for="equi_ubicacion">(*) Ubicacion en el centro:</label>
                         <div class="errorTxt9"></div>
                     </div>
                 </div>
@@ -130,7 +130,7 @@
                         <div class="errorTxt13"></div>
                         <label for="cen_id" class="active">(*) Seleccione El Centro De Formacion:</label>
                     </div>
-                    <div class="file-field input-field col s4">
+                    <div class="file-field input-field col s4" id="tequi_id" name="tequi_id" data-url="<?php echo crearUrl("equipos", "campoPersonalizado", "editar", array('noVista', 'novVista')); ?>">
                         <select id="tequi_id" name="tequi_id" class="error browser-default select2" data-error=".errorTxt14">
                             <option value="" >(Vacio)</option>
                             <?php
@@ -140,7 +140,7 @@
                             ?>
                         </select>
                         <div class="errorTxt14"></div>
-                        <label for="tequi_id" class="active">(*) Seleccione El Tipo De Equipo:</label>
+                        <label id="tequi_id"  for="tequi_id" class="active">(*) Seleccione El Tipo De Equipo:</label>
                     </div>
                     <div class="input-field col s4">
                         <select name="area_id" class="error browser-default select2" data-error=".errorTxt15">
@@ -156,7 +156,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                         <div class="btn teal darken-2">
                             <span>FOTO</span>
                             <input type='file' id='ruta' name='ruta'>
@@ -164,6 +164,32 @@
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="hidden">
                         </div>
+                    </div>
+                    <div class="input-field col s6">
+                        <div class="btn teal darken-2">
+                            <div class="modal-trigger" href="#modal1">
+                                <span>seleccione el tipo de medidor</span>
+                            </div>    
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="hidden">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <h4 class="header2">tipo de medidor</h4>
+                        <br>
+                        <?php foreach ($medidores as $medidor) { ?>
+                            <p>
+                                <input name="medidores[]" id="<?php echo $medidor['tmed_id'] ?>" value="<?php echo $medidor['tmed_id'] ?>" type="checkbox">
+                                <label for="<?php echo $medidor['tmed_id'] ?>"><?php echo $medidor['tmed_nombre'] ?></label>
+                            </p>
+                        <?php } ?>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
                     </div>
                 </div>
                 <!-- 

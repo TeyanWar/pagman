@@ -14,7 +14,8 @@ $(document).ready(function () {
     $("#formTipoEquipo").validate({
         rules: {
             id_tipo_Equipo: {
-                required: true
+                required: true,
+                minlength: 4
             },
             tequi_descripcion: {
                 required: true,
@@ -23,22 +24,23 @@ $(document).ready(function () {
                 maxlength: 50
             },
             idCampoSelec: {
-                required: true,
+                required: true
             }
         },
         //For custom messages
         messages: {
             id_tipo_Equipo: {
-                required: "Este campo no puede quedar vacio",
+                required: "Este campo no puede quedar vacio<br><br>",
+                minlength: "Este campo debe contener como minimo 4 caracteres, NO olvides seguir el patron <code>TE0XXX</code><br><br>"
             },
             tequi_descripcion: {
                 required: "Por favor, diligenciar este campo.",
                 numeric: "Este campo no puede contener Numeros",
-                minlegth: "Por favor digite minimo 4 caracteres",
+                minlength: "Por favor digite minimo 4 caracteres",
                 maxlength: "Solo se permiten 50 carcateres."
             },
             idCampoSelect: {
-                required: "Este campo es obligatorio",
+                required: "Este campo es obligatorio"
             }
         },
         errorElement: 'div',
@@ -93,6 +95,10 @@ $(document).ready(function () {
 //EMPIEZA EL LISTAR DE CAMPOS PERSONALIZADOS EN EL CREAR TIPO EQUIPO
 
 
+    $(document).on("click", ".remove", function () {
+        var id = $(this).attr("data-id");
+        $("#row-" + id).remove();
+    });
 
 
     $("#buscarTipoEquipo").keyup(function () {
@@ -136,60 +142,33 @@ $(document).ready(function () {
             }
         });
     });
-    $(document).on("click", ".eliminar1", function () {
-        var url = $(this).attr("data-url");
-        $.ajax({
-            url: url,
-            type: "get",
-            success: function (data) {
-                $("#modaleliminar1 > .modal-content").html(data);
-            }
-        });
-    });
-    $('.btn-warning-confirm').click(function () {
-        swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: '#DD6B55',
-            confirmButtonText: 'Yes, delete it!',
-            closeOnConfirm: false
-        },
-        function () {
-            swal("Deleted!", "Your imaginary file has been deleted!", "success");
-        });
-    });
-    $(document).on('click', '.eliminar', function (e) {
+    //------------------- ELIMINAR --------------------//
+
+    $(document).on('click', '.modal-eliminar', function (e) {
         e.preventDefault();
-        var url = $(this).attr('data-url');
-        var equi_id = $(this).attr('data-equi_id');
-        swal({title: "¿Realmente desea eliminar este registro?",
-            text: "Recuerde  que una vez eliminado no se podra recuperar",
+        var url = $(this).attr("data-url");
+        var equi_id = $(this).attr("data-id");
+        swal({
+            title: "Estas seguro de eliminar el registro?",
+            text: "La información que estas apunto de eliminar no aparecera en pantalla!",
             type: "warning",
             showCancelButton: true,
-            confirmButtonColor: "Red ",
-            confirmButtonText: "si,eliminar registro",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Si, Elimine el Registro!",
             closeOnConfirm: false},
         function () {
             $.ajax({
                 url: url,
-                type: 'post',
+                type: "post",
                 data: {
                     id: equi_id
                 }
-            }).done(function (data) {
-
             });
-            swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
+            swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
             window.location.href = "listar";
         });
     });
-
-    $(document).on("click", ".remove", function () {
-        var id = $(this).attr("data-id");
-        $("#row-" + id).remove();
-    });
+    //--------------------- FIN ----------------------//
 
     $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
@@ -199,6 +178,18 @@ $(document).ready(function () {
             type: "get",
             success: function (data) {
                 $("#modal_detalle_tipoEquipo> .modal-content").html(data);
+
+            }
+        });
+    });
+    $(document).on('click', ".modal-trigger", function () {
+        var url = $(this).attr("data-url");
+        $(".modal-data").html('Cargando ....');
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#modal_editar_tipoEquipo> .modal-content").html(data);
 
             }
         });

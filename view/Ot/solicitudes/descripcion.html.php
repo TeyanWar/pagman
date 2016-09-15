@@ -26,7 +26,7 @@
 
 <label>Observaciones</label>
 
-<h6><?php echo $descripcion['sserv_observaciones'] ?></h6>
+<h6><?php echo $descripcion['sserv_observacion'] ?></h6>
 
 <div class="input-field col  s12 center"> 
     <input type="button" class="btn blue cerrar" value="Cerrar">

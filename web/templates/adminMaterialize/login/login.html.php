@@ -3,8 +3,9 @@
       <form class="login-form" id="formLoginAjax"action="<?php echo crearUrl("sesion", "sesion", "postInicio")?>" method="post">
         <div class="row">
           <div class="input-field col s12 center">
-            <img src="<?php echo addLib('templates/adminMaterialize/images/login-logo.png') ?>" alt="" class="circle responsive-img valign profile-image-login">
-            <p class="center login-form-text">Inicio Sesion PAGMAN</p>
+            <img src="<?php echo addLib('img/sena/logo_sena.jpg') ?>" alt="" class="circle responsive-img valign profile-image-login">
+            <p class="center login-form-text">INICIAR SESI&Oacute;N</p>
+            <p class="center"><b>PAGMAN </b></p>
           </div>
         </div>
         <div class="row margin">
@@ -29,7 +30,7 @@
         </div>
         <div class="row">
           <div class="input-field col s12" id="loginAjax">
-             <input type="button"  value="ENTRAR" class="btn waves-effect waves-light col s12">
+             <input type="button" value="ENTRAR" class="btn waves-effect col s12 verde_claro">
           </div>
         </div>
         <div class="row">

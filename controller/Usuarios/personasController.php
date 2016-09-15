@@ -10,11 +10,11 @@ class PersonasController
         
         $PersonasModel = new PersonasModel();
         
-            $id = $parametros[1];
+            $agre = $parametros[1];
 
             $sql = "SELECT pag_persona.per_id "
                     . "FROM pag_persona "
-                    . "WHERE pag_persona.per_id='$id'";
+                    . "WHERE pag_persona.per_id='$agre'";
 
             $usuar = $PersonasModel->find($sql);
 
@@ -54,42 +54,50 @@ class PersonasController
             redirect(crearUrl('usuarios', 'usuarios', 'listar'));
             //----------------fin validaciones-----------------
         }  else {
-
-        
-            $PersonasModel = new PersonasModel();
-        
-            $id = $_POST['id'];
+            
+            $idper = $_POST['idper'];
             $login = $_POST['login'];
             $clave = $_POST['clave'];
             $estado = $_POST['estado'];
             $perfil = $_POST['perfil'];
+            
+            if(isset($idper) && ($login) && ($clave) && ($estado) && ($perfil)){
+                $PersonasModel = new PersonasModel();
 
-            $sql = "UPDATE "
-                . "pag_persona "
-                . "SET "
-                . "per_tipo='usuario del sistema' "
-                . "WHERE per_id='$id'";
+                $sql = "UPDATE "
+                    . "pag_persona "
+                    . "SET "
+                    . "per_tipo='usuario del sistema' "
+                    . "WHERE per_id='$idper'";
 
-            $respuesta = $PersonasModel->update($sql);
+                $respuesta = $PersonasModel->update($sql);
 
+                //----------------------------------------------------------
+                //aqui Inicia encriptacion de Password
+                $salt = '$bgr$/';
+                $passwordp = sha1(md5($salt . $clave));
+                //aqui termina encriptacion password
+
+                $insertusu = "INSERT INTO pag_usuario(per_id,"
+                            . "usu_usuario,usu_clave,"
+                            . "usu_estado,rol_id) "
+                            . " VALUES('$idper',"
+                            . "'$login',"
+                            . "'$passwordp',"
+                            . "'$estado',"
+                            . "'$perfil')";
+
+                $insertar = $PersonasModel->insertar($insertusu);
+
+                // Cierra la conexion
+                $PersonasModel->cerrar();
+                echo true;
+            }  else {
+                echo false;
+            }
             //----------------------------------------------------------
 
-            $insertusu = "INSERT INTO pag_usuario(per_id,"
-                        . "usu_usuario,usu_clave,"
-                        . "usu_estado,rol_id) "
-                        . " VALUES('$id',"
-                        . "'$login',"
-                        . "'$clave',"
-                        . "'$estado',"
-                        . "'$perfil')";
-
-            $insertar = $PersonasModel->insertar($insertusu);
-
-            // Cierra la conexion
-            $PersonasModel->cerrar();
-            //----------------------------------------------------------
-
-            redirect(crearUrl("usuarios", "usuarios", "listar"));
+//            redirect(crearUrl("usuarios", "usuarios", "listar"));
         }
     }
     
@@ -105,10 +113,10 @@ class PersonasController
         $plano = $_FILES['plano'];
         $errores=array();
         //-------------------------------validar el tipo de archivo-----------------------------
-        if($plano['type'] != 'text/csv'){
-            $errores[]='<h6><strong>(*) Este tipo de archivo no es valido.</strong><h6>';
-            $errores[]='<h6><strong>(*) Solo se permiten archivos con la extencion "csv".</strong><h6>';
-        } 
+//        if($plano['type'] != 'text/csv'){
+//            $errores[]='<h6><strong>(*) Este tipo de archivo no es valido.</strong><h6>';
+//            $errores[]='<h6><strong>(*) Solo se permiten archivos con la extencion "csv".</strong><h6>';
+//        } 
         
         //------------------------------------------------------------------------------------
         

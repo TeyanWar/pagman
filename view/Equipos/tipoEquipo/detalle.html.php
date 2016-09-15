@@ -1,6 +1,6 @@
 <center>
     <h5>
-        Campos Personalizados del Tipo de Equipo: <b><code><?php echo $consultaEquipo['tequi_descripcion']; ?></code></b>
+        Campos Personalizados del Tipo de Equipo: <b><code><?php echo $tEquipo['tequi_descripcion']; ?></code></b>
     </h5>
 </center>
 <table class="striped">
@@ -16,12 +16,11 @@
     ?>
 
     <tbody>
-        <?php foreach ($consulta as $tipoEquipo) { ?>
+        <?php foreach ($sqlDetalle as $tipoEquipo) { ?>
             <tr>
                 <?php //die(print_r($tipoEquipo['cp_nombre']));   ?>
                 <td><?php echo $tipoEquipo['cp_id']; ?></td>
                 <td><?php echo $tipoEquipo['cp_nombre']; ?></td>
-                <td>Agregado</td>
             </tr>
         <?php } ?>
     </tbody>
