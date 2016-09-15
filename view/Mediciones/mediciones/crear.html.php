@@ -21,22 +21,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <?php
-                $errores = getErrores();
-                if (!$errores == "") {
-                    ?>
-                    <div id="">
-                        <div id="card-alert" class="card red">
-                            <div class="card-content white-text">
-                                <p><i class="mdi-alert-error"></i> 
-                                <p><?php echo $errores ?></p>
-                            </div>
-                            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                    </div>
-                <?php } ?>
+               
 
                 <!--Fin mensaje de campos obligatorios-->
 

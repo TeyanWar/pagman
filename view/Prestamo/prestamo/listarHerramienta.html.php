@@ -13,7 +13,7 @@
     <tbody>
         <?php
         $count = 1;
-        foreach ($listarHerramienta as $herramienta) {
+        foreach ($listarHerramienta as $herramienta) {  
             ?>
             <tr>
                 <td><?php echo $count++ ?></td>

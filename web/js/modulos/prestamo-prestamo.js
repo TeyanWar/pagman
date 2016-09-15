@@ -2,9 +2,6 @@ $(document).ready(function () {
     //aqui empieza las validaciones para el prestamo de herramientas
     $("#F_prestamo_herramienta").validate({
         rules: {
-            pher_observaciones: {
-                required: true
-            }
         },
         //mensajes para cada validacion del prestamo de herramientas
         messages: {
@@ -22,16 +19,31 @@ $(document).ready(function () {
             }
         }
     });
+
+    //aqui terminan las validaciones del formulario de herramientas
     //------------------------------------------------------------------------------//
+    // aqui empieza la modal para editar herramientas
+    $(document).on('click', ".modal-trigger", function () {
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#model-data").html(data);
+            }
+        });
+    });
 
     //aqui empieza el filtro de busqueda herramienta para el prestamo de herramientas (carrito)
     $("#buscarHerramienta").keyup(function () {
-        var Herramienta = $("#buscarHerramienta").val();
         var url = $(this).attr("data-url");
 
         $.ajax({
             url: url,
             type: "POST",
+//            data: {
+//                buscarHerramienta:Herramienta
+//            },
             data: $('#F_prestamo_herramienta').serialize(),
             success: function (data) {
                 $("#RespuestaHerramienta").html(data);
@@ -83,6 +95,7 @@ $(document).ready(function () {
             confirmButtonText: "Si, Elimine el Registro!",
             closeOnConfirm: false},
         function () {
+
             $.ajax({
                 url: url,
                 type: "post",
