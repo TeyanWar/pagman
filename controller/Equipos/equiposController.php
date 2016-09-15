@@ -5,12 +5,14 @@ include_once('../model/Equipos/equiposModel.php');
 class EquiposController {
 
     public function editar($parametros = false) {
+        $id = $parametros[1];
         $objEquipos = new EquiposModel();
         $objPersona = new EquiposModel();
         $objEstado = new EquiposModel();
         $objCentro = new EquiposModel();
         $objArea = new EquiposModel();
         $objT_equipo = new EquiposModel();
+        $objMedidores = new EquiposModel();
 
         // Corregir: debe filtrar solo por NULL
         // $sql1 = "Select per_id, per_nombre from pag_persona WHERE estado = NULL ";
@@ -33,6 +35,26 @@ class EquiposController {
         $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo";
         $tEquipos = $objT_equipo->select($sql5);
 
+        $sql6 = "select * from pag_tipo_medidor";
+        $medidores = $objMedidores->select($sql6);
+
+        $sql7 = "select * from pag_det_equipo_medidor where equi_id='$id'";
+        $medidoresDet = $objMedidores->select($sql7);
+        
+        $sql = "SELECT * FROM pag_equipo WHERE equi_id='$id'";
+        $equipo = $objEquipos->find($sql);
+        
+        foreach($medidores as $key=>$medidor){
+            $medidores[$key]['checkeado']='';
+            foreach($medidoresDet as $medidorDet){
+                if($medidor['tmed_id']==$medidorDet['tmed_id']){
+                    $medidores[$key]['checkeado']='checked';
+                    break;
+                }
+            }
+        }//foreach
+
+
         $objPersona->cerrar();
         $objEstado->cerrar();
         $objCentro->cerrar();
@@ -40,10 +62,9 @@ class EquiposController {
         $objT_equipo->cerrar();
 
 
-        $id = $parametros[1];
 
-        $sql = "SELECT * FROM pag_equipo WHERE equi_id='$id'";
-        $equipo = $objEquipos->find($sql);
+
+        
 //echo "<pre>"; die(print_r($equipo));
         // Cierra la conexion
         $objEquipos->cerrar();
@@ -87,6 +108,15 @@ class EquiposController {
 //         die(print_r($sql));
 
         $respuesta = $objEquipos->update($sql);
+        if ($respuesta) {
+            $sqlEliminar = "delete from pag_det_equipo_medidor where equi_id='$equi_noplaca'";
+            $eliminar = $objEquipos->delete($sqlEliminar);
+            foreach ($_POST['medidores'] as $medidor) {
+                $sql = "INSERT INTO pag_det_equipo_medidor (equi_id,tmed_id) "
+                        . "values('$equi_noplaca',$medidor)";
+                $insert = $objEquipos->insertar($sql);
+            }
+        }
 
         // Cierra la conexion
         $objEquipos->cerrar();

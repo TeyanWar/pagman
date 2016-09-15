@@ -9,12 +9,11 @@
                 <select class="select2" name="per_id">
                     <?php
                     foreach ($personas as $persona) {
-                        if($persona['per_id'] == $equipo['per_id']){
+                        if ($persona['per_id'] == $equipo['per_id']) {
                             echo "<option value='" . $persona['per_id'] . "' selected>" . $persona['per_nombre'] . "</option>";
-                        }else{
+                        } else {
                             echo "<option value='" . $persona['per_id'] . "'>" . $persona['per_nombre'] . "</option>";
                         }
-                        
                     }
                     ?>
                 </select>
@@ -31,12 +30,11 @@
                 <select class="select2" name="equi_estado">
                     <?php
                     foreach ($estados as $estado) {
-                        if($estado['est_id'] == $equipo['est_id']){
+                        if ($estado['est_id'] == $equipo['est_id']) {
                             echo "<option value='" . $estado['est_id'] . "' selected>" . $estado['est_descripcion'] . "</option>";
-                        }else{
+                        } else {
                             echo "<option value='" . $estado['est_id'] . "' >" . $estado['est_descripcion'] . "</option>";
                         }
-                        
                     }
                     ?>
                 </select>
@@ -83,12 +81,32 @@
             <div class="input-field col s4">
                 <input type="date" value="<?php echo $equipo['equi_vence_garantia']; ?>" name="equi_vence_garantia">
                 <label for="equi_vence_garantia" class="active">Vecimiento de garantia  :</label>
-
             </div>
         </div>
+        <div id="edit">
+            <center><h5><b><code>Editar Medidores</code></b></h5></center>
+            <table>
+                <thead>
+                    <tr></tr>
+                </thead>
+                <?php foreach ($medidores as $medidor) { ?>
+                    <td>
+                        <input name="medidores[]" id ="<?php echo $medidor['tmed_id']; ?>" value="<?php echo $medidor['tmed_id']; ?>" type = "checkbox" <?php echo $medidor['checkeado']; ?> >
+                        <label for="<?php echo $medidor['tmed_id']; ?>"><?php echo ucWords($medidor['tmed_nombre']); ?></label>
+                    </td>
+
+                    <?php
+                }
+                ?>
+            </table>
+        </div>
+
         <div class="row">
-            <div class="input-field col s12">
-                <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Editar
+            <div class="input-field col s5">
+                <input type="button" id="editMedidor" value="Editar Medidores" class="btn teal darken-2 waves-effect waves-light right">
+            </div>
+            <div class="input-field col s5">
+                <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Actualizar Equipo
                     <i class="mdi-content-send right"></i>
                 </button>
             </div>
@@ -96,7 +114,7 @@
     </form>
 </div>
 <script>
-     jQuery.validator.addMethod("letra", function (value, element) {
+    jQuery.validator.addMethod("letra", function(value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
 
@@ -230,7 +248,7 @@
             curl: "Enter your website"
         },
         errorElement: 'div',
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
                 $(placement).append(error)
@@ -239,11 +257,13 @@
             }
         }
     });
-    
-   
-    
-    
-    
-    
+    $("#edit").css("display", "none");
+
+    $("#editMedidor").click(function() {
+        $("#edit").css("display", "block");
+    });
+
+
+
     $('select').material_select();
 </script>
