@@ -1,22 +1,24 @@
 $(document).ready(function() {
 
 //consulta Equipos
-    $("#busquedaAjax").keyup(function() {
-        var usuario = $("#busquedaAjax").val();
-        if (usuario != "") {
+    $("#buscarEquipo").keyup(function() {
+        
+        var equipos = $("#buscarEquipo").val();
+        if (equipos != "") {
             $('#pagina').val(1);
         }
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaEquipos=" + usuario + "&pagina" + pagina,
+            data: "busquedaEquipos=" + equipos + "&pagina" + pagina,
             success: function(data) {
-                $("#tabla").html(data);
+                $("#divEquipos").html(data);
             }
         });
     });
-    $("#busquedaAjax").trigger("keyup");
+    
+    $("#buscarEquipo").trigger("keyup");
     //Ver detalle//
 
     $(document).on("click", ".ver-detalle1", function() {
@@ -85,7 +87,7 @@ $(document).ready(function() {
     jQuery.validator.addMethod("letra", function(value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
-    $("#formequipo").validate({
+    $("#formEquipos").validate({
         rules: {
             equi_id: {
                 required: true,
@@ -223,5 +225,26 @@ $(document).ready(function() {
                 error.insertAfter(element);
             }
         }
+    });
+    
+    
+    //Codigo para observar Foto de Equipo
+    
+        $('.fancybox').fancybox({
+        width: '75%',
+        height: '75%',
+        openEffect: 'elastic', //'fade', 'elastic'
+        closeEffect: 'elastic',
+        openSpeed: 'normal', //ms, slow, normal, fast (default 250ms)
+        closeSpeed: 'normal',
+        helpers: {
+            title: {
+                type: 'inside' //'float', 'inside', 'outside' or 'over'
+            },
+            overlay: {
+                closeClick: true  // if true, se cierra al hacer click fuera de la imagen
+            }
+        },
+        padding: 11
     });
 });

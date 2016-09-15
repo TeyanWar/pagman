@@ -1,10 +1,10 @@
 <div class="col s12 m12 l6">
 
     <div class="card-panel">
-        <h4 class="header2">Crear equipo</h4>
+        <h5>CREAR NUEVO EQUIPO</h5>
         <ol class="breadcrumbs">
             <li><a href="<?php echo addLib('') ?>">Panel de control</a></li>
-            <li><a href="<?php echo crearUrl("equipos", "equipos", "Consulta") ?>">Listar/Consultar</a></li>
+            <li><a href="<?php echo crearUrl("equipos", "equipos", "listar") ?>">Listar/Consultar</a></li>
             <li class="active">Crear Equipo</li>
         </ol>
         <div id="card-alert" class="card teal">
@@ -30,7 +30,7 @@
         <?php } ?>
 
         <div class="row">
-            <form id="formequiposs" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear") ?>" method="POST" enctype='multipart/form-data' novalidate>
+            <form id="formEquipos" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear") ?>" method="POST" enctype='multipart/form-data' novalidate>
                 <div class="row">
                     <div class="input-field col s4">
                         <input type="text" id="equi_id" name="equi_id" class="validate" data-error=".errorTxt1">
@@ -38,25 +38,38 @@
                         <div class="errorTxt1"></div>
                     </div>
                     <div class="input-field col s4">
-                        <select class="error browser-default select2" id="per_id" name="per_id" data-error=".errorTxt2">
-                            <option value="">(Vacio)</option>
-                            <?php
-                            foreach ($personas as $persona) {
-                                echo "<option value=" . $persona['per_id'] . ">" . $persona['per_nombre'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                        <div class="errorTxt2"></div>
-                        <label for="Persona" class="active">(*) Seleccione El Encargado:</label>
-                    </div>
-                    <div class="input-field col s4">
                         <input type="text" id="equi_nombre" name="equi_nombre" class="validate" data-error=".errorTxt3">
                         <label for="equi_nombre">(*) Nombre Del Equipo:</label>
                         <div class="errorTxt3"></div>
                     </div>
+                    <div class="input-field col s4">
+                        <input type="text" id="equi_modelo" name="equi_modelo" class="validate" data-error=".errorTxt5">
+                        <label for="equi_modelo" class="active" >(*) Modelo (Año en el que se fabrico):</label>
+                        <div class="errorTxt5"></div>
+                    </div>
                 </div>
 
                 <div class="row">
+                    <div class="input-field col s4">
+                        <input type="text" id="equi_serie" name="equi_serie" class="validate" data-error=".errorTxt6">
+                        <label for="equi_noserie">(*) No. Serie:</label>
+                        <div class="errorTxt6"></div>
+                    </div>
+                    <div class="input-field col s4">
+                        <input type="text" id="equi_marca" name="equi_marca" class="validate" data-error=".errorTxt8">
+                        <label for="equi_marca" class="active" >(*) Marca:</label>
+                        <div class="errorTxt8"></div>
+                    </div>
+
+                    <div class="input-field col s4">
+                        <input type="text" id="equi_fabricante" name="equi_fabricante" class="validate" data-error=".errorTxt7">
+                        <label for="equi_fabricante" class="active" >(*) Fabricante:</label>
+                        <div class="errorTxt7"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+
                     <div class="input-field col s4">
                         <select class="error browser-default select2" id="est_id" name="est_id" data-error=".errorTxt4">
                             <option value="">(Vacio)</option>
@@ -69,34 +82,30 @@
                         <div class="errorTxt4"></div>
                         <label for="Estado_equipo" class="active">(*) Elija Estado Del Equipo</label>
                     </div>
-                    <div class="input-field col s4">
-                        <input type="text" id="equi_modelo" name="equi_modelo" class="validate" data-error=".errorTxt5">
-                        <label for="equi_modelo" class="active" >(*) Modelo:</label>
-                        <div class="errorTxt5"></div>
+                    <div class="file-field input-field col s4" id="tequi_id" name="tequi_id" data-url="<?php echo crearUrl("equipos", "campoPersonalizado", "editar", array('noVista', 'novVista')); ?>">
+                        <select id="tequi_id" name="tequi_id" class="error browser-default select2" data-error=".errorTxt14">
+                            <option value="" >(Vacio)</option>
+                            <?php
+                            foreach ($tEquipos as $tEquipo) {
+                                echo "<option value=" . $tEquipo['tequi_id'] . ">" . $tEquipo['tequi_descripcion'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <div class="errorTxt14"></div>
+                        <label id="tequi_id"  for="tequi_id" class="active">(*) Seleccione El Tipo De Equipo:</label>
                     </div>
                     <div class="input-field col s4">
-                        <input type="text" id="equi_serie" name="equi_serie" class="validate" data-error=".errorTxt6">
-                        <label for="equi_noserie">(*) No. Serie:</label>
-                        <div class="errorTxt6"></div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s4">
-                        <input type="text" id="equi_fabricante" name="equi_fabricante" class="validate" data-error=".errorTxt7">
-                        <label for="equi_fabricante" class="active" >(*) Fabricante:</label>
-                        <div class="errorTxt7"></div>
-                    </div>
-                    <div class="input-field col s4">
-                        <input type="text" id="equi_marca" name="equi_marca" class="validate" data-error=".errorTxt8">
-                        <label for="equi_marca" class="active" >(*) Marca:</label>
-                        <div class="errorTxt8"></div>
-                    </div>
-                    <div class="input-field col s4">
-                        <input type="text" id="equi_ubicacion" name="equi_ubicacion" class="validate" data-error=".errorTxt9">
-                        <label for="equi_ubicacion">(*) Ubicacion en el centro:</label>
-                        <div class="errorTxt9"></div>
-                    </div>
+                        <select class="error browser-default select2" id="per_id" name="per_id" data-error=".errorTxt2">
+                            <option value="">(Vacio)</option>
+                            <?php
+                            foreach ($personas as $persona) {
+                                echo "<option value=" . $persona['per_id'] . ">" . $persona['per_nombre'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <div class="errorTxt2"></div>
+                        <label for="Persona" class="active">(*) Seleccione El Encargado:</label>
+                    </div>          
                 </div>
 
                 <div class="row">
@@ -130,18 +139,12 @@
                         <div class="errorTxt13"></div>
                         <label for="cen_id" class="active">(*) Seleccione El Centro De Formacion:</label>
                     </div>
-                    <div class="file-field input-field col s4" id="tequi_id" name="tequi_id" data-url="<?php echo crearUrl("equipos", "campoPersonalizado", "editar", array('noVista', 'novVista')); ?>">
-                        <select id="tequi_id" name="tequi_id" class="error browser-default select2" data-error=".errorTxt14">
-                            <option value="" >(Vacio)</option>
-                            <?php
-                            foreach ($tEquipos as $tEquipo) {
-                                echo "<option value=" . $tEquipo['tequi_id'] . ">" . $tEquipo['tequi_descripcion'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                        <div class="errorTxt14"></div>
-                        <label id="tequi_id"  for="tequi_id" class="active">(*) Seleccione El Tipo De Equipo:</label>
+                    <div class="input-field col s4">
+                        <input type="text" id="equi_ubicacion" name="equi_ubicacion" class="validate" data-error=".errorTxt9">
+                        <label for="equi_ubicacion">(*) Ubicacion en el centro:</label>
+                        <div class="errorTxt9"></div>
                     </div>
+
                     <div class="input-field col s4">
                         <select name="area_id" class="error browser-default select2" data-error=".errorTxt15">
                             <option value="" >(Vacio)</option>
@@ -156,13 +159,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s6">
-                        <div class="btn teal darken-2">
-                            <span>FOTO</span>
+                    <div class="file-field input-field col s6">
+                        <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
+                            <span>Subir Foto del Equipo</span>
                             <input type='file' id='ruta' name='ruta'>
-                        </div>
+                        </div>  
                         <div class="file-path-wrapper">
-                            <input class="file-path validate" type="hidden">
+                            <input class="file-path validate" type="text" placeholder="Eliga la imagen" readonly="">
                         </div>
                     </div>
                     <div class="input-field col s6">
@@ -179,7 +182,7 @@
 
                 <div id="modal1" class="modal">
                     <div class="modal-content">
-                        <h4 class="header2">tipo de medidor</h4>
+                        <h4 class="header2">Tipo de medidor</h4>
                         <br>
                         <?php foreach ($medidores as $medidor) { ?>
                             <p>

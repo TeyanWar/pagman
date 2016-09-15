@@ -12,7 +12,7 @@ class SesionController {
         
 
         $objSesion = new sesionModel();
-        $sql = "SELECT * FROM pag_usuario WHERE usu_usuario='$nom_usu' and usu_clave='$password'";
+        $sql = "SELECT * FROM pag_usuario WHERE usu_usuario='$nom_usu' and usu_clave='$password '";
 
         $consultar = $objSesion->find($sql);
 

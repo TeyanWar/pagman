@@ -91,7 +91,7 @@ class EquiposController {
         // Cierra la conexion
         $objEquipos->cerrar();
 
-        redirect(crearUrl("equipos", "equipos", "consulta"));
+        redirect(crearUrl("equipos", "equipos", "listar"));
     }
 
     function crear() {
@@ -100,7 +100,7 @@ class EquiposController {
         $objCentro = new EquiposModel();
         $objArea = new EquiposModel();
         $objT_equipo = new EquiposModel();
-        $objMedidores=new EquiposModel();
+        $objMedidores = new EquiposModel();
 
         // Corregir: debe filtrar solo por NULL
         // $sql1 = "Select per_id, per_nombre from pag_persona WHERE estado = NULL ";
@@ -122,10 +122,10 @@ class EquiposController {
         //$sql5 = "select tequi_id, tequi_descripcion from pag_tipo_de_equipo WHERE estado = 0";
         $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo";
         $tEquipos = $objT_equipo->select($sql5);
-        
-        $sql6= "SELECT * from pag_tipo_medidor where estado IS NULL";
-        $medidores=$objMedidores->select($sql6);
-        
+
+        $sql6 = "SELECT * from pag_tipo_medidor where estado IS NULL";
+        $medidores = $objMedidores->select($sql6);
+
         $objPersona->cerrar();
         $objEstado->cerrar();
         $objCentro->cerrar();
@@ -134,12 +134,10 @@ class EquiposController {
         $objMedidores->cerrar();
 
 
-
         include_once("../view/Equipos/equipos/crear.html.php");
     }
 
     function postCrear() {
-
         //--------expresiones regulares--------------------
         $errores = array();
         $patronNumeros = "/[0-9]{1,9}(\.[0-9]{0,2})?$/";
@@ -227,88 +225,109 @@ class EquiposController {
             setErrores($errores);
             redirect(crearUrl("equipos", "equipos", "crear"));
             //----------------fin validaciones-----------------
-        } else {
-            $equi_id = $_POST['equi_id'];
-            $per_id = $_POST['per_id'];
-            $equi_nombre = $_POST['equi_nombre'];
-            $est_id = $_POST['est_id'];
-            $equi_modelo = $_POST['equi_modelo'];
-            $equi_serie = $_POST['equi_serie'];
-            $equi_fabricante = $_POST['equi_fabricante'];
-            $equi_marca = $_POST['equi_marca'];
-            $equi_ubicacion = $_POST['equi_ubicacion'];
-            $equi_fecha_compra = $_POST['equi_fecha_compra'];
-            $equi_fecha_instalacion = $_POST['equi_fecha_instalacion'];
-            $equi_vence_garantia = $_POST['equi_vence_garantia'];
-            $cen_id = $_POST['cen_id'];
-
-            $equi_foto = "equipo-" . $equi_id;
-            $ruta = $_FILES['ruta']['tmp_name'];
-            $rutaydoc = getDocumentRoot() . "/web/media/img/Equipos/" . $equi_foto;
-            if ($ruta <> "") {
-                if (move_uploaded_file($ruta, $rutaydoc)) {
-                    
-                }
-            } else {
-                $rutaydoc = NULL;
-            }
-            $objEquipos = new EquiposModel();
-
-            $area_id = $_POST['area_id'];
-            $tequi_id = $_POST['tequi_id'];
-
-
-            $insertEquipos = "INSERT INTO pag_equipo "
-                    . "(equi_id,"
-                    . "per_id,"
-                    . "equi_nombre,"
-                    . "cen_id,"
-                    . "est_id,"
-                    . "equi_foto,"
-                    . "equi_fabricante,"
-                    . "equi_marca,"
-                    . "equi_modelo,"
-                    . "equi_serie,"
-                    . "equi_ubicacion,"
-                    . "equi_fecha_compra,"
-                    . "equi_fecha_instalacion,"
-                    . "equi_vence_garantia,"
-                    . "area_id,"
-                    . "tequi_id)"
-                    . " VALUES('$equi_id', "
-                    . "$per_id, "
-                    . "'$equi_nombre', "
-                    . "'$cen_id', "
-                    . "$est_id, "
-                    . "'$rutaydoc', "
-                    . "'$equi_fabricante', "
-                    . "'$equi_marca', "
-                    . "'$equi_modelo', "
-                    . "'$equi_serie', "
-                    . "'$equi_ubicacion', "
-                    . "'$equi_fecha_compra', "
-                    . "'$equi_fecha_instalacion', "
-                    . "'$equi_vence_garantia', "
-                    . "$area_id,"
-                    . "$tequi_id)";
-
-            $insertar = $objEquipos->insertar($insertEquipos);
-
-            if($insertar){
-                foreach($_POST['medidores'] as $medidor){
-                    $sql="INSERT INTO pag_det_equipo_medidor (equi_id,tmed_id) "
-                            . "values('$equi_id',$medidor)";
-                    $insert=$objEquipos->insertar($sql);
-                }
-            }
-            
-
-            
-            // Cierra la conexion
-            $objEquipos->cerrar();
-
-            redirect(crearUrl("equipos", "equipos", "Consulta"));
         }
+
+        $equi_id = $_POST['equi_id'];
+        $per_id = $_POST['per_id'];
+        $equi_nombre = $_POST['equi_nombre'];
+        $est_id = $_POST['est_id'];
+        $equi_modelo = $_POST['equi_modelo'];
+        $equi_serie = $_POST['equi_serie'];
+        $equi_fabricante = $_POST['equi_fabricante'];
+        $equi_marca = $_POST['equi_marca'];
+        $equi_ubicacion = $_POST['equi_ubicacion'];
+        $equi_fecha_compra = $_POST['equi_fecha_compra'];
+        $equi_fecha_instalacion = $_POST['equi_fecha_instalacion'];
+        $equi_vence_garantia = $_POST['equi_vence_garantia'];
+        $cen_id = $_POST['cen_id'];
+
+        //die(print_r($_FILES));
+        $fotoEquipo = $_FILES['ruta']['name'];
+        //Asigno el nombre de la foto segun numero de placa
+        $equipo_foto = "Equipo-" . $fotoEquipo;
+        //Hago un explode para capturar la extension de IMAGEN
+        $fotoEquipo = explode(".", $_FILES['ruta']['name']);
+        //die(print_r($fotoHerramienta));
+        //Nombre de la foto con la extension capturada
+        $nombreFoto = $equipo_foto . "." . end($fotoEquipo);
+        //die($nombreFoto);
+
+        $ruta = $_FILES['ruta']['tmp_name'];
+        //Capturo la ruta donde guardare la Imagen
+        $rutaydoc = getDocumentRoot() . "/web/media/img/Equipos/" . $nombreFoto;
+
+        if ($ruta <> "") {
+            if (move_uploaded_file($ruta, $rutaydoc)) {
+                
+            }
+        } else {
+            $rutaydoc = NULL;
+        }
+
+        $area_id = $_POST['area_id'];
+        $tequi_id = $_POST['tequi_id'];
+
+        //Borramos de la tabla Equipo el siguiente campo tmed_id, ya que eso va en la tabla
+        //Detalla nombrada pag_det_equipo_medidor
+        $sqlEquipo = "INSERT INTO pag_equipo "
+                . "(equi_id, "
+                . "per_id, "
+                . "equi_nombre, "
+                . "est_id, "
+                . "cen_id, "
+                . "equi_foto, "
+                . "equi_valor_tmed, " //Campo Nuevo en la BD, aun no se coloca en el formulario, (¿Para que es?)
+                . "equi_fabricante, "
+                . "equi_marca, "
+                . "equi_modelo, "
+                . "equi_serie, "
+                . "equi_ubicacion, "
+                . "equi_fecha_compra, "
+                . "equi_fecha_instalacion, "
+                . "equi_vence_garantia, "
+                . "area_id, "
+                . "tequi_id ) VALUES("
+                . "'$equi_id', "
+                . "$per_id, "
+                . "'$equi_nombre', "
+                . "$est_id, "
+                . "$cen_id, "
+                . "'$nombreFoto', "
+                . "12000, " //Valo colocado para que ingrese a la BD, no viene del formulario, esta QUEMADO. (equi_valor_tmed)
+                . "'$equi_fabricante', "
+                . "'$equi_marca', "
+                . "'$equi_modelo', "
+                . "'$equi_serie', "
+                . "'$equi_ubicacion', "
+                . "'$equi_fecha_compra', "
+                . "'$equi_fecha_instalacion', "
+                . "'$equi_vence_garantia', "
+                . "$area_id, "
+                . "'$tequi_id' )";
+        //die(print_r("<br>" . $sqlEquipo. "<br>"));
+
+
+        $objEquipos = new EquiposModel();
+
+        $insertar = $objEquipos->insertar($sqlEquipo);
+        //die(print_r($insertar));
+        if ($insertar == true) {
+            //die(print_r("INSERTO"));
+            foreach ($_POST['medidores'] as $medidor) {
+                $sql = "INSERT INTO pag_det_equipo_medidor (equi_id,tmed_id) "
+                        . "values('$equi_id',$medidor)";
+                $insert = $objEquipos->insertar($sql);
+            }
+        } else {
+            //die(print_r("NO INSERTO"));
+        }
+
+
+
+        // Cierra la conexion
+        $objEquipos->cerrar();
+
+        redirect(crearUrl("equipos", "equipos", "listar"));
     }
 
     function eliminar($parametros) {
@@ -342,19 +361,6 @@ class EquiposController {
     }
 
     function listar() {
-        $objEquipos = new EquiposModel();
-
-        $sql = "SELECT * FROM pag_equipo WHERE estado IS NULL";
-        //$sql = "SELECT * FROM pag_equipo";
-        $equipos = $objEquipos->select($sql);
-
-        // Cierra la conexion
-        $objEquipos->cerrar();
-
-        include_once("../view/Equipos/equipos/consulta.html.php");
-    }
-
-    function Consulta() {
         include_once("../view/Equipos/equipos/consulta.html.php");
     }
 
@@ -363,25 +369,22 @@ class EquiposController {
 
         $buscarEquipo = $_POST['busquedaEquipos'];
 
-        $sql3 = "SELECT * FROM pag_equipo WHERE estado IS NULL "
-                . "AND equi_nombre LIKE '%" . $buscarEquipo . "%' or equi_id LIKE '%" . $buscarEquipo . "%'";
+        $sql = "SELECT * FROM pag_equipo WHERE equi_nombre LIKE '%" . $buscarEquipo . "%' or equi_id LIKE '%" . $buscarEquipo . "%' ORDER BY equi_id ASC ";
+        $consultaEquipo = $objEquipos->select($sql);
 
-        $equipos = $objEquipos->select($sql3);
-
-
+        
         //aqui empieza el paginado       
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
         $url = crearUrl('equipos', 'equipos', 'listar');
 
-        $paginado = new Paginado($equipos, $pagina, $url);
+        //$paginado = new Paginado($consultaEquipo, $pagina, $url);
 
-        $equipos = $paginado->getDatos();
+        //$consultaEquipo = $paginado->getDatos();
 
+        
         $objEquipos->cerrar();
 
         include_once("../view/Equipos/equipos/listar.html.php");
     }
-
-
 
 }
