@@ -16,21 +16,15 @@
             </button>
         </div>
 
-        <?php $error = getErrores(); ?>
-        <?php if (!$error == "") { ?>
-            <div id="card-alert" class="card red">
-                <div class="card-content white-text">
-                    <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
-                </div>
-
-                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+       <!--Inicio contenedor mensajes de error-->
+        <div class="card red">
+            <div id="cont_errors_ajax" class="card-content white-text">
             </div>
-        <?php } ?>
+        </div>
+        <!--Fin contenedor mensajes de error-->
 
         <div class="row">
-            <form id="formEquipos" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear") ?>" method="POST" enctype='multipart/form-data' novalidate>
+            <form id="formEquipos" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear",array('noVista'))?>" method="POST" enctype='multipart/form-data' novalidate>
                 <div class="row">
                     <div class="input-field col s4">
                         <input type="text" id="equi_id" name="equi_id" class="validate" data-error=".errorTxt1">
@@ -182,12 +176,12 @@
 
                 <div id="modal1" class="modal">
                     <div class="modal-content">
-                        <h4 class="header2">Tipo de medidor</h4>
+                        <h4 class="header2">Seleccione el/los Medidor(es) a usar en este equipo</h4>
                         <br>
                         <?php foreach ($medidores as $medidor) { ?>
                             <p>
                                 <input name="medidores[]" id="<?php echo $medidor['tmed_id'] ?>" value="<?php echo $medidor['tmed_id'] ?>" type="checkbox">
-                                <label for="<?php echo $medidor['tmed_id'] ?>"><?php echo $medidor['tmed_nombre'] ?></label>
+                                <label for="<?php echo $medidor['tmed_id'] ?>"><?php echo ucwords($medidor['tmed_nombre']); ?></label>
                             </p>
                         <?php } ?>
                     </div>
@@ -207,7 +201,7 @@
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Crear
+                        <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right btn_submit_modal">Crear
                             <i class="mdi-content-send right"></i>
                         </button>
                     </div>

@@ -253,9 +253,8 @@ class EquiposController {
         }
         if (count($errores) > 0) {
             setErrores($errores);
-            redirect(crearUrl("equipos", "equipos", "crear"));
             //----------------fin validaciones-----------------
-        }
+        }else{
 
         $equi_id = $_POST['equi_id'];
         $per_id = $_POST['per_id'];
@@ -348,16 +347,14 @@ class EquiposController {
                         . "values('$equi_id',$medidor)";
                 $insert = $objEquipos->insertar($sql);
             }
-        } else {
+            
+            } else {
             //die(print_r("NO INSERTO"));
         }
-
-
-
         // Cierra la conexion
         $objEquipos->cerrar();
-
-        redirect(crearUrl("equipos", "equipos", "listar"));
+        }
+        echo getRespuestaAccion('listar');
     }
 
     function eliminar($parametros) {

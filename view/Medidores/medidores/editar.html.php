@@ -1,7 +1,12 @@
-
+<!--Inicio contenedor mensajes de error-->
+<div class="card red">
+    <div id="cont_errors_ajax" class="card-content white-text">
+    </div>
+</div>
+<!--Fin contenedor mensajes de error-->
 <div class="col s12 m12 l6">
     <h4 class="header2">Modificar Tipo de Medidor</h4> 
-    <form action="<?php echo crearUrl("medidores", "medidores", "postEditar") ?>" method="post" id="editarMedidores">
+    <form action="<?php echo crearUrl("medidores", "medidores", "postEditar", array('noVista')) ?>" method="post" id="editarMedidores">
 
         <div class="row">
             <div class="col s6">
@@ -29,10 +34,10 @@
                 <label style="color: #448aff;"><h6>Tipo Medidor</h6></label> 
                 <?php echo $medidores['tmed_tipo'] ?>
             </div>
-            <?php if($medidores['tmed_tipo']==='Automatico'){ ?>
+            <?php if ($medidores['tmed_tipo'] === 'Automatico') { ?>
                 <div class="col s4">
                     <label style="color: #448aff;"><h6>Tiempo que equivale</h6></label>
-                    <?php echo $medida['tmed_numt']." ".$medida['tm_nombre'] ?>
+                    <?php echo $medida['tmed_numt'] . " " . $medida['tm_nombre'] ?>
                 </div>
             <?php } ?>
         </div>
@@ -49,7 +54,7 @@
                 <button type="button" class="btn blue cerrar" value="">Cancelar</button>
             </div>
             <div class="input-field col  m3"> 
-                <button type="submit" class="btn blue " value="submit" >Actualizar</button>
+                <button type="submit" class="btn blue btn_submit_modal" value="submit" >Actualizar</button>
             </div>
         </div>
     </form>
@@ -60,7 +65,6 @@
 
 <script type="text/javascript">
     $(".modal-trigger").leanModal({
-
         dismissible: true,
         opacity: .5,
         in_duration: 300,
