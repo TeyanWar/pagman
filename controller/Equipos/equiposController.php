@@ -1,5 +1,4 @@
 <?php
-
 include_once('../model/Equipos/equiposModel.php');
 
 class EquiposController {
@@ -40,15 +39,15 @@ class EquiposController {
 
         $sql7 = "select * from pag_det_equipo_medidor where equi_id='$id'";
         $medidoresDet = $objMedidores->select($sql7);
-        
+
         $sql = "SELECT * FROM pag_equipo WHERE equi_id='$id'";
         $equipo = $objEquipos->find($sql);
-        
-        foreach($medidores as $key=>$medidor){
-            $medidores[$key]['checkeado']='';
-            foreach($medidoresDet as $medidorDet){
-                if($medidor['tmed_id']==$medidorDet['tmed_id']){
-                    $medidores[$key]['checkeado']='checked';
+
+        foreach ($medidores as $key => $medidor) {
+            $medidores[$key]['checkeado'] = '';
+            foreach ($medidoresDet as $medidorDet) {
+                if ($medidor['tmed_id'] == $medidorDet['tmed_id']) {
+                    $medidores[$key]['checkeado'] = 'checked';
                     break;
                 }
             }
@@ -64,7 +63,7 @@ class EquiposController {
 
 
 
-        
+
 //echo "<pre>"; die(print_r($equipo));
         // Cierra la conexion
         $objEquipos->cerrar();
@@ -399,19 +398,72 @@ class EquiposController {
         $sql = "SELECT * FROM pag_equipo WHERE equi_nombre LIKE '%" . $buscarEquipo . "%' or equi_id LIKE '%" . $buscarEquipo . "%' ORDER BY equi_id ASC ";
         $consultaEquipo = $objEquipos->select($sql);
 
-        
+
         //aqui empieza el paginado       
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
         $url = crearUrl('equipos', 'equipos', 'listar');
 
         //$paginado = new Paginado($consultaEquipo, $pagina, $url);
-
         //$consultaEquipo = $paginado->getDatos();
 
-        
+
         $objEquipos->cerrar();
 
         include_once("../view/Equipos/equipos/listar.html.php");
+    }
+
+    public function listarTipoEquipo() {
+        include_once("../view/Equipos/equipos/crear.html.php");
+    }
+
+    public function tipoEquipo() {
+        $objCp = new equiposModel();
+
+        $campoP = $_POST['buscarTipoEquipo'];
+
+        $sql = "SELECT * FROM pag_tipo_equipo WHERE tequi_descripcion LIKE '%" . $campoP . "%' or tequi_id LIKE '%" . $campoP . "%' ORDER BY tequi_id ASC ";
+        $consultaCampoAjax = $objCp->select($sql);
+
+        if ($consultaCampoAjax == true) {
+            
+        } else {
+            ?>
+                <code>No se encontraron registros.</code>
+            <?php
+        }
+
+        //aqui empieza el paginado       
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+        $url = crearUrl('equipos', 'equipos', 'tipoEquipo', array('noVista', $campoP));
+
+        $paginado = new Paginado($consultaCampoAjax, $pagina, $url, 2);
+        $consultaCampoAjax = $paginado->getDatos();
+
+        $objCp->cerrar();
+
+
+        include_once("../view/Equipos/equipos/tipoEquipo.html.php");
+    }
+
+    public function agregarMedida($parametros) {
+        $objTIpoEquipo = new EquiposModel();
+
+        $id = $parametros[1];
+        //die(print_r($id));
+        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoEquipo_camposPersonalizados WHERE "
+                . "pag_det_tipoEquipo_camposPersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
+                . "pag_det_tipoEquipo_camposPersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoEquipo_camposPersonalizados.tequi_id='$id' ORDER BY pag_det_tipoEquipo_camposPersonalizados.cp_id ASC ";
+        $consultaTipoEquipo = $objTIpoEquipo->select($sqlCP);
+
+        //die(print_r($consultaTipoEquipo));
+         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+            $url = crearUrl('equipos', 'equipos', 'agregarMedida',array('noVista',$id));
+
+            $paginado = new Paginado($consultaTipoEquipo, $pagina, $url, 3);
+            $consultaTipoEquipo = $paginado->getDatos();
+        $objTIpoEquipo->cerrar();
+
+        include_once('../view/Equipos/equipos/agregarValorTipoEquipo.html.php');
     }
 
 }

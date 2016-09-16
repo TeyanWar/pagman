@@ -1,5 +1,4 @@
 <div class="col s12 m12 l6">
-
     <div class="card-panel">
         <h5>CREAR NUEVO EQUIPO</h5>
         <ol class="breadcrumbs">
@@ -16,7 +15,7 @@
             </button>
         </div>
 
-       <!--Inicio contenedor mensajes de error-->
+        <!--Inicio contenedor mensajes de error-->
         <div class="card red">
             <div id="cont_errors_ajax" class="card-content white-text">
             </div>
@@ -24,7 +23,7 @@
         <!--Fin contenedor mensajes de error-->
 
         <div class="row">
-            <form id="formEquipos" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear",array('noVista'))?>" method="POST" enctype='multipart/form-data' novalidate>
+            <form id="formEquipos" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear", array('noVista')) ?>" method="POST" enctype='multipart/form-data' novalidate>
                 <div class="row">
                     <div class="input-field col s4">
                         <input type="text" id="equi_id" name="equi_id" class="validate" data-error=".errorTxt1">
@@ -43,6 +42,8 @@
                     </div>
                 </div>
 
+                <!---- INICIO ROW QUE CONTIENE NUMERO SERIE, MARCA DEL EQUIPO Y FABRICANTE ------------>
+
                 <div class="row">
                     <div class="input-field col s4">
                         <input type="text" id="equi_serie" name="equi_serie" class="validate" data-error=".errorTxt6">
@@ -54,7 +55,6 @@
                         <label for="equi_marca" class="active" >(*) Marca:</label>
                         <div class="errorTxt8"></div>
                     </div>
-
                     <div class="input-field col s4">
                         <input type="text" id="equi_fabricante" name="equi_fabricante" class="validate" data-error=".errorTxt7">
                         <label for="equi_fabricante" class="active" >(*) Fabricante:</label>
@@ -62,8 +62,9 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <!--------------- NUEVO DIV ROW QUE CONTIENE ESTADO DEL EQUIPO, AREA DEL EQUIPO Y ENCARGADO --------------------->
 
+                <div class="row">
                     <div class="input-field col s4">
                         <select class="error browser-default select2" id="est_id" name="est_id" data-error=".errorTxt4">
                             <option value="">(Vacio)</option>
@@ -76,17 +77,18 @@
                         <div class="errorTxt4"></div>
                         <label for="Estado_equipo" class="active">(*) Elija Estado Del Equipo</label>
                     </div>
-                    <div class="file-field input-field col s4" id="tequi_id" name="tequi_id" data-url="<?php echo crearUrl("equipos", "campoPersonalizado", "editar", array('noVista', 'novVista')); ?>">
-                        <select id="tequi_id" name="tequi_id" class="error browser-default select2" data-error=".errorTxt14">
+
+                    <div class="input-field col s4">
+                        <select name="area_id" class="error browser-default select2" data-error=".errorTxt15">
                             <option value="" >(Vacio)</option>
                             <?php
-                            foreach ($tEquipos as $tEquipo) {
-                                echo "<option value=" . $tEquipo['tequi_id'] . ">" . $tEquipo['tequi_descripcion'] . "</option>";
+                            foreach ($areas as $area) {
+                                echo "<option value=" . $area['area_id'] . ">" . $area['area_descripcion'] . "</option>";
                             }
                             ?>
                         </select>
-                        <div class="errorTxt14"></div>
-                        <label id="tequi_id"  for="tequi_id" class="active">(*) Seleccione El Tipo De Equipo:</label>
+                        <div class="errorTxt15"></div>
+                        <label for="area_id" class="active">(*) Seleccion El Area:</label>
                     </div>
                     <div class="input-field col s4">
                         <select class="error browser-default select2" id="per_id" name="per_id" data-error=".errorTxt2">
@@ -101,6 +103,8 @@
                         <label for="Persona" class="active">(*) Seleccione El Encargado:</label>
                     </div>          
                 </div>
+
+                <!--------------------- NUEVO DIV ROW QUE CONTIENE FECHA DE COMPRA, INSTACION Y VIGENCIA DE LA GARAMTOA DEL EQUIPO----------------------------------->
 
                 <div class="row">
                     <div class="input-field col s4">
@@ -120,6 +124,8 @@
                     </div>
                 </div>
 
+                <!-------------------- NUEVO DIV ROW QUE CONTIENE CENTRO DE FORMARION,  TIPO DE EQUIPO, UBICACION EN EL CENTRO------------------------------------------->
+
                 <div class="row">
                     <div class="input-field col s4">
                         <select id="cen_id" name="cen_id" class="error browser-default select2" data-error=".errorTxt13">
@@ -133,27 +139,30 @@
                         <div class="errorTxt13"></div>
                         <label for="cen_id" class="active">(*) Seleccione El Centro De Formacion:</label>
                     </div>
+
+                    <div class="file-field input-field col s4" >
+                        <div class="input-field">
+                            <input type="text" class="active" id="consultarTipo" name='consultarTipo' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Equipos", "equipos", "tipoEquipo", array('noVista' => "noVista")) ?>" />
+                            <label for="consultarTipo" class="active">Seleccionar tipo de Equipo</label>
+                        </div>
+                    </div>
+                    <div id="modalUpdate1" class="modal modal-fixed-footer">
+                        <div class="modal-content"></div>
+                        <div class="modal-footer">
+                            <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           
+                        </div>
+                    </div>
                     <div class="input-field col s4">
                         <input type="text" id="equi_ubicacion" name="equi_ubicacion" class="validate" data-error=".errorTxt9">
                         <label for="equi_ubicacion">(*) Ubicacion en el centro:</label>
                         <div class="errorTxt9"></div>
                     </div>
-
-                    <div class="input-field col s4">
-                        <select name="area_id" class="error browser-default select2" data-error=".errorTxt15">
-                            <option value="" >(Vacio)</option>
-                            <?php
-                            foreach ($areas as $area) {
-                                echo "<option value=" . $area['area_id'] . ">" . $area['area_descripcion'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                        <div class="errorTxt15"></div>
-                        <label for="area_id" class="active">(*) Seleccion El Area:</label>
-                    </div>
                 </div>
+
+                <!------------------------- NUEVO DIV ROW QUE CONTIENE FOTO DEL EQUIPO, DIV QUE MUESTRA LOS CAMPOS PERSONALIZADOS Y EL TIPO DE MEDIDOR -------------------------------------------->
+
                 <div class="row">
-                    <div class="file-field input-field col s6">
+                    <div class="file-field input-field col s4">
                         <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
                             <span>Subir Foto del Equipo</span>
                             <input type='file' id='ruta' name='ruta'>
@@ -162,10 +171,18 @@
                             <input class="file-path validate" type="text" placeholder="Eliga la imagen" readonly="">
                         </div>
                     </div>
-                    <div class="input-field col s6">
+
+                    <!--DIV DONDE MUESTRA LOS CAMPOS PERSONALIZADOS DEL TIPO DE EQUIPO-->
+
+                    <div id="tablaTipoEquipo" class="col s4">
+
+                    </div>
+                    <!-- FIN DEL DIV-->
+
+                    <div class="input-field col s4">
                         <div class="btn teal darken-2">
                             <div class="modal-trigger" href="#modal1">
-                                <span>seleccione el tipo de medidor</span>
+                                <span>Seleccione el tipo de medidor</span>
                             </div>    
                         </div>
                         <div class="file-path-wrapper">
@@ -173,6 +190,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!----------------------------- SELECCIONAR TIPO DE MEDIDOR ------------------------------->
 
                 <div id="modal1" class="modal">
                     <div class="modal-content">
@@ -189,16 +208,8 @@
                         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
                     </div>
                 </div>
-                <!-- 
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input type="text" id="descripcion" name="descripcion"
-                               placeholder="Digite descripci&oacute;n del equipo">
-                        <label for="descripcion" class="">Descripci&oacute;n del equipo</label>
-                    </div>
-                </div> 
-                -->
 
+                <!--------------------DIV ROW BOTON CREAR ------------------------------------------->
                 <div class="row">
                     <div class="input-field col s12">
                         <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right btn_submit_modal">Crear
@@ -207,7 +218,12 @@
                     </div>
                 </div>
 
-            </form>
-        </div>
-    </div>
-</div>
+            </form> <!-- Cierre FORM ---->
+        </div> <!-- cierre ROW que abarca TODO ---->
+    </div> <!----- Cierre CARD PANEL--->
+</div> <!--- CIERRE DIV PRINCIPAL ------->
+
+
+<script type="text/javascript">
+    
+</script> 
