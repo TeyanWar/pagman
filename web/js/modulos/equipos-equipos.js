@@ -1,8 +1,43 @@
-$(document).ready(function() {
+$(document).ready(function () {
+
+//--------------------------------------------
+
+    $(document).on('click', '.ajax_paginate > div > div > ul > li > a', function (e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            type: 'GET'
+        }).done(function (response) {
+            $("#modal_editar_campoPersonalizado > .modal-content").html(response);
+        });
+    });
+
+    //Capturamos el ID del select de formulario CREAR EQUIPO
+    $("#consultarTipo").keyup(function () {
+        var buscarCP = $("#consultarTipo").val();
+        //alert(buscarCP);
+        var url = $(this).attr("data-url");
+        //alert(url);
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "buscarTipoEquipo=" + buscarCP,
+            success: function (data) {
+                $("#tablaTipoEquipo").html(data);
+            }
+        });
+    });
+
+    $('#consultarTipo').trigger('keyup');// function_trigger para visualizar las herramientas existentes
+
+
+//----------------------------------
+
 
 //consulta Equipos
-    $("#buscarEquipo").keyup(function() {
-        
+    $("#buscarEquipo").keyup(function () {
+
         var equipos = $("#buscarEquipo").val();
         if (equipos != "") {
             $('#pagina').val(1);
@@ -12,51 +47,56 @@ $(document).ready(function() {
             url: url,
             type: "POST",
             data: "busquedaEquipos=" + equipos + "&pagina" + pagina,
-            success: function(data) {
+            success: function (data) {
                 $("#divEquipos").html(data);
             }
         });
     });
-    
+
     $("#buscarEquipo").trigger("keyup");
     //Ver detalle//
 
-    $(document).on("click", ".ver-detalle1", function() {
+    $(document).on("click", ".ver-detalle1", function () {
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "get",
-            success: function(data) {
+            success: function (data) {
                 $("#modalDetalle1 > .modal-content").html(data);
             }
         });
     });
     //Capturamos el ID del select de formulario CREAR EQUIPO
-    $("#tequi_id").change(function() {
+    $("#tequi_id").change(function () {
         //capturamos el ID del select
-        var id = $(this).val();
-        
+        var id = document.getElementById("idEquipo").value;
+
+        //alert(id);
         //capturamos la URL del SELECT
         var url = $(this).attr("data-url");
-        alert(url);
+        //alert(url);
         $.ajax({
-            id: id,
             url: url,
+            type: POST,
+            id: "idTipoEquipo=" + id,
+            success: function (data) {
+                $("#modalUpdate1 > .modal-content").html(data);
+            }
         });
     })
 
     //editar//
-    $(document).on("click", ".editar1", function() {
+    $(document).on("click", ".editar1", function () {
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "get",
-            success: function(data) {
+            success: function (data) {
                 $("#modalUpdate1 > .modal-content").html(data);
             }
         });
     });
-    $(document).on('click', '.modal-eliminar', function(e) {
+    $(document).on('click', '.modal-eliminar', function (e) {
         e.preventDefault();
         var url = $(this).attr('data-url');
         var equi_id = $(this).attr('data-id');
@@ -67,7 +107,7 @@ $(document).ready(function() {
             confirmButtonColor: "Red ",
             confirmButtonText: "si,eliminar registro",
             closeOnConfirm: false},
-        function() {
+        function () {
             $.ajax({
                 url: url,
                 type: 'post',
@@ -84,7 +124,7 @@ $(document).ready(function() {
 
     /* Incluimos un método para validar el campo nombre */
 
-    jQuery.validator.addMethod("letra", function(value, element) {
+    jQuery.validator.addMethod("letra", function (value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
     $("#formEquipos").validate({
@@ -217,7 +257,7 @@ $(document).ready(function() {
             curl: "Enter your website"
         },
         errorElement: 'div',
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             var placement = $(element).data('error');
             if (placement) {
                 $(placement).append(error)
@@ -226,11 +266,11 @@ $(document).ready(function() {
             }
         }
     });
-    
-    
+
+
     //Codigo para observar Foto de Equipo
-    
-        $('.fancybox').fancybox({
+
+    $('.fancybox').fancybox({
         width: '75%',
         height: '75%',
         openEffect: 'elastic', //'fade', 'elastic'
