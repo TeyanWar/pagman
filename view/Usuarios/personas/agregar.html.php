@@ -78,7 +78,7 @@
     });
     //----------------------expresion para validar solo numeros y letras----------------
     jQuery.validator.addMethod("password", function(value, element) {
-        return this.optional(element) || /^([a-z]+[0-9]+)|([0-9]+[a-z]+)/i.test(value);
+        return this.optional(element) || /^[0-9a-zA-Z]+$/i.test(value);
     });
     
         //----------------------validate editar----------------------------
