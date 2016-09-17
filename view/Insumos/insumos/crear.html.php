@@ -40,7 +40,7 @@
                         <div class="errorTxt1"></div>
                         <span class="help-block">
                             Por favor digite el codigo del insumo a registrar, recuerde que el <code>codigo del insumo</code> 
-                            debe corresponder al siguiente patron: <code>0001xxx</code>
+                            debe corresponder al siguiente patron: <code>001 &oacute; ab001</code>
                         </span>
                     </div>
                     <div class="input-field col s6">
@@ -71,8 +71,9 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <input id="ins_valor" type="text" class="validate" name="ins_valor" >
                         <label for="last_name">* Valor</label>
+                        <input id="ins_valor" type="text" class="validate"  data-error=".errorTxt4" name="ins_valor" >
+                        <div class="errorTxt2"></div>
                     </div>
                 </div>
                 <div class="col s12 m12">

@@ -1186,9 +1186,51 @@ INSERT INTO `pag_usuario` (`per_id`, `usu_usuario`, `usu_clave`, `usu_estado`, `
 (1151956249, 'admin', 'b9ddaf31e98e6d249804d3f7a9e936f82a12af32', 'activo', 1);
 
 ----------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+
+CREATE TABLE `pag_det_tipoEquipo_camposPersonalizados` (
+  `idDetalle` int(11) NOT NULL,
+  `tequi_id` varchar(12) NOT NULL,
+  `cp_id` varchar(20) NOT NULL,
+  `estado` timestamp(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ;
+
+--
+-- Volcado de datos para la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+
+INSERT INTO `pag_det_tipoEquipo_camposPersonalizados` (`idDetalle`, `tequi_id`, `cp_id`, `estado`) VALUES
+(29, 'CTE002', 'CP004', NULL),
+(30, 'CTE002', 'CP003', NULL),
+(31, 'CTE002', 'CP002', NULL),
+(32, 'CTE002', 'CP001', NULL),
+(33, 'TE01', 'CP004', NULL),
+(34, 'TE01', 'CP001', NULL),
+(35, 'T', 'CP003', NULL),
+(36, 'TE001', 'CP004', NULL),
+(37, 'TE001', 'CP004', NULL),
+(38, 'TE002', 'CP004', NULL),
+(39, 'TE003', 'CP004', NULL),
+(40, 'TE01', 'CP004', NULL),
+(41, 'TE00', 'CP004', NULL),
+(42, 'TE002', 'CP004', NULL);
+
+-- --------------------------------------------------------
+
+
 --
 -- Índices para tablas volcadas
 --
+
+
+--
+-- Indices de la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
+  ADD PRIMARY KEY (`idDetalle`);
 
 --
 -- Indices de la tabla `pag_almacen`
@@ -1506,6 +1548,11 @@ ALTER TABLE `pag_usuario`
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
+--
+-- AUTO_INCREMENT de la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pag_almacen`
 --

@@ -1,30 +1,79 @@
 $(document).ready(function () {
 
-    //consulta Equipos
-    $("#busquedaAjax").keyup(function () {
-        var usuario = $("#busquedaAjax").val();
-            
-        if (usuario != "") {
+//---------------------------------------------------
+    $(document).on("click", "#mostrarDivCamposPersonalizados", function () {
+        var url = $(this).attr("data-url");
+        //alert(url);
+        $.ajax({
+            url: url,
+            type: "get",
+              success: function (data) {
+                $("#tablaCamposPersonalizados").html(data);
+            }
+        });
+    });
+
+
+
+//--------------------------------------------
+
+    $(document).on('click', '.ajax_paginate > div > div > ul > li > a', function (e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            type: 'GET'
+        }).done(function (response) {
+            $("#tablaCamposPersonalizados").html(response);
+        });
+    });
+
+
+    //Capturamos el ID del select de formulario CREAR EQUIPO
+    $("#consultarTipo").keyup(function () {
+        var buscarCP = $("#consultarTipo").val();
+        //alert(buscarCP);
+        var url = $(this).attr("data-url");
+        //alert(url);
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "buscarTipoEquipo=" + buscarCP,
+            success: function (data) {
+                $("#tablaTipoEquipo").html(data);
+            }
+        });
+    });
+
+    $('#consultarTipo').trigger('keyup');// function_trigger para visualizar las herramientas existentes
+
+
+//----------------------------------
+
+
+//consulta Equipos
+    $("#buscarEquipo").keyup(function () {
+
+        var equipos = $("#buscarEquipo").val();
+        if (equipos != "") {
             $('#pagina').val(1);
         }
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaEquipos=" + usuario +"&pagina"+pagina,
+            data: "busquedaEquipos=" + equipos + "&pagina" + pagina,
             success: function (data) {
-                $("#tabla").html(data);
+                $("#divEquipos").html(data);
             }
         });
     });
 
-    $("#busquedaAjax").trigger("keyup");
-
-
+    $("#buscarEquipo").trigger("keyup");
+    //Ver detalle//
 
     $(document).on("click", ".ver-detalle1", function () {
         var url = $(this).attr("data-url");
-
         $.ajax({
             url: url,
             type: "get",
@@ -33,10 +82,28 @@ $(document).ready(function () {
             }
         });
     });
+    //Capturamos el ID del select de formulario CREAR EQUIPO
+    $("#tequi_id").change(function () {
+        //capturamos el ID del select
+        var id = document.getElementById("idEquipo").value;
 
+        //alert(id);
+        //capturamos la URL del SELECT
+        var url = $(this).attr("data-url");
+        //alert(url);
+        $.ajax({
+            url: url,
+            type: POST,
+            id: "idTipoEquipo=" + id,
+            success: function (data) {
+                $("#modalUpdate1 > .modal-content").html(data);
+            }
+        });
+    })
+
+    //editar//
     $(document).on("click", ".editar1", function () {
         var url = $(this).attr("data-url");
-
         $.ajax({
             url: url,
             type: "get",
@@ -45,8 +112,6 @@ $(document).ready(function () {
             }
         });
     });
-
-
     $(document).on('click', '.modal-eliminar', function (e) {
         e.preventDefault();
         var url = $(this).attr('data-url');
@@ -71,8 +136,6 @@ $(document).ready(function () {
             $("#busquedaAjax").trigger('keyup');
         });
     });
-
-
     //----------------- validaciones ---------------
 
     /* Incluimos un método para validar el campo nombre */
@@ -80,8 +143,7 @@ $(document).ready(function () {
     jQuery.validator.addMethod("letra", function (value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
-
-    $("#formequipo").validate({
+    $("#formEquipos").validate({
         rules: {
             equi_id: {
                 required: true,
@@ -220,6 +282,25 @@ $(document).ready(function () {
             }
         }
     });
-    
-   
+
+
+    //Codigo para observar Foto de Equipo
+
+    $('.fancybox').fancybox({
+        width: '75%',
+        height: '75%',
+        openEffect: 'elastic', //'fade', 'elastic'
+        closeEffect: 'elastic',
+        openSpeed: 'normal', //ms, slow, normal, fast (default 250ms)
+        closeSpeed: 'normal',
+        helpers: {
+            title: {
+                type: 'inside' //'float', 'inside', 'outside' or 'over'
+            },
+            overlay: {
+                closeClick: true  // if true, se cierra al hacer click fuera de la imagen
+            }
+        },
+        padding: 11
+    });
 });

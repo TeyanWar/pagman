@@ -2,14 +2,12 @@
     <table class="centered striped card-panel">
         <thead>             
             <tr>
-                <th>#</th>
-                <th>Referencia</th>
-                <th>Nombre</th>
+                <th>Codigo ins.</th>
+                <th>Nombre ins.</th>
                 <th>Descripcion</th>
-                <th>Valor</th>
+                <th>Valor unit.</th>
                 <th>Unidad de medida</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <th colspan="2">Acciones</th>
             </tr>
         </thead>
 
@@ -21,7 +19,6 @@
                     continue;
                 ?>
                 <tr>
-                    <td><?php echo $count++ ?></td>
                     <td><?php echo $insumo['ins_id'] ?></td>
                     <td><?php echo $insumo['ins_nombre'] ?></td>
                     <td><?php echo $insumo['ins_descripcion'] ?></td>

@@ -20,15 +20,15 @@ class InsumosController {
         //aqui se validan los insumos 
         
         if (!isset($_POST['ins_id']) or $_POST['ins_id'] == "") {
-            $errores[] = "El campo codigo insumo no debe estar vacio";
+            $errores[] = "El campo Codigo insumo no debe estar vacio";
         }
 
         if (!isset($_POST['ins_nombre']) or $_POST['ins_nombre'] == "") {
-            $errores[] = "El campor nombre no debe estar vacio";
+            $errores[] = "El campor Nombre insumo no debe estar vacio";
         }
         if (count($errores) > 0) {
             setErrores($errores);
-            redirect(crearUrl('herramientas', 'herramientas', 'crear'));
+            redirect(crearUrl('insumos', 'insumos', 'crear'));
         }
         
         $ins_id = $_POST['ins_id'];
@@ -37,7 +37,9 @@ class InsumosController {
         $ins_valor = $_POST['ins_valor'];
         $umed_id = $_POST['umed_id'];
 
-        $insertInsumos = "INSERT INTO pag_insumo (ins_id,ins_nombre,ins_descripcion,ins_valor,umed_id) VALUES ('$ins_id', '$ins_nombre', '$ins_descripcion', '$ins_valor', $umed_id)";
+        $insertInsumos = "INSERT INTO pag_insumo "
+                . "(ins_id,ins_nombre,ins_descripcion,ins_valor,umed_id)"
+                . " VALUES ('$ins_id', '$ins_nombre', '$ins_descripcion', '$ins_valor', $umed_id)";
 
         $insertar = $objInsumos->insertar($insertInsumos);
         // Cierra la conexion

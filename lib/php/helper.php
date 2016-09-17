@@ -284,3 +284,46 @@ function medicionesCreadas(){
     return $consultaMedicion;
     
 }
+
+//------------------# ultimas ots del encargado que inicie sesion------------
+function notificaciones()
+{
+    $objinicio = new sesionModel();
+
+    $result = "SELECT COUNT(*) AS total "
+            . "FROM pag_orden_trabajo,pag_persona "
+            . "WHERE pag_orden_trabajo.per_id=pag_persona.per_id "
+            . "AND pag_persona.per_id='" . $_SESSION['login']['per_id'] . "' "
+            . "AND pag_orden_trabajo.est_id=3 "
+            . "AND pag_orden_trabajo.estado IS NULL";
+
+        $row = $objinicio->find($result);
+    
+    // Cierra la conexion
+    $objinicio->cerrar();
+
+    $numero = $row['total'];
+    return $numero;
+}
+
+//----------------ots que le corresponden al encargado que inicio sesion-----
+function encargadoOts()
+{
+    $objinicio = new sesionModel();
+
+        $encarOt = "SELECT pag_orden_trabajo.ot_id,ot_prioridad,pag_equipo.equi_nombre "
+            . "FROM pag_orden_trabajo,pag_persona,pag_equipo "
+            . "WHERE pag_orden_trabajo.per_id=pag_persona.per_id "
+            . "AND pag_orden_trabajo.equi_id=pag_equipo.equi_id "
+            . "AND pag_persona.per_id='" . $_SESSION['login']['per_id'] . "' "
+            . "AND pag_orden_trabajo.est_id=3 "
+            . "AND pag_orden_trabajo.estado IS NULL "
+            . "ORDER BY pag_orden_trabajo.ot_id DESC LIMIT 0,5";
+
+        $rowot = $objinicio->select($encarOt);
+    
+    // Cierra la conexion
+    $objinicio->cerrar();
+
+    return $rowot;
+}

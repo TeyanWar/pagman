@@ -2,20 +2,15 @@
 
 include_once('../model/Prestamo/PrestamoModel.php');
 include_once('../model/Herramientas/HerramientasModel.php');
+include_once('../model/Usuarios/PersonasModel.php');
 
 class PrestamoController {
 
     function crear() {
-        //aqui empieza el select para el almacenista que este en ese momento registrado
-        $objAlmacenista = new PrestamoModel();
-
-        $sql = "SELECT * FROM pag_almacenista";
-
-        $almacenista = $objAlmacenista->select($sql);
-
-        $objAlmacenista->cerrar();
+        $per_id = $_SESSION['login']['per_id'];
+//        dd($per_id);
         //aqui empieza el select para la jornada
-        $objJornada = new PrestamoModel();
+        $objJornada = new PersonasModel();
 
         $sql = "SELECT * FROM pag_jornada";
 
@@ -26,44 +21,50 @@ class PrestamoController {
     }
 
     function postCrear() {
-
+        // estos son los pos que llegan de los formularios.
+//        dd($_POST);
         $pher_fecha = $_POST['pher_fecha'];
-//      $pher_fecha_devolucion = $_POST['pher_fecha_devolucion'];
-        $alma_id = $_POST['alma_id'];
         $jor_id = $_POST['jor_id'];
         $pher_observaciones = $_POST['pher_observaciones'];
-        $herramientas = $_POST['id_herramienta'];
-        $cantidadEntregada = $_POST['cantidadEntregada'];
-        $cantidadSolicitada = $_POST['cantidadSolicitada'];
+        $herramientas = $_POST['herramientasDetalle'];
+        //dd($herramientas);
 
         $objPrestamo = new PrestamoModel();
-        $insertPrestamo = "INSERT INTO pag_prestamo_herramienta (pher_fecha,alm_id,jor_id,pher_observaciones)"
-                . " VALUES('$pher_fecha','$alma_id','$jor_id','$pher_observaciones')";
-//        //-----------------------------------------------------------------------//
-//        //aqui empieza el insert a la tabla detalle del prestamo (pag_det_prestamo_herramienta)
+
+        explodeFecha($pher_fecha);
+        $fecha = getFecha();
+
+        $insertPrestamo = "INSERT INTO pag_prestamo_herramienta "
+                . "(pher_fecha,jor_id,pher_observaciones)"
+                . " VALUES('$fecha','$jor_id','$pher_observaciones')";
+
+        //        //aqui empieza el insert a la tabla detalle del prestamo (pag_det_prestamo_herramienta)
         $insertar = $objPrestamo->insertar($insertPrestamo);
         $sql = "select MAX(pher_id) as pher_id from pag_prestamo_herramienta";
         $pher_id = $objPrestamo->select($sql);
 
 //        echo ($pher_id[0]['pher_id']);
         if ($insertPrestamo) {
-            foreach ($herramientas as $her_id => $detPrestamo) {
-                $insertDetalleprestamo = "INSERT INTO pag_det_prestamo_herramienta (pher_id,her_id,est_id,detph_cant_solicita,detph_cant_entrega) "
-                        . "VALUES(" . $pher_id[0]['pher_id'] . ",'$detPrestamo', 1,$her_id,$cantidadSolicitada, $cantidadEntregada)";
-//                $insertar = $objPrestamo->insertar($insertDetalleprestamo);
+            foreach ($herramientas as $herramienta) {
+                $insertDetalleprestamo = "INSERT INTO pag_det_prestamo_herramienta "
+                        . "(pher_id,her_id,detph_cant_solicita,detph_cant_entrega,est_id,detph_observacion) "
+                        . "VALUES(" . $pher_id[0]['pher_id'] . ",'" . $herramienta['her_id'] . "'," . $herramienta['cantidad_solicitada'] . "," . $herramienta['cantidad_entregada'] . ",1,'" . $herramienta['observaciones'] . "')";
+                $insertar = $objPrestamo->insertar($insertDetalleprestamo);
             }
-            $insertar = $objPrestamo->insertar($insertDetalleprestamo);
-//                dd($insertDetalleprestamo);
+            //die();
+//        dd($insertPrestamo);
             // Cierra la conexion   
             $objPrestamo->cerrar();
-            redirect(crearUrl("prestamo", "prestamo", "listar"));
         }
+
+        redirect(crearUrl("prestamo", "prestamo", "listar"));
     }
 
     function listar() {
         $objPrestamo = new PrestamoModel();
 
-        $sql = "SELECT * FROM pag_prestamo_herramienta";
+        $sql = "SELECT pher_fecha,jor_descripcion,pher_observaciones from pag_prestamo_herramienta,pag_jornada"
+                . " where pag_prestamo_herramienta.jor_id=pag_jornada.jor_id";
         $listar = $objPrestamo->select($sql);
 
         //aqui empieza el paginado
@@ -82,48 +83,34 @@ class PrestamoController {
 
     function editar($parametros = false) {
         $objPrestamo = new PrestamoModel();
-
         $id = $parametros[1];
-
-        $sql = "SELECT * FROM pag_prestamo_herramienta WHERE pher_id='$id'";
-
+        $sql = "SELECT pher_id,pher_fecha,pher_observaciones,jor_id FROM pag_prestamo_herramienta WHERE pher_id='$id'";
         $prestamo = $objPrestamo->find($sql);
-
         // Cierra la conexion
         $objPrestamo->cerrar();
-
         include_once("../view/Prestamo/prestamo/editar.html.php");
     }
 
     function postEditar() {
-
+        $objPrestamo = new PrestamoModel();
         $pher_id = $_POST['id'];
         $pher_fecha = $_POST['pher_fecha'];
-        $pher_fecha_devolucion = $_POST['pher_fecha_devolucion'];
-        $alma_id = $_POST['alma_id'];
         $jor_id = $_POST['jor_id'];
         $pher_observaciones = $_POST['pher_observaciones'];
-        $id = $_POST['id'];
-
-        $objPrestamo = new PrestamoModel();
 
         $sql = "UPDATE "
                 . "pag_prestamo_herramienta "
                 . "SET "
-                . "pher_id='$pher_id', "
                 . "pher_fecha='$pher_fecha', "
-                . "pher_fecha='$pher_fecha_devolucion', "
-                . "pher_fecha='$alma_id', "
                 . "pher_fecha='$jor_id', "
                 . "pher_observaciones=$pher_observaciones, "
-                . "WHERE id=$id";
+                . "WHERE pher_id=$pher_id";
 
         $respuesta = $objPrestamo->update($sql);
-
         // Cierra la conexion
         $objPrestamo->cerrar();
 
-        redirect(crearUrl("prestamo", "prestamo", "listarPrestamo"));
+        redirect(crearUrl("prestamo", "prestamo", "listar"));
     }
 
     function eliminar($parametros) {
@@ -144,7 +131,7 @@ class PrestamoController {
         $id = $_POST['id'];
         $objPrestamo = new HerramientasModel();
 
-        $sql = "UPDATE pag_prestamo_herramienta SET estado=false WHERE pher_id='$id'";
+        $sql = "UPDATE pag_prestamo_herramienta SET estado=1 WHERE pher_id='$id'";
         $prestamo = $objPrestamo->update($sql);
         // Cierra la conexion
         $objPrestamo->cerrar();
@@ -158,6 +145,7 @@ class PrestamoController {
     }
 
     function buscarHerramientas() {
+//        dd($_POST);
         $objPrestamo = new PrestamoModel();
         $herramienta = $_POST['buscarHerramienta'];
 

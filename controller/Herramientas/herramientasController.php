@@ -66,8 +66,6 @@ class HerramientasController {
         }
         // estos son los pos que llegan de los formularios.
 
-
-
         $her_id = $_POST['her_id'];
         $her_nombre = $_POST['her_nombre'];
         $her_descripcion = $_POST['her_descripcion'];
@@ -99,6 +97,9 @@ class HerramientasController {
             $rutaydoc = NULL;
         }
 
+        explodeFecha($her_fecha_ingreso);
+        $fecha = getFecha();
+
         $insertHerramientas = "INSERT INTO pag_herramienta "
                 . "(her_id,"
                 . "ther_id,"
@@ -110,8 +111,9 @@ class HerramientasController {
                 . "'$ther_id',"
                 . "'$her_nombre',"
                 . "'$her_descripcion',"
-                . "'$her_fecha_ingreso',"
+                . "'$fecha',"
                 . "'$nombreFoto')";
+//        dd($insertHerramientas);
         $objHerramientas = new HerramientasModel();
         //die(print_r($insertHerramientas));
         $insertar = $objHerramientas->insertar($insertHerramientas);
@@ -123,7 +125,6 @@ class HerramientasController {
     }
 
     function editar($parametros = false) {
-
         $objHerramientas = new HerramientasModel();
         $id = $parametros[1];
         $sql = "SELECT * FROM pag_herramienta WHERE her_id='$id'";
@@ -139,22 +140,15 @@ class HerramientasController {
         $her_nombre = $_POST['her_nombre'];
         $her_descripcion = $_POST['her_descripcion'];
         $her_fecha_ingreso = $_POST['her_fecha_ingreso'];
-//        $her_imagen = $_FILES['her_imagen'];
-////        $ther_id = $_POST['ther_id'];
-//        //$rutaImagen=$_FILES["her_imagen"]["name"];
-//        $rutaImagen = $_SERVER['DOCUMENT_ROOT'] . "/pagman/web/img/" . $_FILES["her_imagen"];
-//        // Si no es un archivo repetido y no hubo error, subimos a la carpeta /Imagenes para luego ser mostrada 
-//        move_uploaded_file($_FILES["her_imagen"], $rutaImagen);
 
         $sql = "UPDATE "
                 . "pag_herramienta "
                 . "SET "
                 . "her_nombre='$her_nombre', "
                 . "her_descripcion='$her_descripcion', "
-//                . "her_imagen='" . $_POST["her_imagen"] . "', "
                 . "her_fecha_ingreso='$her_fecha_ingreso'  "
                 . "WHERE her_id='$her_id'";
-//        die(print_r($sql));
+        
         $respuesta = $objHerramientas->update($sql);
         // Cierra la conexion
         $objHerramientas->cerrar();
@@ -215,14 +209,14 @@ class HerramientasController {
         $sql = "SELECT * FROM pag_herramienta WHERE her_id LIKE '%" . $herramienta . "%' or her_nombre LIKE '%" . $herramienta . "%'";
 
         $listarHer = $objherramientas->select($sql);
-           /*
+        /*
          * Paginado
          */
-        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
         $url = crearUrl('Herramientas', 'herramientas', 'listar');
-        
+
         $paginado = new Paginado($listarHer, $pagina, $url);
-        
+
         $listarHer = $paginado->getDatos();
         /*
          * Fin paginado

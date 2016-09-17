@@ -57,26 +57,26 @@ $(document).ready(function () {
         rules: {
             ins_id: {
                 required: true,
-                number: true,
-                minlength: 5,
+                minlength: 3,
                 maxlength: 10
             },
             ins_nombre: {
                 required: true,
                 letterswithbasicpunc: true,
                 minlength: 5,
-                maxlength: 20,
-                
-             umed_id: "requiered"
-             
-            }
+                maxlength: 20
+            },
+            ins_valor: {
+                required: true,
+                numeric: true
+            },
+            umed_id: "required"
         },
         //mensajes para cada dato validado
         messages: {
             ins_id: {
                 required: "Este campo es obligatorio",
-                number: "Solo se aceptan numeros",
-                minlength: "debe tener minimo: 5 caracteres",
+                minlength: "debe tener minimo: 3 caracteres",
                 maxlength: "debe tener maximo: 10 caracteres"
             },
             ins_nombre: {
@@ -86,8 +86,9 @@ $(document).ready(function () {
                 minlength: "Debe tener minimo: 5 caracteres",
                 maxlength: "Debe tener maximo: 20 caracteres"
             },
-            umed_id: {
-                required: "Este campo es obligatorio seleccionar"
+            ins_valor: {
+                required: "Este campo es obligatorio",
+                numeric: "Este campo solo acepta numero"
             }
         },
         errorElement: 'div',

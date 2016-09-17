@@ -54,9 +54,6 @@ $(document).ready(function () {
             }
         }
     });
-    //-------------------------------------------------------------------------------//
-
-
     //aqui terminan las validaciones del formulario de herramientas
     //------------------------------------------------------------------------------//
     // aqui empieza la modal para editar herramientas
@@ -71,7 +68,7 @@ $(document).ready(function () {
         });
     });
     //aqui termina la modal para editar las herramientas
-    //------------------------------------------------------------------------------//
+    
     // aqui empieza el filtro de busqueda de herramientas por numero_placa o nombre herramienta
     //$('#buscarHer').focus();
     $("#buscarHer").keyup(function () {
