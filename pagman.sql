@@ -1183,20 +1183,7 @@ CREATE TABLE `pag_usuario` (
 --
 
 INSERT INTO `pag_usuario` (`per_id`, `usu_usuario`, `usu_clave`, `usu_estado`, `rol_id`) VALUES
-(1151956249, 'admin', '0000', 'activo', 1);
-
-----------------------------------------------------------
---
--- Estructura de tabla para la tabla ''
---
-
---  CREATE TABLE `pag_det_tipoEquipo_camposPersonalizados` (
---     `idDetalle` int(11) PRIMARY KEY AUTO_INCREMENT,
---     `tequi_id` int(11) NOT NULL,
---     `cp_id` int(11) NOT NULL
---  );
-
-
+(1151956249, 'admin', 'b9ddaf31e98e6d249804d3f7a9e936f82a12af32', 'activo', 1);
 
 ----------------------------------------------------------
 --
@@ -1783,16 +1770,6 @@ ALTER TABLE `pag_det_prestamo_herramienta`
 --
 ALTER TABLE `pag_tipo_medidor`
   ADD CONSTRAINT `pag_tipo_medidor_ibfk_1` FOREIGN KEY (`tm_id`) REFERENCES `pag_tiempo_medidor` (`tm_id`);
-
---
--- índices de la tabla `pag_det_tipoEquipo_camposPersonalizados`
---
-
--- ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados` 
---     ADD CONSTRAINT `pag_det_tipoEquipo_campos_ibfk_1` FOREIGN KEY (`tequi_id`) REFERENCES pag_tipo_equipo(`tequi_id`);
--- 
--- ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados` 
---     ADD CONSTRAINT `pag_det_tipoEquipo_campos_ibfk_2` FOREIGN KEY (`cp_id`) REFERENCES pag_campos_personalizados(`cp_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

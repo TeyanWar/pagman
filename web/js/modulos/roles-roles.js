@@ -55,7 +55,7 @@ $(document).ready(function () {
                     swal("Eliminado!", "Registro eliminado.", "success");
                     window.setTimeout('location.reload()', 1000);
                 }else{
-                    swal("Acción denegada", "No tiene los permisos para realizar esta acción.", "error");
+                    swal("Acci&oacute;n denegada", "No tiene el permiso para realizar esta acci&oacute;n.", "error");
                 }
             });
         });
