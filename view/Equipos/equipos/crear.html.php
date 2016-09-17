@@ -139,19 +139,6 @@
                         <div class="errorTxt13"></div>
                         <label for="cen_id" class="active">(*) Seleccione El Centro De Formacion:</label>
                     </div>
-
-                    <div class="file-field input-field col s4" >
-                        <div class="input-field">
-                            <input type="text" class="active" id="consultarTipo" name='consultarTipo' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Equipos", "equipos", "tipoEquipo", array('noVista' => "noVista")) ?>" />
-                            <label for="consultarTipo" class="active">Seleccionar tipo de Equipo</label>
-                        </div>
-                    </div>
-                    <div id="modalUpdate1" class="modal modal-fixed-footer">
-                        <div class="modal-content"></div>
-                        <div class="modal-footer">
-                            <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           
-                        </div>
-                    </div>
                     <div class="input-field col s4">
                         <input type="text" id="equi_ubicacion" name="equi_ubicacion" class="validate" data-error=".errorTxt9">
                         <label for="equi_ubicacion">(*) Ubicacion en el centro:</label>
@@ -171,24 +158,31 @@
                             <input class="file-path validate" type="text" placeholder="Eliga la imagen" readonly="">
                         </div>
                     </div>
-
-                    <!--DIV DONDE MUESTRA LOS CAMPOS PERSONALIZADOS DEL TIPO DE EQUIPO-->
-
-                    <div id="tablaTipoEquipo" class="col s4">
-
-                    </div>
-                    <!-- FIN DEL DIV-->
-
-                    <div class="input-field col s4">
-                        <div class="btn teal darken-2">
-                            <div class="modal-trigger" href="#modal1">
-                                <span>Seleccione el tipo de medidor</span>
-                            </div>    
+                    <center>
+                        <div class="input-field col s4">
+                            <div class="btn teal darken-2">
+                                <div class="modal-trigger" href="#modal1">
+                                    <span>Seleccione el tipo de medidor</span>
+                                </div>    
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="hidden">
+                            </div>
                         </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="hidden">
+                    </center>
+                    <center>
+                        <div class="input-field col s4">
+                            <div class="btn teal darken-2">
+                                <div class="modal-trigger" href="#modal2" data-url="<?php echo crearUrl('equipos', 'equipos', 'tipoEquipo'); ?>">
+                                    <span>AGREGAR TIPO DE EQUIPO</span>
+                                    <i class="mdi-hardware-phonelink"></i>
+                                </div>    
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="hidden">
+                            </div>
                         </div>
-                    </div>
+                    </center>
                 </div>
 
                 <!----------------------------- SELECCIONAR TIPO DE MEDIDOR ------------------------------->
@@ -205,18 +199,30 @@
                         <?php } ?>
                     </div>
                     <div class="modal-footer">
-                        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
                     </div>
                 </div>
-
-                <!--------------------DIV ROW BOTON CREAR ------------------------------------------->
-                <div class="row">
-                    <div class="input-field col s12">
-                        <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right btn_submit_modal">Crear
-                            <i class="mdi-content-send right"></i>
-                        </button>
+                <div id="modal2" class="modal">
+                    <div class="modal-content">
+                        <center><h5>BUSQUEDA DE TIPO DE EQUIPO</h5></center>
+                        <div class="input-field">
+                            <i class="mdi-action-search prefix"></i>
+                            <input type="text" class="active" id="consultarTipo" name='consultarTipo' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("equipos", "equipos", "tipoEquipo", array('noVista' => "noVista")) ?>" />
+                            <label for="consultarTipo" class="active">Digite el nombre y/o codigo del Equipo a Buscar</label>
+                        </div>
+                    </div>
+                    <div id="tablaTipoEquipo">
+                        
                     </div>
                 </div>
+                    <!--------------------DIV ROW BOTON CREAR ------------------------------------------->
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right btn_submit_modal">Crear
+                                <i class="mdi-content-send right"></i>
+                            </button>
+                        </div>
+                    </div>
 
             </form> <!-- Cierre FORM ---->
         </div> <!-- cierre ROW que abarca TODO ---->
@@ -225,5 +231,5 @@
 
 
 <script type="text/javascript">
-    
+
 </script> 

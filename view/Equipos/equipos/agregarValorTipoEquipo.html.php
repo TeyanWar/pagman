@@ -1,10 +1,12 @@
-<center><h5>AGREGAR VALOR A LOS CAMPOS PERSONALIZADOS</h5></center><br>
-<table class="striped">
+<table class="striped centered" style="width: 500px; margin-left: 100px; margin-bottom: 30px">
     <thead>
         <tr>
-            <th data-field="cp_id">Código del Campo</th>
-            <th data-field="name">Nombre del Campo</th>
-            <th data-field="valor">Valor a Agregar</th>
+            <th colspan="3"><h5><code>CAMPOS PERSONALIZADOS <?php echo $nombreEquipo['tequi_descripcion']; ?></code></h5></th>
+        </tr>
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Valor a asignar</th>
         </tr>
     </thead>
     <tbody>

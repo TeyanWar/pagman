@@ -1,5 +1,20 @@
 $(document).ready(function () {
 
+//---------------------------------------------------
+    $(document).on("click", "#mostrarDivCamposPersonalizados", function () {
+        var url = $(this).attr("data-url");
+        //alert(url);
+        $.ajax({
+            url: url,
+            type: "get",
+              success: function (data) {
+                $("#tablaCamposPersonalizados").html(data);
+            }
+        });
+    });
+
+
+
 //--------------------------------------------
 
     $(document).on('click', '.ajax_paginate > div > div > ul > li > a', function (e) {
@@ -9,9 +24,10 @@ $(document).ready(function () {
             url: url,
             type: 'GET'
         }).done(function (response) {
-            $("#modal_editar_campoPersonalizado > .modal-content").html(response);
+            $("#tablaCamposPersonalizados").html(response);
         });
     });
+
 
     //Capturamos el ID del select de formulario CREAR EQUIPO
     $("#consultarTipo").keyup(function () {

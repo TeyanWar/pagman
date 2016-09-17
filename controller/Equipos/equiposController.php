@@ -1,4 +1,5 @@
 <?php
+
 include_once('../model/Equipos/equiposModel.php');
 
 class EquiposController {
@@ -253,105 +254,104 @@ class EquiposController {
         if (count($errores) > 0) {
             setErrores($errores);
             //----------------fin validaciones-----------------
-        }else{
-
-        $equi_id = $_POST['equi_id'];
-        $per_id = $_POST['per_id'];
-        $equi_nombre = $_POST['equi_nombre'];
-        $est_id = $_POST['est_id'];
-        $equi_modelo = $_POST['equi_modelo'];
-        $equi_serie = $_POST['equi_serie'];
-        $equi_fabricante = $_POST['equi_fabricante'];
-        $equi_marca = $_POST['equi_marca'];
-        $equi_ubicacion = $_POST['equi_ubicacion'];
-        $equi_fecha_compra = $_POST['equi_fecha_compra'];
-        $equi_fecha_instalacion = $_POST['equi_fecha_instalacion'];
-        $equi_vence_garantia = $_POST['equi_vence_garantia'];
-        $cen_id = $_POST['cen_id'];
-
-        //die(print_r($_FILES));
-        $fotoEquipo = $_FILES['ruta']['name'];
-        //Asigno el nombre de la foto segun numero de placa
-        $equipo_foto = "Equipo-" . $fotoEquipo;
-        //Hago un explode para capturar la extension de IMAGEN
-        $fotoEquipo = explode(".", $_FILES['ruta']['name']);
-        //die(print_r($fotoHerramienta));
-        //Nombre de la foto con la extension capturada
-        $nombreFoto = $equipo_foto . "." . end($fotoEquipo);
-        //die($nombreFoto);
-
-        $ruta = $_FILES['ruta']['tmp_name'];
-        //Capturo la ruta donde guardare la Imagen
-        $rutaydoc = getDocumentRoot() . "/web/media/img/Equipos/" . $nombreFoto;
-
-        if ($ruta <> "") {
-            if (move_uploaded_file($ruta, $rutaydoc)) {
-                
-            }
         } else {
-            $rutaydoc = NULL;
-        }
 
-        $area_id = $_POST['area_id'];
-        $tequi_id = $_POST['tequi_id'];
+            $equi_id = $_POST['equi_id'];
+            $per_id = $_POST['per_id'];
+            $equi_nombre = $_POST['equi_nombre'];
+            $est_id = $_POST['est_id'];
+            $equi_modelo = $_POST['equi_modelo'];
+            $equi_serie = $_POST['equi_serie'];
+            $equi_fabricante = $_POST['equi_fabricante'];
+            $equi_marca = $_POST['equi_marca'];
+            $equi_ubicacion = $_POST['equi_ubicacion'];
+            $equi_fecha_compra = $_POST['equi_fecha_compra'];
+            $equi_fecha_instalacion = $_POST['equi_fecha_instalacion'];
+            $equi_vence_garantia = $_POST['equi_vence_garantia'];
+            $cen_id = $_POST['cen_id'];
 
-        //Borramos de la tabla Equipo el siguiente campo tmed_id, ya que eso va en la tabla
-        //Detalla nombrada pag_det_equipo_medidor
-        $sqlEquipo = "INSERT INTO pag_equipo "
-                . "(equi_id, "
-                . "per_id, "
-                . "equi_nombre, "
-                . "est_id, "
-                . "cen_id, "
-                . "equi_foto, "
-                . "equi_valor_tmed, " //Campo Nuevo en la BD, aun no se coloca en el formulario, (¿Para que es?)
-                . "equi_fabricante, "
-                . "equi_marca, "
-                . "equi_modelo, "
-                . "equi_serie, "
-                . "equi_ubicacion, "
-                . "equi_fecha_compra, "
-                . "equi_fecha_instalacion, "
-                . "equi_vence_garantia, "
-                . "area_id, "
-                . "tequi_id ) VALUES("
-                . "'$equi_id', "
-                . "$per_id, "
-                . "'$equi_nombre', "
-                . "$est_id, "
-                . "$cen_id, "
-                . "'$nombreFoto', "
-                . "12000, " //Valo colocado para que ingrese a la BD, no viene del formulario, esta QUEMADO. (equi_valor_tmed)
-                . "'$equi_fabricante', "
-                . "'$equi_marca', "
-                . "'$equi_modelo', "
-                . "'$equi_serie', "
-                . "'$equi_ubicacion', "
-                . "'$equi_fecha_compra', "
-                . "'$equi_fecha_instalacion', "
-                . "'$equi_vence_garantia', "
-                . "$area_id, "
-                . "'$tequi_id' )";
-        //die(print_r("<br>" . $sqlEquipo. "<br>"));
+            //die(print_r($_FILES));
+            $fotoEquipo = $_FILES['ruta']['name'];
+            //Asigno el nombre de la foto segun numero de placa
+            $equipo_foto = "Equipo-" . $fotoEquipo;
+            //Hago un explode para capturar la extension de IMAGEN
+            $fotoEquipo = explode(".", $_FILES['ruta']['name']);
+            //die(print_r($fotoHerramienta));
+            //Nombre de la foto con la extension capturada
+            $nombreFoto = $equipo_foto . "." . end($fotoEquipo);
+            //die($nombreFoto);
 
+            $ruta = $_FILES['ruta']['tmp_name'];
+            //Capturo la ruta donde guardare la Imagen
+            $rutaydoc = getDocumentRoot() . "/web/media/img/Equipos/" . $nombreFoto;
 
-        $objEquipos = new EquiposModel();
-
-        $insertar = $objEquipos->insertar($sqlEquipo);
-        //die(print_r($insertar));
-        if ($insertar == true) {
-            //die(print_r("INSERTO"));
-            foreach ($_POST['medidores'] as $medidor) {
-                $sql = "INSERT INTO pag_det_equipo_medidor (equi_id,tmed_id) "
-                        . "values('$equi_id',$medidor)";
-                $insert = $objEquipos->insertar($sql);
-            }
-            
+            if ($ruta <> "") {
+                if (move_uploaded_file($ruta, $rutaydoc)) {
+                    
+                }
             } else {
-            //die(print_r("NO INSERTO"));
-        }
-        // Cierra la conexion
-        $objEquipos->cerrar();
+                $rutaydoc = NULL;
+            }
+
+            $area_id = $_POST['area_id'];
+            $tequi_id = $_POST['tequi_id'];
+
+            //Borramos de la tabla Equipo el siguiente campo tmed_id, ya que eso va en la tabla
+            //Detalla nombrada pag_det_equipo_medidor
+            $sqlEquipo = "INSERT INTO pag_equipo "
+                    . "(equi_id, "
+                    . "per_id, "
+                    . "equi_nombre, "
+                    . "est_id, "
+                    . "cen_id, "
+                    . "equi_foto, "
+                    . "equi_valor_tmed, " //Campo Nuevo en la BD, aun no se coloca en el formulario, (¿Para que es?)
+                    . "equi_fabricante, "
+                    . "equi_marca, "
+                    . "equi_modelo, "
+                    . "equi_serie, "
+                    . "equi_ubicacion, "
+                    . "equi_fecha_compra, "
+                    . "equi_fecha_instalacion, "
+                    . "equi_vence_garantia, "
+                    . "area_id, "
+                    . "tequi_id ) VALUES("
+                    . "'$equi_id', "
+                    . "$per_id, "
+                    . "'$equi_nombre', "
+                    . "$est_id, "
+                    . "$cen_id, "
+                    . "'$nombreFoto', "
+                    . "12000, " //Valo colocado para que ingrese a la BD, no viene del formulario, esta QUEMADO. (equi_valor_tmed)
+                    . "'$equi_fabricante', "
+                    . "'$equi_marca', "
+                    . "'$equi_modelo', "
+                    . "'$equi_serie', "
+                    . "'$equi_ubicacion', "
+                    . "'$equi_fecha_compra', "
+                    . "'$equi_fecha_instalacion', "
+                    . "'$equi_vence_garantia', "
+                    . "$area_id, "
+                    . "'$tequi_id' )";
+            //die(print_r("<br>" . $sqlEquipo. "<br>"));
+
+
+            $objEquipos = new EquiposModel();
+
+            $insertar = $objEquipos->insertar($sqlEquipo);
+            //die(print_r($insertar));
+            if ($insertar == true) {
+                //die(print_r("INSERTO"));
+                foreach ($_POST['medidores'] as $medidor) {
+                    $sql = "INSERT INTO pag_det_equipo_medidor (equi_id,tmed_id) "
+                            . "values('$equi_id',$medidor)";
+                    $insert = $objEquipos->insertar($sql);
+                }
+            } else {
+                //die(print_r("NO INSERTO"));
+            }
+            // Cierra la conexion
+            $objEquipos->cerrar();
         }
         echo getRespuestaAccion('listar');
     }
@@ -428,15 +428,16 @@ class EquiposController {
             
         } else {
             ?>
-                <code>No se encontraron registros.</code>
+            <center><code>No se encontraron registros.</code></center>
             <?php
+
         }
 
         //aqui empieza el paginado       
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
         $url = crearUrl('equipos', 'equipos', 'tipoEquipo', array('noVista', $campoP));
 
-        $paginado = new Paginado($consultaCampoAjax, $pagina, $url, 2);
+        $paginado = new Paginado($consultaCampoAjax, $pagina, $url, 3);
         $consultaCampoAjax = $paginado->getDatos();
 
         $objCp->cerrar();
@@ -449,18 +450,22 @@ class EquiposController {
         $objTIpoEquipo = new EquiposModel();
 
         $id = $parametros[1];
-        //die(print_r($id));
+        
+        $sql = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='$id'";
+        $nombreEquipo = $objTIpoEquipo->find($sql);
+        //die(print_r($sql));
+        
         $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoEquipo_camposPersonalizados WHERE "
                 . "pag_det_tipoEquipo_camposPersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
                 . "pag_det_tipoEquipo_camposPersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoEquipo_camposPersonalizados.tequi_id='$id' ORDER BY pag_det_tipoEquipo_camposPersonalizados.cp_id ASC ";
         $consultaTipoEquipo = $objTIpoEquipo->select($sqlCP);
 
         //die(print_r($consultaTipoEquipo));
-         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-            $url = crearUrl('equipos', 'equipos', 'agregarMedida',array('noVista',$id));
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+        $url = crearUrl('equipos', 'equipos', 'agregarMedida', array('noVista', $id));
 
-            $paginado = new Paginado($consultaTipoEquipo, $pagina, $url, 3);
-            $consultaTipoEquipo = $paginado->getDatos();
+        $paginado = new Paginado($consultaTipoEquipo, $pagina, $url, 3);
+        $consultaTipoEquipo = $paginado->getDatos();
         $objTIpoEquipo->cerrar();
 
         include_once('../view/Equipos/equipos/agregarValorTipoEquipo.html.php');

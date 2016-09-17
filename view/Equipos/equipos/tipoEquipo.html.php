@@ -1,44 +1,27 @@
-<div class="card-panel">
-    <table class="striped centered">
-        <thead>
-            <tr>
-                <th>Nombre tipo de Equipo</th>
-                <th>Seleccionar</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <?php foreach ($consultaCampoAjax as $tipoEquipo) { ?>
+<?php ?><center><div class="col s10" style="margin-left: 50px; margin-bottom: 20px;">
+        <table class="striped centered">
+            <thead>
                 <tr>
-                    <td><?php echo $tipoEquipo['tequi_descripcion']; ?> </td>
-                    <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
-                           href="#modal_editar_campoPersonalizado" 
-                           data-url="<?php echo crearUrl("equipos", "equipos", "agregarMedida", array('noVista', 'id' => $tipoEquipo['tequi_id'])); ?>">
-                            <i class="mdi-action-done teal"></i></a>
-                    </td>
+                    <th>Nombre tipo de Equipo</th>
+                    <th>Seleccionar</th>
                 </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+            </thead>
 
-    <div class="modal" id="modal_editar_campoPersonalizado">
-        <div class="modal-content">
-        </div> 
-    </div>  
+            <tbody>
+                <?php foreach ($consultaCampoAjax as $tipoEquipo) { ?>
+                    <tr>
+                        <td><?php echo $tipoEquipo['tequi_descripcion']; ?> </td>
+                        <td><a class="btn-floating waves-effect waves-light modal-action teal darken-1"  
+                               id="mostrarDivCamposPersonalizados" data-url="<?php echo crearUrl('equipos', 'equipos', 'agregarMedida', array('noVista' => 'noVista', 'id' => $tipoEquipo['tequi_id'])) ?>">
+                                <i class="mdi-navigation-check"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+
+    </div>
+</center>
+<div id="tablaCamposPersonalizados">
 </div>
-
-
-<script type="text/javascript">
-    $('.modal-trigger').leanModal({
-        dismissible: true, // Modal can be dismissed by clicking outside of the modal
-        opacity: .5, // Opacity of modal background
-        in_duration: 300, // Transition in duration
-        out_duration: 200, // Transition out duration
-        ready: function () {
-            //alert('Ready'); 
-        }, // Callback for Modal open
-        complete: function () {
-            //alert('Closed'); 
-        } // Callback for Modal close
-    });
-</script> 
