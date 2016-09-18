@@ -464,7 +464,7 @@ class EquiposController {
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
         $url = crearUrl('equipos', 'equipos', 'agregarMedida', array('noVista', $id));
 
-        $paginado = new Paginado($consultaTipoEquipo, $pagina, $url, 3);
+        $paginado = new Paginado($consultaTipoEquipo, $pagina, $url);
         $consultaTipoEquipo = $paginado->getDatos();
         $objTIpoEquipo->cerrar();
 
