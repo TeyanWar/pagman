@@ -1,4 +1,57 @@
+//bryan david ramos TADSI 03
+
 $(document).ready(function () {
+
+
+$("#formValidate").validate({
+
+        rules: {
+            ins_id: {
+                required: true,
+                number: true,
+                minlength: 5,
+                maxlength: 10
+            },
+            ins_nombre: {
+                required: true,
+                letterswithbasicpunc: true,
+                minlength: 5,
+                maxlength: 20,
+                
+             umed_id: "requiered"
+             
+            }
+        },
+        //mensajes para cada dato validado
+        messages: {
+            ins_id: {
+                required: "Este campo es obligatorio",
+                number: "Solo se aceptan numeros",
+                minlength: "debe tener minimo: 5 caracteres",
+                maxlength: "debe tener maximo: 10 caracteres"
+            },
+            ins_nombre: {
+                required: "Este campo es obligatorio",
+                letterswithbasicpunc: "solo se permiten letras y caracteres como:\n\
+                (guión medio, punto, coma, paréntesis, comillas simples o dobles y espacio).",
+                minlength: "Debe tener minimo: 5 caracteres",
+                maxlength: "Debe tener maximo: 20 caracteres"
+            },
+            umed_id: {
+                required: "Este campo es obligatorio seleccionar"
+            }
+        },
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error);
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+   
 // aqui empieza el eliminar con la libreria sweetalert , completamente funcional con el eliminado logico.
 //" CAMBIO DE ESTADO TRUE-FALSE "
     $(document).on('click', '.eliminarinsumo', function (e) {
@@ -14,7 +67,7 @@ $(document).ready(function () {
             confirmButtonText: "Si, Elimine el Registro!",
             closeOnConfirm: false},
         function () {
-
+            
             $.ajax({
                 url: url,
                 type: "POST",
@@ -22,84 +75,35 @@ $(document).ready(function () {
                     ins_id: ins_id
                 }
             }).done(function (data) {
-
+                
             });
 
             swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
-
-            $("#buscainsumo").trigger('keyup');
+            
+                $("#buscainsumo").trigger('keyup');
         });
     });
-
+    
 //buscador ajax para los insumos
-    $("#buscainsumo").keyup(function () {
 
+ $("#buscainsumo").keyup(function () {
         var insumo = $("#buscainsumo").val();
+            
+        if (insumo != "") {
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val(); 
         var url = $(this).attr("data-url");
-
         $.ajax({
             url: url,
             type: "POST",
-            data: "insumo=" + insumo,
+            data: "insumo=" + insumo +"&pagina"+pagina,
             success: function (data) {
                 $("#tablainsumo").html(data);
             }
         });
     });
-    $("#buscainsumo").trigger('keyup');
 
-    //aqui empieza las validaciones para los insumos
-    //validacion para letras
-//    jQuery.validator.addMethod("lettersonly", function (value, element) {
-//        return this.optional(element) || /^[a-z]+$/i.test(value);
-//    }, "Solo letras");
-    $(".F_registrar_ins").validate({
-        rules: {
-            ins_id: {
-                required: true,
-                minlength: 3,
-                maxlength: 10
-            },
-            ins_nombre: {
-                required: true,
-                letterswithbasicpunc: true,
-                minlength: 5,
-                maxlength: 20
-            },
-            ins_valor: {
-                required: true,
-                numeric: true
-            },
-            umed_id: "required"
-        },
-        //mensajes para cada dato validado
-        messages: {
-            ins_id: {
-                required: "Este campo es obligatorio",
-                minlength: "debe tener minimo: 3 caracteres",
-                maxlength: "debe tener maximo: 10 caracteres"
-            },
-            ins_nombre: {
-                required: "Este campo es obligatorio",
-                letterswithbasicpunc: "solo se permiten letras y caracteres como:\n\
-                (guión medio, punto, coma, paréntesis, comillas simples o dobles y espacio).",
-                minlength: "Debe tener minimo: 5 caracteres",
-                maxlength: "Debe tener maximo: 20 caracteres"
-            },
-            ins_valor: {
-                required: "Este campo es obligatorio",
-                numeric: "Este campo solo acepta numero"
-            }
-        },
-        errorElement: 'div',
-        errorPlacement: function (error, element) {
-            var placement = $(element).data('error');
-            if (placement) {
-                $(placement).append(error);
-            } else {
-                error.insertAfter(element);
-            }
-        }
-    });
+ $("#buscainsumo").trigger('keyup');
 });
     
