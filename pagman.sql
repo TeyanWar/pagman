@@ -291,6 +291,17 @@ CREATE TABLE `pag_det_equipo_medidor` (
   `tmed_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `pag_det_equipo_medidor`
+--
+
+INSERT INTO `pag_det_equipo_medidor` (`dequimed_id`, `equi_id`, `tmed_id`) VALUES
+(1, '0123', 9),
+(2, '1', 9),
+(3, 'EP_003', 9),
+(4, 'PC_002', 9),
+(5, 'TC001', 9);
+
 -- --------------------------------------------------------
 
 --
@@ -1607,7 +1618,7 @@ ALTER TABLE `pag_det_componente_ot`
 -- AUTO_INCREMENT de la tabla `pag_det_equipo_medidor`
 --
 ALTER TABLE `pag_det_equipo_medidor`
-  MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_herramienta_ot`
 --

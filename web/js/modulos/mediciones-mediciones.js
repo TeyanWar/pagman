@@ -6,12 +6,14 @@ $(document).ready(function () {
     $(document).on('click','.ajax_paginate > div > div > ul > li > a',function(e){
         e.preventDefault();
         var url=$(this).attr('href');
-        $.ajax({
-            url: url,
-            type:'GET'
-        }).done(function(response){
-                $("#modal_detalle_mediciones> .modal-content").html(response);
-        });
+        if(url!='#'){
+            $.ajax({
+                url: url,
+                type:'GET'
+            }).done(function(response){
+                    $("#modal_detalle_mediciones> .modal-content").html(response);
+            });
+        }
     });
     
     $.validator.setDefaults({
