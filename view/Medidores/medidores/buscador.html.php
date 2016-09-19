@@ -49,7 +49,7 @@
         <div id="editarMedidor" class="modal">
 
             <div class="modal-content"></div>
-            </div>
+        </div>
         
         
 

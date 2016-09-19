@@ -57,28 +57,27 @@ class campoPersonalizadoController {
 
         if (count($errores) > 0) {
             setErrores($errores);
-            redirect(crearUrl('equipos', 'campoPersonalizado', 'crear'));
-        }
+        } else {
 
-        $codigoCP = $_POST['codigoCP'];
-        $nombreCP = $_POST['nombreCP'];
-        //die($_POST['nombreCP']);
+            $codigoCP = $_POST['codigoCP'];
+            $nombreCP = $_POST['nombreCP'];
+            //die($_POST['nombreCP']);
 
-        $sql = "INSERT INTO pag_campos_personalizados (cp_id,cp_nombre)VALUES("
-                . "'$codigoCP',"
-                . "'$nombreCP')";
-        //die(print_r($sql));
-        $objCP = new campoPersonalizadoModel();
+            $sql = "INSERT INTO pag_campos_personalizados (cp_id,cp_nombre)VALUES("
+                    . "'$codigoCP',"
+                    . "'$nombreCP')";
+            //die(print_r($sql));
+            $objCP = new campoPersonalizadoModel();
 
-        $insertarCP = $objCP->insertar($sql);
+            $insertarCP = $objCP->insertar($sql);
 
 //        if ($insertarCP = true) {
 //            die("REGISTRO");
 //        }
 
-        $objCP->cerrar();
-
-        redirect(crearUrl("Equipos", "campoPersonalizado", "listar"));
+            $objCP->cerrar();
+        }
+        echo getRespuestaAccion('listar');
     }
 
     public function listar() {
