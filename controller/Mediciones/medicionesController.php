@@ -125,7 +125,6 @@ class MedicionesController {
                 pdt.tmed_id=ptm.tmed_id AND
                 pdt.equi_id='$idEquipo'";
         $medidores = $objMedidor->select($sql);
-
         $objEquipos->cerrar();
         include_once '../view/Mediciones/mediciones/ajaxAgregarEquipo.html.php';
     }

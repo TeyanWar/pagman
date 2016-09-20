@@ -1,25 +1,20 @@
-<table class="striped centered" style="width: 500px; margin-left: 100px; margin-bottom: 30px">
-    <thead>
-        <tr>
-            <th colspan="3"><h5><code>CAMPOS PERSONALIZADOS <?php echo $nombreEquipo['tequi_descripcion']; ?></code></h5></th>
-        </tr>
-        <tr>
-            <th>Codigo</th>
-            <th>Nombre</th>
-            <th>Valor a asignar</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="col s12">
+    <div class="card col s10" style="margin-left: 50px; margin-bottom: 20px;">
+        <br><h5>
+            <center>
+                <code>AGREGAR VALOR A CAMPOS PERSONALIZADOS <?php echo $nombreEquipo['tequi_descripcion']; ?></code>
+            </center>
+        </h5><br>
         <?php foreach ($consultaTipoEquipo as $tipoEquipo) { ?>
-            <tr>
-                <td>
-                    <?php echo $tipoEquipo['cp_id']; ?></td>
-                <td><?php echo $tipoEquipo['cp_nombre']; ?></td>
-                <td><input type="text" class="col s10"/></td>
-            </tr>
+            <div class="input-field col s2">
+                <input type="text" id="equi_id" name="equi_id" class="validate" data-error=".errorTxt1">
+                <label for="equi_noplaca" class="active" ><?php echo $tipoEquipo['cp_nombre']; ?></label>
+                <div class="errorTxt1"></div>
+            </div>
         <?php } ?>
-    </tbody>
-</table>
-<div class="ajax_paginate">
-    <?php $paginado->render() ?>
+        <!--<div class="ajax_paginate">
+        <?php //$paginado->render() ?>
+        </div>-->
+        <br><br>
+    </div>
 </div>
