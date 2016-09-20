@@ -29,13 +29,13 @@
                 </div>
                 <!--Fin contenedor mensajes de error-->
 
-                <form id="formValidate" class="col s12 formValidate" action="<?php echo crearUrl("usuarios", "usuarios", "postCrear",array('noVista')) ?>" method="post" novalidate>
+                <form id="formValidate" class="col s12 formValidate" data-url="<?php echo crearUrl("usuarios", "usuarios", "postCrear", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("usuarios", "usuarios", "listar") ?>" method="post" novalidate>
                     
                     <div class="row">
                         
                         <div class="col s4">
                             <label>(*) Departamento</label>
-                            <select class="error browser-default select2" id="departamento" name="departamento" data-url="<?php echo crearUrl('usuarios', 'usuarios', 'selectCentro', array('noVista' => 'noVista')) ?>" data-error=".errorTxt1">
+                            <select class="error browser-default select2" id="departamento" name="departamento" data-error=".errorTxt1">
                                 <option value="" disabled selected>Seleccione</option>
                                 <?php 
                                     foreach($departamentos as $depto){
@@ -58,15 +58,6 @@
                             </select>
                                 <div class="errorTxt2"></div>
                         </div>
-
-<!--                        <div class="col s4">
-                            <label>(*) Centro</label>
-                            <select class="select2" id="selectCentro" name="centro" data-error=".errorTxt2" >
-                                <option value="" disabled selected>Seleccione</option>
-                            </select>
-                            <div class="errorTxt2"></div>
-                        </div>-->
-<!--                       //--------------->
                         
                         <div class="col s4">
                             <label>(*) Cargo</label>
@@ -162,6 +153,7 @@
                                         <label>(*) Rol/perfil</label>
                                         <select class="error browser-default select2" name="perfil">
                                             <option value="" disabled selected>Seleccione</option>
+                                            <option value="">(Vacio)</option>
                                             <?php 
                                                 foreach($perfiles as $perfil){
                                                 echo "<option value='".$perfil["rol_id"]."'>". $perfil["rol_nombre"] . "</option>";
@@ -176,6 +168,7 @@
                                         <label>(*) Estado</label>
                                         <select class="error browser-default select2" name="estado">
                                             <option value="" disabled selected>Seleccione</option>
+                                            <option value="">(Vacio)</option>
                                             <option value="activo" >activo</option>
                                             <option value="desactivado" >desactivado</option>
                                         </select>
@@ -192,7 +185,7 @@
 
                     
                     <div class="row">
-                        <button name="action" id="enviar" type="submit" class="btn teal waves-effect waves-light right btn_submit_modal">Registrar
+                        <button name="action" id="enviar" type="submit" class="btn teal waves-effect waves-light right">Registrar
                             <i class="mdi-content-add left"> </i>
                         </button>
                     </div>

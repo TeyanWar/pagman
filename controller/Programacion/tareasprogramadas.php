@@ -54,7 +54,7 @@ $objProgramacion = new ProgramacionModel();
 
 //---------------------------programaciones manuales-------------------------------
 
-        $sqlm = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) AS totalMediciones,"
+        $sqlm = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) totalMediciones,"
                 . "pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
                 . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
                 . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"

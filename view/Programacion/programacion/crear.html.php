@@ -1,4 +1,4 @@
-<form id="formValid" class="col s12 formValid" action="<?php echo crearUrl('programacion', 'programacion', 'postCrear',array('noVista')) ?>"  method="post" novalidate>
+<form id="formValid" class="col s12" data-url="<?php echo crearUrl("Programacion", "programacion", "postCrear", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Programacion", "programacion", "listar") ?>" method="post" novalidate>
     <div class="card-panel">
         <div class="container">
             <h4 class="header">Crear nuevo mantenimiento</h4>
@@ -32,6 +32,7 @@
                     <div class="col s4">
                         <label>(*) Centro de formacion</label>
                         <select class="error browser-default select2" id="centro" name="centro" data-error=".errorTxt2">
+                            <option value="" disabled selected>Seleccione</option>
                             <option value="">(Vacio)</option>
                             <?php foreach ($centros as $centro) { ?>
                                 <option value="<?php echo $centro['cen_id']; ?>" ><?php echo $centro['cen_nombre']; ?></option>
@@ -77,7 +78,7 @@
                 <label><h6>(*) PROGRAMACIONES:</h6></label>
                 <div class="divider"></div>
                 <div class="input-field col s12">
-                    <table class="striped" id="programaciones" cellspacing="0">
+                    <table class="striped" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>(*) Placa</th>
@@ -91,7 +92,8 @@
                                 <th>(*) Prioridad</th>
                                 <th>Quitar</th>
                             </tr>
-                        </thead>                  
+                        </thead>
+                        <tbody id="programaciones"></tbody>
                     </table>
                 </div>
             </div>
@@ -99,7 +101,7 @@
             <div class="row">
                 <div class="input-field col s3 offset-s9">
                     <br><br>
-                    <button class="btn teal waves-effect waves-light btn_submit_modal" name="action" id="enviar" type="submit"><i class="mdi-content-add"></i>Registrar</button>
+                    <button class="btn teal waves-effect waves-light right" name="action" id="enviar" type="submit"><i class="mdi-content-add"></i>Registrar</button>
                     
                 </div>
             </div>

@@ -36,17 +36,17 @@ class UsuariosController {
 
         $UsuariosModel = new UsuariosModel();
 
-        $id = $parametros[1];
+        $idcon = $parametros[1];
 
-        $sql = "SELECT pag_persona.per_tipo "
+        $edcos = "SELECT pag_persona.per_tipo "
                 . "FROM pag_persona "
-                . "WHERE pag_persona.per_id='$id'";
+                . "WHERE pag_persona.per_id='$idcon'";
 
-        $comprobar = $UsuariosModel->find($sql);
+        $prueba = $UsuariosModel->find($edcos);
 
-        if ($comprobar['per_tipo'] === 'persona') {
+        if ($prueba['per_tipo']==='persona') {
 
-            $sql = "SELECT pag_persona.per_id,pag_persona.per_nombre,pag_persona.per_apellido,"
+            $sqlpersona = "SELECT pag_persona.per_id,pag_persona.per_nombre,pag_persona.per_apellido,"
                     . "pag_persona.per_telefono,pag_persona.per_movil,"
                     . "pag_persona.per_email,pag_persona.per_direccion,"
                     . "pag_persona.per_valor_hora,pag_departamento.dept_id,"
@@ -54,14 +54,14 @@ class UsuariosController {
                     . "FROM pag_persona,pag_cargo,pag_departamento,pag_centro "
                     . "WHERE pag_persona.dept_id=pag_departamento.dept_id "
                     . "and pag_persona.car_id=pag_cargo.car_id "
-                    . "and pag_persona.cen_id=pag_centro.cen_id and pag_persona.per_id='$id'";
+                    . "and pag_persona.cen_id=pag_centro.cen_id and pag_persona.per_id='$idcon'";
 
-            $per = $UsuariosModel->find($sql);
+            $per = $UsuariosModel->find($sqlpersona);
 
             include_once("../view/Usuarios/personas/editar.html.php");
         } else {
 
-            $sql = "SELECT pag_rol.rol_id,"
+            $sqlusu = "SELECT pag_rol.rol_id,"
                     . "pag_usuario.usu_usuario,pag_usuario.usu_clave,"
                     . "pag_usuario.usu_estado,pag_persona.per_id,"
                     . "pag_persona.per_nombre,pag_persona.per_apellido,"
@@ -75,9 +75,9 @@ class UsuariosController {
                     . "and pag_usuario.per_id=pag_persona.per_id "
                     . "and pag_persona.dept_id=pag_departamento.dept_id "
                     . "and pag_persona.car_id=pag_cargo.car_id "
-                    . "and pag_persona.cen_id=pag_centro.cen_id and pag_persona.per_id='$id'";
+                    . "and pag_persona.cen_id=pag_centro.cen_id and pag_persona.per_id='$idcon'";
 
-            $usu = $UsuariosModel->find($sql);
+            $usu = $UsuariosModel->find($sqlusu);
 
             include_once("../view/Usuarios/usuarios/editar.html.php");
         }
@@ -89,7 +89,7 @@ class UsuariosController {
 
     function postEditar() {
 
-        $id = $_POST['id'];
+        $ed = $_POST['id'];
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
         $telefono = $_POST['telefono'];
@@ -103,11 +103,11 @@ class UsuariosController {
 
         $objUsuarios = new UsuariosModel();
 
-        $sqli = "SELECT pag_persona.per_tipo "
+        $editar = "SELECT pag_persona.per_tipo "
                 . "FROM pag_persona "
-                . "WHERE pag_persona.per_id='$id'";
+                . "WHERE pag_persona.per_id='$ed'";
 
-        $comprobar = $objUsuarios->find($sqli);
+        $comprobar = $objUsuarios->find($editar);
 
         //--------expresiones regulares--------------------
         $errores = array();
@@ -119,21 +119,25 @@ class UsuariosController {
 
         //--------------VALIDACIONES---------------------------------------
 
-        if ($comprobar['per_tipo'] === 'usuario del sistema') {
+        if ($comprobar['per_tipo']==='usuario del sistema') {
 
             if (!isset($_POST['login']) or $_POST['login'] == "") {
-                $errores[] = '<h6><strong>Para editar usuario el campo <code><b>login</b></code> es obligatorio</strong><h6>';
+                $errores[] = '<strong>Para editar usuario el campo <code><b>login</b></code> es obligatorio</strong>';
             }
             
             if(!empty($_POST['clave'])){
                 
                 if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
-                    $errores[] = '<h6><strong>(*) Para editar usuario el campo <code><b>clave</b></code> debe contener numeros o letras</strong><h6>';
+                    $errores[] = '<strong>(*) Para editar usuario el campo <code><b>clave</b></code> debe contener numeros o letras</strong>';
                 }
             }
 
             if (!isset($_POST['perfil']) or $_POST['perfil'] == "") {
-                $errores[] = '<h6><strong>(*) Para editar usuario el campo <code><b>perfil</b></code> es obligatorio</strong><h6>';
+                $errores[] = '<strong>(*) Para editar usuario el campo <code><b>perfil</b></code> es obligatorio</strong>';
+            }
+            
+            if (!isset($_POST['estado']) or $_POST['estado'] == "") {
+                $errores[] = '<strong>Para editar usuario el campo <code><b>Estado</b></code> es obligatorio</strong>';
             }
 
             if (!isset($_POST['departamento']) or $_POST['departamento'] == "") {
@@ -223,11 +227,11 @@ class UsuariosController {
                         . "per_valor_hora='$valorhora',"
                         . "car_id='$cargo',"
                         . "cen_id='$centro' "
-                        . "WHERE per_id='$id'";
+                        . "WHERE per_id='$ed'";
 
                 $respuesta1 = $objUsuarios->update($sql);
 
-                if ($comprobar['per_tipo'] == 'usuario del sistema' &&
+                if ($comprobar['per_tipo']==='usuario del sistema' &&
                         isset($_POST['login']) &&
                         isset($_POST['clave']) &&
                         isset($_POST['estado']) &&
@@ -244,7 +248,7 @@ class UsuariosController {
                             . "usu_usuario='$login',"
                             . "usu_estado='$estado',"
                             . "rol_id='$perfil' "
-                            . "WHERE per_id='$id'";
+                            . "WHERE per_id='$ed'";
 
                     $respuesta = $objUsuarios->update($sqls);
                     
@@ -257,7 +261,7 @@ class UsuariosController {
                             . "pag_usuario "
                             . "SET "
                             . "usu_clave='$password' "
-                            . "WHERE per_id='$id'";
+                            . "WHERE per_id='$ed'";
 
                     $upclave = $objUsuarios->update($scla);
                         
@@ -353,7 +357,7 @@ class UsuariosController {
                         . "per_valor_hora='$valorhora',"
                         . "car_id='$cargo',"
                         . "cen_id='$centro' "
-                        . "WHERE per_id='$id'";
+                        . "WHERE per_id='$ed'";
 
                 $respuesta2 = $objUsuarios->update($sql);
             }
@@ -466,23 +470,23 @@ class UsuariosController {
                 isset($_POST['perfil']) && $_POST['perfil'] != "") {
 
             if (!isset($_POST['login']) or $_POST['login'] == "") {
-                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>login</b></code> es obligatorio</strong><h6>';
+                $errores[] = '<strong>Para el registro de usuario el campo <code><b>login</b></code> es obligatorio</strong>';
             }
 
             if (!isset($_POST['clave']) or $_POST['clave'] == "") {
-                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>clave</b></code> es obligatorio</strong><h6>';
+                $errores[] = '<strong>Para el registro de usuario el campo <code><b>clave</b></code> es obligatorio</strong>';
             }
             
             if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
-                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>clave</b></code> debe contener numeros o letras</strong><h6>';
+                $errores[] = '<strong>Para el registro de usuario el campo <code><b>clave</b></code> debe contener numeros o letras</strong>';
             }
 
             if (!isset($_POST['estado']) or $_POST['estado'] == "") {
-                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>estado</b></code> es obligatorio</strong><h6>';
+                $errores[] = '<strong>Para el registro de usuario el campo <code><b>estado</b></code> es obligatorio</strong>';
             }
 
             if (!isset($_POST['perfil']) or $_POST['perfil'] == "") {
-                $errores[] = '<h6><strong>Para el registro de usuario el campo <code><b>perfil</b></code> es obligatorio</strong><h6>';
+                $errores[] = '<strong>Para el registro de usuario el campo <code><b>perfil</b></code> es obligatorio</strong>';
             }
 
             if (!isset($_POST['departamento']) or $_POST['departamento'] == "") {
@@ -648,9 +652,7 @@ class UsuariosController {
 
         if (count($errores) > 0) {
             setErrores($errores);
-            
-//                redirect(crearUrl('usuarios', 'usuarios', 'crear'));
-            //----------------fin validaciones-----------------
+            echo getErrores();
         } else {
 
             $identificacion = $_POST['identificacion'];
@@ -711,7 +713,7 @@ class UsuariosController {
                         . "'$perfil')";
 
                 $insertar = $objUsuarios->insertar($insertusu);
-
+                echo true;
                
             } else {
 
@@ -734,14 +736,12 @@ class UsuariosController {
 
                 $insertar = $objUsuarios->insertar($insertper);
 
-                
+                echo true;
             }
-
-//                redirect(crearUrl("usuarios", "usuarios", "listar")); 
             // Cierra la conexion
             $objUsuarios->cerrar();
         }
-        echo getRespuestaAccion('listar');
+
     }
 
     function verDetalle($parametros = false) {

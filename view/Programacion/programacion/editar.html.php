@@ -73,7 +73,7 @@
                     required: true,
                     digits: true,
                     minlength: 1,
-                    maxlength: 2
+                    maxlength: 5
                 }
             },
             //For custom messages
@@ -88,7 +88,7 @@
                     required: "La frecuencia es obligatorio.",
                     digits: "La frecuencia debe ser numerico",
                     minlength: "Introduzca al menos 1 caracteres",
-                    maxlength: "Solo se permite introducir maximo 2 caracteres"
+                    maxlength: "Solo se permite introducir maximo 5 caracteres"
                 }
             },
             errorElement: 'div',
