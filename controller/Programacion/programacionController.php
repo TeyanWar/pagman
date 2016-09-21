@@ -192,7 +192,7 @@ class ProgramacionController {
                     $prog = $objProgramacion->find($man);
                     $no = $prog['detprog_id']+ 1;
                     $detalle = "INSERT INTO pag_det_programacion(detprog_id,proequi_id,ttra_id,detprog_duracion_horas,"
-                            . "equi_id,comp_id,priotra_id,tar_id,tmed_id,frecuencia,frec_actual,est_id)"
+                            . "equi_id,comp_id,priotra_id,tar_id,tmed_id,frecuencia,frec_actual,frec_medc,est_id)"
                             . "VALUES"
                             . "(" . $no . ","
                             . "" . $co[$a] . ","
@@ -204,6 +204,7 @@ class ProgramacionController {
                             . "".$tareas[$a].","
                             . "".$medidores[$a].","
                             . "" . $frecuencias[$a] . ","
+                            . "0,"
                             . "0,"
                             . "1)";
 

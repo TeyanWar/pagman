@@ -4,6 +4,30 @@ include_once '../model/Programacion/programacionModel.php';
 
 $objProgramacion = new ProgramacionModel();
 
+//-----------actualizacion datos recientes de programacion-----------------------
+        
+        $infrec = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) totalMediciones,"
+                . "pag_det_programacion.detprog_id,frecuencia,frec_actual "
+                . "FROM pag_programacion_equipo,pag_det_programacion,"
+                . "pag_control_medidas,pag_equipo,pag_tipo_medidor "
+                . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
+                . "AND pag_det_programacion.equi_id=pag_equipo.equi_id "
+                . "AND pag_control_medidas.equi_id=pag_equipo.equi_id "
+                . "AND pag_det_programacion.tmed_id=pag_tipo_medidor.tmed_id "
+                . "AND pag_tipo_medidor.tmed_tipo='Manual' "
+                . "GROUP BY pag_det_programacion.detprog_id "
+                . "ORDER BY pag_det_programacion.detprog_id DESC";
+
+        $datos = $objProgramacion->select($infrec);
+        
+        foreach ($datos as $d) {
+            $met=$d['frecuencia']*$d['frec_actual'];
+            $fretotal=$d['totalMediciones']-$met;
+            $histmed = "UPDATE pag_det_programacion SET frec_medc='$fretotal' WHERE detprog_id=$d[detprog_id]";
+            $objProgramacion->update($histmed);
+        }
+//---------------fin actualizacion de datos recientes----------------------------
+
 //---------------------programaciones automaticas----------------------------------------------
         $sql = "SELECT pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
                 . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
@@ -60,7 +84,7 @@ $objProgramacion = new ProgramacionModel();
                 . "pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
                 . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
                 . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
-                . "pag_det_programacion.frecuencia,pag_tipo_medidor.tmed_id,tmed_nombre,tmed_tipo,tmed_tiempo,"
+                . "pag_det_programacion.frecuencia,frec_medc,pag_tipo_medidor.tmed_id,tmed_nombre,tmed_tipo,tmed_tiempo,"
                 . "pag_det_programacion.detprog_id,pag_programacion_equipo.proequi_fecha_inicio,"
                 . "pag_programacion_equipo.proequi_id,proequi_fecha,pag_det_programacion.frec_actual "
                 . "FROM pag_programacion_equipo,pag_det_programacion,pag_control_medidas,pag_centro,pag_equipo,"
@@ -88,8 +112,22 @@ $objProgramacion = new ProgramacionModel();
         foreach ($mediciones as $med) {
             if($med['tmed_tipo']=='Manual'){
                 
-                if($med['frecuencia'] <= $med['totalMediciones']){//hoy
+                if($med['frec_medc'] > $med['frecuencia']){
+                    if(date('d-m-Y')!=$med['proequi_fecha']){
+                        $objProgramacion = new ProgramacionModel();
 
+                        $frectual = 1+$med['frec_actual'];
+                        $amed = "UPDATE pag_det_programacion SET frec_actual=$frectual WHERE detprog_id=$med[detprog_id]";
+
+                        $fechaactual = date('d-m-Y');
+                        $nuevafec = "UPDATE pag_programacion_equipo "
+                                . "SET proequi_fecha='$fechaactual' WHERE proequi_id=$med[proequi_id]";
+
+                        $objProgramacion->update($amed);
+                        $objProgramacion->update($nuevafec);
+                        // Cierra la conexion
+                        $objProgramacion->cerrar();
+                    }
                 }
             }
         } 
