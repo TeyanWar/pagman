@@ -208,24 +208,22 @@
                             ?>
                             <input type="hidden" value="<?php echo $med['detprog_id'] ?>" ><?php echo $med['frecuencia']-$med['frec_medc']." ".$med['tmed_nombre'] ?>
                             <?php
-                        }elseif($med['frec_medc'] > $med['frecuencia']){
-                                if(date('d-m-Y')!=$med['proequi_fecha']){
-                                    $objProgramacion = new ProgramacionModel();
+                        }elseif(($med['frecuencia']-$med['frec_medc'])<0){
+                                $objProgramacion = new ProgramacionModel();
 
-                                    $frectual = 1+$med['frec_actual'];
-                                    $amed = "UPDATE pag_det_programacion SET frec_actual=$frectual WHERE detprog_id=$med[detprog_id]";
+                                $frectual = 1+$med['frec_actual'];
+                                $amed = "UPDATE pag_det_programacion SET frec_actual=$frectual WHERE detprog_id=$med[detprog_id]";
 
-                                    $fechaactual = date('d-m-Y');
-                                    $nuevafec = "UPDATE pag_programacion_equipo "
-                                            . "SET proequi_fecha='$fechaactual' WHERE proequi_id=$med[proequi_id]";
+                                $fechaactual = date('d-m-Y');
+                                $nuevafec = "UPDATE pag_programacion_equipo "
+                                        . "SET proequi_fecha='$fechaactual' WHERE proequi_id=$med[proequi_id]";
 
-                                    $objProgramacion->update($amed);
-                                    $objProgramacion->update($nuevafec);
-                                    // Cierra la conexion
-                                    $objProgramacion->cerrar();
-                                }
+                                $objProgramacion->update($amed);
+                                $objProgramacion->update($nuevafec);
+                                // Cierra la conexion
+                                $objProgramacion->cerrar();
                             ?>
-                            <input type="hidden" value="<?php echo $med['detprog_id'] ?>" ><?php echo $med['frecuencia']-$med['frec_medc']." ".$med['tmed_nombre'] ?>
+                            <input type="hidden" value="<?php echo $med['detprog_id'] ?>" ><?php echo "pendiente"; ?>
                             <?php
                         }
                         ?>

@@ -112,22 +112,20 @@ $objProgramacion = new ProgramacionModel();
         foreach ($mediciones as $med) {
             if($med['tmed_tipo']=='Manual'){
                 
-                if($med['frec_medc'] > $med['frecuencia']){
-                    if(date('d-m-Y')!=$med['proequi_fecha']){
-                        $objProgramacion = new ProgramacionModel();
+                if(($med['frecuencia']-$med['frec_medc'])<0){
+                    $objProgramacion = new ProgramacionModel();
 
-                        $frectual = 1+$med['frec_actual'];
-                        $amed = "UPDATE pag_det_programacion SET frec_actual=$frectual WHERE detprog_id=$med[detprog_id]";
+                    $frectual = 1+$med['frec_actual'];
+                    $amed = "UPDATE pag_det_programacion SET frec_actual=$frectual WHERE detprog_id=$med[detprog_id]";
 
-                        $fechaactual = date('d-m-Y');
-                        $nuevafec = "UPDATE pag_programacion_equipo "
-                                . "SET proequi_fecha='$fechaactual' WHERE proequi_id=$med[proequi_id]";
+                    $fechaactual = date('d-m-Y');
+                    $nuevafec = "UPDATE pag_programacion_equipo "
+                            . "SET proequi_fecha='$fechaactual' WHERE proequi_id=$med[proequi_id]";
 
-                        $objProgramacion->update($amed);
-                        $objProgramacion->update($nuevafec);
-                        // Cierra la conexion
-                        $objProgramacion->cerrar();
-                    }
+                    $objProgramacion->update($amed);
+                    $objProgramacion->update($nuevafec);
+                    // Cierra la conexion
+                    $objProgramacion->cerrar();
                 }
             }
         } 
