@@ -4,6 +4,7 @@
     </div>
 </div>
 <!--Fin contenedor mensajes de error-->
+
 <div class="col s12 m12 l6">
     <h4 class="header2">Modificar Tipo de Medidor</h4> 
     <form action="<?php echo crearUrl("medidores", "medidores", "postEditar", array('noVista')) ?>" method="post" id="editarMedidores">
