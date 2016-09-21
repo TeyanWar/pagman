@@ -119,7 +119,7 @@ class ProgramacionController {
                     $errores[]='El campo <code><b>Medidor</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 if(isset($placa[$a]) && !preg_match($patronNumeros,$_POST['medidores'][$a])){
-                    $errores[]='El campo <code><b>Medidor</b></code> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Medidor</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 
                 if(isset($placa[$a]) && empty($_POST['prioridades'][$a])){
@@ -151,15 +151,16 @@ class ProgramacionController {
             $centro = $_POST['centro'];
             $tareas = $_POST['tareas'];
             
-            $fechareg = mktime();
+            $fechareg = time()-17995;
             explodeFecha($inicio);
             $expfech = getFecha();
             $fechaini = date("U",strtotime($expfech));
+            $fepresicion = $fechaini-17995;
             
             if(isset($placas) && ($equipos) &&
                     ($tipos) && ($medidores) && ($inicio) && 
                     ($horas) && ($frecuencias) && ($prioridades) && 
-                    ($centro) && ($fechaini) && ($tareas)){
+                    ($centro) && ($fepresicion) && ($tareas)){
             
                 $objProgramacion = new ProgramacionModel();
                 $b = 0;
@@ -174,7 +175,7 @@ class ProgramacionController {
                             . "($cons,"
                             . "'".$fechareg."',"
                             . "$centro,"
-                            . "'" . $fechaini . "',"
+                            . "'" . $fepresicion . "',"
                             . "1,"
                             . "CURRENT_DATE())";
 

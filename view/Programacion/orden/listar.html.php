@@ -22,7 +22,8 @@
         <?php foreach ($programaciones as $programacion) { ?>
         
             <?php if($programacion['tmed_tipo']=='Automatico'){ ?>
-                <?php $i = $programacion['proequi_fecha_inicio'] - mktime(); ?>
+                <?php $factual=time()-18000; ?>
+                <?php $i = $programacion['proequi_fecha_inicio'] - $factual; ?>
                 <tr
                         <?php
                         if($i > 0 && $i < 86400){
@@ -76,7 +77,7 @@
 
                             }elseif ($i > 86400 && $i < 172800) {
                                 ?>
-                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "Maaacute;ana"; ?>
+                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "Ma&ntilde;ana"; ?>
                                 <?php
 
                             }elseif ($i > 172800 && $i < 259200) {
@@ -137,7 +138,8 @@
 
                                     $fechaactual = date('d-m-Y');
                                     $frecprogm = $programacion['frecuencia'] * $programacion['tmed_tiempo'];
-                                    $inicnuevo = mktime() + $frecprogm;
+                                    $tmdefinido = time()-18000;
+                                    $inicnuevo = $tmdefinido + $frecprogm;
                                     $nuevafecha = "UPDATE pag_programacion_equipo "
                                             . "SET proequi_fecha='$fechaactual',proequi_fecha_inicio='$inicnuevo' "
                                             . "WHERE proequi_id=$programacion[proequi_id]";

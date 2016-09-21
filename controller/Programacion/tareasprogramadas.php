@@ -30,7 +30,8 @@ $objProgramacion = new ProgramacionModel();
         foreach ($programaciones as $programacion){
             
             if($programacion['tmed_tipo']=='Automatico'){
-                $i = $programacion['proequi_fecha_inicio'] - mktime();
+                $factual=time()-18000;
+                $i = $programacion['proequi_fecha_inicio'] - $factual;
 
                 if($i < 0){ //------si se paso de la fecha establecida------------------
                     if(date('d-m-Y')!=$programacion['proequi_fecha']){
@@ -40,7 +41,8 @@ $objProgramacion = new ProgramacionModel();
 
                         $fechaactual = date('d-m-Y');
                         $frecprogm = $programacion['frecuencia'] * $programacion['tmed_tiempo'];
-                        $inicnuevo = mktime() + $frecprogm;
+                        $tmdefinido = time()-18000;
+                        $inicnuevo = $tmdefinido + $frecprogm;
                         $nuevafecha = "UPDATE pag_programacion_equipo "
                                     . "SET proequi_fecha='$fechaactual',proequi_fecha_inicio='$inicnuevo' "
                                     . "WHERE proequi_id=$programacion[proequi_id]";
