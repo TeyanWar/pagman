@@ -10,7 +10,7 @@
                         <input type="text" class="form-control" id="pher_id" name="pher_id" readonly="" value="<?php echo $prestamo['pher_id'] ?>">
                     </div>
                     <div class="input-field col s6">
-                        <label for="pher_fecha"> Fecha inicio prestamo </label>
+                        <label for="pher_fecha" class="active"> Fecha inicio prestamo </label>
                         <input name="pher_fecha" type="date" id="pher_fecha" class="form-control datepicker" value="<?php echo $prestamo['pher_fecha'] ?>">
                     </div>
                     <div class="input-field col s6">

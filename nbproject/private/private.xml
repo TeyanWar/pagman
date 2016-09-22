@@ -1,27 +1,11 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/pagman/view/Prestamo/prestamo/listar.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/controller/Prestamo/prestamoController.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/prestamo-prestamo.js</file>
+            <file>file:/C:/xampp/htdocs/pagman/controller/Herramientas/herramientasController.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/view/Herramientas/herramientas/listar.html.php</file>
+            <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/herramientas-herramientas.js</file>
         </group>
     </open-files>
 </project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/opt/lampp/htdocs/pagman/web/js/modulos/equipos-campoPersonalizado.js</file>
-            <file>file:/opt/lampp/htdocs/pagman/view/Equipos/tipoEquipo/editar.html.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/controller/Permisos/permisosController.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/web/js/modulos/permisos-permisos.js</file>
-            <file>file:/opt/lampp/htdocs/pagman/lib/config/conexion.php</file>
-        </group>
-    </open-files>
-</project-private>
->>>>>>> 08182602183f62d53a3e020f59df66a6bf415659

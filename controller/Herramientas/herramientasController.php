@@ -176,25 +176,23 @@ class HerramientasController {
         include_once("../view/Herramientas/herramientas/buscador.html.php");
     }
 
-    function eliminar($parametros) {
-        $objHerramientas = new HerramientasModel();
-
-        $id = $parametros[1];
-
-        $sql = "SELECT * FROM pag_herramienta WHERE her_id='$id'";
-        $herramienta = $objHerramientas->find($sql);
-        //die(print_r($sql));
-        // Cierra la conexion
-        $objHerramientas->cerrar();
-
-        include_once("../view/Herramientas/herramientas/eliminar.html.php");
-    }
+//    function eliminar($parametros) {
+//        $objHerramientas = new HerramientasModel();
+//        $id = $parametros[1];
+//        $sql = "SELECT * FROM pag_herramienta WHERE her_id='$id'";
+//        $herramienta = $objHerramientas->find($sql);
+//        //die(print_r($sql));
+//        // Cierra la conexion
+//        $objHerramientas->cerrar();
+//
+//        include_once("../view/Herramientas/herramientas/eliminar.html.php");
+//    }
 
     function postEliminar() {
         $id = $_POST['id'];
         $objHerramientas = new HerramientasModel();
 
-        $sql = "UPDATE pag_herramienta SET estado=false WHERE her_id='$id'";
+        $sql = "UPDATE pag_herramienta SET estado=NULL WHERE her_id='$id'";
         $herramienta = $objHerramientas->update($sql);
         // Cierra la conexion
         $objHerramientas->cerrar();
