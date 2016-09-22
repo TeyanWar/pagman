@@ -5,7 +5,7 @@
         <!--Inicio rastro de miga-->
         <ol class="breadcrumbs">
             <li><a href="<?php echo addLib('index.php') ?>">Panel de control</a></li>
-            <li><a href="<?php echo crearUrl("equipos", "tipoEquipo", "crear") ?>">Crear campo personalizado</a></li>
+            <li><a href="<?php echo crearUrl("equipos", "tipoEquipo", "crear") ?>">Crear Tipo de Equipo</a></li>
             <li class="active">Listar Tipo de equipos</li>
         </ol>
 

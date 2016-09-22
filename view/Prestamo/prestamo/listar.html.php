@@ -22,8 +22,7 @@
         <tr>
             <th>#</th>
             <th>Fecha inicio prestamo</th>
-            <th>Id almacenista</th>
-            <th>Id jornada</th>
+            <th>Nombre jornada</th>
             <th>Observaciones</th>
             <th colspan="2">Acciones</th>
         </tr>
@@ -32,16 +31,22 @@
         <?php
         $count = 1;
         foreach ($listar as $prestamo) {
+            explodeFecha($prestamo['pher_fecha']);
+            $fechaPrestamo = getFecha();
             ?>
             <tr>
                 <td><?php echo $paginado->count++ ?></td>
-                <td><?php echo $prestamo['pher_fecha'] ?></td>
-                <td><?php echo $prestamo['alm_id'] ?></td>
-                <td><?php echo $prestamo['jor_id'] ?></td>
+                <td><?php echo $fechaPrestamo ?></td>
+                <td><?php echo $prestamo['jor_descripcion'] ?></td>
                 <td><?php echo $prestamo['pher_observaciones'] ?></td>
-                <td><a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" data-pher_id="<?php echo $prestamo['pher_id'] ?>" data-url="<?php echo crearUrl('prestamo', 'prestamo', 'postEliminar', array('noVista' => 'noVista', 'id' => $prestamo['pher_id'])) ?>"><i class="mdi-action-delete small"></i></a></td>
+                <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" href="#M_editar_prestamo" data-url="<?php echo crearUrl('prestamo', 'prestamo', 'editar', array('noVista' => "noVista", 'id' => $prestamo['pher_id'])) ?>"><i class="mdi-content-create small"></i></a></td>
+
             </tr>
         <?php } ?>
     </tbody>
 </table>
+<!--aqui empieza la estructura de mi ventana modal para editar herramientas-->
+<div id="M_editar_prestamo" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 318.246px;">
+    <div class="modal-content" id="model-data"></div>
+</div>
 <?php $paginado->render() ?>

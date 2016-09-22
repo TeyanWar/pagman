@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col s12 m12 g12">
-        <table class="striped hoverable centered">
+        <table class="striped centered">
             <thead>
                 <tr>
                     <th>#</th>
@@ -28,11 +28,8 @@
                                data-url="<?php echo crearUrl("equipos", "tipoEquipo", "verDetalle", array('noVista', 'id' => $tEquipo['tequi_id'])); ?>">
                                 <i class="mdi-action-find-in-page tiny"></i></a>
                         </td>
-                        <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
-                               href="#modal_detalle_tipoEquipo" 
-                               data-url="<?php echo crearUrl("equipos", "tipoEquipo", "verDetalle", array('noVista', 'id' => $tEquipo['tequi_id'])); ?>">
-                                <i class="mdi-content-create red"></i></a>
-                        </td>                    </tr>
+                        <td><a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" data-id="<?php echo $tEquipo['tequi_id'] ?>" data-url="<?php echo crearUrl('Equipos', 'tipoEquipo', 'postEliminar', array('noVista' => 'noVista', 'id' => $tEquipo['tequi_id'])) ?>"><i class="mdi-action-delete small"></i></a></td>
+                    </tr>
                 <?php } ?>
 
             </tbody>

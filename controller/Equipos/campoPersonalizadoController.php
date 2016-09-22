@@ -57,28 +57,27 @@ class campoPersonalizadoController {
 
         if (count($errores) > 0) {
             setErrores($errores);
-            redirect(crearUrl('equipos', 'campoPersonalizado', 'crear'));
-        }
+        } else {
 
-        $codigoCP = $_POST['codigoCP'];
-        $nombreCP = $_POST['nombreCP'];
-        //die($_POST['nombreCP']);
+            $codigoCP = $_POST['codigoCP'];
+            $nombreCP = $_POST['nombreCP'];
+            //die($_POST['nombreCP']);
 
-        $sql = "INSERT INTO pag_campos_personalizados (cp_id,cp_nombre)VALUES("
-                . "'$codigoCP',"
-                . "'$nombreCP')";
-        //die(print_r($sql));
-        $objCP = new campoPersonalizadoModel();
+            $sql = "INSERT INTO pag_campos_personalizados (cp_id,cp_nombre)VALUES("
+                    . "'$codigoCP',"
+                    . "'$nombreCP')";
+            //die(print_r($sql));
+            $objCP = new campoPersonalizadoModel();
 
-        $insertarCP = $objCP->insertar($sql);
+            $insertarCP = $objCP->insertar($sql);
 
 //        if ($insertarCP = true) {
 //            die("REGISTRO");
 //        }
 
-        $objCP->cerrar();
-
-        redirect(crearUrl("Equipos", "campoPersonalizado", "listar"));
+            $objCP->cerrar();
+        }
+        echo getRespuestaAccion('listar');
     }
 
     public function listar() {
@@ -123,30 +122,34 @@ class campoPersonalizadoController {
         if (!isset($_POST['codigoCP']) or $_POST['codigoCP'] == "") {
             $errores[] = "El campo Codigo No puede estar vacío, por favor ingresa uno, recuerde seguir el patrón <code>CP0XXXX</code>";
         }
+        if (!isset($_POST['nombreCP']) or $_POST['nombreCP'] == "") {
+            $errores[] = "El campo <code><b>Nombre campo personalizado</b></code>No puede estar vacío, por favor ingresa uno, recuerde seguir el patrón <code>CP0XXXX</code>";
+        }
+        if(count($errores)>0){
+            setErrores($errores);
+        }else{
+            $sql = "SELECT * FROM pag_campos_personalizados WHERE cp_id='" . $_POST['codigoCP'] . "'";
+            //die(print_r($sql));
+            $consulta = $objCp->select($sql);
+            //die(print_r($consulta));
+    //        foreach ($consulta as $codigo) {
+    //            if ($codigoCP = $codigo['cp_id']) {
+    //                
+    //            }
+    //        }
 
-        $sql = "SELECT * FROM pag_campos_personalizados WHERE cp_id='" . $_POST['codigoCP'] . "'";
-        //die(print_r($sql));
-        $consulta = $objCp->select($sql);
-        //die(print_r($consulta));
-//        foreach ($consulta as $codigo) {
-//            if ($codigoCP = $codigo['cp_id']) {
-//                
-//            }
-//        }
+            $codigoCP = $_POST['codigoCP'];
+            //die(print_r($codigoCP));
+            $nombreCP = $_POST['nombreCP'];
 
-        $codigoCP = $_POST['codigoCP'];
-        //die(print_r($codigoCP));
-        $nombreCP = $_POST['nombreCP'];
-
-        $sql = "UPDATE pag_campos_personalizados SET "
-                . "cp_nombre='$nombreCP'"
-                . "WHERE cp_id='$codigoCP'";
-        //die(print_r($sql));
-        $campoEditar = $objCp->update($sql);
-        $objCp->cerrar();
-
-        redirect(crearUrl("Equipos", "campoPersonalizado", "listar"));
-
+            $sql = "UPDATE pag_campos_personalizados SET "
+                    . "cp_nombre='$nombreCP'"
+                    . "WHERE cp_id='$codigoCP'";
+            //die(print_r($sql));
+            $campoEditar = $objCp->update($sql);
+            $objCp->cerrar();
+        }
+        echo getRespuestaAccion('listar');
         //redirect(crearUrl('equipos','campoPersonalizado','listar'));
     }
 

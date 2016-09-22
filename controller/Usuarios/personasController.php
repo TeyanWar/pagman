@@ -73,13 +73,17 @@ class PersonasController
                 $respuesta = $PersonasModel->update($sql);
 
                 //----------------------------------------------------------
+                //aqui Inicia encriptacion de Password
+                $salt = '$bgr$/';
+                $passwordp = sha1(md5($salt . $clave));
+                //aqui termina encriptacion password
 
                 $insertusu = "INSERT INTO pag_usuario(per_id,"
                             . "usu_usuario,usu_clave,"
                             . "usu_estado,rol_id) "
                             . " VALUES('$idper',"
                             . "'$login',"
-                            . "'$clave',"
+                            . "'$passwordp',"
                             . "'$estado',"
                             . "'$perfil')";
 

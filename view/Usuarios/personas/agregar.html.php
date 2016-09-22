@@ -76,6 +76,10 @@
     jQuery.validator.addMethod("letra", function(value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
+    //----------------------expresion para validar solo numeros y letras----------------
+    jQuery.validator.addMethod("password", function(value, element) {
+        return this.optional(element) || /^[0-9a-zA-Z]+$/i.test(value);
+    });
     
         //----------------------validate editar----------------------------
     
@@ -88,6 +92,7 @@
             },
             clave: {
                 required: true,
+                password: true,
                 minlength: 5,
                 maxlength: 20
             },
@@ -109,6 +114,7 @@
             },
             clave:{
                 required: "El clave es obligatorio.",
+                password: "El valor debe ser alfanumerico.",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },

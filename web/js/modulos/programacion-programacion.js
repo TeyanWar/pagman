@@ -1,10 +1,10 @@
 $(document).ready(function () {
     
+    //---------------menseje respuesta de programacion------------------
     $(document).on('submit', '#formValid', function (e) {
         e.preventDefault();
         var url = $('#formValid').attr("data-url");
         var redirect = $('#formValid').attr("data-redirect");
-        var error = $('#formValid').attr("action");
         $.ajax({
             type: "POST",
             url: url,
@@ -19,15 +19,13 @@ $(document).ready(function () {
                         }, 2000);
             }
             else {
-                Materialize.toast("<i class= 'material-icons' ></i> Error al registrar.", 3000, 'rounded col red');
-                setTimeout(
-                        function () {
-                            window.location.href = (error);
-                        }, 1000);
+                $('#cont_errors_ajax').html(respuesta);
+                $('#cont_errors_ajax').css('display','block');
             }
         });
     });
-    
+
+    //------------mensaje respuesta actualizacion-----------------------
     $(document).on('submit', '#formulario1', function (e) {
         e.preventDefault();
         var url = $('#formulario1').attr("data-url");

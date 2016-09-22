@@ -14,7 +14,7 @@
                 $count = 1;
                 foreach ($equipos as $equipo) { ?>
                     <tr>
-                        <td><?php echo $count++; ?></td>
+                        <td><?php echo $paginado->count++ ?></td>
                         <td><?php echo $equipo['equi_nombre'] ?></td>
                         <td>
                             <?php foreach($equipo['tiposMedidores'] as $tipoMedidor){ 
@@ -54,7 +54,7 @@
                       <center>
                         <p><i class="mdi-alert-warning">
                         </i> 
-                        ATENCI&Oacute;N :No se encontraron registros,Por favor dirijase a la opci&oacute;n "Crear" 
+                        ATENCI&Oacute;N :No se encontraron registros, por favor dir&iacute;jase a la opci&oacute;n "Crear Medici&oacute;n." 
                         del modulo para realizar un registro.</p></center>
                       </div>
                       <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">

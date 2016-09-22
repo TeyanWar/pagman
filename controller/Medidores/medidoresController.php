@@ -193,7 +193,6 @@ class medidoresController {
         
         if(count($errores)>0){
             setErrores($errores);
-            redirect(crearUrl('medidores', 'medidores', 'listar'));
         }else{
         
         $id = $_POST['id'];
@@ -211,8 +210,8 @@ class medidoresController {
         
         $medidores = $objMedidores->update($sql);
         $objMedidores->cerrar();
-        redirect(crearUrl('medidores', 'medidores', 'listar'));
         }
+        echo getRespuestaAccion('listar');
     }
     
     public function listar(){

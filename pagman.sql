@@ -291,6 +291,17 @@ CREATE TABLE `pag_det_equipo_medidor` (
   `tmed_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `pag_det_equipo_medidor`
+--
+
+INSERT INTO `pag_det_equipo_medidor` (`dequimed_id`, `equi_id`, `tmed_id`) VALUES
+(1, '0123', 9),
+(2, '1', 9),
+(3, 'EP_003', 9),
+(4, 'PC_002', 9),
+(5, 'TC001', 9);
+
 -- --------------------------------------------------------
 
 --
@@ -1173,7 +1184,7 @@ INSERT INTO `pag_unidad_medida` (`umed_id`, `umed_descripcion`, `estado`) VALUES
 CREATE TABLE `pag_usuario` (
   `per_id` bigint(20) NOT NULL,
   `usu_usuario` varchar(45) NOT NULL,
-  `usu_clave` varchar(45) NOT NULL,
+  `usu_clave` varchar(200) NOT NULL,
   `usu_estado` varchar(45) NOT NULL,
   `rol_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1183,11 +1194,54 @@ CREATE TABLE `pag_usuario` (
 --
 
 INSERT INTO `pag_usuario` (`per_id`, `usu_usuario`, `usu_clave`, `usu_estado`, `rol_id`) VALUES
-(1151956249, 'admin', '0000', 'activo', 1);
+(1151956249, 'admin', 'b9ddaf31e98e6d249804d3f7a9e936f82a12af32', 'activo', 1);
+
+----------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+
+CREATE TABLE `pag_det_tipoEquipo_camposPersonalizados` (
+  `idDetalle` int(11) NOT NULL,
+  `tequi_id` varchar(12) NOT NULL,
+  `cp_id` varchar(20) NOT NULL,
+  `estado` timestamp(6) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ;
+
+--
+-- Volcado de datos para la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+
+INSERT INTO `pag_det_tipoEquipo_camposPersonalizados` (`idDetalle`, `tequi_id`, `cp_id`, `estado`) VALUES
+(29, 'CTE002', 'CP004', NULL),
+(30, 'CTE002', 'CP003', NULL),
+(31, 'CTE002', 'CP002', NULL),
+(32, 'CTE002', 'CP001', NULL),
+(33, 'TE01', 'CP004', NULL),
+(34, 'TE01', 'CP001', NULL),
+(35, 'T', 'CP003', NULL),
+(36, 'TE001', 'CP004', NULL),
+(37, 'TE001', 'CP004', NULL),
+(38, 'TE002', 'CP004', NULL),
+(39, 'TE003', 'CP004', NULL),
+(40, 'TE01', 'CP004', NULL),
+(41, 'TE00', 'CP004', NULL),
+(42, 'TE002', 'CP004', NULL);
+
+-- --------------------------------------------------------
+
 
 --
 -- Índices para tablas volcadas
 --
+
+
+--
+-- Indices de la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
+  ADD PRIMARY KEY (`idDetalle`);
 
 --
 -- Indices de la tabla `pag_almacen`
@@ -1506,6 +1560,11 @@ ALTER TABLE `pag_usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `pag_almacen`
 --
 ALTER TABLE `pag_almacen`
@@ -1559,7 +1618,7 @@ ALTER TABLE `pag_det_componente_ot`
 -- AUTO_INCREMENT de la tabla `pag_det_equipo_medidor`
 --
 ALTER TABLE `pag_det_equipo_medidor`
-  MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_herramienta_ot`
 --

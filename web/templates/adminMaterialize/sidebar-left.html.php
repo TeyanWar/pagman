@@ -10,10 +10,10 @@
         <!-- START LEFT SIDEBAR NAV-->
         <aside id="left-sidebar-nav">
             <ul id="slide-out" class="side-nav leftside-navigation">
-                <li class="user-details cyan darken-2">
+                <li class="user-details gris">
                     <div class="row">
                         <div class="col col s4 m4 l4">
-                            <img src="<?php echo addLib('templates/adminMaterialize/images/avatar.jpg') ?>" alt="" class="circle responsive-img valign profile-image">
+                            <img src="<?php echo addLib('img/avatar/male1.png') ?>" alt="" class="circle responsive-img valign profile-image">
                         </div>
                         <div class="col col s8 m8 l8">
                             <ul id="profile-dropdown" class="dropdown-content">

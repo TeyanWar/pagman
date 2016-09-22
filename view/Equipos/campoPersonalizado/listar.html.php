@@ -7,7 +7,7 @@
                     <th>Codigo Campo Personalizado</th>                    
                     <th>Nombre Campo Personalizado</th>
                     <th colspan="3"><center>Acciones</center></th>
-                </tr>
+            </tr>
             </thead>
             <tbody>
                 <?php
@@ -16,7 +16,7 @@
 
                     <tr>
                         <td><?php echo $paginado->count++ ?></td>
-    <!--                        <td><?php //echo $depto['dept_id']                 ?></td>-->
+    <!--                        <td><?php //echo $depto['dept_id']                  ?></td>-->
                         <td><?php echo $datosCP['cp_id'] ?></td>
                         <td><?php echo $datosCP['cp_nombre'] ?></td>
                         <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
@@ -36,7 +36,7 @@
                 <?php } ?>
             </tbody>
         </table>
-        
+
 
         <div class="modal" id="modal_editar_campoPersonalizado">
             <div class="modal-content">
@@ -49,16 +49,15 @@
         </div>
 
         <?php $paginado->render(); ?>
-        
-        
+
     </div>
 </div>
 
 <script type="text/javascript">
-    $('.modal-trigger').leanModal({
-        dismissible: true, // Modal can be dismissed by clicking outside of the modal
+            $('.modal-trigger').leanModal({
+            dismissible: true, // Modal can be dismissed by clicking outside of the modal
         opacity: .5, // Opacity of modal background
-        in_duration: 300, // Transition in duration
+    in_duration: 300, // Transition in duration
         out_duration: 200, // Transition out duration
         ready: function () {
             //alert('Ready'); 

@@ -8,13 +8,13 @@
     </div>
 
     <div class="col s4">
-        <label style="color: #448aff;"><h6>Clave</h6></label> 
-        <?php echo $usu['usu_clave']; ?>
+        <label style="color: #448aff;"><h6>Estado</h6></label> 
+        <?php echo $usu['usu_estado']; ?>
     </div>
 
     <div class="col s4">
-        <label style="color: #448aff;"><h6>Estado</h6></label> 
-        <?php echo $usu['usu_estado']; ?>
+        <label style="color: #448aff;"><h6>Rol</h6></label> 
+        <?php echo $usu['rol_nombre']; ?>
     </div>
 
 </div>
@@ -87,12 +87,6 @@
     </div>
 </div>
 <br>
-<div class="row">
-    <div class="col s4">
-        <label style="color: #448aff;"><h6>Perfil</h6></label> 
-        <?php echo $usu['rol_nombre']; ?>
-    </div>
-</div>
 
 <style>
     #modalDetalle{

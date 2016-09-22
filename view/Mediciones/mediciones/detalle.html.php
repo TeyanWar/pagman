@@ -43,4 +43,6 @@
     <br>
 </div>
 
-<?php $paginado->render() ?>
+<div class="ajax_paginate">
+    <?php $paginado->render() ?>
+</div>

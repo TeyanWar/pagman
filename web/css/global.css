@@ -1,3 +1,5 @@
+
+
 .submenu-lista{
     display: none;
 /*    margin-left: 191px;
@@ -93,4 +95,22 @@ code{
 /*Mensajes de error en los campos de formularios*/
 .error{
     color: #F44336;
+}
+
+/*Colores institucionales*/
+
+.verde_claro{
+    background: #5eb319;
+}
+
+.verde_oscuro{
+    background: #238276;
+}
+
+.gris{
+    background: #707070;
+}
+
+.naranja{
+    background: #fc7323;
 }

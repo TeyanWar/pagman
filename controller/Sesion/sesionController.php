@@ -7,10 +7,12 @@ class SesionController {
     function postInicio() {
         $nom_usu = $_POST['nom_usu'];
         $pass_usu = $_POST['pass_usu'];
+        $salt = '$bgr$/';
+        $password = sha1(md5($salt . $pass_usu));
         
 
         $objSesion = new sesionModel();
-        $sql = "SELECT * FROM pag_usuario WHERE usu_usuario='$nom_usu' and usu_clave='$pass_usu'";
+        $sql = "SELECT * FROM pag_usuario WHERE usu_usuario='$nom_usu' and usu_clave='$password '";
 
         $consultar = $objSesion->find($sql);
 

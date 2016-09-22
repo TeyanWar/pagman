@@ -69,64 +69,64 @@ class ProgramacionController {
         $errores=array();
         
         if(!isset($_POST['centro']) or $_POST['centro']==""){
-            $errores[]='(*) El campo "Centro de Formacion" es obligatorio';
+            $errores[]='El campo <code><b>Centro de Formacion</b></code> es obligatorio';
         }
         
         if(!isset($_POST['inicio']) or $_POST['inicio']==""){
-            $errores[]='(*) El campo "Fecha Inicio Programacion" es obligatorio';
+            $errores[]='El campo <code><b>Fecha Inicio Programacion</b></code> es obligatorio';
         }
         
         if(!isset($_POST['placas']) or $_POST['placas']==""){
-            $errores[]='<strong>(*) Debe tener al menos una programacion</strong>';
+            $errores[]='<code><b>Debe tener al menos una programacion</b></code>';
         }else {
             $a=0;
 
             foreach ($_POST['placas'] as $placa) {
                 
                 if(isset($placa[$a]) && empty($_POST['equipos'][$a])){
-                    $errores[]='<strong>(*) El "Nombre del Equipo" es obligatorio.</strong>';
+                    $errores[]='<strong>El <code><b>Nombre del Equipo</b></code> es obligatorio.</strong>';
                 }
                 
                 if(isset($placa[$a]) && empty($_POST['tareas'][$a])){
-                    $errores[]='(*) El campo <strong>"Tarea"</strong> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Tarea</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 if(isset($placa[$a]) && !preg_match($patronNumeros,$_POST['tareas'][$a])){
-                    $errores[]='(*) El campo <strong>"Tarea"</strong> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Tarea</b></code> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 
                 if(isset($placa[$a]) && empty($_POST['tipos'][$a])){
-                    $errores[]='(*) El campo <strong>"Tipo de trabajo"</strong> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Tipo de trabajo</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 if(isset($placa[$a]) && !preg_match($patronNumeros,$_POST['tipos'][$a])){
-                    $errores[]='(*) El campo <strong>"Tipo de trabajo"</strong> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Tipo de trabajo</b></code> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 
                 if(isset($placa[$a]) && empty($_POST['horas'][$a])){
-                    $errores[]='(*) El campo <strong>"Duracion horas"</strong> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Duracion horas</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 if(isset($placa[$a]) && !preg_match($patronNumeros,$_POST['horas'][$a])){
-                    $errores[]='(*) El campo <strong>"Duracion horas"</strong> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Duracion horas</b></code> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 
                 if(isset($placa[$a]) && empty($_POST['frecuencias'][$a])){
-                    $errores[]='(*) El campo <strong>"Frecuencia"</strong> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Frecuencia</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 if(isset($placa[$a]) && !preg_match($patronNumeros,$_POST['frecuencias'][$a])){
-                    $errores[]='(*) El campo <strong>"Frecuencia"</strong> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Frecuencia</b></code> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 
                 if(isset($placa[$a]) && empty($_POST['medidores'][$a])){
-                    $errores[]='(*) El campo <strong>"Medidor"</strong> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Medidor</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 if(isset($placa[$a]) && !preg_match($patronNumeros,$_POST['medidores'][$a])){
-                    $errores[]='(*) El campo <strong>"Medidor"</strong> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Medidor</b></code> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 
                 if(isset($placa[$a]) && empty($_POST['prioridades'][$a])){
-                    $errores[]='(*) El campo <strong>"Prioridade"</strong> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Prioridade</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 if(isset($placa[$a]) && !preg_match($patronNumeros,$_POST['prioridades'][$a])){
-                    $errores[]='(*) El campo <strong>"Prioridade"</strong> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Prioridade</b></code> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
         
                 $a++;
@@ -135,7 +135,7 @@ class ProgramacionController {
 
         if(count($errores)>0){
             setErrores($errores);
-//            redirect(crearUrl("programacion", "programacion", "crear"));
+            echo getErrores();
             //----------------fin validaciones-----------------
         }else {
             
@@ -209,17 +209,13 @@ class ProgramacionController {
                     $deta = $objProgramacion->insertar($detalle);
                     $a++;
                 }
-                
                 echo true;
-                
+
                 $objProgramacion->cerrar();
-//                redirect(crearUrl("programacion", "programacion", "listar"));
-                
-            }  else {
-                echo false;
             }
             
         }
+
     }
     
     function verDetalle($parametros = false) {

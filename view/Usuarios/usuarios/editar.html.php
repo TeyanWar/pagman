@@ -12,10 +12,9 @@
             </div>
 
             <div class="col s4">
-                <label>(*) Clave</label>
-                <input id="clave" type="text" class="validate" length="30" name="clave" value="<?php echo $usu['usu_clave'] ?>" data-error=".errorTxt32">
+                <label>Clave (opcional)</label>
+                <input id="clave" type="text" class="validate" length="30" name="clave" data-error=".errorTxt32">
                 <div class="errorTxt32"></div>
-
             </div>
 
             <div class="col s4">
@@ -139,7 +138,7 @@
 
             <div class="col s4">
                 <label>(*) Cargo</label>
-                <select id="cargo" class="error browser-default select2" name="cargo" data-error=".errorTxt44">
+                <select id="cargo" class="error browser-default" name="cargo" data-error=".errorTxt44">
                     <option value="" disabled selected>-Seleccione Cargo-</option>
                     <?php 
                         foreach($cargos as $car){
@@ -157,7 +156,7 @@
 
         <div class="row">
             <div class="col s4">
-                <label>(*) Perfil</label>
+                <label>(*) Rol</label>
                 <select id="perfil" class="error browser-default select2" name="perfil" data-error=".errorTxt45">
                     <option value="" disabled selected>-Seleccione perfil-</option>
                     <?php 
@@ -178,12 +177,11 @@
         <input type="hidden" name="id" value="<?php echo $usu['per_id'] ?>">
 
         <div class="row">
-
-            <div class="input-field col s4 offset-s4">
-                <div class="input-field col s12">
-                    <button class="btn cyan waves-effect waves-light teal" type="submit"><i class="mdi-action-perm-identity"></i>Guardar Cambios</button>
-                </div>
+            <div class="input-field col s4 "></div>
+            <div class="input-field col s5">
+                <button class="btn cyan waves-effect waves-light teal" type="submit"><i class="mdi-action-perm-identity"></i>Guardar</button>
             </div>
+            
         </div>
     </form>
 </div>
@@ -192,7 +190,7 @@
     #modalUpdate{
         top: 2% !important;
         max-height: 100%;
-        height: 94%;
+        height: 97%;
     }
 </style>
 
@@ -203,6 +201,11 @@
 
     jQuery.validator.addMethod("letra", function(value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
+    });
+    
+    //----------------------expresion para validar solo numeros y letras----------------
+    jQuery.validator.addMethod("password", function(value, element) {
+        return this.optional(element) || /^[0-9a-zA-Z]+$/i.test(value);
     });
     
         //----------------------validate editar----------------------------
@@ -224,7 +227,7 @@
                 maxlength: 20
             },
             clave: {
-                required: true,
+                password: true,
                 minlength: 4,
                 maxlength: 20
             },
@@ -295,7 +298,7 @@
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
             clave:{
-                required: "El clave es obligatorio.",
+                password: "Solo se permiten numeros o letras.",
                 minlength: "Introduzca al menos 4 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },

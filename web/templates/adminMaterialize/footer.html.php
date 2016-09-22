@@ -9,8 +9,8 @@
 
 <!-- START FOOTER -->
 <footer class="page-footer">
-    <div class="footer-copyright">
-        <div class="container">
+    <div class="footer-copyright ">
+        <div class="container verde_oscuro">
             <span>Copyright © 2015 <a class="grey-text text-lighten-4" href="#" target="_blank">Sena CDTI / TADSI 03 - 811428</a> All rights reserved.</span>
             <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="#">Sena CDTI / Plan 100 mil 811428</a></span>
         </div>
