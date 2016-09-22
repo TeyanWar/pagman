@@ -36,19 +36,18 @@
                                 
                                 <?php if ($solicitud['est_descripcion']=="Atendida") { ?>
                                     <td>
-                                        <a class="btn-floating waves-effect waves-light modal-trigger teal disabled" href="#editar" data-url="<?php echo crearUrl("Ot", "solicitudes", "editar", array('noVista' => 'noVista', 'sserv_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-image-edit small"/></a>
-                                    </td>
-                                    <td>
                                         <a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1 disabled" href="#registrar" data-url="<?php echo crearUrl("Ot", "ot", "crear", array('noVista' => 'noVista', 'ot_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-content-add tiny"/></a>
                                     </td>
-                                    
-                                <?php   } else { ?>                                    
+                                    <td>
+                                        <a class="btn-floating waves-effect waves-light modal-trigger teal disabled" href="#editar" data-url="<?php echo crearUrl("Ot", "solicitudes", "editar", array('noVista' => 'noVista', 'sserv_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-image-edit small"/></a>
+                                    </td>                                                                        
+                                <?php } else { ?> 
+                                    <td>
+                                        <a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" href="#crearOt" data-url="<?php echo crearUrl("Ot", "ot", "crear", array('noVista' => 'noVista', 'ot_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-content-add tiny"/></a>
+                                    </td>
                                     <td>
                                         <a class="btn-floating waves-effect waves-light modal-trigger teal" href="#editar" data-url="<?php echo crearUrl("Ot", "solicitudes", "editar", array('noVista' => 'noVista', 'sserv_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-image-edit small"/></a>
-                                    </td>
-                                    <td>
-                                        <a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" href="#registrar" data-url="<?php echo crearUrl("Ot", "ot", "crear", array('noVista' => 'noVista', 'ot_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-content-add tiny"/></a>
-                                    </td>
+                                    </td>                                    
                                 <?php } ?>       
                                 <td>
                                     <a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" href="#descripcion" data-url="<?php echo crearUrl("Ot", "solicitudes", "descripcion", array('noVista' => 'noVista', 'sserv_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-action-find-in-page tiny"/></a>

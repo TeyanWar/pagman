@@ -11,7 +11,9 @@ class OtController {
     }
 
     function buscar() {
+        
         $buscar = $_POST['resultado'];
+        
         $objBuscar = new OtModel();
 
         $sql = "SELECT * FROM pag_orden_trabajo, pag_tipo_falla, pag_equipo, "
@@ -30,18 +32,17 @@ class OtController {
                 . "ORDER BY pag_orden_trabajo.ot_id DESC";
 
         $ordenes = $objBuscar->select($sql);
-
 		
-//Paginado
-		
-        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1);
+        //Paginado
+	
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
         $url = crearUrl('ot', 'ot', 'listar');
-
+        
         $paginado = new Paginado($ordenes, $pagina, $url);
-
-        $ordenes = $paginado->getDatos();
-//Fin		
-//        dd($ordenes);
+        
+        $ordenes = $paginado->getDatos();        
+        //Fin paginado
+        
         // Cierra la conexion
         $objBuscar->cerrar();
         include_once("../view/Ot/ot/listar.html.php");
