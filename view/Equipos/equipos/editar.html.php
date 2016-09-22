@@ -7,7 +7,7 @@
 <!--Fin contenedor mensajes de error-->
 
 <div class="row">
-    <form action="<?php echo crearUrl("equipos", "equipos", "postEditar")?>" method="post" id="editarEquipos">
+    <form action="<?php echo crearUrl("equipos", "equipos", "postEditar",array('noVista'))?>" method="post" id="editarEquipos">
         <div class="row">
             <div class="input-field col s4">
                 <input type="text" name="equi_nombre" class="validate" value="<?php echo $equipo['equi_nombre']; ?>" data-error=".errorTxt1">
@@ -138,7 +138,7 @@
                 <input type="button" id="editMedidor" value="Editar Medidores" class="btn teal darken-2 waves-effect waves-light right">
             </div>
             <div class="input-field col s5">
-                <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Actualizar Equipo
+                <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right btn_submit_modal">Actualizar Equipo
                     <i class="mdi-content-send right"></i>
                 </button>
             </div>
@@ -291,7 +291,12 @@
             }
         }
     });
-
+    
+    $("#edit").css("display", "none");
+    
+    $("#editMedidor").click(function(){
+        $("#edit").css("display", "block");
+    });
 
 
 

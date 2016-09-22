@@ -80,6 +80,10 @@ class EquiposController {
         $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
         $patronLetrasNumeros = "/^[0-9a-zA-Z]+$/";
 
+        if (!isset($_POST['medidores']) or $_POST['medidores'] == "") {
+            $errores[] = "El equipo debe tener al menos un <code><b>Medidor</code></b> agregado";
+        }//Valida que el Nombre del equipo no este vacio
+        
         if (!isset($_POST['equi_nombre']) or $_POST['equi_nombre'] == "") {
             $errores[] = "El campo <code><b>nombre</b></code> no puede estar vac&iacute;o";
         }//Valida que el Nombre del equipo no este vacio
@@ -134,6 +138,11 @@ class EquiposController {
 
         /* Termino Validaciones */
 
+        $objEquipos = new EquiposModel();
+        if (count($errores) > 0) {
+            setErrores($errores);
+        } else {
+            
 
         $equi_placa = $_POST['equi_placa'];
         //die(print_r($equi_placa));
@@ -155,10 +164,7 @@ class EquiposController {
         //die(print_r($_POST));
 
         $medidores = $_POST['medidores'];
-        $objEquipos = new EquiposModel();
-        if (count($errores) > 0) {
-            setErrores($errores);
-        } else {
+        
             $sql = "UPDATE "
                     . "pag_equipo "
                     . "SET "
@@ -191,7 +197,7 @@ class EquiposController {
         }
         // Cierra la conexion
 
-        redirect(crearUrl("equipos", "equipos", "listar"));
+        echo getRespuestaAccion('listar');
     }
 
     function crear() {
