@@ -1,5 +1,5 @@
 <div class="card-panel">
-<table id="data-table-simple" class="responsive-table display" cellspacing="0">
+<table id="data-table-simple" class="responsive-table display striped" cellspacing="0">
             <thead>
                 <tr>
                     <th>#</th>

@@ -1,4 +1,29 @@
 $(document).ready(function () {
+    
+    //----------------------respuesta registro-------------------
+    $(document).on('submit', '#formValidate', function (e) {
+        e.preventDefault();
+        var url = $('#formValidate').attr("data-url");
+        var redirect = $('#formValidate').attr("data-redirect");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize()
+        }).done(function (respuesta) {
+            console.log(respuesta);
+            if (respuesta==true) {
+                Materialize.toast("<i class= 'material-icons' ></i> Registro exitoso.", 2000, 'rounded col green');
+                setTimeout(
+                        function () {
+                            window.location.href = (redirect);
+                        }, 2000);
+            }
+            else {
+                $('#cont_errors_ajax').html(respuesta);
+                $('#cont_errors_ajax').css('display','block');
+            }
+        });
+    });
 
     //----------------- validaciones ---------------
     

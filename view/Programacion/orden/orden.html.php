@@ -20,19 +20,6 @@
             </button>
         </div>
     </div>
-        
-        <?php $error=getErrores(); ?>
-        <?php if (!$error=="") { ?>
-           <div id="card-alert" class="card red">
-               <div class="card-content white-text">
-                   <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
-               </div>
-
-               <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                   <span aria-hidden="true">×</span>
-               </button>
-           </div>
-       <?php } ?>
     
     <div class="row">
 
@@ -78,14 +65,18 @@
 
     </div>
 
-    <form  id="formt" class="col s12" action="<?php echo crearUrl('programacion', 'orden', 'crear') ?>" data-url="<?php echo crearUrl("Programacion", "orden", "Postordenpro", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Ot", "ot", "listar") ?>" method="POST" novalidate>
-        <?php echo '<br />'; ?>
+    <form  id="formt" class="col s12" data-url="<?php echo crearUrl("Programacion", "orden", "Postordenpro", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Ot", "ot", "listar") ?>" method="POST" novalidate>
+        <br />
         <div class="divider"></div>
         <div id="tabla"></div>
         <div class="divider"></div>
-
-        <?php echo '<br /><br />'; ?>
-
+        <br />
+        <!--Inicio contenedor mensajes de error-->
+        <div class="card red">
+            <div id="cont_errors_ajax" class="card-content white-text">
+            </div>
+        </div>
+        <!--Fin contenedor mensajes de error-->
         <div class="row">
             
 
@@ -95,7 +86,7 @@
                     <option value="" disabled selected>Seleccione</option>
                     <?php
                         foreach($encargados as $enc){
-                        echo "<option value='".$enc["per_id"]."'>". $enc["per_nombre"] . "</option>";
+                        echo "<option value='".$enc["per_id"]."'>". $enc["nombrecom"] . "</option>";
                         }
                     ?>
                 </select>
@@ -152,7 +143,7 @@
                 <label><h6>(*) INSUMOS:</h6></label>
                 <br>
                 <br>
-                <table class="striped" id="insumosprog" cellspacing="0">
+                <table class="striped" cellspacing="0">
                     <thead>
                         <tr>
                             <th>(*) Nombre</th>
@@ -162,7 +153,8 @@
                             <th>(*) Cantidad</th>
                             <th>Quitar</th>
                         </tr>
-                    </thead>                  
+                    </thead>
+                    <tbody id="insumosprog"></tbody>
                 </table>
                 <div class="row"><div class="errorTxt99"></div></div>
             </div>
@@ -171,7 +163,7 @@
                 <label><h6>(*) HERRAMIENTAS:</h6></label>
                 <br>
                 <br>
-                <table class="striped" id="herramientasprog" cellspacing="0">
+                <table class="striped" cellspacing="0">
                     <thead>
                         <tr>
                             <th>(*) Nombre</th>
@@ -179,7 +171,8 @@
                             <th>(*) Cantidad</th>
                             <th>Quitar</th>
                         </tr>
-                    </thead>                  
+                    </thead>
+                    <tbody id="herramientasprog"></tbody>
                 </table>
                 <div class="row"><div class="errorTxt90"></div></div>
             </div>

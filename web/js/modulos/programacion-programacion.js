@@ -1,5 +1,31 @@
 $(document).ready(function () {
+    
+    //---------------menseje respuesta de programacion------------------
+    $(document).on('submit', '#formValid', function (e) {
+        e.preventDefault();
+        var url = $('#formValid').attr("data-url");
+        var redirect = $('#formValid').attr("data-redirect");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize()
+        }).done(function (respuesta) {
+            console.log(respuesta);
+            if (respuesta==true) {
+                Materialize.toast("<i class= 'material-icons' ></i> Registro exitoso.", 2000, 'rounded col green');
+                setTimeout(
+                        function () {
+                            window.location.href = (redirect);
+                        }, 2000);
+            }
+            else {
+                $('#cont_errors_ajax').html(respuesta);
+                $('#cont_errors_ajax').css('display','block');
+            }
+        });
+    });
 
+    //------------mensaje respuesta actualizacion-----------------------
     $(document).on('submit', '#formulario1', function (e) {
         e.preventDefault();
         var url = $('#formulario1').attr("data-url");

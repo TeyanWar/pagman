@@ -18,21 +18,14 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
-        <?php
-        $miserrores = getErrores();
-        if (!$miserrores == "") {
-        ?>
-        <div id="card-alert" class="card red">
-            <div class="card-content white-text">
-                <p><i class="mdi-action-info-outline"></i>
-                    <?php echo $miserrores; ?> 
-                </p>
+        <!--Inicio contenedor mensajes de error-->
+        <div class="card red">
+            <div id="cont_errors_ajax" class="card-content white-text">
             </div>
         </div>
-        <?php }
-        ?>
+        <!--Fin contenedor mensajes de error-->
         <div class="row">
-            <form class="col s12" id="formCamposPersonalizados" action="<?php echo crearUrl("Equipos", "campoPersonalizado", "postCrear") ?>" method="POST">
+            <form class="col s12" id="formCamposPersonalizados" action="<?php echo crearUrl("Equipos", "campoPersonalizado", "postCrear",array('noVista')) ?>" method="POST" novalidate="">
                 <div class="row col s6">
                     <div class="input-field col s12">
                         <input type="text" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" required>
@@ -53,7 +46,7 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Crear
+                        <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right btn_submit_modal">Crear
                             <i class="mdi-content-add right"></i>
                         </button>
                     </div>

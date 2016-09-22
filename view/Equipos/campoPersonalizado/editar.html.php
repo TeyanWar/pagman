@@ -1,19 +1,12 @@
 <center><h5>EDITAR CAMPO PERSONALIZADO Código <code><?php echo $consulta['cp_id']; ?></code></h5></center><br>
 </div>
-<?php
-$miserrores = getErrores();
-if (!$miserrores == "") {
-    ?>
-    <div id="card-alert" class="card red">
-        <div class="card-content white-text">
-            <p><i class="mdi-action-info-outline"></i>
-                <?php echo $miserrores; ?> 
-            </p>
-        </div>
+<!--Inicio contenedor mensajes de error-->
+<div class="card red">
+    <div id="cont_errors_ajax" class="card-content white-text">
     </div>
-<?php }
-?>
-<form class="col s12" id="formEditarCamposPersonalizados" action="<?php echo crearUrl("Equipos", "campoPersonalizado", "postEditar") ?>" method="POST">
+</div>
+<!--Fin contenedor mensajes de error-->
+<form class="col s12" id="formEditarCamposPersonalizados" action="<?php echo crearUrl("Equipos", "campoPersonalizado", "postEditar",array('noVista')) ?>" method="POST">
     <div class="row">
         <div class="input-field col s12">
             <input type="text" id="nombreCP" data-error=".errorTxt2" name="nombreCP" class="validate" value="<?php echo $consulta['cp_nombre']; ?>">
@@ -23,17 +16,17 @@ if (!$miserrores == "") {
     </div>
     <div class="row">
         <div class="input-field col s12">
-            <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Editar
+            <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right btn_submit_modal">Editar
                 <i class="mdi-content-add right"></i>
             </button>
         </div>
     </div>
 
-            <input type="hidden" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" value="<?php echo $consulta['cp_id']; ?>">
+    <input type="hidden" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" value="<?php echo $consulta['cp_id']; ?>">
 
 </form>
 <script>
-    jQuery.validator.addMethod("letra", function (value, element) {
+    jQuery.validator.addMethod("letra", function(value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
 
@@ -68,7 +61,7 @@ if (!$miserrores == "") {
             }
         },
         errorElement: 'div',
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
                 $(placement).append(error)

@@ -15,24 +15,14 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
-        <?php
-        $errores = getErrores();
-        if (!$errores == "") {
-            ?>
-            <div id="card-alert" class="card red">
-                <div class="card-content white-text">
-                    <p><i class="mdi-alert-error"></i> 
-                    <p><?php echo $errores ?></p>
-                </div>
-                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+        <!--Inicio contenedor mensajes de error-->
+        <div class="card red">
+            <div id="cont_errors_ajax" class="card-content white-text">
             </div>
-
-        <?php } ?>
-        
+        </div>
+        <!--Fin contenedor mensajes de error-->
         <div class="row">
-            <form class="col s12" action="<?php echo crearUrl("equipos", "tipoEquipo", "ajaxGuardarCampoPersonalizado") ?>" method="POST" id="formTipoEquipo">
+            <form class="col s12" action="<?php echo crearUrl("equipos", "tipoEquipo", "ajaxGuardarCampoPersonalizado")?>" method="POST" id="formTipoEquipo">
                 <div class="row col s6">
                     <div class="input-field">
                         <input type="text" id="id_tipo_Equipo" name="id_tipo_Equipo" class="validate" data-error=".errorTxt1">

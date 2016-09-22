@@ -36,7 +36,7 @@ class OrdenController {
         $programaciones = $objOrden->select($sql);
         
         //----------------los de mediciones-----------------------------------------
-        $sqlm = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) AS totalMediciones,"
+        $sqlm = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) totalMediciones,"
                 . "pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
                 . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
                 . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
@@ -86,7 +86,7 @@ class OrdenController {
         $sql3 = "SELECT tmed_id,tmed_nombre FROM pag_tipo_medidor";
         $tmedidores = $objOrden->select($sql3);
 
-        $sql4 = "SELECT per_id,per_nombre FROM pag_persona";
+        $sql4 = "SELECT per_id,CONCAT(per_nombre, ' ', per_apellido) As nombrecom FROM pag_persona";
         $encargados = $objOrden->select($sql4);
 
         // Cierra la conexion
@@ -106,12 +106,17 @@ class OrdenController {
             $errores = array();
 
             //---------------validaciones-------------------
+            if (!isset($_POST['id']) or $_POST['id'] == "") {
+                $errores[] = '<code><b>Debe elegir al menos una orden programada</b></code>';
+                $errores[] = '<strong>Por favor registre una programacion!</strong>';
+            }
+            
             if (!isset($_POST['inicio']) or $_POST['inicio'] == "") {
-                $errores[] = '(*) El campo "Fecha Inicio" es obligatorio';
+                $errores[] = 'El campo <code><b>Fecha Inicio</b></code> es obligatorio';
             }
 
             if (!isset($_POST['ot_fin']) or $_POST['ot_fin'] == "") {
-                $errores[] = '(*) El campo "Fecha Fin" es obligatorio';
+                $errores[] = 'El campo <code><b>Fecha Fin</b></code> es obligatorio';
             }
 
             if (isset($_POST['inicio']) && isset($_POST['ot_fin'])) {
@@ -124,31 +129,27 @@ class OrdenController {
                 $timestamp2 = date("U", strtotime($finf));
 
                 if ($timestamp1 >= $timestamp2) {
-                    $errores[] = '<strong>(*) El campo "Fecha Fin" debe ser mayor que la "fecha de Inicio"</strong>';
+                    $errores[] = '<strong>El campo <code><b>Fecha Fin</b></code> debe ser mayor que la <code><b>fecha Inicio</b></code></strong>';
                     $errores[] = ' - Fecha de Inicio: ' . $_POST['inicio'];
                     $errores[] = ' - Fecha Fin: ' . $_POST['ot_fin'];
                 }
             }
 
             if (!isset($_POST['ot_encargado']) or $_POST['ot_encargado'] == "") {
-                $errores[] = '(*) El campo "Encargado" es obligatorio';
+                $errores[] = 'El campo <code><b>Encargado</b></code> es obligatorio';
             }
 
             if (!isset($_POST['ot_ayudantes']) or $_POST['ot_ayudantes'] == "") {
-                $errores[] = '(*) El campo "Ayudantes" es obligatorio';
+                $errores[] = 'El campo <code><b>Ayudantes</b></code> es obligatorio';
             }
 
             if (isset($_POST['ot_ayudantes']) && !preg_match($patronLetras, $_POST['ot_ayudantes'])) {
-                $errores[] = '(*) El campo "Ayudantes" debe contener letras unicamente';
-            }
-
-            if (!isset($_POST['id']) or $_POST['id'] == "") {
-                $errores[] = '<strong>(*) Debe elegir al menos una orden programada</strong>';
+                $errores[] = 'El campo <code><b>Ayudantes</b></code> debe contener letras unicamente';
             }
             //----------------------------------------------
             if (count($errores) > 0) {
                 setErrores($errores);
-//                redirect(crearUrl("programacion", "orden", "crear"));
+                echo getErrores();
                 //----------------fin validaciones-----------------
             } else {
                 
@@ -238,10 +239,6 @@ class OrdenController {
                     $objOrden->cerrar();
                 
                     echo true;
-//                    redirect(crearUrl("Ot", "ot", "listar"));
-                    
-                } else {
-                    echo false;
                 }
 
             }
