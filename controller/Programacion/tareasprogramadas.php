@@ -1,6 +1,55 @@
 <?php
 
-include_once '../model/Programacion/programacionModel.php';
+class ProgramacionModel{
+    private $host="localhost";
+    private $user="root";
+    private $password="sena123";
+    private $database="pagman";
+    private $conn;
+    
+    public function __construct() {
+        $this->conectar();
+    }
+    
+    public function conectar() {
+        $this->conn = mysqli_connect($this->host, $this->user, $this->password, $this->database);
+    }
+    
+    public function cerrar(){
+        mysqli_close($this->conn);
+    }
+    
+    function getConn(){
+        return $this->conn;
+    }
+    //------------fin conexion---------------------
+    function select($sql){
+        $respuesta = mysqli_query($this->getConn(), $sql);
+        
+        $return = array();
+        
+        if ($respuesta) {
+            while ($row = @mysqli_fetch_array($respuesta)) {
+                if(isset($row['estado']) ){
+                    if($row['estado']==null){
+                        $return[]=$row;
+                    }
+                }else{
+                    $return[]=$row;
+                }
+            }
+        }
+
+        return $return;
+    }
+    
+    function update($sql){
+        $respuesta = mysqli_query($this->getConn(), $sql);
+        return $respuesta;
+    }
+}
+
+//------------------------------fin conexion----------------------------------
 
 $objProgramacion = new ProgramacionModel();
 
@@ -99,10 +148,6 @@ $objProgramacion = new ProgramacionModel();
                 . "AND pag_programacion_equipo.tman_id=pag_tipo_mantenimiento.tman_id "
                 . "AND pag_det_programacion.tmed_id=pag_tipo_medidor.tmed_id "
                 . "AND pag_det_programacion.est_id=1 "
-                . "AND (pag_equipo.equi_nombre LIKE "
-                . "'%" . $program . "%' OR pag_tipo_trabajo.ttra_descripcion LIKE "
-                . "'%" . $program . "%' OR pag_tipo_medidor.tmed_nombre LIKE "
-                . "'%" . $program . "%') "
                 . "GROUP BY pag_det_programacion.detprog_id "
                 . "ORDER BY pag_det_programacion.detprog_id DESC";
 
@@ -124,10 +169,31 @@ $objProgramacion = new ProgramacionModel();
 
                     $objProgramacion->update($amed);
                     $objProgramacion->update($nuevafec);
-                    // Cierra la conexion
-                    $objProgramacion->cerrar();
                 }
             }
         } 
+        
+        //-----------ultimos datos recientes de programacion manual-----------------------
+        $infrec = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) totalMediciones,"
+                . "pag_det_programacion.detprog_id,frecuencia,frec_actual "
+                . "FROM pag_programacion_equipo,pag_det_programacion,"
+                . "pag_control_medidas,pag_equipo,pag_tipo_medidor "
+                . "WHERE pag_det_programacion.proequi_id=pag_programacion_equipo.proequi_id "
+                . "AND pag_det_programacion.equi_id=pag_equipo.equi_id "
+                . "AND pag_control_medidas.equi_id=pag_equipo.equi_id "
+                . "AND pag_det_programacion.tmed_id=pag_tipo_medidor.tmed_id "
+                . "AND pag_tipo_medidor.tmed_tipo='Manual' "
+                . "GROUP BY pag_det_programacion.detprog_id "
+                . "ORDER BY pag_det_programacion.detprog_id DESC";
+
+        $datos = $objProgramacion->select($infrec);
+        
+        foreach ($datos as $d) {
+            $met=$d['frecuencia']*$d['frec_actual'];
+            $fretotal=$d['totalMediciones']-$met;
+            $histmed = "UPDATE pag_det_programacion SET frec_medc='$fretotal' WHERE detprog_id=$d[detprog_id]";
+            $objProgramacion->update($histmed);
+        }
+//---------------fin ultimos de datos recientes----------------------------
 // Cierra la conexion
 $objProgramacion->cerrar();
