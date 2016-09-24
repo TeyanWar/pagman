@@ -119,7 +119,7 @@ class ProgramacionController {
                     $errores[]='El campo <code><b>Medidor</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 if(isset($placa[$a]) && !preg_match($patronNumeros,$_POST['medidores'][$a])){
-                    $errores[]='El campo <code><b>Medidor</b></code> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
+                    $errores[]='El campo <code><b>Medidor</b></code> es obligatorio. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
                 
                 if(isset($placa[$a]) && empty($_POST['prioridades'][$a])){
@@ -151,15 +151,16 @@ class ProgramacionController {
             $centro = $_POST['centro'];
             $tareas = $_POST['tareas'];
             
-            $fechareg = mktime();
+            $fechareg = time()-17995;
             explodeFecha($inicio);
             $expfech = getFecha();
             $fechaini = date("U",strtotime($expfech));
+            $fepresicion = $fechaini-17995;
             
             if(isset($placas) && ($equipos) &&
                     ($tipos) && ($medidores) && ($inicio) && 
                     ($horas) && ($frecuencias) && ($prioridades) && 
-                    ($centro) && ($fechaini) && ($tareas)){
+                    ($centro) && ($fepresicion) && ($tareas)){
             
                 $objProgramacion = new ProgramacionModel();
                 $b = 0;
@@ -174,7 +175,7 @@ class ProgramacionController {
                             . "($cons,"
                             . "'".$fechareg."',"
                             . "$centro,"
-                            . "'" . $fechaini . "',"
+                            . "'" . $fepresicion . "',"
                             . "1,"
                             . "CURRENT_DATE())";
 
@@ -191,7 +192,7 @@ class ProgramacionController {
                     $prog = $objProgramacion->find($man);
                     $no = $prog['detprog_id']+ 1;
                     $detalle = "INSERT INTO pag_det_programacion(detprog_id,proequi_id,ttra_id,detprog_duracion_horas,"
-                            . "equi_id,comp_id,priotra_id,tar_id,tmed_id,frecuencia,frec_actual,est_id)"
+                            . "equi_id,comp_id,priotra_id,tar_id,tmed_id,frecuencia,frec_actual,frec_medc,est_id)"
                             . "VALUES"
                             . "(" . $no . ","
                             . "" . $co[$a] . ","
@@ -203,6 +204,7 @@ class ProgramacionController {
                             . "".$tareas[$a].","
                             . "".$medidores[$a].","
                             . "" . $frecuencias[$a] . ","
+                            . "0,"
                             . "0,"
                             . "1)";
 
