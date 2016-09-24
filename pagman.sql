@@ -48,8 +48,8 @@ CREATE TABLE `pag_area` (
 --
 
 INSERT INTO `pag_area` (`area_id`, `area_descripcion`, `estado`) VALUES
-(1, 'MecatrÛnica', NULL),
-(2, 'RefrigeraciÛn', NULL);
+(1, 'Mecatr?nica', NULL),
+(2, 'Refrigeraci?n', NULL);
 
 -- --------------------------------------------------------
 
@@ -362,8 +362,42 @@ CREATE TABLE `pag_det_programacion` (
   `tmed_id` int(11) DEFAULT NULL,
   `frecuencia` int(11) DEFAULT NULL,
   `frec_actual` int(11) NOT NULL,
+  `frec_medc` varchar(45) DEFAULT NULL,
   `est_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+
+CREATE TABLE `pag_det_tipoEquipo_camposPersonalizados` (
+  `idDetalle` int(11) NOT NULL,
+  `tequi_id` varchar(12) NOT NULL,
+  `cp_id` varchar(20) NOT NULL,
+  `estado` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+
+INSERT INTO `pag_det_tipoEquipo_camposPersonalizados` (`idDetalle`, `tequi_id`, `cp_id`, `estado`) VALUES
+(29, 'CTE002', 'CP004', NULL),
+(30, 'CTE002', 'CP003', NULL),
+(31, 'CTE002', 'CP002', NULL),
+(32, 'CTE002', 'CP001', NULL),
+(33, 'TE01', 'CP004', NULL),
+(34, 'TE01', 'CP001', NULL),
+(35, 'T', 'CP003', NULL),
+(36, 'TE001', 'CP004', NULL),
+(37, 'TE001', 'CP004', NULL),
+(38, 'TE002', 'CP004', NULL),
+(39, 'TE003', 'CP004', NULL),
+(40, 'TE01', 'CP004', NULL),
+(41, 'TE00', 'CP004', NULL),
+(42, 'TE002', 'CP004', NULL);
 
 -- --------------------------------------------------------
 
@@ -474,7 +508,7 @@ INSERT INTO `pag_estado` (`est_id`, `est_descripcion`, `tdoc_id`, `estado`) VALU
 (1, 'Activo', 1, NULL),
 (2, 'Inactivo', 1, NULL),
 (3, 'Creada', 2, NULL),
-(4, 'En ejecuciÛn', 2, NULL),
+(4, 'En ejecuci?n', 2, NULL),
 (5, 'Gestionada', 2, NULL),
 (6, 'Cerrada', 2, NULL),
 (7, 'Por atender', 4, NULL),
@@ -590,11 +624,6 @@ CREATE TABLE `pag_herramienta` (
   `her_imagen` varchar(45) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `pag_herramienta`
---
-
 
 -- --------------------------------------------------------
 
@@ -1018,7 +1047,7 @@ CREATE TABLE `pag_tipo_doc` (
 INSERT INTO `pag_tipo_doc` (`tdoc_id`, `tdoc_descripcion`, `estado`) VALUES
 (1, 'General', NULL),
 (2, 'Orden de trabajo', NULL),
-(3, 'ProgramaciÛn equipos', NULL),
+(3, 'Programaci?n equipos', NULL),
 (4, 'Solicitudes de servicio', NULL);
 
 -- --------------------------------------------------------
@@ -1040,7 +1069,7 @@ CREATE TABLE `pag_tipo_equipo` (
 INSERT INTO `pag_tipo_equipo` (`tequi_id`, `tequi_descripcion`, `estado`) VALUES
 (1, 'Electromecanico', NULL),
 (2, 'Hidraulico', NULL),
-(3, 'RefrigeraciÛn', NULL);
+(3, 'Refrigeraci?n', NULL);
 
 -- --------------------------------------------------------
 
@@ -1080,7 +1109,7 @@ CREATE TABLE `pag_tipo_herramienta` (
 
 INSERT INTO `pag_tipo_herramienta` (`ther_id`, `ther_descripcion`, `estado`) VALUES
 (1, 'Digital', NULL),
-(2, 'An·loga', NULL),
+(2, 'An?loga', NULL),
 (3, 'Pesada', NULL),
 (4, 'Otra...', NULL);
 
@@ -1120,7 +1149,6 @@ CREATE TABLE `pag_tipo_medidor` (
   `tm_id` int(11) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 --
 -- Volcado de datos para la tabla `pag_tipo_medidor`
@@ -1169,7 +1197,7 @@ CREATE TABLE `pag_unidad_medida` (
 
 INSERT INTO `pag_unidad_medida` (`umed_id`, `umed_descripcion`, `estado`) VALUES
 (1, 'Litro', NULL),
-(2, 'CentÌmetros c˙bicos', NULL),
+(2, 'Cent?metros c?bicos', NULL),
 (3, 'Gramos', NULL),
 (4, 'Libra', NULL);
 
@@ -1194,51 +1222,9 @@ CREATE TABLE `pag_usuario` (
 INSERT INTO `pag_usuario` (`per_id`, `usu_usuario`, `usu_clave`, `usu_estado`, `rol_id`) VALUES
 (1151956249, 'admin', 'b9ddaf31e98e6d249804d3f7a9e936f82a12af32', 'activo', 1);
 
-
 --
--- Estructura de tabla para la tabla `pag_det_tipoEquipo_camposPersonalizados`
+-- √çndices para tablas volcadas
 --
-
-CREATE TABLE `pag_det_tipoEquipo_camposPersonalizados` (
-  `idDetalle` int(11) NOT NULL,
-  `tequi_id` varchar(12) NOT NULL,
-  `cp_id` varchar(20) NOT NULL,
-  `estado` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
-) ;
-
---
--- Volcado de datos para la tabla `pag_det_tipoEquipo_camposPersonalizados`
---
-
-INSERT INTO `pag_det_tipoEquipo_camposPersonalizados` (`idDetalle`, `tequi_id`, `cp_id`, `estado`) VALUES
-(29, 'CTE002', 'CP004', NULL),
-(30, 'CTE002', 'CP003', NULL),
-(31, 'CTE002', 'CP002', NULL),
-(32, 'CTE002', 'CP001', NULL),
-(33, 'TE01', 'CP004', NULL),
-(34, 'TE01', 'CP001', NULL),
-(35, 'T', 'CP003', NULL),
-(36, 'TE001', 'CP004', NULL),
-(37, 'TE001', 'CP004', NULL),
-(38, 'TE002', 'CP004', NULL),
-(39, 'TE003', 'CP004', NULL),
-(40, 'TE01', 'CP004', NULL),
-(41, 'TE00', 'CP004', NULL),
-(42, 'TE002', 'CP004', NULL);
-
--- --------------------------------------------------------
-
-
---
--- Õndices para tablas volcadas
---
-
-
---
--- Indices de la tabla `pag_det_tipoEquipo_camposPersonalizados`
---
-ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
-  ADD PRIMARY KEY (`idDetalle`);
 
 --
 -- Indices de la tabla `pag_almacen`
@@ -1353,7 +1339,14 @@ ALTER TABLE `pag_det_programacion`
   ADD KEY `equi_id` (`equi_id`),
   ADD KEY `comp_id` (`comp_id`),
   ADD KEY `priotra_id` (`priotra_id`),
-  ADD KEY `tar_id` (`tar_id`);
+  ADD KEY `tar_id` (`tar_id`),
+  ADD KEY `tmed_id` (`tmed_id`);
+
+--
+-- Indices de la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
+  ADD PRIMARY KEY (`idDetalle`);
 
 --
 -- Indices de la tabla `pag_equipo`
@@ -1464,7 +1457,9 @@ ALTER TABLE `pag_prioridad_trabajo`
 -- Indices de la tabla `pag_programacion_equipo`
 --
 ALTER TABLE `pag_programacion_equipo`
-  ADD PRIMARY KEY (`proequi_id`);
+  ADD PRIMARY KEY (`proequi_id`),
+  ADD KEY `cen_id` (`cen_id`),
+  ADD KEY `tman_id` (`tman_id`);
 
 --
 -- Indices de la tabla `pag_regional`
@@ -1557,11 +1552,6 @@ ALTER TABLE `pag_usuario`
 --
 
 --
--- AUTO_INCREMENT de la tabla `pag_det_tipoEquipo_camposPersonalizados`
---
-ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `pag_almacen`
 --
 ALTER TABLE `pag_almacen`
@@ -1607,11 +1597,6 @@ ALTER TABLE `pag_departamento`
 ALTER TABLE `pag_det_componente_ot`
   MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
--- AUTO_INCREMENT de la tabla `pag_det_componente_ot`
---
-ALTER TABLE `pag_det_componente_ot`
-  MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `pag_det_equipo_medidor`
 --
 ALTER TABLE `pag_det_equipo_medidor`
@@ -1636,6 +1621,11 @@ ALTER TABLE `pag_det_prestamo_herramienta`
 --
 ALTER TABLE `pag_det_programacion`
   MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `pag_det_tipoEquipo_camposPersonalizados`
+--
+ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT de la tabla `pag_equipo_componente`
 --
@@ -1732,11 +1722,6 @@ ALTER TABLE `pag_tarea`
 ALTER TABLE `pag_tiempo_medidor`
   MODIFY `tm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT de la tabla `pag_tiempo_medidor`
---
-ALTER TABLE `pag_tiempo_medidor`
-  MODIFY `tm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
 -- AUTO_INCREMENT de la tabla `pag_tipo_doc`
 --
 ALTER TABLE `pag_tipo_doc`
@@ -1819,6 +1804,19 @@ ALTER TABLE `pag_det_insumo_ot`
 ALTER TABLE `pag_det_prestamo_herramienta`
   ADD CONSTRAINT `pag_det_prestamo_herramienta_ibfk_1` FOREIGN KEY (`pher_id`) REFERENCES `pag_prestamo_herramienta` (`pher_id`),
   ADD CONSTRAINT `pag_det_prestamo_herramienta_ibfk_3` FOREIGN KEY (`est_id`) REFERENCES `pag_estado` (`est_id`);
+
+--
+-- Filtros para la tabla `pag_det_programacion`
+--
+ALTER TABLE `pag_det_programacion`
+  ADD CONSTRAINT `pag_det_programacion_ibfk_1` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`);
+
+--
+-- Filtros para la tabla `pag_programacion_equipo`
+--
+ALTER TABLE `pag_programacion_equipo`
+  ADD CONSTRAINT `pag_programacion_equipo_ibfk_1` FOREIGN KEY (`cen_id`) REFERENCES `pag_centro` (`cen_id`),
+  ADD CONSTRAINT `pag_programacion_equipo_ibfk_2` FOREIGN KEY (`tman_id`) REFERENCES `pag_tipo_mantenimiento` (`tman_id`);
 
 --
 -- Filtros para la tabla `pag_tipo_medidor`
