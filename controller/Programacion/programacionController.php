@@ -128,7 +128,6 @@ class ProgramacionController {
                 if(isset($placa[$a]) && !preg_match($patronNumeros,$_POST['prioridades'][$a])){
                     $errores[]='El campo <code><b>Prioridade</b></code> debe ser numerico. para el equipo: <strong>' .$_POST['equipos'][$a]. '</strong>';
                 }
-        
                 $a++;
             }
         }
