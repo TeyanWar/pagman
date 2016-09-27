@@ -237,25 +237,10 @@ $(document).ready(function () {
         $("#filaher-" + id).remove();
 
     });
-    //------------------------------------------------
-    //-------------------------------------------------
+    
     //-------------funcion pdf-------------------------
     $(document).on('click', '.pdf', function () {
-        var url = $(this).attr("urld");
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: $(this).parents("form:first").serialize()
-        }).done(function (respuesta) {
-            console.log(respuesta);
-            if (respuesta==true) {
-                Materialize.toast("<i class= 'material-icons' ></i> PDF exitoso.", 2000, 'rounded col green');
-            }
-            else {
-                $('#cont_errors_ajax').html(respuesta);
-                $('#cont_errors_ajax').css('display','block');
-            }
-        });
+        document.formulariopdf.submit()
     });
 
 

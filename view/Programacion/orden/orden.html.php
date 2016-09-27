@@ -65,7 +65,7 @@
 
     </div>
 
-    <form  id="formt" class="col s12" data-url="<?php echo crearUrl("Programacion", "orden", "Postordenpro", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Ot", "ot", "listar") ?>" method="POST" novalidate>
+    <form  id="formt" name="formulariopdf" class="col s12" action="<?php echo crearUrl("Programacion","orden","Pdf",array('noVista'=>"noVista")) ?>" data-url="<?php echo crearUrl("Programacion", "orden", "Postordenpro", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Ot", "ot", "listar") ?>" method="POST" novalidate>
         <br />
         <div class="divider"></div>
         <div id="tabla"></div>
@@ -187,9 +187,9 @@
                 <button class="btn teal waves-effect waves-light" type="submit"><i class="mdi-content-add"></i>CREAR OT</button>
             </div>
             <div class="input-field col s2">
-                <a class="btn teal waves-effect waves-light pdf" urld="<?php echo crearUrl("Programacion", "orden", "Pdf", array('noVista'=>"noVista")) ?>" type="submit"><i class="mdi-action-get-app"></i>EXPORTAR PDF</a>
+                <a class="btn teal waves-effect waves-light pdf" name="pdf"><i class="mdi-action-get-app"></i>EXPORTAR PDF</a>
             </div>
         </div>
     </form>
 
-<!--</div>target="_blank" name="pdf"-->
+</div>
