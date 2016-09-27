@@ -343,6 +343,24 @@ class OrdenController {
         include_once '../view/Programacion/orden/filaher.html.php';
     }
 
-
+    function Pdf(){
+        
+        $errores = array();
+        //---------------validaciones-------------------
+        if (!isset($_POST['id']) or $_POST['id'] == "") {
+            $errores[] = '<code><b>Para Exportar PDF. Debe elegir al menos una orden programada</b></code>';;
+        }
+        //----------------------------------------------
+        if (count($errores) > 0) {
+            setErrores($errores);
+            echo getErrores();
+            //----------------fin validaciones-----------------
+        } else {
+            
+            
+            echo true;
+        }
+        
+    }
 
 }

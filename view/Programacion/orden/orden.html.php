@@ -186,10 +186,10 @@
             <div class="input-field col s4">
                 <button class="btn teal waves-effect waves-light" type="submit"><i class="mdi-content-add"></i>CREAR OT</button>
             </div>
-<!--            <div class="input-field col s2">
-                <a class="btn teal waves-effect waves-light" target="_blank" name="pdf"><i class="mdi-action-get-app"></i>EXPORTAR PDF</a>
-            </div>-->
+            <div class="input-field col s2">
+                <a class="btn teal waves-effect waves-light pdf" urld="<?php echo crearUrl("Programacion", "orden", "Pdf", array('noVista'=>"noVista")) ?>" type="submit"><i class="mdi-action-get-app"></i>EXPORTAR PDF</a>
+            </div>
         </div>
     </form>
 
-</div>
+<!--</div>target="_blank" name="pdf"-->
