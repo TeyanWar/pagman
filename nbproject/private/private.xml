@@ -1,24 +1,9 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/pagman/controller/Herramientas/herramientasController.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/view/Herramientas/herramientas/listar.html.php</file>
-            <file>file:/C:/xampp/htdocs/pagman/web/js/modulos/herramientas-herramientas.js</file>
+            <file>file:/home/jhony984/NetBeansProjects/pagman/index.php</file>
         </group>
     </open-files>
 </project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/opt/lampp/htdocs/pagman/view/Equipos/equipos/editar.html.php</file>
-            <file>file:/opt/lampp/htdocs/pagman/lib/config/conexion.php</file>
-        </group>
-    </open-files>
-</project-private>
->>>>>>> 8dc2de8cec1248bed387c4d15c74d21deef65a66
