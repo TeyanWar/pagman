@@ -182,12 +182,12 @@
         <br>
         <br>
         <div class="row">
-            <div class="input-field col s5 "></div>
-            <div class="input-field col s4">
-                <button class="btn teal waves-effect waves-light" type="submit"><i class="mdi-content-add"></i>CREAR OT</button>
+            <div class="input-field col s4 "></div>
+            <div class="input-field col s2">
+                <button class="btn teal waves-effect waves-light" type="submit">CREAR OT<i class="mdi-content-send right"></i></button>
             </div>
             <div class="input-field col s2">
-                <a class="btn teal waves-effect waves-light pdf" name="pdf"><i class="mdi-action-get-app"></i>EXPORTAR PDF</a>
+                <a class="btn teal waves-effect waves-light pdf" name="pdf">EXPORTAR PDF<i class="mdi-action-get-app"></i></a>
             </div>
         </div>
     </form>

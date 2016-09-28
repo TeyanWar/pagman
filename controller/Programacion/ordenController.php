@@ -343,19 +343,59 @@ class OrdenController {
         require_once("../lib/pdf/dompdf_config.inc.php");
 
         $codigoHTML='
-        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-        <html xmlns="http://www.w3.org/1999/xhtml">
+        <html lang="es">
         <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Documento sin título</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Ordenes Programadas</title>
+        <style>
+            table {
+              border-collapse: collapse;
+              border-spacing: 0;
+            }
+
+            ul li {
+              list-style-type: none;
+            }
+
+            table, th, td {
+              border: none;
+            }
+
+            table {
+              width: 100%;
+              display: table;
+            }
+
+            table.striped > tbody > tr:nth-child(odd) {
+              background-color: #f2f2f2;
+            }
+
+            table.striped > tbody > tr > td {
+              border-radius: 0px;
+            }
+
+            thead {
+              border-bottom: 1px solid #d0d0d0;
+            }
+
+            td, th {
+              padding: 15px 5px;
+              display: table-cell;
+              text-align: left;
+              vertical-align: middle;
+              border-radius: 2px;
+            }
+        </style>
         </head>
         <body>
-        <table width="100%" border="1" cellspacing="0" cellpadding="0">
+        <table class="striped" cellspacing="0">
+          <thead>
           <tr>
-            <td colspan="8" bgcolor="skyblue"><CENTER><strong>REPORTE ORDENES PROGRAMADDAS</strong></CENTER></td>
+            <td colspan="9" ><CENTER><strong>REPORTE ORDENES PROGRAMADAS</strong></CENTER></td>
           </tr>
-          <tr bgcolor="red">
+          <tr >
             <td><strong>Centro</strong></td>
+            <td><strong>No. Placa</strong></td>
             <td><strong>Equipo</strong></td>
             <td><strong>Componente</strong></td>
             <td><strong>Tipo de Trabajo</strong></td>
@@ -363,12 +403,13 @@ class OrdenController {
             <td><strong>Tipo Mantenimiento</strong></td>
             <td><strong>Frecuencia</strong></td>
             <td><strong>Medidor</strong></td>
-          </tr>';
+          </tr>
+          </thead>';
 
         //------------------------------------------------------------------
         $objOrden = new OrdenModel();
         foreach ($orprog as $v) {
-            $sql = "SELECT pag_centro.cen_nombre,pag_equipo.equi_nombre,"
+            $sql = "SELECT pag_centro.cen_nombre,pag_equipo.equi_id,equi_nombre,"
                 . "pag_componente.comp_descripcion,pag_tipo_trabajo.ttra_descripcion,"
                 . "pag_tarea.tar_nombre,pag_tipo_mantenimiento.tman_descripcion,"
                 . "pag_det_programacion.frecuencia,pag_tipo_medidor.tmed_nombre "
@@ -387,9 +428,11 @@ class OrdenController {
 
             $dato = $objOrden->find($sql);
 
-            $codigoHTML.='	
+            $codigoHTML.='
+            <tbody>
             <tr>
                     <td>'.$dato['cen_nombre'].'</td>
+                    <td>'.$dato['equi_id'].'</td>
                     <td>'.$dato['equi_nombre'].'</td>
                     <td>'.$dato['comp_descripcion'].'</td>
                     <td>'.$dato['ttra_descripcion'].'</td>
@@ -397,7 +440,8 @@ class OrdenController {
                     <td>'.$dato['tman_descripcion'].'</td>
                     <td>'.$dato['frecuencia'].'</td>
                     <td>'.$dato['tmed_nombre'].'</td>
-            </tr>';
+            </tr>
+            </tbody>';
 
         }
         // Cierra la conexion
@@ -409,10 +453,11 @@ class OrdenController {
         </html>';
         $codigoHTML=utf8_encode($codigoHTML);
         $dompdf=new DOMPDF();
+        $dompdf->set_paper("A4","landscape");
         $dompdf->load_html($codigoHTML);
         ini_set("memory_limit","128M");
         $dompdf->render();
-        $dompdf->stream("Reporte.pdf");
+        $dompdf->stream("programaciones.pdf");
     }
 
 }
