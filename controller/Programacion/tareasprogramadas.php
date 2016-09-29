@@ -103,7 +103,7 @@ $objProgramacion = new ProgramacionModel();
         foreach ($programaciones as $programacion){
             
             if($programacion['tmed_tipo']=='Automatico'){
-                $factual=time()-18000;
+                $factual=time()-104400;
                 $i = $programacion['proequi_fecha_inicio'] - $factual;
 
                 if($i < 0){ //------si se paso de la fecha establecida------------------

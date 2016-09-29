@@ -22,7 +22,7 @@
         <?php foreach ($programaciones as $programacion) { ?>
         
             <?php if($programacion['tmed_tipo']=='Automatico'){ ?>
-                <?php $factual=time()-18000; ?>
+                <?php $factual=time()-104400; ?>
                 <?php $i = $programacion['proequi_fecha_inicio'] - $factual; ?>
                 <tr
                         <?php

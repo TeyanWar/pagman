@@ -127,7 +127,6 @@ class OrdenController {
         //---------------validaciones-------------------
         if (!isset($_POST['id']) or $_POST['id'] == "") {
             $errores[] = '<code><b>Debe elegir al menos una orden programada</b></code>';
-            $errores[] = '<strong>Por favor registre una programacion!</strong>';
         }
 
         if (!isset($_POST['inicio']) or $_POST['inicio'] == "") {
