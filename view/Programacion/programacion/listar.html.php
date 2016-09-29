@@ -6,7 +6,7 @@
                     <th>Placa</th>
                     <th>equipo</th>
                     <th>Centro</th>
-                    <th>No.tareas</th>
+                    <th>No. Programaciones</th>
                     <th>Editar</th>
                     <th>Detalle</th>
                     

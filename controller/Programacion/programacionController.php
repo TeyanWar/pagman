@@ -76,6 +76,21 @@ class ProgramacionController {
             $errores[]='El campo <code><b>Fecha Inicio Programacion</b></code> es obligatorio';
         }
         
+        if (isset($_POST['inicio'])) {
+            explodeFecha($_POST['inicio']);
+            $inf = getFecha();
+            $timestamp1 = date("Y-m-d", strtotime($inf));
+
+            $fhoy = time();
+            $fregistro = date('j F, Y', $fhoy);
+
+            if($timestamp1 < date('Y-m-d')) {
+                $errores[] = 'El campo <code><b>Fecha Inicio Programacion</b></code> debe ser mayor que la <code><b>Fecha Registro Programacion</b></code>';
+                $errores[] = ' - Fecha de Registro: ' . $fregistro;
+                $errores[] = ' - Fecha Inicio: ' . $_POST['inicio'];
+            }
+        }
+        
         if(!isset($_POST['placas']) or $_POST['placas']==""){
             $errores[]='<code><b>Debe tener al menos una programacion</b></code>';
         }else {
@@ -84,7 +99,7 @@ class ProgramacionController {
             foreach ($_POST['placas'] as $placa) {
                 
                 if(isset($placa[$a]) && empty($_POST['equipos'][$a])){
-                    $errores[]='<strong>El <code><b>Nombre del Equipo</b></code> es obligatorio.</strong>';
+                    $errores[]='El <code><b>Nombre del Equipo</b></code> es obligatorio.';
                 }
                 
                 if(isset($placa[$a]) && empty($_POST['tareas'][$a])){
@@ -396,7 +411,7 @@ class ProgramacionController {
 
         $garancomp = date("U", strtotime($garantia['equi_vence_garantia']));
 
-        if ($garancomp > mktime()) {
+        if ($garancomp > time()) {
             $infogarantia = $garantia['equi_nombre'];
             $vencegarantia = date('F j, Y', $garancomp);
 
