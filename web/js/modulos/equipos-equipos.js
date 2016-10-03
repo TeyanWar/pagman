@@ -7,7 +7,7 @@ $(document).ready(function () {
         $.ajax({
             url: url,
             type: "get",
-              success: function (data) {
+            success: function (data) {
                 $("#tablaCamposPersonalizados").html(data);
             }
         });
@@ -27,25 +27,6 @@ $(document).ready(function () {
             $("#tablaCamposPersonalizados").html(response);
         });
     });
-
-
-    //Capturamos el ID del select de formulario CREAR EQUIPO
-    $("#consultarTipo").keyup(function () {
-        var buscarCP = $("#consultarTipo").val();
-        //alert(buscarCP);
-        var url = $(this).attr("data-url");
-        //alert(url);
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: "buscarTipoEquipo=" + buscarCP,
-            success: function (data) {
-                $("#tablaTipoEquipo").html(data);
-            }
-        });
-    });
-
-    $('#consultarTipo').trigger('keyup');// function_trigger para visualizar las herramientas existentes
 
 
 //----------------------------------
@@ -72,7 +53,7 @@ $(document).ready(function () {
     $("#buscarEquipo").trigger("keyup");
     //Ver detalle//
 
-    $(document).on("click", ".ver-detalle1", function () {
+    $(document).on("click", ".ver-detale1", function () {
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
@@ -82,6 +63,7 @@ $(document).ready(function () {
             }
         });
     });
+    
     //Capturamos el ID del select de formulario CREAR EQUIPO
     $("#tequi_id").change(function () {
         //capturamos el ID del select
@@ -112,6 +94,18 @@ $(document).ready(function () {
             }
         });
     });
+
+    $(document).on("click", ".AgregarCantidad", function () {
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#modalAgregarCantidad > .modal-content").html(data);
+            }
+        });
+    });
+
     $(document).on('click', '.modal-eliminar', function (e) {
         e.preventDefault();
         var url = $(this).attr('data-url');

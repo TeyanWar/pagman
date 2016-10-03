@@ -25,7 +25,7 @@
         </div>
         <!--Fin contenedor mensajes de error-->
         <div class="row">
-            <form class="col s12" id="formCamposPersonalizados" action="<?php echo crearUrl("Equipos", "campoPersonalizado", "postCrear",array('noVista')) ?>" method="POST" novalidate="">
+            <form id="formCamposPersonalizados" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear", array('noVista')) ?>" method="POST" enctype='multipart/form-data' novalidate>
                 <div class="row col s6">
                     <div class="input-field col s12">
                         <input type="text" id="codigoCP" name="codigoCP" data-error=".errorTxt1" class="validate" required>
@@ -46,8 +46,8 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
-                        <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right btn_submit_modal">Crear
-                            <i class="mdi-content-add right"></i>
+                        <button name="action" type="submit">Crear
+                            <i class="mdi-content-send right"></i>
                         </button>
                     </div>
                 </div>
