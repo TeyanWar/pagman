@@ -82,9 +82,9 @@ class SolicitudesController {
             $errores[]="Debe seleccionar un <code><b>Solicitante</b></code>";
 	}
         
-        if(!between($descripcion,3,5)){
-            $errores[]="El campo <code><b>descripci&oacute;n</b></code> debe contener entre 3 y 5 caracteres. ";
-        }
+//        if(!between($descripcion,3,5)){
+//            $errores[]="El campo <code><b>descripci&oacute;n</b></code> debe contener entre 3 y 5 caracteres. ";
+//        }
 
 //        if(empty ($descripcion)){
 //            $errores[]="El campo <code><b>Descripci&oacute;n</b></code> debe ser diligenciado";
