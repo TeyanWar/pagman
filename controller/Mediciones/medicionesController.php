@@ -10,7 +10,11 @@ class MedicionesController {
     public function crear() {
 
         $objEquipos = new EquiposModel();
-        $sql = "SELECT * FROM pag_equipo order by equi_nombre asc";
+        $sql = "SELECT * FROM pag_equipo pe,pag_tipo_medidor pt,pag_det_equipo_medidor pde "
+                . "where pde.equi_id=pe.equi_id and "
+                . "pde.tmed_id=pt.tmed_id and "
+                . "pt.tmed_tipo='Manual '"
+                . "order by equi_nombre asc";
         $equipos = $objEquipos->select($sql);
         $objEquipos->cerrar();
 
