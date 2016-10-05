@@ -83,7 +83,7 @@ class EquiposController {
         if (!isset($_POST['medidores']) or $_POST['medidores'] == "") {
             $errores[] = "El equipo debe tener al menos un <code><b>Medidor</code></b> agregado";
         }//Valida que el Nombre del equipo no este vacio
-        
+
         if (!isset($_POST['equi_nombre']) or $_POST['equi_nombre'] == "") {
             $errores[] = "El campo <code><b>nombre</b></code> no puede estar vac&iacute;o";
         }//Valida que el Nombre del equipo no este vacio
@@ -142,29 +142,29 @@ class EquiposController {
         if (count($errores) > 0) {
             setErrores($errores);
         } else {
-            
 
-        $equi_placa = $_POST['equi_placa'];
-        //die(print_r($equi_placa));
 
-        $equi_nombre = $_POST['equi_nombre'];
-        $equi_modelo = $_POST['equi_modelo'];
-        $equi_noserie = $_POST['equi_serie'];
-        $equi_marca = $_POST['equi_marca'];
-        $equi_fabricante = $_POST['equi_fabricante'];
-        $equi_estado = $_POST['equi_estado'];
-        $area_id = $_POST['area_id'];
-        $per_id = $_POST['per_id'];
-        $equi_ubicacion = $_POST['equi_ubicacion'];
-        $equi_fecha_compra = $_POST['equi_fecha_compra'];
-        $equi_fecha_instalacion = $_POST['equi_fecha_instalacion'];
-        $equi_vence_garantia = $_POST['equi_vence_garantia'];
-        $cen_id = $_POST['cen_id'];
+            $equi_placa = $_POST['equi_placa'];
+            //die(print_r($equi_placa));
 
-        //die(print_r($_POST));
+            $equi_nombre = $_POST['equi_nombre'];
+            $equi_modelo = $_POST['equi_modelo'];
+            $equi_noserie = $_POST['equi_serie'];
+            $equi_marca = $_POST['equi_marca'];
+            $equi_fabricante = $_POST['equi_fabricante'];
+            $equi_estado = $_POST['equi_estado'];
+            $area_id = $_POST['area_id'];
+            $per_id = $_POST['per_id'];
+            $equi_ubicacion = $_POST['equi_ubicacion'];
+            $equi_fecha_compra = $_POST['equi_fecha_compra'];
+            $equi_fecha_instalacion = $_POST['equi_fecha_instalacion'];
+            $equi_vence_garantia = $_POST['equi_vence_garantia'];
+            $cen_id = $_POST['cen_id'];
 
-        $medidores = $_POST['medidores'];
-        
+            //die(print_r($_POST));
+
+            $medidores = $_POST['medidores'];
+
             $sql = "UPDATE "
                     . "pag_equipo "
                     . "SET "
@@ -225,9 +225,7 @@ class EquiposController {
         $sql4 = "Select area_id, area_descripcion from pag_area";
         $areas = $objArea->select($sql4);
 
-        //$sql5 = "select tequi_id, tequi_descripcion from pag_tipo_de_equipo WHERE estado = 0";
-        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo";
-        $tEquipos = $objT_equipo->select($sql5);
+
 
         $sql6 = "SELECT * from pag_tipo_medidor where estado IS NULL";
         $medidores = $objMedidores->select($sql6);
@@ -236,7 +234,6 @@ class EquiposController {
         $objEstado->cerrar();
         $objCentro->cerrar();
         $objArea->cerrar();
-        $objT_equipo->cerrar();
         $objMedidores->cerrar();
 
 
@@ -250,7 +247,8 @@ class EquiposController {
         $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
 
         //-----------------validaciones--------------------
-
+        //--- Validacion cantidad campos personalizados -->
+        // ----------- Fin Validacion ------------------ //
         if (!isset($_POST['equi_id']) or $_POST['equi_id'] == "") {
             $errores[] = '(*) El campo "N.Placa" es obligatorio';
         }
@@ -327,6 +325,7 @@ class EquiposController {
         if (!isset($_POST['medidores']) or $_POST['medidores'] == "") {
             $errores[] = '(*) Añadir los medidores es Obligatorio';
         }
+
         if (count($errores) > 0) {
             setErrores($errores);
             //----------------fin validaciones-----------------
@@ -489,7 +488,17 @@ class EquiposController {
     }
 
     public function listarTipoEquipo() {
-        include_once("../view/Equipos/equipos/crear.html.php");
+
+        $objT_equipo = new equiposModel();
+
+
+        //$sql5 = "select tequi_id, tequi_descripcion from pag_tipo_de_equipo WHERE estado = 0";
+        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo";
+        $tEquipos = $objT_equipo->select($sql5);
+
+        $objT_equipo->cerrar();
+
+        include_once("../view/Equipos/equipos/consultaTipoEquipo.html.php");
     }
 
     public function tipoEquipo() {
@@ -545,6 +554,20 @@ class EquiposController {
         $objTIpoEquipo->cerrar();
 
         include_once('../view/Equipos/equipos/agregarValorTipoEquipo.html.php');
+    }
+
+    public function agregarValorCamposPersonalizados() {
+        $id = $_POST['idTipoEquipo'];
+        $valorCampos = $_POST['cantidad'];
+        $codigo = $_POST['codigoCP'];
+        foreach ($codigo as $codigoCP){
+            echo $codigoCP;
+        }
+        
+        foreach ($valorCampos as $cantidad) {
+            echo $cantidad."<br>";
+        }
+        echo $id;
     }
 
 }

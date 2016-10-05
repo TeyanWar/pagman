@@ -125,7 +125,6 @@ $(document).ready(function () {
     //----FILTRO DE BUSQUEDA CON SELECT EQUIPOS-----------
     $("#equipo").change(function () {
         var program = $("#equipo").val();
-//        alert(program);
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
@@ -140,7 +139,6 @@ $(document).ready(function () {
     //----FILTRO DE BUSQUEDA CON SELECT TIPO TRABAJO-----------
     $("#trabajo").change(function () {
         var program = $("#trabajo").val();
-//        alert(program);
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
@@ -156,7 +154,6 @@ $(document).ready(function () {
     //----FILTRO DE BUSQUEDA CON SELECT TIPO MEDIDOR-----------
     $("#medidor").change(function () {
         var program = $("#medidor").val();
-//        alert(program);
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
@@ -241,8 +238,10 @@ $(document).ready(function () {
 
     });
     
-
+    //-------------funcion pdf-------------------------
+    $(document).on('click', '.pdf', function () {
+        document.formulariopdf.submit()
+    });
 
 
 });
-

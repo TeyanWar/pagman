@@ -47,11 +47,49 @@
                             </a>
 
                         </td>
-
+                        <td>
+                            <a class="btn-floating cyan darken-1 modal-trigger agregarCantidad"
+                               href="#modalAgregarCantidad" data-url="<?php echo crearUrl('equipos', 'equipos', 'listarTipoEquipo', array('noVista' => 'noVista', 'id' => $equipo['equi_id'])) ?>">
+                                <i class="mdi-hardware-phonelink"></i>
+                            </a>
+                        </td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
+
+
+        <div id="modalAgregarCantidad" class="modal modal-fixed-footer">
+
+            <div class="modal-content">
+
+                <center><h5>BUSQUEDA DE TIPO DE EQUIPO</h5></center><br>
+
+                <div id="card-alert" class="card teal">
+                    <div class="card-content white-text">
+                        <p><i class="mdi-action-info-outline"></i> <code>IMPORTANTE:</code> En esta sección usted podrá seleccionar un tipo de equipo y agregar cantidad a todos los campos personalizados de éste.</p>
+                    </div>
+                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                
+                <div class="input-field">
+                    <i class="mdi-action-search prefix"></i>
+                    <input type="text" class="active" id="consultarTipo" name='consultarTipo' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("equipos", "equipos", "tipoEquipo", array('noVista' => "noVista")) ?>" />
+                    <label for="consultarTipo" class="active">Digite el nombre y/o codigo del Equipo a Buscar</label>
+                </div>
+
+                <div id="tablaTipoEquipo">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
+            </div>
+
+        </div>
+
         <div id="modalDetalle1" class="modal modal-fixed-footer">
 
             <div class="modal-content"></div>
@@ -80,4 +118,25 @@
             //alert('Closed'); 
         } // Callback for Modal close
     });
+
+
+    //Capturamos el ID del select de formulario CREAR EQUIPO
+    $("#consultarTipo").keyup(function () {
+        var buscarCP = $("#consultarTipo").val();
+        //alert(buscarCP);
+        var url = $(this).attr("data-url");
+        //alert(url);
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "buscarTipoEquipo=" + buscarCP,
+            success: function (data) {
+                $("#tablaTipoEquipo").html(data);
+            }
+        });
+    });
+
+    $('#consultarTipo').trigger('keyup');// function_trigger para visualizar las herramientas existentes
+
+
 </script>

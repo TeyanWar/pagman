@@ -20,7 +20,7 @@
                 <?php } ?>
             </tbody>
         </table>
-
+        
     </div>
 </center>
 <div id="tablaCamposPersonalizados">

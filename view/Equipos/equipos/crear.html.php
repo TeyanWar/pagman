@@ -14,7 +14,6 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
-
         <!--Inicio contenedor mensajes de error-->
         <div class="card red">
             <div id="cont_errors_ajax" class="card-content white-text">
@@ -170,19 +169,6 @@
                             </div>
                         </div>
                     </center>
-                    <center>
-                        <div class="input-field col s4">
-                            <div class="btn teal darken-2">
-                                <div class="modal-trigger" href="#modal2" data-url="<?php echo crearUrl('equipos', 'equipos', 'tipoEquipo'); ?>">
-                                    <span>AGREGAR TIPO DE EQUIPO</span>
-                                    <i class="mdi-hardware-phonelink"></i>
-                                </div>    
-                            </div>
-                            <div class="file-path-wrapper">
-                                <input class="file-path validate" type="hidden">
-                            </div>
-                        </div>
-                    </center>
                 </div>
 
                 <!----------------------------- SELECCIONAR TIPO DE MEDIDOR ------------------------------->
@@ -202,34 +188,16 @@
                         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
                     </div>
                 </div>
-                <div id="modal2" class="modal">
-                    <div class="modal-content">
-                        <center><h5>BUSQUEDA DE TIPO DE EQUIPO</h5></center>
-                        <div class="input-field">
-                            <i class="mdi-action-search prefix"></i>
-                            <input type="text" class="active" id="consultarTipo" name='consultarTipo' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("equipos", "equipos", "tipoEquipo", array('noVista' => "noVista")) ?>" />
-                            <label for="consultarTipo" class="active">Digite el nombre y/o codigo del Equipo a Buscar</label>
-                        </div>
-                    </div>
-                    <div id="tablaTipoEquipo">
-                        
+
+                <!--------------------DIV ROW BOTON CREAR ------------------------------------------->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button name="action" type="submit" class="btn teal waves-light right">Crear
+                            <i class="mdi-content-add right"></i>
+                        </button>
                     </div>
                 </div>
-                    <!--------------------DIV ROW BOTON CREAR ------------------------------------------->
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right btn_submit_modal">Crear
-                                <i class="mdi-content-send right"></i>
-                            </button>
-                        </div>
-                    </div>
-
             </form> <!-- Cierre FORM ---->
         </div> <!-- cierre ROW que abarca TODO ---->
     </div> <!----- Cierre CARD PANEL--->
 </div> <!--- CIERRE DIV PRINCIPAL ------->
-
-
-<script type="text/javascript">
-
-</script> 

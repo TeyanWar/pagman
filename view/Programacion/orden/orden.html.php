@@ -65,7 +65,7 @@
 
     </div>
 
-    <form  id="formt" class="col s12" data-url="<?php echo crearUrl("Programacion", "orden", "Postordenpro", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Ot", "ot", "listar") ?>" method="POST" novalidate>
+    <form  id="formt" name="formulariopdf" class="col s12" action="<?php echo crearUrl("Programacion","orden","Pdf",array('noVista'=>"noVista")) ?>" data-url="<?php echo crearUrl("Programacion", "orden", "Postordenpro", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Ot", "ot", "listar") ?>" method="POST" novalidate>
         <br />
         <div class="divider"></div>
         <div id="tabla"></div>
@@ -182,13 +182,13 @@
         <br>
         <br>
         <div class="row">
-            <div class="input-field col s5 "></div>
-            <div class="input-field col s4">
-                <button class="btn teal waves-effect waves-light" type="submit"><i class="mdi-content-add"></i>CREAR OT</button>
+            <div class="input-field col s4 "></div>
+            <div class="input-field col s2">
+                <button class="btn teal waves-effect waves-light" type="submit">CREAR OT<i class="mdi-content-send right"></i></button>
             </div>
-<!--            <div class="input-field col s2">
-                <a class="btn teal waves-effect waves-light" target="_blank" name="pdf"><i class="mdi-action-get-app"></i>EXPORTAR PDF</a>
-            </div>-->
+            <div class="input-field col s2">
+                <a class="btn teal waves-effect waves-light pdf" name="pdf">EXPORTAR PDF<i class="mdi-action-get-app"></i></a>
+            </div>
         </div>
     </form>
 

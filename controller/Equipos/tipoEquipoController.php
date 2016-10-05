@@ -21,10 +21,7 @@ class TipoEquipoController {
     function editar($parametros = false) {
         $objTipoEquipos = new TipoEquipoModel();
 
-
         $id = $parametros[1];
-
-
 
         $sqlEquipo = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='$id'";
         $tEquipo = $objTipoEquipos->find($sqlEquipo);
@@ -42,17 +39,21 @@ class TipoEquipoController {
     }
 
     function postEditar() {
+        
+        //  die(print_r($_POST['tequi_id']));
+        
         $tequi_id = $_POST['tequi_id'];
-        $tequi_descripcion = $_POST['tequi_descripcion'];
+        $tequi_descripcion = $_POST['tipoEquipoNombre'];
 
+        //die(print_r($tequi_descripcion ));
         $objTipoEquipos = new TipoEquipoModel();
 
         $sql = "UPDATE "
                 . "pag_tipo_equipo "
                 . "SET "
                 . "tequi_descripcion = '$tequi_descripcion' "
-                . "WHERE tequi_id = $tequi_id";
-
+                . "WHERE tequi_id = '$tequi_id'";
+        //die(print_r($sql));
         $respuesta = $objTipoEquipos->update($sql);
 
         // Cierra la conexion
@@ -66,8 +67,6 @@ class TipoEquipoController {
 
 
         $id = $parametros[1];
-
-
 
         $sqlEquipo = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='$id'";
         $tEquipo = $objTipoEquipos->find($sqlEquipo);
@@ -155,7 +154,7 @@ class TipoEquipoController {
         $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
 
 
-        $sql = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='" . $_POST['id_tipo_Equipo'] . "'";
+        $sql = "SELECT * FROM pag_tipo_equipo";
         $objTipoEquipo = new TipoEquipoModel();
 
         $consulta = $objTipoEquipo->select($sql);
@@ -163,7 +162,7 @@ class TipoEquipoController {
         $objTipoEquipo->cerrar();
 
         foreach ($consulta as $campoId) {
-            if ($_POST['id_tipo_Equipo'] = $campoId['tequi_id']) {
+            if ($_POST['id_tipo_Equipo'] == $campoId['tequi_id']) {
                 $errores[] = "¡ERROR! El identificador de tipo de equipo <code>" . $campoId['tequi_id'] . "</code> se encuentra registrado";
             }
         }

@@ -156,7 +156,7 @@ class OtController {
             $sql = "SELECT * FROM pag_tipo_falla tf, pag_solicitud_servicio pss WHERE pss.tfa_id=tf.tfa_id AND pss.sserv_id=$id_solicitud";
             $fallas = $objTipoFalla->select($sql);
             //select Tipo de falla
-            
+                                                           
         }else{
             
             $sql = "SELECT * FROM pag_centro";
@@ -230,7 +230,7 @@ class OtController {
     }
 
     function postCrear() {
-        
+        //die(print_r($_POST));
         $centro_formacion = $_POST['ot_centro_formacion'];
         $equipo = $_POST['ot_equipo'];
         $tipoFalla = $_POST['ot_tipo_falla'];
@@ -513,6 +513,5 @@ class OtController {
         
         include_once '../view/Ot/ot/FherOT.html.php';
     }
-
 
 }

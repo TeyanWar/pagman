@@ -23,13 +23,14 @@
                     <div class="col s3">
                         <label><h6>(*) Código Solicitud de Servicio</h6></label>  
                         <?php echo $id_solicitud; ?>
-                        <input type="hidden" value="<?php echo $id_solicitud; ?>">
+                        <input type="hidden" name="id_solicitud" value="<?php echo $id_solicitud; ?>">
                     </div>
                 
                     <div class="col s3">
                         <label>(*) Centro de Formación</label>
                         <?php foreach ($centrosFormacion as $centro) { ?>
                             <option value="<?php echo $centro['cen_id'] ?>"><?php echo $centro['cen_nombre'] ?></option>
+                            <input type="hidden" name="ot_centro_formacion" value="<?php echo $centro['cen_id']; ?>">
                         <?php } ?>                        
                     </div>
                 
@@ -37,6 +38,7 @@
                         <label>(*) Equipo</label>
                         <?php foreach ($equipos as $equipo) { ?>
                             <option value="<?php echo $equipo['equi_id'] ?>"><?php echo $equipo['equi_nombre'] ?></option>
+                            <input type="hidden" name="ot_equipo" value="<?php echo $equipo['equi_id']; ?>">
                         <?php } ?>
                     </div>
                 
@@ -44,6 +46,7 @@
                         <label>(*) Tipo de falla</label> 
                             <?php foreach ($fallas as $falla) { ?>
                                 <option value="<?php echo $falla['tfa_id'] ?>"> <?php echo $falla['tfa_descripcion'] ?></option>
+                                <input type="hidden" name="ot_tipo_falla" value="<?php echo $falla['tfa_id']; ?>">
                             <?php } ?> 
                         </select>
                     </div>
@@ -180,7 +183,7 @@
                 <label><h6>(*) INSUMOS:</h6></label>
                 <br>
                 <br>
-                <table class="striped" id="carroInsumos" cellspacing="0">
+                <table class="striped carroInsumos" id="carroInsumos" cellspacing="0">
                     <thead>
                         <tr>
                             <th>(*) Nombre</th>
@@ -199,7 +202,7 @@
                 <label><h6>(*) HERRAMIENTAS:</h6></label>
                 <br>
                 <br>
-                <table class="striped" id="carroHerramientas" cellspacing="0">
+                <table class="striped carroHerramientas" id="carroHerramientas" cellspacing="0">
                     <thead>
                         <tr>
                             <th>(*) Nombre</th>
@@ -213,7 +216,7 @@
             </div>
         </div>
           <br>
-        <br>  
+        <br> 
 
             <div class="row">
                 <button name="action" type="submit" class="btn teal waves-effect waves-light right submit_ot">Crear OT

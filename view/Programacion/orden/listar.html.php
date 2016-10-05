@@ -22,7 +22,8 @@
         <?php foreach ($programaciones as $programacion) { ?>
         
             <?php if($programacion['tmed_tipo']=='Automatico'){ ?>
-                <?php $i = $programacion['proequi_fecha_inicio'] - mktime(); ?>
+                <?php $factual=time()-104400; ?>
+                <?php $i = $programacion['proequi_fecha_inicio'] - $factual; ?>
                 <tr
                         <?php
                         if($i > 0 && $i < 86400){
@@ -30,17 +31,17 @@
                             class="#ff9100 orange accent-3"
                             <?php
 
-                        }elseif ($i > 86400 && $i < 259200) {
+                        }elseif ($i > 172800 && $i < 259200) {
                             ?>
                             class="#ffab00 amber accent-4"
                             <?php
 
-                        }elseif ($i > 432000 && $i < 604800) {
+                        }elseif ($i > 518400 && $i < 604800) {
                             ?>
                             class="#ffc400 amber accent-3"
                             <?php
 
-                        }elseif ($i > 864000 && $i < 1036800) {
+                        }elseif ($i > 950400 && $i < 1036800) {
                             ?>
                             class="#ffea00 yellow accent-3"
                             <?php
@@ -74,17 +75,57 @@
                                 <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "Hoy"; ?>
                                 <?php
 
-                            }elseif ($i > 86400 && $i < 259200) {
+                            }elseif ($i > 86400 && $i < 172800) {
+                                ?>
+                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "Ma&ntilde;ana"; ?>
+                                <?php
+
+                            }elseif ($i > 172800 && $i < 259200) {
                                 ?>
                                 <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "falta: un dia"; ?>
                                 <?php
 
-                            }elseif ($i > 432000 && $i < 604800) {
+                            }elseif ($i > 259200 && $i < 345600) {
+                                ?>
+                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "faltan: 2 dias"; ?>
+                                <?php
+
+                            }elseif ($i > 345600 && $i < 432000) {
+                                ?>
+                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "faltan: 3 dias"; ?>
+                                <?php
+
+                            }elseif ($i > 432000 && $i < 518400) {
+                                ?>
+                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "faltan: 4 dias"; ?>
+                                <?php
+
+                            }elseif ($i > 518400 && $i < 604800) {
                                 ?>
                                 <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "faltan: 5 dias"; ?>
                                 <?php
 
-                            }elseif ($i > 864000 && $i < 1036800) {
+                            }elseif ($i > 604800 && $i < 691200) {
+                                ?>
+                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "faltan: 6 dias"; ?>
+                                <?php
+
+                            }elseif ($i > 691200 && $i < 777600) {
+                                ?>
+                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "faltan: 7 dias"; ?>
+                                <?php
+
+                            }elseif ($i > 777600 && $i < 864000) {
+                                ?>
+                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "faltan: 8 dias"; ?>
+                                <?php
+
+                            }elseif ($i > 864000 && $i < 950400) {
+                                ?>
+                                <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "faltan: 9 dias"; ?>
+                                <?php
+
+                            }elseif ($i > 950400 && $i < 1036800) {
                                 ?>
                                 <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "faltan: 10 dias"; ?>
                                 <?php
@@ -97,7 +138,8 @@
 
                                     $fechaactual = date('d-m-Y');
                                     $frecprogm = $programacion['frecuencia'] * $programacion['tmed_tiempo'];
-                                    $inicnuevo = mktime() + $frecprogm;
+                                    $tmdefinido = time()-18000;
+                                    $inicnuevo = $tmdefinido + $frecprogm;
                                     $nuevafecha = "UPDATE pag_programacion_equipo "
                                             . "SET proequi_fecha='$fechaactual',proequi_fecha_inicio='$inicnuevo' "
                                             . "WHERE proequi_id=$programacion[proequi_id]";
@@ -127,13 +169,18 @@
             
         <?php foreach ($mediciones as $med) { ?>
             <?php if($med['tmed_tipo']=='Manual'){ ?>
+                    <?php $porcentaje = ($med['frecuencia']*80)/100; ?>
                 <tr
                         <?php
-                        if($med['frecuencia'] <= $med['totalMediciones']){
+                        if($med['frec_medc'] >= $porcentaje && $med['frec_medc'] <= $med['frecuencia']){
                             ?>
                             class="#ff9100 orange accent-3"
                             <?php
-                        }elseif($med['frecuencia']>$med['totalMediciones']){
+                        }elseif ($med['frec_medc'] < $porcentaje) {
+                            ?>
+                            class="#c0ca33 lime darken-1"
+                            <?php
+                        }elseif ($med['frec_medc'] > $med['frecuencia']) {
                             ?>
                             class="#c0ca33 lime darken-1"
                             <?php
@@ -153,13 +200,30 @@
                     <td><input type="hidden" value="<?php echo $med['frec_actual'] ?>" ><?php echo $med['frec_actual'] ?></td>
                     <td>
                         <?php
-                        if($med['frecuencia'] <= $med['totalMediciones']){
+                        if($med['frec_medc'] >= $porcentaje && $med['frec_medc'] <= $med['frecuencia']){
                             ?>
-                            <input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" ><?php echo "Hoy"; ?>
+                            <input type="hidden" value="<?php echo $med['detprog_id'] ?>" ><?php echo $med['frecuencia']-$med['frec_medc']." ".$med['tmed_nombre'] ?>
                             <?php
-                        }elseif($med['frecuencia']>$med['totalMediciones']){
+                        }elseif($med['frec_medc'] < $porcentaje){
                             ?>
-                            <input type="hidden" value="<?php echo $med['totalMediciones'] ?>" ><?php echo $med['frecuencia']-$med['totalMediciones']." ".$med['tmed_nombre'] ?>
+                            <input type="hidden" value="<?php echo $med['detprog_id'] ?>" ><?php echo $med['frecuencia']-$med['frec_medc']." ".$med['tmed_nombre'] ?>
+                            <?php
+                        }elseif(($med['frecuencia']-$med['frec_medc'])<0){
+                                $objProgramacion = new ProgramacionModel();
+
+                                $frectual = 1+$med['frec_actual'];
+                                $amed = "UPDATE pag_det_programacion SET frec_actual=$frectual WHERE detprog_id=$med[detprog_id]";
+
+                                $fechaactual = date('d-m-Y');
+                                $nuevafec = "UPDATE pag_programacion_equipo "
+                                        . "SET proequi_fecha='$fechaactual' WHERE proequi_id=$med[proequi_id]";
+
+                                $objProgramacion->update($amed);
+                                $objProgramacion->update($nuevafec);
+                                // Cierra la conexion
+                                $objProgramacion->cerrar();
+                            ?>
+                            <input type="hidden" value="<?php echo $med['detprog_id'] ?>" ><?php echo "pendiente"; ?>
                             <?php
                         }
                         ?>

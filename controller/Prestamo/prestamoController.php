@@ -63,7 +63,7 @@ class PrestamoController {
     function listar() {
         $objPrestamo = new PrestamoModel();
 
-        $sql = "SELECT pher_fecha,jor_descripcion,pher_observaciones from pag_prestamo_herramienta,pag_jornada"
+        $sql = "SELECT pher_id,pher_fecha,jor_descripcion,pher_observaciones from pag_prestamo_herramienta,pag_jornada"
                 . " where pag_prestamo_herramienta.jor_id=pag_jornada.jor_id";
         $listar = $objPrestamo->select($sql);
 
