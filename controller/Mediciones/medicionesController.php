@@ -127,7 +127,8 @@ class MedicionesController {
         $sql = "select ptm.tmed_acronimo,ptm.tmed_id from pag_equipo pe,pag_tipo_medidor ptm,pag_det_equipo_medidor pdt where 
                 pdt.equi_id=pe.equi_id and
                 pdt.tmed_id=ptm.tmed_id AND
-                pdt.equi_id='$idEquipo'";
+                pdt.equi_id='$idEquipo' And "
+                ."ptm.tmed_tipo='Manual'";
         $medidores = $objMedidor->select($sql);
         $objEquipos->cerrar();
         include_once '../view/Mediciones/mediciones/ajaxAgregarEquipo.html.php';
