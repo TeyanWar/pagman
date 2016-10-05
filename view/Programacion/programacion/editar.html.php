@@ -1,7 +1,7 @@
 
 <div class="row">
 
-    <form  id="formulario1" class="col s12" data-url="<?php echo crearUrl("Programacion", "programacion", "postEditar", array('noVista'=>"noVista")) ?>" data-redirect="<?php echo crearUrl("Programacion", "programacion", "listar") ?>" method="post" novalidate>
+    <form  id="formulario1" class="col s12" data-url="<?php echo crearUrl("Programacion", "programacion", "postEditar", array('noVista'=>"noVista")) ?>" method="post" novalidate>
         <h5><?php echo $parametros[2]; ?></h5>
         <div class="errorTxt97"></div>
         <div class="errorTxt98"></div>
@@ -43,7 +43,7 @@
                         <i class="mdi-action-cached"></i></a></button>
             </div>
             <div class="input-field col s2 ">
-                <a class="btn-floating btn-large waves-effect waves-light red  modal-action modal-close" href="#" >
+                <a class="btn-floating btn-large waves-effect waves-light red  modal-action modal-close" >
                     <i class="mdi-content-clear"></i></a>
             </div>
         </div>

@@ -1,148 +1,150 @@
-<div class="row">
+<form id="form4" class="col s12" action="<?php echo crearUrl("usuarios", "usuarios", "postEditar") ?>" method="post" novalidate>
+    <h4 class="header2">Modificar Persona</h4>
 
-    <form id="form4" class="col s12" action="<?php echo crearUrl("usuarios", "usuarios", "postEditar") ?>" method="post" novalidate>
-        <h4 class="header2">Modificar Persona</h4>
-
-        <div class="row">
-            <div class="col s4">
-                <label for="departamento">(*) Departamento</label>
-                <select class="error browser-default" id="departamento" name="departamento" data-error=".errorTxt51">
-                    <option value="" disabled selected>-Departamento-</option>
-                    <?php
-                    foreach ($departamentos as $depto) {
-                        if ($depto['dept_id'] == $per['dept_id']) {
-                            echo "<option value='" . $depto["dept_id"] . "' selected>" . $depto["dept_nombre"] . "</option>";
-                        } else {
-                            echo "<option value='" . $depto["dept_id"] . "'>" . $depto["dept_nombre"] . "</option>";
-                        }
+    <div class="row">
+        <div class="input-field col s4">
+            <small style="color: #848484;">(*) Departamento</small>
+            <select class="error browser-default select2" id="departamento" name="departamento" data-error=".errorTxt51">
+                <option value="" disabled selected>-Departamento-</option>
+                <?php
+                foreach ($departamentos as $depto) {
+                    if ($depto['dept_id'] == $per['dept_id']) {
+                        echo "<option value='" . $depto["dept_id"] . "' selected>" . $depto["dept_nombre"] . "</option>";
+                    } else {
+                        echo "<option value='" . $depto["dept_id"] . "'>" . $depto["dept_nombre"] . "</option>";
                     }
-                    ?>
-                </select>
-                <div class="errorTxt51"></div>
-            </div>
+                }
+                ?>
+            </select>
+            <div class="errorTxt51"></div>
+        </div>
 
-            <div class="col s8">
-                <label for="centro">(*) Centro</label>
-                <select class="error browser-default" id="centro" name="centro" data-error=".errorTxt52">
-                    <option value="" disabled selected>-Seleccione Centro-</option>
-                    <?php
-                    foreach ($centros as $cen) {
-                        if ($cen['cen_id'] == $per['cen_id']) {
-                            echo "<option value='" . $cen["cen_id"] . "' selected>" . $cen["cen_nombre"] . "</option>";
-                        } else {
-                            echo "<option value='" . $cen["cen_id"] . "'>" . $cen["cen_nombre"] . "</option>";
-                        }
+        <div class="input-field col s8">
+            <small style="color: #848484;">(*) Centro</small>
+            <select class="error browser-default select2" id="centro" name="centro" data-error=".errorTxt52">
+                <option value="" disabled selected>-Seleccione Centro-</option>
+                <?php
+                foreach ($centros as $cen) {
+                    if ($cen['cen_id'] == $per['cen_id']) {
+                        echo "<option value='" . $cen["cen_id"] . "' selected>" . $cen["cen_nombre"] . "</option>";
+                    } else {
+                        echo "<option value='" . $cen["cen_id"] . "'>" . $cen["cen_nombre"] . "</option>";
                     }
-                    ?>
-                </select>
-                <div class="errorTxt52"></div>
-            </div>
-
+                }
+                ?>
+            </select>
+            <div class="errorTxt52"></div>
         </div>
 
-        <div class="row">
+    </div>
+    <br>
+    <div class="row">
 
-            <div class="col s4">
-                <label for="disabled">(*) Numero Identificacion</label>
-                <input disabled id="disabled" type="text" class="validate" length="10" value="<?php echo $per['per_id'] ?>">
-            </div>
-
-            <div class="col s4">
-                <label for="nombre">(*) Nombre</label>
-                <input id="nombre" type="text" class="validate" length="20" name="nombre" value="<?php echo $per['per_nombre'] ?>" data-error=".errorTxt54">
-                <div class="errorTxt54"></div>
-            </div>
-
-            <div class="col s4">
-                <label for="apellido">(*) Apellido</label>
-                <input id="apellido" type="text" class="validate" length="30" name="apellido" value="<?php echo $per['per_apellido'] ?>" data-error=".errorTxt55">
-                <div class="errorTxt55"></div>
-            </div>
+        <div class="col s4">
+            <label for="disabled">(*) Numero Identificacion</label>
+            <input disabled id="disabled" type="text" class="validate" length="10" value="<?php echo $per['per_id'] ?>">
         </div>
 
-        <div class="row">
-
-            <div class="col s4">
-                <label for="telefono">(*) Telefono</label>
-                <input id="telefono" type="tel" class="validate" length="10" name="telefono" value="<?php echo $per['per_telefono'] ?>" data-error=".errorTxt56">
-                <div class="errorTxt56"></div>
-            </div>
-
-            <div class="col s4">
-                <label for="movil">(*) Movil</label>
-                <input id="movil" type="text" class="validate" length="10" name="movil" value="<?php echo $per['per_movil'] ?>" data-error=".errorTxt57">
-                <div class="errorTxt57"></div>
-            </div>
-
-            <div class="col s4">
-                <label for="email">(*) Email</label>
-                <input id="email" type="email" class="validate" length="50" name="email" value="<?php echo $per['per_email'] ?>" data-error=".errorTxt58">
-                <div class="errorTxt58"></div>
-            </div>
+        <div class="col s4">
+            <label for="nombre">(*) Nombre</label>
+            <input id="nombre" type="text" class="validate" length="20" name="nombre" value="<?php echo $per['per_nombre'] ?>" data-error=".errorTxt54">
+            <div class="errorTxt54"></div>
         </div>
 
-        <div class="row">
+        <div class="col s4">
+            <label for="apellido">(*) Apellido</label>
+            <input id="apellido" type="text" class="validate" length="30" name="apellido" value="<?php echo $per['per_apellido'] ?>" data-error=".errorTxt55">
+            <div class="errorTxt55"></div>
+        </div>
+    </div>
 
-            <div class="col s4">
-                <label for="direccion">(*) Direccion</label>
-                <input id="direccion" type="text" class="validate" length="40" name="direccion" value="<?php echo $per['per_direccion'] ?>" data-error=".errorTxt59">
-                <div class="errorTxt59"></div>
-            </div>
+    <div class="row">
 
-            <div class="col s4">
-                <label for="valorhora">(*) Valor Hora</label>
-                <input id="valorhora" type="text" class="validate" length="10" name="valorhora" value="<?php echo $per['per_valor_hora'] ?>" data-error=".errorTxt60">
-                <div class="errorTxt60"></div>
-            </div>
+        <div class="col s4">
+            <label for="telefono">(*) Telefono</label>
+            <input id="telefono" type="tel" class="validate" length="10" name="telefono" value="<?php echo $per['per_telefono'] ?>" data-error=".errorTxt56">
+            <div class="errorTxt56"></div>
+        </div>
 
-            <div class="col s4">
-                <label for="cargo">(*) Cargo</label>
-                <select class="error browser-default" id="cargo" name="cargo" data-error=".errorTxt61">
-                    <option value="" disabled selected>-Seleccione Cargo-</option>
-                    <?php
-                    foreach ($cargos as $car) {
-                        if ($car['car_id'] == $per['car_id']) {
-                            echo "<option value='" . $car["car_id"] . "' selected>" . $car["car_descripcion"] . "</option>";
-                        } else {
-                            echo "<option value='" . $car["car_id"] . "'>" . $car["car_descripcion"] . "</option>";
-                        }
+        <div class="col s4">
+            <label for="movil">(*) Movil</label>
+            <input id="movil" type="text" class="validate" length="10" name="movil" value="<?php echo $per['per_movil'] ?>" data-error=".errorTxt57">
+            <div class="errorTxt57"></div>
+        </div>
+
+        <div class="col s4">
+            <label for="email">(*) Email</label>
+            <input id="email" type="email" class="validate" length="50" name="email" value="<?php echo $per['per_email'] ?>" data-error=".errorTxt58">
+            <div class="errorTxt58"></div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col s4">
+            <br>
+            <label for="direccion">(*) Direccion</label>
+            <input id="direccion" type="text" class="validate" length="40" name="direccion" value="<?php echo $per['per_direccion'] ?>" data-error=".errorTxt59">
+            <div class="errorTxt59"></div>
+        </div>
+
+        <div class="col s4">
+            <br>
+            <label for="valorhora">(*) Valor Hora</label>
+            <input id="valorhora" type="text" class="validate" length="10" name="valorhora" value="<?php echo $per['per_valor_hora'] ?>" data-error=".errorTxt60">
+            <div class="errorTxt60"></div>
+        </div>
+
+        <div class="input-field col s4">
+            <small style="color: #848484;">(*) Cargo</small>
+            <select class="error browser-default select2" id="cargo" name="cargo" data-error=".errorTxt61">
+                <option value="" disabled selected>-Seleccione Cargo-</option>
+                <?php
+                foreach ($cargos as $car) {
+                    if ($car['car_id'] == $per['car_id']) {
+                        echo "<option value='" . $car["car_id"] . "' selected>" . $car["car_descripcion"] . "</option>";
+                    } else {
+                        echo "<option value='" . $car["car_id"] . "'>" . $car["car_descripcion"] . "</option>";
                     }
-                    ?>
-                </select>
-                <div class="errorTxt61"></div>
-            </div>
-
+                }
+                ?>
+            </select>
+            <div class="errorTxt61"></div>
         </div>
 
-        <!-- Campo para almacenar el id del equipo -->
-        <input type="hidden" name="id" value="<?php echo $per['per_id'] ?>">
+    </div>
 
-        <div class="row">
+    <!-- Campo para almacenar el id del equipo -->
+    <input type="hidden" name="id" value="<?php echo $per['per_id'] ?>">
 
-            <div class="input-field col s4 offset-s4">
-                <div class="input-field col s12">
-                    <button class="btn cyan waves-effect waves-light teal" type="submit"><i class="mdi-action-perm-identity"></i>Guardar Cambios</button>
-                </div>
+    <div class="row">
+
+        <div class="input-field col s5 offset-s5">
+            <div class="input-field col s12">
+                <button class="btn cyan waves-effect waves-light teal" type="submit"><i class="mdi-action-perm-identity"></i>Guardar</button>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>
 
 <style>
     #modalUpdate{
         top: 2% !important;
         max-height: 100%;
-        height: 80%;
+        height: 86%;
+        width: 900px;
     }
 </style>
 
 <script>
+    $(".select2").select2({});
+    
     $(document).ready(function () {
         $('select').material_select('destroy');
         $('select').material_select();
       
       $(document).on('click', '.modal-close', function () {    
-      $("#mod").closeModal();
+      $("#modalUpdate").closeModal();
     });   
 
     });

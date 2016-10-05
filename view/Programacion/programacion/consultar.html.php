@@ -49,10 +49,7 @@
    
 </div>
 </div>
-<div id="tabla">
-    
-    
-  <!--  paginador ----->
-    <div id="datos"></div>
-    <div id="paginacion"></div>
+
+<div class="card-panel">
+  <div id="tabla"></div>
 </div>

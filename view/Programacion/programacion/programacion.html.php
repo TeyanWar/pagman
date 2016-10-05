@@ -35,59 +35,58 @@
     </div>
     <div class='row'>
         <div class="input-field col s4">
-            <select id="componente">
+            <small style="color: #848484;">Componente (opcional)</small>
+            <select id="componente" class="select2">
                 <option value="INDEFINIDO">(Vacio)</option>
                 <?php foreach ($componentes as $componente) { ?>
                     <option  ><?php echo $componente['comp_descripcion']; ?></option>
                 <?php } ?>
 
             </select>
-            <label>Componente</label>
         </div>
         <div class="input-field col s4">
-            <select id="tra">
+            <small style="color: #848484;">(*) Tipo de Trabajo</small>
+            <select id="tra" class="select2">
                 <?php foreach ($tipos as $tipo) { ?>
                     <option><?php echo $tipo['ttra_descripcion']; ?></option>
                 <?php } ?>
 
             </select>
-            <label>(*) Tipo de Trabajo</label>
         </div>
         
         <div class="input-field col s4">
-            <select id="tarea">
+            <small style="color: #848484;">(*) Tarea</small>
+            <select id="tarea" class="select2">
                 <?php foreach ($tareas as $tarea) { ?>
                     <option><?php echo $tarea['tar_nombre']; ?></option>
                 <?php } ?>
 
             </select>
-            <label>(*) Tarea</label>
-
         </div>        
         
         
     </div>
     <div class='row'>
         <div class="input-field col s4">
-            <label for="hora">(*) Duracion horas</label>
+            <small style="color: #848484;" for="hora">(*) Duracion horas</small>
             <input type="text" id="hora" name="hora" data-error=".errorTxt91">
             <div class="errorTxt91"></div>
         </div>
         
         <div class=" input-field col s4">
-              <label for="frecuencia">(*) Frecuencia</label>
+              <small style="color: #848484;" for="frecuencia">(*) Frecuencia</small>
               <input type="text" id="frecuencia" name="frecuencia" data-error=".errorTxt92">
             <div class="errorTxt92"></div>
         </div>
         
         <div class="input-field col s4">
-            <select id="med">
+            <small style="color: #848484;">(*) Medidores</small>
+            <select id="med" class="select2">
                 <?php foreach ($medidores as $medidor) { ?>
                     <option  ><?php echo $medidor['tmed_nombre']; ?></option>
                 <?php } ?>
 
             </select>
-            <label>(*) Medidores</label>
         </div>
         
     </div>
@@ -95,14 +94,12 @@
 
   
         <div class="input-field col s4">
-            <select id="prio">
+            <small style="color: #848484;">(*) Prioridad de trabajo</small>
+            <select id="prio" class="select2">
                 <?php foreach ($prioridades as $prio) { ?>
                     <option><?php echo $prio['priotra_descripcion']; ?></option>
                 <?php } ?>
-
             </select>
-            <label>(*) Prioridad de trabajo</label>
-
         </div>
       
         <div class="input-field offset-s4 col s2 ">
@@ -128,13 +125,15 @@
 </style>
 
 <script>
+    $(".select2").select2({});
+    
     $(document).ready(function () {
         $('select').material_select('destroy');
         $('select').material_select();
       
       $(document).on('click', '.modal-close', function () {    
-      $("#mod").closeModal();
-    });   
+        $("#mod").closeModal();
+      });   
 
     });
 </script>

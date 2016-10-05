@@ -29,7 +29,6 @@ $(document).ready(function () {
     $(document).on('submit', '#formulario1', function (e) {
         e.preventDefault();
         var url = $('#formulario1').attr("data-url");
-        var redirect = $('#formulario1').attr("data-redirect");
         $.ajax({
             type: "POST",
             url: url,
@@ -38,19 +37,18 @@ $(document).ready(function () {
 
             if (respuesta == true) {
                 Materialize.toast("<i class= 'material-icons' ></i> Actualizacion exitosa.", 2000, 'rounded col green');
-                setTimeout(
-                    function () {
-                        window.location.href = (redirect);
-                    }, 1000);
             }
             else {
                 Materialize.toast("<i class= 'material-icons' ></i> Error en la actualización.", 3000, 'rounded col red');
-                setTimeout(
-                        function () {
-                            window.location.href = (redirect);
-                        }, 1000);
             }
+        }).fail(function () {
+            Materialize.toast("<i class='material-icons'>warning</i>", 4000, 'blue');
         });
+        setTimeout(
+            function () {
+                $(".modal").closeModal();
+                $('#pro').trigger('keyup');
+            }, 1400);
     });
     
     //------ paginador ------------------

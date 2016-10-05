@@ -15,33 +15,34 @@
 
         <div class="row">
 
-            <div class="input-field col s4">
+            <div class="input-field col s6">
                 <input id="login" type="text" class="validate" length="20" name="login" data-error=".errorTxt91">
                 <label for="first_name">(*) Login</label>
                 <div class="errorTxt91"></div>
             </div>
 
-            <div class="input-field col s4">
+            <div class="input-field col s6">
                 <input id="clave" type="password" class="validate" length="20" name="clave" data-error=".errorTxt92">
                 <label for="password">(*) Clave</label>
                 <div class="errorTxt92"></div>
             </div>
 
-            <div class="col s4">
-                <label>(*) Estado</label>
-                <select class="error browser-default" id="estado" name="estado" data-error=".errorTxt93">
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <small style="color: #848484;">(*) Estado</small>
+                <select class="error browser-default select2" id="estado" name="estado" data-error=".errorTxt93">
                     <option value="" disabled selected>Seleccione</option>
                     <option value="activo">activo</option>
                     <option value="desactivado">desactivado</option>
                 </select>
                 <div class="errorTxt93"></div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col s4">
-                <label>(*) Rol/perfil</label>
-                <select class="error browser-default" id="perfil" name="perfil" data-error=".errorTxt94">
+            
+            <div class="input-field col s6">
+                <small style="color: #848484;">(*) Rol/perfil</small>
+                <select class="error browser-default select2" id="perfil" name="perfil" data-error=".errorTxt94">
                     <option value="" disabled selected>Seleccione</option>
                     <?php 
                         foreach($perfiles as $perfil){
@@ -54,21 +55,24 @@
         </div>
 
         <input type="hidden" name="idper" value="<?php echo $usuar['per_id'] ?>">
-
+        
         <div class="row">
-            <button name="action" type="submit" class="btn teal waves-effect waves-light right submit_ot animated infinite rubberBand">Registrar
-                <i class="mdi-content-add left"> </i>
-            </button>
+
+            <div class="input-field col s4 offset-s4">
+                <div class="input-field col s12">
+                    <button name="action" type="submit" class="btn teal waves-effect waves-light right submit_ot animated infinite rubberBand">Registrar
+                        <i class="mdi-content-add left"> </i>
+                    </button>
+                </div>
+            </div>
         </div>
+        
     </form>
 
 </div>
 
 <script>
-    $("select").material_select();
-</script>
-
-<script>
+    $(".select2").select2({});
     //----------------- validaciones ---------------
     
     /* Incluimos un método para validar el campo nombre */
