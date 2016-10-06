@@ -69,19 +69,19 @@
     <div id="modalDetalle" class="modal modal-fixed-footer">
         <div class="modal-content"></div>
         <div class="modal-footer">
-            <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
+            <a class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
         </div>
     </div>
     <div id="modalUpdate" class="modal modal-fixed-footer">
         <div class="modal-content"></div>
         <div class="modal-footer">
-            <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           
+            <a class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>           
         </div>
     </div>
     <div id="modalAgregar" class="modal modal-fixed-footer">
         <div class="modal-content"></div>
         <div class="modal-footer">
-            <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                    
+            <a class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                    
         </div>
     </div>
 </div>

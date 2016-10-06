@@ -139,18 +139,20 @@
                                 <h4 class="header2">Registro Usuario</h4>
                                 <div class="row">
 
-                                    <div class="input-field col s4">
+                                    <div class="input-field col s6">
                                         <input id="name4" type="text" class="validate" length="20" name="login">
                                         <label for="first_name">(*) Login</label>
                                     </div>
 
-                                    <div class="input-field col s4">
+                                    <div class="input-field col s6">
                                         <input id="password5" type="password" class="validate" length="30" name="clave">
                                         <label for="password">(*) Clave</label>
                                     </div>
-                                    
-                                    <div class="col s4">
-                                        <label>(*) Rol/perfil</label>
+
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6">
+                                        <small style="color: #848484;">(*) Rol/perfil</small>
                                         <select class="error browser-default select2" name="perfil">
                                             <option value="" disabled selected>Seleccione</option>
                                             <option value="">(Vacio)</option>
@@ -161,11 +163,9 @@
                                             ?>
                                         </select>
                                     </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col s4">
-                                        <label>(*) Estado</label>
+                                    
+                                    <div class="input-field col s6">
+                                        <small style="color: #848484;">(*) Estado</small>
                                         <select class="error browser-default select2" name="estado">
                                             <option value="" disabled selected>Seleccione</option>
                                             <option value="">(Vacio)</option>
@@ -177,7 +177,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+                                <a href="#!" id="m" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
                             </div>
                         </div>
 
@@ -198,5 +198,14 @@
 </div>
 
 <script>
-    $("select").material_select();
+    $(".select2").select2({});
+    
+    $(document).ready(function () {
+        $('select').material_select('destroy');
+        $('select').material_select();
+      
+      $(document).on('click', '.modal-close', function () {    
+        $("#m").closeModal();
+      });
+    });
 </script>
