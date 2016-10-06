@@ -272,6 +272,16 @@ class OtController {
             $idsql = "select max(ot_id) as ot_id from pag_orden_trabajo";
 
             $otid = $objDetalle->find($idsql);//------capturamos el codigo de la ot
+            
+            //--------si se registra a partir de una solicitud------------
+            if(!empty($_POST['id_solicitud'])){
+                $solicitudid = $_POST['id_solicitud'];
+
+                $camestado = "UPDATE pag_solicitud_servicio SET est_id=8, estado=NULL 
+                 WHERE pag_solicitud_servicio.sserv_id=" . $solicitudid;
+
+                $objDetalle->update($camestado);
+            }
             //--------------componete----------------
             if(!empty($_POST['componente'])){
                 $idcomps = $_POST['componente'];
