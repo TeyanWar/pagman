@@ -90,7 +90,7 @@
                 <?php if(isset($parametros[1])){ ?>
                     <div class="col s4">
                         <label>Componentes (opcional)</label> 
-                        <select name="componente[]" class="error browser-default select2" >
+                        <select name="componente[]" class="error browser-default select2" multiple="" >
                             <option value="" disabled selected>Seleccione</option>
                             <?php foreach ($selectcomp as $comp) { ?>
                                 <option value="<?php echo $comp['comp_id'] ?>"><?php echo $comp['comp_descripcion'] ?></option>
