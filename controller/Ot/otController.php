@@ -152,6 +152,13 @@ class OtController {
             $sql = "SELECT * FROM pag_equipo pe, pag_solicitud_servicio pss WHERE pss.equi_id=pe.equi_id AND pss.sserv_id=$id_solicitud";
             $equipos = $objEquipos->select($sql);
             //select equipos
+            //select componentes del equipo de solicitud
+            $sqlcomp = "SELECT pag_componente.comp_id,comp_descripcion FROM pag_equipo,pag_equipo_componente,pag_componente "
+                . "WHERE pag_equipo_componente.equi_id=pag_equipo.equi_id "
+                . "AND pag_equipo_componente.comp_id=pag_componente.comp_id "
+                . "AND pag_equipo.equi_id='" . $equipos[0]['equi_id'] . "'";
+
+            $selectcomp = $objEquipos->select($sqlcomp);
 
             $sql = "SELECT * FROM pag_tipo_falla tf, pag_solicitud_servicio pss WHERE pss.tfa_id=tf.tfa_id AND pss.sserv_id=$id_solicitud";
             $fallas = $objTipoFalla->select($sql);
