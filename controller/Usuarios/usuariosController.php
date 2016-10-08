@@ -122,22 +122,22 @@ class UsuariosController {
         if ($comprobar['per_tipo']==='usuario del sistema') {
 
             if (!isset($_POST['login']) or $_POST['login'] == "") {
-                $errores[] = '<strong>Para editar usuario el campo <code><b>login</b></code> es obligatorio</strong>';
+                $errores[] = 'Para editar usuario el campo <code><b>login</b></code> es obligatorio';
             }
             
             if(!empty($_POST['clave'])){
                 
                 if (isset($_POST['clave']) && !preg_match($NumerosLetras, $_POST['clave'])) {
-                    $errores[] = '<strong>(*) Para editar usuario el campo <code><b>clave</b></code> debe contener numeros o letras</strong>';
+                    $errores[] = 'Para editar usuario el campo <code><b>clave</b></code> debe contener numeros o letras';
                 }
             }
 
             if (!isset($_POST['perfil']) or $_POST['perfil'] == "") {
-                $errores[] = '<strong>(*) Para editar usuario el campo <code><b>perfil</b></code> es obligatorio</strong>';
+                $errores[] = 'Para editar usuario el campo <code><b>perfil</b></code> es obligatorio';
             }
             
             if (!isset($_POST['estado']) or $_POST['estado'] == "") {
-                $errores[] = '<strong>Para editar usuario el campo <code><b>Estado</b></code> es obligatorio</strong>';
+                $errores[] = 'Para editar usuario el campo <code><b>Estado</b></code> es obligatorio';
             }
 
             if (!isset($_POST['departamento']) or $_POST['departamento'] == "") {
@@ -163,18 +163,18 @@ class UsuariosController {
                 $errores[] = 'Para editar usuario el campo <code><b>nombre</b></code> es obligatorio';
             }
             if (isset($_POST['nombre']) && !preg_match($patronLetras, $_POST['nombre'])) {
-                $errores[] = '(*) Para editar usuario el campo <code><b>nombre</b></code> debe contener letras unicamente';
+                $errores[] = 'Para editar usuario el campo <code><b>nombre</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['apellido']) or $_POST['apellido'] == "") {
-                $errores[] = '(*) Para editar usuario el campo <code><b>apellido</b></code> es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>apellido</b></code> es obligatorio';
             }
             if (isset($_POST['apellido']) && !preg_match($patronLetras, $_POST['apellido'])) {
-                $errores[] = '(*) Para editar usuario el campo <code><b>apellido</b></code> debe contener letras unicamente';
+                $errores[] = 'Para editar usuario el campo <code><b>apellido</b></code> debe contener letras unicamente';
             }
 
             if (!isset($_POST['telefono']) or $_POST['telefono'] == "") {
-                $errores[] = '(*) Para editar usuario el campo <code><b>telefono</b></code> es obligatorio';
+                $errores[] = 'Para editar usuario el campo <code><b>telefono</b></code> es obligatorio';
             }
             if (isset($_POST['telefono']) && !preg_match($patronNumeros, $_POST['telefono'])) {
                 $errores[] = 'Para editar usuario el campo <code><b>telefono</b></code> debe contener numeros unicamente';
@@ -210,7 +210,7 @@ class UsuariosController {
 
             if (count($errores) > 0) {
                 setErrores($errores);
-                redirect(crearUrl("usuarios", "usuarios", "listar"));
+                echo getErrores();
                 //----------------fin validaciones-----------------
             } else {
 
@@ -267,6 +267,7 @@ class UsuariosController {
                         
                     }
                 }
+                echo true;
             }
         } else {
 
@@ -340,7 +341,7 @@ class UsuariosController {
 
             if (count($errores) > 0) {
                 setErrores($errores);
-                redirect(crearUrl("usuarios", "usuarios", "listar"));
+                echo getErrores();
                 //----------------fin validaciones-----------------
             } else {
 
@@ -360,13 +361,12 @@ class UsuariosController {
                         . "WHERE per_id='$ed'";
 
                 $respuesta2 = $objUsuarios->update($sql);
+                
+                echo true;
             }
         }
-
         // Cierra la conexion
         $objUsuarios->cerrar();
-
-        redirect(crearUrl("usuarios", "usuarios", "listar"));
     }
 
     function listar() {

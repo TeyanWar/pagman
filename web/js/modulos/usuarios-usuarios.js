@@ -24,6 +24,33 @@ $(document).ready(function () {
             }
         });
     });
+    
+    //------------mensaje respuesta actualizacion-----------------------
+    $(document).on('submit', '#form2', function (e) {
+        e.preventDefault();
+        var url = $('#form2').attr("data-url");
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $(this).serialize()
+        }).done(function (respuesta) {
+
+            if (respuesta == true) {
+                Materialize.toast("<i class= 'material-icons' ></i> Actualizacion exitosa.", 2000, 'rounded col green');
+                setTimeout(
+                    function () {
+                        $("#modalUpdate").closeModal();
+                        $('#cate').trigger('keyup');
+                    }, 1400);
+            }
+            else {
+                Materialize.toast("<i class= 'material-icons' ></i> Error en la actualización.", 3000, 'rounded col red');
+                $('#cont_errors_ajax').html(respuesta);
+                $('#cont_errors_ajax').css('display','block');
+                $('.modal-content').animate({scrollTop:$('#cont_errors_ajax').position().top}, 'slow');
+            }
+        });
+    });
 
     //----------------- validaciones ---------------
     

@@ -26,9 +26,9 @@ $(document).ready(function () {
     });
 
     //------------mensaje respuesta actualizacion-----------------------
-    $(document).on('submit', '#formulario1', function (e) {
+    $(document).on('submit', '#editform', function (e) {
         e.preventDefault();
-        var url = $('#formulario1').attr("data-url");
+        var url = $('#editform').attr("data-url");
         $.ajax({
             type: "POST",
             url: url,
@@ -37,18 +37,19 @@ $(document).ready(function () {
 
             if (respuesta == true) {
                 Materialize.toast("<i class= 'material-icons' ></i> Actualizacion exitosa.", 2000, 'rounded col green');
+                setTimeout(
+                    function () {
+                        $("#edit").closeModal();
+                        $('#pro').trigger('keyup');
+                    }, 1400);
             }
             else {
                 Materialize.toast("<i class= 'material-icons' ></i> Error en la actualización.", 3000, 'rounded col red');
+                $('#cont_errors_ajax').html(respuesta);
+                $('#cont_errors_ajax').css('display','block');
+                $('.modal-content').animate({scrollTop:$('#cont_errors_ajax').position().top}, 'slow');
             }
-        }).fail(function () {
-            Materialize.toast("<i class='material-icons'>warning</i>", 4000, 'blue');
         });
-        setTimeout(
-            function () {
-                $(".modal").closeModal();
-                $('#pro').trigger('keyup');
-            }, 1400);
     });
     
     //------ paginador ------------------
