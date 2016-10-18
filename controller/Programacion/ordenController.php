@@ -110,7 +110,8 @@ class OrdenController {
         $sql3 = "SELECT tmed_id,tmed_nombre FROM pag_tipo_medidor";
         $tmedidores = $objOrden->select($sql3);
 
-        $sql4 = "SELECT per_id,CONCAT(per_nombre, ' ', per_apellido) As nombrecom FROM pag_persona";
+        $sql4 = "SELECT pag_persona.per_id,CONCAT(per_nombre, ' ', per_apellido) As nombrecom,pag_cargo.car_descripcion "
+                . "FROM pag_persona,pag_cargo WHERE pag_persona.car_id=pag_cargo.car_id";
         $encargados = $objOrden->select($sql4);
 
         // Cierra la conexion
