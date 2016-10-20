@@ -77,7 +77,7 @@ class campoPersonalizadoController {
 
             $objCP->cerrar();
         }
-        redirect(crearUrl('equipos', 'campoPersonalizado', 'listar'));
+        echo getRespuestaAccion('listar');
     }
 
     public function listar() {
