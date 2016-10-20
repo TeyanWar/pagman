@@ -77,7 +77,7 @@ class campoPersonalizadoController {
 
             $objCP->cerrar();
         }
-        echo getRespuestaAccion('listar');
+        redirect(crearUrl('equipos', 'campoPersonalizado', 'listar'));
     }
 
     public function listar() {
@@ -125,18 +125,18 @@ class campoPersonalizadoController {
         if (!isset($_POST['nombreCP']) or $_POST['nombreCP'] == "") {
             $errores[] = "El campo <code><b>Nombre campo personalizado</b></code>No puede estar vacío, por favor ingresa uno, recuerde seguir el patrón <code>CP0XXXX</code>";
         }
-        if(count($errores)>0){
+        if (count($errores) > 0) {
             setErrores($errores);
-        }else{
+        } else {
             $sql = "SELECT * FROM pag_campos_personalizados WHERE cp_id='" . $_POST['codigoCP'] . "'";
             //die(print_r($sql));
             $consulta = $objCp->select($sql);
             //die(print_r($consulta));
-    //        foreach ($consulta as $codigo) {
-    //            if ($codigoCP = $codigo['cp_id']) {
-    //                
-    //            }
-    //        }
+            //        foreach ($consulta as $codigo) {
+            //            if ($codigoCP = $codigo['cp_id']) {
+            //                
+            //            }
+            //        }
 
             $codigoCP = $_POST['codigoCP'];
             //die(print_r($codigoCP));
