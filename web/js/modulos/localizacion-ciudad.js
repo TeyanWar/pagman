@@ -1,40 +1,41 @@
 $(document).ready(function () {
      //consulta Ciudad
-    $("#busquedaAjax5").keyup(function () {
-        var usuario = $("#busquedaAjax5").val();
+    $("#buscarCiu").keyup(function () {
+        var ciudad = $("#buscarCiu").val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaciudad=" + usuario,
+            data: "busquedaciudad=" + ciudad,
             success: function (data) {
-                $("#tabla5").html(data);
+                $("#buscarCiudad").html(data);
             }
         });
     });
 
-    $("#busquedaAjax5").trigger("keyup");
+    $("#buscarCiu").trigger("keyup");
 
-    $(document).on("click", ".ver-detalle5", function () {
+     $(document).on('click', ".modal-trigger", function () {
+        var url = $(this).attr("data-url");
+//        alert(url);
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+//                alert(data);
+                $("#detalleCiu > .modal-content").html(data);
+                
+            }
+        });
+    });
+    $(document).on("click", ".editar", function () {
         var url = $(this).attr("data-url");
 
         $.ajax({
             url: url,
             type: "get",
             success: function (data) {
-                $("#modalDetalle5 > .modal-content").html(data);
-            }
-        });
-    });
-
-    $(document).on("click", ".editar5", function () {
-        var url = $(this).attr("data-url");
-
-        $.ajax({
-            url: url,
-            type: "get",
-            success: function (data) {
-                $("#modalUpdate5 > .modal-content").html(data);
+                $("#editarCiu > .modal-content").html(data);
             }
         });
     });

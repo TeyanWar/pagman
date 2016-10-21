@@ -177,16 +177,17 @@ class CiudadController {
     }
 
     function Consulta() {
-        include_once("../view/Localizacion/ciudad/consulta.html.php");
+        include_once("../view/Localizacion/ciudad/consultar.html.php");
     }
 
     function buscarAjax() {
         $objCiudad = new CiudadModel();
 
-        $ciudad = $_POST['buscarCiu'];
+        $ciudad = $_POST['busquedaciudad'];
 
         $sql = "SELECT * FROM pag_ciudad WHERE estado IS NULL  AND (ciud_nombre LIKE '%" . $ciudad . "%' or ciud_id LIKE '%" . $ciudad . "%') ORDER BY ciud_nombre ASC";
         $ciudades = $objCiudad->select($sql);
+        
 
         //aqui empieza el paginado       
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);

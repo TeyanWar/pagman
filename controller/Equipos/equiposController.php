@@ -404,6 +404,7 @@ class EquiposController {
 
             //die(print_r($_FILES));
             $fotoEquipo = $_FILES['ruta']['name'];
+            die(print_r($_FILES));
             //Asigno el nombre de la foto segun numero de placa
             $equipo_foto = "Equipo-" . $fotoEquipo;
             //Hago un explode para capturar la extension de IMAGEN
@@ -426,7 +427,7 @@ class EquiposController {
             }
 
             $area_id = $_POST['area_id'];
-            $tequi_id = $_POST['tequi_id'];
+            //$tequi_id = $_POST['tequi_id'];
 
             //Borramos de la tabla Equipo el siguiente campo tmed_id, ya que eso va en la tabla
             //Detalla nombrada pag_det_equipo_medidor

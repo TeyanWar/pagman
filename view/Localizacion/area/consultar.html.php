@@ -48,15 +48,10 @@
 
         <div id="editarCiu" class="modal">
             <div class="modal-content"></div>
-            <div class="modal-footer">
-                <a class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
-            </div>
         </div>
 
         <div id="detalleCiu" class="modal">
-            <div class="modal-content">
-                HOLA
-            </div>
+            <div class="modal-content"></div>
         </div>
         <?php if (isset($_REQUEST['pagina'])) { ?>
             <input type="hidden" id="pagina" name="pagina" value="<?php echo $_REQUEST['pagina'] ?>">

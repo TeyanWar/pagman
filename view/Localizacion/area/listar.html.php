@@ -11,15 +11,15 @@
             </thead>
             <tbody>
                 <?php
-                foreach ($ciudades as $ciudad) {
+                foreach ($areas as $area) {
                     ?>
 
                     <tr>
                         <td><?php echo $paginado->count++ ?></td>
     <!--                        <td><?php //echo $depto['dept_id']          ?></td>-->
-                        <td><?php echo $ciudad['ciud_nombre'] ?></td>
-                        <td><a class="btn-floating modal-trigger  waves-effect waves-light teal editar" 
-                               href="#editarCiu" data-url="<?php echo crearUrl('localizacion', 'ciudad', 'editar', array('noVista' => "noVista", 'id' => $ciudad['ciud_id'])) ?>">
+                        <td><?php echo $area['area_descripcion'] ?></td>
+                        <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" 
+                               href="#editarDepto" data-url="<?php echo crearUrl('localizacion', 'ciudad', 'editar', array('noVista' => "noVista", 'id' => $ciudad['ciud_id'])) ?>">
                                 <i class="mdi-content-create small"></i></a>
                         </td>                        
                         <td>
@@ -39,7 +39,7 @@
 
     <script type="text/javascript">
         $('.modal-trigger').leanModal({
-            dismissible: false , // Modal can be dismissed by clicking outside of the modal
+            dismissible: true, // Modal can be dismissed by clicking outside of the modal
             opacity: .5, // Opacity of modal background
             in_duration: 300, // Transition in duration
             out_duration: 200, // Transition out duration
