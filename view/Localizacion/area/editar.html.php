@@ -1,32 +1,18 @@
 <div class="row">
-    <form class="col s12"  action="<?php echo crearUrl("localizacion", "ciudad", "postEditar") ?>" method="post">
+    <form class="col s12"  action="<?php echo crearUrl("localizacion", "area", "postEditar") ?>" method="post">
 
         <center> <h5> Editar ciudad </h5></center>
         <br>
         <br>
 
         <div class="input-field col s6">
-            <input  readonly=""type="text" id="ciud_id" class="validate" name="ciud_id" value="<?php echo $ciudades['ciud_id']; ?>">
-            <label  style="color:#448aff;" for="ciud_id" class="active" >Codigo Ciudad:</label>
+            <input  readonly=""type="text" id="ciud_id" class="validate" name="area_id" value="<?php echo $area['area_id']; ?>">
+            <label  style="color:#448aff;" for="ciud_id" class="active" >Codigo Area:</label>
 
         </div>
         <div class="input-field col s6">
-            <input  type="text" id="ciud_nombre" class="validate" name="ciud_nombre" value="<?php echo $ciudades['ciud_nombre']; ?>">
-            <label  style="color:#448aff;" for="ciud_nombre" class="active" >Nombre Ciudad:</label>
-
-        </div>
-        <div class="input-field col s12">
-             <select class="select2"  name="dept_id">
-                <?php 
-                      foreach($departamentos as $departamento){
-                          if($departamento['dept_id']== $ciudades['dept_id']){
-                              echo "<option value='".$departamento["dept_id"]."' selected>". $departamento["dept_nombre"] . "</option>";
-                          }else{
-                              echo "<option value='".$departamento["dept_id"]."'>". $departamento["dept_nombre"] . "</option>";
-                          }
-                      }
-                  ?>
-            </select>
+            <input  type="text" id="ciud_nombre" class="validate" name="area_descripcion" value="<?php echo $area['area_descripcion']; ?>">
+            <label  style="color:#448aff;" for="ciud_nombre" class="active" >Nombre Area:</label>
 
         </div>
         <div class="col s12 m8 offset-m2 l6 offset-l3">

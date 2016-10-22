@@ -403,28 +403,27 @@ class EquiposController {
             $cen_id = $_POST['cen_id'];
 
             //die(print_r($_FILES));
-            $fotoEquipo = $_FILES['ruta']['name'];
-            die(print_r($_FILES));
+            //$fotoEquipo = $_FILES['ruta']['name'];
             //Asigno el nombre de la foto segun numero de placa
-            $equipo_foto = "Equipo-" . $fotoEquipo;
+            //$equipo_foto = "Equipo-" . $fotoEquipo;
             //Hago un explode para capturar la extension de IMAGEN
-            $fotoEquipo = explode(".", $_FILES['ruta']['name']);
+            //$fotoEquipo = explode(".", $_FILES['ruta']['name']);
             //die(print_r($fotoHerramienta));
             //Nombre de la foto con la extension capturada
-            $nombreFoto = $equipo_foto . "." . end($fotoEquipo);
+            //$nombreFoto = $equipo_foto . "." . end($fotoEquipo);
             //die($nombreFoto);
 
-            $ruta = $_FILES['ruta']['tmp_name'];
+            //$ruta = $_FILES['ruta']['tmp_name'];
             //Capturo la ruta donde guardare la Imagen
-            $rutaydoc = getDocumentRoot() . "/web/media/img/Equipos/" . $nombreFoto;
+            //$rutaydoc = getDocumentRoot() . "/web/media/img/Equipos/" . $nombreFoto;
 
-            if ($ruta <> "") {
-                if (move_uploaded_file($ruta, $rutaydoc)) {
+            //if ($ruta <> "") {
+              //  if (move_uploaded_file($ruta, $rutaydoc)) {
                     
-                }
-            } else {
-                $rutaydoc = NULL;
-            }
+             //   }
+            //} else {
+              //  $rutaydoc = NULL;
+            //}
 
             $area_id = $_POST['area_id'];
             //$tequi_id = $_POST['tequi_id'];
@@ -437,7 +436,7 @@ class EquiposController {
                     . "equi_nombre, "
                     . "est_id, "
                     . "cen_id, "
-                    . "equi_foto, "
+                    //. "equi_foto, "
                     . "equi_valor_tmed, " //Campo Nuevo en la BD, aun no se coloca en el formulario, (¿Para que es?)
                     . "equi_fabricante, "
                     . "equi_marca, "
@@ -447,14 +446,13 @@ class EquiposController {
                     . "equi_fecha_compra, "
                     . "equi_fecha_instalacion, "
                     . "equi_vence_garantia, "
-                    . "area_id, "
-                    . "tequi_id ) VALUES("
+                    . "area_id) VALUES("
                     . "'$equi_id', "
                     . "$per_id, "
                     . "'$equi_nombre', "
                     . "$est_id, "
                     . "$cen_id, "
-                    . "'$nombreFoto', "
+                    //. "'$nombreFoto', "
                     . "12000, " //Valo colocado para que ingrese a la BD, no viene del formulario, esta QUEMADO. (equi_valor_tmed)
                     . "'$equi_fabricante', "
                     . "'$equi_marca', "
@@ -464,11 +462,8 @@ class EquiposController {
                     . "'$equi_fecha_compra', "
                     . "'$equi_fecha_instalacion', "
                     . "'$equi_vence_garantia', "
-                    . "$area_id, "
-                    . "'$tequi_id' )";
+                    . "$area_id,)";
             //die(print_r("<br>" . $sqlEquipo. "<br>"));
-
-
             $objEquipos = new EquiposModel();
 
             $insertar = $objEquipos->insertar($sqlEquipo);

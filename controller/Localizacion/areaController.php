@@ -5,61 +5,41 @@ include_once('../model/Localizacion/areaModel.php');
 class areaController {
 
     function editar($parametros = false) {
-        $objCentro = new centroModel();
+        $objArea = new areaModel();
 
         $id = $parametros[1];
 
-       $sql = "SELECT * from "
-                . "pag_centro,pag_regional "
-                . "WHERE pag_centro.reg_id=pag_regional.reg_id and cen_id=$id";
-
+        $sql="select * from pag_area where area_id=$id";
         
-        $centro = $objCentro->find($sql);
+        $area = $objArea->find($sql);
+        
+        $objArea->cerrar();
 
-        $sql2 = "SELECT * FROM pag_regional";
-        $regionales = $objCentro->select($sql2);
-
-        // Cierra la conexion
-        $objCentro->cerrar();
-
-        include_once("../view/Localizacion/centro/editar.html.php");
+        include_once("../view/Localizacion/area/editar.html.php");
     }
 
     function postEditar() {
 
-        $cen_id = $_POST['cen_id'];
-        $cen_nombre = $_POST['cen_nombre'];
-        $cen_dir = $_POST['cen_dir'];
-        $cen_telefono = $_POST['cen_telefono'];
-        $reg_id = $_POST['reg_id'];
-
-        $objCentro = new centroModel();
+        $area_id = $_POST['area_id'];
+        $area_descripcion = $_POST['area_descripcion'];
+        $objArea = new areaModel();
 
         $sql = "UPDATE "
-                . "pag_centro "
+                . "pag_area "
                 . "SET "
-                . "cen_nombre='$cen_nombre', cen_dir='$cen_dir', cen_telefono='$cen_telefono',reg_id=$reg_id"
-                . " WHERE cen_id=$cen_id";
+                . "area_descripcion='$area_descripcion'"
+                . " WHERE area_id=$area_id";
         //die(print_r($sql));
-        $respuesta = $objCentro->update($sql);
+        $respuesta = $objArea->update($sql);
         //die(print_r($sql));
         // Cierra la conexion
-        $objCentro->cerrar();
+        $objArea->cerrar();
 
-        redirect(crearUrl("Localizacion", "centro", "Consulta"));
+        redirect(crearUrl("Localizacion", "area", "Consultar"));
     }
 
     function listar() {
-        $objAreas = new areaModel();
-
-        $sql = "SELECT * FROM pag_centro WHERE estado IS NULL";
-
-        $areas = $objAreas->select($sql);
-
-        // Cierra la conexion
-        $objAreas->cerrar();
-
-        include_once("../view/Localizacion/centro/listar.html.php");
+        include_once("../view/Localizacion/area/consultar.html.php");
     }
 
 
@@ -140,29 +120,35 @@ class areaController {
         include_once("../view/Localizacion/centro/detalle.html.php");
     }
     
-    function Consulta(){
+    function Consultar(){
      
-      include_once("../view/Localizacion/centro/consulta.html.php");
+      include_once("../view/Localizacion/area/consultar.html.php");
         
         
         
     }
     function buscarAjax()
     {
-      $objCentro = new Centromodel();
+      $objArea = new areaModel();
 
-      $centro = $_POST['busquedacentro'];
-
+      $area = $_POST['area_id'];
      // $sql="SELECT * FROM pag_centro WHERE cen_nombre LIKE '%".$centro."%' or cen_id LIKE '%".$centro."%'";
-       $sql="SELECT * FROM pag_centro WHERE estado IS NULL  AND (cen_nombre LIKE '%".$centro."%' or cen_id LIKE '%".$centro."%')";
+       $sql="SELECT * FROM pag_area WHERE estado IS NULL  AND (area_descripcion LIKE '%".$area."%' or area_id LIKE '%".$area."%')";
      
       
-      $centros= $objCentro->select($sql);
+      $areas= $objArea->select($sql);
    
+        //aqui empieza el paginado       
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+        $url = crearUrl('Localizacion', 'area', 'listar');
 
-      $objCentro->cerrar();
+        $paginado = new Paginado($areas, $pagina, $url);
 
-      include_once("../view/Localizacion/centro/listar.html.php");
+        $areas = $paginado->getDatos();
+
+        $objArea->cerrar();
+
+        include_once("../view/Localizacion/area/listar.html.php");
     }
 }
 

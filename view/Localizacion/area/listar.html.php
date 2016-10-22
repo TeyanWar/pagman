@@ -18,16 +18,14 @@
                         <td><?php echo $paginado->count++ ?></td>
     <!--                        <td><?php //echo $depto['dept_id']          ?></td>-->
                         <td><?php echo $area['area_descripcion'] ?></td>
-                        <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" 
-                               href="#editarDepto" data-url="<?php echo crearUrl('localizacion', 'ciudad', 'editar', array('noVista' => "noVista", 'id' => $ciudad['ciud_id'])) ?>">
+                        <td><a class="modal-trigger btn-floating  waves-effect waves-light teal editar" 
+                               href="#editarArea" data-url="<?php echo crearUrl('localizacion', 'area', 'editar', array('noVista' => "noVista", 'id' => $area['area_id'])) ?>">
                                 <i class="mdi-content-create small"></i></a>
                         </td>                        
                         <td>
-
-                            <a class="btn-floating cyan darken-1 modal-trigger" 
-                               href="#detalleCiu" data-url="<?php echo crearUrl('localizacion', 'ciudad', 'detalle', array('noVista' => "noVista", 'id' => $ciudad['ciud_id'])) ?>">
-                                <i class="mdi-action-find-in-page tiny"></i>
-                            </a>
+                            <a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" 
+                            data-tmed_id="<?php echo $medidor['tmed_id'] ?>" data-url="<?php echo crearUrl('medidores', 'medidores', 'postEliminar', array('noVista' => 'noVista', 'id' => $medidor['tmed_id'])) ?>">
+                            <i class="mdi-action-delete small"></i></a>
                         </td>
                     </tr>
 
