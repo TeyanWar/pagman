@@ -244,75 +244,132 @@ class EquiposController {
         //--------expresiones regulares--------------------
         $errores = array();
         $patronNumeros = "/[0-9]{1,9}(\.[0-9]{0,2})?$/";
-        $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
+        $patronLetras = "/^[a-zA-Z_áéíóúñ\s( )]*$/";
+        $patronLetrasNumerosGuiones = "/^[0-9a-zA-Z(-_)-áéíóúñ\s]+$/";
+        $patronLetrasNumeros = "/^[0-9a-zA-Z( )]+$/";
 
         //-----------------validaciones--------------------
         //--- Validacion cantidad campos personalizados -->
         // ----------- Fin Validacion ------------------ //
         if (!isset($_POST['equi_id']) or $_POST['equi_id'] == "") {
-            $errores[] = '(*) El campo "N.Placa" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"N.Placa"</strong></code> es obligatorio';
         }
+       
         //-------------------------------------------------------------
-        $doc = "SELECT equi_id FROM pag_equipo";
-        $objEquipos = new EquiposModel();
-        $ids = $objEquipos->select($doc);
-        // Cierra la conexion
-        $objEquipos->cerrar();
+        if(isset($_POST['equi_id']) && !empty($_POST['equi_id'])){
+            if(!preg_match($patronLetrasNumerosGuiones,$_POST['equi_id'])){
+                $errores[]='(*) El campo <strong><code>"Numero de placa"</strong></code> unicamente admite letras,numeros y guiones';
+            }
+            $doc = "SELECT equi_id FROM pag_equipo";
+            $objEquipos = new EquiposModel();
+            $ids = $objEquipos->select($doc);
+            // Cierra la conexion
+            $objEquipos->cerrar();
 
-        foreach ($ids as $id) {
-            if ($id['equi_id'] == $_POST['equi_id']) {
-                $errores[] = '<strong>(*) El N.Placa ingresado ya se encuentra registrado</strong>';
+            foreach ($ids as $id) {
+                if ($id['equi_id'] == $_POST['equi_id']) {
+                    $errores[] = '<strong>(*) El N.Placa ingresado ya se encuentra registrado</strong>';
+                }
             }
         }
+        
         //-------------------------------------------------------------
 
         if (!isset($_POST['per_id']) or $_POST['per_id'] == "") {
-            $errores[] = '(*) El campo "Encargado" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Encargado"</strong></code> es obligatorio';
         }
+        if (isset($_POST['per_id']) && !empty($_POST['per_id'])){
+            if (!preg_match($patronNumeros,$_POST['per_id'])){
+             $errores[]="(*) El campo <strong><code>'Encargado'</strong></code> debe ser Numerico";   
+            }
+        }
+        
 
         if (!isset($_POST['equi_nombre']) or $_POST['equi_nombre'] == "") {
-            $errores[] = '(*) El campo "Nombre Del Equipo" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Nombre Del Equipo"</code></strong> es obligatorio';
         }
-        if (isset($_POST['equi_nombre']) && !preg_match($patronLetras, $_POST['equi_nombre'])) {
-            $errores[] = '(*) El campo "Nombre Del Equipo" debe contener letras unicamente';
+        
+        if(isset($_POST['equi_nombre']) && !empty($_POST['equi_nombre'])){
+            if (isset($_POST['equi_nombre']) && !preg_match($patronLetrasNumeros, $_POST['equi_nombre'])) {
+                $errores[] = '(*) El campo <strong><code>"Nombre Del Equipo"</strong></code> unicamente admite letras y numeros';
+            }
         }
 
         if (!isset($_POST['est_id']) or $_POST['est_id'] == "") {
-            $errores[] = '(*) El campo "Estado Del Equipo" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Estado Del Equipo"</strong></code> es obligatorio';
+        }
+        
+        if(isset($_POST['est_id']) && !empty($_POST['est_id'])){
+            if(isset($_POST['est_id']) && !preg_match($patronNumeros,$_POST['est_id'])){
+                $errores[] = '(*) El campo <strong><code>"Estado Del Equipo"</strong></code> debe ser numerico';
+            }
         }
 
         if (!isset($_POST['equi_modelo']) or $_POST['equi_modelo'] == "") {
-            $errores[] = '(*) El campo "Modelo" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Modelo"</strong></code> es obligatorio';
+        }
+        
+        if(isset($_POST['equi_modelo']) && !empty($_POST['equi_modelo'])){
+            if(isset($_POST['equi_modelo']) && !preg_match($patronNumeros,$_POST['equi_modelo'])){
+                $errores[] = '(*) El campo <strong><code>"Modelo"</strong></code> debe ser numerico';
+            }
         }
 
         if (!isset($_POST['equi_serie']) or $_POST['equi_serie'] == "") {
-            $errores[] = '(*) El campo "No. Serie" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"No. Serie"</code></strong> es obligatorio';
+        }
+        
+        if(isset($_POST['equi_serie']) && !empty($_POST['equi_serie'])){
+            if(isset($_POST['equi_serie']) && !preg_match($patronLetrasNumerosGuiones,$_POST['equi_serie'])){
+                $errores[] = '(*) El campo <strong><code>"No. Serie"</code></strong> unicamente admite Letras,numeros y guiones';
+            }
         }
 
         if (!isset($_POST['equi_fabricante']) or $_POST['equi_fabricante'] == "") {
-            $errores[] = '(*) El campo "Fabricante" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Fabricante"</code></strong> es obligatorio';
+        }
+        
+        if(isset($_POST['equi_fabricante']) && !empty($_POST['equi_fabricante'])){
+            if(isset($_POST['equi_fabricante']) && !preg_match($patronLetras,$_POST['equi_fabricante'])){
+                $errores[] = '(*) El campo <strong><code>"Fabricante"</code></strong> unicamente admite Letras';
+            }
         }
 
         if (!isset($_POST['equi_marca']) or $_POST['equi_marca'] == "") {
-            $errores[] = '(*) El campo "Marca" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Marca"</strong></code> es obligatorio';
+        }
+        
+        if(isset($_POST['equi_marca']) && !empty($_POST['equi_marca'])){
+            if(isset($_POST['equi_marca']) && !preg_match($patronLetrasNumeros,$_POST['equi_marca'])){
+                $errores[] = '(*) El campo <strong><code>"Marca"</code></strong> unicamente admite Letras y numeros';
+            }
         }
 
         if (!isset($_POST['equi_ubicacion']) or $_POST['equi_ubicacion'] == "") {
-            $errores[] = '(*) El campo "Ubicacion" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Ubicacion"</strong></code> es obligatorio';
+        }
+        
+        if(isset($_POST['equi_ubicacion']) && !empty($_POST['equi_ubicacion'])){
+            if(isset($_POST['equi_ubicacion']) && !preg_match($patronLetrasNumeros,$_POST['equi_ubicacion'])){
+                $errores[] = '(*) El campo <strong><code>"Ubicacion"</code></strong> unicamente admite Letras y numeros';
+            }
         }
 
         if (!isset($_POST['equi_fecha_compra']) or $_POST['equi_fecha_compra'] == "") {
-            $errores[] = '(*) El campo "Fecha De Compra" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Fecha De Compra"</code></strong> es obligatorio';
         }
         if (!isset($_POST['equi_fecha_instalacion']) or $_POST['equi_fecha_instalacion'] == "") {
-            $errores[] = '(*) El campo "Fecha De Instalacion" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Fecha De Instalacion"</strong></code> es obligatorio';
         }
 
         if (!isset($_POST['equi_vence_garantia']) or $_POST['equi_vence_garantia'] == "") {
-            $errores[] = '(*) El campo "Vecimiento De Garantia" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Vecimiento De Garantia"</strong></code> es obligatorio';
+        }
+        if($_POST['equi_vence_garantia'] < $_POST['equi_fecha_compra']){
+            $errores[]="(*) Por favor verifique la <strong><code> 'Fecha de garantia' </strong></code> no puede ser mayor a la <strong><code>'Fecha de compra</strong></code>'";
         }
         if (!isset($_POST['cen_id']) or $_POST['cen_id'] == "") {
-            $errores[] = '(*) El campo "Centro De Formacion" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Centro De Formacion"</strong></code> es obligatorio';
         }
 
 //        if (!isset($_POST['tequi_id']) or $_POST['tequi_id'] == "") {
@@ -320,10 +377,10 @@ class EquiposController {
 //        }
 
         if (!isset($_POST['area_id']) or $_POST['area_id'] == "") {
-            $errores[] = '(*) El campo "Area" es obligatorio';
+            $errores[] = '(*) El campo <strong><code>"Area"</strong></code> es obligatorio';
         }
         if (!isset($_POST['medidores']) or $_POST['medidores'] == "") {
-            $errores[] = '(*) Añadir los medidores es Obligatorio';
+            $errores[] = '(*) Desbes añadir al menos 1 <strong><code>"Medidor"</strong></code> para este equipo';
         }
 
         if (count($errores) > 0) {
@@ -346,30 +403,30 @@ class EquiposController {
             $cen_id = $_POST['cen_id'];
 
             //die(print_r($_FILES));
-            $fotoEquipo = $_FILES['ruta']['name'];
+            //$fotoEquipo = $_FILES['ruta']['name'];
             //Asigno el nombre de la foto segun numero de placa
-            $equipo_foto = "Equipo-" . $fotoEquipo;
+            //$equipo_foto = "Equipo-" . $fotoEquipo;
             //Hago un explode para capturar la extension de IMAGEN
-            $fotoEquipo = explode(".", $_FILES['ruta']['name']);
+            //$fotoEquipo = explode(".", $_FILES['ruta']['name']);
             //die(print_r($fotoHerramienta));
             //Nombre de la foto con la extension capturada
-            $nombreFoto = $equipo_foto . "." . end($fotoEquipo);
+            //$nombreFoto = $equipo_foto . "." . end($fotoEquipo);
             //die($nombreFoto);
 
-            $ruta = $_FILES['ruta']['tmp_name'];
+            //$ruta = $_FILES['ruta']['tmp_name'];
             //Capturo la ruta donde guardare la Imagen
-            $rutaydoc = getDocumentRoot() . "/web/media/img/Equipos/" . $nombreFoto;
+            //$rutaydoc = getDocumentRoot() . "/web/media/img/Equipos/" . $nombreFoto;
 
-            if ($ruta <> "") {
-                if (move_uploaded_file($ruta, $rutaydoc)) {
+            //if ($ruta <> "") {
+              //  if (move_uploaded_file($ruta, $rutaydoc)) {
                     
-                }
-            } else {
-                $rutaydoc = NULL;
-            }
+             //   }
+            //} else {
+              //  $rutaydoc = NULL;
+            //}
 
             $area_id = $_POST['area_id'];
-            $tequi_id = $_POST['tequi_id'];
+            //$tequi_id = $_POST['tequi_id'];
 
             //Borramos de la tabla Equipo el siguiente campo tmed_id, ya que eso va en la tabla
             //Detalla nombrada pag_det_equipo_medidor
@@ -379,7 +436,7 @@ class EquiposController {
                     . "equi_nombre, "
                     . "est_id, "
                     . "cen_id, "
-                    . "equi_foto, "
+                    //. "equi_foto, "
                     . "equi_valor_tmed, " //Campo Nuevo en la BD, aun no se coloca en el formulario, (¿Para que es?)
                     . "equi_fabricante, "
                     . "equi_marca, "
@@ -389,14 +446,13 @@ class EquiposController {
                     . "equi_fecha_compra, "
                     . "equi_fecha_instalacion, "
                     . "equi_vence_garantia, "
-                    . "area_id, "
-                    . "tequi_id ) VALUES("
+                    . "area_id) VALUES("
                     . "'$equi_id', "
                     . "$per_id, "
                     . "'$equi_nombre', "
                     . "$est_id, "
                     . "$cen_id, "
-                    . "'$nombreFoto', "
+                    //. "'$nombreFoto', "
                     . "12000, " //Valo colocado para que ingrese a la BD, no viene del formulario, esta QUEMADO. (equi_valor_tmed)
                     . "'$equi_fabricante', "
                     . "'$equi_marca', "
@@ -406,11 +462,8 @@ class EquiposController {
                     . "'$equi_fecha_compra', "
                     . "'$equi_fecha_instalacion', "
                     . "'$equi_vence_garantia', "
-                    . "$area_id, "
-                    . "'$tequi_id' )";
+                    . "$area_id,)";
             //die(print_r("<br>" . $sqlEquipo. "<br>"));
-
-
             $objEquipos = new EquiposModel();
 
             $insertar = $objEquipos->insertar($sqlEquipo);

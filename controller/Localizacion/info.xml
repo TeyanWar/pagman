@@ -139,5 +139,38 @@
             </funciones>
             
         </controlador>
+        <controlador>
+            <nombre>areaController</nombre>
+            <icono>mdi-image-center-focus-strong</icono>
+            <display>Area(s)</display>
+            <descripcion>Controlador de Areas</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear Area</display>
+                    <descripcion>Crear Area</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar Area</display>
+                    <descripcion>Editar Area</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar Area</display>
+                    <descripcion>Eliminar Area</descripcion>
+                </funcion>
+                
+                 <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar Area</display>
+                    <descripcion>Listar Area</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
     </controladores>
 </modulos>

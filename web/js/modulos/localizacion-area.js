@@ -1,19 +1,24 @@
 $(document).ready(function () {
      //consulta Ciudad
-    $("#buscarCiu").keyup(function () {
-        var ciudad = $("#buscarCiu").val();
+    $("#buscarArea").keyup(function () {
+        var Area = $("#buscarArea").val();
+        
+        if(Area != ""){
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaciudad=" + ciudad,
+            data: "area_id=" + Area+"&pagina="+pagina,
             success: function (data) {
-                $("#buscarCiudad").html(data);
+                $("#busquedaArea").html(data);
             }
         });
     });
 
-    $("#buscarCiu").trigger("keyup");
+    $("#buscarArea").trigger("keyup");
 
      $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
@@ -35,7 +40,7 @@ $(document).ready(function () {
             url: url,
             type: "get",
             success: function (data) {
-                $("#editarCiu > .modal-content").html(data);
+                $("#editarArea > .modal-content").html(data);
             }
         });
     });
