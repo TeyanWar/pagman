@@ -6,7 +6,7 @@
                     <th>#</th>
                     <th>Nombre de la Ciudad</th>                    
                     <th>Editar</th>
-                    <th>Detalle</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +24,7 @@
                         </td>                        
                         <td>
                             <a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" 
-                            data-tmed_id="<?php echo $medidor['tmed_id'] ?>" data-url="<?php echo crearUrl('medidores', 'medidores', 'postEliminar', array('noVista' => 'noVista', 'id' => $medidor['tmed_id'])) ?>">
+                            data-tmed_id="<?php echo $area['area_id'] ?>" data-url="<?php echo crearUrl('localizacion', 'area', 'Eliminar', array('noVista' => 'noVista', 'id' => $area['area_id'])) ?>">
                             <i class="mdi-action-delete small"></i></a>
                         </td>
                     </tr>
