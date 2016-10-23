@@ -1,5 +1,11 @@
+<!--Inicio contenedor mensajes de error-->
+        <div class="card red">
+            <div id="cont_errors_ajax" class="card-content white-text">
+            </div>
+        </div>
+        <!--Fin contenedor mensajes de error-->
 <div class="row">
-    <form class="col s12"  action="<?php echo crearUrl("localizacion", "ciudad", "postEditar") ?>" method="post">
+    <form class="col s12"  action="<?php echo crearUrl("localizacion", "ciudad", "postEditar",array('noVista')) ?>" method="post">
 
         <center> <h5> Editar ciudad </h5></center>
         <br>
@@ -30,7 +36,7 @@
 
         </div>
         <div class="col s12 m8 offset-m2 l6 offset-l3">
-            <center> <button name="action" type="submit" class="btn cyan waves-effect waves-light right teal">Editar
+            <center> <button name="action" type="submit" class="btn cyan waves-effect waves-light right teal btn_submit_modal">Editar
                 <i class="mdi-content-send right teal"></i>
                 </button>
         </div>

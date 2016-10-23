@@ -462,10 +462,9 @@ class EquiposController {
                     . "'$equi_fecha_compra', "
                     . "'$equi_fecha_instalacion', "
                     . "'$equi_vence_garantia', "
-                    . "$area_id,)";
+                    . "$area_id)";
             //die(print_r("<br>" . $sqlEquipo. "<br>"));
             $objEquipos = new EquiposModel();
-
             $insertar = $objEquipos->insertar($sqlEquipo);
             //die(print_r($insertar));
             if ($insertar == true) {

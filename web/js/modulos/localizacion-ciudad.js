@@ -2,11 +2,16 @@ $(document).ready(function () {
      //consulta Ciudad
     $("#buscarCiu").keyup(function () {
         var ciudad = $("#buscarCiu").val();
+         
+        if(ciudad != ""){
+            $('#pagina').val(1);
+        }
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "busquedaciudad=" + ciudad,
+            data: "busquedaciudad=" + ciudad+"&pagina="+pagina,
             success: function (data) {
                 $("#buscarCiudad").html(data);
             }
