@@ -92,6 +92,14 @@
     </div>
     <br>
     <div class="divider"></div>
+    <div class="row">
+        <?php if($guia['texto_guia']!=""){ ?>
+            <div class="col s12 m8 l12">
+                <label style="color: #448aff;"><h6>Guia Mantenimiento</h6></label> 
+                <?php echo $guia['texto_guia'] ?>
+            </div>
+        <?php } ?>
+    </div>
     <br>
     <div class="row">        
         <div class="col s6">
