@@ -33,8 +33,8 @@
                     
                     <div class="row">
                         
-                        <div class="col s4">
-                            <label>(*) Departamento</label>
+                        <div class="input-field col s4">
+                            <small style="color: #848484;">(*) Departamento</small>
                             <select class="error browser-default select2" id="departamento" name="departamento" data-error=".errorTxt1">
                                 <option value="" disabled selected>Seleccione</option>
                                 <?php 
@@ -46,8 +46,8 @@
                                 <div class="errorTxt1"></div>
                         </div>
                         
-                        <div class="col s4">
-                            <label>(*) Centro</label>
+                        <div class="input-field col s4">
+                            <small style="color: #848484;">(*) Centro</small>
                             <select class="error browser-default select2" id="centro" name="centro" data-error=".errorTxt2">
                                 <option value="" disabled selected>Seleccione</option>
                                 <?php 
@@ -59,8 +59,8 @@
                                 <div class="errorTxt2"></div>
                         </div>
                         
-                        <div class="col s4">
-                            <label>(*) Cargo</label>
+                        <div class="input-field col s4">
+                            <small style="color: #848484;">(*) Cargo</small>
                             <select class="error browser-default select2" id="cargo" name="cargo" data-error=".errorTxt3">
                                 <option value="" disabled selected>Seleccione</option>
                                 <?php 

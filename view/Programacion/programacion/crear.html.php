@@ -29,8 +29,8 @@
 
                 <div class="row">  
 
-                    <div class="col s4">
-                        <label>(*) Centro de formacion</label>
+                    <div class="input-field col s4">
+                        <small style="color: #848484;">(*) Centro de formacion</small>
                         <select class="error browser-default select2" id="centro" name="centro" data-error=".errorTxt2">
                             <option value="" disabled selected>Seleccione</option>
                             <option value="">(Vacio)</option>
@@ -40,16 +40,16 @@
                         </select>
                         <div class="errorTxt2"></div>
                     </div>
-                    
+                    <br>
                     <div class="input-field col s8">
                         <i class="mdi-action-search prefix"></i>
                         <input type="text" id="equipo"  data-url="<?php echo crearUrl('Programacion', 'programacion', 'listarEquipo', array('noVista' => "noVista")) ?>">
                         <label form="equipo">Equipos</label>
                         <div id="conte" class="conte" style="z-index: 4; position: absolute; width: 90%;">
-
                         </div>
                     </div>
-                </div>   
+                </div>
+                <br>
                 <div class="row">
                     <div class=" col s2">
                         <label for="fecha">(*) Fecha Registro Programacion</label>
