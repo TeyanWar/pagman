@@ -207,6 +207,7 @@ $(document).ready(function () {
         var fre = $("#frecuencia").val();
         var prio = $("#prio").val();
         var tarea = $("#tarea").val();
+        var tario = $("#tario").val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
@@ -220,7 +221,8 @@ $(document).ready(function () {
                 hora: hora,
                 fre: fre,
                 prio: prio,
-                tarea: tarea
+                tarea: tarea,
+                tario: tario
             }
         }).done(function (data) {
             $("#mod").closeModal();

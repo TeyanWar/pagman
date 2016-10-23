@@ -65,6 +65,11 @@ class OtController {
                 . "AND pag_orden_trabajo.estado IS NULL AND ot_id=$id";
 
         $detalleOrdenes = $objDetalle->find($sql);
+        //------------------consulta guia de mantenimiento------------------
+        $sqlguia = "SELECT texto_guia FROM pag_det_programacion "
+                . "WHERE pag_det_programacion.detprog_id='" . $detalleOrdenes['id_mantenimiento'] . "'";
+
+        $guia = $objDetalle->find($sqlguia);
         //----------------------consulta de componentes---------------------
         $sqlc = "SELECT pag_componente.comp_descripcion "
                 . "FROM pag_det_componente_ot,pag_orden_trabajo,pag_componente "

@@ -204,11 +204,11 @@ class OrdenController {
                     $insertOt = "INSERT INTO pag_orden_trabajo(cen_id,"
                             . "equi_id,tfa_id, ot_prioridad, per_id,"
                             . "ot_fecha_inicio,ot_fecha_fin,ot_ayudantes,"
-                            . "ot_desc_falla,ot_desc_trabajo,est_id)"
+                            . "ot_desc_falla,ot_desc_trabajo,id_mantenimiento,est_id)"
                             . "VALUES($orden[cen_id],'$orden[equi_id]', "
                             . "'1', '$orden[priotra_descripcion]', '$encargado', '$fechaInicio', "
                             . "'$fechaFin', '$ayudantes','mantenimiento preventivo',"
-                            . "'$orden[tar_nombre]','3')";
+                            . "'$orden[tar_nombre]','$orden[detprog_id]','3')";
 
                     $insertar = $objOrden->insertar($insertOt);
 
