@@ -136,6 +136,8 @@ class TipoEquipoController {
 
         $cp_id = $_POST['cp_id'];
         $cp_nombre = $_POST['cp_nombre'];
+        $cantidad = $_POST['cantidad'];
+        //die(print_r($cantidadCampo));
         $consecutivo = $_POST['consecutivo'];
 
         //die(print_r($consecutivo));
@@ -194,14 +196,14 @@ class TipoEquipoController {
         //DIE(PRINT_R($sql)); 
         foreach ($id_campo as $campo) {
             $id_tipo_Equipo = $_POST['id_tipo_Equipo'];
-            //DIE(PRINT_R($id_tipo_Equipo)); 
-            $tipo_Equipo = $_POST['tequi_descripcion'];
-            $id_campo = $_POST['camposPersonalizados'];
-            $sqlDetalle = "INSERT INTO pag_det_tipoEquipo_camposPersonalizados ("
+            //DIE(PRINT_R($tipo_Equipo)); 
+            $sqlDetalle = "INSERT INTO pag_det_tipoEquipo_camposPersonalizados("
                     . "tequi_id,"
-                    . "cp_id) VALUES("
+                    . "cp_id,"
+                    . "cantidad) VALUES("
                     . "'$id_tipo_Equipo',"
-                    . "'$campo[cp_id]')";
+                    . "'$campo[cp_id]',"
+                    . "'$campo[cantidad]')";
             $insertCampo = $objTipoEquipo->insertar($sqlDetalle);
         }
 

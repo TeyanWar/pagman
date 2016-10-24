@@ -14,6 +14,9 @@
         <input type="hidden" value="<?php echo $_POST['cp_nombre']; ?>" name="camposPersonalizados[<?php echo $consecutivo ?>][cp_nombre]"></td>
 
     <td>
+    <td><?php echo $cantidad ?>
+        <input type="hidden" value="<?php echo $_POST['cantidad']; ?>" name="camposPersonalizados[<?php echo $consecutivo; ?>][cantidad]"></td>
+
     <td>
         <a class="btn-floating waves-effect waves-light blue-grey remove" data-id="<?php echo $consecutivo ?>"><i class="mdi-content-clear"></i></a>
     </td>
