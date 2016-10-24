@@ -7,7 +7,7 @@
 
     <div class=" row">
         <div class="col s12 m8 l4">
-            <label style="color: #448aff;"><h6>No. OT</h6></label>  
+            <label style="color: #448aff;"><h6>No. OT</h6></label>
             <?php echo $editarOt['ot_id']; ?>
             <input type="hidden" value="<?php echo $editarOt['ot_id']; ?>" name="ot_id">
         </div>
@@ -49,9 +49,9 @@
             <label style="color: #448aff;"><h6>Encargado</h6></label> 
             <?php echo $editarOt['per_nombre'] ?>
         </div>
-        <div class="col s12 m4 l4">
-            <label class="active" style="color: #448aff;"><h6>Estado</h6></label>
-            <select name="est_id" class="browser-default">
+        <div class="input-field col s12 m4 l4">
+            <small class="active" style="color: #448aff;"><h6>Estado</h6></small>
+            <select name="est_id" id="est_id" class="error browser-default select2" data-error=".errorTxt12">
                 <option value="" disabled selected>Seleccione</option>
                 <?php foreach ($estados as $estado) { ?>
                     <?php if ($editarOt['est_id'] == $estado['est_id']) { ?>
@@ -63,6 +63,7 @@
                 }
                 ?>
             </select>
+            <div class="errorTxt12"></div>
         </div>
     </div>
     <div class="row">
@@ -105,6 +106,37 @@
     
     <br>
     <div class="divider"></div>
+    <div class="row">
+        <?php if($guia['texto_guia']!=""){ ?>
+            <div class="col s12 m8 l12">
+                <label style="color: #448aff;"><h6>Guia Mantenimiento</h6></label> 
+                <?php echo $guia['texto_guia'] ?>
+            </div>
+        <?php } ?>
+    </div>
+    <br>
+    <div class="row">
+        <?php if($mant['id_mantenimiento']!=""){ ?>
+            <div class="input-field col s5 m5 l5">
+                <small style="color: #448aff;"><h6>¿Cumplio con los estandares de mantenimiento?</h6></small>
+                <select id="estandar" name="estandar" class="error browser-default select2" data-error=".errorTxt14">
+                    <option value="" disabled selected>Seleccione</option>
+                    <?php 
+                        if($m['estandar']!=""){
+                            if($m['estandar']==='Si cumple'){
+                                echo "<option value='".$m['estandar']."' selected>". $m['estandar'] . "</option>";
+                            }  else {
+                                echo "<option value='".$m['estandar']."' selected>". $m['estandar'] . "</option>";
+                            }
+                        }
+                    ?>
+                    <option value="Si cumple" >Si cumple</option>
+                    <option value="No cumple" >No cumple</option>
+                </select>
+                <div class="errorTxt14"></div>
+            </div>
+        <?php } ?>
+    </div>
     <br>
     <div class="row">
         
@@ -173,3 +205,40 @@
             </button>
         </div>
 </form>
+
+<script>
+    $(".select2").select2({});
+    //----------------- validaciones ---------------
+    $("#editarOt").validate({
+        rules: {
+            est_id: {
+                required: true
+            },
+            estandar: {
+                required: true
+            },
+            cgender:"required",
+			cagree:"required",
+        },
+        //For custom messages
+        messages: {
+            est_id:{
+                required: "El Estado es obligatorio."
+            },
+            estandar:{
+                required: "Este campo es obligatorio."
+            },
+            curl: "Enter your website",
+        },
+        errorElement : 'div',
+        errorPlacement: function(error, element) {
+          var placement = $(element).data('error');
+          if (placement) {
+            $(placement).append(error)
+          } else {
+            error.insertAfter(element);
+          }
+        }
+    });
+
+</script>

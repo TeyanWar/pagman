@@ -357,7 +357,18 @@ class OtController {
         $sql2 = "SELECT * FROM pag_estado where tdoc_id=2";
         $estados = $objEditar->select($sql2);
         $editarOt = $objEditar->find($sql);
- 
+        //------------------consulta guia de mantenimiento------------------
+        $sqlguia = "SELECT texto_guia FROM pag_det_programacion "
+                . "WHERE pag_det_programacion.detprog_id='" . $editarOt['id_mantenimiento'] . "'";
+        $guia = $objEditar->find($sqlguia);
+        //---------------si es una orden de trabajo para hacer mantenimiento--------------------
+        $probar = "SELECT id_mantenimiento FROM pag_orden_trabajo "
+                . "WHERE ot_id=$id";
+        $mant = $objEditar->find($probar);
+        //-------------------------dato estandar---------------------------------
+        $stpro = "SELECT estandar FROM pag_orden_trabajo "
+                . "WHERE ot_id=$id";
+        $m = $objEditar->find($stpro);
         //--------------------------- Componentes ------------------------------//
         
         $sqlc = "SELECT pag_componente.comp_descripcion "
@@ -409,6 +420,15 @@ class OtController {
                 . "WHERE  pag_orden_trabajo.ot_id=$ot_id";
 
         $editarOt = $objPostEditar->update($sql);
+        
+        if(!empty($_POST['estandar'])){
+            $destandar = $_POST['estandar'];
+
+            $sqlstd = "UPDATE pag_orden_trabajo SET estandar='$destandar' "
+                    . "WHERE pag_orden_trabajo.ot_id=$ot_id";
+
+            $objPostEditar->update($sqlstd);
+        }
 
         if ($editarOt) {
             echo true;
