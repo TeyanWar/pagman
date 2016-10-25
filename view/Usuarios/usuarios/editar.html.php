@@ -177,11 +177,36 @@
             </select>
             <div class="errorTxt45"></div>
         </div>
+    </div>
+    <br>
+    <div class="divider"></div>
+    <div class="row">
+        <?php if ($usu['per_horas']!="" && $usu['per_sueldo']!="") { ?>
+            <div class="col s4">
+                <label style="color: #448aff;"><h6>Contratista</h6></label>
+                <?php echo "SI" ?>
+            </div>
+            <div class="col s4">
+                <label style="color: #448aff;"><h6>Cantidad Horas</h6></label> 
+                <?php echo $usu['per_horas'] ?>
+            </div>
+            <div class="col s4">
+                <label style="color: #448aff;"><h6>Valor Sueldo</h6></label>
+                <?php echo $usu['per_sueldo'] ?>
+            </div>
+        <?php } else { ?>
+            <div class="col s4">
+                <label style="color: #448aff;"><h6>Contratista</h6></label>
+                <?php echo "NO" ?>
+            </div>
+        <?php } ?>
+    </div>
+    
+    <div class="row">
         <!-- Campo para almacenar el id del equipo -->
         <input type="hidden" name="id" value="<?php echo $usu['per_id'] ?>">
-        <div class="input-field col s1"></div>
+        <div class="input-field col s4"></div>
         <div class="input-field col s4">
-            <br><br><br>
             <button class="btn cyan waves-effect waves-light teal" type="submit"><i class="mdi-action-perm-identity"></i>Guardar</button>
         </div>
     </div>

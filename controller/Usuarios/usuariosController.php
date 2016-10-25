@@ -47,7 +47,7 @@ class UsuariosController {
         if ($prueba['per_tipo']==='persona') {
 
             $sqlpersona = "SELECT pag_persona.per_id,pag_persona.per_nombre,pag_persona.per_apellido,"
-                    . "pag_persona.per_telefono,pag_persona.per_movil,"
+                    . "pag_persona.per_telefono,pag_persona.per_movil,per_horas,per_sueldo,"
                     . "pag_persona.per_email,pag_persona.per_direccion,"
                     . "pag_persona.per_valor_hora,pag_departamento.dept_id,"
                     . "pag_cargo.car_id,pag_centro.cen_id "
@@ -66,7 +66,7 @@ class UsuariosController {
                     . "pag_usuario.usu_estado,pag_persona.per_id,"
                     . "pag_persona.per_nombre,pag_persona.per_apellido,"
                     . "pag_persona.per_telefono,pag_persona.per_movil,"
-                    . "pag_persona.per_email,pag_persona.per_direccion,"
+                    . "pag_persona.per_email,pag_persona.per_direccion,per_horas,per_sueldo,"
                     . "pag_persona.per_valor_hora,pag_departamento.dept_id,"
                     . "pag_cargo.car_id,pag_centro.cen_id "
                     . "FROM pag_usuario,pag_persona,pag_rol,pag_cargo,"
@@ -567,6 +567,25 @@ class UsuariosController {
             if (isset($_POST['valorhora']) && !preg_match($patronNumeros, $_POST['valorhora'])) {
                 $errores[] = 'El campo <code><b>valor hora</b></code> debe contener numeros unicamente';
             }
+            
+            if (!isset($_POST['contrs']) or $_POST['contrs'] == "") {
+                $errores[] = 'El campo <code><b>Contratista/No Contratista</b></code> es obligatorio';
+            }
+            if(isset($_POST['contrs']) && $_POST['contrs']==="Contratista"){
+                if(!isset($_POST['cnhors']) or $_POST['cnhors']==""){
+                    $errores[]="El campo <code><b>Cantidad Horas</b></code> no puede estar vac&iacute;o";
+                }
+                if(isset($_POST['cnhors']) && !preg_match($patronNumeros,$_POST['cnhors'])){
+                    $errores[]="En el campo <code><b>Numero</b></code> &uacute;nicamente se admiten numeros";
+                }
+
+                if(!isset($_POST['vsueldo']) or $_POST['vsueldo']==""){
+                    $errores[]="El campo <code><b>Valor Sueldo</b></code> no puede estar vac&iacute;o";
+                }
+                if(isset($_POST['vsueldo']) && !preg_match($patronNumeros,$_POST['vsueldo'])){
+                    $errores[]="En el campo <code><b>Valor Sueldo</b></code> &uacute;nicamente se admiten numeros";
+                }
+            }
         } else {
             //-----------------validaciones para persona--------------------
 
@@ -648,6 +667,25 @@ class UsuariosController {
             if (isset($_POST['valorhora']) && !preg_match($patronNumeros, $_POST['valorhora'])) {
                 $errores[] = 'El campo <code><b>valor hora</b></code> debe contener numeros unicamente';
             }
+            
+            if (!isset($_POST['contrs']) or $_POST['contrs'] == "") {
+                $errores[] = 'El campo <code><b>Contratista/No Contratista</b></code> es obligatorio';
+            }
+            if(isset($_POST['contrs']) && $_POST['contrs']==="Contratista"){
+                if(!isset($_POST['cnhors']) or $_POST['cnhors']==""){
+                    $errores[]="El campo <code><b>Cantidad Horas</b></code> no puede estar vac&iacute;o";
+                }
+                if(isset($_POST['cnhors']) && !preg_match($patronNumeros,$_POST['cnhors'])){
+                    $errores[]="En el campo <code><b>Cantidad Horas</b></code> &uacute;nicamente se admiten numeros";
+                }
+
+                if(!isset($_POST['vsueldo']) or $_POST['vsueldo']==""){
+                    $errores[]="El campo <code><b>Valor Sueldo</b></code> no puede estar vac&iacute;o";
+                }
+                if(isset($_POST['vsueldo']) && !preg_match($patronNumeros,$_POST['vsueldo'])){
+                    $errores[]="En el campo <code><b>Valor Sueldo</b></code> &uacute;nicamente se admiten numeros";
+                }
+            }
         }
 
         if (count($errores) > 0) {
@@ -681,11 +719,13 @@ class UsuariosController {
                 $perfil = $_POST['perfil'];
 
                 //--------------------------------------
-
-                $insertper = "INSERT INTO pag_persona "
+                if($_POST['contrs']==='Contratista'){
+                    $cnhors = $_POST['cnhors'];
+                    $vsueldo = $_POST['vsueldo'];
+                    $insertper = "INSERT INTO pag_persona "
                         . "(per_id,per_nombre,per_apellido,per_telefono,per_movil,"
                         . "per_email,per_direccion,dept_id,per_valor_hora,"
-                        . "car_id,cen_id,per_tipo) "
+                        . "per_horas,per_sueldo,car_id,cen_id,per_tipo) "
                         . "VALUES('$identificacion',"
                         . "'$nombre',"
                         . "'$apellido',"
@@ -693,31 +733,30 @@ class UsuariosController {
                         . "'$movil',"
                         . "'$email',"
                         . "'$direccion',"
-                        . "'$departamento',"
-                        . "'$valorhora',"
-                        . "'$cargo',"
-                        . "'$centro',"
+                        . "$departamento,"
+                        . "$valorhora,"
+                        . "'$cnhors',"
+                        . "'$vsueldo',"
+                        . "$cargo,"
+                        . "$centro,"
                         . "'usuario del sistema')";
 
-                $inserta = $objUsuarios->insertar($insertper);
+                    $inserta = $objUsuarios->insertar($insertper);
 
-                //-----------insercion pag_usuario-------------------
+                    //-----------insercion pag_usuario-------------------
 
-                $insertusu = "INSERT INTO pag_usuario(per_id,"
-                        . "usu_usuario,usu_clave,"
-                        . "usu_estado,rol_id) "
-                        . " VALUES('$identificacion',"
-                        . "'$login',"
-                        . "'$passwd',"
-                        . "'$estado',"
-                        . "'$perfil')";
+                    $insertusu = "INSERT INTO pag_usuario(per_id,"
+                            . "usu_usuario,usu_clave,"
+                            . "usu_estado,rol_id) "
+                            . " VALUES('$identificacion',"
+                            . "'$login',"
+                            . "'$passwd',"
+                            . "'$estado',"
+                            . "'$perfil')";
 
-                $insertar = $objUsuarios->insertar($insertusu);
-                echo true;
-               
-            } else {
-
-                $insertper = "INSERT INTO pag_persona "
+                    $insertar = $objUsuarios->insertar($insertusu);
+                }else{
+                    $insertper = "INSERT INTO pag_persona "
                         . "(per_id,per_nombre,per_apellido,per_telefono,per_movil,"
                         . "per_email,per_direccion,dept_id,per_valor_hora,"
                         . "car_id,cen_id,per_tipo) "
@@ -728,14 +767,72 @@ class UsuariosController {
                         . "'$movil',"
                         . "'$email',"
                         . "'$direccion',"
-                        . "'$departamento',"
-                        . "'$valorhora',"
-                        . "'$cargo',"
-                        . "'$centro',"
+                        . "$departamento,"
+                        . "$valorhora,"
+                        . "$cargo,"
+                        . "$centro,"
+                        . "'usuario del sistema')";
+
+                    $inserta = $objUsuarios->insertar($insertper);
+
+                    //-----------insercion pag_usuario-------------------
+
+                    $insertusu = "INSERT INTO pag_usuario(per_id,"
+                            . "usu_usuario,usu_clave,"
+                            . "usu_estado,rol_id) "
+                            . " VALUES('$identificacion',"
+                            . "'$login',"
+                            . "'$passwd',"
+                            . "'$estado',"
+                            . "'$perfil')";
+
+                    $insertar = $objUsuarios->insertar($insertusu);
+                }
+                echo true;
+            } else {
+                if($_POST['contrs']==='Contratista'){
+                    $cnhors = $_POST['cnhors'];
+                    $vsueldo = $_POST['vsueldo'];
+                    $insertper = "INSERT INTO pag_persona "
+                        . "(per_id,per_nombre,per_apellido,per_telefono,per_movil,"
+                        . "per_email,per_direccion,dept_id,per_valor_hora,"
+                        . "per_horas,per_sueldo,car_id,cen_id,per_tipo) "
+                        . "VALUES('$identificacion',"
+                        . "'$nombre',"
+                        . "'$apellido',"
+                        . "'$telefono',"
+                        . "'$movil',"
+                        . "'$email',"
+                        . "'$direccion',"
+                        . "$departamento,"
+                        . "$valorhora,"
+                        . "'$cnhors',"
+                        . "'$vsueldo',"
+                        . "$cargo,"
+                        . "$centro,"
                         . "'persona')";
 
-                $insertar = $objUsuarios->insertar($insertper);
+                    $insertar = $objUsuarios->insertar($insertper);
+                } else {
+                    $insertper = "INSERT INTO pag_persona "
+                        . "(per_id,per_nombre,per_apellido,per_telefono,per_movil,"
+                        . "per_email,per_direccion,dept_id,per_valor_hora,"
+                        . "car_id,cen_id,per_tipo) "
+                        . "VALUES('$identificacion',"
+                        . "'$nombre',"
+                        . "'$apellido',"
+                        . "'$telefono',"
+                        . "'$movil',"
+                        . "'$email',"
+                        . "'$direccion',"
+                        . "$departamento,"
+                        . "$valorhora,"
+                        . "$cargo,"
+                        . "$centro,"
+                        . "'persona')";
 
+                    $insertar = $objUsuarios->insertar($insertper);
+                }
                 echo true;
             }
             // Cierra la conexion
@@ -760,7 +857,7 @@ class UsuariosController {
 
             $sql = "SELECT pag_persona.per_id,pag_persona.per_nombre,pag_persona.per_apellido,"
                     . "pag_persona.per_telefono,pag_persona.per_movil,"
-                    . "pag_persona.per_email,pag_persona.per_direccion,"
+                    . "pag_persona.per_email,pag_persona.per_direccion,per_horas,per_sueldo,"
                     . "pag_persona.per_valor_hora,pag_departamento.dept_nombre,"
                     . "pag_cargo.car_descripcion,pag_centro.cen_nombre "
                     . "FROM pag_persona,pag_cargo,pag_departamento,pag_centro "
@@ -778,7 +875,7 @@ class UsuariosController {
                     . "pag_usuario.usu_estado,pag_persona.per_id,"
                     . "pag_persona.per_nombre,pag_persona.per_apellido,"
                     . "pag_persona.per_telefono,pag_persona.per_movil,"
-                    . "pag_persona.per_email,pag_persona.per_direccion,"
+                    . "pag_persona.per_email,pag_persona.per_direccion,per_horas,per_sueldo,"
                     . "pag_persona.per_valor_hora,pag_departamento.dept_nombre,"
                     . "pag_cargo.car_descripcion,pag_centro.cen_nombre "
                     . "FROM pag_usuario,pag_persona,pag_rol,pag_cargo,"
@@ -797,6 +894,13 @@ class UsuariosController {
         // Cierra la conexion
         $UsuariosModel->cerrar();
         //*---------------------------------------------------------
+    }
+    
+    function selectContrato() {
+        $contrs = $_POST['contrs'];
+        if($contrs==='Contratista'){
+            include_once("../view/Usuarios/usuarios/camcontra.html.php");
+        }
     }
 
 }

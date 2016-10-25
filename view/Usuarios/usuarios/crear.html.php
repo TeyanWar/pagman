@@ -180,10 +180,21 @@
                                 <a href="#!" id="m" class=" modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
                             </div>
                         </div>
-
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col s4">
+                            <label>Contratista/No Contratista</label>
+                            <select class="error browser-default" id="contrs" name="contrs" data-url="<?php  echo crearUrl("usuarios", "usuarios", "selectContrato", array('noVista'=>"noVista"))?>" data-error=".errorTxt12" >
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="Contratista">Contratista</option>
+                                <option value="No Contratista">No Contratista</option>
+                            </select>
+                            <div class="errorTxt12"></div>
+                        </div>
+                        <div class="col s8" id="campos"></div>
                     </div>
 
-                    
                     <div class="row">
                         <button name="action" id="enviar" type="submit" class="btn teal waves-effect waves-light right">Registrar
                             <i class="mdi-content-add left"> </i>
