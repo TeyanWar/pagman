@@ -120,7 +120,29 @@
         </div>
 
     </div>
-
+    <br>
+    <div class="divider"></div>
+    <div class="row">
+        <?php if ($per['per_horas']!="" && $per['per_sueldo']!="") { ?>
+            <div class="col s4">
+                <label style="color: #448aff;"><h6>Contratista</h6></label>
+                <?php echo "SI" ?>
+            </div>
+            <div class="col s4">
+                <label style="color: #448aff;"><h6>Cantidad Horas</h6></label> 
+                <?php echo $per['per_horas'] ?>
+            </div>
+            <div class="col s4">
+                <label style="color: #448aff;"><h6>Valor Sueldo</h6></label>
+                <?php echo $per['per_sueldo'] ?>
+            </div>
+        <?php } else { ?>
+            <div class="col s4">
+                <label style="color: #448aff;"><h6>Contratista</h6></label>
+                <?php echo "NO" ?>
+            </div>
+        <?php } ?>
+    </div>
     <!-- Campo para almacenar el id del equipo -->
     <input type="hidden" name="id" value="<?php echo $per['per_id'] ?>">
 

@@ -1,6 +1,19 @@
 $("#contenedor-campos").hide();
 $(document).ready(function () {
 
+    //Paginación por medio de ajax
+    $(document).on('click', '.ajax_paginate > div > div > ul > li > a', function (e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        if (url != '#') {
+            $.ajax({
+                url: url,
+                type: 'GET'
+            }).done(function (response) {
+                $("#modal_detalle_tipoEquipo> .modal-content").html(response);
+            });
+        }
+    });
 //Validaciones
 
     $.validator.setDefaults({

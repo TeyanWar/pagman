@@ -27,3 +27,4 @@
         <?php } ?>
     </tbody>
 </table>
+<?php $paginado->render() ?>

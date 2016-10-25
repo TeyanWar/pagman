@@ -340,7 +340,7 @@ function porcresul()
                 . "AND pag_orden_trabajo.estado IS NULL "
                 . "ORDER BY pag_orden_trabajo.ot_id";
 
-        $si = $objinicio->select($siestd);
+        $si = $objinicio->find($siestd);
         //-------------------------------------------------------
         $nosmant = "SELECT COUNT(*) AS totalno FROM pag_orden_trabajo "
                 . "WHERE pag_orden_trabajo.estandar='No cumple' "
@@ -349,7 +349,7 @@ function porcresul()
                 . "AND pag_orden_trabajo.estado IS NULL "
                 . "ORDER BY pag_orden_trabajo.ot_id";
 
-        $no = $objinicio->select($nosmant);
+        $no = $objinicio->find($nosmant);
         //----------------------------------------------------------
         $total = $si + $no;
         //-----------porcentaje los que si cumplen------------------
@@ -359,6 +359,7 @@ function porcresul()
     
     // Cierra la conexion
     $objinicio->cerrar();
+    $porcentajes = array($porS,$porN);
 
-    return json_encode(array('si'=>$porS, 'no'=>$porN));
+    return $porcentajes;
 }

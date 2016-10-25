@@ -14,7 +14,6 @@ $(document).ready(function () {
     });
 
 
-
 //--------------------------------------------
 
     $(document).on('click', '.ajax_paginate > div > div > ul > li > a', function (e) {
