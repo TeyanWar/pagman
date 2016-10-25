@@ -35,8 +35,10 @@ Scripts
 <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins/prism/prism.js') ?>"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js') ?>"></script>
-<!-- chartist -->
-<!--<script type="text/javascript" src="<?php // echo addLib('templates/adminMaterialize/js/plugins/js/plugins/chartist-js/chartist.min.js')   ?>"></script>-->
+<!-- chartjs -->
+<script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins/chartist-js/chartist.min.js')   ?>"></script>
+<script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/js/plugins/chartjs/chart.min.js')   ?>"></script>
+
 
 <script type="text/javascript" src="<?php echo addLib('templates/adminMaterialize/sweetalert/dist/sweetalert.min.js') ?>"></script>
 
@@ -72,6 +74,7 @@ Scripts
 <script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>
 
 <script type="text/javascript" src="<?php echo addLib('js/global.js') ?>"></script>
+
 </body>
 
 </html>

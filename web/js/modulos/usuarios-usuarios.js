@@ -118,6 +118,21 @@ $(document).ready(function () {
                 minlength: 3,
                 maxlength: 10
             },
+            contrs: {
+                required: true
+            },
+            cnhors: {
+                required: true,
+                number: true,
+                minlength: 1,
+                maxlength: 10
+            },
+            vsueldo: {
+                required: true,
+                number: true,
+                minlength: 3,
+                maxlength: 10
+            },
             cgender:"required",
 			cagree:"required",
         },
@@ -179,6 +194,21 @@ $(document).ready(function () {
                 minlength: "Introduzca al menos 3 caracteres",
                 maxlength: "Solo se permite introducir maximo 10 caracteres"
             },
+            contrs:{
+                required: "Este campo es obligatorio."
+            },
+            cnhors:{
+                required: "La Cantidad Horas es obligatorio.",
+                number: "El valor debe ser numerico",
+                minlength: "Introduzca al menos 1 caracteres",
+                maxlength: "Solo se permite introducir maximo 10 caracteres"
+            },
+            vsueldo:{
+                required: "El Valor Sueldo es obligatorio.",
+                number: "El valor debe ser numerico",
+                minlength: "Introduzca al menos 3 caracteres",
+                maxlength: "Solo se permite introducir maximo 10 caracteres"
+            },
             curl: "Enter your website",
         },
         errorElement : 'div',
@@ -192,23 +222,19 @@ $(document).ready(function () {
         }
     });
     
-    //select dependiente de select
-//    $(document).on('change', '#departamento', function () {
-//        var url = $('#departamento').attr("data-url");
-//        var id = $(this).val();
-//
-//        $.ajax({
-//            url: url,
-//            type: 'POST',
-//            data: 'id=' + id,
-//            success: function (data) {
-//                $("#selectCentro").html(data);
-//                $('select').material_select();
-//            }
-//        });
-//    });  
-    
-    //fin: select dependiente de select
+    //-------------------------------------------
+    $("#contrs").change(function () {
+        var contrs = $("#contrs").val();
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "contrs=" + contrs,
+            success: function (data) {
+                $("#campos").html(data);
+            }
+        });
+    });
 
     //----consulta ajax usuarios-----------
     $("#cate").keyup(function () {

@@ -20,22 +20,45 @@ class areaController {
 
     function postEditar() {
 
-        $area_id = $_POST['area_id'];
-        $area_descripcion = $_POST['area_descripcion'];
-        $objArea = new areaModel();
+         //--------------expresiones regulaes-----------
+        $patronLetras = "/^[a-zA-Z_,áéíóúñ\s]*$/";
+        $patronNumeros = "/[0-9]{1,9}(\.[0-9]{0,2})?$/";
+        $errores = array();
 
-        $sql = "UPDATE "
-                . "pag_area "
-                . "SET "
-                . "area_descripcion='$area_descripcion'"
-                . " WHERE area_id=$area_id";
-        //die(print_r($sql));
-        $respuesta = $objArea->update($sql);
-        //die(print_r($sql));
-        // Cierra la conexion
-        $objArea->cerrar();
-
-        redirect(crearUrl("Localizacion", "area", "Consultar"));
+        //---------------validaciones-------------------
+        if(!isset($_POST['area_id']) or ($_POST['area_id']=="")){
+            $errores[]="(*) El Id es Obligatorio";
+        }
+        if(isset($_POST['area_id']) && !empty($_POST['area_id'])){
+            if(!preg_match($patronNumeros, $_POST['area_id'])){
+                $errores[] = '(*) El ID solo puede ser numerico';
+            }
+        }
+        
+        if (!isset($_POST['area_nombre']) or $_POST['area_nombre'] == "") {
+            $errores[] = '(*) El campo <code><strong>"Nombre Del Area"</code></strong> es obligatorio';
+        }
+        
+        if(isset($_POST['area_nombre']) && !empty($_POST['area_nombre'])){
+            if(!preg_match($patronLetras,$_POST['area_nombre'])){
+                $errores[]="(*) En el campo <code><strong>'Nombre Del Area'</code></strong> unicamente se permiten letras";
+            }
+        }
+        
+        //----------------------------------------------
+        if (count($errores) > 0) {
+            setErrores($errores);
+            //----------------fin validaciones-----------------
+        } else {
+            $nom_area = $_POST['area_nombre'];
+            $id=$_POST['area_id'];
+            $objArea=new AreaModel();
+            
+            $sql="Update Pag_area set area_descripcion='$nom_area' where area_id=$id";
+            
+            $area = $objArea->update($sql);
+        }
+        echo getRespuestaAccion('consultar');
     }
 
     function listar() {
@@ -88,45 +111,26 @@ class areaController {
     }
 
     function eliminar($parametros) {
-        $objCentro = new centroModel();
+        $objArea = new areaModel();
 
         $id = $parametros[1];
 
-        $sql = "update pag_centro set estado=NOW() WHERE cen_id=$id";
+        $sql = "update pag_area set estado=NOW() WHERE area_id=$id";
 
-        $centro = $objCentro->find($sql);
-
-        // Cierra la conexion
-        $objCentro->cerrar();
-
-        redirect(crearUrl("localizacion", "centro", "Consulta"));
-    }
-
-    function detalle($parametros = false) {
-        $objCentro = new centromodel();
-        $id = $parametros[1];
-        
-        $sql="SELECT * FROM (pag_centro,pag_regional) WHERE pag_centro.reg_id=pag_regional.reg_id AND pag_centro.cen_id=$id;";
-
-        //$sql = "SELECT * FROM pag_centro WHERE cen_id=$id";
-        $centro = $objCentro->find($sql);
-        
-
-
+        $area = $objArea->find($sql);
 
         // Cierra la conexion
-        $objCentro->cerrar();
+        $objArea->cerrar();
 
-        include_once("../view/Localizacion/centro/detalle.html.php");
+        redirect(crearUrl("localizacion", "area", "Consulta"));
     }
+
     
     function Consultar(){
-     
-      include_once("../view/Localizacion/area/consultar.html.php");
         
-        
-        
+     include_once("../view/Localizacion/area/consultar.html.php");
     }
+    
     function buscarAjax()
     {
       $objArea = new areaModel();
@@ -150,5 +154,6 @@ class areaController {
 
         include_once("../view/Localizacion/area/listar.html.php");
     }
+    
 }
 

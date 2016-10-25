@@ -83,6 +83,7 @@ $(document).ready(function () {
                 {
                     cp_id: tr.children('#cp_id').html(),
                     cp_nombre: tr.children('#cp_nombre').html(),
+                    cantidad: tr.children().children().children().children('#cp_cantidad').val(),
                     consecutivo: consecutivo
                 },
         function (data) {

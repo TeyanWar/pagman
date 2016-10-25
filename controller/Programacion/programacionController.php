@@ -164,6 +164,7 @@ class ProgramacionController {
             $prioridades = $_POST['prioridades'];
             $centro = $_POST['centro'];
             $tareas = $_POST['tareas'];
+            $comentario = $_POST['comentario'];
             
             $fechareg = time()-17995;
             explodeFecha($inicio);
@@ -206,7 +207,7 @@ class ProgramacionController {
                     $prog = $objProgramacion->find($man);
                     $no = $prog['detprog_id']+ 1;
                     $detalle = "INSERT INTO pag_det_programacion(detprog_id,proequi_id,ttra_id,detprog_duracion_horas,"
-                            . "equi_id,comp_id,priotra_id,tar_id,tmed_id,frecuencia,frec_actual,frec_medc,est_id)"
+                            . "equi_id,comp_id,priotra_id,tar_id,tmed_id,frecuencia,frec_actual,frec_medc,texto_guia,est_id)"
                             . "VALUES"
                             . "(" . $no . ","
                             . "" . $co[$a] . ","
@@ -220,6 +221,7 @@ class ProgramacionController {
                             . "" . $frecuencias[$a] . ","
                             . "0,"
                             . "0,"
+                            . "'".$comentario[$a]."',"
                             . "1)";
 
                     $deta = $objProgramacion->insertar($detalle);

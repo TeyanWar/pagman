@@ -22,7 +22,7 @@
         </div>
         <!--Fin contenedor mensajes de error-->
         <div class="row">
-            <form class="col s12" action="<?php echo crearUrl("equipos", "tipoEquipo", "ajaxGuardarCampoPersonalizado")?>" method="POST" id="formTipoEquipo">
+            <form class="col s12" action="<?php echo crearUrl("equipos", "tipoEquipo", "ajaxGuardarCampoPersonalizado") ?>" method="POST" id="formTipoEquipo">
                 <div class="row col s6">
                     <div class="input-field">
                         <input type="text" id="id_tipo_Equipo" name="id_tipo_Equipo" class="validate" data-error=".errorTxt1">
@@ -57,6 +57,7 @@
                                                     <th>#</th>
                                                     <th data-field="cod_campo">C&oacute;digo campo</th>
                                                     <th data-field="nom_campo">Nombre equipo</th>
+                                                    <th colspan="2"data-field="cantidad">Cantidad</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>

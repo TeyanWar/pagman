@@ -327,3 +327,39 @@ function encargadoOts()
 
     return $rowot;
 }
+
+//---------consulta para aplicarlos en el grafico de mantenimientos preventivos-------
+function porcresul()
+{
+    $objinicio = new sesionModel();
+
+        $siestd = "SELECT COUNT(*) AS totalsi FROM pag_orden_trabajo "
+                . "WHERE pag_orden_trabajo.estandar='Si cumple' "
+                . "AND pag_orden_trabajo.id_mantenimiento IS NOT NULL "
+                . "AND pag_orden_trabajo.estandar IS NOT NULL "
+                . "AND pag_orden_trabajo.estado IS NULL "
+                . "ORDER BY pag_orden_trabajo.ot_id";
+
+        $si = $objinicio->find($siestd);
+        //-------------------------------------------------------
+        $nosmant = "SELECT COUNT(*) AS totalno FROM pag_orden_trabajo "
+                . "WHERE pag_orden_trabajo.estandar='No cumple' "
+                . "AND pag_orden_trabajo.id_mantenimiento IS NOT NULL "
+                . "AND pag_orden_trabajo.estandar IS NOT NULL "
+                . "AND pag_orden_trabajo.estado IS NULL "
+                . "ORDER BY pag_orden_trabajo.ot_id";
+
+        $no = $objinicio->find($nosmant);
+        //----------------------------------------------------------
+        $total = $si + $no;
+        //-----------porcentaje los que si cumplen------------------
+        $porS = ($si/$total)*100;
+        //-----------porcentaje los que no cumplen------------------
+        $porN = ($no/$total)*100;
+    
+    // Cierra la conexion
+    $objinicio->cerrar();
+    $porcentajes = array($porS,$porN);
+
+    return $porcentajes;
+}

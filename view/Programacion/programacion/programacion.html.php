@@ -92,7 +92,6 @@
     </div>
     <div class='row'>
 
-  
         <div class="input-field col s4">
             <small style="color: #848484;">(*) Prioridad de trabajo</small>
             <select id="prio" class="select2">
@@ -101,7 +100,19 @@
                 <?php } ?>
             </select>
         </div>
-      
+
+    </div>
+    
+    <div class="row">
+        <br>
+        <div class="input-field col s12">
+            <label for="tario"  class="active">Comentario guia</label>
+            <textarea id="tario" class="materialize-textarea" length="120"></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        
         <div class="input-field offset-s4 col s2 ">
             <a class="btn-floating btn-large waves-effect waves-light cyan lighten-1  modal-action modal-close" href="#" id="tab"  data-url="<?php echo crearUrl('Programacion', 'programacion', 'añadirFila', array('noVista' => "noVista")); ?>">
                 <i class="mdi-content-add"></i></a>
@@ -110,7 +121,7 @@
              <a class="btn-floating btn-large waves-effect waves-light red  modal-action modal-close" href="#" >
                 <i class="mdi-content-clear"></i></a>
         </div>
-
+        
     </div>
    
 
@@ -120,7 +131,8 @@
     #mod{
         top: 17% !important;
         max-height: 100%;
-        height: 65%;
+        height: 75%;
+        width: 80%;
     }
 </style>
 
