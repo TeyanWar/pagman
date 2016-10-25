@@ -33,8 +33,7 @@ class OtController {
 
         $ordenes = $objBuscar->select($sql);
 		
-        //Paginado
-	
+        //Paginado	
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
         $url = crearUrl('ot', 'ot', 'listar');
         

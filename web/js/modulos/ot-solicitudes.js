@@ -1,26 +1,26 @@
 $(document).ready(function () {
-
+        
 //buscador solicitudes
     //$('#buscador').focus()
-    $('#buscador').keyup(function () {
-        var solicitud = $('#buscador').val();
-        
-        if(solicitud != ""){
-            $('#pagina').val(1);
-        }
-        
-        var pagina = $('#pagina').val();        
-        var url = $(this).attr("data-url");
-
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: "resul=" + solicitud+"&pagina="+pagina,
-            success: function (data) {
-                $('#listar').html(data);
-            }
-        });        
-    });
+//    $('#buscador').keyup(function () {
+//        var solicitud = $('#buscador').val();
+//        
+//        if(solicitud !== ""){
+//            $('#pagina').val(1);
+//        }
+//        
+//        var pagina = $('#pagina').val();        
+//        var url = $(this).attr("data-url");
+//
+//        $.ajax({
+//            url: url,
+//            type: "POST",
+//            data: "resultado=" + solicitud+"&pagina="+pagina,
+//            success: function (data) {
+//                $('#listar').html(data);
+//            }
+//        });        
+//    });
 
     $('#buscador').trigger('keyup');
 //fin: buscador solicitudes
@@ -304,5 +304,23 @@ $(document).ready(function () {
         var id = $(this).attr('data-id');
         $("#fher-" + id).remove();
     });
+    
+    $('#buscador').focus();
+    $('#buscador').keyup(function () {
+        var solicitud = $('#buscador').val();
+        var url = $(this).attr("data-url");
+        
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "resultado=" + solicitud,
+            success: function (data) {
+                $('#listar').html(data);
+            }
+        });
+    });
+
+$('#buscador').trigger('keyup');
 
 });//fin: $(document).ready
+
