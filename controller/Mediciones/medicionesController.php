@@ -59,11 +59,11 @@ class MedicionesController {
 //    }
 
     function detalle($parametros) {
-        
+
         $objDetalle = new MedicionesModel();
         $id = $parametros[1];
         $equi_nombre = $parametros[2];
-        $sql="SELECT cm.ctrmed_fecha AS fecha_medicion, cm.ctrmed_medida_actual AS valor_medicion, tm.tmed_nombre AS tipo_medida, 
+        $sql = "SELECT cm.ctrmed_fecha AS fecha_medicion, cm.ctrmed_medida_actual AS valor_medicion, tm.tmed_nombre AS tipo_medida, 
                 CONCAT(p.per_nombre,' ',p.per_apellido) AS encargado 
               FROM pag_control_medidas cm, pag_tipo_medidor tm, pag_persona p  
               WHERE cm.tmed_id=tm.tmed_id AND cm.per_id=p.per_id AND cm.equi_id='$id' 
@@ -72,17 +72,17 @@ class MedicionesController {
         // ORGANIZAR CON EL MÉTODO BURBUJA //
 
         $detalleMediciones = $objDetalle->select($sql);
-            /*
-             * Paginado
-             */
-            $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-            $url = crearUrl('mediciones', 'mediciones', 'detalle',array('noVista',$id,$equi_nombre));
+        /*
+         * Paginado
+         */
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+        $url = crearUrl('mediciones', 'mediciones', 'detalle', array('noVista', $id, $equi_nombre));
 
-            $paginado = new Paginado($detalleMediciones, $pagina, $url,3);
-            $detalleMediciones = $paginado->getDatos();
-            /*
-             * Fin paginado
-             */
+        $paginado = new Paginado($detalleMediciones, $pagina, $url, 3);
+        $detalleMediciones = $paginado->getDatos();
+        /*
+         * Fin paginado
+         */
         // Cierra la conexion
 
         $sql = "SELECT tm.tmed_nombre AS medidor, SUM(cm.ctrmed_medida_actual) AS total 
@@ -128,7 +128,7 @@ class MedicionesController {
                 pdt.equi_id=pe.equi_id and
                 pdt.tmed_id=ptm.tmed_id AND
                 pdt.equi_id='$idEquipo' And "
-                ."ptm.tmed_tipo='Manual'";
+                . "ptm.tmed_tipo='Manual'";
         $medidores = $objMedidor->select($sql);
         $objEquipos->cerrar();
         include_once '../view/Mediciones/mediciones/ajaxAgregarEquipo.html.php';
@@ -265,17 +265,17 @@ class MedicionesController {
 
             $equipos[$keyEquipo]['tiposMedidores'] = $tiposMedidores;
         }
-            
+
         /*
          * Paginado
          */
-        $pagina = (isset($_REQUEST['pagina'])?$_REQUEST['pagina']:1); 
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
         $url = crearUrl('mediciones', 'mediciones', 'listar');
-        
+
 //        $paginado = new Paginado($equipos[$keyEquipo]['tiposMedidores'], $pagina, $url);
-            $paginado = new Paginado($equipos, $pagina, $url,2);
-        
-        $equipos= $paginado->getDatos();
+        $paginado = new Paginado($equipos, $pagina, $url, 2);
+
+        $equipos = $paginado->getDatos();
         /*
          * Fin paginado.
          */
