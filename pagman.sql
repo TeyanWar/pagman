@@ -1,19 +1,20 @@
--- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: pagman
--- ------------------------------------------------------
--- Server version	10.1.13-MariaDB
+-- Servidor: localhost
+-- Tiempo de generación: 27-10-2016 a las 02:18:17
+-- Versión del servidor: 10.1.16-MariaDB
+-- Versión de PHP: 5.6.24
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `pagman`
@@ -58,10 +59,18 @@ INSERT INTO `pag_area` (`area_id`, `area_descripcion`, `estado`) VALUES
 --
 
 CREATE TABLE `pag_campos_personalizados` (
-  `cp_id` int(11) NOT NULL,
+  `cp_id` varchar(30) NOT NULL,
   `cp_nombre` varchar(45) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pag_campos_personalizados`
+--
+
+INSERT INTO `pag_campos_personalizados` (`cp_id`, `cp_nombre`, `estado`) VALUES
+('CP01', 'Metros', NULL),
+('CP02', 'Centimetros', NULL);
 
 -- --------------------------------------------------------
 
@@ -200,7 +209,8 @@ INSERT INTO `pag_controlador` (`cont_id`, `mod_id`, `cont_nombre`, `cont_icono`,
 (18, 13, 'rolesController', 'mdi-social-group', 'Roles', 'Controlador de Roles'),
 (20, 15, 'usuariosController', 'mdi-action-account-circle', 'Usuarios', 'Controlador de Usuarios'),
 (23, 16, 'programacionController', 'mdi-editor-insert-invitation', 'Programacion', 'Controlador de Programacion'),
-(24, 16, 'ordenController', 'mdi-action-description', 'Ordenes Prog', 'Controlador de ordenprog');
+(24, 16, 'ordenController', 'mdi-action-description', 'Ordenes Prog', 'Controlador de ordenprog'),
+(25, 5, 'areaController', 'mdi-image-center-focus-strong', 'Area(s)', 'Controlador de Areas');
 
 -- --------------------------------------------------------
 
@@ -423,8 +433,9 @@ INSERT INTO `pag_det_programacion` (`detprog_id`, `proequi_id`, `ttra_id`, `detp
 
 CREATE TABLE `pag_det_tipoEquipo_camposPersonalizados` (
   `idDetalle` int(11) NOT NULL,
-  `tequi_id` varchar(12) NOT NULL,
+  `tequi_id` varchar(30) NOT NULL,
   `cp_id` varchar(20) NOT NULL,
+  `cantidad` int(12) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -432,21 +443,14 @@ CREATE TABLE `pag_det_tipoEquipo_camposPersonalizados` (
 -- Volcado de datos para la tabla `pag_det_tipoEquipo_camposPersonalizados`
 --
 
-INSERT INTO `pag_det_tipoEquipo_camposPersonalizados` (`idDetalle`, `tequi_id`, `cp_id`, `estado`) VALUES
-(29, 'CTE002', 'CP004', NULL),
-(30, 'CTE002', 'CP003', NULL),
-(31, 'CTE002', 'CP002', NULL),
-(32, 'CTE002', 'CP001', NULL),
-(33, 'TE01', 'CP004', NULL),
-(34, 'TE01', 'CP001', NULL),
-(35, 'T', 'CP003', NULL),
-(36, 'TE001', 'CP004', NULL),
-(37, 'TE001', 'CP004', NULL),
-(38, 'TE002', 'CP004', NULL),
-(39, 'TE003', 'CP004', NULL),
-(40, 'TE01', 'CP004', NULL),
-(41, 'TE00', 'CP004', NULL),
-(42, 'TE002', 'CP004', NULL);
+INSERT INTO `pag_det_tipoEquipo_camposPersonalizados` (`idDetalle`, `tequi_id`, `cp_id`, `cantidad`, `estado`) VALUES
+(43, 'TE04', 'CP01', 12, NULL),
+(44, 'TE04', 'CP01', 12, NULL),
+(45, 'TE04', 'CP01', 12, NULL),
+(46, 'TE04', 'CP01', 12, NULL),
+(47, 'TE04', 'CP01', 12, NULL),
+(48, 'TE04', 'CP01', 12, NULL),
+(49, 'TE04', 'CP02', 12, NULL);
 
 -- --------------------------------------------------------
 
@@ -480,11 +484,11 @@ CREATE TABLE `pag_equipo` (
 --
 
 INSERT INTO `pag_equipo` (`equi_id`, `per_id`, `equi_nombre`, `est_id`, `cen_id`, `equi_foto`, `tmed_id`, `equi_valor_tmed`, `equi_fabricante`, `equi_marca`, `equi_modelo`, `equi_serie`, `equi_ubicacion`, `equi_fecha_compra`, `equi_fecha_instalacion`, `equi_vence_garantia`, `area_id`, `estado`) VALUES
-('0123', 1151956249, 'Fresadora', 1, 2, '', NULL, NULL, 'Asus', 'wert', '2016', '12245', 'Cali', '2016-04-27', '2016-04-27', '2016-10-25', 1, NULL),
-('1', 1151956249, 'Torno CNC', 0, 1, '', 1, 1, 'Mazda', 'Mazda', 'Mazda', 'Mazda 123', 'Cali', '2016-03-01', '2016-03-02', '2016-03-31', 1, NULL),
-('EP_003', 1151956249, 'Carro', 1, 1, 'equipo-EP_003', NULL, NULL, 'HP', 'HP', 'HP', '3456', 'Salomia', '2016-02-02', '2016-03-02', '2018-02-02', 1, NULL),
-('PC_002', 1151956249, 'Grua', 1, 1, 'm', NULL, NULL, 'Lenovo', 'Lenovo', 'Lenovo', '7431', 'Sena', '2016-04-08', '2016-04-08', '2016-04-15', 2, NULL),
-('TC001', 1151956249, 'Torno Convencional', 1, 1, '', NULL, NULL, 'Tornos Technologies Ibérica, S.A', 'Valor', '2016', '123456', 'CDTI', '2014-04-12', '2014-05-12', '2020-04-12', 1, NULL);
+('0123', 1151956249, 'Fresadora', 1, 2, '', NULL, NULL, 'Asus', 'wert', '2016', '12245', 'Cali', '2016-04-27', '2016-04-27', '2016-10-25', 1, '2016-10-27 00:10:31'),
+('1', 1151956249, 'Torno CNC', 0, 1, '', 1, 1, 'Mazda', 'Mazda', 'Mazda', 'Mazda 123', 'Cali', '2016-03-01', '2016-03-02', '2016-03-31', 1, '2016-10-27 00:10:35'),
+('EP_003', 1151956249, 'Carro', 1, 1, 'equipo-EP_003', NULL, NULL, 'HP', 'HP', 'HP', '3456', 'Salomia', '2016-02-02', '2016-03-02', '2018-02-02', 1, '2016-10-27 00:10:33'),
+('PC_002', 1151956249, 'Grua', 1, 1, 'm', NULL, NULL, 'Lenovo', 'Lenovo', 'Lenovo', '7431', 'Sena', '2016-04-08', '2016-04-08', '2016-04-15', 2, '2016-10-27 00:10:37'),
+('TC001', 1151956249, 'Torno Convencional', 1, 1, '', NULL, NULL, 'Tornos Technologies Ibérica, S.A', 'Valor', '2016', '123456', 'CDTI', '2014-04-12', '2014-05-12', '2020-04-12', 1, '2016-10-27 00:10:39');
 
 -- --------------------------------------------------------
 
@@ -654,7 +658,11 @@ INSERT INTO `pag_funcion` (`func_id`, `cont_id`, `func_nombre`, `func_display`, 
 (83, 23, 'editar', 'Editar Programacion', 'Editar Programacion'),
 (84, 23, 'listar', 'Listar Programacion', 'Listar Programacion'),
 (85, 23, 'eliminar', 'Eliminar Programacion', 'Eliminar Programacion'),
-(86, 24, 'crear', 'Crear orden', 'Crear orden programada');
+(86, 24, 'crear', 'Crear orden', 'Crear orden programada'),
+(87, 25, 'crear', 'Crear Area', 'Crear Area'),
+(88, 25, 'editar', 'Editar Area', 'Editar Area'),
+(89, 25, 'eliminar', 'Eliminar Area', 'Eliminar Area'),
+(90, 25, 'listar', 'Listar Area', 'Listar Area');
 
 -- --------------------------------------------------------
 
@@ -829,76 +837,80 @@ CREATE TABLE `pag_permisos` (
 --
 
 INSERT INTO `pag_permisos` (`perm_id`, `func_id`, `rol_id`) VALUES
-(418, 73, 1),
-(417, 74, 1),
-(416, 75, 1),
-(415, 76, 1),
-(414, 77, 1),
-(413, 68, 1),
-(412, 67, 1),
-(411, 66, 1),
-(410, 65, 1),
-(409, 86, 1),
-(408, 85, 1),
-(407, 84, 1),
-(406, 83, 1),
-(405, 82, 1),
-(404, 60, 1),
-(403, 59, 1),
-(402, 58, 1),
-(401, 53, 1),
-(400, 52, 1),
-(399, 51, 1),
-(398, 50, 1),
-(397, 49, 1),
-(396, 48, 1),
-(395, 47, 1),
-(394, 46, 1),
-(393, 45, 1),
-(392, 44, 1),
-(391, 43, 1),
-(390, 42, 1),
-(389, 41, 1),
-(388, 40, 1),
-(387, 39, 1),
-(386, 38, 1),
-(385, 37, 1),
-(384, 36, 1),
-(383, 35, 1),
-(382, 34, 1),
-(381, 33, 1),
-(380, 32, 1),
-(379, 31, 1),
-(378, 30, 1),
-(377, 29, 1),
-(376, 28, 1),
-(375, 27, 1),
-(374, 26, 1),
-(373, 25, 1),
-(372, 24, 1),
-(371, 23, 1),
-(370, 22, 1),
-(369, 21, 1),
-(368, 20, 1),
-(367, 19, 1),
-(366, 18, 1),
-(365, 17, 1),
-(364, 16, 1),
-(363, 15, 1),
-(362, 14, 1),
-(361, 13, 1),
-(360, 12, 1),
-(359, 11, 1),
-(358, 10, 1),
-(357, 9, 1),
-(356, 8, 1),
-(355, 7, 1),
-(354, 6, 1),
-(353, 5, 1),
-(352, 4, 1),
-(351, 3, 1),
-(350, 2, 1),
-(349, 1, 1);
+(488, 77, 1),
+(487, 68, 1),
+(486, 67, 1),
+(485, 66, 1),
+(484, 65, 1),
+(483, 86, 1),
+(482, 85, 1),
+(481, 84, 1),
+(480, 83, 1),
+(479, 82, 1),
+(478, 60, 1),
+(477, 59, 1),
+(476, 58, 1),
+(475, 53, 1),
+(474, 52, 1),
+(473, 51, 1),
+(472, 50, 1),
+(471, 49, 1),
+(470, 48, 1),
+(469, 47, 1),
+(468, 46, 1),
+(467, 45, 1),
+(466, 44, 1),
+(465, 43, 1),
+(464, 42, 1),
+(463, 41, 1),
+(462, 40, 1),
+(461, 39, 1),
+(460, 38, 1),
+(459, 37, 1),
+(458, 36, 1),
+(457, 35, 1),
+(456, 34, 1),
+(455, 33, 1),
+(454, 32, 1),
+(453, 31, 1),
+(452, 30, 1),
+(451, 29, 1),
+(450, 28, 1),
+(449, 27, 1),
+(448, 26, 1),
+(447, 25, 1),
+(446, 24, 1),
+(445, 23, 1),
+(444, 22, 1),
+(443, 21, 1),
+(442, 20, 1),
+(441, 19, 1),
+(440, 18, 1),
+(439, 17, 1),
+(438, 16, 1),
+(437, 15, 1),
+(436, 14, 1),
+(435, 13, 1),
+(434, 81, 1),
+(433, 78, 1),
+(432, 79, 1),
+(431, 80, 1),
+(430, 12, 1),
+(429, 11, 1),
+(428, 10, 1),
+(427, 9, 1),
+(426, 8, 1),
+(425, 7, 1),
+(424, 6, 1),
+(423, 5, 1),
+(422, 4, 1),
+(421, 3, 1),
+(420, 2, 1),
+(419, 1, 1),
+(489, 76, 1),
+(490, 75, 1),
+(491, 74, 1),
+(492, 73, 1);
 
 -- --------------------------------------------------------
 
@@ -1138,7 +1150,7 @@ INSERT INTO `pag_tipo_doc` (`tdoc_id`, `tdoc_descripcion`, `estado`) VALUES
 --
 
 CREATE TABLE `pag_tipo_equipo` (
-  `tequi_id` int(11) NOT NULL,
+  `tequi_id` varchar(30) NOT NULL,
   `tequi_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1148,9 +1160,13 @@ CREATE TABLE `pag_tipo_equipo` (
 --
 
 INSERT INTO `pag_tipo_equipo` (`tequi_id`, `tequi_descripcion`, `estado`) VALUES
-(1, 'Electromecanico', NULL),
-(2, 'Hidraulico', NULL),
-(3, 'Refrigeraci?n', NULL);
+('1', 'Electromecanico', '0000-00-00 00:00:00'),
+('2', 'Hidraulico', '0000-00-00 00:00:00'),
+('3', 'Refrigeraci?n', '0000-00-00 00:00:00'),
+('TE001', 'Prueba BD', '0000-00-00 00:00:00'),
+('TE002', 'Prueba BD', '0000-00-00 00:00:00'),
+('TE03', 'Prueba BD', '0000-00-00 00:00:00'),
+('TE04', 'Prueba BD', NULL);
 
 -- --------------------------------------------------------
 
@@ -1428,7 +1444,9 @@ ALTER TABLE `pag_det_programacion`
 -- Indices de la tabla `pag_det_tipoEquipo_camposPersonalizados`
 --
 ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
-  ADD PRIMARY KEY (`idDetalle`);
+  ADD PRIMARY KEY (`idDetalle`),
+  ADD KEY `tequi_id` (`tequi_id`),
+  ADD KEY `cp_id` (`cp_id`);
 
 --
 -- Indices de la tabla `pag_equipo`
@@ -1662,7 +1680,7 @@ ALTER TABLE `pag_ciudad`
 -- AUTO_INCREMENT de la tabla `pag_controlador`
 --
 ALTER TABLE `pag_controlador`
-  MODIFY `cont_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `cont_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `pag_control_medidas`
 --
@@ -1707,7 +1725,7 @@ ALTER TABLE `pag_det_programacion`
 -- AUTO_INCREMENT de la tabla `pag_det_tipoEquipo_camposPersonalizados`
 --
 ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- AUTO_INCREMENT de la tabla `pag_equipo_componente`
 --
@@ -1732,7 +1750,7 @@ ALTER TABLE `pag_estado`
 -- AUTO_INCREMENT de la tabla `pag_funcion`
 --
 ALTER TABLE `pag_funcion`
-  MODIFY `func_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `func_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT de la tabla `pag_insumo`
 --
@@ -1762,7 +1780,7 @@ ALTER TABLE `pag_orden_trabajo`
 -- AUTO_INCREMENT de la tabla `pag_permisos`
 --
 ALTER TABLE `pag_permisos`
-  MODIFY `perm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=419;
+  MODIFY `perm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=493;
 --
 -- AUTO_INCREMENT de la tabla `pag_prestamo_herramienta`
 --
@@ -1808,11 +1826,6 @@ ALTER TABLE `pag_tiempo_medidor`
 --
 ALTER TABLE `pag_tipo_doc`
   MODIFY `tdoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `pag_tipo_equipo`
---
-ALTER TABLE `pag_tipo_equipo`
-  MODIFY `tequi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_falla`
 --
