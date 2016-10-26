@@ -210,6 +210,7 @@
         <div class="col s12 m4 l4">
             <div class="card">
                 <div class="teal waves-effect waves-block waves-light">
+                    <input type="hidden" id="grafico-est" name="grafico-est" value="<?php echo date('Y'); ?>" data-url="<?php  echo crearUrl("Programacion", "grafico", "Vergrafico", array('noVista'=>"noVista"))?>" >
                     <div class="move-up">
                         <br>
                         <h5 class="margin white-text" style="text-align: center;">Mantenimientos Preventivos</h5>
@@ -221,9 +222,10 @@
                 <div class="card-content  teal darken-2">
                     <div class="line-chart-wrapper">
                         <h6 class="margin white-text">Estandares De Mantenimiento</h6>
+                        
                         <ul class="doughnut-chart-legend">
-                            <li class="mobile ultra-small"><span class="legend-color"></span><p class="white-text">El 20% No cumple los estandares de mantenimiento.</p></li>
-                            <li class="home ultra-small"><span class="legend-color"></span><p  class="white-text">El 80% Si cumple los estandares de mantenimiento.</p></li>
+                            <li class="home ultra-small"><span class="legend-color"></span><p  class="white-text">El <small id="rsSI"></small>% Si cumple los estandares de mantenimiento.</p></li>
+                            <li class="mobile ultra-small"><span class="legend-color"></span><p class="white-text">El <small id="rsNO"></small>% No cumple los estandares de mantenimiento.</p></li>
                         </ul>
                     </div>
                 </div>
