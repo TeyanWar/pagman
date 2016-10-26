@@ -100,6 +100,14 @@
             </div>
         <?php } ?>
     </div>
+    <div class="row">
+        <?php if($detalleOrdenes['estandar']!=""){ ?>
+            <div class="input-field col s5 m5 l5">
+                <small style="color: #448aff;"><h6>¿Cumplio con los estandares de mantenimiento?</h6></small>
+                <?php echo $detalleOrdenes['estandar'] ?>
+            </div>
+        <?php } ?>
+    </div>
     <br>
     <div class="row">        
         <div class="col s6">
