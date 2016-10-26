@@ -1,19 +1,20 @@
--- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
+-- phpMyAdmin SQL Dump
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: pagman
--- ------------------------------------------------------
--- Server version	10.1.13-MariaDB
+-- Servidor: localhost
+-- Tiempo de generación: 27-10-2016 a las 03:53:02
+-- Versión del servidor: 10.1.16-MariaDB
+-- Versión de PHP: 5.6.24
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `pagman`
@@ -112,7 +113,7 @@ CREATE TABLE `pag_centro` (
 --
 
 INSERT INTO `pag_centro` (`cen_id`, `cen_codigo`, `cen_nombre`, `cen_dir`, `cen_telefono`, `reg_id`, `estado`) VALUES
-(1, '9229', 'CDTI', 'Pondaje', '3275647', 3, NULL),
+(1, '9229', 'CDTI', 'Pondaje', '3275647', 4, NULL),
 (2, '4893', 'CEAI', 'Salomia', '2345', 4, NULL),
 (3, '7846', 'ASTIN', 'Salomia', '5678', 5, NULL);
 
@@ -164,7 +165,7 @@ CREATE TABLE `pag_componente` (
 
 INSERT INTO `pag_componente` (`comp_id`, `comp_descripcion`, `estado`) VALUES
 ('1', 'Polea', NULL),
-('2', 'Cadena', NULL),
+('2', 'Pi&ntilde;&oacute;n', NULL),
 ('3', 'motor', NULL),
 ('9999', 'INDEFINIDO', NULL);
 
@@ -412,7 +413,6 @@ CREATE TABLE `pag_det_programacion` (
   `frec_actual` int(11) NOT NULL,
   `frec_medc` varchar(45) DEFAULT NULL,
   `texto_guia` varchar(200) DEFAULT NULL,
-  `costo_comp` varchar(45) DEFAULT NULL,
   `est_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -420,10 +420,10 @@ CREATE TABLE `pag_det_programacion` (
 -- Volcado de datos para la tabla `pag_det_programacion`
 --
 
-INSERT INTO `pag_det_programacion` (`detprog_id`, `proequi_id`, `ttra_id`, `detprog_duracion_horas`, `equi_id`, `comp_id`, `priotra_id`, `tar_id`, `tmed_id`, `frecuencia`, `frec_actual`, `frec_medc`, `texto_guia`, `costo_comp`, `est_id`) VALUES
-(1, 1, 1, 2, '1', '1', 3, 1, 9, 1, 1, '0', 'revisar todo', NULL, 1),
-(2, 2, 4, 4, '0123', '9999', 2, 2, 9, 5, 0, '0', 'revisar a fondo', NULL, 1),
-(3, 3, 3, 5, '0123', '9999', 3, 3, 9, 1, 0, '0', 'realizar revision de cableado electrico', NULL, 1);
+INSERT INTO `pag_det_programacion` (`detprog_id`, `proequi_id`, `ttra_id`, `detprog_duracion_horas`, `equi_id`, `comp_id`, `priotra_id`, `tar_id`, `tmed_id`, `frecuencia`, `frec_actual`, `frec_medc`, `texto_guia`, `est_id`) VALUES
+(1, 1, 1, 2, '1', '1', 3, 1, 9, 1, 1, '0', 'laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.\r\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu.\r\nooooooooooooooooooooooooooooooooooooooooooooooooooo.\r\nmmmmmmmmmmm', 1),
+(2, 2, 4, 4, '0123', '9999', 2, 2, 9, 5, 0, '0', 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.\r\nyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy.\r\njjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', 1),
+(3, 3, 3, 5, '0123', '9999', 3, 3, 9, 1, 0, '0', 'realizar revision de cableado electrico', 1);
 
 -- --------------------------------------------------------
 
@@ -450,7 +450,18 @@ INSERT INTO `pag_det_tipoEquipo_camposPersonalizados` (`idDetalle`, `tequi_id`, 
 (46, 'TE04', 'CP01', 12, NULL),
 (47, 'TE04', 'CP01', 12, NULL),
 (48, 'TE04', 'CP01', 12, NULL),
-(49, 'TE04', 'CP02', 12, NULL);
+(49, 'TE04', 'CP02', 12, NULL),
+(50, 'TE043', 'CP02', 12, NULL),
+(51, 'TE043', 'CP02', 12, NULL),
+(52, 'TE043', 'CP02', 12, NULL),
+(53, 'TE06', 'CP02', 12, NULL),
+(54, 'TE06', 'CP02', 12, NULL),
+(55, 'TE06', 'CP02', 12, NULL),
+(56, 'TE06', 'CP02', 12, NULL),
+(57, 'TE06', 'CP02', 12, NULL),
+(58, 'TE06', 'CP02', 12, NULL),
+(59, 'TE06', 'CP02', 12, NULL),
+(60, 'TE06', 'CP02', 12, NULL);
 
 -- --------------------------------------------------------
 
@@ -463,10 +474,9 @@ CREATE TABLE `pag_equipo` (
   `per_id` bigint(20) NOT NULL,
   `equi_nombre` varchar(100) NOT NULL,
   `est_id` int(11) NOT NULL,
+  `tequi_id` varchar(30) NOT NULL,
   `cen_id` int(11) NOT NULL,
   `equi_foto` varchar(100) DEFAULT NULL,
-  `tmed_id` int(11) DEFAULT NULL,
-  `equi_valor_tmed` int(11) DEFAULT NULL,
   `equi_fabricante` varchar(45) NOT NULL,
   `equi_marca` varchar(45) NOT NULL,
   `equi_modelo` varchar(45) NOT NULL,
@@ -483,12 +493,12 @@ CREATE TABLE `pag_equipo` (
 -- Volcado de datos para la tabla `pag_equipo`
 --
 
-INSERT INTO `pag_equipo` (`equi_id`, `per_id`, `equi_nombre`, `est_id`, `cen_id`, `equi_foto`, `tmed_id`, `equi_valor_tmed`, `equi_fabricante`, `equi_marca`, `equi_modelo`, `equi_serie`, `equi_ubicacion`, `equi_fecha_compra`, `equi_fecha_instalacion`, `equi_vence_garantia`, `area_id`, `estado`) VALUES
-('0123', 1151956249, 'Fresadora', 1, 2, '', NULL, NULL, 'Asus', 'wert', '2016', '12245', 'Cali', '2016-04-27', '2016-04-27', '2016-10-25', 1, '2016-10-27 00:10:31'),
-('1', 1151956249, 'Torno CNC', 0, 1, '', 1, 1, 'Mazda', 'Mazda', 'Mazda', 'Mazda 123', 'Cali', '2016-03-01', '2016-03-02', '2016-03-31', 1, '2016-10-27 00:10:35'),
-('EP_003', 1151956249, 'Carro', 1, 1, 'equipo-EP_003', NULL, NULL, 'HP', 'HP', 'HP', '3456', 'Salomia', '2016-02-02', '2016-03-02', '2018-02-02', 1, '2016-10-27 00:10:33'),
-('PC_002', 1151956249, 'Grua', 1, 1, 'm', NULL, NULL, 'Lenovo', 'Lenovo', 'Lenovo', '7431', 'Sena', '2016-04-08', '2016-04-08', '2016-04-15', 2, '2016-10-27 00:10:37'),
-('TC001', 1151956249, 'Torno Convencional', 1, 1, '', NULL, NULL, 'Tornos Technologies Ibérica, S.A', 'Valor', '2016', '123456', 'CDTI', '2014-04-12', '2014-05-12', '2020-04-12', 1, '2016-10-27 00:10:39');
+INSERT INTO `pag_equipo` (`equi_id`, `per_id`, `equi_nombre`, `est_id`, `tequi_id`, `cen_id`, `equi_foto`, `equi_fabricante`, `equi_marca`, `equi_modelo`, `equi_serie`, `equi_ubicacion`, `equi_fecha_compra`, `equi_fecha_instalacion`, `equi_vence_garantia`, `area_id`, `estado`) VALUES
+('0123', 1151956249, 'Fresadora', 1, '', 2, '', 'Asus', 'wert', '2016', '12245', 'Cali', '2016-04-27', '2016-04-27', '2016-10-25', 1, '2016-10-27 00:10:31'),
+('1', 1151956249, 'Torno CNC', 0, '', 1, '', 'Mazda', 'Mazda', 'Mazda', 'Mazda 123', 'Cali', '2016-03-01', '2016-03-02', '2016-03-31', 1, '2016-10-27 00:10:35'),
+('EP_003', 1151956249, 'Carro', 1, '', 1, 'equipo-EP_003', 'HP', 'HP', 'HP', '3456', 'Salomia', '2016-02-02', '2016-03-02', '2018-02-02', 1, '2016-10-27 00:10:33'),
+('PC_002', 1151956249, 'Grua', 1, '', 1, 'm', 'Lenovo', 'Lenovo', 'Lenovo', '7431', 'Sena', '2016-04-08', '2016-04-08', '2016-04-15', 2, '2016-10-27 00:10:37'),
+('TC001', 1151956249, 'Torno Convencional', 1, '', 1, '', 'Tornos Technologies Ibérica, S.A', 'Valor', '2016', '123456', 'CDTI', '2014-04-12', '2014-05-12', '2020-04-12', 1, '2016-10-27 00:10:39');
 
 -- --------------------------------------------------------
 
@@ -807,7 +817,6 @@ CREATE TABLE `pag_orden_trabajo` (
   `per_id` bigint(20) DEFAULT NULL,
   `id_mantenimiento` varchar(45) DEFAULT NULL,
   `estandar` varchar(20) DEFAULT NULL,
-  `ot_horas_trabajadas` varchar(45) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -815,11 +824,11 @@ CREATE TABLE `pag_orden_trabajo` (
 -- Volcado de datos para la tabla `pag_orden_trabajo`
 --
 
-INSERT INTO `pag_orden_trabajo` (`ot_id`, `ot_fecha_creacion`, `ot_prioridad`, `ot_desc_falla`, `ot_fecha_inicio`, `ot_fecha_fin`, `ot_ayudantes`, `ot_desc_trabajo`, `ot_observacion`, `est_id`, `cen_id`, `equi_id`, `tfa_id`, `per_id`, `id_mantenimiento`, `estandar`, `ot_horas_trabajadas`, `estado`) VALUES
-(4, '2016-10-23 14:58:34', 'Media', 'mantenimiento preventivo', '23 October, 201', '24 October, 201', 'jhonatan', 'Cambiar piezas', 'se rayo el capon', 6, 1, '1', 1, 1151956249, '1', NULL, NULL, NULL),
-(5, '2016-10-23 23:08:43', 'Baja', 'mantenimiento preventivo', '23 October, 201', '25 October, 201', 'liceth', 'Lubricacion', '', 3, 1, '0123', 1, 9870111123, '2', 'Si cumple', NULL, NULL),
-(6, '2016-10-24 16:39:05', 'Media', 'mantenimiento preventivo', '24 October, 201', '25 October, 201', 'lenny', 'Limpieza', '', 3, 1, '0123', 1, 1151956249, '3', 'No cumple', NULL, NULL),
-(7, '2016-10-24 17:14:58', 'Media', 'mantenimiento preventivo', '25 October, 201', '26 October, 201', 'carol', 'Cambiar piezas', '', 3, 1, '1', 1, 9870111123, '1', 'No cumple', NULL, NULL);
+INSERT INTO `pag_orden_trabajo` (`ot_id`, `ot_fecha_creacion`, `ot_prioridad`, `ot_desc_falla`, `ot_fecha_inicio`, `ot_fecha_fin`, `ot_ayudantes`, `ot_desc_trabajo`, `ot_observacion`, `est_id`, `cen_id`, `equi_id`, `tfa_id`, `per_id`, `id_mantenimiento`, `estandar`, `estado`) VALUES
+(4, '2016-10-23 14:58:34', 'Media', 'mantenimiento preventivo', '23 October, 201', '24 October, 201', 'jhonatan', 'Cambiar piezas', 'se rayo el capon', 6, 1, '1', 1, 1151956249, '1', NULL, NULL),
+(5, '2016-10-23 23:08:43', 'Baja', 'mantenimiento preventivo', '23 October, 201', '25 October, 201', 'liceth', 'Lubricacion', '', 3, 1, '0123', 1, 9870111123, '2', 'Si cumple', NULL),
+(6, '2016-10-24 16:39:05', 'Media', 'mantenimiento preventivo', '24 October, 201', '25 October, 201', 'lenny', 'Limpieza', '', 3, 1, '0123', 1, 1151956249, '3', 'No cumple', NULL),
+(7, '2016-10-24 17:14:58', 'Media', 'mantenimiento preventivo', '25 October, 201', '26 October, 201', 'carol', 'Cambiar piezas', '', 3, 1, '1', 1, 9870111123, '1', 'No cumple', NULL);
 
 -- --------------------------------------------------------
 
@@ -1167,7 +1176,9 @@ INSERT INTO `pag_tipo_equipo` (`tequi_id`, `tequi_descripcion`, `estado`) VALUES
 ('TE001', 'Prueba BD', '0000-00-00 00:00:00'),
 ('TE002', 'Prueba BD', '0000-00-00 00:00:00'),
 ('TE03', 'Prueba BD', '0000-00-00 00:00:00'),
-('TE04', 'Prueba BD', NULL);
+('TE04', 'Prueba BD', NULL),
+('TE043', 'prueba dos', NULL),
+('TE06', 'Prueba Tres', NULL);
 
 -- --------------------------------------------------------
 
@@ -1455,7 +1466,8 @@ ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
 ALTER TABLE `pag_equipo`
   ADD PRIMARY KEY (`equi_id`),
   ADD KEY `per_id` (`per_id`),
-  ADD KEY `cen_id` (`cen_id`);
+  ADD KEY `cen_id` (`cen_id`),
+  ADD KEY `tequi_id` (`tequi_id`);
 
 --
 -- Indices de la tabla `pag_equipo_componente`
@@ -1726,7 +1738,7 @@ ALTER TABLE `pag_det_programacion`
 -- AUTO_INCREMENT de la tabla `pag_det_tipoEquipo_camposPersonalizados`
 --
 ALTER TABLE `pag_det_tipoEquipo_camposPersonalizados`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT de la tabla `pag_equipo_componente`
 --
