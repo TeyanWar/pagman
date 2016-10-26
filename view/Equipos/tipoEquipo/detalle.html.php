@@ -6,6 +6,7 @@
 <table class="striped">
     <thead>
         <tr>
+            <th>#</th>
             <th data-field="name">Código del campo</th>
             <th data-field="price">Nombre/Descripción del campo</th>
             <th>Cantidad</th>
@@ -20,6 +21,7 @@
         <?php foreach ($sqlDetalle as $tipoEquipo) { ?>
             <tr>
                 <?php //die(print_r($tipoEquipo['cp_nombre']));   ?>
+                <td><?php echo $paginado->count++ ?></td>
                 <td><?php echo $tipoEquipo['cp_id']; ?></td>
                 <td><?php echo $tipoEquipo['cp_nombre']; ?></td>
                 <td><?php echo $tipoEquipo['cantidad']; ?></td>
@@ -27,4 +29,6 @@
         <?php } ?>
     </tbody>
 </table>
-<?php $paginado->render() ?>
+<div class="ajax_paginate">
+    <?php $paginado->render() ?>
+</div>

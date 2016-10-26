@@ -507,16 +507,9 @@ class EquiposController {
         $id = $parametros[1];
         $objTipoEquipo = new EquiposModel();
                 
-        $sql = "SELECT * FROM pag_equipo,pag_persona,pag_estado"
-                . " WHERE pag_equipo.per_id=pag_persona.per_id "
-                . "AND pag_equipo.est_id=pag_estado.est_id "
-                . "AND tdoc_id=1 AND equi_id='$id'";
+        $sql = "SELECT * FROM pag_equipo,pag_persona,pag_estado,pag_tipo_equipo WHERE pag_equipo.per_id=pag_persona.per_id AND pag_equipo.est_id=pag_estado.est_id AND pag_equipo.tequi_id=pag_tipo_equipo.tequi_id AND tdoc_id=1 AND equi_id='$id'";
 
         $equipo = $objEquipos->find($sql);
-
-        $sql1 = "SELECT * FROM pag_tipo_equipo,pag_equipo WHERE "
-                . "pag_equipo.tequi_id=pag_tipo_equipo.tequi_id='$id'";
-        $tipoEquipo = $objTipoEquipo->find($sql1);
         
         // Cierra la conexion
         $objTipoEquipo->cerrar();
