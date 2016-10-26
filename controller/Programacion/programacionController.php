@@ -289,17 +289,17 @@ class ProgramacionController {
 
             foreach ($_POST['cod'] as $codigo) {
                 if(isset($codigo[$b]) && empty($_POST['horas'][$b])){
-                    $errores[]='(*) El campo <strong>"Duracion horas"</strong> es obligatorio. para la tarea: <strong>' .$_POST['tareas'][$b]. '</strong>';
+                    $errores[]='El campo <code><b>Duracion horas</b></code> es obligatorio. para la tarea: <strong>' .$_POST['tareas'][$b]. '</strong>';
                 }
                 if(isset($codigo[$b]) && !preg_match($patronNumeros,$_POST['horas'][$b])){
-                    $errores[]='(*) El campo <strong>"Duracion horas"</strong> debe ser numerico. para la tarea: <strong>' .$_POST['tareas'][$b]. '</strong>';
+                    $errores[]='El campo <code><b>Duracion horas</b></code> debe ser numerico. para la tarea: <strong>' .$_POST['tareas'][$b]. '</strong>';
                 }
                 
                 if(isset($codigo[$b]) && empty($_POST['frecuencia'][$b])){
-                    $errores[]='(*) El campo <strong>"Frecuencia"</strong> es obligatorio. para la tarea: <strong>' .$_POST['tareas'][$b]. '</strong>';
+                    $errores[]='El campo <code><b>Frecuencia</b></code> es obligatorio. para la tarea: <strong>' .$_POST['tareas'][$b]. '</strong>';
                 }
                 if(isset($codigo[$b]) && !preg_match($patronNumeros,$_POST['frecuencia'][$b])){
-                    $errores[]='(*) El campo <strong>"Frecuencia"</strong> debe ser numerico. para la tarea: <strong>' .$_POST['tareas'][$b]. '</strong>';
+                    $errores[]='El campo <code><b>Frecuencia</b></code> debe ser numerico. para la tarea: <strong>' .$_POST['tareas'][$b]. '</strong>';
                 }
                 
                 $b++;
@@ -308,7 +308,7 @@ class ProgramacionController {
 
         if(count($errores)>0){
             setErrores($errores);
-//            redirect(crearUrl("programacion", "programacion", "listar"));
+            echo getErrores();
             //----------------fin validaciones-----------------
         }else{
             
@@ -353,8 +353,6 @@ class ProgramacionController {
                 $objProgramacion->cerrar();
                 
                 echo true;
-//                redirect(crearUrl('programacion', 'programacion', 'listar'));
-
             }  else {
                 echo false;
             }

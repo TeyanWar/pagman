@@ -17,20 +17,7 @@
             <span aria-hidden="true">×</span>
         </button>
     </div>
-    
-    <?php $error=getErrores(); ?>
-    <?php if (!$error=="") { ?>
-       <div id="card-alert" class="card red">
-           <div class="card-content white-text">
-               <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
-           </div>
 
-           <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">×</span>
-           </button>
-       </div>
-   <?php } ?>
-    
     <div class="input-field col s8">
         <i class="mdi-action-search prefix"></i>   
         <input type="text" id="cate" name='usuario' value="" class="validate" data-url="<?php echo crearUrl("Usuarios", "usuarios", "consultarAjax", array('noVista' => "noVista")) ?>" >

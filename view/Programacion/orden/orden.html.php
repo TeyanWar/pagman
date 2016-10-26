@@ -23,8 +23,8 @@
     
     <div class="row">
 
-        <div class="col s3">
-            <label>Busqueda por: Equipo</label>
+        <div class="input-field col s3">
+            <small style="color: #848484;">Busqueda por: Equipo</small>
             <select class="select2" id="equipo" name="program" data-url="<?php  echo crearUrl("Programacion", "orden", "consultarAjax", array('noVista'=>"noVista"))?>" >
                 <option value="" disabled selected>Seleccione</option>
                 <?php 
@@ -35,8 +35,8 @@
             </select>
         </div>
 
-        <div class="col s3">
-            <label>Busqueda por: Tipo trabajo</label>
+        <div class="input-field col s3">
+            <small style="color: #848484;">Busqueda por: Tipo trabajo</small>
             <select class="select2" id="trabajo" name="program" data-url="<?php  echo crearUrl("Programacion", "orden", "consultarAjax", array('noVista'=>"noVista"))?>" >
                 <option value="" disabled selected>Seleccione</option>
                 <?php 
@@ -47,8 +47,8 @@
             </select>
         </div>
 
-        <div class="col s3">
-            <label>Busqueda por: Tipo Medidor</label>
+        <div class="input-field col s3">
+            <small style="color: #848484;">Busqueda por: Medidor</small>
             <select class="select2" id="medidor" name="program" data-url="<?php  echo crearUrl("Programacion", "orden", "consultarAjax", array('noVista'=>"noVista"))?>" >
                 <option value="" disabled selected>Seleccione</option>
                 <?php 
@@ -80,13 +80,13 @@
         <div class="row">
             
 
-            <div class="col s3">
-                <label>(*) Encargado</label>
+            <div class="input-field col s3">
+                <small style="color: #848484;">(*) Encargado</small>
                 <select class="error browser-default select2" id="ot_encargado" name="ot_encargado" data-error=".errorTxt213">
                     <option value="" disabled selected>Seleccione</option>
                     <?php
                         foreach($encargados as $enc){
-                        echo "<option value='".$enc["per_id"]."'>". $enc["nombrecom"] . "</option>";
+                        echo "<option value='".$enc["per_id"]."'>". $enc["nombrecom"] . " ''" . $enc["car_descripcion"]. "''</option>";
                         }
                     ?>
                 </select>
@@ -94,6 +94,7 @@
             </div>
             
             <div class="col s9">
+                <br>
                 <label for="input_text">(*) Ayudantes</label>
                 <input name= "ot_ayudantes" id="ot_ayudantes" type="text" length="100" class="validate" placeholder="
                        D&iacute;gite los ayudantes de la OT separados por coma: Ejemplo, ejemplo 2, ejemplo3." data-error=".errorTxt214">
@@ -104,7 +105,7 @@
         <div class="row">
             <div class=" col s2">
                 <label for="fechaorden">(*) Fecha Registro Orden</label>
-                <input readonly="" type="text" value="<?php echo date('d-m-Y'); ?>">
+                <input readonly="" type="text" value="<?php echo date('j F, Y'); ?>">
             </div>
 
             <div class=" col s2">

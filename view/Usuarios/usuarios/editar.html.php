@@ -1,5 +1,14 @@
-<form id="form2" class="col s12" action="<?php echo crearUrl("usuarios", "usuarios", "postEditar")?>" method="post" novalidate>
+<form id="form2" class="col s12 valiform" data-url="<?php echo crearUrl("usuarios", "usuarios", "postEditar", array('noVista'=>"noVista")) ?>" method="post" novalidate>
+
     <h4 class="header2">Modificar Usuario</h4>
+    
+    <!--Inicio contenedor mensajes de error-->
+    <div class="card red">
+        <div id="cont_errors_ajax" class="card-content white-text">
+        </div>
+    </div>
+    <!--Fin contenedor mensajes de error-->
+    
     <div class="row">
 
         <div class="col s4">
@@ -215,7 +224,7 @@
     
         //----------------------validate editar----------------------------
     
-    $("#form2").validate({
+    $(".valiform").validate({
         rules: {
             departamento: {
                 required: true

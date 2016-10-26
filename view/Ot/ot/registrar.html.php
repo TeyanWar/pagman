@@ -87,11 +87,23 @@
             </div>
 
             <div class="row">
-                <div class="col s4">
-                    <label>Componentes (opcional)</label>
-                    <select class="select2" id="selecomp" name="componente[]" multiple=""></select>
-                </div>
-
+                <?php if(isset($parametros[1])){ ?>
+                    <div class="col s4">
+                        <label>Componentes (opcional)</label> 
+                        <select name="componente[]" class="error browser-default select2" multiple="" >
+                            <?php foreach ($selectcomp as $comp) { ?>
+                                <option value="<?php echo $comp['comp_id'] ?>"><?php echo $comp['comp_descripcion'] ?></option>
+                            <?php } ?>
+                        </select>
+                        <div class="errorTxt6"></div>
+                    </div>
+                <?php }else{ ?>
+                    <div class="col s4">
+                        <label>Componentes (opcional)</label>
+                        <select class="select2" id="selecomp" name="componente[]" multiple=""></select>
+                    </div>
+                <?php } ?>
+                
                 <div class="col s4">
                     <label for="fecha_inicio">(*) Fecha inicio</label>
                     <input id="fecha_inicio" type="date" class="datepicker" name="ot_fecha_inicio" data-error=".errorTxt4">

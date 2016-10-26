@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class=" col s2">
                         <label for="fecha">(*) Fecha Registro Programacion</label>
-                        <input readonly="" type="text"class="validate" value="<?php echo date('d-m-Y'); ?>" >
+                        <input readonly="" type="text"class="validate" value="<?php echo date('j F, Y'); ?>" >
                     </div>
 
                     <div class=" col s2">

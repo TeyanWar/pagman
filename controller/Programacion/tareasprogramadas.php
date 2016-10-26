@@ -3,7 +3,7 @@
 class ProgramacionModel{
     private $host="localhost";
     private $user="root";
-    private $password="sena123";
+    private $password="";
     private $database="pagman";
     private $conn;
     
