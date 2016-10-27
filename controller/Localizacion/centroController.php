@@ -59,7 +59,7 @@ class centroController {
         // Cierra la conexion
         $objCentros->cerrar();
 
-        include_once("../view/Localizacion/centro/listar.html.php");
+        include_once("../view/Localizacion/centro/consulta.html.php");
     }
 
 

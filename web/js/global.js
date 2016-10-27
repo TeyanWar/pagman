@@ -97,30 +97,45 @@ $(document).ready(function(){
 //    });
 
  
- //-----------------------------------------------------------------------------------
+    //-----------Grafico Estandares De Mantenimiento Preventivo-----------------
+    //--------------------------------------------------------------------------
+    $("#grafico-est").keyup(function () {
+        var año = $("#grafico-est").val();
+        var url = $('#grafico-est').attr("data-url");
+        $.ajax({
+            type:'POST',
+            url: url,
+            data:'año='+año,
+            success:function(data){
+                var valores = eval(data);
+                var si   = valores[0];
+                var no   = valores[1];
 
-    //Sampel Pie Doughnut Chart
-    var PieDoughnutChartSampleData = [
-        {
-            value: 20,
-            color:"#F7464A",
-            highlight: "#FF5A5E",
-            label: "No Cumple"
-        },
-        {
-            value: 80,
-            color: "#FDB45C",
-            highlight: "#FFC870",
-            label: "Si Cumple"
-        }
-    ]
+                var PieDoughnutChartSampleData = [
+                    {
+                        value: no,
+                        color:"#F7464A",
+                        highlight: "#FF5A5E",
+                        label: "No Cumple"
+                    },
+                    {
+                        value: si,
+                        color: "#FDB45C",
+                        highlight: "#FFC870",
+                        label: "Si Cumple"
+                    }
+                ];
 
-    window.onload = function() {
-
-        window.PieChartSample = new Chart(document.getElementById("pie-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
-            responsive:true
+                window.PieChartSample = new Chart(document.getElementById("pie-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
+                    responsive:true
+                });
+                $('#rsSI').html(si);
+                $('#rsNO').html(no);
+            }
         });
-    };
+        return false;
+    });
+    $("#grafico-est").trigger("keyup");
 
     
 });

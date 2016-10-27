@@ -119,7 +119,7 @@ class SolicitudesController {
 
     function buscar() {
 
-        $buscar = $_POST['resul'];
+        $buscar = $_POST['resultado'];
 
         $objBuscar = new SolicitudesModel();
 

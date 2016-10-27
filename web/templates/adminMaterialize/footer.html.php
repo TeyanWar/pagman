@@ -73,11 +73,7 @@ Scripts
 <script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>
 <!-- Scripts jquery Form-->
 <script type="text/javascript" src="<?php echo addLib('js/jquery.form.js') ?>"></script>
-<!--<script type="text/javascript">
-    $('#formEquipo').ajaxForm(function() { 
-        alert("Thank you for your comment!"); 
-    }); 
-</script>-->
+<!--Scripts PAGMAN-->
 <script type="text/javascript" src="<?php echo addLib('js/global.js') ?>"></script>
 
 </body>

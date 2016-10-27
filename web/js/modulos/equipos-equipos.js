@@ -297,12 +297,13 @@ $(document).ready(function () {
         padding: 11
     });
 
+    //Enviar formulario con archivos por ajax
     $(".file-form").on('submit', function () {
         $('.btn_submit_file').prop('disabled',true);
         var options = {
             url: $(this).attr("action"),
             success: function (response) {
-                alert(response);
+//                alert(response);
                 var respuesta = $.parseJSON(response);
                 if (respuesta.accion === true) {
                     Materialize.toast(respuesta.mensajes, 1500, 'rounded col green');
