@@ -196,23 +196,6 @@ $(document).ready(function () {
     
 //fin: select dependiente de select
 
-    //select dependiente de select
-//    $(document).on('change', '#selectCen', function () {
-//        var url = $('#selectCen').attr("data-url");
-//        var id = $(this).val();
-//
-//        $.ajax({
-//            url: url,
-//            type: 'POST',
-//            data: 'id=' + id,
-//            success: function (data) {
-//                $("#selectEqui").html(data);
-//                $('select').material_select();
-//            }
-//        });
-//    });
-
-
     $(document).on('submit', '#editarOt', function (e) {
         e.preventDefault();
         var url = $('#editarOt').attr("data-url");
@@ -339,6 +322,43 @@ $(document).ready(function () {
 	});
         
     //----------------carritos de compras----------------------
+    
+    //----------filtro de componentes--------------
+    $("#componen").keyup(function () {
+        var componente = $("#componen").val();
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: "componente=" + componente,
+            success: function (data) {
+                $("#resulcomp").html(data);
+            }
+        });
+    });
+    
+    //-----------componentes------------------
+    $(document).on('click', '.codcomponenteOT', function () {
+        var cod = $(this).attr("data-id");
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                cod: cod
+            }
+        }).done(function (data) {
+            $("#carroComponentes").append(data);
+        });
+    });
+    
+    $(document).on('click', '.Componenteremove', function () {
+        var id = $(this).attr('data-id');
+
+        $("#fcomp-" + id).remove();
+
+    });
+    
     
         //----------filtro de insumos--------------
     $("#insum").keyup(function () {
