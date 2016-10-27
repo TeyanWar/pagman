@@ -441,10 +441,9 @@ class EquiposController {
                     . "est_id, "
                     . "tequi_id, "
                     . "cen_id, "
-                    . "equi_foto, "
-                    . "equi_valor_tmed, " //Campo Nuevo en la BD, aun no se coloca en el formulario, (¿Para que es?)
+                    . "equi_foto, " //Campo Nuevo en la BD, aun no se coloca en el formulario, (¿Para que es?)
                     . "equi_fabricante, "
-                    . "equi_marca, "
+                    . "equi_marca, "    
                     . "equi_modelo, "
                     . "equi_serie, "
                     . "equi_ubicacion, "
@@ -458,8 +457,7 @@ class EquiposController {
                     . "$est_id, "
                     . "'$tequi_id', "
                     . "$cen_id, "
-                    . "'$nombreFoto', "
-                    . "12000, " //Valo colocado para que ingrese a la BD, no viene del formulario, esta QUEMADO. (equi_valor_tmed)
+                    . "'$nombreFoto'," //Valo colocado para que ingrese a la BD, no viene del formulario, esta QUEMADO. (equi_valor_tmed)
                     . "'$equi_fabricante', "
                     . "'$equi_marca', "
                     . "'$equi_modelo', "
