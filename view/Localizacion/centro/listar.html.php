@@ -5,7 +5,7 @@
 
                         <th>Codigo centro</th>
                         <th>Nombre centro </th>
-                        <th colspan="2">Acciones</th>
+                        <th colspan="2"><center>Acciones</center></th>
                     </tr>
                 </thead>
                 <tbody>
