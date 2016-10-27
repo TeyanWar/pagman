@@ -8,6 +8,7 @@
         <tr>
             <th data-field="name">Código del campo</th>
             <th data-field="price">Nombre/Descripción del campo</th>
+            <th>Cantidad</th>
         </tr>
     </thead>
     <?php
@@ -21,7 +22,9 @@
                 <?php //die(print_r($tipoEquipo['cp_nombre']));   ?>
                 <td><?php echo $tipoEquipo['cp_id']; ?></td>
                 <td><?php echo $tipoEquipo['cp_nombre']; ?></td>
+                <td><?php echo $tipoEquipo['cantidad']; ?></td>
             </tr>
         <?php } ?>
     </tbody>
 </table>
+<?php $paginado->render() ?>

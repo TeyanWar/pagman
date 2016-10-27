@@ -18,21 +18,7 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
-        <?php
-        $errores = getErrores();
-        if (!$errores == "") {
-            ?>
-            <div id="card-alert" class="card red">
-                <div class="card-content white-text">
-                    <p><i class="mdi-alert-error"></i> 
-                        <?php echo $errores ?>
-                    </p>
-                </div>
-                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-        <?php } ?>
+       
         <!--Fin mensaje de campos obligatorios-->
         <form class="col s12">
             <div class="input-field">
@@ -48,10 +34,15 @@
 
         <div id="editarCiu" class="modal">
             <div class="modal-content"></div>
+            <div class="modal-footer">
+                <a class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
+            </div>
         </div>
 
         <div id="detalleCiu" class="modal">
-            <div class="modal-content"></div>
+            <div class="modal-content">
+                HOLA
+            </div>
         </div>
         <?php if (isset($_REQUEST['pagina'])) { ?>
             <input type="hidden" id="pagina" name="pagina" value="<?php echo $_REQUEST['pagina'] ?>">

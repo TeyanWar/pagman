@@ -39,9 +39,9 @@ class TipoEquipoController {
     }
 
     function postEditar() {
-        
+
         //  die(print_r($_POST['tequi_id']));
-        
+
         $tequi_id = $_POST['tequi_id'];
         $tequi_descripcion = $_POST['tipoEquipoNombre'];
 
@@ -76,6 +76,13 @@ class TipoEquipoController {
                 . "pag_det_tipoEquipo_camposPersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
                 . "pag_det_tipoEquipo_camposPersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoEquipo_camposPersonalizados.tequi_id='$id'";
         $sqlDetalle = $objTipoEquipos->select($sqlCP);
+
+
+        $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
+        $url = crearUrl('equipos', 'tipoEquipo', 'verDetalle', array('noVista', $id));
+
+        $paginado = new Paginado($sqlDetalle, $pagina, $url, 3);
+        $sqlDetalle = $paginado->getDatos();
 
         // Cierra la conexion
         $objTipoEquipos->cerrar();
@@ -136,6 +143,8 @@ class TipoEquipoController {
 
         $cp_id = $_POST['cp_id'];
         $cp_nombre = $_POST['cp_nombre'];
+        $cantidad = $_POST['cantidad'];
+        //die(print_r($cantidadCampo));
         $consecutivo = $_POST['consecutivo'];
 
         //die(print_r($consecutivo));
@@ -194,14 +203,14 @@ class TipoEquipoController {
         //DIE(PRINT_R($sql)); 
         foreach ($id_campo as $campo) {
             $id_tipo_Equipo = $_POST['id_tipo_Equipo'];
-            //DIE(PRINT_R($id_tipo_Equipo)); 
-            $tipo_Equipo = $_POST['tequi_descripcion'];
-            $id_campo = $_POST['camposPersonalizados'];
-            $sqlDetalle = "INSERT INTO pag_det_tipoEquipo_camposPersonalizados ("
+            //DIE(PRINT_R($tipo_Equipo)); 
+            $sqlDetalle = "INSERT INTO pag_det_tipoEquipo_camposPersonalizados("
                     . "tequi_id,"
-                    . "cp_id) VALUES("
+                    . "cp_id,"
+                    . "cantidad) VALUES("
                     . "'$id_tipo_Equipo',"
-                    . "'$campo[cp_id]')";
+                    . "'$campo[cp_id]',"
+                    . "'$campo[cantidad]')";
             $insertCampo = $objTipoEquipo->insertar($sqlDetalle);
         }
 

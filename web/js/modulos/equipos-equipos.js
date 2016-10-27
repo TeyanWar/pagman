@@ -14,7 +14,6 @@ $(document).ready(function () {
     });
 
 
-
 //--------------------------------------------
 
     $(document).on('click', '.ajax_paginate > div > div > ul > li > a', function (e) {
@@ -63,7 +62,7 @@ $(document).ready(function () {
             }
         });
     });
-    
+
     //Capturamos el ID del select de formulario CREAR EQUIPO
     $("#tequi_id").change(function () {
         //capturamos el ID del select
@@ -117,18 +116,18 @@ $(document).ready(function () {
             confirmButtonColor: "Red ",
             confirmButtonText: "si,eliminar registro",
             closeOnConfirm: false},
-        function () {
-            $.ajax({
-                url: url,
-                type: 'post',
-                data: {
-                    id: equi_id
-                }
-            });
-            //       alert(equi_id);
-            swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
-            $("#busquedaAjax").trigger('keyup');
-        });
+                function () {
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        data: {
+                            id: equi_id
+                        }
+                    });
+                    //       alert(equi_id);
+                    swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
+                    $("#busquedaAjax").trigger('keyup');
+                });
     });
     //----------------- validaciones ---------------
 
@@ -297,4 +296,28 @@ $(document).ready(function () {
         },
         padding: 11
     });
+
+    $(".file-form").on('submit', function () {
+        $('.btn_submit_file').prop('disabled',true);
+        var options = {
+            url: $(this).attr("action"),
+            success: function (response) {
+                alert(response);
+                var respuesta = $.parseJSON(response);
+                if (respuesta.accion === true) {
+                    Materialize.toast(respuesta.mensajes, 1500, 'rounded col green');
+                    window.setTimeout("location.href='" + respuesta.redirect + "'", 1500);
+                } else {
+                    $('#cont_errors_ajax').html(respuesta.mensajes);
+                    $('#cont_errors_ajax').css('display', 'block');
+                    $('.btn_submit_file').prop('disabled', false);
+                    $('.modal-content').animate({scrollTop: $('#cont_errors_ajax').position().top}, 'slow');
+                }
+            }
+        };//options
+
+        $(this).ajaxSubmit(options);
+        return false;
+    });
+
 });

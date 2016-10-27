@@ -18,21 +18,15 @@
             </button>
         </div>
 
-        <?php $error=getErrores(); ?>
-         <?php if (!$error=="") { ?>
-            <div id="card-alert" class="card red">
-                <div class="card-content white-text">
-                    <p><i class="mdi-alert-error"></i> <?php echo $error; ?> </p>
-                </div>
-
-                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+        <!--Inicio contenedor mensajes de error-->
+        <div class="card red">
+            <div id="cont_errors_ajax" class="card-content white-text">
             </div>
-        <?php } ?>
+        </div>
+        <!--Fin contenedor mensajes de error-->
       
             
-        <form id="formciudad" class="col s12" action="<?php echo crearUrl("localizacion", "ciudad", "postCrear") ?>" method="POST" novalidate>
+        <form id="formciudad" class="col s12" action="<?php echo crearUrl("localizacion", "ciudad", "postCrear",array('noVista')) ?>" method="POST" novalidate>
 
             <div class="row">
                 <div class="input-field col s6">
@@ -60,7 +54,7 @@
 
             <div class="row">
                 <div class="input-field col s12">
-                    <button name="action" type="submit" class="btn cyan waves-effect waves-light right teal ">Crear
+                    <button name="action" type="submit" class="btn cyan waves-effect waves-light right teal btn_submit_modal">Crear
                         <i class="mdi-content-send right teal"></i>
                     </button>
                 </div>

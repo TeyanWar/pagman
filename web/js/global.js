@@ -95,5 +95,32 @@ $(document).ready(function(){
 //            scrollTop: posicion
 //        }); 
 //    });
+
+ 
+ //-----------------------------------------------------------------------------------
+
+    //Sampel Pie Doughnut Chart
+    var PieDoughnutChartSampleData = [
+        {
+            value: 20,
+            color:"#F7464A",
+            highlight: "#FF5A5E",
+            label: "No Cumple"
+        },
+        {
+            value: 80,
+            color: "#FDB45C",
+            highlight: "#FFC870",
+            label: "Si Cumple"
+        }
+    ]
+
+    window.onload = function() {
+
+        window.PieChartSample = new Chart(document.getElementById("pie-chart-sample").getContext("2d")).Pie(PieDoughnutChartSampleData,{
+            responsive:true
+        });
+    };
+
     
 });

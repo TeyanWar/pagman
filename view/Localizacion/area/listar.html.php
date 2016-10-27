@@ -6,28 +6,26 @@
                     <th>#</th>
                     <th>Nombre de la Ciudad</th>                    
                     <th>Editar</th>
-                    <th>Detalle</th>
+                    <th>Eliminar</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                foreach ($ciudades as $ciudad) {
+                foreach ($areas as $area) {
                     ?>
 
                     <tr>
                         <td><?php echo $paginado->count++ ?></td>
     <!--                        <td><?php //echo $depto['dept_id']          ?></td>-->
-                        <td><?php echo $ciudad['ciud_nombre'] ?></td>
-                        <td><a class="btn-floating modal-trigger  waves-effect waves-light teal editar" 
-                               href="#editarCiu" data-url="<?php echo crearUrl('localizacion', 'ciudad', 'editar', array('noVista' => "noVista", 'id' => $ciudad['ciud_id'])) ?>">
+                        <td><?php echo $area['area_descripcion'] ?></td>
+                        <td><a class="modal-trigger btn-floating  waves-effect waves-light teal editar" 
+                               href="#editarArea" data-url="<?php echo crearUrl('localizacion', 'area', 'editar', array('noVista' => "noVista", 'id' => $area['area_id'])) ?>">
                                 <i class="mdi-content-create small"></i></a>
                         </td>                        
                         <td>
-
-                            <a class="btn-floating cyan darken-1 modal-trigger" 
-                               href="#detalleCiu" data-url="<?php echo crearUrl('localizacion', 'ciudad', 'detalle', array('noVista' => "noVista", 'id' => $ciudad['ciud_id'])) ?>">
-                                <i class="mdi-action-find-in-page tiny"></i>
-                            </a>
+                            <a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" 
+                            data-tmed_id="<?php echo $area['area_id'] ?>" data-url="<?php echo crearUrl('localizacion', 'area', 'Eliminar', array('noVista' => 'noVista', 'id' => $area['area_id'])) ?>">
+                            <i class="mdi-action-delete small"></i></a>
                         </td>
                     </tr>
 
@@ -39,7 +37,7 @@
 
     <script type="text/javascript">
         $('.modal-trigger').leanModal({
-            dismissible: false , // Modal can be dismissed by clicking outside of the modal
+            dismissible: true, // Modal can be dismissed by clicking outside of the modal
             opacity: .5, // Opacity of modal background
             in_duration: 300, // Transition in duration
             out_duration: 200, // Transition out duration

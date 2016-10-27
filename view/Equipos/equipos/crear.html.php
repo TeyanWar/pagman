@@ -22,7 +22,7 @@
         <!--Fin contenedor mensajes de error-->
 
         <div class="row">
-            <form id="formEquipos" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear", array('noVista')) ?>" method="POST" enctype='multipart/form-data' novalidate>
+            <form id="formEquipo" class="col s12 file-form" action="<?php echo crearUrl("equipos", "equipos", "postCrear", array('noVista')) ?>" method="POST" enctype='multipart/form-data' novalidate>
                 <div class="row">
                     <div class="input-field col s4">
                         <input type="text" id="equi_id" name="equi_id" class="validate" data-error=".errorTxt1">
@@ -143,60 +143,73 @@
                         <label for="equi_ubicacion">(*) Ubicacion en el centro:</label>
                         <div class="errorTxt9"></div>
                     </div>
-                </div>
-
-                <!------------------------- NUEVO DIV ROW QUE CONTIENE FOTO DEL EQUIPO, DIV QUE MUESTRA LOS CAMPOS PERSONALIZADOS Y EL TIPO DE MEDIDOR -------------------------------------------->
-
-                <div class="row">
-                    <div class="file-field input-field col s4">
-                        <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
-                            <span>Subir Foto del Equipo</span>
-                            <input type='file' id='ruta' name='ruta'>
-                        </div>  
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text" placeholder="Eliga la imagen" readonly="">
+                    <div class="row">
+                        <div class="input-field col s4">
+                            <select id="tequi_id" name="tequi_id" class="error browser-default select2" data-error=".errorTxt14">
+                                <option value="">(Vacio)</option>
+                                <?php
+                                foreach ($tipoEquipo as $tEquipo) {
+                                    echo "<option value=" . $tEquipo['tequi_id'] . ">" . $tEquipo['tequi_descripcion'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                            <div class="errorTxt14"></div>
+                            <label for="tequi_id" class="active">(*) Seleccione El Tipo De Equipo:</label>
                         </div>
                     </div>
-                    <center>
-                        <div class="input-field col s4">
-                            <div class="btn teal darken-2">
-                                <div class="modal-trigger" href="#modal1">
-                                    <span>Seleccione el tipo de medidor</span>
-                                </div>    
+                    
+                    <!------------------------- NUEVO DIV ROW QUE CONTIENE FOTO DEL EQUIPO, DIV QUE MUESTRA LOS CAMPOS PERSONALIZADOS Y EL TIPO DE MEDIDOR -------------------------------------------->
+
+                    <div class="row">
+                        <div class="file-field input-field col s4">
+                            <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
+                                <span>Subir Foto del Equipo</span>
+                                <input type='file' id='ruta' name='ruta'>
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="hidden">
+                                <input class="file-path validate" type="text" placeholder="Eliga la imagen" readonly="">
                             </div>
                         </div>
-                    </center>
-                </div>
-
-                <!----------------------------- SELECCIONAR TIPO DE MEDIDOR ------------------------------->
-
-                <div id="modal1" class="modal">
-                    <div class="modal-content">
-                        <h4 class="header2">Seleccione el/los Medidor(es) a usar en este equipo</h4>
-                        <br>
-                        <?php foreach ($medidores as $medidor) { ?>
-                            <p>
-                                <input name="medidores[]" id="<?php echo $medidor['tmed_id'] ?>" value="<?php echo $medidor['tmed_id'] ?>" type="checkbox">
-                                <label for="<?php echo $medidor['tmed_id'] ?>"><?php echo ucwords($medidor['tmed_nombre']); ?></label>
-                            </p>
-                        <?php } ?>
+                        <center>
+                            <div class="input-field col s4">
+                                <div class="btn teal darken-2">
+                                    <div class="modal-trigger" href="#modal1">
+                                        <span>Seleccione el tipo de medidor</span>
+                                    </div>    
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="hidden">
+                                </div>
+                            </div>
+                        </center>
                     </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
-                    </div>
-                </div>
+                    <!----------------------------- SELECCIONAR TIPO DE MEDIDOR ------------------------------->
 
-                <!--------------------DIV ROW BOTON CREAR ------------------------------------------->
-                <div class="row">
-                    <div class="input-field col s12">
-                        <button name="action" type="submit" class="btn teal waves-light right btn_submit_modal">Crear
-                            <i class="mdi-content-add right"></i>
-                        </button>
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <h4 class="header2">Seleccione el/los Medidor(es) a usar en este equipo</h4>
+                            <br>
+                            <?php foreach ($medidores as $medidor) { ?>
+                                <p>
+                                    <input name="medidores[]" id="<?php echo $medidor['tmed_id'] ?>" value="<?php echo $medidor['tmed_id'] ?>" type="checkbox">
+                                    <label for="<?php echo $medidor['tmed_id'] ?>"><?php echo ucwords($medidor['tmed_nombre']); ?></label>
+                                </p>
+                            <?php } ?>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+                        </div>
                     </div>
-                </div>
+
+                    <!--------------------DIV ROW BOTON CREAR ------------------------------------------->
+                    <div class="row">
+                        <div class="col s12">
+                            <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand btn_submit_file">Crear
+                                <i class="mdi-content-add left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>    
             </form> <!-- Cierre FORM ---->
         </div> <!-- cierre ROW que abarca TODO ---->
     </div> <!----- Cierre CARD PANEL--->

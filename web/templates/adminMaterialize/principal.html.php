@@ -205,77 +205,26 @@
                         </div>
                     </div>
                 </div>
+<!----------------------------------------------------->
 
-                <div class="col s12 m4 l4">
-                    <div class="card">
-                        <div class="card-move-up teal waves-effect waves-block waves-light">
-                            <div class="move-up">
-                                <p class="margin white-text">Browser Stats</p>
-                                <canvas id="trending-radar-chart" height="114"></canvas>
-                            </div>
-                        </div>
-                        <div class="card-content  teal darken-2">
-                            <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
-                            <div class="line-chart-wrapper">
-                                <p class="margin white-text">Revenue by country</p>
-                                <canvas id="line-chart" height="114"></canvas>
-                            </div>
-                        </div>
-                        <div class="card-reveal">
-                            <span class="card-title grey-text text-darken-4">Revenue by country <i class="mdi-navigation-close right"></i></span>
-                            <table class="responsive-table">
-                                <thead>
-                                    <tr>
-                                        <th data-field="country-name">Country Name</th>
-                                        <th data-field="item-sold">Item Sold</th>
-                                        <th data-field="total-profit">Total Profit</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>USA</td>
-                                        <td>65</td>
-                                        <td>$452.55</td>
-                                    </tr>
-                                    <tr>
-                                        <td>UK</td>
-                                        <td>76</td>
-                                        <td>$452.55</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Canada</td>
-                                        <td>65</td>
-                                        <td>$452.55</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Brazil</td>
-                                        <td>76</td>
-                                        <td>$452.55</td>
-                                    </tr>
-                                    <tr>
-
-                                        <td>India</td>
-                                        <td>65</td>
-                                        <td>$452.55</td>
-                                    </tr>
-                                    <tr>
-                                        <td>France</td>
-                                        <td>76</td>
-                                        <td>$452.55</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Austrelia</td>
-                                        <td>65</td>
-                                        <td>$452.55</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Russia</td>
-                                        <td>76</td>
-                                        <td>$452.55</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+        <div class="col s12 m4 l4">
+            <div class="card">
+                <div class="teal waves-effect waves-block waves-light">
+                    <div class="move-up">
+                        <br>
+                        <h5 class="margin white-text" style="text-align: center;">Mantenimientos Preventivos</h5>
+                        <br>
+                        <canvas id="pie-chart-sample" ></canvas>
+                    </div>
+                    
+                </div>
+                <div class="card-content  teal darken-2">
+                    <div class="line-chart-wrapper">
+                        <h6 class="margin white-text">Estandares De Mantenimiento</h6>
+                        <ul class="doughnut-chart-legend">
+                            <li class="mobile ultra-small"><span class="legend-color"></span><p class="white-text">El 20% No cumple los estandares de mantenimiento.</p></li>
+                            <li class="home ultra-small"><span class="legend-color"></span><p  class="white-text">El 80% Si cumple los estandares de mantenimiento.</p></li>
+                        </ul>
                     </div>
                 </div>
             </div>
