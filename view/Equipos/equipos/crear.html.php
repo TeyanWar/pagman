@@ -204,7 +204,7 @@
                     <!--------------------DIV ROW BOTON CREAR ------------------------------------------->
                     <div class="row">
                         <div class="col s12">
-                            <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Crear Herramienta
+                            <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Crear Equipo
                                 <i class="mdi-content-add left"></i>
                             </button>
                         </div>

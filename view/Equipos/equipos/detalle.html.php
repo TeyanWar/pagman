@@ -58,7 +58,7 @@
         <tr>
             <td><?php echo $equipo['est_descripcion'] ?></td>
             <td><?php echo $equipo['equi_marca']; ?></td>
-            <td><?php echo $tipoEquipo['tequi_descripcion'] ?></td>
+            <td><?php echo $equipo['tequi_descripcion'] ?></td>
             <td><?php echo $equipo['equi_ubicacion']; ?></td>
         </tr>
 
