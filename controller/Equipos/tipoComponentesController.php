@@ -93,6 +93,7 @@ class tipoComponentesController {
             $errores[] = "El campo <code><b>Nombre Tipo de Componente</b></code> no puede estar vac&iacute;o";
         }//Valida que el campo nombre medidor no llegue vac&iacute;o
 
+        
         if (isset($_POST['nombre']) && !preg_match($patronLetras, $_POST['nombre'])) {
             $errores[] = "En el campo <code><b>Nombre Tipo de Componente</b></code> &uacute;nicamente se admiten letras";
         }//Valida que el campo nombre medidor contenga letras &uacute;nicamente
