@@ -19,7 +19,7 @@
                 foreach ($equipos as $programacion) {
                     ?>
                     <tr>
-                        <td><input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" name="cod[]"><?php echo $programacion['comp_descripcion'] ?></td>
+                        <td><input type="hidden" value="<?php echo $programacion['detprog_id'] ?>" name="cod[]"><?php echo $programacion['comp_nombre'] ?></td>
                         <td><?php echo $programacion['tar_nombre'] ?></td>
                         <td><?php echo $programacion['detprog_duracion_horas'] ?></td>
                         <td><?php echo $programacion['frecuencia'] ?></td>

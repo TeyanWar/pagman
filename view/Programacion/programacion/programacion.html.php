@@ -39,7 +39,7 @@
             <select id="componente" class="select2">
                 <option value="INDEFINIDO">(Vacio)</option>
                 <?php foreach ($componentes as $componente) { ?>
-                    <option  ><?php echo $componente['comp_descripcion']; ?></option>
+                    <option  ><?php echo $componente['comp_nombre']; ?></option>
                 <?php } ?>
 
             </select>
