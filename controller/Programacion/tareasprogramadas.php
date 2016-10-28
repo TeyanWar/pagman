@@ -79,7 +79,7 @@ $objProgramacion = new ProgramacionModel();
 
 //---------------------programaciones automaticas----------------------------------------------
         $sql = "SELECT pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
-                . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
+                . "pag_componente.comp_id,comp_nombre,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
                 . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
                 . "pag_det_programacion.frecuencia,pag_tipo_medidor.tmed_id,tmed_nombre,tmed_tipo,tmed_tiempo,"
                 . "pag_det_programacion.detprog_id,pag_programacion_equipo.proequi_fecha_inicio,"
@@ -131,7 +131,7 @@ $objProgramacion = new ProgramacionModel();
 
         $sqlm = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) totalMediciones,"
                 . "pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
-                . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
+                . "pag_componente.comp_id,comp_nombre,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
                 . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
                 . "pag_det_programacion.frecuencia,frec_medc,pag_tipo_medidor.tmed_id,tmed_nombre,tmed_tipo,tmed_tiempo,"
                 . "pag_det_programacion.detprog_id,pag_programacion_equipo.proequi_fecha_inicio,"

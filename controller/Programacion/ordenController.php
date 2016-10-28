@@ -11,7 +11,7 @@ class OrdenController {
         $program = $_POST['program'];
 
         $sql = "SELECT pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
-                . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
+                . "pag_componente.comp_id,comp_nombre,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
                 . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
                 . "pag_det_programacion.frecuencia,pag_tipo_medidor.tmed_id,tmed_nombre,tmed_tipo,tmed_tiempo,"
                 . "pag_det_programacion.detprog_id,pag_programacion_equipo.proequi_fecha_inicio,"
@@ -38,7 +38,7 @@ class OrdenController {
         //----------------los de mediciones-----------------------------------------
         $sqlm = "SELECT SUM(pag_control_medidas.ctrmed_medida_actual) totalMediciones,"
                 . "pag_centro.cen_id,cen_nombre,pag_equipo.equi_id,equi_nombre,pag_equipo.estado,"
-                . "pag_componente.comp_id,comp_descripcion,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
+                . "pag_componente.comp_id,comp_nombre,pag_tipo_trabajo.ttra_id,ttra_descripcion,"
                 . "pag_tarea.tar_id,tar_nombre,pag_tipo_mantenimiento.tman_id,tman_descripcion,"
                 . "pag_det_programacion.frecuencia,frec_medc,pag_tipo_medidor.tmed_id,tmed_nombre,tmed_tipo,tmed_tiempo,"
                 . "pag_det_programacion.detprog_id,pag_programacion_equipo.proequi_fecha_inicio,"
@@ -410,7 +410,7 @@ class OrdenController {
         $objOrden = new OrdenModel();
         foreach ($orprog as $v) {
             $sql = "SELECT pag_centro.cen_nombre,pag_equipo.equi_id,equi_nombre,"
-                . "pag_componente.comp_descripcion,pag_tipo_trabajo.ttra_descripcion,"
+                . "pag_componente.comp_nombre,pag_tipo_trabajo.ttra_descripcion,"
                 . "pag_tarea.tar_nombre,pag_tipo_mantenimiento.tman_descripcion,"
                 . "pag_det_programacion.frecuencia,pag_tipo_medidor.tmed_nombre "
                 . "FROM pag_programacion_equipo,pag_det_programacion,pag_centro,pag_equipo,"
@@ -434,7 +434,7 @@ class OrdenController {
                     <td>'.$dato['cen_nombre'].'</td>
                     <td>'.$dato['equi_id'].'</td>
                     <td>'.$dato['equi_nombre'].'</td>
-                    <td>'.$dato['comp_descripcion'].'</td>
+                    <td>'.$dato['comp_nombre'].'</td>
                     <td>'.$dato['ttra_descripcion'].'</td>
                     <td>'.$dato['tar_nombre'].'</td>
                     <td>'.$dato['tman_descripcion'].'</td>
