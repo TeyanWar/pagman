@@ -2,7 +2,7 @@ $(document).ready(function () {
     
     $("#buscartcomp").keyup(function () {
         var tcomp = $("#buscartcomp").val();
-        
+        alert(tcomp);
         if(tcomp != ""){
             $('#pagina').val(1);
         }
@@ -36,12 +36,11 @@ $(document).ready(function () {
     
      $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
-//        alert(url);
+        
         $.ajax({
             url: url,
             type: "get",
             success: function (data) {
-//                alert(data);
                 $("#editarTcomp > .modal-content").html(data);
                 
             }

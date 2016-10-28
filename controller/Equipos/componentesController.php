@@ -15,7 +15,7 @@ class componentesController {
 
         $objComponentes->cerrar();
 
-        include_once '../view/equipos/componentes/crear.html.php';
+        include_once '../view/Equipos/componentes/crear.html.php';
     }
 
     public function postCrear() {
@@ -88,16 +88,16 @@ class componentesController {
 
             $sqlComponente = "INSERT INTO pag_componente (comp_nombre,comp_descripcion,comp_acronimo,estado) values"
                     . " ('$nombre','$descripcion','$acronimo',null)";
-
-
-
             $componentes = $objComponentes->insertar($sqlComponente);
 
+            //--------------------------------- 
+            
             $sqlDetCompEqui = "Insert into pag_equipo_componente (equi_id,comp_id) values "
                     . "('$equipo','$tipoComponente')";
-
             $detEquiComp = $objComponentes->insertar($sqlDetCompEqui);
 
+            //----------------------------------------
+            
             $sqlIdComp = "Select max(comp_id) as id from pag_componente";
             $idcomponente = $objComponentes->find($sqlIdComp);
             $idComp = $idcomponente['id'];

@@ -28,7 +28,7 @@
             </div>
         </div>
         <!--Fin contenedor mensajes de error-->
-        <form  class="formValidate" action="<?php echo crearUrl('equipos', 'Componentes', 'postCrear', array('noVista')) ?>" method="post" id="formTipoComponentes" novalidate>
+        <form  class="formValidate" action="<?php echo crearUrl('Equipos', 'componentes', 'postCrear', array('noVista')) ?>" method="post" id="formTipoComponentes" novalidate>
             <div class="row">
                 <div class="input-field col s4">
                     <input id="nombreMedidor" name="nombre" type="text" data-error=".errorTxt1" class="validate">

@@ -5,7 +5,7 @@ include_once '../model/Equipos/tipoComponentesModel.php';
 class tipoComponentesController {
 
     public function crear() {
-        include_once '../view/equipos/tipocomponentes/crear.html.php';
+        include_once '../view/Equipos/tipoComponentes/crear.html.php';
     }
 
     public function postCrear() {
@@ -152,12 +152,12 @@ class tipoComponentesController {
         $objComponentes = new tipoComponentesModel();
 
         $componente = $_POST['tcomp_id'];
-
+        
         $sql = "SELECT * from pag_tipo_componente where tcomp_nombre LIKE '%" . $componente . "%' or tcomp_acronimo LIKE '%" . $componente . "%'";
 
 
         $componentes = $objComponentes->select($sql);
-
+        die(print_r('HOla'));
         /*
          * Paginado
          */
