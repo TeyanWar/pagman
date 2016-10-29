@@ -20,7 +20,6 @@
                 <span aria-hidden="true">×</span>
             </button>
         </div>
-        
         <!--Fin mensaje de campos obligatorios-->
         <form class="col s12">
             <div class="input-field">
