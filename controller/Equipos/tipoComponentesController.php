@@ -158,7 +158,7 @@ class tipoComponentesController {
 
 
         $componentes = $objComponentes->select($sql);
-        die(print_r('HOla'));
+        //die(print_r('HOla'));
         /*
          * Paginado
          */

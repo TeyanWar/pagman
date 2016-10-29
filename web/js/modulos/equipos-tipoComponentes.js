@@ -2,7 +2,6 @@ $(document).ready(function () {
     
     $("#buscartcomp").keyup(function () {
         var tcomp = $("#buscartcomp").val();
-        alert(tcomp);
         if(tcomp != ""){
             $('#pagina').val(1);
         }
