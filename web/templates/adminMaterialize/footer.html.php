@@ -62,14 +62,9 @@ Scripts
     <script type="text/javascript" src="<?php echo addLib('js/modulos/' . (strtolower($modulo)) . '-' . (strtolower($controller)) . '.js') ?>"></script>
 <?php } // if ?>
 <!--INGRESO DE JS CAMPO PERSONALIZADO-->
-
-<script type="text/javascript" src="<?php echo addLib('js/modulos/equipos-campoPersonalizado.js') ?>"></script>
 <!--fin-->
-<script type="text/javascript" src="<?php echo addLib('js/modulos/equipos-tipoEquipo.js') ?>"></script>
 
-<script type="text/javascript" src="<?php echo addLib('js/modulos/usuarios-personas.js') ?>"></script>
 
-<script type="text/javascript" src="<?php echo addLib('js/modulos/equipos-tipoComponentes.js') ?>"></script>
 
 <!-- Scripts PrintArea -->
 <script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>

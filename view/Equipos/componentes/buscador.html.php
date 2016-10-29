@@ -25,7 +25,7 @@
         <form class="col s12">
             <div class="input-field">
                 <i class="mdi-action-search prefix"></i>
-                <input type="text" class="active" id="buscarcomp" name='buscarcomp' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Equipos", "Componentes", "buscador", array('noVista' => "noVista")) ?>" />
+                <input type="text" class="active" id="buscarcomp" name='buscarcomp' class="header-search-input z-depth-2" data-url="<?php echo crearUrl("Equipos", "componentes", "buscador", array('noVista' => "noVista")) ?>" />
                 <label for="buscarcomp" class="active">Digite el nombre o acr&oacute;nimo de un Componente</label>
             </div>
         </form>
