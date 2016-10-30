@@ -91,13 +91,13 @@ class componentesController {
             $componentes = $objComponentes->insertar($sqlComponente);
 
             //--------------------------------- 
-            
+
             $sqlDetCompEqui = "Insert into pag_equipo_componente (equi_id,comp_id) values "
                     . "('$equipo','$tipoComponente')";
             $detEquiComp = $objComponentes->insertar($sqlDetCompEqui);
 
             //----------------------------------------
-            
+
             $sqlIdComp = "Select max(comp_id) as id from pag_componente";
             $idcomponente = $objComponentes->find($sqlIdComp);
             $idComp = $idcomponente['id'];
@@ -238,7 +238,6 @@ class componentesController {
                     . "tcomp_id='$tipoComponente'"
                     . "where det_id='$$idDetTipoComp'";
             $updateTipoComp = $objComponentes->update($sqlUpdateTipoComp);
-            die($updateComponente.$sqlIdDetEquiComp.$sqlUpdateEquiComp.$sqlIdDetTipoComp.$sqlUpdateTipoComp);
 
             $objComponentes->cerrar();
         }
@@ -288,12 +287,36 @@ class componentesController {
 
     function postEliminar() {
         $id = $_POST['id'];
-        $objMedidor = new MedidoresModel();
+        $objComponentes = new ComponentesModel();
 
-        $sql = "UPDATE pag_tipo_medidor SET estado=now() WHERE tmed_id='$id'";
-        $medidor = $objMedidor->update($sql);
-        // Cierra la conexion
-        $objMedidor->cerrar();
+        $sql = "UPDATE pag_componente SET estado=now() WHERE comp_id='$id'";
+        $componente = $objComponentes->update($sql);
+
+        //------------------------ Busqueda Id detalle entre equipo y Componente para Actualizar el Equipo-------------------------------------------------------------------------------------
+        $sqlIdDetEquiComp = "Select equicomp_id from pag_equipo_componente where comp_id='$id' and pag_equipo='$equipo'";
+        $idDetalleEquiComp = $objComponentes->find($sqlIdDetEquiComp);
+        $idDetEquiComp = $idDetalleEquiComp['equicomp_id'];
+
+    //-------------------------Eliminar detalle entre Equipo y Componente---------------------------------------------------------------------
+        $sqlUpdateEquiComp = "Update pag_equipo_componente Set"
+                . "estado=now()"
+                . "where equicomp_id='$idDetEquiComp'";
+        $updateEquiComp = $objComponentes->update($sqlUpdateEquiComp);
+        //------------------------Busqueda id entre Tipo de componente y Componente para actualizar el tipo de componente--------------------------
+        $sqlIdDetTipoComp = "Select det_id from pag_det_componente_tipocomponente where tcomp_id='$tipoComponente' and comp_id='$id'";
+        $idDetalleTipoComp = $objComponentes->find($sqlIdDetTipoComp);
+        $idDetTipoComp = $idDetalleTipoComp['det_id'];
+
+     //------------------------Actualizacion detalle entre Tipo componente y Componente para Actualizar el tipo de componente-----------
+        $sqlUpdateTipoComp = "Update pag_det_componente_tipocomponente Set"
+                . "estado=now()"
+                . "where det_id='$$idDetTipoComp'";
+        $updateTipoComp = $objComponentes->update($sqlUpdateTipoComp);
+
+
+        $objComponentes->cerrar();
+        
+        include_once "../view/Equipos/componentes/listar.html.php";
     }
 
 }

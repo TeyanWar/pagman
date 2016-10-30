@@ -50,9 +50,9 @@ $(document).ready(function () {
     $(document).on('click', '.modal-eliminar', function (e) {
         e.preventDefault();
         var url = $(this).attr("data-url");
-        var id = $(this).attr("data-tcomp_id");
+        var id = $(this).attr("data-comp_id");
         swal({
-            title: "Esta seguro de eliminar el medidor?",
+            title: "Esta seguro de eliminar el Componente?",
             text: "La información que estas apunto de eliminar no aparecera en pantalla!",
             type: "warning",
             showCancelButton: true,
@@ -69,7 +69,7 @@ $(document).ready(function () {
                 
             });
           swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
-            window.location.href = "listar";
+            //window.location.href = "listar";
         });
     });
     

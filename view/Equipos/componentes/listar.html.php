@@ -32,7 +32,7 @@
                         </td>
                         <td>
                             <a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" 
-                            data-tcomp_id="<?php echo $componente['Tcomp_id'] ?>" data-url="<?php echo crearUrl('equipos', 'tipoComponentes', 'postEliminar', array('noVista' => 'noVista', 'id' => $componente['Tcomp_id'])) ?>">
+                            data-comp_id="<?php echo $componente['comp_id'] ?>" data-url="<?php echo crearUrl('equipos', 'componentes', 'postEliminar', array('noVista' => 'noVista', 'id' => $componente['comp_id'])) ?>">
                             <i class="mdi-action-delete small"></i></a></td>
                         </td>
                                 
