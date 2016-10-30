@@ -8,8 +8,8 @@
                     <th>Nombre Componente</th>
                     <th>Acr&oacute;nimo</th>
                     <th>Descripci&oacute;n</th>
-                    <th>Pertenece al Equipo</th>
                     <th>Tipo Componente</th>
+                    <th>Valor del Componente</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
@@ -24,8 +24,8 @@
                         <td><?php echo $componente['comp_nombre'] ?></td>
                         <td><?php echo $componente['comp_acronimo'] ?></td>
                         <td><?php echo $componente['comp_descripcion'] ?></td>
-                        <td><?php echo $componente['equi_nombre'] ?></td>
                         <td> <?php echo $componente['tcomp_nombre']?></td>
+                        <td> <?php echo "$ ".number_format($componente['comp_precio'],0,',','.')?></td>
                         <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" 
                                href="#editarTcomp" data-url="<?php echo crearUrl('equipos', 'componentes', 'editar', array('noVista' => "noVista", 'id' => $componente['comp_id'])) ?>">
                                 <i class="mdi-content-create small"></i></a>
