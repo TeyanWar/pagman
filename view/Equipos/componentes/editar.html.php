@@ -21,63 +21,63 @@
                 <div class="errorTxt2"></div>
             </div>
         </div>
-</div>
-<div class="row">
-    <div class="input-field col s6">
-        <select required name="equipo" class="select2" id="tipo_componente" data-error=".errorTxt1">
-            <?php
-            foreach ($equipos as $equipo) {
-                if ($equipo['equi_id'] == $componentes['equi_id']) {
-                    echo "<option value='" . $equipo['equi_id'] . "' selected>" . $equipo['equi_nombre'] . "</option>";
-                } else {
-                    echo "<option value='" . $equipo['equi_id'] . "'>" . $equipo['equi_nombre'] . "</option>";
-                }
-            }
-            ?>
-        </select>
-        <div class="errorTxt1"></div>
-        <label class="active">&nbsp;(*) Equipo al que pertenece el componente></label>
-    </div>
-    <div class="input-field col s6">
-        <select required name="tipo_componente" class="select2" id="tipo_componente" data-error=".errorTxt1">
-            <?php
-            foreach ($tiposDeComponentes as $tiposDeComponente) {
-                if ($tiposDeComponente['tcomp_id'] == $componentes['tcomp_id']) {
-                    echo "<option value='" . $tiposDeComponente['tcomp_id'] . "' selected>" . $tiposDeComponente['tcomp_nombre'] . "</option>";
-                } else {
-                    echo "<option value='" . $tiposDeComponente['tcomp_id'] . "'>" . $tiposDeComponente['tcomp_nombre'] . "</option>";
-                }
-            }
-            ?>
-        </select>
-        <div class="errorTxt1"></div>
-        <label class="active">&nbsp;(*) Tipo de Componente</label>
-    </div>
-</div>
-<div class="row">
-    <div class="col s12">
-        <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" name="descripcion" class="materialize-textarea" length="100" data-error=".errorTxt3"><?php echo $componentes['comp_descripcion'] ?></textarea>
-        <div class="errorTxt3"></div>
-    </div>
-</div>
 
-<input type="hidden" name="id" value="<?php echo $componentes['comp_id'] ?>">
-<!--
-            <button class="btn cyan waves-effect waves-light" type="submit" name="action">Actualizar
-                <i class="mdi-content-send"></i>
-            </button>-->
+        <div class="row">
+            <div class="input-field col s6">
+                <select required name="equipo" class="select2" id="tipo_componente" data-error=".errorTxt1">
+                    <?php
+                    foreach ($equipos as $equipo) {
+                        if ($equipo['equi_id'] == $componentes['equi_id']) {
+                            echo "<option value='" . $equipo['equi_id'] . "' selected>" . $equipo['equi_nombre'] . "</option>";
+                        } else {
+                            echo "<option value='" . $equipo['equi_id'] . "'>" . $equipo['equi_nombre'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+                <div class="errorTxt1"></div>
+                <label class="active">&nbsp;(*) Equipo al que pertenece el componente></label>
+            </div>
+            <div class="input-field col s6">
+                <select required name="tipo_componente" class="select2" id="tipo_componente" data-error=".errorTxt1">
+                    <?php
+                    foreach ($tiposDeComponentes as $tiposDeComponente) {
+                        if ($tiposDeComponente['tcomp_id'] == $componentes['tcomp_id']) {
+                            echo "<option value='" . $tiposDeComponente['tcomp_id'] . "' selected>" . $tiposDeComponente['tcomp_nombre'] . "</option>";
+                        } else {
+                            echo "<option value='" . $tiposDeComponente['tcomp_id'] . "'>" . $tiposDeComponente['tcomp_nombre'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+                <div class="errorTxt1"></div>
+                <label class="active">&nbsp;(*) Tipo de Componente</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" name="descripcion" class="materialize-textarea" length="100" data-error=".errorTxt3"><?php echo $componentes['comp_descripcion'] ?></textarea>
+                <div class="errorTxt3"></div>
+            </div>
+        </div>
 
-<div class="row center" >
-    <div class="input-field col  m3 "></div>
-    <div class="input-field col  m3 "> 
-        <button type="button" class="btn blue cerrar" value="">Cancelar</button>
-    </div>
-    <div class="input-field col  m3"> 
-        <button type="submit" class="btn blue btn_submit_modal" value="submit" >Actualizar</button>
-    </div>
-</div>
-</form>
+        <input type="hidden" name="id" value="<?php echo $componentes['comp_id'] ?>">
+        <!--
+                    <button class="btn cyan waves-effect waves-light" type="submit" name="action">Actualizar
+                        <i class="mdi-content-send"></i>
+                    </button>-->
+
+        <div class="row center" >
+            <div class="input-field col  m3 "></div>
+            <div class="input-field col  m3 "> 
+                <button type="button" class="btn blue cerrar" value="">Cancelar</button>
+            </div>
+            <div class="input-field col  m3"> 
+                <button type="submit" class="btn blue btn_submit_modal" value="submit" >Actualizar</button>
+            </div>
+        </div>
+    </form>
 </div>
 <script>
     $('select').material_select();
@@ -89,10 +89,10 @@
         opacity: .5,
         in_duration: 300,
         out_duration: 200,
-        ready: function() {
+        ready: function () {
 
         },
-        complete: function() {
+        complete: function () {
 
         }
     });
@@ -143,7 +143,7 @@
             }
         },
         errorElement: 'div',
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             var placement = $(element).data('error');
             if (placement) {
                 $(placement).append(error);
