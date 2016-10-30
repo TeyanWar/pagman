@@ -47,6 +47,19 @@ $(document).ready(function () {
 
     });
     
+    $(document).on('click', ".ver-detallec", function () {
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#modalDetallec > .modal-content").html(data);
+                
+            }
+        });
+
+    });
+    
     $(document).on('click', '.modal-eliminar', function (e) {
         e.preventDefault();
         var url = $(this).attr("data-url");
@@ -69,6 +82,7 @@ $(document).ready(function () {
                 
             });
           swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
+          $('#buscarcomp').trigger('keyup');
             //window.location.href = "listar";
         });
     });

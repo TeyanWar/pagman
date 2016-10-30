@@ -262,7 +262,7 @@ class componentesController {
         $sql = "SELECT pag_componente.comp_id,comp_nombre,
 		comp_acronimo,comp_descripcion,pag_tipo_componente.tcomp_nombre,comp_precio 
 	FROM pag_tipo_componente,pag_componente
-	WHERE pag_componente.tcomp_id=pag_tipo_componente.tcomp_id 
+	WHERE pag_componente.tcomp_id=pag_tipo_componente.tcomp_id AND pag_componente.estado IS NULL 
 	AND (pag_componente.comp_nombre LIKE '%$componente%' OR pag_componente.comp_acronimo LIKE '%$componente%') ";
         
         $componentes = $objComponentes->select($sql);
@@ -316,21 +316,50 @@ class componentesController {
                 . "estado=now()"
                 . " where equicomp_id='$idDetEquiComp'";
         $updateEquiComp = $objComponentes->update($sqlUpdateEquiComp);
+        
+        //----la tabla pag_det_componente_tipocomponente fue eliminada de la BD-----
         //------------------------Busqueda id entre Tipo de componente y Componente para actualizar el tipo de componente--------------------------
-        $sqlIdDetTipoComp = "Select det_id from pag_det_componente_tipocomponente where tcomp_id='$idTipoComponente' and comp_id='$id'";
-        $idDetalleTipoComp = $objComponentes->find($sqlIdDetTipoComp);
-        $idDetTipoComp = $idDetalleTipoComp['det_id'];
-
-        //------------------------Actualizacion detalle entre Tipo componente y Componente para Actualizar el tipo de componente-----------
-        $sqlUpdateTipoComp = "Update pag_det_componente_tipocomponente Set "
-                . "estado=now()"
-                . " where det_id='$idDetTipoComp'";
-        $updateTipoComp = $objComponentes->update($sqlUpdateTipoComp);
+//        $sqlIdDetTipoComp = "Select det_id from pag_det_componente_tipocomponente where tcomp_id='$idTipoComponente' and comp_id='$id'";
+//        $idDetalleTipoComp = $objComponentes->find($sqlIdDetTipoComp);
+//        $idDetTipoComp = $idDetalleTipoComp['det_id'];
+//
+//        //------------------------Actualizacion detalle entre Tipo componente y Componente para Actualizar el tipo de componente-----------
+//        $sqlUpdateTipoComp = "Update pag_det_componente_tipocomponente Set "
+//                . "estado=now()"
+//                . " where det_id='$idDetTipoComp'";
+//        $updateTipoComp = $objComponentes->update($sqlUpdateTipoComp);
 
 
         $objComponentes->cerrar();
 
         include_once "../view/Equipos/componentes/listar.html.php";
+    }
+    
+    function verDetalle($parametros = false) {
+
+        $objComponentes = new ComponentesModel();
+
+        $id = $parametros[1];
+
+        $sql = "SELECT pag_componente.comp_id,comp_nombre,comp_descripcion,"
+                . "comp_acronimo,comp_precio,pag_tipo_componente.tcomp_nombre "
+                . "FROM pag_componente,pag_tipo_componente "
+                . "WHERE pag_componente.tcomp_id=pag_tipo_componente.tcomp_id "
+                . "AND pag_componente.comp_id=$id";
+        
+        //-----------equipos a los que pertenece-------------
+        $equipos = "SELECT pag_equipo.equi_id,equi_nombre "
+                . "FROM pag_equipo,pag_equipo_componente,pag_componente "
+                . "WHERE pag_equipo_componente.equi_id=pag_equipo.equi_id "
+                . "AND pag_equipo_componente.comp_id=pag_componente.comp_id "
+                . "AND pag_componente.comp_id=$id";
+
+        $verComp = $objComponentes->find($sql);
+        $vCequipos = $objComponentes->select($equipos);
+
+        // Cierra la conexion
+        $objComponentes->cerrar();
+        include_once("../view/Equipos/componentes/detalle.html.php");
     }
 
 }

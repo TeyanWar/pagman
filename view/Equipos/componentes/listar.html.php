@@ -11,6 +11,7 @@
                     <th>Tipo Componente</th>
                     <th>Valor del Componente</th>
                     <th>Editar</th>
+                    <th>Detalle</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
@@ -31,6 +32,12 @@
                                 <i class="mdi-content-create small"></i></a>
                         </td>
                         <td>
+                            <a class="btn-floating cyan darken-1 modal-trigger ver-detallec"
+                               href="#modalDetallec" data-url="<?php echo crearUrl('equipos', 'componentes', 'verDetalle', array('noVista' => 'noVista', 'id' => $componente['comp_id'])) ?>">
+                                <i class="mdi-action-find-in-page tiny"></i>
+                            </a>
+                        </td>
+                        <td>
                             <a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" 
                             data-comp_id="<?php echo $componente['comp_id'] ?>" data-url="<?php echo crearUrl('equipos', 'componentes', 'postEliminar', array('noVista' => 'noVista', 'id' => $componente['comp_id'])) ?>">
                             <i class="mdi-action-delete small"></i></a></td>
@@ -42,6 +49,12 @@
         </table>
     </div>
 
+</div>
+<div class="modal modal-fixed-footer" id="modalDetallec">
+    <div class="modal-content"></div>
+    <div class="modal-footer">
+        <a class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
+    </div>
 </div>
 
 
