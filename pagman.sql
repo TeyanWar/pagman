@@ -1,19 +1,20 @@
--- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost    Database: pagman
--- ------------------------------------------------------
--- Server version	10.1.13-MariaDB
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-10-2016 a las 22:13:38
+-- Versión del servidor: 10.1.13-MariaDB
+-- Versión de PHP: 7.0.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `pagman`
@@ -89,8 +90,7 @@ CREATE TABLE `pag_cargo` (
 
 INSERT INTO `pag_cargo` (`car_id`, `car_descripcion`, `estado`) VALUES
 (1, 'Instructor', NULL),
-(2, 'Mantenedor', NULL),
-(3, 'Operario', NULL);
+(2, 'Mantenedor', NULL);
 
 -- --------------------------------------------------------
 
@@ -158,16 +158,19 @@ CREATE TABLE `pag_componente` (
   `comp_nombre` varchar(45) NOT NULL,
   `comp_descripcion` varchar(100) NOT NULL,
   `comp_acronimo` varchar(10) NOT NULL,
-  `estado` timestamp NULL DEFAULT NULL
+  `estado` timestamp NULL DEFAULT NULL,
+  `tcomp_id` int(11) NOT NULL,
+  `comp_precio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_componente`
 --
 
-INSERT INTO `pag_componente` (`comp_id`, `comp_nombre`, `comp_descripcion`, `comp_acronimo`, `estado`) VALUES
-(2, 'Tornillo', 'Tornillo', 'Tornillo', NULL),
-(9999, 'INDEFINIDO', '', '', '2016-10-28 19:46:37');
+INSERT INTO `pag_componente` (`comp_id`, `comp_nombre`, `comp_descripcion`, `comp_acronimo`, `estado`, `tcomp_id`, `comp_precio`) VALUES
+(3, 'Tornillo', 'Tornillo', 'Tornillo', NULL, 2, 5000),
+(4, 'Tuerca', 'Tuerca', 'Tuerca', NULL, 2, 5000),
+(5, 'Motor', 'Motor', 'Motor', NULL, 2, 5000);
 
 -- --------------------------------------------------------
 
@@ -305,28 +308,10 @@ CREATE TABLE `pag_det_componente_ot` (
 --
 
 INSERT INTO `pag_det_componente_ot` (`comp_ot_id`, `ot_id`, `comp_id`) VALUES
-(7, 8, '9999'),
-(8, 9, '9999'),
-(9, 10, '2');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pag_det_componente_tipocomponente`
---
-
-CREATE TABLE `pag_det_componente_tipocomponente` (
-  `det_id` int(11) NOT NULL,
-  `tcomp_id` int(11) NOT NULL,
-  `comp_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `pag_det_componente_tipocomponente`
---
-
-INSERT INTO `pag_det_componente_tipocomponente` (`det_id`, `tcomp_id`, `comp_id`) VALUES
-(5, 2, 2);
+(3, 4, '1'),
+(4, 5, '9999'),
+(5, 6, '9999'),
+(6, 7, '1');
 
 -- --------------------------------------------------------
 
@@ -349,7 +334,10 @@ INSERT INTO `pag_det_equipo_medidor` (`dequimed_id`, `equi_id`, `tmed_id`) VALUE
 (2, '1', 9),
 (5, 'TC001', 9),
 (6, 'EP_003', 11),
-(7, 'PC_002', 11);
+(7, 'PC_002', 11),
+(8, 'Equi_prueba', 9),
+(9, 'Equi_prueba1', 9),
+(10, 'Equi_prueba2', 9);
 
 -- --------------------------------------------------------
 
@@ -369,15 +357,10 @@ CREATE TABLE `pag_det_herramienta_ot` (
 --
 
 INSERT INTO `pag_det_herramienta_ot` (`dherot_id`, `ot_id`, `her_id`, `cantidad`) VALUES
-(8, 8, 'JHY_8987', 2),
-(9, 8, 'EREU_09887GTHHF', 3),
-(10, 8, 'GHUY_09FTYH', 4),
-(11, 9, 'JHY_8987', 2),
-(12, 9, 'EREU_09887GTHHF', 3),
-(13, 9, 'GHUY_09FTYH', 4),
-(14, 10, 'JHY_8987', 2),
-(15, 10, 'EREU_09887GTHHF', 3),
-(16, 10, 'GHUY_09FTYH', 4);
+(4, 4, 'EREU_09887GTHHF', 12),
+(5, 5, 'JHY_8987', 1),
+(6, 6, 'GHUY_09FTYH', 5),
+(7, 7, 'EREU_09887GTHHF', 2);
 
 -- --------------------------------------------------------
 
@@ -397,9 +380,10 @@ CREATE TABLE `pag_det_insumo_ot` (
 --
 
 INSERT INTO `pag_det_insumo_ot` (`dinsot_id`, `ot_id`, `ins_id`, `cantidad`) VALUES
-(8, 8, 1, 1),
-(9, 9, 1, 1),
-(10, 10, 1, 1);
+(4, 4, 1, 2),
+(5, 5, 2, 3),
+(6, 6, 2, 3),
+(7, 6, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -416,6 +400,13 @@ CREATE TABLE `pag_det_prestamo_herramienta` (
   `est_id` int(11) NOT NULL,
   `detph_observacion` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pag_det_prestamo_herramienta`
+--
+
+INSERT INTO `pag_det_prestamo_herramienta` (`detph_id`, `pher_id`, `her_id`, `detph_cant_solicita`, `detph_cant_entrega`, `est_id`, `detph_observacion`) VALUES
+(1, 1, 'EREU_09887GTHHF', 10, 10, 1, 'OK');
 
 -- --------------------------------------------------------
 
@@ -445,9 +436,9 @@ CREATE TABLE `pag_det_programacion` (
 --
 
 INSERT INTO `pag_det_programacion` (`detprog_id`, `proequi_id`, `ttra_id`, `detprog_duracion_horas`, `equi_id`, `comp_id`, `priotra_id`, `tar_id`, `tmed_id`, `frecuencia`, `frec_actual`, `frec_medc`, `texto_guia`, `est_id`) VALUES
-(1, 1, 2, 4, '1', '2', 1, 3, 9, 1, 0, '0', 'Se debe implementar limieza', 1),
-(2, 2, 1, 2, '0123', '9999', 1, 1, 9, 1, 0, '0', 'se debe realizar limpeza general a todo el material hidraulico', 1),
-(3, 3, 4, 4, 'TC001', '9999', 3, 4, 9, 1, 0, '0', '', 1);
+(1, 1, 1, 2, '1', '1', 3, 1, 9, 1, 1, '0', 'laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.\r\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu.\r\nooooooooooooooooooooooooooooooooooooooooooooooooooo.\r\nmmmmmmmmmmm', 1),
+(2, 2, 4, 4, '0123', '9999', 2, 2, 9, 5, 0, '0', 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.\r\nyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy.\r\njjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', 1),
+(3, 3, 3, 5, '0123', '9999', 3, 3, 9, 1, 0, '0', 'realizar revision de cableado electrico', 1);
 
 -- --------------------------------------------------------
 
@@ -520,8 +511,11 @@ CREATE TABLE `pag_equipo` (
 INSERT INTO `pag_equipo` (`equi_id`, `per_id`, `equi_nombre`, `est_id`, `tequi_id`, `cen_id`, `equi_foto`, `equi_fabricante`, `equi_marca`, `equi_modelo`, `equi_serie`, `equi_ubicacion`, `equi_fecha_compra`, `equi_fecha_instalacion`, `equi_vence_garantia`, `area_id`, `estado`) VALUES
 ('0123', 1151956249, 'Fresadora', 1, '', 2, '', 'Asus', 'wert', '2016', '12245', 'Cali', '2016-04-27', '2016-04-27', '2016-10-25', 1, NULL),
 ('1', 1151956249, 'Torno CNC', 0, '', 1, '', 'Mazda', 'Mazda', 'Mazda', 'Mazda 123', 'Cali', '2016-03-01', '2016-03-02', '2016-03-31', 1, NULL),
-('EP_003', 1151956249, 'Carro', 1, '', 1, 'equipo-EP_003', 'HP', 'HP', 'HP', '3456', 'Salomia', '2016-02-02', '2016-03-02', '2018-02-02', 1, NULL),
-('PC_002', 1151956249, 'Grua', 1, '', 1, 'm', 'Lenovo', 'Lenovo', 'Lenovo', '7431', 'Sena', '2016-04-08', '2016-04-08', '2016-04-15', 2, NULL),
+('EP_003', 1151956249, 'Carro', 1, '', 1, 'equipo-EP_003', 'HP', 'HP', 'HP', '3456', 'Salomia', '2016-02-02', '2016-03-02', '2018-02-02', 1, '2016-10-27 00:10:33'),
+('Equi_prueba', 1151956249, 'EquiPrueba', 1, 'TE043', 1, 'Equipo-.', 'Torno', '2016', '2016', '2016', 'Sala', '2016-10-20', '2016-10-21', '2016-10-22', 1, NULL),
+('Equi_prueba1', 1151956249, 'EquiPrueba', 1, 'TE043', 1, 'Equipo-torno.jpg.jpg', 'Torno', '2016', '2016', '2016', 'Sala', '2016-10-20', '2016-10-21', '2016-10-22', 1, NULL),
+('Equi_prueba2', 1151956249, 'EquiPruebaFoto', 1, 'TE043', 1, 'Equipo-torno.jpg.jpg', 'Torno', '2016', '2016', '2016', 'Sala', '2016-10-20', '2016-10-21', '2016-10-22', 1, NULL),
+('PC_002', 1151956249, 'Grua', 1, '', 1, 'm', 'Lenovo', 'Lenovo', 'Lenovo', '7431', 'Sena', '2016-04-08', '2016-04-08', '2016-04-15', 2, '2016-10-27 00:10:37'),
 ('TC001', 1151956249, 'Torno Convencional', 1, '', 1, '', 'Tornos Technologies Ibérica, S.A', 'Valor', '2016', '123456', 'CDTI', '2014-04-12', '2014-05-12', '2020-04-12', 1, NULL);
 
 -- --------------------------------------------------------
@@ -542,7 +536,11 @@ CREATE TABLE `pag_equipo_componente` (
 --
 
 INSERT INTO `pag_equipo_componente` (`equicomp_id`, `comp_id`, `equi_id`, `estado`) VALUES
-(8, 2, '1', NULL);
+(19, 4, '0123', NULL),
+(20, 4, '1', NULL),
+(21, 5, '0123', NULL),
+(22, 5, '1', NULL),
+(23, 5, 'Equi_prueba', NULL);
 
 -- --------------------------------------------------------
 
@@ -855,9 +853,10 @@ CREATE TABLE `pag_orden_trabajo` (
 --
 
 INSERT INTO `pag_orden_trabajo` (`ot_id`, `ot_fecha_creacion`, `ot_prioridad`, `ot_desc_falla`, `ot_fecha_inicio`, `ot_fecha_fin`, `ot_ayudantes`, `ot_desc_trabajo`, `ot_observacion`, `est_id`, `cen_id`, `equi_id`, `tfa_id`, `per_id`, `id_mantenimiento`, `estandar`, `estado`) VALUES
-(8, '2016-10-28 20:09:50', 'Media', 'mantenimiento preventivo', '28 October, 201', '29 October, 201', 'jhonatan', 'Cambio de aceite', '', 3, 1, 'TC001', 1, 1151956249, '3', 'Si cumple', NULL),
-(9, '2016-10-28 20:09:14', 'Alta', 'mantenimiento preventivo', '28 October, 201', '29 October, 201', 'jhonatan', 'Cambiar piezas', '', 3, 1, '0123', 1, 1151956249, '2', 'Si cumple', NULL),
-(10, '2016-10-28 20:09:29', 'Alta', 'mantenimiento preventivo', '28 October, 201', '29 October, 201', 'jhonatan', 'Limpieza', '', 3, 1, '1', 1, 1151956249, '1', 'No cumple', NULL);
+(4, '2016-10-23 14:58:34', 'Media', 'mantenimiento preventivo', '23 October, 201', '24 October, 201', 'jhonatan', 'Cambiar piezas', 'se rayo el capon', 6, 1, '1', 1, 1151956249, '1', NULL, NULL),
+(5, '2016-10-23 23:08:43', 'Baja', 'mantenimiento preventivo', '23 October, 201', '25 October, 201', 'liceth', 'Lubricacion', '', 3, 1, '0123', 1, 9870111123, '2', 'Si cumple', NULL),
+(6, '2016-10-24 16:39:05', 'Media', 'mantenimiento preventivo', '24 October, 201', '25 October, 201', 'lenny', 'Limpieza', '', 3, 1, '0123', 1, 1151956249, '3', 'No cumple', NULL),
+(7, '2016-10-24 17:14:58', 'Media', 'mantenimiento preventivo', '25 October, 201', '26 October, 201', 'carol', 'Cambiar piezas', '', 3, 1, '1', 1, 9870111123, '1', 'No cumple', NULL);
 
 -- --------------------------------------------------------
 
@@ -876,92 +875,88 @@ CREATE TABLE `pag_permisos` (
 --
 
 INSERT INTO `pag_permisos` (`perm_id`, `func_id`, `rol_id`) VALUES
-(734, 77, 1),
-(733, 68, 1),
-(732, 67, 1),
-(731, 66, 1),
-(730, 65, 1),
-(729, 86, 1),
-(728, 85, 1),
-(727, 84, 1),
-(726, 83, 1),
-(725, 82, 1),
-(724, 60, 1),
-(723, 59, 1),
-(722, 58, 1),
-(721, 53, 1),
-(720, 52, 1),
-(719, 51, 1),
-(718, 50, 1),
-(717, 49, 1),
-(716, 48, 1),
-(715, 47, 1),
-(714, 46, 1),
-(713, 45, 1),
-(712, 44, 1),
-(711, 43, 1),
-(710, 42, 1),
-(709, 41, 1),
-(708, 40, 1),
-(707, 39, 1),
-(706, 38, 1),
-(705, 37, 1),
-(704, 90, 1),
-(703, 89, 1),
-(702, 88, 1),
-(701, 87, 1),
-(700, 36, 1),
-(699, 35, 1),
-(698, 34, 1),
-(697, 33, 1),
-(696, 32, 1),
-(695, 31, 1),
-(694, 30, 1),
-(693, 29, 1),
-(692, 28, 1),
-(691, 27, 1),
-(690, 26, 1),
-(689, 25, 1),
-(688, 24, 1),
-(687, 23, 1),
-(686, 22, 1),
-(685, 21, 1),
-(684, 20, 1),
-(683, 19, 1),
-(682, 18, 1),
-(681, 17, 1),
-(680, 16, 1),
-(679, 15, 1),
-(678, 14, 1),
-(677, 13, 1),
-(676, 98, 1),
-(675, 97, 1),
-(674, 96, 1),
-(673, 95, 1),
-(672, 94, 1),
-(671, 93, 1),
-(670, 92, 1),
-(669, 91, 1),
-(668, 81, 1),
-(667, 78, 1),
-(666, 79, 1),
-(665, 80, 1),
-(664, 12, 1),
-(663, 11, 1),
-(662, 10, 1),
-(661, 9, 1),
-(660, 8, 1),
-(659, 7, 1),
-(658, 6, 1),
-(657, 5, 1),
-(656, 4, 1),
-(655, 3, 1),
-(654, 2, 1),
-(653, 1, 1),
-(735, 76, 1),
-(736, 75, 1),
-(737, 74, 1),
-(738, 73, 1);
+(648, 77, 1),
+(647, 68, 1),
+(646, 67, 1),
+(645, 66, 1),
+(644, 65, 1),
+(643, 86, 1),
+(642, 85, 1),
+(641, 84, 1),
+(640, 83, 1),
+(639, 82, 1),
+(638, 60, 1),
+(637, 59, 1),
+(636, 58, 1),
+(635, 53, 1),
+(634, 52, 1),
+(633, 51, 1),
+(632, 50, 1),
+(631, 49, 1),
+(630, 48, 1),
+(629, 47, 1),
+(628, 46, 1),
+(627, 45, 1),
+(626, 44, 1),
+(625, 43, 1),
+(624, 42, 1),
+(623, 41, 1),
+(622, 40, 1),
+(621, 39, 1),
+(620, 38, 1),
+(619, 37, 1),
+(618, 36, 1),
+(617, 35, 1),
+(616, 34, 1),
+(615, 33, 1),
+(614, 32, 1),
+(613, 31, 1),
+(612, 30, 1),
+(611, 29, 1),
+(610, 28, 1),
+(609, 27, 1),
+(608, 26, 1),
+(607, 25, 1),
+(606, 24, 1),
+(605, 23, 1),
+(604, 22, 1),
+(603, 21, 1),
+(602, 20, 1),
+(601, 19, 1),
+(600, 18, 1),
+(599, 17, 1),
+(598, 16, 1),
+(597, 15, 1),
+(596, 14, 1),
+(595, 13, 1),
+(594, 98, 1),
+(593, 97, 1),
+(592, 96, 1),
+(591, 95, 1),
+(590, 94, 1),
+(589, 93, 1),
+(588, 92, 1),
+(587, 91, 1),
+(586, 81, 1),
+(585, 78, 1),
+(584, 79, 1),
+(583, 80, 1),
+(582, 12, 1),
+(581, 11, 1),
+(580, 10, 1),
+(579, 9, 1),
+(578, 8, 1),
+(577, 7, 1),
+(576, 6, 1),
+(575, 5, 1),
+(574, 4, 1),
+(573, 3, 1),
+(572, 2, 1),
+(571, 1, 1),
+(649, 76, 1),
+(650, 75, 1),
+(651, 74, 1),
+(652, 73, 1);
 
 -- --------------------------------------------------------
 
@@ -1012,6 +1007,13 @@ CREATE TABLE `pag_prestamo_herramienta` (
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `pag_prestamo_herramienta`
+--
+
+INSERT INTO `pag_prestamo_herramienta` (`pher_id`, `pher_fecha`, `per_id_solicita`, `pher_fecha_devolucion`, `pher_observaciones`, `jor_id`, `per_id_entrega`, `estado`) VALUES
+(1, '2016-10-27', 0, '', 'Ok', 1, 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -1053,9 +1055,9 @@ CREATE TABLE `pag_programacion_equipo` (
 --
 
 INSERT INTO `pag_programacion_equipo` (`proequi_id`, `proequi_fecha`, `cen_id`, `proequi_fecha_inicio`, `tman_id`, `estado`) VALUES
-(1, '1477666151', 1, '1477785605', 1, '2016-10-28 05:00:00'),
-(2, '1477666355', 1, '1477612805', 1, '2016-10-28 05:00:00'),
-(3, '1477666414', 1, '1477699205', 1, '2016-10-28 05:00:00');
+(1, '24-10-2016', 1, '1479987450', 1, '2016-10-23 05:00:00'),
+(2, '1477235087', 1, '1477699205', 1, '2016-10-23 05:00:00'),
+(3, '1477309040', 1, '1477267205', 1, '2016-10-24 05:00:00');
 
 -- --------------------------------------------------------
 
@@ -1192,7 +1194,7 @@ CREATE TABLE `pag_tipo_componente` (
 
 INSERT INTO `pag_tipo_componente` (`tcomp_id`, `tcomp_nombre`, `tcomp_acronimo`, `tcomp_descripcion`, `estado`) VALUES
 (2, 'Correa', 'Correa', 'Polea de torno 2', NULL),
-(3, 'Tuerca', 'Tue', 'Tuerca', NULL);
+(3, 'Tuerca', 'Tue', 'Tuerca', '2016-10-29 22:52:11');
 
 -- --------------------------------------------------------
 
@@ -1440,7 +1442,8 @@ ALTER TABLE `pag_ciudad`
 -- Indices de la tabla `pag_componente`
 --
 ALTER TABLE `pag_componente`
-  ADD PRIMARY KEY (`comp_id`);
+  ADD PRIMARY KEY (`comp_id`),
+  ADD KEY `tcomp_id` (`tcomp_id`);
 
 --
 -- Indices de la tabla `pag_controlador`
@@ -1468,12 +1471,6 @@ ALTER TABLE `pag_departamento`
 --
 ALTER TABLE `pag_det_componente_ot`
   ADD PRIMARY KEY (`comp_ot_id`);
-
---
--- Indices de la tabla `pag_det_componente_tipocomponente`
---
-ALTER TABLE `pag_det_componente_tipocomponente`
-  ADD PRIMARY KEY (`det_id`);
 
 --
 -- Indices de la tabla `pag_det_equipo_medidor`
@@ -1753,7 +1750,7 @@ ALTER TABLE `pag_area`
 -- AUTO_INCREMENT de la tabla `pag_cargo`
 --
 ALTER TABLE `pag_cargo`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `pag_centro`
 --
@@ -1768,7 +1765,7 @@ ALTER TABLE `pag_ciudad`
 -- AUTO_INCREMENT de la tabla `pag_componente`
 --
 ALTER TABLE `pag_componente`
-  MODIFY `comp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000;
+  MODIFY `comp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `pag_controlador`
 --
@@ -1788,32 +1785,27 @@ ALTER TABLE `pag_departamento`
 -- AUTO_INCREMENT de la tabla `pag_det_componente_ot`
 --
 ALTER TABLE `pag_det_componente_ot`
-  MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
---
--- AUTO_INCREMENT de la tabla `pag_det_componente_tipocomponente`
---
-ALTER TABLE `pag_det_componente_tipocomponente`
-  MODIFY `det_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_equipo_medidor`
 --
 ALTER TABLE `pag_det_equipo_medidor`
-  MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_herramienta_ot`
 --
 ALTER TABLE `pag_det_herramienta_ot`
-  MODIFY `dherot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `dherot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_insumo_ot`
 --
 ALTER TABLE `pag_det_insumo_ot`
-  MODIFY `dinsot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `dinsot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_prestamo_herramienta`
 --
 ALTER TABLE `pag_det_prestamo_herramienta`
-  MODIFY `detph_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `detph_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_programacion`
 --
@@ -1828,7 +1820,7 @@ ALTER TABLE `pag_det_tipoequipo_campospersonalizados`
 -- AUTO_INCREMENT de la tabla `pag_equipo_componente`
 --
 ALTER TABLE `pag_equipo_componente`
-  MODIFY `equicomp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `equicomp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT de la tabla `pag_equipo_cp`
 --
@@ -1873,17 +1865,17 @@ ALTER TABLE `pag_modulo`
 -- AUTO_INCREMENT de la tabla `pag_orden_trabajo`
 --
 ALTER TABLE `pag_orden_trabajo`
-  MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `pag_permisos`
 --
 ALTER TABLE `pag_permisos`
-  MODIFY `perm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=739;
+  MODIFY `perm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=653;
 --
 -- AUTO_INCREMENT de la tabla `pag_prestamo_herramienta`
 --
 ALTER TABLE `pag_prestamo_herramienta`
-  MODIFY `pher_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `pag_prioridad_trabajo`
 --
@@ -1968,6 +1960,12 @@ ALTER TABLE `pag_unidad_medida`
 --
 ALTER TABLE `pag_ciudad`
   ADD CONSTRAINT `pag_ciudad_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `pag_departamento` (`dept_id`);
+
+--
+-- Filtros para la tabla `pag_componente`
+--
+ALTER TABLE `pag_componente`
+  ADD CONSTRAINT `pag_componente_ibfk_1` FOREIGN KEY (`tcomp_id`) REFERENCES `pag_tipo_componente` (`tcomp_id`);
 
 --
 -- Filtros para la tabla `pag_departamento`
