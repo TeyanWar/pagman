@@ -1,20 +1,19 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- MySQL dump 10.16  Distrib 10.1.13-MariaDB, for Win32 (AMD64)
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 30-10-2016 a las 22:13:38
--- Versión del servidor: 10.1.13-MariaDB
--- Versión de PHP: 7.0.8
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: pagman
+-- ------------------------------------------------------
+-- Server version	10.1.13-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Base de datos: `pagman`
@@ -156,11 +155,11 @@ INSERT INTO `pag_ciudad` (`ciud_id`, `ciud_nombre`, `dept_id`, `estado`) VALUES
 CREATE TABLE `pag_componente` (
   `comp_id` int(11) NOT NULL,
   `comp_nombre` varchar(45) NOT NULL,
-  `comp_descripcion` varchar(100) NOT NULL,
-  `comp_acronimo` varchar(10) NOT NULL,
+  `comp_descripcion` varchar(100) DEFAULT NULL,
+  `comp_acronimo` varchar(10) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL,
-  `tcomp_id` int(11) NOT NULL,
-  `comp_precio` int(11) NOT NULL
+  `tcomp_id` int(11) DEFAULT NULL,
+  `comp_precio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -170,7 +169,8 @@ CREATE TABLE `pag_componente` (
 INSERT INTO `pag_componente` (`comp_id`, `comp_nombre`, `comp_descripcion`, `comp_acronimo`, `estado`, `tcomp_id`, `comp_precio`) VALUES
 (3, 'Tornillo', 'Tornillo', 'Tornillo', NULL, 2, 5000),
 (4, 'Tuerca', 'Tuerca', 'Tuerca', NULL, 2, 5000),
-(5, 'Motor', 'Motor', 'Motor', NULL, 2, 5000);
+(5, 'Motor', 'Motor', 'Motor', NULL, 2, 5000),
+(9999, 'INDEFINIDO', NULL, NULL, '2016-10-30 23:47:18', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -303,16 +303,6 @@ CREATE TABLE `pag_det_componente_ot` (
   `comp_id` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `pag_det_componente_ot`
---
-
-INSERT INTO `pag_det_componente_ot` (`comp_ot_id`, `ot_id`, `comp_id`) VALUES
-(3, 4, '1'),
-(4, 5, '9999'),
-(5, 6, '9999'),
-(6, 7, '1');
-
 -- --------------------------------------------------------
 
 --
@@ -352,16 +342,6 @@ CREATE TABLE `pag_det_herramienta_ot` (
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `pag_det_herramienta_ot`
---
-
-INSERT INTO `pag_det_herramienta_ot` (`dherot_id`, `ot_id`, `her_id`, `cantidad`) VALUES
-(4, 4, 'EREU_09887GTHHF', 12),
-(5, 5, 'JHY_8987', 1),
-(6, 6, 'GHUY_09FTYH', 5),
-(7, 7, 'EREU_09887GTHHF', 2);
-
 -- --------------------------------------------------------
 
 --
@@ -374,16 +354,6 @@ CREATE TABLE `pag_det_insumo_ot` (
   `ins_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `pag_det_insumo_ot`
---
-
-INSERT INTO `pag_det_insumo_ot` (`dinsot_id`, `ot_id`, `ins_id`, `cantidad`) VALUES
-(4, 4, 1, 2),
-(5, 5, 2, 3),
-(6, 6, 2, 3),
-(7, 6, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -430,15 +400,6 @@ CREATE TABLE `pag_det_programacion` (
   `texto_guia` varchar(200) DEFAULT NULL,
   `est_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `pag_det_programacion`
---
-
-INSERT INTO `pag_det_programacion` (`detprog_id`, `proequi_id`, `ttra_id`, `detprog_duracion_horas`, `equi_id`, `comp_id`, `priotra_id`, `tar_id`, `tmed_id`, `frecuencia`, `frec_actual`, `frec_medc`, `texto_guia`, `est_id`) VALUES
-(1, 1, 1, 2, '1', '1', 3, 1, 9, 1, 1, '0', 'laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.\r\nuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu.\r\nooooooooooooooooooooooooooooooooooooooooooooooooooo.\r\nmmmmmmmmmmm', 1),
-(2, 2, 4, 4, '0123', '9999', 2, 2, 9, 5, 0, '0', 'hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.\r\nyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy.\r\njjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj', 1),
-(3, 3, 3, 5, '0123', '9999', 3, 3, 9, 1, 0, '0', 'realizar revision de cableado electrico', 1);
 
 -- --------------------------------------------------------
 
@@ -848,16 +809,6 @@ CREATE TABLE `pag_orden_trabajo` (
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `pag_orden_trabajo`
---
-
-INSERT INTO `pag_orden_trabajo` (`ot_id`, `ot_fecha_creacion`, `ot_prioridad`, `ot_desc_falla`, `ot_fecha_inicio`, `ot_fecha_fin`, `ot_ayudantes`, `ot_desc_trabajo`, `ot_observacion`, `est_id`, `cen_id`, `equi_id`, `tfa_id`, `per_id`, `id_mantenimiento`, `estandar`, `estado`) VALUES
-(4, '2016-10-23 14:58:34', 'Media', 'mantenimiento preventivo', '23 October, 201', '24 October, 201', 'jhonatan', 'Cambiar piezas', 'se rayo el capon', 6, 1, '1', 1, 1151956249, '1', NULL, NULL),
-(5, '2016-10-23 23:08:43', 'Baja', 'mantenimiento preventivo', '23 October, 201', '25 October, 201', 'liceth', 'Lubricacion', '', 3, 1, '0123', 1, 9870111123, '2', 'Si cumple', NULL),
-(6, '2016-10-24 16:39:05', 'Media', 'mantenimiento preventivo', '24 October, 201', '25 October, 201', 'lenny', 'Limpieza', '', 3, 1, '0123', 1, 1151956249, '3', 'No cumple', NULL),
-(7, '2016-10-24 17:14:58', 'Media', 'mantenimiento preventivo', '25 October, 201', '26 October, 201', 'carol', 'Cambiar piezas', '', 3, 1, '1', 1, 9870111123, '1', 'No cumple', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -1050,15 +1001,6 @@ CREATE TABLE `pag_programacion_equipo` (
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `pag_programacion_equipo`
---
-
-INSERT INTO `pag_programacion_equipo` (`proequi_id`, `proequi_fecha`, `cen_id`, `proequi_fecha_inicio`, `tman_id`, `estado`) VALUES
-(1, '24-10-2016', 1, '1479987450', 1, '2016-10-23 05:00:00'),
-(2, '1477235087', 1, '1477699205', 1, '2016-10-23 05:00:00'),
-(3, '1477309040', 1, '1477267205', 1, '2016-10-24 05:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -1194,7 +1136,7 @@ CREATE TABLE `pag_tipo_componente` (
 
 INSERT INTO `pag_tipo_componente` (`tcomp_id`, `tcomp_nombre`, `tcomp_acronimo`, `tcomp_descripcion`, `estado`) VALUES
 (2, 'Correa', 'Correa', 'Polea de torno 2', NULL),
-(3, 'Tuerca', 'Tue', 'Tuerca', '2016-10-29 22:52:11');
+(3, 'Tuerca', 'Tue', 'Tuerca', NULL);
 
 -- --------------------------------------------------------
 
@@ -1765,7 +1707,7 @@ ALTER TABLE `pag_ciudad`
 -- AUTO_INCREMENT de la tabla `pag_componente`
 --
 ALTER TABLE `pag_componente`
-  MODIFY `comp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `comp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000;
 --
 -- AUTO_INCREMENT de la tabla `pag_controlador`
 --
@@ -1810,7 +1752,7 @@ ALTER TABLE `pag_det_prestamo_herramienta`
 -- AUTO_INCREMENT de la tabla `pag_det_programacion`
 --
 ALTER TABLE `pag_det_programacion`
-  MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_tipoequipo_campospersonalizados`
 --
@@ -1885,7 +1827,7 @@ ALTER TABLE `pag_prioridad_trabajo`
 -- AUTO_INCREMENT de la tabla `pag_programacion_equipo`
 --
 ALTER TABLE `pag_programacion_equipo`
-  MODIFY `proequi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `proequi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `pag_regional`
 --
