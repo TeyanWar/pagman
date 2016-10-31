@@ -122,28 +122,30 @@ class componentesController {
         $objComponentes = new ComponentesModel();
         $id = $parametros[1];
 
-        $sqlComponente = "SELECT pag_equipo.equi_id,pag_equipo.equi_nombre,pag_componente.comp_id,comp_nombre,
-		comp_acronimo,comp_descripcion,pag_tipo_componente.tcomp_nombre 
-	FROM pag_equipo,pag_equipo_componente,pag_tipo_componente,
-		pag_det_componente_tipocomponente,pag_componente 
-	WHERE pag_equipo_componente.equi_id=pag_equipo.equi_id 
-	AND pag_equipo_componente.comp_id=pag_componente.comp_id 
-	AND pag_det_componente_tipocomponente.comp_id=pag_componente.comp_id 
-	AND pag_det_componente_tipocomponente.tcomp_id=pag_tipo_componente.tcomp_id
-        and pag_componente.comp_id=$id";
-
-        $sql2 = "SELECT * from pag_tipo_componente where estado is null";
-
-        $sql3 = "Select equi_id,equi_nombre from pag_equipo where estado is null";
-
-
-
+        $sqlComponente = "SELECT comp_id,comp_nombre,comp_acronimo,comp_precio,comp_descripcion,tcomp_id "
+                . "from pag_componente "
+                . "where comp_id=$id";
         $componentes = $objComponentes->find($sqlComponente);
-        $tiposDeComponentes = $objComponentes->select($sql2);
-        $equipos = $objComponentes->select($sql3);
 
+        $sqlTipoComponente = "SELECT * from pag_tipo_componente where estado is null";
+        $tiposDeComponentes = $objComponentes->select($sqlTipoComponente);
 
-//        die(print_r($medidores));
+        $sql2 = "SELECT equi_id,equi_nombre from pag_equipo where estado is null";
+        $equipos = $objComponentes->select($sql2);
+
+        $sql3 = "select * from pag_equipo_componente where comp_id='$id' and estado is null";
+        $equiposDet = $objComponentes->select($sql3);
+
+        foreach ($equipos as $key => $equipo) {
+            $equipos[$key]['checkeado'] = '';
+            foreach ($equiposDet as $equipoDet) {
+                if ($equipo['equi_id'] == $equipoDet['equi_id']) {
+                    $equipos[$key]['checkeado'] = 'checked';
+                    break;
+                }
+            }
+        }//foreach
+        //die(print_r($medidores));
         $objComponentes->cerrar();
         include_once '../view/Equipos/componentes/editar.html.php';
     }
@@ -193,12 +195,23 @@ class componentesController {
         if (isset($_POST['tipo_componente']) && !preg_match($patronNumeros, $_POST['tipo_componente'])) {
             $errores[] = "En el campo <code><b>Tipo de Componente</b></code> &uacute;nicamente se admiten numeros";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
-        if (!isset($_POST['equipo']) or $_POST['equipo'] == "") {
-            $errores[] = "El campo <code><b>Equipo</b></code> no puede estar vac&iacute;o";
+        if (!isset($_POST['equipos']) or $_POST['equipos'] == "") {
+            $errores[] = "Debes agregar al menos 1 <code><b>Equipo</b></code> a este Componente";
         }//Valida que el campo acronimo no llegue vac&iacute;o
 
-        if (isset($_POST['equipo']) && !preg_match($patronLetrasNumerosGuiones, $_POST['equipo'])) {
-            $errores[] = "En el campo <code><b>Equipo</b></code> &uacute;nicamente se admiten letras,numeros y guiones";
+        if (isset($_POST['equipos']) && !empty($_POST['equipos'])) {
+            foreach ($_POST['equipos'] as $equipo) {
+                if (!preg_match($patronLetrasNumerosGuiones, $equipo)) {
+                    $errores[] = "En el campo <code><b>Equipo</b></code> &uacute;nicamente se admiten letras,numeros y guiones";
+                }//Valida que el campo acronimo contenga letras &uacute;nicamente
+            }
+        }
+        if (!isset($_POST['valor']) or $_POST['valor'] == "") {
+            $errores[] = "El campo <code><b>Valor de Componente</b></code> es obligatorio";
+        }//Valida que el campo acronimo no llegue vac&iacute;o
+
+        if (isset($_POST['valor']) && !preg_match($patronNumeros, $_POST['valor'])) {
+            $errores[] = "En el campo <code><b>Valor de Componente</b></code> &uacute;nicamente se admiten numeros";
         }//Valida que el campo acronimo contenga letras &uacute;nicamente
 
 
@@ -211,38 +224,29 @@ class componentesController {
             $nombre = $_POST['nombre'];
             $acronimo = $_POST['acronimo'];
             $descripcion = $_POST['descripcion'];
-            $equipo = $_POST['equipo'];
             $tipoComponente = $_POST['tipo_componente'];
+            $valor = $_POST['valor'];
 
             //------------------------Actualizacion Table Pag componente---------------------------------------------------
             $sql = "UPDATE pag_componente SET "
                     . "comp_nombre = '$nombre',"
                     . "comp_acronimo = '$acronimo',"
-                    . "comp_descripcion = '$descripcion'"
+                    . "comp_descripcion = '$descripcion',"
+                    . "tcomp_id = '$tipoComponente',"
+                    . "comp_precio = '$valor'"
                     . " WHERE comp_id = $id";
             $updateComponente = $objComponentes->update($sql);
+            
+            $sqlDelete = "Delete from pag_equipo_componente where comp_id=$id";
+            $eliminacion = $objComponentes->delete($sqlDelete);
+            if ($updateComponente == true && $sqlDelete == true) {
+                foreach ($_POST['equipos'] as $equipo) {
+                    $idEquipo = $equipo;
+                    $sqlUpdateDetalle = "INSERT INTO pag_equipo_componente (comp_id,equi_id) values ('$id','$idEquipo')";
+                    $updateDetalle = $objComponentes->insertar($sqlUpdateDetalle);
+                }
+            }
 
-//------------------------ Busqueda Id detalle entre equipo y Componente para Actualizar el Equipo-------------------------------------------------------------------------------------
-            $sqlIdDetEquiComp = "Select equicomp_id from pag_equipo_componente where comp_id='$id' and equi_id='$equipo'";
-            $idDetalleEquiComp = $objComponentes->find($sqlIdDetEquiComp);
-            $idDetEquiComp = $idDetalleEquiComp['equicomp_id'];
-
-//-------------------------Actualizacion detalle entre Equipo y Componente---------------------------------------------------------------------
-            $sqlUpdateEquiComp = "Update pag_equipo_componente Set "
-                    . "equi_id='$equipo'"
-                    . " where equicomp_id='$idDetEquiComp'";
-            $updateEquiComp = $objComponentes->update($sqlUpdateEquiComp);
-
-//------------------------Busqueda id entre Tipo de componente y Componente para actualizar el tipo de componente--------------------------
-            $sqlIdDetTipoComp = "Select det_id from pag_det_componente_tipocomponente where tcomp_id='$tipoComponente' and comp_id='$id'";
-            $idDetalleTipoComp = $objComponentes->find($sqlIdDetTipoComp);
-            $idDetTipoComp = $idDetalleTipoComp['det_id'];
-
-//------------------------Actualizacion detalle entre Tipo componente y Componente para Actualizar el tipo de componente-----------
-            $sqlUpdateTipoComp = "Update pag_det_componente_tipocomponente Set "
-                    . "tcomp_id='$tipoComponente'"
-                    . " where det_id='$$idDetTipoComp'";
-            $updateTipoComp = $objComponentes->update($sqlUpdateTipoComp);
 
             $objComponentes->cerrar();
         }
@@ -264,7 +268,7 @@ class componentesController {
 	FROM pag_tipo_componente,pag_componente
 	WHERE pag_componente.tcomp_id=pag_tipo_componente.tcomp_id AND pag_componente.estado IS NULL 
 	AND (pag_componente.comp_nombre LIKE '%$componente%' OR pag_componente.comp_acronimo LIKE '%$componente%') ";
-        
+
         $componentes = $objComponentes->select($sql);
 
         /*
@@ -288,53 +292,17 @@ class componentesController {
         $id = $_POST['id'];
         $objComponentes = new ComponentesModel();
 
-        $sql = "SELECT pag_equipo.equi_id,pag_componente.comp_id,comp_nombre,
-            pag_tipo_componente.tcomp_id 
-	FROM pag_equipo,pag_equipo_componente,pag_tipo_componente,
-		pag_det_componente_tipocomponente,pag_componente 
-	WHERE pag_equipo_componente.equi_id=pag_equipo.equi_id 
-	AND pag_equipo_componente.comp_id=pag_componente.comp_id 
-	AND pag_det_componente_tipocomponente.comp_id=pag_componente.comp_id 
-	AND pag_det_componente_tipocomponente.tcomp_id=pag_tipo_componente.tcomp_id
-        and pag_componente.comp_id='$id'";
+        $sql = "UPDATE pag_componente set estado=now() where comp_id=$id";
+        $sql2 = "UPDATE pag_equipo_componente set estado=now() where comp_id=$id";
+        $update1 = $objComponentes->update($sql);
 
-        $componente = $objComponentes->find($sql);
-
-        $idEquipo = $componente['equi_id'];
-        $idTipoComponente = $componente['tcomp_id'];
-
-        $sql2 = "UPDATE pag_componente SET estado=now() WHERE comp_id='$id'";
-        $eliminarcomponente = $objComponentes->update($sql2);
-
-        //------------------------ Busqueda Id detalle entre equipo y Componente para Actualizar el Equipo-------------------------------------------------------------------------------------
-        $sqlIdDetEquiComp = "Select equicomp_id from pag_equipo_componente where comp_id='$id' and equi_id='$idEquipo'";
-        $idDetalleEquiComp = $objComponentes->find($sqlIdDetEquiComp);
-        $idDetEquiComp = $idDetalleEquiComp['equicomp_id'];
-
-        //-------------------------Eliminar detalle entre Equipo y Componente---------------------------------------------------------------------
-        $sqlUpdateEquiComp = "Update pag_equipo_componente Set "
-                . "estado=now()"
-                . " where equicomp_id='$idDetEquiComp'";
-        $updateEquiComp = $objComponentes->update($sqlUpdateEquiComp);
-        
-        //----la tabla pag_det_componente_tipocomponente fue eliminada de la BD-----
-        //------------------------Busqueda id entre Tipo de componente y Componente para actualizar el tipo de componente--------------------------
-//        $sqlIdDetTipoComp = "Select det_id from pag_det_componente_tipocomponente where tcomp_id='$idTipoComponente' and comp_id='$id'";
-//        $idDetalleTipoComp = $objComponentes->find($sqlIdDetTipoComp);
-//        $idDetTipoComp = $idDetalleTipoComp['det_id'];
-//
-//        //------------------------Actualizacion detalle entre Tipo componente y Componente para Actualizar el tipo de componente-----------
-//        $sqlUpdateTipoComp = "Update pag_det_componente_tipocomponente Set "
-//                . "estado=now()"
-//                . " where det_id='$idDetTipoComp'";
-//        $updateTipoComp = $objComponentes->update($sqlUpdateTipoComp);
-
+        $update2 = $objComponentes->update($sql2);
 
         $objComponentes->cerrar();
 
         include_once "../view/Equipos/componentes/listar.html.php";
     }
-    
+
     function verDetalle($parametros = false) {
 
         $objComponentes = new ComponentesModel();
@@ -346,7 +314,7 @@ class componentesController {
                 . "FROM pag_componente,pag_tipo_componente "
                 . "WHERE pag_componente.tcomp_id=pag_tipo_componente.tcomp_id "
                 . "AND pag_componente.comp_id=$id";
-        
+
         //-----------equipos a los que pertenece-------------
         $equipos = "SELECT pag_equipo.equi_id,equi_nombre "
                 . "FROM pag_equipo,pag_equipo_componente,pag_componente "

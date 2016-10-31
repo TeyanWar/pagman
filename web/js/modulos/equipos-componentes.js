@@ -30,8 +30,12 @@ $(document).ready(function () {
    //Botón para cerrar modales
     $(document).on('click', '.cerrar', function () {
         $(".modal").closeModal();
+        $(".lean-overlay").remove();
     });
    
+   $('#cerrarDetalleComp').click(function(){
+       $(".lean-overlay").remove();
+   });
 
     
      $(document).on('click', ".modal-trigger", function () {

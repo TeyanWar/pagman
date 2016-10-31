@@ -6,7 +6,7 @@
 <!--Fin contenedor mensajes de error-->
 
 <div class="col s12 m12 l6">
-    <h4 class="header2">Modificar Tipo de Componente</h4> 
+    <h4 class="header2">Modificar de Componente</h4> 
     <form action="<?php echo crearUrl("Equipos", "componentes", "postEditar", array('noVista')) ?>" method="post" id="editarComponentes">
 
         <div class="row">
@@ -24,21 +24,6 @@
 
         <div class="row">
             <div class="input-field col s6">
-                <select required name="equipo" class="select2" id="tipo_componente" data-error=".errorTxt1">
-                    <?php
-                    foreach ($equipos as $equipo) {
-                        if ($equipo['equi_id'] == $componentes['equi_id']) {
-                            echo "<option value='" . $equipo['equi_id'] . "' selected>" . $equipo['equi_nombre'] . "</option>";
-                        } else {
-                            echo "<option value='" . $equipo['equi_id'] . "'>" . $equipo['equi_nombre'] . "</option>";
-                        }
-                    }
-                    ?>
-                </select>
-                <div class="errorTxt1"></div>
-                <label class="active">&nbsp;(*) Equipo al que pertenece el componente></label>
-            </div>
-            <div class="input-field col s6">
                 <select required name="tipo_componente" class="select2" id="tipo_componente" data-error=".errorTxt1">
                     <?php
                     foreach ($tiposDeComponentes as $tiposDeComponente) {
@@ -53,6 +38,11 @@
                 <div class="errorTxt1"></div>
                 <label class="active">&nbsp;(*) Tipo de Componente</label>
             </div>
+            <div class=" col s6">
+                <label for="valor">Valor</label>
+                <input id="valor" name="valor" type="text" class="validate"  value="<?php echo $componentes['comp_precio'] ?>" data-error=".errorTxt2" >
+                <div class="errorTxt2"></div>
+            </div>
         </div>
         <div class="row">
             <div class="col s12">
@@ -61,7 +51,22 @@
                 <div class="errorTxt3"></div>
             </div>
         </div>
-
+        <div id="edit">
+            <center><h5><b><code>Equipos a los que pertenece</code></b></h5></center>
+            <table>
+                <thead>
+                    <tr></tr>
+                </thead>
+                <?php foreach ($equipos as $equipo) { ?>
+                    <td>
+                        <input name="equipos[]" id ="<?php echo $equipo['equi_id']; ?>" value="<?php echo $equipo['equi_id']; ?>" type = "checkbox" <?php echo $equipo['checkeado']; ?> >
+                        <label for="<?php echo $equipo['equi_id']; ?>"><?php echo ucWords($equipo['equi_nombre']); ?></label>
+                    </td>
+                    <?php
+                }
+                ?>
+            </table>
+        </div>
         <input type="hidden" name="id" value="<?php echo $componentes['comp_id'] ?>">
         <!--
                     <button class="btn cyan waves-effect waves-light" type="submit" name="action">Actualizar
@@ -70,6 +75,9 @@
 
         <div class="row center" >
             <div class="input-field col  m3 "></div>
+            <div class="input-field col m2">
+                <input type="button" id="editEquipos" value="Editar Equipos A los que pertenece" class="btn teal darken-2 waves-effect waves-light right">
+            </div>
             <div class="input-field col  m3 "> 
                 <button type="button" class="btn blue cerrar" value="">Cancelar</button>
             </div>
@@ -89,10 +97,10 @@
         opacity: .5,
         in_duration: 300,
         out_duration: 200,
-        ready: function () {
+        ready: function() {
 
         },
-        complete: function () {
+        complete: function() {
 
         }
     });
@@ -143,7 +151,7 @@
             }
         },
         errorElement: 'div',
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             var placement = $(element).data('error');
             if (placement) {
                 $(placement).append(error);
@@ -151,6 +159,12 @@
                 error.insertAfter(element);
             }
         }
+    });
+
+    $("#edit").css("display", "none");
+
+    $("#editEquipos").click(function() {
+        $("#edit").css("display", "block");
     });
 </script>
 <style>

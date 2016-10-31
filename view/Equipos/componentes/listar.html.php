@@ -53,7 +53,7 @@
 <div class="modal modal-fixed-footer" id="modalDetallec">
     <div class="modal-content"></div>
     <div class="modal-footer">
-        <a class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
+        <a id="cerrarDetalleComp"class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
     </div>
 </div>
 
