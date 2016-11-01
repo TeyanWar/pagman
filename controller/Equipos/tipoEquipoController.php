@@ -30,6 +30,7 @@ class TipoEquipoController {
         $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoequipo_campospersonalizados WHERE pag_det_tipoequipo_campospersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND pag_det_tipoequipo_campospersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoequipo_campospersonalizados.tequi_id='$id'";
         $sqlDetalle = $objTipoEquipos->select($sqlCP);
 
+        
         // Cierra la conexion
         $objTipoEquipos->cerrar();
 
