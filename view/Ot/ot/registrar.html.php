@@ -168,19 +168,8 @@
                     <div class="errorTxt10"></div>
                 </div>
             </div>
+                       
             <div class="row">
-                <div class="input-field col s3">
-                    <i class="mdi-action-search prefix"></i>
-                    <input placeholder="Buscar Componentes" id="insum" name="componente" type="text" data-url="<?php  echo crearUrl("Ot", "ot", "listacompOT", array('noVista'=>"noVista"))?>" >
-                    <label for="componente" class="active">Busqueda De Componentes</label>
-                    <div id="resulcomp" class="conte" style="z-index: 4; position: absolute; width: 90%;"></div>
-                </div>
-            </div>
-            
-            <div class="row">
-                
-                
-
                 <div class="input-field col s3">
                     <i class="mdi-action-search prefix"></i>
                     <input placeholder="Buscar Insumos" id="insum" name="insumo" type="text" data-url="<?php  echo crearUrl("Ot", "ot", "listainsOT", array('noVista'=>"noVista"))?>" >
