@@ -350,7 +350,7 @@
                                 <a class="btn waves-effect indigo" style="margin-top: 20px;" href="<?php echo crearUrl('Ot', 'solicitudes', 'listar') ?>">VER MÁS</a>
                                 
                                 <div class="col s9" style="margin-top:20px;">
-                                    <h6><code>TOTAL SOLICITUDES NO ATENDIDAS;</code><b><?php echo totalSolicitudesNoAtentidas() ?></b></h6>
+                                    <h6><code>TOTAL DE SOLICITUDES NO ATENDIDAS;</code><b><?php echo totalSolicitudesNoAtentidas() ?></b></h6>
                                 </div>
                             </div>
                         </div>
