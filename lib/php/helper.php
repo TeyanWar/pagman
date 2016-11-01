@@ -324,9 +324,23 @@ function socitudesNoAtendidas() {
 
     $solicitudesOt = "SELECT * FROM pag_solicitud_servicio,pag_equipo,pag_persona WHERE pag_solicitud_servicio.equi_id=pag_equipo.equi_id AND pag_solicitud_servicio.per_id=pag_persona.per_id AND pag_solicitud_servicio.est_id=7 AND pag_solicitud_servicio.estado is NULL LIMIT 0,3";
     $sqlSolicitudesOt = $objinicio->select($solicitudesOt);
-    
-    //cierra conexion
+
     $objinicio->cerrar();
 
+
     return $sqlSolicitudesOt;
+}
+
+function totalSolicitudesNoAtentidas() {
+
+    $objinicio = new SesionModel();
+
+
+    $soliTotal = "SELECT COUNT(*) AS total FROM pag_solicitud_servicio,pag_equipo,pag_persona WHERE pag_solicitud_servicio.equi_id=pag_equipo.equi_id AND pag_solicitud_servicio.per_id=pag_persona.per_id AND pag_solicitud_servicio.est_id=7 AND pag_solicitud_servicio.estado is NULL";
+    $rowSoli = $objinicio->find($soliTotal);
+
+    $numeroSoli = $rowSoli['total'];
+    //cierra conexion
+    $objinicio->cerrar();
+    return $numeroSoli;
 }

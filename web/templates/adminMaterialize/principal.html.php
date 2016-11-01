@@ -291,7 +291,6 @@
                 <!--card stats end-->
                 <!-- //////////////////////////////////////////////////////////////////////////// -->
 
-                card widgets start
                 <div id="card-widgets">
                     <div class="row">
 
@@ -349,6 +348,10 @@
                                     </tbody>
                                 </table>
                                 <a class="btn waves-effect indigo" style="margin-top: 20px;" href="<?php echo crearUrl('Ot', 'solicitudes', 'listar') ?>">VER MÁS</a>
+                                
+                                <div class="col s9" style="margin-top:20px;">
+                                    <h6><code>TOTAL SOLICITUDES NO ATENDIDAS;</code><b><?php echo totalSolicitudesNoAtentidas() ?></b></h6>
+                                </div>
                             </div>
                         </div>
 
@@ -400,31 +403,31 @@
                                                     </div>
                                                 </div>-->
 
-                        <div class="col s12 m6 l4">
+                        <div class="col s5">
                             <div id="profile-card" class="card">
                                 <div class="card-image waves-effect waves-block waves-light">
                                     <img class="activator" src="<?php echo addLib('templates/adminMaterialize/images/user-bg.jpg') ?>" alt="user background">
                                 </div>
                                 <div class="card-content">
-                                    <img src="<?php echo addLib('templates/adminMaterialize/images/avatar.jpg') ?>" alt="" class="circle responsive-img activator card-profile-image">
+                                    <img src="<?php echo addLib('img/avatar/male1.png') ?>" alt="" class="circle responsive-img activator card-profile-image">
                                     <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
                                         <i class="mdi-action-account-circle"></i>
                                     </a>
-
-                                    <span class="card-title activator grey-text text-darken-4">Roger Waters</span>
-                                    <p><i class="mdi-action-perm-identity cyan-text text-darken-2"></i> Project Manager</p>
-                                    <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"></i> +1 (612) 222 8989</p>
-                                    <p><i class="mdi-communication-email cyan-text text-darken-2"></i> mail@domain.com</p>
+                                    <br>
+                                    <span class="card-title activator grey-text text-darken-4"><?php echo $_SESSION['login']['per_nombre'] . "&nbsp;" . $_SESSION['login']['per_apellido'] ?></span>
+                                    <p><i class="mdi-action-perm-identity cyan-text text-darken-2"></i>&nbsp;<?php echo $_SESSION['login']['per_tipo'] ?></p>
+                                    <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"></i> <?php echo $_SESSION['login']['per_movil'] ?></p>
+                                    <p><i class="mdi-communication-email cyan-text text-darken-2"></i> <?php echo $_SESSION['login']['per_email'] ?></p>
 
                                 </div>
                                 <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4">Roger Waters <i class="mdi-navigation-close right"></i></span>
-                                    <p>Here is some more information about this card.</p>
-                                    <p><i class="mdi-action-perm-identity cyan-text text-darken-2"></i> Project Manager</p>
-                                    <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"></i> +1 (612) 222 8989</p>
-                                    <p><i class="mdi-communication-email cyan-text text-darken-2"></i> mail@domain.com</p>
-                                    <p><i class="mdi-social-cake cyan-text text-darken-2"></i> 18th June 1990</p>
-                                    <p><i class="mdi-device-airplanemode-on cyan-text text-darken-2"></i> BAR - AUS</p>
+                                    <span class="card-title grey-text text-darken-4"><?php echo $_SESSION['login']['per_nombre'] . "&nbsp;" . $_SESSION['login']['per_apellido'] ?><i class="mdi-navigation-close right"></i></span>
+                                    <p>Aquí hay más información acerca de esta Persona.</p>
+                                    <p><i class="mdi-action-perm-identity cyan-text text-darken-2"></i>&nbsp;<?php echo $_SESSION['login']['per_tipo'] ?></p>
+                                    <p><i class="mdi-action-perm-phone-msg cyan-text text-darken-2"></i> <?php echo $_SESSION['login']['per_movil'] ?></p>
+                                    <p><i class="mdi-communication-email cyan-text text-darken-2"></i> <?php echo $_SESSION['login']['per_email'] ?></p>
+                                    <p><i class="mdi-communication-location-on cyan-text text-darken-2"></i> <?php echo $_SESSION['login']['per_direccion'] ?></p>
+                                    <p><i class="mdi-editor-attach-money cyan-text text-darken-2"></i><?php echo $_SESSION['login']['per_valor_hora'] ?></p>
                                 </div>
                             </div>
                         </div>
@@ -432,7 +435,6 @@
                     </div>
 
                     <div class="row">
-                        blog card 
                         <div class="col s12 m12 l4">
                             <div class="blog-card" >
                                 <div class="card">
@@ -466,8 +468,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        product-card 
                         <div class="col s12 m12 l4">
                             <div class="product-card">
                                 <div class="card">
@@ -503,8 +503,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        map-card 
                         <div class="col s12 m12 l4">
                             <div class="map-card">
                                 <div class="card">
@@ -532,10 +530,8 @@
                         </div>
 
                     </div>
-                    card widgets start
                     <div id="card-widgets">
                         <div class="row">
-
                             <div class="col s12 m12 l4">
                                 <ul id="task-card" class="collection with-header">
                                     <li class="collection-header cyan">
@@ -648,7 +644,6 @@
                         </div>
 
                         <div class="row">
-                            blog card 
                             <div class="col s12 m12 l4">
                                 <div class="blog-card" >
                                     <div class="card">
@@ -682,8 +677,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            product-card 
                             <div class="col s12 m12 l4">
                                 <div class="product-card">
                                     <div class="card">
