@@ -31,6 +31,7 @@ class TipoEquipoController {
         $sqlDetalle = $objTipoEquipos->select($sqlCP);
 
         
+        
         // Cierra la conexion
         $objTipoEquipos->cerrar();
 
