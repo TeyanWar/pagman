@@ -73,6 +73,7 @@ class DepartamentoController {
 
 
 
+        
         include_once("../view/Localizacion/departamento/crear.html.php");
     }
 
