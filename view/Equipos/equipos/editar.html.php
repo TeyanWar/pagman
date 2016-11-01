@@ -1,4 +1,4 @@
-
+<center><H5>EDITAR EQUIPO <code><?php echo $equipo['equi_nombre']; ?></code></H5></center>
 <!--Inicio contenedor mensajes de error-->
 <div class="card red">
     <div id="cont_errors_ajax" class="card-content white-text">
@@ -7,7 +7,7 @@
 <!--Fin contenedor mensajes de error-->
 
 <div class="row">
-    <form action="<?php echo crearUrl("equipos", "equipos", "postEditar",array('noVista'))?>" method="post" id="editarEquipos">
+    <form action="<?php echo crearUrl("equipos", "equipos", "postEditar", array('noVista')) ?>" method="post" id="editarEquipos">
         <div class="row">
             <div class="input-field col s4">
                 <input type="text" name="equi_nombre" class="validate" value="<?php echo $equipo['equi_nombre']; ?>" data-error=".errorTxt1">
@@ -112,6 +112,16 @@
                 <label for="Estado_equipo" class="">Elija el Centro de Formacion</label>
                 <div class="errorTxt12"></div>
             </div>
+            <div class="input-field col s4">
+                <select class="select2" class="validate" name="tequi_id" data-error=".errorTxt17">
+                    <?php foreach ($tEquipos as $tipoEquipos) { ?>
+                        <option value="<?php echo $tipoEquipos['tequi_id']; ?>" ><?php echo $tipoEquipos['tequi_descripcion']; ?></option>
+                    <?php }
+                    ?>
+                </select>
+                <label for="tequi_id" class="">Elija el Tipo de equipo</label>
+                <div class="errorTxt17"></div>
+            </div>
         </div>
         <div id="edit">
             <center><h5><b><code>Editar Medidores</code></b></h5></center>
@@ -171,7 +181,7 @@
             },
             equi_modelo: {
                 required: true,
-                letra:false,
+                letra: false,
                 minlength: 3,
                 maxlength: 20
             },
@@ -291,10 +301,10 @@
             }
         }
     });
-    
+
     $("#edit").css("display", "none");
-    
-    $("#editMedidor").click(function(){
+
+    $("#editMedidor").click(function () {
         $("#edit").css("display", "block");
     });
 

@@ -160,7 +160,7 @@ class EquiposController {
             $equi_fecha_instalacion = $_POST['equi_fecha_instalacion'];
             $equi_vence_garantia = $_POST['equi_vence_garantia'];
             $cen_id = $_POST['cen_id'];
-
+            $tequi_id=$_POST['tequi_id'];
             //die(print_r($_POST));
 
             $medidores = $_POST['medidores'];
@@ -171,6 +171,7 @@ class EquiposController {
                     . "equi_nombre='$equi_nombre', "
                     . "per_id='$per_id', "
                     . "est_id=$equi_estado, "
+                    . "tequi_id='$tequi_id',"
                     . "equi_modelo='$equi_modelo', "
                     . "equi_serie='$equi_noserie', "
                     . "equi_fabricante='$equi_fabricante', "
