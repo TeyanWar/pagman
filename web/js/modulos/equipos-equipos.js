@@ -116,7 +116,7 @@ $(document).ready(function () {
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "Red ",
-            confirmButtonText: "si,eliminar registro",
+            confirmButtonText: "Sí, Eliminar registro",
             closeOnConfirm: false},
         function () {
             $.ajax({

@@ -23,38 +23,28 @@ if (!$miserrores == "") {
     <table class="striped">
         <thead>
             <tr>
-                <th>
-                    Seleccionado
-                </th>
-                <th>
-                    Nombre del Campo
+                <th colspan="4">
+                    Campos personalizados de este Tipo de equipo
                 </th>
             </tr>
         </thead>
         <tbody>
         <div class="col s6">
             <?php foreach ($sqlDetalle as $detalle) { ?>
-            
-                <tr>
-                    <td>
-                        <input style="display: none" class="filled-in"  id="<?php echo $detalle['cp_id']; ?>" value="<?php echo $detalle['cp_id']; ?>" type="checkbox">
-                        <label for="<?php $detalle['cp_id']; ?>"></label>
+                <td>
+                    <?php
+                    echo "<option value='" . $detalle['cp_nombre'] . "' selected>" . $detalle['cp_nombre'] . "</option>";
+                    ?> </td>
 
-                    </td>
-
-                    <td>
-                        <?php echo $detalle['cp_nombre']; ?>
-                    </td>
-                </tr>
                 <?php
             }
             ?>
         </div>
         </tbody>
     </table>
-    
+
     <input type="hidden" id="tequi_id" name="tequi_id" data-error=".errorTxt1" class="validate" value="<?php echo $tEquipo['tequi_id']; ?>">
-    
+
     <div class="row">
         <div class="input-field col s12">
             <button name="action" type="submit" class="btn teal darken-2 waves-effect waves-light right">Editar
