@@ -12,7 +12,7 @@
                         <div class="card-move-up waves-effect waves-block waves-light">
                             <div class="move-up cyan darken-1">
                                 <div>
-                                    <span class="chart-title white-text"><h5>MEDICIONES CREADAS ESTE MES DE &nbsp;<code><?php
+                                    <span class="chart-title white-text"><h5>MEDICIONES CREADAS EN ESTE MES DE &nbsp;<code><?php
                                                 setlocale(LC_ALL, "es_ES");
                                                 echo strftime("%B del %Y");
                                                 ?></code></h5></span>
