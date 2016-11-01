@@ -298,7 +298,7 @@
                         <div class="col s12 m12 l7">
                             <ul id="task-card" class="collection with-header">
                                 <li class="collection-header cyan">
-                                    <h5 class="task-card-title"><b>SOLICITUDES DE SERVICIO <code>NO ATENDIDAS</code>, HASTA LA FECHA</b>
+                                    <h5 class="task-card-title"><b>SOLICITUDES DE SERVICIO <code>NO ATENDIDAS</code> HASTA LA FECHA</b>
                                     </h5>
                                     <p class="task-card-date"><?php
                                         setlocale(LC_ALL, "es_ES");
