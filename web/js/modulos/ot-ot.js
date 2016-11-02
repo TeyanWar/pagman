@@ -256,16 +256,20 @@ $(document).ready(function () {
         e.preventDefault();
         swal({title: "¿Realmente desea eliminar este registro?",
             text: "Recuerde que una vez eliminado no se podrá recuperar.",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#b71c1c",
-            confirmButtonText: "Sí, eliminar registro.",
-            closeOnConfirm: false},
-        function () {
+            type: "input", showCancelButton: true,
+            closeOnConfirm: false,
+            animation: "slide-from-top" },
+        function (inputValue) {
+            if (inputValue === false) return false;
+            if (inputValue === " "){
+                swal.showInputError("Ingrese nombre de usuario que solicita eliminar el registro");
+                return false
+            }            
             var url = $('.modal-eliminar').attr('data-url');
             $.ajax({
                 url: url,
-                type: 'get'
+                type: 'get',
+                data: "nom_usuario=" + inputValue
             }).done(function (respuesta) {
                 if (respuesta == true) {
                     swal("¡Eliminado!", "Su registro se ha eliminado exitosamente.", 'success');
