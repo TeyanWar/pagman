@@ -73,7 +73,6 @@ class DepartamentoController {
 
 
 
-        
         include_once("../view/Localizacion/departamento/crear.html.php");
     }
 
@@ -165,7 +164,7 @@ class DepartamentoController {
     function buscarAjax() {
         $objdepartamento = new DepartamentoModel();
 
-        $departamento = $_POST['buscarDepto'];
+        $departamento = $_POST['busquedadepartamento'];
 
         $sql = "SELECT * FROM pag_departamento WHERE dept_nombre LIKE '%" . $departamento . "%' or dept_id LIKE '%" . $departamento . "%'  ORDER BY dept_nombre ASC";
         $departamentos = $objdepartamento->select($sql);
