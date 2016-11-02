@@ -60,7 +60,7 @@
                     <td><input type="checkbox" name="id[]" id="<?php echo $programacion['detprog_id'] ?>" value="<?php echo $programacion['detprog_id'] ?>" data-error=".errorTxt215"><label for="<?php echo $programacion['detprog_id'] ?>"></label></td>
                     <td><input type="hidden" value="<?php echo $programacion['cen_id'] ?>" ><?php echo $programacion['cen_nombre'] ?></td>
                     <td><input type="hidden" value="<?php echo $programacion['equi_id'] ?>" ><?php echo $programacion['equi_nombre'] ?></td>
-                    <td><input type="hidden" value="<?php echo $programacion['comp_id'] ?>" ><?php echo $programacion['comp_descripcion'] ?></td>
+                    <td><input type="hidden" value="<?php echo $programacion['comp_id'] ?>" ><?php echo $programacion['comp_nombre'] ?></td>
                     <td><input type="hidden" value="<?php echo $programacion['ttra_id'] ?>" ><?php echo $programacion['ttra_descripcion'] ?></td>
                     <td><input type="hidden" value="<?php echo $programacion['tar_id'] ?>" ><?php echo $programacion['tar_nombre'] ?></td>
                     <td><input type="hidden" value="<?php echo $programacion['tman_id'] ?>" ><?php echo $programacion['tman_descripcion'] ?></td>
@@ -191,7 +191,7 @@
                     <td><input type="checkbox" name="id[]" id="<?php echo -$med['detprog_id'] ?>" value="<?php echo $med['detprog_id'] ?>" data-error=".errorTxt215"><label for="<?php echo -$med['detprog_id'] ?>"></label></td>
                     <td><input type="hidden" value="<?php echo $med['cen_id'] ?>" ><?php echo $med['cen_nombre'] ?></td>
                     <td><input type="hidden" value="<?php echo $med['equi_id'] ?>" ><?php echo $med['equi_nombre'] ?></td>
-                    <td><input type="hidden" value="<?php echo $med['comp_id'] ?>" ><?php echo $med['comp_descripcion'] ?></td>
+                    <td><input type="hidden" value="<?php echo $med['comp_id'] ?>" ><?php echo $med['comp_nombre'] ?></td>
                     <td><input type="hidden" value="<?php echo $med['ttra_id'] ?>" ><?php echo $med['ttra_descripcion'] ?></td>
                     <td><input type="hidden" value="<?php echo $med['tar_id'] ?>" ><?php echo $med['tar_nombre'] ?></td>
                     <td><input type="hidden" value="<?php echo $med['tman_id'] ?>" ><?php echo $med['tman_descripcion'] ?></td>

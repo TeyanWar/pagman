@@ -107,5 +107,77 @@
             </funciones>
             
         </controlador>
+        
+        
+        <controlador>
+            <nombre>componentesController</nombre>
+            <display>Componentes</display>
+            <icono>mdi-notification-folder-special</icono>
+            <descripcion>Controlador de componentes</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear componentes</display>
+                    <descripcion>Crear componentes</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar componentes</display>
+                    <descripcion>Editar componentes</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar componentes</display>
+                    <descripcion>Eliminar componentes</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar componentes</display>
+                    <descripcion>Listar componentes</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+        
+        
+        
+        <controlador>
+            <nombre>tipoComponentesController</nombre>
+            <display>T. Componentes</display>
+            <icono>mdi-notification-folder-special</icono>
+            <descripcion>Controlador de tipo Componentes</descripcion>
+            
+            <funciones>
+                <funcion>
+                    <nombre>crear</nombre>
+                    <display>Crear T. componente</display>
+                    <descripcion>Crear T. componente</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>editar</nombre>
+                    <display>Editar T. componente</display>
+                    <descripcion>Editar T. componente</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>eliminar</nombre>
+                    <display>Eliminar T. componente</display>
+                    <descripcion>Eliminar T. componente</descripcion>
+                </funcion>
+                
+                <funcion>
+                    <nombre>listar</nombre>
+                    <display>Listar T. componente</display>
+                    <descripcion>Listar T. componente</descripcion>
+                </funcion>
+            </funciones>
+            
+        </controlador>
+        
     </controladores>
 </modulos>

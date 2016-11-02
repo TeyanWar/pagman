@@ -32,7 +32,7 @@ class EquiposController {
         $areas = $objArea->select($sql4);
 
         //$sql5 = "select tequi_id, tequi_descripcion from pag_tipo_de_equipo WHERE estado = 0";
-        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo";
+        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo WHERE estado is NULL";
         $tEquipos = $objT_equipo->select($sql5);
 
         $sql6 = "select * from pag_tipo_medidor";
@@ -160,7 +160,7 @@ class EquiposController {
             $equi_fecha_instalacion = $_POST['equi_fecha_instalacion'];
             $equi_vence_garantia = $_POST['equi_vence_garantia'];
             $cen_id = $_POST['cen_id'];
-
+            $tequi_id=$_POST['tequi_id'];
             //die(print_r($_POST));
 
             $medidores = $_POST['medidores'];
@@ -171,6 +171,7 @@ class EquiposController {
                     . "equi_nombre='$equi_nombre', "
                     . "per_id='$per_id', "
                     . "est_id=$equi_estado, "
+                    . "tequi_id='$tequi_id',"
                     . "equi_modelo='$equi_modelo', "
                     . "equi_serie='$equi_noserie', "
                     . "equi_fabricante='$equi_fabricante', "
@@ -392,7 +393,6 @@ class EquiposController {
             setErrores($errores);
             //----------------fin validaciones-----------------
         } else {
-
             $equi_id = $_POST['equi_id'];
             $per_id = $_POST['per_id'];
             $equi_nombre = $_POST['equi_nombre'];
@@ -467,7 +467,7 @@ class EquiposController {
                     . "'$equi_fecha_instalacion', "
                     . "'$equi_vence_garantia', "
                     . "$area_id)";
-            //die(print_r("<br>" . $sqlEquipo. "<br>"));
+
             $objEquipos = new EquiposModel();
             $insertar = $objEquipos->insertar($sqlEquipo);
             //die(print_r($insertar));
@@ -484,7 +484,7 @@ class EquiposController {
             // Cierra la conexion
             $objEquipos->cerrar();
         }
-        redirect(crearUrl("equipos", "equipos", "listar"));
+        echo getRespuestaAccion('listar');
     }
 
     function eliminar($parametros) {

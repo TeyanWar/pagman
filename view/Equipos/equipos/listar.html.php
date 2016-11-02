@@ -34,11 +34,9 @@
                                 <i class="mdi-content-create small"></i>
                             </a>
                         </td>
-                        <td>
-                            <a class="btn-floating cyan darken-1 modal-trigger ver-detalle1"
-                               href="#modalDetalle1" data-url="<?php echo crearUrl('equipos', 'equipos', 'detalle', array('noVista' => 'noVista', 'id' => $equipo['equi_id'])) ?>">
-                                <i class="mdi-action-find-in-page tiny"></i>
-                            </a>
+                        <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
+                               href="#modal_detalle_equipo" 
+                               data-url="<?php echo crearUrl("Equipos", "equipos", "detalle", array('noVista', 'id' => $equipo['equi_id'])); ?>"><i class="mdi-action-find-in-page tiny"></i></a>
                         </td>
                         <td>
                             <a class="btn-floating waves-effect modal-eliminar waves-light red darken-4" data-id="<?php echo $equipo['equi_id'] ?>" 
@@ -50,13 +48,10 @@
                 <?php } ?>
             </tbody>
         </table>
-        
-        <div id="modalDetalle1" class="modal modal-fixed-footer">
 
-            <div class="modal-content"></div>
-            <div class="modal-footer">
-                <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
-            </div>
+        <div class="modal" id="modal_detalle_equipo">
+            <div class="modal-content">
+            </div> 
         </div>
         <div id="modalUpdate1" class="modal modal-fixed-footer">
             <div class="modal-content"></div>

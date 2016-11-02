@@ -52,17 +52,7 @@ $(document).ready(function () {
     $("#buscarEquipo").trigger("keyup");
     //Ver detalle//
 
-    $(document).on("click", ".ver-detale1", function () {
-        var url = $(this).attr("data-url");
-        $.ajax({
-            url: url,
-            type: "get",
-            success: function (data) {
-                $("#modalDetalle1 > .modal-content").html(data);
-            }
-        });
-    });
-    
+
     //Capturamos el ID del select de formulario CREAR EQUIPO
     $("#tequi_id").change(function () {
         //capturamos el ID del select
@@ -81,6 +71,18 @@ $(document).ready(function () {
             }
         });
     })
+    //Ver detale//
+    $(document).on('click', ".modal-trigger", function () {
+        var url = $(this).attr("data-url");
+        $(".modal-data").html('Cargando ....');
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#modal_detalle_equipo> .modal-content").html(data);
+            }
+        });
+    });
 
     //editar//
     $(document).on("click", ".editar1", function () {
@@ -114,7 +116,7 @@ $(document).ready(function () {
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "Red ",
-            confirmButtonText: "si,eliminar registro",
+            confirmButtonText: "Sí, Eliminar registro",
             closeOnConfirm: false},
         function () {
             $.ajax({
@@ -296,4 +298,29 @@ $(document).ready(function () {
         },
         padding: 11
     });
+
+    //Enviar formulario con archivos por ajax
+    $(".file-form").on('submit', function () {
+        $('.btn_submit_file').prop('disabled', true);
+        var options = {
+            url: $(this).attr("action"),
+            success: function (response) {
+//                alert(response);
+                var respuesta = $.parseJSON(response);
+                if (respuesta.accion === true) {
+                    Materialize.toast(respuesta.mensajes, 1500, 'rounded col green');
+                    window.setTimeout("location.href='" + respuesta.redirect + "'", 1500);
+                } else {
+                    $('#cont_errors_ajax').html(respuesta.mensajes);
+                    $('#cont_errors_ajax').css('display', 'block');
+                    $('.btn_submit_file').prop('disabled', false);
+                    $('.modal-content').animate({scrollTop: $('#cont_errors_ajax').position().top}, 'slow');
+                }
+            }
+        };//options
+
+        $(this).ajaxSubmit(options);
+        return false;
+    });
+
 });

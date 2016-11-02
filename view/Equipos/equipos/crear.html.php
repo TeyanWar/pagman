@@ -22,7 +22,7 @@
         <!--Fin contenedor mensajes de error-->
 
         <div class="row">
-            <form id="formEquipos" class="col s12" action="<?php echo crearUrl("equipos", "equipos", "postCrear", array('noVista')) ?>" method="POST" enctype='multipart/form-data' novalidate>
+            <form id="formEquipo" class="col s12 file-form" action="<?php echo crearUrl("equipos", "equipos", "postCrear", array('noVista')) ?>" method="POST" enctype='multipart/form-data' novalidate>
                 <div class="row">
                     <div class="input-field col s4">
                         <input type="text" id="equi_id" name="equi_id" class="validate" data-error=".errorTxt1">
@@ -157,7 +157,7 @@
                             <label for="tequi_id" class="active">(*) Seleccione El Tipo De Equipo:</label>
                         </div>
                     </div>
-
+                    
                     <!------------------------- NUEVO DIV ROW QUE CONTIENE FOTO DEL EQUIPO, DIV QUE MUESTRA LOS CAMPOS PERSONALIZADOS Y EL TIPO DE MEDIDOR -------------------------------------------->
 
                     <div class="row">
@@ -165,7 +165,7 @@
                             <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
                                 <span>Subir Foto del Equipo</span>
                                 <input type='file' id='ruta' name='ruta'>
-                            </div>  
+                            </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text" placeholder="Eliga la imagen" readonly="">
                             </div>
@@ -204,11 +204,12 @@
                     <!--------------------DIV ROW BOTON CREAR ------------------------------------------->
                     <div class="row">
                         <div class="col s12">
-                            <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Crear Equipo
+                            <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand btn_submit_file">Crear
                                 <i class="mdi-content-add left"></i>
                             </button>
                         </div>
                     </div>
+                </div>    
             </form> <!-- Cierre FORM ---->
         </div> <!-- cierre ROW que abarca TODO ---->
     </div> <!----- Cierre CARD PANEL--->

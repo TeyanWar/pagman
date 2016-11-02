@@ -253,7 +253,7 @@ class OtController {
         $descripcionFalla = $_POST['ot_desc_falla'];
         $descripcionTrabajo = $_POST['ot_desc_trabajo'];
         //Post para insercion a la tabla pag_orden_trabajo
-        
+
         if (isset($centro_formacion) && ($equipo) && ($tipoFalla) && ($fechaInicio) && 
                 ($fechaFin) && ($prioridad) && ($encargado) && ($ayudantes) && 
                 ($descripcionFalla) && ($descripcionTrabajo)) {

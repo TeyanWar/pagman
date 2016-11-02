@@ -49,10 +49,10 @@ class ProgramacionController {
             $objProgramacion->insertar($insmant);
         }
         //----------------comprobar componente----------
-        $comprot = "SELECT comp_id FROM pag_componente WHERE comp_descripcion='INDEFINIDO'";
+        $comprot = "SELECT comp_id FROM pag_componente WHERE comp_nombre='INDEFINIDO'";
         $compnte= $objProgramacion->find($comprot);
         if(empty($compnte)){
-            $insertcom = "INSERT INTO pag_componente (comp_id,comp_descripcion) VALUES ('9999','INDEFINIDO')";
+            $insertcom = "INSERT INTO pag_componente (comp_id,comp_nombre,estado) VALUES (9999,'INDEFINIDO',now())";
             $objProgramacion->insertar($insertcom);
         }
         $cen = "SELECT  *FROM pag_centro";
@@ -241,7 +241,7 @@ class ProgramacionController {
         
         $id = $parametros[1];
         
-        $sql = "SELECT detprog_id,detprog_duracion_horas,frecuencia,pag_det_programacion.comp_id,comp_descripcion,"
+        $sql = "SELECT detprog_id,detprog_duracion_horas,frecuencia,pag_det_programacion.comp_id,comp_nombre,"
                 . "pag_det_programacion.tar_id,tar_nombre,pag_det_programacion.tmed_id,tmed_nombre,pag_estado.est_id,est_descripcion"
                 . " FROM pag_det_programacion,pag_componente,pag_tarea,pag_tipo_medidor,pag_estado"
                 . " WHERE  pag_det_programacion.comp_id=pag_componente.comp_id "
@@ -263,7 +263,7 @@ class ProgramacionController {
         
         $id = $parametros[1];
         
-        $sql = "SELECT detprog_id,detprog_duracion_horas,frecuencia,pag_det_programacion.comp_id,comp_descripcion,"
+        $sql = "SELECT detprog_id,detprog_duracion_horas,frecuencia,pag_det_programacion.comp_id,comp_nombre,"
                 . "pag_det_programacion.tar_id,tar_nombre,pag_det_programacion.tmed_id,tmed_nombre,pag_estado.est_id,est_descripcion"
                 . " FROM pag_det_programacion,pag_componente,pag_tarea,pag_tipo_medidor,pag_estado"
                 . " WHERE  pag_det_programacion.comp_id=pag_componente.comp_id "
@@ -418,10 +418,11 @@ class ProgramacionController {
         }
         //--------------------------------------------
         
-        $sql=" SELECT pag_componente.comp_id,comp_descripcion "
+        $sql=" SELECT pag_componente.comp_id,comp_nombre "
                 . "from pag_equipo_componente,pag_componente "
                 . "where pag_equipo_componente.comp_id=pag_componente.comp_id "
-                . "and equi_id='".$_POST['equipo']."' ";
+                . "and pag_componente.estado IS NULL "
+                . "and pag_equipo_componente.equi_id='".$_POST['equipo']."' ";
         $componentes=$tipos = $objProgramacion->select($sql);
         $tip = "SELECT * FROM pag_tipo_trabajo";
         $tipos = $objProgramacion->select($tip);
@@ -447,7 +448,7 @@ class ProgramacionController {
         $tarea = $_POST['tarea'];
         $co=$_POST['com'];
         $objProgramacion = new ProgramacionModel();
-        $com = "SELECT comp_id FROM pag_componente where comp_descripcion='" . $co . "'";
+        $com = "SELECT comp_id FROM pag_componente where comp_nombre='" . $co . "'";
         $compo= $objProgramacion->find($com);
         $tip = "SELECT ttra_id FROM pag_tipo_trabajo where ttra_descripcion='" . $ti . "'";
         $tipo = $objProgramacion->find($tip);

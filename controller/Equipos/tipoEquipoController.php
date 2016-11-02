@@ -27,11 +27,15 @@ class TipoEquipoController {
         $tEquipo = $objTipoEquipos->find($sqlEquipo);
 
         //die(print_r($id));
-        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoEquipo_camposPersonalizados WHERE "
-                . "pag_det_tipoEquipo_camposPersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
-                . "pag_det_tipoEquipo_camposPersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoEquipo_camposPersonalizados.tequi_id='$id'";
+        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,"
+                . "pag_det_tipoequipo_campospersonalizados WHERE "
+                . "pag_det_tipoequipo_campospersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
+                . "pag_det_tipoequipo_campospersonalizados.cp_id=pag_campos_personalizados.cp_id AND "
+                . "pag_det_tipoequipo_campospersonalizados.tequi_id='$id'";
         $sqlDetalle = $objTipoEquipos->select($sqlCP);
 
+        
+        
         // Cierra la conexion
         $objTipoEquipos->cerrar();
 
@@ -72,9 +76,7 @@ class TipoEquipoController {
         $tEquipo = $objTipoEquipos->find($sqlEquipo);
 
         //die(print_r($id));
-        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoEquipo_camposPersonalizados WHERE "
-                . "pag_det_tipoEquipo_camposPersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
-                . "pag_det_tipoEquipo_camposPersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoEquipo_camposPersonalizados.tequi_id='$id'";
+        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoequipo_campospersonalizados WHERE pag_det_tipoequipo_campospersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND pag_det_tipoequipo_campospersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoequipo_campospersonalizados.tequi_id='$id'";
         $sqlDetalle = $objTipoEquipos->select($sqlCP);
 
 
@@ -204,7 +206,7 @@ class TipoEquipoController {
         foreach ($id_campo as $campo) {
             $id_tipo_Equipo = $_POST['id_tipo_Equipo'];
             //DIE(PRINT_R($tipo_Equipo)); 
-            $sqlDetalle = "INSERT INTO pag_det_tipoEquipo_camposPersonalizados("
+            $sqlDetalle = "INSERT INTO pag_det_tipoequipo_campospersonalizados("
                     . "tequi_id,"
                     . "cp_id,"
                     . "cantidad) VALUES("
