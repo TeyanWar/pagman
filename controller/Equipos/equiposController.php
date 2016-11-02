@@ -32,7 +32,7 @@ class EquiposController {
         $areas = $objArea->select($sql4);
 
         //$sql5 = "select tequi_id, tequi_descripcion from pag_tipo_de_equipo WHERE estado = 0";
-        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo";
+        $sql5 = "select tequi_id, tequi_descripcion from pag_tipo_equipo WHERE estado is NULL";
         $tEquipos = $objT_equipo->select($sql5);
 
         $sql6 = "select * from pag_tipo_medidor";
