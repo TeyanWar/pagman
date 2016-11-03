@@ -1,6 +1,12 @@
-<div class="orden col s12 m12 l12">
-    <div class="title center"><h5>Orden de trabajo No. <?php echo $detalleOrdenes['ot_id'];?></h5></div>
-    <br>
+<div class="title center">
+    <h5>ORDEN DE TRABAJO # <?php echo $detalleOrdenes['ot_id']; ?></h5>
+</div>
+<div class="row">
+    <a id="imprime" class="btn-floating waves-effect teal"><i class="mdi-maps-local-print-shop"></i></a>
+</div>
+
+<div id="orden" class="col s12 m12 l12">
+    
     <div class=" row">
         <div class="col s12 m8 l4">
             <label style="color: #448aff;"><h6>No. OT</h6></label> 
@@ -130,7 +136,7 @@
                             <td><?php echo $detins['ins_nombre'] ?></td>
                             <td><?php echo $detins['umed_descripcion'] ?></td>
                             <td><?php echo $detins['ins_valor'] ?></td>
-                            <td><?php echo $detins['cantidad'] ?></td>
+                            <td><?php echo $detins['ins_cantidad'] ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>

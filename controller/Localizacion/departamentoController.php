@@ -44,7 +44,7 @@ class DepartamentoController {
         // Cierra la conexion
         $objDepartamento->cerrar();
 
-        redirect(crearUrl("localizacion", "departamento", "listar"));
+        redirect(crearUrl("Localizacion", "departamento", "listar"));
     }
 
     function listar() {
