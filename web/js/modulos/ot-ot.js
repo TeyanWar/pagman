@@ -255,43 +255,32 @@ $(document).ready(function () {
         e.preventDefault();
         swal({title: "¿Realmente desea eliminar este registro?",
             text: "Recuerde que una vez eliminado no se podrá recuperar.",
-            type: "input", showCancelButton: true,
+            type: "input",   showCancelButton: true,
             closeOnConfirm: false,
-            animation: "slide-from-top" },
+            animation: "slide-from-top",
+            inputPlaceholder: "Nombre De Usuario" },
         function (inputValue) {
-            if (inputValue === false) return false;
-            if (inputValue === " "){
-                swal.showInputError("Ingrese nombre de usuario que solicita eliminar el registro");
-                return false
-            }            
+            if (inputValue === false) return false;      
+            if (inputValue === "") {
+            swal.showInputError("Ingrese Nombre De Usuario!");
+            return false   
+            }
             var url = $('.modal-eliminar').attr('data-url');
+            var inputValue = inputValue;
             $.ajax({
                 url: url,
-                type: 'get',
-                data: "nom_usuario=" + inputValue
-            }).done(function (respuesta) {
-                if (respuesta == true) {
-                    swal("¡Eliminado!", "Su registro se ha eliminado exitosamente.", 'success');
+                type: 'post',
+                data: "inputValue=" + inputValue
+            }).done(function(respuesta) {
+                if(respuesta==true) {
+                    swal("¡Eliminado!", "Su registro se ha eliminado exitosamente. " + inputValue, 'success');
                     $('#buscador').trigger('keyup');
-                } else {
+                }else{
                     swal("¡Error!", "Su registro no se pudo eliminar.");
                 }
             });
-        });
-        $("#herramientas").keyup(function () {
-            var equipo = $("#equipo").val();
-            var url = $(this).attr("data-url");
-            $('#conte').show();
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: "equipo=" + equipo,
-                success: function (data) {
-                    $("#conte").html(data);
-                }
-            });
-        });
 
+        });
     });
 
     $(document).on('click', '.agregarInsumo', function () {
