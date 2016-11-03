@@ -278,7 +278,6 @@ $(document).ready(function () {
                     swal("¡Error!", "Su registro no se pudo eliminar.");
                 }
             });
-
         });
         $("#herramientas").keyup(function () {
             var equipo = $("#equipo").val();
