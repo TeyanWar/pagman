@@ -56,7 +56,7 @@
                                         <tr>
                                             <td><?php echo $insumos['ins_id'] ?></td>
                                             <td><?php echo $insumos['ins_nombre'] ?></td>
-                                            <td><?php echo $insumos['ins_valor'] ?></td>
+                                            <td><?php echo "$ ".number_format($insumos['ins_valor'],0,',','.')?></td>
                                         </tr>
                                     <?php }
                                     ?> 
@@ -67,7 +67,7 @@
                             foreach ($totalInsumo as $totalInsumos) {
                                 ?>
 
-                                <?php echo "<b>VALOR TOTAL:</b><font color='blue' size='4px' style='margin-left:80px;'>" . $totalInsumos['sumaTotal'] . "</font></code>" ?>
+                                <?php echo "<b>VALOR TOTAL:</b><font color='blue' size='4px' style='margin-left:80px;'>$ ".number_format($totalInsumos['sumaTotal'],0,',','.'); ?></font></code>
                                 <?php $paginado->render(); ?>
                             <?php } ?>
                         </div>
@@ -127,7 +127,7 @@
                                                     <td><?php echo $Orden['per_nombre'] ?></td>
                                                     <td><?php echo $Orden['ins_nombre']; ?></td>
                                                     <td><?php echo $Orden['ins_cantidad']; ?></td>
-                                                    <td><?php echo $valorTotal; ?></td>
+                                                    <td><?php echo "$ ".number_format($valorTotal,0,',','.')?></td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
@@ -156,7 +156,7 @@
                                         }
                                         ?>
                                     </b><font color='blue' size='4px'>
-                                    <?php echo $valorParc; ?></font>
+                                    <?php echo "$ ".number_format($valorParc,0,',','.')?></font>
                                 </div>
 
                                 <div class="col s12 m5 l6">
