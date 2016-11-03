@@ -174,14 +174,29 @@ class CostosController {
 
         $objInsumos = new costosModel();
         $sql = "SELECT ins_id, ins_nombre, ins_valor FROM pag_insumo";
-		$insumo = $objInsumos->select($sql); 
-        
+        $insumo = $objInsumos->select($sql);
+
         $sql2 = "SELECT sum(ins_valor) as sumaTotal FROM pag_insumo";
-        $totalInsumo = $objInsumos->select($sql2); 
+        $totalInsumo = $objInsumos->select($sql2);
+
+        $sql = "SELECT * FROM pag_orden_trabajo,pag_persona,pag_det_insumo_ot,pag_det_herramienta_ot,pag_herramienta,pag_insumo WHERE "
+                . "pag_orden_trabajo.per_id=pag_persona.per_id AND "
+                . "pag_det_insumo_ot.ot_id=pag_orden_trabajo.ot_id AND "
+                . "pag_det_insumo_ot.ins_id=pag_insumo.ins_id AND "
+                . "pag_det_herramienta_ot.ot_id=pag_orden_trabajo.ot_id AND "
+                . "pag_det_herramienta_ot.her_id=pag_herramienta.her_id LIMIT 0,5";
+        $OrdenTrabajo = $objInsumos->select($sql);
+
+
+        $sql3 = "SELECT * FROM pag_orden_trabajo,pag_persona,pag_det_insumo_ot,pag_insumo WHERE "
+                . "pag_orden_trabajo.per_id=pag_persona.per_id AND "
+                . "pag_det_insumo_ot.ot_id=pag_orden_trabajo.ot_id AND "
+                . "pag_det_insumo_ot.ins_id=pag_insumo.ins_id";
+        $sqlTotalInsumo = $objInsumos->select($sql3);
 
         //aqui empieza el paginado       
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-        $url = crearUrl('costos', 'costos', 'valTotalIns');
+        $url = crearUrl('costos', 'costos', 'crear');
 
         $paginado = new Paginado($insumo, $pagina, $url);
 
