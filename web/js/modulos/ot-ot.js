@@ -251,7 +251,6 @@ $(document).ready(function () {
 
     $('#buscador').trigger('keyup');
 
-
     $(document).on('click', ".modal-eliminar", function (e) {
         e.preventDefault();
         swal({title: "¿Realmente desea eliminar este registro?",
