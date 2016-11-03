@@ -30,12 +30,11 @@ if (!$miserrores == "") {
         </thead>
         <tbody>
         <div class="col s6">
-            <?php foreach ($sqlDetalle as $detalle) { ?>
+            <?php foreach ($camposPersonalizados as $campoPersonalizado) { ?>
                 <td>
-                    <?php
-                    echo "<option value='" . $detalle['cp_nombre'] . "' selected>" . $detalle['cp_nombre'] . "</option>";
-                    ?> </td>
-
+                    <input name="campoSeleccionado[]" id="<?php echo $campoPersonalizado['cp_id']; ?>" value="<?php echo $campoPersonalizado['cp_id']; ?>" type="checkbox" <?php echo $campoPersonalizado['checkeado']; ?> >
+                    <label for="<?php echo $campoPersonalizado['cp_id']; ?>"><?php echo ucwords($campoPersonalizado['cp_nombre']); ?></label>
+                </td>
                 <?php
             }
             ?>
@@ -99,4 +98,7 @@ if (!$miserrores == "") {
             }
         }
     });
+
+    $('select').material_select();
+
 </script>
