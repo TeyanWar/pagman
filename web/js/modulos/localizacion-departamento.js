@@ -1,68 +1,47 @@
 $(document).ready(function () {
-     $("#busquedaAjax4").keyup(function () {
-        var usuario = $("#busquedaAjax4").val();
+     $("#buscarDepto").keyup(function () {
+        var usuario = $("#buscarDepto").val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
             data: "busquedadepartamento=" + usuario,
             success: function (data) {
-                $("#tabla12").html(data);
+                $("#buscarDepartamento").html(data);
             }
         });
     });
 
-    $("#busquedaAjax4").trigger("keyup");
+    $("#buscarDepto").trigger("keyup");
 
-    $(document).on("click", ".ver-detalle2", function () {
+    $(document).on("click", ".ver-detalle", function () {
         var url = $(this).attr("data-url");
 
         $.ajax({
             url: url,
             type: "get",
             success: function (data) {
-                $("#modalDetalle2 > .modal-content").html(data);
+                $("#detalleDepto > .modal-content").html(data);
             }
         });
     });
 
-    $(document).on("click", ".editar2", function () {
+    $(document).on("click", ".editar", function () {
         var url = $(this).attr("data-url");
 
         $.ajax({
             url: url,
             type: "get",
             success: function (data) {
-                $("#modalUpdate2 > .modal-content").html(data);
+                $("#editarDepto > .modal-content").html(data);
             }
         });
     });
     
 
-    $(document).on('click', '.eliminar3', function (e) {
-        e.preventDefault();
-        var url = $(this).attr('data-url');
-        var dept_id = $(this).attr('data-dept_id');
-        swal({title: "¿Realmente desea eliminar este registro?",
-            text: "Recuerde  que una vez eliminado no se podra recuperar",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "Red ",
-            confirmButtonText: "si,eliminar registro",
-            closeOnConfirm: false},
-                function () {
-                    $.ajax({
-                        url: url,
-                        type: 'post',
-                        data: {
-                            id: dept_id
-                        }
-                    }).done(function (data) {
-
-                    });
-                    swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
-                    window.location.href = "Consulta";
-                });
+    $(document).on('click', '.cerrar', function () {
+        $(".modal").closeModal();
+        $(".lean-overlay").remove();
     });
     
     
