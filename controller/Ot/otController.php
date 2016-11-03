@@ -445,8 +445,10 @@ class OtController {
         $objOt = new OtModel();
 
         $id = $parametros[1];
-
-        $sql = "UPDATE pag_orden_trabajo SET estado = NOW() WHERE ot_id=$id";
+        $cedula=$_SESSION['login']['per_id'];
+        $datocaja=$_POST['inputValue'];
+        
+        $sql = "UPDATE pag_orden_trabajo SET ced_eliminar_ot='$cedula',dato_eliminar_ot='$datocaja',estado=NOW() WHERE ot_id=$id";
         $eliminarOt = $objOt->update($sql);
 
         if ($eliminarOt) {
