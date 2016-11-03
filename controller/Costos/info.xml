@@ -15,9 +15,9 @@
             
             <funciones>
                 <funcion>
-                    <nombre>crear</nombre>
-                    <display>Crear Costos</display>
-                    <descripcion>Crear Costos</descripcion>
+                    <nombre>pagoManteCont</nombre>
+                    <display>pago mante contratista</display>
+                    <descripcion>pago mante contratista</descripcion>
                 </funcion>
                 
                 <funcion>

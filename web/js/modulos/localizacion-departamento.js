@@ -1,6 +1,7 @@
 $(document).ready(function () {
      $("#buscarDepto").keyup(function () {
         var usuario = $("#buscarDepto").val();
+        //alert(usuario);
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
