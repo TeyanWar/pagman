@@ -190,9 +190,10 @@ class HerramientasController {
 
     function postEliminar() {
         $id = $_POST['id'];
+        
         $objHerramientas = new HerramientasModel();
 
-        $sql = "UPDATE pag_herramienta SET estado=NULL WHERE her_id='$id'";
+        $sql = "UPDATE pag_herramienta SET estado=false WHERE her_id='$id'";
         $herramienta = $objHerramientas->update($sql);
         // Cierra la conexion
         $objHerramientas->cerrar();

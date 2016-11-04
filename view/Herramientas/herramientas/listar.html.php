@@ -39,7 +39,7 @@
                     <td>
                         <a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" 
                            data-her_id="<?php echo $herramienta['her_id'] ?>" 
-                           data-url="<?php echo crearUrl('herramientas', 'herramientas', 'postEliminar', array('noVista' => 'noVista', 'her_id' => $herramienta['her_id'])) ?>">
+                           data-url="<?php echo crearUrl('Herramientas', 'herramientas', 'postEliminar', array('noVista' => 'noVista', 'id' => $herramienta['her_id'])) ?>">
                             <i class="mdi-action-delete small"></i>
                         </a>
                     </td>

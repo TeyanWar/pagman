@@ -97,6 +97,7 @@ $(document).ready(function () {
         e.preventDefault();
         var url = $(this).attr("data-url");
         var her_id = $(this).attr("data-her_id");
+        alert(url);
         swal({
             title: "Estas seguro de eliminar el registro?",
             text: "La información que estas apunto de eliminar no aparecera en pantalla!",
