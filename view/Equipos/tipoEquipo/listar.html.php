@@ -18,12 +18,12 @@
                     <tr>
                         <td><?php echo $count++ ?></td>
                         <td><?php echo $tEquipo['tequi_descripcion'] ?></td>
-                        <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
+                        <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" data-modal_name="editar" 
                                href="#modal_editar_tipoEquipo" 
                                data-url="<?php echo crearUrl("equipos", "tipoEquipo", "editar", array('noVista', 'id' => $tEquipo['tequi_id'])); ?>">
                                 <i class="mdi-content-create teal"></i></a>
                         </td>
-                        <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" 
+                        <td><a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" data-modal_name="detalle" 
                                href="#modal_detalle_tipoEquipo" 
                                data-url="<?php echo crearUrl("equipos", "tipoEquipo", "verDetalle", array('noVista', 'id' => $tEquipo['tequi_id'])); ?>">
                                 <i class="mdi-action-find-in-page tiny"></i></a>

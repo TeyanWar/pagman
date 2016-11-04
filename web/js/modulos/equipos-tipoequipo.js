@@ -176,14 +176,17 @@ $(document).ready(function () {
 //            }
 //        });
 //    });
+
+    
     $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
+        var modal = $(this).attr("data-modal_name");
         $(".modal-data").html('Cargando ....');
         $.ajax({
             url: url,
             type: "get",
             success: function (data) {
-                $("#modal_editar_tipoEquipo> .modal-content").html(data);
+                $("#modal_"+modal+"_tipoEquipo> .modal-content").html(data);
 
             }
         });
