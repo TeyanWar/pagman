@@ -8,9 +8,10 @@
                     <th>Nombre Componente</th>
                     <th>Acr&oacute;nimo</th>
                     <th>Descripci&oacute;n</th>
-                    <th>Pertenece al Equipo</th>
                     <th>Tipo Componente</th>
+                    <th>Valor del Componente</th>
                     <th>Editar</th>
+                    <th>Detalle</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
@@ -24,11 +25,17 @@
                         <td><?php echo $componente['comp_nombre'] ?></td>
                         <td><?php echo $componente['comp_acronimo'] ?></td>
                         <td><?php echo $componente['comp_descripcion'] ?></td>
-                        <td><?php echo $componente['equi_nombre'] ?></td>
                         <td> <?php echo $componente['tcomp_nombre']?></td>
+                        <td> <?php echo "$ ".number_format($componente['comp_precio'],0,',','.')?></td>
                         <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" 
                                href="#editarTcomp" data-url="<?php echo crearUrl('equipos', 'componentes', 'editar', array('noVista' => "noVista", 'id' => $componente['comp_id'])) ?>">
                                 <i class="mdi-content-create small"></i></a>
+                        </td>
+                        <td>
+                            <a class="btn-floating cyan darken-1 modal-trigger ver-detallec"
+                               href="#modalDetallec" data-url="<?php echo crearUrl('equipos', 'componentes', 'verDetalle', array('noVista' => 'noVista', 'id' => $componente['comp_id'])) ?>">
+                                <i class="mdi-action-find-in-page tiny"></i>
+                            </a>
                         </td>
                         <td>
                             <a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" 
@@ -42,6 +49,12 @@
         </table>
     </div>
 
+</div>
+<div class="modal modal-fixed-footer" id="modalDetallec">
+    <div class="modal-content"></div>
+    <div class="modal-footer">
+        <a id="cerrarDetalleComp"class="waves-effect waves-green btn-flat modal-action modal-close">cerrar</a>                 
+    </div>
 </div>
 
 

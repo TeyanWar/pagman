@@ -44,7 +44,7 @@ class DepartamentoController {
         // Cierra la conexion
         $objDepartamento->cerrar();
 
-        redirect(crearUrl("localizacion", "departamento", "listar"));
+        redirect(crearUrl("Localizacion", "departamento", "listar"));
     }
 
     function listar() {
@@ -164,7 +164,7 @@ class DepartamentoController {
     function buscarAjax() {
         $objdepartamento = new DepartamentoModel();
 
-        $departamento = $_POST['buscarDepto'];
+        $departamento = $_POST['busquedadepartamento'];
 
         $sql = "SELECT * FROM pag_departamento WHERE dept_nombre LIKE '%" . $departamento . "%' or dept_id LIKE '%" . $departamento . "%'  ORDER BY dept_nombre ASC";
         $departamentos = $objdepartamento->select($sql);

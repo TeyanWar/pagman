@@ -52,16 +52,6 @@ $(document).ready(function () {
     $("#buscarEquipo").trigger("keyup");
     //Ver detalle//
 
-    $(document).on("click", ".ver-detale1", function () {
-        var url = $(this).attr("data-url");
-        $.ajax({
-            url: url,
-            type: "get",
-            success: function (data) {
-                $("#modalDetalle1 > .modal-content").html(data);
-            }
-        });
-    });
 
     //Capturamos el ID del select de formulario CREAR EQUIPO
     $("#tequi_id").change(function () {
@@ -81,6 +71,18 @@ $(document).ready(function () {
             }
         });
     })
+    //Ver detale//
+    $(document).on('click', ".modal-trigger", function () {
+        var url = $(this).attr("data-url");
+        $(".modal-data").html('Cargando ....');
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#modal_detalle_equipo> .modal-content").html(data);
+            }
+        });
+    });
 
     //editar//
     $(document).on("click", ".editar1", function () {
@@ -114,20 +116,20 @@ $(document).ready(function () {
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "Red ",
-            confirmButtonText: "si,eliminar registro",
+            confirmButtonText: "Sí, Eliminar registro",
             closeOnConfirm: false},
-                function () {
-                    $.ajax({
-                        url: url,
-                        type: 'post',
-                        data: {
-                            id: equi_id
-                        }
-                    });
-                    //       alert(equi_id);
-                    swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
-                    $("#busquedaAjax").trigger('keyup');
-                });
+        function () {
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {
+                    id: equi_id
+                }
+            });
+            //       alert(equi_id);
+            swal("Eliminado!", "Su registro se ha eliminado exitosamente.", "success");
+            $("#busquedaAjax").trigger('keyup');
+        });
     });
     //----------------- validaciones ---------------
 
@@ -299,7 +301,7 @@ $(document).ready(function () {
 
     //Enviar formulario con archivos por ajax
     $(".file-form").on('submit', function () {
-        $('.btn_submit_file').prop('disabled',true);
+        $('.btn_submit_file').prop('disabled', true);
         var options = {
             url: $(this).attr("action"),
             success: function (response) {

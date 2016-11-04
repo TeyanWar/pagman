@@ -107,7 +107,7 @@
     <br>
     <div class="divider"></div>
     <div class="row">
-        <?php if($guia['texto_guia']!=""){ ?>
+        <?php if(!empty($guia['texto_guia'])){ ?>
             <div class="col s12 m8 l12">
                 <label style="color: #448aff;"><h6>Guia Mantenimiento</h6></label> 
                 <?php echo $guia['texto_guia'] ?>
@@ -160,7 +160,7 @@
                             <td><?php echo $detins['ins_nombre'] ?></td>
                             <td><?php echo $detins['umed_descripcion'] ?></td>
                             <td><?php echo $detins['ins_valor'] ?></td>
-                            <td><?php echo $detins['cantidad'] ?></td>
+                            <td><?php echo $detins['ins_cantidad'] ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>

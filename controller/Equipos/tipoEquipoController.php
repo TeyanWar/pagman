@@ -27,11 +27,29 @@ class TipoEquipoController {
         $tEquipo = $objTipoEquipos->find($sqlEquipo);
 
         //die(print_r($id));
-        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoEquipo_camposPersonalizados WHERE "
-                . "pag_det_tipoEquipo_camposPersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
-                . "pag_det_tipoEquipo_camposPersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoEquipo_camposPersonalizados.tequi_id='$id'";
+        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,"
+                . "pag_det_tipoequipo_campospersonalizados WHERE "
+                . "pag_det_tipoequipo_campospersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
+                . "pag_det_tipoequipo_campospersonalizados.cp_id=pag_campos_personalizados.cp_id AND "
+                . "pag_det_tipoequipo_campospersonalizados.tequi_id='$id'";
         $sqlDetalle = $objTipoEquipos->select($sqlCP);
 
+        //consulta de todos los Campos personalizados
+        $sql1 = "SELECT * FROM pag_campos_personalizados WHERE estado is NULL";
+        $camposPersonalizados = $objTipoEquipos->select($sql1);
+        
+        $sql2 = "SELECT * FROM pag_det_tipoequipo_campospersonalizados WHERE tequi_id='$id'";
+        $campoSeleccionados = $objTipoEquipos->select($sql2);
+        
+        foreach ($camposPersonalizados as $key => $campoPersonalizado){
+            $camposPersonalizados[$key]['checkeado']='';
+            foreach($campoSeleccionados as $campoSeleccionado){
+                if($campoPersonalizado['cp_id'] == $campoSeleccionado['cp_id']){
+                    $camposPersonalizados[$key]['checkeado']=='checked';
+                    break;
+                }
+            }
+        }
         // Cierra la conexion
         $objTipoEquipos->cerrar();
 
@@ -72,9 +90,7 @@ class TipoEquipoController {
         $tEquipo = $objTipoEquipos->find($sqlEquipo);
 
         //die(print_r($id));
-        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoEquipo_camposPersonalizados WHERE "
-                . "pag_det_tipoEquipo_camposPersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND "
-                . "pag_det_tipoEquipo_camposPersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoEquipo_camposPersonalizados.tequi_id='$id'";
+        $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,pag_det_tipoequipo_campospersonalizados WHERE pag_det_tipoequipo_campospersonalizados.tequi_id=pag_tipo_equipo.tequi_id AND pag_det_tipoequipo_campospersonalizados.cp_id=pag_campos_personalizados.cp_id AND pag_det_tipoequipo_campospersonalizados.tequi_id='$id'";
         $sqlDetalle = $objTipoEquipos->select($sqlCP);
 
 
@@ -204,7 +220,7 @@ class TipoEquipoController {
         foreach ($id_campo as $campo) {
             $id_tipo_Equipo = $_POST['id_tipo_Equipo'];
             //DIE(PRINT_R($tipo_Equipo)); 
-            $sqlDetalle = "INSERT INTO pag_det_tipoEquipo_camposPersonalizados("
+            $sqlDetalle = "INSERT INTO pag_det_tipoequipo_campospersonalizados("
                     . "tequi_id,"
                     . "cp_id,"
                     . "cantidad) VALUES("

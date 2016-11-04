@@ -30,8 +30,12 @@ $(document).ready(function () {
    //Botón para cerrar modales
     $(document).on('click', '.cerrar', function () {
         $(".modal").closeModal();
+        $(".lean-overlay").remove();
     });
    
+   $('#cerrarDetalleComp').click(function(){
+       $(".lean-overlay").remove();
+   });
 
     
      $(document).on('click', ".modal-trigger", function () {
@@ -41,6 +45,19 @@ $(document).ready(function () {
             type: "get",
             success: function (data) {
                 $("#editarTcomp > .modal-content").html(data);
+                
+            }
+        });
+
+    });
+    
+    $(document).on('click', ".ver-detallec", function () {
+        var url = $(this).attr("data-url");
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+                $("#modalDetallec > .modal-content").html(data);
                 
             }
         });
@@ -69,6 +86,7 @@ $(document).ready(function () {
                 
             });
           swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
+          $('#buscarcomp').trigger('keyup');
             //window.location.href = "listar";
         });
     });
