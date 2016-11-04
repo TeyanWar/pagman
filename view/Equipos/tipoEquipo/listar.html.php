@@ -9,6 +9,7 @@
                     <th>Ver Detalle</th>
                     <th>Eliminar</th>
                 </tr>
+                
             </thead>
             <tbody>
                 <?php

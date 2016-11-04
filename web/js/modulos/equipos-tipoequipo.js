@@ -178,6 +178,7 @@ $(document).ready(function () {
 //    });
 
     
+    
     $(document).on('click', ".modal-trigger", function () {
         var url = $(this).attr("data-url");
         var modal = $(this).attr("data-modal_name");
