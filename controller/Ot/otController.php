@@ -80,7 +80,7 @@ class OtController {
 
         //----------------------consulta de insumos---------------------
         $sqlin = "SELECT pag_insumo.ins_nombre,pag_insumo.ins_valor,"
-                . "pag_unidad_medida.umed_descripcion,pag_det_insumo_ot.cantidad "
+                . "pag_unidad_medida.umed_descripcion,pag_det_insumo_ot.ins_cantidad "
                 . "FROM pag_det_insumo_ot,pag_insumo,pag_unidad_medida,pag_orden_trabajo "
                 . "WHERE pag_det_insumo_ot.ot_id=pag_orden_trabajo.ot_id "
                 . "AND pag_det_insumo_ot.ins_id=pag_insumo.ins_id "
@@ -303,7 +303,7 @@ class OtController {
                 $f=0;
                 foreach ($codin as $insumo){
 
-                    $det = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,cantidad) "
+                    $det = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,ins_cantidad) "
                             . "VALUES ($otid[ot_id],$insumo,$cantins[$f])";
 
                     $objDetalle->insertar($det);
@@ -380,7 +380,7 @@ class OtController {
 
         //----------------------consulta de insumos---------------------
         $sqlin = "SELECT pag_insumo.ins_nombre,pag_insumo.ins_valor,"
-                . "pag_unidad_medida.umed_descripcion,pag_det_insumo_ot.cantidad "
+                . "pag_unidad_medida.umed_descripcion,pag_det_insumo_ot.ins_cantidad "
                 . "FROM pag_det_insumo_ot,pag_insumo,pag_unidad_medida,pag_orden_trabajo "
                 . "WHERE pag_det_insumo_ot.ot_id=pag_orden_trabajo.ot_id "
                 . "AND pag_det_insumo_ot.ins_id=pag_insumo.ins_id "

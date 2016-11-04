@@ -160,7 +160,7 @@
                             <td><?php echo $detins['ins_nombre'] ?></td>
                             <td><?php echo $detins['umed_descripcion'] ?></td>
                             <td><?php echo $detins['ins_valor'] ?></td>
-                            <td><?php echo $detins['cantidad'] ?></td>
+                            <td><?php echo $detins['ins_cantidad'] ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>

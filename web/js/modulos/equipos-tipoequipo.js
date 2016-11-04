@@ -136,26 +136,6 @@ $(document).ready(function () {
 
 //------------------AQUI TERMINA EL LISTAR -----------------------------------------------------
 
-    $(document).on("click", ".ver-detalle1", function () {
-        var url = $(this).attr("data-url");
-        $.ajax({
-            url: url,
-            type: "get",
-            success: function (data) {
-                $("#modalDetalle1 > .modal-content").html(data);
-            }
-        });
-    });
-    $(document).on("click", ".editar1", function () {
-        var url = $(this).attr("data-url");
-        $.ajax({
-            url: url,
-            type: "get",
-            success: function (data) {
-                $("#modalUpdate1 > .modal-content").html(data);
-            }
-        });
-    });
     //------------------- ELIMINAR --------------------//
 
     $(document).on('click', '.modal-eliminar', function (e) {

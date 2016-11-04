@@ -1,3 +1,6 @@
+<!--AGREADECIMIENTOS Y CREDITOS A @Nicolas Rodriguez por la funcion de formateo DE NUMEROS -->
+<?php /* echo "$".number_format($valorNumeros,0,',','.')*/?>
+
 <div id="bordered-table">
     <div class="row">
         <table class="striped">
