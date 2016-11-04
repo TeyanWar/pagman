@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2016 a las 02:09:41
+-- Tiempo de generación: 04-11-2016 a las 02:31:21
 -- Versión del servidor: 5.6.21
 -- Versión de PHP: 5.6.3
 
@@ -302,7 +302,18 @@ CREATE TABLE IF NOT EXISTS `pag_det_componente_ot` (
 `comp_ot_id` int(11) NOT NULL,
   `ot_id` int(11) NOT NULL,
   `comp_id` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pag_det_componente_ot`
+--
+
+INSERT INTO `pag_det_componente_ot` (`comp_ot_id`, `ot_id`, `comp_id`) VALUES
+(7, 8, '4'),
+(8, 9, '4'),
+(9, 9, '5'),
+(10, 10, '4'),
+(11, 11, '5');
 
 -- --------------------------------------------------------
 
@@ -341,7 +352,18 @@ CREATE TABLE IF NOT EXISTS `pag_det_herramienta_ot` (
   `ot_id` int(11) NOT NULL,
   `her_id` varchar(40) NOT NULL,
   `cantidad` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pag_det_herramienta_ot`
+--
+
+INSERT INTO `pag_det_herramienta_ot` (`dherot_id`, `ot_id`, `her_id`, `cantidad`) VALUES
+(8, 8, 'EREU_09887GTHHF', 1),
+(9, 9, 'EREU_09887GTHHF', 1),
+(10, 10, 'EREU_09887GTHHF', 1),
+(11, 11, 'EREU_09887GTHHF', 1),
+(12, 12, 'EREU_09887GTHHF', 1);
 
 -- --------------------------------------------------------
 
@@ -354,7 +376,15 @@ CREATE TABLE IF NOT EXISTS `pag_det_insumo_ot` (
   `ot_id` int(11) NOT NULL,
   `ins_id` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pag_det_insumo_ot`
+--
+
+INSERT INTO `pag_det_insumo_ot` (`dinsot_id`, `ot_id`, `ins_id`, `cantidad`) VALUES
+(8, 8, 1, 2),
+(9, 9, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -400,7 +430,7 @@ CREATE TABLE IF NOT EXISTS `pag_det_programacion` (
   `frec_medc` varchar(45) DEFAULT NULL,
   `texto_guia` varchar(200) DEFAULT NULL,
   `est_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -810,7 +840,18 @@ CREATE TABLE IF NOT EXISTS `pag_orden_trabajo` (
   `ced_eliminar_ot` varchar(45) DEFAULT NULL,
   `dato_eliminar_ot` varchar(45) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pag_orden_trabajo`
+--
+
+INSERT INTO `pag_orden_trabajo` (`ot_id`, `ot_fecha_creacion`, `ot_prioridad`, `ot_desc_falla`, `ot_fecha_inicio`, `ot_fecha_fin`, `ot_ayudantes`, `ot_desc_trabajo`, `ot_observacion`, `est_id`, `cen_id`, `equi_id`, `tfa_id`, `per_id`, `id_mantenimiento`, `estandar`, `ced_eliminar_ot`, `dato_eliminar_ot`, `estado`) VALUES
+(8, '2016-11-03 01:49:40', 'Media', 'Prueba', '2 November, 201', '11 November, 20', 'Esteban CerÃ³n', 'Prueba', NULL, 3, 1, '1', 1, 1151956249, NULL, NULL, NULL, NULL, '2016-11-03 01:49:40'),
+(9, '2016-11-03 01:56:42', 'Baja', 'Prueba', '2 November, 201', '10 November, 20', 'Gloria', 'Prueba', NULL, 3, 1, '1', 1, 9870111123, NULL, NULL, '1151956249', 'Esteban CerÃ³n', '2016-11-03 01:56:42'),
+(10, '2016-11-03 16:34:01', 'Media', 'prueba', '3 November, 201', '10 November, 20', 'Glora', 'prueba', NULL, 3, 1, '1', 1, 9870111123, NULL, NULL, NULL, NULL, NULL),
+(11, '2016-11-03 16:36:25', 'Alta', 'Prueba', '3 November, 201', '3 November, 201', 'Esteban', 'prueba', NULL, 3, 1, 'Equi_prueba', 1, 1151956249, NULL, NULL, NULL, NULL, NULL),
+(12, '2016-11-04 01:28:16', 'Media', 'Prueba', '2016-11-04', '2016-11-09', 'Prueba', 'Prueba ', NULL, 3, 1, 'Equi_prueba', 1, 9870111123, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1002,7 +1043,7 @@ CREATE TABLE IF NOT EXISTS `pag_programacion_equipo` (
   `proequi_fecha_inicio` varchar(15) NOT NULL,
   `tman_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1061,20 +1102,11 @@ CREATE TABLE IF NOT EXISTS `pag_solicitud_servicio` (
   `equi_id` varchar(45) NOT NULL,
   `sserv_descripcion` varchar(100) DEFAULT NULL,
   `sserv_observacion` varchar(100) DEFAULT NULL,
-  `per_id` int(11) NOT NULL,
+  `per_id` bigint(20) NOT NULL,
   `est_id` int(11) NOT NULL,
   `tfa_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `pag_solicitud_servicio`
---
-
-INSERT INTO `pag_solicitud_servicio` (`sserv_id`, `sserv_fecha`, `cen_id`, `equi_id`, `sserv_descripcion`, `sserv_observacion`, `per_id`, `est_id`, `tfa_id`, `estado`) VALUES
-(1, '2016-10-06 02:58:23', 1, '1', 'caja', NULL, 1151956249, 8, 1, NULL),
-(2, '2016-10-06 00:58:06', 1, 'EP_003', 'motor', '', 1151956249, 8, 1, NULL),
-(3, '2016-10-06 03:21:14', 2, '0123', 'mmmm', '', 1151956249, 8, 1, NULL);
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1693,7 +1725,7 @@ MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 -- AUTO_INCREMENT de la tabla `pag_det_componente_ot`
 --
 ALTER TABLE `pag_det_componente_ot`
-MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_equipo_medidor`
 --
@@ -1703,12 +1735,12 @@ MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 -- AUTO_INCREMENT de la tabla `pag_det_herramienta_ot`
 --
 ALTER TABLE `pag_det_herramienta_ot`
-MODIFY `dherot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `dherot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_insumo_ot`
 --
 ALTER TABLE `pag_det_insumo_ot`
-MODIFY `dinsot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `dinsot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_prestamo_herramienta`
 --
@@ -1718,7 +1750,7 @@ MODIFY `detph_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT de la tabla `pag_det_programacion`
 --
 ALTER TABLE `pag_det_programacion`
-MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_tipoequipo_campospersonalizados`
 --
@@ -1773,7 +1805,7 @@ MODIFY `mod_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 -- AUTO_INCREMENT de la tabla `pag_orden_trabajo`
 --
 ALTER TABLE `pag_orden_trabajo`
-MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `pag_permisos`
 --
@@ -1793,7 +1825,7 @@ MODIFY `priotra_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT de la tabla `pag_programacion_equipo`
 --
 ALTER TABLE `pag_programacion_equipo`
-MODIFY `proequi_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `proequi_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pag_regional`
 --
@@ -1808,7 +1840,7 @@ MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- AUTO_INCREMENT de la tabla `pag_solicitud_servicio`
 --
 ALTER TABLE `pag_solicitud_servicio`
-MODIFY `sserv_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `sserv_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `pag_tarea`
 --

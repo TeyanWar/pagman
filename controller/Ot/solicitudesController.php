@@ -138,13 +138,13 @@ class SolicitudesController {
                         or pag_tipo_falla.tfa_descripcion like '" . $buscar . "%'
                         or pag_estado.est_descripcion like '" . $buscar . "%'
                         or UPPER(pag_persona.per_nombre) like UPPER('" . $buscar . "%')
-                    ) order by sserv_id desc ";
+                    ) order by sserv_id desc";
 
         $solicitudes = $objBuscar->select($sql);
                 
         // Paginado
         $pagina = (isset($_REQUEST['pagina']) ? $_REQUEST['pagina'] : 1);
-        $url = crearUrl('ot', 'solicitudes', 'listar');
+        $url = crearUrl('Ot', 'solicitudes', 'listar');
 
         $paginado = new Paginado($solicitudes, $pagina, $url);
 

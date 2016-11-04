@@ -153,9 +153,9 @@ $(document).ready(function () {
             if (respuesta==true) {
                 Materialize.toast("<i class= 'material-icons' ></i> Registro exitoso.", 2000, 'rounded col green');
                 setTimeout(
-                        function () {
-                            window.location.href = (redirect);
-                        }, 2000);
+                    function () {
+                        window.location.href = (redirect);
+                    }, 2000);
             }
             else {
                 Materialize.toast("<i class= 'material-icons' ></i> Error al registrar.", 3000, 'rounded col red');
@@ -250,7 +250,6 @@ $(document).ready(function () {
     });
 
     $('#buscador').trigger('keyup');
-
 
     $(document).on('click', ".modal-eliminar", function (e) {
         e.preventDefault();

@@ -29,7 +29,7 @@
                                 <td><?php echo $solicitud['sserv_fecha'] ?></td>
                                 <td><?php echo $solicitud['per_nombre'] . " " . $solicitud['per_apellido'] ?></td>
                                 <td><?php echo $solicitud['tfa_descripcion'] ?></td>
-                                <td><?php echo $solicitud['est_descripcion'] ?></td>
+                                <td><?php echo $solicitud['est_descripcion'] ?></td>    
                                 
                                 <?php if ($solicitud['est_descripcion']=="Atendida") { ?>
                                     <td>
