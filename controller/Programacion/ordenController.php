@@ -228,7 +228,7 @@ class OrdenController {
                         $i=0;
                         foreach ($idns as $insid){
 
-                            $det = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,cantidad) "
+                            $det = "INSERT INTO pag_det_insumo_ot (ot_id,ins_id,ins_cantidad) "
                                     . "VALUES ($otid[ot_id],$insid,$cantidades[$i])";
 
                             $insedet = $objOrden->insertar($det);
