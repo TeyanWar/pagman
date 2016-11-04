@@ -144,7 +144,7 @@ function planos()
         // Cierra la conexion
         $objInsumos->cerrar();
 
-        redirect(crearUrl("insumos", "insumos", "buscador"));
+        redirect(crearUrl("insumos", "insumos", "Listar"));
         }
     }
 

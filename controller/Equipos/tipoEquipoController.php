@@ -44,7 +44,7 @@ class TipoEquipoController {
         foreach ($camposPersonalizados as $key => $campoPersonalizado){
             $camposPersonalizados[$key]['checkeado']='';
             foreach($campoSeleccionados as $campoSeleccionado){
-                if($campoPersonalizado['cp_id'] == $campoSeleccionado['cp_id']){
+                if($campoSeleccionado['cp_id'] == $campoPersonalizado['cp_id']){
                     $camposPersonalizados[$key]['checkeado']=='checked';
                     break;
                 }
