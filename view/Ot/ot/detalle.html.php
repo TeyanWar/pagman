@@ -99,10 +99,15 @@
     <br>
     <div class="divider"></div>
     <div class="row">
-        <?php if(!empty($guia['texto_guia'])){ ?>
+        <?php if(!empty($texto)){ ?>
             <div class="col s12 m8 l12">
-                <label style="color: #448aff;"><h6>Guia Mantenimiento</h6></label> 
-                <?php echo $guia['texto_guia'] ?>
+                <label style="color: #448aff;"><h6>Guia Mantenimiento</h6></label>
+		<?php $guia = explode(",", $texto['texto_guia']); ?>
+                <?php $i=1; foreach ($guia as $tex) { ?>
+                    <p>
+                        <?php echo $i.") ".$tex; ?>
+                    </p>
+                <?php $i++; } ?>
             </div>
         <?php } ?>
     </div>

@@ -108,6 +108,9 @@
         <div class="input-field col s12">
             <label for="tario"  class="active">Comentario guia</label>
             <textarea id="tario" class="materialize-textarea" length="120"></textarea>
+            <span class="help-block">
+                Por favor ingrese el paso a paso separado por: <code>coma (,)</code>
+            </span>
         </div>
     </div>
 

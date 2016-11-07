@@ -68,7 +68,7 @@ class OtController {
         $sqlguia = "SELECT texto_guia FROM pag_det_programacion "
                 . "WHERE pag_det_programacion.detprog_id='" . $detalleOrdenes['id_mantenimiento'] . "'";
 
-        $guia = $objDetalle->find($sqlguia);
+        $texto = $objDetalle->find($sqlguia);
         //----------------------consulta de componentes---------------------
         $sqlc = "SELECT pag_componente.comp_descripcion "
                 . "FROM pag_det_componente_ot,pag_orden_trabajo,pag_componente "
@@ -359,7 +359,7 @@ class OtController {
         //------------------consulta guia de mantenimiento------------------
         $sqlguia = "SELECT texto_guia FROM pag_det_programacion "
                 . "WHERE pag_det_programacion.detprog_id='" . $editarOt['id_mantenimiento'] . "'";
-        $guia = $objEditar->find($sqlguia);
+        $texto = $objEditar->find($sqlguia);
         //---------------si es una orden de trabajo para hacer mantenimiento--------------------
         $probar = "SELECT id_mantenimiento FROM pag_orden_trabajo "
                 . "WHERE ot_id=$id";
