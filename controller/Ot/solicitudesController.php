@@ -261,14 +261,20 @@ class SolicitudesController {
     }
 
     function Eliminar($parametros) {
-
-        $id = $parametros[1];
-
         $objEliminar = new SolicitudesModel();
-
-        $sql = "UPDATE pag_solicitud_servicio SET estado = NOW() WHERE sserv_id = $id";
-
-        $objEliminar->update($sql);
+        
+        $id = $parametros[1];
+        $cedula=$_SESSION['login']['per_id'];
+        $datocaja=$_POST['inputValue'];
+        
+        $sql = "UPDATE pag_solicitud_servicio SET ced_eliminar_ot='$cedula',dato_eliminar_ot='$datocaja', estado = NOW() WHERE sserv_id = $id";
+        $eliminarSolicitud = $objEliminar->update($sql);
+        
+        if ($eliminarSolicitud) {
+            echo true;
+        } else {
+            echo false;
+        }
 
         // Cierra la conexion
         $objEliminar->cerrar();

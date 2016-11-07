@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.2.11
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Tiempo de generación: 04-11-2016 a las 06:07:25
--- Versión del servidor: 10.1.16-MariaDB
--- Versión de PHP: 5.6.24
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 07-11-2016 a las 17:11:44
+-- Versión del servidor: 5.6.21
+-- Versión de PHP: 5.6.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de datos: `pagman`
@@ -26,8 +26,8 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `pag_almacen`
 --
 
-CREATE TABLE `pag_almacen` (
-  `alm_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_almacen` (
+`alm_id` int(11) NOT NULL,
   `alm_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -38,11 +38,11 @@ CREATE TABLE `pag_almacen` (
 -- Estructura de tabla para la tabla `pag_area`
 --
 
-CREATE TABLE `pag_area` (
-  `area_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_area` (
+`area_id` int(11) NOT NULL,
   `area_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_area`
@@ -58,7 +58,7 @@ INSERT INTO `pag_area` (`area_id`, `area_descripcion`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_campos_personalizados`
 --
 
-CREATE TABLE `pag_campos_personalizados` (
+CREATE TABLE IF NOT EXISTS `pag_campos_personalizados` (
   `cp_id` varchar(30) NOT NULL,
   `cp_nombre` varchar(45) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
@@ -78,11 +78,11 @@ INSERT INTO `pag_campos_personalizados` (`cp_id`, `cp_nombre`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_cargo`
 --
 
-CREATE TABLE `pag_cargo` (
-  `car_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_cargo` (
+`car_id` int(11) NOT NULL,
   `car_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_cargo`
@@ -98,15 +98,15 @@ INSERT INTO `pag_cargo` (`car_id`, `car_descripcion`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_centro`
 --
 
-CREATE TABLE `pag_centro` (
-  `cen_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_centro` (
+`cen_id` int(11) NOT NULL,
   `cen_codigo` varchar(10) NOT NULL,
   `cen_nombre` varchar(45) NOT NULL,
   `cen_dir` varchar(45) NOT NULL,
   `cen_telefono` varchar(45) NOT NULL,
   `reg_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_centro`
@@ -123,12 +123,12 @@ INSERT INTO `pag_centro` (`cen_id`, `cen_codigo`, `cen_nombre`, `cen_dir`, `cen_
 -- Estructura de tabla para la tabla `pag_ciudad`
 --
 
-CREATE TABLE `pag_ciudad` (
-  `ciud_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_ciudad` (
+`ciud_id` int(11) NOT NULL,
   `ciud_nombre` varchar(45) NOT NULL,
   `dept_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_ciudad`
@@ -153,15 +153,15 @@ INSERT INTO `pag_ciudad` (`ciud_id`, `ciud_nombre`, `dept_id`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_componente`
 --
 
-CREATE TABLE `pag_componente` (
-  `comp_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_componente` (
+`comp_id` int(11) NOT NULL,
   `comp_nombre` varchar(45) NOT NULL,
   `comp_descripcion` varchar(100) DEFAULT NULL,
   `comp_acronimo` varchar(10) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL,
   `tcomp_id` int(11) DEFAULT NULL,
   `comp_precio` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_componente`
@@ -179,14 +179,14 @@ INSERT INTO `pag_componente` (`comp_id`, `comp_nombre`, `comp_descripcion`, `com
 -- Estructura de tabla para la tabla `pag_controlador`
 --
 
-CREATE TABLE `pag_controlador` (
-  `cont_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_controlador` (
+`cont_id` int(11) NOT NULL,
   `mod_id` int(11) NOT NULL,
   `cont_nombre` varchar(40) NOT NULL,
   `cont_icono` varchar(40) NOT NULL,
   `cont_display` varchar(40) NOT NULL,
   `cont_descripcion` varchar(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_controlador`
@@ -224,15 +224,15 @@ INSERT INTO `pag_controlador` (`cont_id`, `mod_id`, `cont_nombre`, `cont_icono`,
 -- Estructura de tabla para la tabla `pag_control_medidas`
 --
 
-CREATE TABLE `pag_control_medidas` (
-  `ctrmed_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_control_medidas` (
+`ctrmed_id` int(11) NOT NULL,
   `ctrmed_fecha` varchar(15) NOT NULL,
   `ctrmed_medida_actual` varchar(100) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
   `per_id` bigint(20) NOT NULL,
   `tmed_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_control_medidas`
@@ -248,11 +248,11 @@ INSERT INTO `pag_control_medidas` (`ctrmed_id`, `ctrmed_fecha`, `ctrmed_medida_a
 -- Estructura de tabla para la tabla `pag_departamento`
 --
 
-CREATE TABLE `pag_departamento` (
-  `dept_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_departamento` (
+`dept_id` int(11) NOT NULL,
   `dept_nombre` varchar(30) NOT NULL,
   `reg_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_departamento`
@@ -298,11 +298,11 @@ INSERT INTO `pag_departamento` (`dept_id`, `dept_nombre`, `reg_id`) VALUES
 -- Estructura de tabla para la tabla `pag_det_componente_ot`
 --
 
-CREATE TABLE `pag_det_componente_ot` (
-  `comp_ot_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_det_componente_ot` (
+`comp_ot_id` int(11) NOT NULL,
   `ot_id` int(11) NOT NULL,
   `comp_id` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_det_componente_ot`
@@ -313,7 +313,8 @@ INSERT INTO `pag_det_componente_ot` (`comp_ot_id`, `ot_id`, `comp_id`) VALUES
 (8, 9, '4'),
 (9, 9, '5'),
 (10, 10, '4'),
-(11, 11, '5');
+(11, 11, '5'),
+(12, 13, '4');
 
 -- --------------------------------------------------------
 
@@ -321,11 +322,11 @@ INSERT INTO `pag_det_componente_ot` (`comp_ot_id`, `ot_id`, `comp_id`) VALUES
 -- Estructura de tabla para la tabla `pag_det_equipo_medidor`
 --
 
-CREATE TABLE `pag_det_equipo_medidor` (
-  `dequimed_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_det_equipo_medidor` (
+`dequimed_id` int(11) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
   `tmed_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_det_equipo_medidor`
@@ -347,12 +348,12 @@ INSERT INTO `pag_det_equipo_medidor` (`dequimed_id`, `equi_id`, `tmed_id`) VALUE
 -- Estructura de tabla para la tabla `pag_det_herramienta_ot`
 --
 
-CREATE TABLE `pag_det_herramienta_ot` (
-  `dherot_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_det_herramienta_ot` (
+`dherot_id` int(11) NOT NULL,
   `ot_id` int(11) NOT NULL,
   `her_id` varchar(40) NOT NULL,
   `cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_det_herramienta_ot`
@@ -363,7 +364,9 @@ INSERT INTO `pag_det_herramienta_ot` (`dherot_id`, `ot_id`, `her_id`, `cantidad`
 (9, 9, 'EREU_09887GTHHF', 1),
 (10, 10, 'EREU_09887GTHHF', 1),
 (11, 11, 'EREU_09887GTHHF', 1),
-(12, 12, 'EREU_09887GTHHF', 1);
+(12, 12, 'EREU_09887GTHHF', 1),
+(13, 13, 'EREU_09887GTHHF', 5),
+(14, 14, 'EREU_09887GTHHF', 6);
 
 -- --------------------------------------------------------
 
@@ -371,12 +374,12 @@ INSERT INTO `pag_det_herramienta_ot` (`dherot_id`, `ot_id`, `her_id`, `cantidad`
 -- Estructura de tabla para la tabla `pag_det_insumo_ot`
 --
 
-CREATE TABLE `pag_det_insumo_ot` (
-  `dinsot_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_det_insumo_ot` (
+`dinsot_id` int(11) NOT NULL,
   `ot_id` int(11) NOT NULL,
   `ins_id` int(11) NOT NULL,
   `ins_cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_det_insumo_ot`
@@ -384,7 +387,9 @@ CREATE TABLE `pag_det_insumo_ot` (
 
 INSERT INTO `pag_det_insumo_ot` (`dinsot_id`, `ot_id`, `ins_id`, `ins_cantidad`) VALUES
 (8, 8, 1, 2),
-(9, 9, 1, 2);
+(9, 9, 1, 2),
+(10, 13, 1, 3),
+(11, 14, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -392,15 +397,15 @@ INSERT INTO `pag_det_insumo_ot` (`dinsot_id`, `ot_id`, `ins_id`, `ins_cantidad`)
 -- Estructura de tabla para la tabla `pag_det_prestamo_herramienta`
 --
 
-CREATE TABLE `pag_det_prestamo_herramienta` (
-  `detph_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_det_prestamo_herramienta` (
+`detph_id` int(11) NOT NULL,
   `pher_id` int(11) NOT NULL,
   `her_id` varchar(40) NOT NULL,
   `detph_cant_solicita` int(11) NOT NULL,
   `detph_cant_entrega` int(11) NOT NULL,
   `est_id` int(11) NOT NULL,
   `detph_observacion` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_det_prestamo_herramienta`
@@ -415,8 +420,8 @@ INSERT INTO `pag_det_prestamo_herramienta` (`detph_id`, `pher_id`, `her_id`, `de
 -- Estructura de tabla para la tabla `pag_det_programacion`
 --
 
-CREATE TABLE `pag_det_programacion` (
-  `detprog_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_det_programacion` (
+`detprog_id` int(11) NOT NULL,
   `proequi_id` int(11) NOT NULL,
   `ttra_id` int(11) NOT NULL,
   `detprog_duracion_horas` int(11) NOT NULL,
@@ -438,13 +443,13 @@ CREATE TABLE `pag_det_programacion` (
 -- Estructura de tabla para la tabla `pag_det_tipoequipo_campospersonalizados`
 --
 
-CREATE TABLE `pag_det_tipoequipo_campospersonalizados` (
-  `idDetalle` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_det_tipoequipo_campospersonalizados` (
+`idDetalle` int(11) NOT NULL,
   `tequi_id` varchar(30) NOT NULL,
   `cp_id` varchar(20) NOT NULL,
   `cantidad` int(12) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_det_tipoequipo_campospersonalizados`
@@ -476,7 +481,7 @@ INSERT INTO `pag_det_tipoequipo_campospersonalizados` (`idDetalle`, `tequi_id`, 
 -- Estructura de tabla para la tabla `pag_equipo`
 --
 
-CREATE TABLE `pag_equipo` (
+CREATE TABLE IF NOT EXISTS `pag_equipo` (
   `equi_id` varchar(45) NOT NULL,
   `per_id` bigint(20) NOT NULL,
   `equi_nombre` varchar(100) NOT NULL,
@@ -516,12 +521,12 @@ INSERT INTO `pag_equipo` (`equi_id`, `per_id`, `equi_nombre`, `est_id`, `tequi_i
 -- Estructura de tabla para la tabla `pag_equipo_componente`
 --
 
-CREATE TABLE `pag_equipo_componente` (
-  `equicomp_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_equipo_componente` (
+`equicomp_id` int(11) NOT NULL,
   `comp_id` int(11) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_equipo_componente`
@@ -540,8 +545,8 @@ INSERT INTO `pag_equipo_componente` (`equicomp_id`, `comp_id`, `equi_id`, `estad
 -- Estructura de tabla para la tabla `pag_equipo_cp`
 --
 
-CREATE TABLE `pag_equipo_cp` (
-  `equicp_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_equipo_cp` (
+`equicp_id` int(11) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
   `cp_id` int(11) NOT NULL,
   `equicp_valor` varchar(100) NOT NULL,
@@ -554,8 +559,8 @@ CREATE TABLE `pag_equipo_cp` (
 -- Estructura de tabla para la tabla `pag_equipo_planos`
 --
 
-CREATE TABLE `pag_equipo_planos` (
-  `equipla_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_equipo_planos` (
+`equipla_id` int(11) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
   `equipla_descripcion` varchar(100) NOT NULL,
   `equipla_ruta` varchar(100) NOT NULL
@@ -567,12 +572,12 @@ CREATE TABLE `pag_equipo_planos` (
 -- Estructura de tabla para la tabla `pag_estado`
 --
 
-CREATE TABLE `pag_estado` (
-  `est_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_estado` (
+`est_id` int(11) NOT NULL,
   `est_descripcion` varchar(45) NOT NULL,
   `tdoc_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_estado`
@@ -594,13 +599,13 @@ INSERT INTO `pag_estado` (`est_id`, `est_descripcion`, `tdoc_id`, `estado`) VALU
 -- Estructura de tabla para la tabla `pag_funcion`
 --
 
-CREATE TABLE `pag_funcion` (
-  `func_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_funcion` (
+`func_id` int(11) NOT NULL,
   `cont_id` int(11) NOT NULL,
   `func_nombre` varchar(40) NOT NULL,
   `func_display` varchar(40) NOT NULL,
   `func_descripcion` varchar(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_funcion`
@@ -700,7 +705,7 @@ INSERT INTO `pag_funcion` (`func_id`, `cont_id`, `func_nombre`, `func_display`, 
 -- Estructura de tabla para la tabla `pag_herramienta`
 --
 
-CREATE TABLE `pag_herramienta` (
+CREATE TABLE IF NOT EXISTS `pag_herramienta` (
   `her_id` varchar(40) NOT NULL,
   `ther_id` int(11) NOT NULL,
   `her_nombre` varchar(45) NOT NULL,
@@ -727,14 +732,14 @@ INSERT INTO `pag_herramienta` (`her_id`, `ther_id`, `her_nombre`, `her_descripci
 -- Estructura de tabla para la tabla `pag_insumo`
 --
 
-CREATE TABLE `pag_insumo` (
-  `ins_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_insumo` (
+`ins_id` int(11) NOT NULL,
   `ins_nombre` varchar(45) NOT NULL,
   `ins_descripcion` varchar(45) NOT NULL,
   `ins_valor` int(11) NOT NULL,
   `umed_id` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_insumo`
@@ -750,8 +755,8 @@ INSERT INTO `pag_insumo` (`ins_id`, `ins_nombre`, `ins_descripcion`, `ins_valor`
 -- Estructura de tabla para la tabla `pag_inventario`
 --
 
-CREATE TABLE `pag_inventario` (
-  `inv_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_inventario` (
+`inv_id` int(11) NOT NULL,
   `inv_fecha` varchar(15) NOT NULL,
   `inv_movimiento` varchar(45) NOT NULL,
   `ins_id` int(11) NOT NULL,
@@ -766,11 +771,11 @@ CREATE TABLE `pag_inventario` (
 -- Estructura de tabla para la tabla `pag_jornada`
 --
 
-CREATE TABLE `pag_jornada` (
-  `jor_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_jornada` (
+`jor_id` int(11) NOT NULL,
   `jor_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_jornada`
@@ -787,13 +792,13 @@ INSERT INTO `pag_jornada` (`jor_id`, `jor_descripcion`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_modulo`
 --
 
-CREATE TABLE `pag_modulo` (
-  `mod_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_modulo` (
+`mod_id` int(11) NOT NULL,
   `mod_nombre` varchar(20) NOT NULL,
   `mod_icono` varchar(40) NOT NULL,
   `mod_sitio_menu` varchar(20) NOT NULL,
   `mod_descripcion` varchar(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_modulo`
@@ -820,8 +825,8 @@ INSERT INTO `pag_modulo` (`mod_id`, `mod_nombre`, `mod_icono`, `mod_sitio_menu`,
 -- Estructura de tabla para la tabla `pag_orden_trabajo`
 --
 
-CREATE TABLE `pag_orden_trabajo` (
-  `ot_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_orden_trabajo` (
+`ot_id` int(11) NOT NULL,
   `ot_fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ot_prioridad` varchar(30) NOT NULL,
   `ot_desc_falla` varchar(400) NOT NULL,
@@ -840,7 +845,7 @@ CREATE TABLE `pag_orden_trabajo` (
   `ced_eliminar_ot` varchar(45) DEFAULT NULL,
   `dato_eliminar_ot` varchar(45) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_orden_trabajo`
@@ -849,9 +854,11 @@ CREATE TABLE `pag_orden_trabajo` (
 INSERT INTO `pag_orden_trabajo` (`ot_id`, `ot_fecha_creacion`, `ot_prioridad`, `ot_desc_falla`, `ot_fecha_inicio`, `ot_fecha_fin`, `ot_ayudantes`, `ot_desc_trabajo`, `ot_observacion`, `est_id`, `cen_id`, `equi_id`, `tfa_id`, `per_id`, `id_mantenimiento`, `estandar`, `ced_eliminar_ot`, `dato_eliminar_ot`, `estado`) VALUES
 (8, '2016-11-03 01:49:40', 'Media', 'Prueba', '2 November, 201', '11 November, 20', 'Esteban CerÃ³n', 'Prueba', NULL, 3, 1, '1', 1, 1151956249, NULL, NULL, NULL, NULL, '2016-11-03 01:49:40'),
 (9, '2016-11-03 01:56:42', 'Baja', 'Prueba', '2 November, 201', '10 November, 20', 'Gloria', 'Prueba', NULL, 3, 1, '1', 1, 9870111123, NULL, NULL, '1151956249', 'Esteban CerÃ³n', '2016-11-03 01:56:42'),
-(10, '2016-11-03 16:34:01', 'Media', 'prueba', '3 November, 201', '10 November, 20', 'Glora', 'prueba', NULL, 3, 1, '1', 1, 9870111123, NULL, NULL, NULL, NULL, NULL),
+(10, '2016-11-07 14:53:01', 'Media', 'prueba', '3 November, 201', '10 November, 20', 'Glora', 'prueba', 'Se cierra exitosamente', 6, 1, '1', 1, 9870111123, NULL, NULL, NULL, NULL, NULL),
 (11, '2016-11-03 16:36:25', 'Alta', 'Prueba', '3 November, 201', '3 November, 201', 'Esteban', 'prueba', NULL, 3, 1, 'Equi_prueba', 1, 1151956249, NULL, NULL, NULL, NULL, NULL),
-(12, '2016-11-04 01:28:16', 'Media', 'Prueba', '2016-11-04', '2016-11-09', 'Prueba', 'Prueba ', NULL, 3, 1, 'Equi_prueba', 1, 9870111123, NULL, NULL, NULL, NULL, NULL);
+(12, '2016-11-04 01:28:16', 'Media', 'Prueba', '2016-11-04', '2016-11-09', 'Prueba', 'Prueba ', NULL, 3, 1, 'Equi_prueba', 1, 9870111123, NULL, NULL, NULL, NULL, NULL),
+(13, '2016-11-04 17:57:12', 'Alta', 'Prueba', '4 November, 201', '4 November, 201', 'Prueba', 'PRueba', NULL, 3, 1, '1', 1, 1151956249, NULL, NULL, NULL, NULL, NULL),
+(14, '2016-11-07 15:08:28', 'Alta', 'Prueba', '7 November, 201', '7 November, 201', 'Gloria TrÃ³chez, Esteban CerÃ³n', 'Prueba', NULL, 3, 1, '1', 1, 1151956249, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -859,11 +866,11 @@ INSERT INTO `pag_orden_trabajo` (`ot_id`, `ot_fecha_creacion`, `ot_prioridad`, `
 -- Estructura de tabla para la tabla `pag_permisos`
 --
 
-CREATE TABLE `pag_permisos` (
-  `perm_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_permisos` (
+`perm_id` int(11) NOT NULL,
   `func_id` int(11) NOT NULL,
   `rol_id` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=653 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_permisos`
@@ -959,7 +966,7 @@ INSERT INTO `pag_permisos` (`perm_id`, `func_id`, `rol_id`) VALUES
 -- Estructura de tabla para la tabla `pag_persona`
 --
 
-CREATE TABLE `pag_persona` (
+CREATE TABLE IF NOT EXISTS `pag_persona` (
   `per_id` bigint(20) NOT NULL,
   `per_nombre` varchar(45) NOT NULL,
   `per_apellido` varchar(45) NOT NULL,
@@ -991,8 +998,8 @@ INSERT INTO `pag_persona` (`per_id`, `per_nombre`, `per_apellido`, `per_telefono
 -- Estructura de tabla para la tabla `pag_prestamo_herramienta`
 --
 
-CREATE TABLE `pag_prestamo_herramienta` (
-  `pher_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_prestamo_herramienta` (
+`pher_id` int(11) NOT NULL,
   `pher_fecha` varchar(15) NOT NULL,
   `per_id_solicita` int(11) NOT NULL,
   `pher_fecha_devolucion` varchar(15) NOT NULL,
@@ -1000,7 +1007,7 @@ CREATE TABLE `pag_prestamo_herramienta` (
   `jor_id` int(11) NOT NULL,
   `per_id_entrega` int(11) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_prestamo_herramienta`
@@ -1015,11 +1022,11 @@ INSERT INTO `pag_prestamo_herramienta` (`pher_id`, `pher_fecha`, `per_id_solicit
 -- Estructura de tabla para la tabla `pag_prioridad_trabajo`
 --
 
-CREATE TABLE `pag_prioridad_trabajo` (
-  `priotra_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_prioridad_trabajo` (
+`priotra_id` int(11) NOT NULL,
   `priotra_descripcion` varchar(20) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_prioridad_trabajo`
@@ -1036,8 +1043,8 @@ INSERT INTO `pag_prioridad_trabajo` (`priotra_id`, `priotra_descripcion`, `estad
 -- Estructura de tabla para la tabla `pag_programacion_equipo`
 --
 
-CREATE TABLE `pag_programacion_equipo` (
-  `proequi_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_programacion_equipo` (
+`proequi_id` int(11) NOT NULL,
   `proequi_fecha` varchar(15) NOT NULL,
   `cen_id` int(11) NOT NULL,
   `proequi_fecha_inicio` varchar(15) NOT NULL,
@@ -1051,12 +1058,12 @@ CREATE TABLE `pag_programacion_equipo` (
 -- Estructura de tabla para la tabla `pag_regional`
 --
 
-CREATE TABLE `pag_regional` (
-  `reg_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_regional` (
+`reg_id` int(11) NOT NULL,
   `reg_codigo` varchar(10) NOT NULL,
   `reg_nombre` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_regional`
@@ -1075,12 +1082,12 @@ INSERT INTO `pag_regional` (`reg_id`, `reg_codigo`, `reg_nombre`, `estado`) VALU
 -- Estructura de tabla para la tabla `pag_rol`
 --
 
-CREATE TABLE `pag_rol` (
-  `rol_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_rol` (
+`rol_id` int(11) NOT NULL,
   `rol_nombre` varchar(20) NOT NULL,
   `rol_descripcion` varchar(100) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_rol`
@@ -1095,8 +1102,8 @@ INSERT INTO `pag_rol` (`rol_id`, `rol_nombre`, `rol_descripcion`, `estado`) VALU
 -- Estructura de tabla para la tabla `pag_solicitud_servicio`
 --
 
-CREATE TABLE `pag_solicitud_servicio` (
-  `sserv_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_solicitud_servicio` (
+`sserv_id` int(11) NOT NULL,
   `sserv_fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `cen_id` int(11) NOT NULL,
   `equi_id` varchar(45) NOT NULL,
@@ -1105,8 +1112,21 @@ CREATE TABLE `pag_solicitud_servicio` (
   `per_id` bigint(20) NOT NULL,
   `est_id` int(11) NOT NULL,
   `tfa_id` int(11) NOT NULL,
+  `ced_eliminar_ot` varchar(45) DEFAULT NULL,
+  `dato_eliminar_ot` varchar(45) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `pag_solicitud_servicio`
+--
+
+INSERT INTO `pag_solicitud_servicio` (`sserv_id`, `sserv_fecha`, `cen_id`, `equi_id`, `sserv_descripcion`, `sserv_observacion`, `per_id`, `est_id`, `tfa_id`, `ced_eliminar_ot`, `dato_eliminar_ot`, `estado`) VALUES
+(21, '2016-11-04 19:02:24', 1, '1', 'sfgdfg', '', 1151956249, 8, 1, NULL, NULL, NULL),
+(22, '2016-11-07 14:49:10', 1, '1', 'Prueba', 'Se cierra exitosamente', 1151956249, 8, 1, NULL, NULL, NULL),
+(23, '2016-11-07 16:02:22', 1, '1', 'Prueba 2', NULL, 1151956249, 7, 1, '1151956249', 'Gloria TrÃ³chez', '2016-11-07 16:02:22'),
+(24, '2016-11-07 16:06:37', 1, 'Equi_prueba', 'Prueba 3', NULL, 9870111123, 7, 2, '1151956249', 'AndrÃ©s Tejada', '2016-11-07 16:06:37'),
+(25, '2016-11-07 16:07:00', 2, '0123', 'Prueba 4', NULL, 1151956249, 7, 2, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1114,11 +1134,11 @@ CREATE TABLE `pag_solicitud_servicio` (
 -- Estructura de tabla para la tabla `pag_tarea`
 --
 
-CREATE TABLE `pag_tarea` (
-  `tar_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_tarea` (
+`tar_id` int(11) NOT NULL,
   `tar_nombre` varchar(200) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_tarea`
@@ -1136,11 +1156,11 @@ INSERT INTO `pag_tarea` (`tar_id`, `tar_nombre`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_tiempo_medidor`
 --
 
-CREATE TABLE `pag_tiempo_medidor` (
-  `tm_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_tiempo_medidor` (
+`tm_id` int(11) NOT NULL,
   `tm_nombre` varchar(45) NOT NULL,
   `tm_seg` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_tiempo_medidor`
@@ -1157,13 +1177,13 @@ INSERT INTO `pag_tiempo_medidor` (`tm_id`, `tm_nombre`, `tm_seg`) VALUES
 -- Estructura de tabla para la tabla `pag_tipo_componente`
 --
 
-CREATE TABLE `pag_tipo_componente` (
-  `tcomp_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_tipo_componente` (
+`tcomp_id` int(11) NOT NULL,
   `tcomp_nombre` varchar(45) NOT NULL,
   `tcomp_acronimo` varchar(45) NOT NULL,
   `tcomp_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pag_tipo_componente`
@@ -1179,11 +1199,11 @@ INSERT INTO `pag_tipo_componente` (`tcomp_id`, `tcomp_nombre`, `tcomp_acronimo`,
 -- Estructura de tabla para la tabla `pag_tipo_doc`
 --
 
-CREATE TABLE `pag_tipo_doc` (
-  `tdoc_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_tipo_doc` (
+`tdoc_id` int(11) NOT NULL,
   `tdoc_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_tipo_doc`
@@ -1201,7 +1221,7 @@ INSERT INTO `pag_tipo_doc` (`tdoc_id`, `tdoc_descripcion`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_tipo_equipo`
 --
 
-CREATE TABLE `pag_tipo_equipo` (
+CREATE TABLE IF NOT EXISTS `pag_tipo_equipo` (
   `tequi_id` varchar(30) NOT NULL,
   `tequi_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
@@ -1228,11 +1248,11 @@ INSERT INTO `pag_tipo_equipo` (`tequi_id`, `tequi_descripcion`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_tipo_falla`
 --
 
-CREATE TABLE `pag_tipo_falla` (
-  `tfa_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_tipo_falla` (
+`tfa_id` int(11) NOT NULL,
   `tfa_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_tipo_falla`
@@ -1248,11 +1268,11 @@ INSERT INTO `pag_tipo_falla` (`tfa_id`, `tfa_descripcion`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_tipo_herramienta`
 --
 
-CREATE TABLE `pag_tipo_herramienta` (
-  `ther_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_tipo_herramienta` (
+`ther_id` int(11) NOT NULL,
   `ther_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_tipo_herramienta`
@@ -1270,11 +1290,11 @@ INSERT INTO `pag_tipo_herramienta` (`ther_id`, `ther_descripcion`, `estado`) VAL
 -- Estructura de tabla para la tabla `pag_tipo_mantenimiento`
 --
 
-CREATE TABLE `pag_tipo_mantenimiento` (
-  `tman_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_tipo_mantenimiento` (
+`tman_id` int(11) NOT NULL,
   `tman_descripcion` varchar(45) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_tipo_mantenimiento`
@@ -1289,8 +1309,8 @@ INSERT INTO `pag_tipo_mantenimiento` (`tman_id`, `tman_descripcion`, `estado`) V
 -- Estructura de tabla para la tabla `pag_tipo_medidor`
 --
 
-CREATE TABLE `pag_tipo_medidor` (
-  `tmed_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_tipo_medidor` (
+`tmed_id` int(11) NOT NULL,
   `tmed_nombre` varchar(45) NOT NULL,
   `tmed_descripcion` varchar(45) NOT NULL,
   `tmed_acronimo` varchar(45) NOT NULL,
@@ -1299,7 +1319,7 @@ CREATE TABLE `pag_tipo_medidor` (
   `tmed_numt` varchar(11) DEFAULT NULL,
   `tm_id` int(11) DEFAULT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_tipo_medidor`
@@ -1315,11 +1335,11 @@ INSERT INTO `pag_tipo_medidor` (`tmed_id`, `tmed_nombre`, `tmed_descripcion`, `t
 -- Estructura de tabla para la tabla `pag_tipo_trabajo`
 --
 
-CREATE TABLE `pag_tipo_trabajo` (
-  `ttra_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_tipo_trabajo` (
+`ttra_id` int(11) NOT NULL,
   `ttra_descripcion` varchar(100) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_tipo_trabajo`
@@ -1337,11 +1357,11 @@ INSERT INTO `pag_tipo_trabajo` (`ttra_id`, `ttra_descripcion`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_unidad_medida`
 --
 
-CREATE TABLE `pag_unidad_medida` (
-  `umed_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `pag_unidad_medida` (
+`umed_id` int(11) NOT NULL,
   `umed_descripcion` varchar(20) NOT NULL,
   `estado` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pag_unidad_medida`
@@ -1359,7 +1379,7 @@ INSERT INTO `pag_unidad_medida` (`umed_id`, `umed_descripcion`, `estado`) VALUES
 -- Estructura de tabla para la tabla `pag_usuario`
 --
 
-CREATE TABLE `pag_usuario` (
+CREATE TABLE IF NOT EXISTS `pag_usuario` (
   `per_id` bigint(20) NOT NULL,
   `usu_usuario` varchar(45) NOT NULL,
   `usu_clave` varchar(200) NOT NULL,
@@ -1382,332 +1402,295 @@ INSERT INTO `pag_usuario` (`per_id`, `usu_usuario`, `usu_clave`, `usu_estado`, `
 -- Indices de la tabla `pag_almacen`
 --
 ALTER TABLE `pag_almacen`
-  ADD PRIMARY KEY (`alm_id`);
+ ADD PRIMARY KEY (`alm_id`);
 
 --
 -- Indices de la tabla `pag_area`
 --
 ALTER TABLE `pag_area`
-  ADD PRIMARY KEY (`area_id`);
+ ADD PRIMARY KEY (`area_id`);
 
 --
 -- Indices de la tabla `pag_campos_personalizados`
 --
 ALTER TABLE `pag_campos_personalizados`
-  ADD PRIMARY KEY (`cp_id`);
+ ADD PRIMARY KEY (`cp_id`);
 
 --
 -- Indices de la tabla `pag_cargo`
 --
 ALTER TABLE `pag_cargo`
-  ADD PRIMARY KEY (`car_id`);
+ ADD PRIMARY KEY (`car_id`);
 
 --
 -- Indices de la tabla `pag_centro`
 --
 ALTER TABLE `pag_centro`
-  ADD PRIMARY KEY (`cen_id`);
+ ADD PRIMARY KEY (`cen_id`);
 
 --
 -- Indices de la tabla `pag_ciudad`
 --
 ALTER TABLE `pag_ciudad`
-  ADD PRIMARY KEY (`ciud_id`),
-  ADD KEY `dept_id` (`dept_id`);
+ ADD PRIMARY KEY (`ciud_id`), ADD KEY `dept_id` (`dept_id`);
 
 --
 -- Indices de la tabla `pag_componente`
 --
 ALTER TABLE `pag_componente`
-  ADD PRIMARY KEY (`comp_id`),
-  ADD KEY `tcomp_id` (`tcomp_id`);
+ ADD PRIMARY KEY (`comp_id`), ADD KEY `tcomp_id` (`tcomp_id`);
 
 --
 -- Indices de la tabla `pag_controlador`
 --
 ALTER TABLE `pag_controlador`
-  ADD PRIMARY KEY (`cont_id`);
+ ADD PRIMARY KEY (`cont_id`);
 
 --
 -- Indices de la tabla `pag_control_medidas`
 --
 ALTER TABLE `pag_control_medidas`
-  ADD PRIMARY KEY (`ctrmed_id`),
-  ADD KEY `tmed_id` (`tmed_id`),
-  ADD KEY `equi_id` (`equi_id`);
+ ADD PRIMARY KEY (`ctrmed_id`), ADD KEY `tmed_id` (`tmed_id`), ADD KEY `equi_id` (`equi_id`);
 
 --
 -- Indices de la tabla `pag_departamento`
 --
 ALTER TABLE `pag_departamento`
-  ADD PRIMARY KEY (`dept_id`),
-  ADD KEY `reg_id` (`reg_id`);
+ ADD PRIMARY KEY (`dept_id`), ADD KEY `reg_id` (`reg_id`);
 
 --
 -- Indices de la tabla `pag_det_componente_ot`
 --
 ALTER TABLE `pag_det_componente_ot`
-  ADD PRIMARY KEY (`comp_ot_id`);
+ ADD PRIMARY KEY (`comp_ot_id`);
 
 --
 -- Indices de la tabla `pag_det_equipo_medidor`
 --
 ALTER TABLE `pag_det_equipo_medidor`
-  ADD PRIMARY KEY (`dequimed_id`),
-  ADD KEY `equi_id` (`equi_id`),
-  ADD KEY `tmed_id` (`tmed_id`);
+ ADD PRIMARY KEY (`dequimed_id`), ADD KEY `equi_id` (`equi_id`), ADD KEY `tmed_id` (`tmed_id`);
 
 --
 -- Indices de la tabla `pag_det_herramienta_ot`
 --
 ALTER TABLE `pag_det_herramienta_ot`
-  ADD PRIMARY KEY (`dherot_id`),
-  ADD KEY `ot_id` (`ot_id`),
-  ADD KEY `her_id` (`her_id`);
+ ADD PRIMARY KEY (`dherot_id`), ADD KEY `ot_id` (`ot_id`), ADD KEY `her_id` (`her_id`);
 
 --
 -- Indices de la tabla `pag_det_insumo_ot`
 --
 ALTER TABLE `pag_det_insumo_ot`
-  ADD PRIMARY KEY (`dinsot_id`),
-  ADD KEY `ot_id` (`ot_id`),
-  ADD KEY `ins_id` (`ins_id`);
+ ADD PRIMARY KEY (`dinsot_id`), ADD KEY `ot_id` (`ot_id`), ADD KEY `ins_id` (`ins_id`);
 
 --
 -- Indices de la tabla `pag_det_prestamo_herramienta`
 --
 ALTER TABLE `pag_det_prestamo_herramienta`
-  ADD PRIMARY KEY (`detph_id`),
-  ADD KEY `pher_id` (`pher_id`),
-  ADD KEY `her_id` (`her_id`),
-  ADD KEY `est_id` (`est_id`);
+ ADD PRIMARY KEY (`detph_id`), ADD KEY `pher_id` (`pher_id`), ADD KEY `her_id` (`her_id`), ADD KEY `est_id` (`est_id`);
 
 --
 -- Indices de la tabla `pag_det_programacion`
 --
 ALTER TABLE `pag_det_programacion`
-  ADD PRIMARY KEY (`detprog_id`),
-  ADD KEY `proequi_id` (`proequi_id`),
-  ADD KEY `ttra_id` (`ttra_id`),
-  ADD KEY `equi_id` (`equi_id`),
-  ADD KEY `comp_id` (`comp_id`),
-  ADD KEY `priotra_id` (`priotra_id`),
-  ADD KEY `tar_id` (`tar_id`),
-  ADD KEY `tmed_id` (`tmed_id`);
+ ADD PRIMARY KEY (`detprog_id`), ADD KEY `proequi_id` (`proequi_id`), ADD KEY `ttra_id` (`ttra_id`), ADD KEY `equi_id` (`equi_id`), ADD KEY `comp_id` (`comp_id`), ADD KEY `priotra_id` (`priotra_id`), ADD KEY `tar_id` (`tar_id`), ADD KEY `tmed_id` (`tmed_id`);
 
 --
 -- Indices de la tabla `pag_det_tipoequipo_campospersonalizados`
 --
 ALTER TABLE `pag_det_tipoequipo_campospersonalizados`
-  ADD PRIMARY KEY (`idDetalle`),
-  ADD KEY `tequi_id` (`tequi_id`),
-  ADD KEY `cp_id` (`cp_id`);
+ ADD PRIMARY KEY (`idDetalle`), ADD KEY `tequi_id` (`tequi_id`), ADD KEY `cp_id` (`cp_id`);
 
 --
 -- Indices de la tabla `pag_equipo`
 --
 ALTER TABLE `pag_equipo`
-  ADD PRIMARY KEY (`equi_id`),
-  ADD KEY `per_id` (`per_id`),
-  ADD KEY `cen_id` (`cen_id`),
-  ADD KEY `tequi_id` (`tequi_id`);
+ ADD PRIMARY KEY (`equi_id`), ADD KEY `per_id` (`per_id`), ADD KEY `cen_id` (`cen_id`), ADD KEY `tequi_id` (`tequi_id`);
 
 --
 -- Indices de la tabla `pag_equipo_componente`
 --
 ALTER TABLE `pag_equipo_componente`
-  ADD PRIMARY KEY (`equicomp_id`);
+ ADD PRIMARY KEY (`equicomp_id`);
 
 --
 -- Indices de la tabla `pag_equipo_cp`
 --
 ALTER TABLE `pag_equipo_cp`
-  ADD PRIMARY KEY (`equicp_id`);
+ ADD PRIMARY KEY (`equicp_id`);
 
 --
 -- Indices de la tabla `pag_equipo_planos`
 --
 ALTER TABLE `pag_equipo_planos`
-  ADD PRIMARY KEY (`equipla_id`);
+ ADD PRIMARY KEY (`equipla_id`);
 
 --
 -- Indices de la tabla `pag_estado`
 --
 ALTER TABLE `pag_estado`
-  ADD PRIMARY KEY (`est_id`),
-  ADD KEY `tdoc_id` (`tdoc_id`);
+ ADD PRIMARY KEY (`est_id`), ADD KEY `tdoc_id` (`tdoc_id`);
 
 --
 -- Indices de la tabla `pag_funcion`
 --
 ALTER TABLE `pag_funcion`
-  ADD PRIMARY KEY (`func_id`);
+ ADD PRIMARY KEY (`func_id`);
 
 --
 -- Indices de la tabla `pag_herramienta`
 --
 ALTER TABLE `pag_herramienta`
-  ADD PRIMARY KEY (`her_id`);
+ ADD PRIMARY KEY (`her_id`);
 
 --
 -- Indices de la tabla `pag_insumo`
 --
 ALTER TABLE `pag_insumo`
-  ADD PRIMARY KEY (`ins_id`);
+ ADD PRIMARY KEY (`ins_id`);
 
 --
 -- Indices de la tabla `pag_inventario`
 --
 ALTER TABLE `pag_inventario`
-  ADD PRIMARY KEY (`inv_id`);
+ ADD PRIMARY KEY (`inv_id`);
 
 --
 -- Indices de la tabla `pag_jornada`
 --
 ALTER TABLE `pag_jornada`
-  ADD PRIMARY KEY (`jor_id`);
+ ADD PRIMARY KEY (`jor_id`);
 
 --
 -- Indices de la tabla `pag_modulo`
 --
 ALTER TABLE `pag_modulo`
-  ADD PRIMARY KEY (`mod_id`);
+ ADD PRIMARY KEY (`mod_id`);
 
 --
 -- Indices de la tabla `pag_orden_trabajo`
 --
 ALTER TABLE `pag_orden_trabajo`
-  ADD PRIMARY KEY (`ot_id`),
-  ADD KEY `est_id` (`est_id`),
-  ADD KEY `cen_id` (`cen_id`),
-  ADD KEY `equi_id` (`equi_id`),
-  ADD KEY `tfa_id` (`tfa_id`),
-  ADD KEY `per_id` (`per_id`);
+ ADD PRIMARY KEY (`ot_id`), ADD KEY `est_id` (`est_id`), ADD KEY `cen_id` (`cen_id`), ADD KEY `equi_id` (`equi_id`), ADD KEY `tfa_id` (`tfa_id`), ADD KEY `per_id` (`per_id`);
 
 --
 -- Indices de la tabla `pag_permisos`
 --
 ALTER TABLE `pag_permisos`
-  ADD PRIMARY KEY (`perm_id`);
+ ADD PRIMARY KEY (`perm_id`);
 
 --
 -- Indices de la tabla `pag_persona`
 --
 ALTER TABLE `pag_persona`
-  ADD PRIMARY KEY (`per_id`);
+ ADD PRIMARY KEY (`per_id`);
 
 --
 -- Indices de la tabla `pag_prestamo_herramienta`
 --
 ALTER TABLE `pag_prestamo_herramienta`
-  ADD PRIMARY KEY (`pher_id`),
-  ADD KEY `jor_id` (`jor_id`);
+ ADD PRIMARY KEY (`pher_id`), ADD KEY `jor_id` (`jor_id`);
 
 --
 -- Indices de la tabla `pag_prioridad_trabajo`
 --
 ALTER TABLE `pag_prioridad_trabajo`
-  ADD PRIMARY KEY (`priotra_id`);
+ ADD PRIMARY KEY (`priotra_id`);
 
 --
 -- Indices de la tabla `pag_programacion_equipo`
 --
 ALTER TABLE `pag_programacion_equipo`
-  ADD PRIMARY KEY (`proequi_id`),
-  ADD KEY `cen_id` (`cen_id`),
-  ADD KEY `tman_id` (`tman_id`);
+ ADD PRIMARY KEY (`proequi_id`), ADD KEY `cen_id` (`cen_id`), ADD KEY `tman_id` (`tman_id`);
 
 --
 -- Indices de la tabla `pag_regional`
 --
 ALTER TABLE `pag_regional`
-  ADD PRIMARY KEY (`reg_id`);
+ ADD PRIMARY KEY (`reg_id`);
 
 --
 -- Indices de la tabla `pag_rol`
 --
 ALTER TABLE `pag_rol`
-  ADD PRIMARY KEY (`rol_id`);
+ ADD PRIMARY KEY (`rol_id`);
 
 --
 -- Indices de la tabla `pag_solicitud_servicio`
 --
 ALTER TABLE `pag_solicitud_servicio`
-  ADD PRIMARY KEY (`sserv_id`);
+ ADD PRIMARY KEY (`sserv_id`);
 
 --
 -- Indices de la tabla `pag_tarea`
 --
 ALTER TABLE `pag_tarea`
-  ADD PRIMARY KEY (`tar_id`);
+ ADD PRIMARY KEY (`tar_id`);
 
 --
 -- Indices de la tabla `pag_tiempo_medidor`
 --
 ALTER TABLE `pag_tiempo_medidor`
-  ADD PRIMARY KEY (`tm_id`);
+ ADD PRIMARY KEY (`tm_id`);
 
 --
 -- Indices de la tabla `pag_tipo_componente`
 --
 ALTER TABLE `pag_tipo_componente`
-  ADD PRIMARY KEY (`tcomp_id`);
+ ADD PRIMARY KEY (`tcomp_id`);
 
 --
 -- Indices de la tabla `pag_tipo_doc`
 --
 ALTER TABLE `pag_tipo_doc`
-  ADD PRIMARY KEY (`tdoc_id`);
+ ADD PRIMARY KEY (`tdoc_id`);
 
 --
 -- Indices de la tabla `pag_tipo_equipo`
 --
 ALTER TABLE `pag_tipo_equipo`
-  ADD PRIMARY KEY (`tequi_id`);
+ ADD PRIMARY KEY (`tequi_id`);
 
 --
 -- Indices de la tabla `pag_tipo_falla`
 --
 ALTER TABLE `pag_tipo_falla`
-  ADD PRIMARY KEY (`tfa_id`);
+ ADD PRIMARY KEY (`tfa_id`);
 
 --
 -- Indices de la tabla `pag_tipo_herramienta`
 --
 ALTER TABLE `pag_tipo_herramienta`
-  ADD PRIMARY KEY (`ther_id`);
+ ADD PRIMARY KEY (`ther_id`);
 
 --
 -- Indices de la tabla `pag_tipo_mantenimiento`
 --
 ALTER TABLE `pag_tipo_mantenimiento`
-  ADD PRIMARY KEY (`tman_id`);
+ ADD PRIMARY KEY (`tman_id`);
 
 --
 -- Indices de la tabla `pag_tipo_medidor`
 --
 ALTER TABLE `pag_tipo_medidor`
-  ADD PRIMARY KEY (`tmed_id`),
-  ADD KEY `tm_id` (`tm_id`);
+ ADD PRIMARY KEY (`tmed_id`), ADD KEY `tm_id` (`tm_id`);
 
 --
 -- Indices de la tabla `pag_tipo_trabajo`
 --
 ALTER TABLE `pag_tipo_trabajo`
-  ADD PRIMARY KEY (`ttra_id`);
+ ADD PRIMARY KEY (`ttra_id`);
 
 --
 -- Indices de la tabla `pag_unidad_medida`
 --
 ALTER TABLE `pag_unidad_medida`
-  ADD PRIMARY KEY (`umed_id`);
+ ADD PRIMARY KEY (`umed_id`);
 
 --
 -- Indices de la tabla `pag_usuario`
 --
 ALTER TABLE `pag_usuario`
-  ADD PRIMARY KEY (`per_id`),
-  ADD UNIQUE KEY `usu_usuario_UNIQUE` (`usu_usuario`);
+ ADD PRIMARY KEY (`per_id`), ADD UNIQUE KEY `usu_usuario_UNIQUE` (`usu_usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -1717,217 +1700,217 @@ ALTER TABLE `pag_usuario`
 -- AUTO_INCREMENT de la tabla `pag_almacen`
 --
 ALTER TABLE `pag_almacen`
-  MODIFY `alm_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `alm_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pag_area`
 --
 ALTER TABLE `pag_area`
-  MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `pag_cargo`
 --
 ALTER TABLE `pag_cargo`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `pag_centro`
 --
 ALTER TABLE `pag_centro`
-  MODIFY `cen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `cen_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `pag_ciudad`
 --
 ALTER TABLE `pag_ciudad`
-  MODIFY `ciud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+MODIFY `ciud_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `pag_componente`
 --
 ALTER TABLE `pag_componente`
-  MODIFY `comp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000;
+MODIFY `comp_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10000;
 --
 -- AUTO_INCREMENT de la tabla `pag_controlador`
 --
 ALTER TABLE `pag_controlador`
-  MODIFY `cont_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+MODIFY `cont_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT de la tabla `pag_control_medidas`
 --
 ALTER TABLE `pag_control_medidas`
-  MODIFY `ctrmed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `ctrmed_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `pag_departamento`
 --
 ALTER TABLE `pag_departamento`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_componente_ot`
 --
 ALTER TABLE `pag_det_componente_ot`
-  MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+MODIFY `comp_ot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_equipo_medidor`
 --
 ALTER TABLE `pag_det_equipo_medidor`
-  MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+MODIFY `dequimed_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_herramienta_ot`
 --
 ALTER TABLE `pag_det_herramienta_ot`
-  MODIFY `dherot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+MODIFY `dherot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_insumo_ot`
 --
 ALTER TABLE `pag_det_insumo_ot`
-  MODIFY `dinsot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+MODIFY `dinsot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_prestamo_herramienta`
 --
 ALTER TABLE `pag_det_prestamo_herramienta`
-  MODIFY `detph_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+MODIFY `detph_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_programacion`
 --
 ALTER TABLE `pag_det_programacion`
-  MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `detprog_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pag_det_tipoequipo_campospersonalizados`
 --
 ALTER TABLE `pag_det_tipoequipo_campospersonalizados`
-  MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+MODIFY `idDetalle` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT de la tabla `pag_equipo_componente`
 --
 ALTER TABLE `pag_equipo_componente`
-  MODIFY `equicomp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+MODIFY `equicomp_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT de la tabla `pag_equipo_cp`
 --
 ALTER TABLE `pag_equipo_cp`
-  MODIFY `equicp_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `equicp_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pag_equipo_planos`
 --
 ALTER TABLE `pag_equipo_planos`
-  MODIFY `equipla_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `equipla_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pag_estado`
 --
 ALTER TABLE `pag_estado`
-  MODIFY `est_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+MODIFY `est_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `pag_funcion`
 --
 ALTER TABLE `pag_funcion`
-  MODIFY `func_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+MODIFY `func_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=99;
 --
 -- AUTO_INCREMENT de la tabla `pag_insumo`
 --
 ALTER TABLE `pag_insumo`
-  MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `pag_inventario`
 --
 ALTER TABLE `pag_inventario`
-  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pag_jornada`
 --
 ALTER TABLE `pag_jornada`
-  MODIFY `jor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `jor_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `pag_modulo`
 --
 ALTER TABLE `pag_modulo`
-  MODIFY `mod_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+MODIFY `mod_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `pag_orden_trabajo`
 --
 ALTER TABLE `pag_orden_trabajo`
-  MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+MODIFY `ot_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `pag_permisos`
 --
 ALTER TABLE `pag_permisos`
-  MODIFY `perm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=653;
+MODIFY `perm_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=653;
 --
 -- AUTO_INCREMENT de la tabla `pag_prestamo_herramienta`
 --
 ALTER TABLE `pag_prestamo_herramienta`
-  MODIFY `pher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+MODIFY `pher_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `pag_prioridad_trabajo`
 --
 ALTER TABLE `pag_prioridad_trabajo`
-  MODIFY `priotra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `priotra_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `pag_programacion_equipo`
 --
 ALTER TABLE `pag_programacion_equipo`
-  MODIFY `proequi_id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `proequi_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `pag_regional`
 --
 ALTER TABLE `pag_regional`
-  MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+MODIFY `reg_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `pag_rol`
 --
 ALTER TABLE `pag_rol`
-  MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+MODIFY `rol_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `pag_solicitud_servicio`
 --
 ALTER TABLE `pag_solicitud_servicio`
-  MODIFY `sserv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+MODIFY `sserv_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `pag_tarea`
 --
 ALTER TABLE `pag_tarea`
-  MODIFY `tar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+MODIFY `tar_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `pag_tiempo_medidor`
 --
 ALTER TABLE `pag_tiempo_medidor`
-  MODIFY `tm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `tm_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_componente`
 --
 ALTER TABLE `pag_tipo_componente`
-  MODIFY `tcomp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+MODIFY `tcomp_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_doc`
 --
 ALTER TABLE `pag_tipo_doc`
-  MODIFY `tdoc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+MODIFY `tdoc_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_falla`
 --
 ALTER TABLE `pag_tipo_falla`
-  MODIFY `tfa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+MODIFY `tfa_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_herramienta`
 --
 ALTER TABLE `pag_tipo_herramienta`
-  MODIFY `ther_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+MODIFY `ther_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_mantenimiento`
 --
 ALTER TABLE `pag_tipo_mantenimiento`
-  MODIFY `tman_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+MODIFY `tman_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_medidor`
 --
 ALTER TABLE `pag_tipo_medidor`
-  MODIFY `tmed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+MODIFY `tmed_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `pag_tipo_trabajo`
 --
 ALTER TABLE `pag_tipo_trabajo`
-  MODIFY `ttra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+MODIFY `ttra_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `pag_unidad_medida`
 --
 ALTER TABLE `pag_unidad_medida`
-  MODIFY `umed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+MODIFY `umed_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --
@@ -1936,66 +1919,66 @@ ALTER TABLE `pag_unidad_medida`
 -- Filtros para la tabla `pag_ciudad`
 --
 ALTER TABLE `pag_ciudad`
-  ADD CONSTRAINT `pag_ciudad_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `pag_departamento` (`dept_id`);
+ADD CONSTRAINT `pag_ciudad_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `pag_departamento` (`dept_id`);
 
 --
 -- Filtros para la tabla `pag_componente`
 --
 ALTER TABLE `pag_componente`
-  ADD CONSTRAINT `pag_componente_ibfk_1` FOREIGN KEY (`tcomp_id`) REFERENCES `pag_tipo_componente` (`tcomp_id`);
+ADD CONSTRAINT `pag_componente_ibfk_1` FOREIGN KEY (`tcomp_id`) REFERENCES `pag_tipo_componente` (`tcomp_id`);
 
 --
 -- Filtros para la tabla `pag_departamento`
 --
 ALTER TABLE `pag_departamento`
-  ADD CONSTRAINT `pag_departamento_ibfk_1` FOREIGN KEY (`reg_id`) REFERENCES `pag_regional` (`reg_id`);
+ADD CONSTRAINT `pag_departamento_ibfk_1` FOREIGN KEY (`reg_id`) REFERENCES `pag_regional` (`reg_id`);
 
 --
 -- Filtros para la tabla `pag_det_equipo_medidor`
 --
 ALTER TABLE `pag_det_equipo_medidor`
-  ADD CONSTRAINT `pag_det_equipo_medidor_ibfk_1` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`),
-  ADD CONSTRAINT `pag_det_equipo_medidor_ibfk_2` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`);
+ADD CONSTRAINT `pag_det_equipo_medidor_ibfk_1` FOREIGN KEY (`equi_id`) REFERENCES `pag_equipo` (`equi_id`),
+ADD CONSTRAINT `pag_det_equipo_medidor_ibfk_2` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`);
 
 --
 -- Filtros para la tabla `pag_det_herramienta_ot`
 --
 ALTER TABLE `pag_det_herramienta_ot`
-  ADD CONSTRAINT `pag_det_herramienta_ot_ibfk_1` FOREIGN KEY (`ot_id`) REFERENCES `pag_orden_trabajo` (`ot_id`),
-  ADD CONSTRAINT `pag_det_herramienta_ot_ibfk_2` FOREIGN KEY (`her_id`) REFERENCES `pag_herramienta` (`her_id`);
+ADD CONSTRAINT `pag_det_herramienta_ot_ibfk_1` FOREIGN KEY (`ot_id`) REFERENCES `pag_orden_trabajo` (`ot_id`),
+ADD CONSTRAINT `pag_det_herramienta_ot_ibfk_2` FOREIGN KEY (`her_id`) REFERENCES `pag_herramienta` (`her_id`);
 
 --
 -- Filtros para la tabla `pag_det_insumo_ot`
 --
 ALTER TABLE `pag_det_insumo_ot`
-  ADD CONSTRAINT `pag_det_insumo_ot_ibfk_1` FOREIGN KEY (`ot_id`) REFERENCES `pag_orden_trabajo` (`ot_id`),
-  ADD CONSTRAINT `pag_det_insumo_ot_ibfk_2` FOREIGN KEY (`ins_id`) REFERENCES `pag_insumo` (`ins_id`);
+ADD CONSTRAINT `pag_det_insumo_ot_ibfk_1` FOREIGN KEY (`ot_id`) REFERENCES `pag_orden_trabajo` (`ot_id`),
+ADD CONSTRAINT `pag_det_insumo_ot_ibfk_2` FOREIGN KEY (`ins_id`) REFERENCES `pag_insumo` (`ins_id`);
 
 --
 -- Filtros para la tabla `pag_det_prestamo_herramienta`
 --
 ALTER TABLE `pag_det_prestamo_herramienta`
-  ADD CONSTRAINT `pag_det_prestamo_herramienta_ibfk_1` FOREIGN KEY (`pher_id`) REFERENCES `pag_prestamo_herramienta` (`pher_id`),
-  ADD CONSTRAINT `pag_det_prestamo_herramienta_ibfk_3` FOREIGN KEY (`est_id`) REFERENCES `pag_estado` (`est_id`);
+ADD CONSTRAINT `pag_det_prestamo_herramienta_ibfk_1` FOREIGN KEY (`pher_id`) REFERENCES `pag_prestamo_herramienta` (`pher_id`),
+ADD CONSTRAINT `pag_det_prestamo_herramienta_ibfk_3` FOREIGN KEY (`est_id`) REFERENCES `pag_estado` (`est_id`);
 
 --
 -- Filtros para la tabla `pag_det_programacion`
 --
 ALTER TABLE `pag_det_programacion`
-  ADD CONSTRAINT `pag_det_programacion_ibfk_1` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`);
+ADD CONSTRAINT `pag_det_programacion_ibfk_1` FOREIGN KEY (`tmed_id`) REFERENCES `pag_tipo_medidor` (`tmed_id`);
 
 --
 -- Filtros para la tabla `pag_programacion_equipo`
 --
 ALTER TABLE `pag_programacion_equipo`
-  ADD CONSTRAINT `pag_programacion_equipo_ibfk_1` FOREIGN KEY (`cen_id`) REFERENCES `pag_centro` (`cen_id`),
-  ADD CONSTRAINT `pag_programacion_equipo_ibfk_2` FOREIGN KEY (`tman_id`) REFERENCES `pag_tipo_mantenimiento` (`tman_id`);
+ADD CONSTRAINT `pag_programacion_equipo_ibfk_1` FOREIGN KEY (`cen_id`) REFERENCES `pag_centro` (`cen_id`),
+ADD CONSTRAINT `pag_programacion_equipo_ibfk_2` FOREIGN KEY (`tman_id`) REFERENCES `pag_tipo_mantenimiento` (`tman_id`);
 
 --
 -- Filtros para la tabla `pag_tipo_medidor`
 --
 ALTER TABLE `pag_tipo_medidor`
-  ADD CONSTRAINT `pag_tipo_medidor_ibfk_1` FOREIGN KEY (`tm_id`) REFERENCES `pag_tiempo_medidor` (`tm_id`);
+ADD CONSTRAINT `pag_tipo_medidor_ibfk_1` FOREIGN KEY (`tm_id`) REFERENCES `pag_tiempo_medidor` (`tm_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

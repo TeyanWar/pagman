@@ -73,34 +73,7 @@ $(document).ready(function () {
                     Materialize.toast("<i class='material-icons'>warning</i>", 2000, 'blue');
                 });
 		
-    });//fin: crear solicitud
-
-	
-	//Validation
-		
-		/*$("#crearSolicitud").validate({
-			rules: {
-				
-				descripcion:{
-					required:true
-				}
-			},
-			messages: {
-				descripcion: {
-					required: "obligatorio",
-				}
-			},
-			errorElement : 'em',
-			errorPlacement: function(error, element){
-				var placement = $(element).data('error');
-				if (placement){
-					$(placement).append(error)
-				} else{
-					error.insertAfter(element);
-				}
-			}
-		
-		});*/
+    });//fin: crear solicitud	
 	
 //editar solicitud
     $(document).on('submit', '#editarSolicitud', function (e) {
@@ -148,25 +121,32 @@ $(document).ready(function () {
     //fin: select dependiente de select
 
 //sweetalert
-    $(document).on('click', ".modal-eliminar", function (e) {
-        
+    $(document).on('click', ".modal-eliminar", function (e) {        
         e.preventDefault();
         swal({title: "¿Está seguro que desea eliminar este registro?",
             text: "Una vez eliminado no se podrá recuperar ningún dato.",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Sí, eliminar registro.",
-            closeOnConfirm: false},
-        function () {
+            type: "input",   showCancelButton: true,
+            closeOnConfirm: false,
+            animation: "slide-from-top",
+            inputPlaceholder: "Usuario que solicita eliminar el registro" },
+        function (inputValue) {
+            if (inputValue === false) return false;      
+            if (inputValue === "") {
+            swal.showInputError("Ingrese nombre de usuario que solicita eliminar el registro");
+            return false
+            }
             var url = $('.modal-eliminar').attr('data-url');
+            var inputValue = inputValue;
             $.ajax({
                 url: url,
-                type: 'get',
-                success: function () {
-                    swal("¡Eliminado!", "Su registro se ha eliminado exitosamente.", 'success');
+                type: 'post',
+                data: "inputValue=" + inputValue
+            }).done(function(respuesta){
+                if(respuesta==true) {
+                    swal("¡Eliminado!", "Su registro se ha eliminado exitosamente. " + inputValue, 'success');
                     $('#buscador').trigger('keyup');
-                    //alert(url);
+                }else{
+                    swal("¡Error!", "Su registro no se pudo eliminar.");
                 }
             });
         });
@@ -176,39 +156,6 @@ $(document).ready(function () {
     $(document).on('click', '.cerrar', function () {
         $(".modal").closeModal();
     });
-    
-//    $('#buscarInsumo').keyup(function () {
-//        var insumo = $('#buscarInsumo').val();
-//        var url = $(this).attr("data-url");
-//
-//        $.ajax({
-//            url: url,
-//            type: "POST",
-//            data: "ins_id=" + insumo,
-//            success: function (data) {
-//                $('#respuestaInsumo').html(data);
-////                $('#respuestaInsumo').fadeIn("slow");
-//            }
-//        });
-//    });
-//    
-//    $(document).on('click', '.agregarInsumo', function () {
-//        var url = $(this).attr("data-url");
-//        var id = $(this).attr("data-id");
-//        var cant = $('#cantidad-'+ id).val();
-//        //alert(url);
-//        
-//        $.ajax({
-//            url: url + "/" + cant,
-//            type: "POST",
-//            data: "id="+id,
-//            success: function (data) {
-//                $('#agregarInsumoTable').append(data);
-//            }
-//        });
-////        $('#agregarInsumoTable').fadeOut("slow");
-//    });
-    
     
     //----------------carritos de compras----------------------
     

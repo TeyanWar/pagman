@@ -15,7 +15,10 @@
                             <th>Solicitante</th>
                             <th>Tipo de falla</th>
                             <th>Estado</th>
-                            <th colspan="4" >Acciones</th>
+                            <th>Convertir a OT</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                            <th>Detalle</th>
                         </tr>
                     </thead>
                     <tbody> 
@@ -34,14 +37,13 @@
                                 <?php if ($solicitud['est_descripcion']=="Atendida") { ?>
                                     <td>
                                         <a class="btn-floating waves-effect waves-light cyan darken-1 disabled" href="#" data-url=""> <i class="mdi-content-add tiny"/></a>
-                                    </td>
-                                    <td>
-                                        <a class="btn-floating waves-effect waves-light red darken-4 disabled" data-url=""><i class="mdi-action-delete small"></i></a>
-                                    </td>
+                                    </td>                                    
                                     <td>
                                         <a class="btn-floating waves-effect waves-light teal disabled" href="#" data-url=""> <i class="mdi-image-edit small"/></a>
                                     </td>
-                                    
+                                    <td>
+                                        <a class="btn-floating waves-effect waves-light red darken-4 disabled" data-url=""><i class="mdi-action-delete small"></i></a>
+                                    </td>                                    
                                 <?php } else { ?> 
                                     <td>
                                         <a class="btn-floating waves-effect waves-light modal-trigger cyan darken-1" href="#crearOt" data-url="<?php echo crearUrl("Ot", "ot", "crear", array('noVista' => 'noVista', 'ot_id' => $solicitud['sserv_id'])) ?>"> <i class="mdi-content-add tiny"/></a>

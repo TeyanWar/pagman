@@ -253,16 +253,16 @@ $(document).ready(function () {
 
     $(document).on('click', ".modal-eliminar", function (e) {
         e.preventDefault();
-        swal({title: "¿Realmente desea eliminar este registro?",
-            text: "Recuerde que una vez eliminado no se podrá recuperar.",
+        swal({title: "¿Está seguro que desea eliminar este registro?",
+            text: "Una vez eliminado no se podrá recuperar ningún dato.",
             type: "input",   showCancelButton: true,
             closeOnConfirm: false,
             animation: "slide-from-top",
-            inputPlaceholder: "Nombre De Usuario" },
+            inputPlaceholder: "Usuario que solicita eliminar el registro" },
         function (inputValue) {
             if (inputValue === false) return false;      
             if (inputValue === "") {
-            swal.showInputError("Ingrese Nombre De Usuario!");
+            swal.showInputError("Ingrese nombre de usuario que solicita eliminar el registro");
             return false   
             }
             var url = $('.modal-eliminar').attr('data-url');
@@ -271,7 +271,7 @@ $(document).ready(function () {
                 url: url,
                 type: 'post',
                 data: "inputValue=" + inputValue
-            }).done(function(respuesta) {
+            }).done(function(respuesta){
                 if(respuesta==true) {
                     swal("¡Eliminado!", "Su registro se ha eliminado exitosamente. " + inputValue, 'success');
                     $('#buscador').trigger('keyup');

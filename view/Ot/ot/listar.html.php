@@ -12,9 +12,8 @@
                         <th data-field="name">Estado de la orden</th>
                         <th data-field="name">Prioridad</th>
                         <th data-field="name">Editar</th>
-                        <th data-field="name">Detalle</th>                        
-                        <!--<th data-field="name">Imprimir</th>-->
                         <th data-field="name">Eliminar</th>
+                        <th data-field="name">Detalle</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -28,8 +27,7 @@
                             <td><?php echo $orden['ot_fecha_creacion'] ?></td>
                             <td><?php echo $orden['equi_nombre'] ?></td>
                             <td><?php echo $orden['est_descripcion'] ?></td>
-                            <td><?php echo $orden['ot_prioridad'] ?></td>
-                            
+                            <td><?php echo $orden['ot_prioridad'] ?></td>                            
                             <?php if ($orden['est_descripcion']=="Cerrada") { ?>                            
                                 <td>
                                     <a class="btn-floating waves-effect waves-light teal disabled" data-url=""> <i class="mdi-content-create small"/></a>
