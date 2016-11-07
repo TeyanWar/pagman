@@ -73,9 +73,7 @@
 
             <div class="row">
                 <div class="input-field col m2">
-
                     <button class="btn teal waves-effect waves-light right btn_submit_modal" type="submit" id="btn-crear-solicitud" name="action">Crear
-
                         <i class="mdi-content-send right"></i>
                     </button>
                 </div>
