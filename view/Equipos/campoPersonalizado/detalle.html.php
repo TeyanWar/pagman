@@ -1,4 +1,7 @@
-<center><h5>DETALLE DEL CAMPO PERSONALIZADO</h5></center><br>
+<center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
+</center>
+<br>
 <table class="striped">
     <thead>
         <tr>

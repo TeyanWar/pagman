@@ -1,8 +1,7 @@
-<center>
-    <h5>
-        Campos Personalizados del Tipo de Equipo: <b><code><?php echo $tEquipo['tequi_descripcion']; ?></code></b>
-    </h5>
+    <center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
 </center>
+<br>
 <table class="striped">
     <thead>
         <tr>

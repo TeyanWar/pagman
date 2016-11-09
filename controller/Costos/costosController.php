@@ -185,7 +185,7 @@ class CostosController {
                 . "pag_det_insumo_ot.ins_id=pag_insumo.ins_id AND "
                 . "pag_det_herramienta_ot.ot_id=pag_orden_trabajo.ot_id AND "
                 . "pag_det_herramienta_ot.her_id=pag_herramienta.her_id LIMIT 0,5";
-        $OrdenTrabajo = $objInsumos->select($sql);
+        $ordenTrabajo = $objInsumos->select($sql);
 
 
         $sql3 = "SELECT * FROM pag_orden_trabajo,pag_persona,pag_det_insumo_ot,pag_insumo WHERE "

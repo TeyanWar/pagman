@@ -1,4 +1,7 @@
-
+<center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
+</center>
+<br>
 <div class="row">
 
    

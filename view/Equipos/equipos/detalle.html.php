@@ -1,4 +1,7 @@
-<div class="title center"><h5>DETALLE DEL EQUIPO SELECCIONADO</h5></div><br>
+<center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
+</center>
+<br>
 <table class="striped col s6">
     <thead>
         <tr>

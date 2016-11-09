@@ -69,7 +69,7 @@ $(document).ready(function(){
             type:"post",
             data: $(this).parents("form:first").serialize()
         }).done(function(response){
-            alert(response);
+            //alert(response);
             var respuesta = $.parseJSON(response);
             if(respuesta.accion===true){
                 Materialize.toast(respuesta.mensajes, 1500, 'rounded col green');

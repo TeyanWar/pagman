@@ -1,4 +1,6 @@
-<div class="title center"><h5>DETALLE DEL CENTRO DE FORMACÓN</h5></div>
+<center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
+</center>
 <br>
 <table class="striped">
     <thead>

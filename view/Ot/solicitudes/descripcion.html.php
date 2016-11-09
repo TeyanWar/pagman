@@ -1,6 +1,7 @@
-<div class="header center">
-    <h5>Detalle de la solicitud</h5>
-</div>
+<center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
+</center>
+<br>
 <table>
     <tr>
         <td><label>Código Solicitud</label></td>

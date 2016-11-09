@@ -1,5 +1,8 @@
 <div class="card-panel">
-    <div class="title center"><h5>Detalle De la Ciudad </h5></div><hr>
+    <center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
+</center>
+<br>
     <table class="striped">
         <thead>
             <tr>

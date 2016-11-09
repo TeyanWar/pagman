@@ -1,6 +1,8 @@
+<center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
+</center>
+<br>
 <div class="card-panel">
-    <div class="title center"><h5>Detalle Del Departamento </h5></div>
-    <br>
     <div class="row">
 
         <div class="col s4">
@@ -18,25 +20,24 @@
             <?php echo $departamento['reg_nombre']; ?>
         </div>
 
-    <div class="row right" >
+        <div class="row right" >
 
-        <div class="input-field col  m3 "> 
-            <button type="button" class="btn blue cerrar" value="">CERRAR</button>
+            <div class="input-field col  m3 "> 
+                <button type="button" class="btn blue cerrar" value="">CERRAR</button>
+            </div>
         </div>
     </div>
-</div>
 
-<script type="text/javascript">
-    $(".modal-trigger").leanModal({
+    <script type="text/javascript">
+        $(".modal-trigger").leanModal({
+            dismissible: true,
+            opacity: .5,
+            in_duration: 300,
+            out_duration: 200,
+            ready: function () {
 
-        dismissible: true,
-        opacity: .5,
-        in_duration: 300,
-        out_duration: 200,
-        ready: function() {
+            },
+            complete: function () {
 
-        },
-        complete: function() {
-
-        }
-    });
+            }
+        });

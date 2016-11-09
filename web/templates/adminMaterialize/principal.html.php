@@ -433,7 +433,7 @@
                         </div>
 
                     </div>
-
+<!--
                     <div class="row">
                         <div class="col s12 m12 l4">
                             <div class="blog-card" >
@@ -713,7 +713,7 @@
                                 </div>
                             </div>
 
-                            <!--                 map-card 
+                                             map-card 
                                             <div class="col s12 m12 l4">
                                                 <div class="map-card">
                                                     <div class="card">
@@ -1340,5 +1340,5 @@
                             
                                     </div>
                                     end container
-                            </section>-->
-                            <!-- END CONTENT -->
+                            </section>
+                             END CONTENT -->

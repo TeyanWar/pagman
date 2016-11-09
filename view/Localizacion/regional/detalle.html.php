@@ -1,4 +1,6 @@
-<div class="title center"><h5>Detalle Regional</h5></div>
+<center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
+</center>
 <br>
 <div class="row">
 

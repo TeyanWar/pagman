@@ -1,4 +1,6 @@
-<div class="title center"><h5>Detalle Usuario</h5></div>
+<center>
+    <?php include 'templates/adminMaterialize/estandarSena.html.php'; ?>    
+</center>
 <br>
 <div class="row">
 
@@ -89,7 +91,7 @@
 <br>
 <div class="divider"></div>
 <div class="row">
-    <?php if ($usu['per_horas']!="" && $usu['per_sueldo']!="") { ?>
+    <?php if ($usu['per_horas'] != "" && $usu['per_sueldo'] != "") { ?>
         <div class="col s4">
             <label style="color: #448aff;"><h6>Contratista</h6></label>
             <?php echo "SI" ?>
