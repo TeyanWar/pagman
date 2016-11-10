@@ -37,7 +37,6 @@ $(document).ready(function () {
     //aqui empieza el filtro de busqueda herramienta para el prestamo de herramientas (carrito)
     $("#buscarHerramienta").keyup(function () {
         var url = $(this).attr("data-url");
-
         $.ajax({
             url: url,
             type: "POST",

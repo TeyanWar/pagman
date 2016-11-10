@@ -79,7 +79,7 @@
             </div>
             <div class="row">
                 <div class="col s12">
-                    <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Crear prestamo
+                    <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Crear
                         <i class="mdi-content-add left"></i>
                     </button>
                 </div>

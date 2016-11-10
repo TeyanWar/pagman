@@ -68,13 +68,13 @@ $(document).ready(function () {
         });
     });
     //aqui termina la modal para editar las herramientas
-    
+
     // aqui empieza el filtro de busqueda de herramientas por numero_placa o nombre herramienta
     //$('#buscarHer').focus();
     $("#buscarHer").keyup(function () {
         var Herramienta = $("#buscarHer").val();
-        
-        if(Herramienta != ""){
+
+        if (Herramienta != "") {
             $('#pagina').val(1);
         }
         var pagina = $('#pagina').val();
@@ -82,7 +82,7 @@ $(document).ready(function () {
         $.ajax({
             url: url,
             type: "POST",
-            data: "her_id=" + Herramienta+"&pagina="+pagina,
+            data: "her_id=" + Herramienta + "&pagina=" + pagina,
             success: function (data) {
                 $("#buscarHerramienta").html(data);
             }
@@ -106,17 +106,22 @@ $(document).ready(function () {
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Si, Elimine el Registro!",
             closeOnConfirm: false},
-        function () {
-            $.ajax({
-                url: url,
-                type: "post",
-                data: {
-                    id: her_id
-                }
-            });
-            swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
-            window.location.href = "listar";
-        });
+                function () {
+                    $.ajax({
+                        url: url,
+                        type: "post",
+                        data: {
+                            id: her_id
+                        }
+                    }).done(function () {
+                        if (data == true) {
+                            swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
+                            window.setTimeout('location.reload()', 1000);
+                        } else {
+                            swal("Acci&oacute;n denegada", "No se pudo realizar esta acci&oacute;n.", "error");
+                        }
+                    });
+                });
     });
     // aqui termina el sweetAlert de herramientas
     //------------------------------------------------------------------------------//

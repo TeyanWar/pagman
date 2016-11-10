@@ -2,7 +2,7 @@
     <table class="centered striped card-panel">
         <thead>
             <tr>
-                <th>#</th>
+                <th>No. registro</th>
                 <th>Fecha ing. her</th>
                 <th>N&uacute;mero de placa</th>
                 <th>Nombre Herramienta</th>
@@ -35,11 +35,18 @@
                         <?php }
                         ?>
                     </td>
-                    <td><a class="modal-trigger btn-floating  waves-effect waves-light teal" href="#modalEditar" data-url="<?php echo crearUrl('herramientas', 'herramientas', 'editar', array('noVista' => "noVista", 'id' => $herramienta['her_id'])) ?>"><i class="mdi-content-create small"></i></a></td>
+                    <td>
+                        <a class="modal-trigger btn-floating  waves-effect waves-light teal"
+                           href="#modalEditar" data-url="<?php echo crearUrl('herramientas', 'herramientas', 'editar', array('noVista' => "noVista", 'id' => $herramienta['her_id']))
+                    ?>">
+                            <i class="mdi-content-create small"></i>
+                        </a>
+                    </td>
                     <td>
                         <a class="modal-eliminar btn-floating waves-effect waves-light red darken-4" 
                            data-her_id="<?php echo $herramienta['her_id'] ?>" 
-                           data-url="<?php echo crearUrl('Herramientas', 'herramientas', 'postEliminar', array('noVista' => 'noVista', 'id' => $herramienta['her_id'])) ?>">
+                           data-url="<?php echo crearUrl('Herramientas', 'herramientas', 'postEliminar', 
+                                   array('noVista' => 'noVista', 'id' => $herramienta['her_id']))?>">
                             <i class="mdi-action-delete small"></i>
                         </a>
                     </td>
@@ -50,10 +57,6 @@
     <!--aqui empieza la estructura de mi ventana modal para editar herramientas-->
     <div id="modalEditar" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 318.246px;">
         <div class="modal-content" id="model-data"></div>
-        <!--        <div class="modal-footer">
-                    <a class="waves-effect waves-red btn-flat modal-action">Cancelar</a>
-                    <a class="waves-effect waves-green btn-flat modal-action modal-close" href="#">Actualizar</a>
-                </div>-->
     </div>
 </div>
 

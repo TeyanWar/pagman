@@ -18,7 +18,7 @@
 <table class="centered card-panel striped">
     <thead>
         <tr>
-            <th>#</th>
+            <th>No. registro</th>
             <th>Fecha inicio prestamo</th>
             <th>Nombre jornada</th>
             <th>Observaciones</th>
@@ -37,7 +37,13 @@
                 <td><?php echo $fechaPrestamo ?></td>
                 <td><?php echo $prestamo['jor_descripcion'] ?></td>
                 <td><?php echo $prestamo['pher_observaciones'] ?></td>
-                <td><a class="modal-trigger btn-floating waves-effect waves-light teal" href="#M_editar_prestamo" data-url="<?php echo crearUrl('prestamo', 'prestamo', 'editar', array('noVista' => "noVista", 'id' => $prestamo['pher_id']))    ?>"><i class="mdi-content-create small"></i></a></td>
+                <td>
+                    <a class="modal-trigger btn-floating waves-effect waves-light teal"
+                       href="#M_editar_prestamo" data-url="<?php echo crearUrl('prestamo', 'prestamo', 'editar', 
+                       array('noVista' => "noVista", 'id' => $prestamo['pher_id']))?>">
+                        <i class="mdi-content-create small"></i>
+                    </a>
+                </td>
             </tr>
         <?php } ?>
     </tbody>

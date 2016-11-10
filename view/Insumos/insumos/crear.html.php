@@ -32,7 +32,7 @@
                 <div id="card-alert" class="card red">
                     <div class="card-content white-text">
                         <p><i class="mdi-alert-error"></i>
-                            <?php echo ($mierror);?>
+                            <?php echo ($mierror); ?>
                         </p>
                     </div>
                     <button type="button" class="close white-text" data-dismiss="alert" aria-lable="close">
@@ -44,26 +44,13 @@
 
         <div class="row">
             <form id="formValidate" class="col s12 m12 l12" action="<?php echo crearUrl("insumos", "insumos", "postCrear") ?>" method="POST">
-
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <input id="ins_id" type="text" class="validate" name="ins_id" data-error=".errorTxt1">
-                        <label for="ins_id">* Codigo Insumo</label>
-                        <div class="errorTxt1"></div>
-                        <span class="help-block">
-                            Por favor digite el codigo del insumo a registrar, recuerde que el <code>codigo del insumo</code> 
-                            debe corresponder al siguiente patron: <code>0001xxx</code>
-                        </span>
-                    </div>
-                    <div class="input-field col s12 m6">
-                        <input id="ins_nombre" type="text" class="validate" name="ins_nombre">
+                        <input id="ins_nombre" type="text" class="form-control" name="ins_nombre">
                         <label for="ins_nombre">* Nombre Insumo</label>
                     </div>
-                </div>
-
-                <div class="row">
                     <div class="input-field col s12 m6">
-                        <input id="ins_descripcion" type="text" class="validate" name="ins_descripcion" >
+                        <input id="ins_descripcion" type="text" class="form-control" name="ins_descripcion" >
                         <label for="ins_descripcion">* Descripcion</label>
                     </div>
                     <div class="input-field col s12 m6">
@@ -77,9 +64,6 @@
                             ?>
                         </select>
                     </div>
-                </div>
-
-                <div class="row">
                     <div class="input-field col s12 m6">
                         <input id="last_name" type="text" class="validate" name="ins_valor" >
                         <label for="last_name">* Valor</label>
@@ -90,22 +74,21 @@
                     <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Crear insumo
                         <i class="mdi-content-add left"> </i>
                     </button>
+                    <i class="btn teal waves-effect waves-light modal-trigger" href="#plano" data-url="<?php echo crearUrl('insumos', 'insumos', 'planos', array('noVista' => "noVista")) ?>" > IMPORTAR </i>
                 </div>
-                <i class="btn teal waves-effect waves-light modal-trigger" href="#plano" data-url="<?php echo crearUrl('insumos', 'insumos', 'planos', array('noVista' => "noVista")) ?>" > IMPORTAR </i>
-
             </form>
         </div>
     </div>
 
-<div class="modal" id="plano" style="display: none; opacity: 1; top: 0px;">
+    <div class="modal" id="plano" style="display: none; opacity: 1; top: 0px;">
         <div class="modal-content" id="model-data"></div>
     </div>
 
 </div>
 
 <script>
- $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('.modal-trigger').leanModal();
-  });
+    $(document).ready(function () {
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal-trigger').leanModal();
+    });
 </script>

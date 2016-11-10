@@ -7,8 +7,7 @@ include_once('../model/Usuarios/PersonasModel.php');
 class PrestamoController {
 
     function crear() {
-        $per_id = $_SESSION['login']['per_id'];
-//        dd($per_id);
+
         //aqui empieza el select para la jornada
         $objJornada = new PersonasModel();
 
@@ -74,6 +73,7 @@ class PrestamoController {
         $paginado = new Paginado($listar, $pagina, $url);
 
         $listar = $paginado->getDatos();
+//        die(print_r($listar));
 //        // fin paginado
         // Cierra la conexion
         $objPrestamo->cerrar();
@@ -82,9 +82,19 @@ class PrestamoController {
     }
 
     function editar($parametros = false) {
+
+        $objJornada = new PersonasModel();
+        $sql = "SELECT * FROM pag_jornada";
+        $jornada = $objJornada->select($sql);
+        $objJornada->cerrar();
+
         $objPrestamo = new PrestamoModel();
         $id = $parametros[1];
-        $sql = "SELECT pher_id,pher_fecha,pher_observaciones,jor_id FROM pag_prestamo_herramienta WHERE pher_id='$id'";
+
+        $sql = "SELECT pher_id,pher_fecha,pher_observaciones,pag_jornada.jor_id "
+                . "FROM pag_prestamo_herramienta,pag_jornada "
+                . "WHERE pag_prestamo_herramienta.jor_id=pag_jornada.jor_id AND pher_id='$id'";
+//        dd($sql);
         $prestamo = $objPrestamo->find($sql);
         // Cierra la conexion
         $objPrestamo->cerrar();
@@ -92,20 +102,23 @@ class PrestamoController {
     }
 
     function postEditar() {
-        $objPrestamo = new PrestamoModel();
         $pher_id = $_POST['id'];
         $pher_fecha = $_POST['pher_fecha'];
         $jor_id = $_POST['jor_id'];
         $pher_observaciones = $_POST['pher_observaciones'];
 
+        $objPrestamo = new PrestamoModel();
+        explodeFecha($pher_fecha);
+        $fecha = getFecha();
+
         $sql = "UPDATE "
                 . "pag_prestamo_herramienta "
                 . "SET "
-                . "pher_fecha='$pher_fecha', "
-                . "pher_fecha='$jor_id', "
-                . "pher_observaciones=$pher_observaciones, "
-                . "WHERE pher_id=$pher_id";
-
+                . "pher_fecha='$fecha', "
+                . "jor_id='$jor_id', "
+                . "pher_observaciones='$pher_observaciones' "
+                . "WHERE pher_id='$pher_id'";
+//        dd($sql);
         $respuesta = $objPrestamo->update($sql);
         // Cierra la conexion
         $objPrestamo->cerrar();

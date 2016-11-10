@@ -2,7 +2,7 @@
     <div class="card-panel">
         <h4 class="header2">Modificar herramienta</h4>
         <div class="row">
-            <form class="centered form-horizontal" id="F_editar_herramienta" role="form" action="<?php echo crearUrl("herramientas", "herramientas", "postEditar") ?>" method="post">
+            <form class="centered form-horizontal" id="F_editar_herramienta" action="<?php echo crearUrl("herramientas", "herramientas", "postEditar") ?>" method="post">
                 <div class="row">
                     <div class="input-field col s4">
                         <label for="her_id" class="active">N&uacute;mero de placa</label>
@@ -23,17 +23,6 @@
                         <input type="text" id="her_descripcion" class="form-control" name="her_descripcion" value="<?php echo $herramienta['her_descripcion'] ?>" length="200">
                     </div>
                 </div>
-                <!--                <div class="row">
-                                    <div class="file-field input-field col s6">
-                                        <div class="btn teal waves-effect waves-light right animated infinite rubberBand">
-                                            <span>Actualizar imagen</span>
-                                            <input type="file" name="her_imagen" id="her_imagen" value="<?php //echo $herramienta['her_imagen']   ?>">
-                                        </div>  
-                                        <div class="file-path-wrapper">
-                                            <input class="file-path validate" type="text" placeholder="Eliga la imagen">
-                                        </div>
-                                    </div>
-                                </div><br />-->
                 <!-- Campo para almacenar el id de la herramienta -->
                 <input type="hidden" name="id" value="<?php echo $herramienta['her_id'] ?>" />
 

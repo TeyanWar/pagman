@@ -3,23 +3,23 @@
 $(document).ready(function () {
 
 
-$("#formValidate").validate({
+    $("#formValidate").validate({
 
         rules: {
             ins_id: {
                 required: true,
                 number: true,
-                minlength: 5,
-                maxlength: 10
+                minlength: 1,
+                maxlength: 5
             },
             ins_nombre: {
                 required: true,
                 letterswithbasicpunc: true,
                 minlength: 5,
                 maxlength: 20,
-                
-             umed_id: "requiered"
-             
+
+                umed_id: "requiered"
+
             }
         },
         //mensajes para cada dato validado
@@ -51,13 +51,14 @@ $("#formValidate").validate({
             }
         }
     });
-   
+
 // aqui empieza el eliminar con la libreria sweetalert , completamente funcional con el eliminado logico.
 //" CAMBIO DE ESTADO TRUE-FALSE "
-    $(document).on('click', '.eliminarinsumo', function (e) {
+    $(document).on('click', '.modal-eliminar', function (e) {
         e.preventDefault();
         var url = $(this).attr("data-url");
-        var ins_id = $(this).attr("data-eliminarinsumo");
+        var ins_id = $(this).attr("data-ins_id");
+        alert(url);
         swal({
             title: "Estas seguro de eliminar el registro?",
             text: "La información que estas apunto de eliminar no aparecera en pantalla!",
@@ -66,44 +67,39 @@ $("#formValidate").validate({
             confirmButtonColor: "#DD6B55",
             confirmButtonText: "Si, Elimine el Registro!",
             closeOnConfirm: false},
-        function () {
-            
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: {
-                    ins_id: ins_id
-                }
-            }).done(function (data) {
-                
-            });
-
-            swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
-            
-                $("#buscainsumo").trigger('keyup');
-        });
+                function () {
+                    $.ajax({
+                        url: url,
+                        type: "post",
+                        data: {
+                            id: ins_id
+                        }
+                    });
+                    swal("Registro Eliminado!", "Su registro fue eliminado satisfactoriamente.", "success");
+                    window.location.href = "listar";
+                });
     });
-    
+
 //buscador ajax para los insumos
 
- $("#buscainsumo").keyup(function () {
+    $("#buscainsumo").keyup(function () {
         var insumo = $("#buscainsumo").val();
-            
+
         if (insumo != "") {
             $('#pagina').val(1);
         }
-        var pagina = $('#pagina').val(); 
+        var pagina = $('#pagina').val();
         var url = $(this).attr("data-url");
         $.ajax({
             url: url,
             type: "POST",
-            data: "insumo=" + insumo +"&pagina"+pagina,
+            data: "insumo=" + insumo + "&pagina" + pagina,
             success: function (data) {
                 $("#tablainsumo").html(data);
             }
         });
     });
 
- $("#buscainsumo").trigger('keyup');
+    $("#buscainsumo").trigger('keyup');
 });
     

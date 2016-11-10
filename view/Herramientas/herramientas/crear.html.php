@@ -1,5 +1,5 @@
 <div class="col s12 m12">
-    <form class="col s12 m12 l12 F_registrar_her" action="<?php echo crearUrl("Herramientas", "herramientas", "postCrear") ?>" method="POST" enctype="multipart/form-data" novalidate="novalidate">
+    <form class="col s12 m12 l12 F_registrar_her" action="<?php echo crearUrl("Herramientas", "herramientas", "postCrear") ?>" method="POST" enctype="multipart/form-data" novalidate>
         <div class="card-panel">
             <h4 class="header2">Registrar herramienta</h4>
             <ol class="breadcrumbs">
@@ -84,7 +84,9 @@
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <button name="action" type="submit" class="btn teal waves-effect waves-light right animated infinite rubberBand">Crear Herramienta
+                        <button name="action" type="submit" id="enviar"
+                                class="btn teal waves-effect waves-light right animated infinite rubberBand">
+                            Crear 
                             <i class="mdi-content-add left"></i>
                         </button>
                     </div>
