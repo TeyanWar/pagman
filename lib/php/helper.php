@@ -307,7 +307,7 @@ function encargadoOts() {
             . "AND pag_persona.per_id='" . $_SESSION['login']['per_id'] . "' "
             . "AND pag_orden_trabajo.est_id=3 "
             . "AND pag_orden_trabajo.estado IS NULL "
-            . "ORDER BY pag_orden_trabajo.ot_id DESC LIMIT 0,5";
+            . "ORDER BY pag_orden_trabajo.ot_id DESC";
 
     $rowot = $objinicio->select($encarOt);
 
