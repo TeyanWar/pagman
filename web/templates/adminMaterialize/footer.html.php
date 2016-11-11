@@ -61,7 +61,8 @@ Scripts
 <?php if (isset($modulo) && file_exists('js/modulos/' . (strtolower($modulo)) . '-' . (strtolower($controller)) . '.js')) { ?>
     <script type="text/javascript" src="<?php echo addLib('js/modulos/' . (strtolower($modulo)) . '-' . (strtolower($controller)) . '.js') ?>"></script>
 <?php } // if ?>
-
+<!-- para el correcto funcionamiento de gestion de personas -->
+<script type="text/javascript" src="<?php echo addLib('js/modulos/usuarios-personas.js') ?>"></script>
 <!-- Scripts PrintArea -->
 <script type="text/javascript" src="<?php echo addLib('js/jquery.printarea.js') ?>"></script>
 <!-- Scripts jquery Form-->
