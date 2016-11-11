@@ -1,9 +1,10 @@
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
 <div class="row">
     <form name="es" class="col s12" id="editarSolicitud" method="POST" action="#" data-url="<?php echo crearUrl("Ot", "solicitudes", "postEditar", array('noVista' => 'noVista')) ?>">
         <div class="row">
-            <div class="header center">
-                <h5>Editar solicitud de servicio</h5>
-            </div>
             <div class="input-field col s12 m4 l4">
                 <input type="text" name="sserv_id" value="<?php echo $registro['sserv_id'] ?>" readonly>
                 <label class="active">Código solicitud</label>                   
@@ -20,10 +21,10 @@
 
         <div class="row">
             <div class="input-field col s12 m4 l4">                    
-                <input type="text" value="<?php echo $registro['per_nombre']." ".$registro['per_apellido'] ?>" readonly >
+                <input type="text" value="<?php echo $registro['per_nombre'] . " " . $registro['per_apellido'] ?>" readonly >
                 <label class="active">Solicitante</label>
             </div>
-            
+
             <div class="input-field col s12 m4 l4">
                 <label class="active">Equipo</label>
                 <select name="equi_id" class="browser-default" >
@@ -40,7 +41,7 @@
                     ?>
                 </select>                   
             </div>
-            
+
             <div class="input-field col s12 m4 l4">
                 <label class="active">Estado</label>
                 <select name="est_id" class="browser-default">
@@ -64,14 +65,14 @@
                 <label for="sserv_descripcion" class="active">Descripcion</label>                    
             </div>
         </div>
-        
+
         <div class="row">
             <div class="input-field col s12 m12 l12">
                 <input value="<?php echo $registro['sserv_observacion'] ?>" id="sserv_observacion" type="text" name="sserv_observacion" class="validate">
                 <label for="sserv_observacion" class="active">Observaciones</label>                    
             </div>
         </div>
-                
+
         <div class="row center" >
             <div class="input-field col  m3 "></div>
             <div class="input-field col  m3 "> 

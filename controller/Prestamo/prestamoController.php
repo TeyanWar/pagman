@@ -2,7 +2,7 @@
 
 include_once('../model/Prestamo/PrestamoModel.php');
 include_once('../model/Herramientas/HerramientasModel.php');
-include_once('../model/Usuarios/PersonasModel.php');
+include_once('../model/Usuarios/personasModel.php');
 
 class PrestamoController {
 

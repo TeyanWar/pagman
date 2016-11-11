@@ -1,4 +1,8 @@
-<!-- BRYAN DAVID RAMOS MUÑOZ TADSI03-->
+
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
 <head>
     <link href="<?php echo addLib('css/select2.css') ?>" rel="stylesheet" type="text/css">
 </head>
@@ -73,7 +77,6 @@
             },
             ins_descripcion: {
                 required: true,
-
             },
             umed_id: {
                 required: true

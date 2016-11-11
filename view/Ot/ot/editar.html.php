@@ -1,4 +1,8 @@
-<div class="title center"><h5>Editar orden de trabajo No. <?php echo $editarOt ['ot_id']; ?></h5></div>
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
+<div class="title center"><h5>Orden de Trabajo No. <code><?php echo $editarOt ['ot_id']; ?></code></h5></div>
 <br>
 <form class="col s12" data-url="
       <?php echo crearUrl("Ot", "ot", "postEditar", array('noVista' => 'noVista')) ?>" 
@@ -31,23 +35,24 @@
             <?php echo $editarOt['tfa_descripcion'] ?>
         </div>
         <div class="col s4 m4 l4">
-        <?php if(!empty($detcomponentes) && $detcomponentes[0][0]!='INDEFINIDO'){ ?>
-                  <label style="color: #448aff;"><h6>Componentes</h6></label>
-                  <?php foreach ($detcomponentes as $detcomp) {
-                           echo $detcomp['comp_descripcion']." "."";
-                        }
-                  ?>
-        <?php } ?>
+            <?php if (!empty($detcomponentes) && $detcomponentes[0][0] != 'INDEFINIDO') { ?>
+                <label style="color: #448aff;"><h6>Componentes</h6></label>
+                <?php
+                foreach ($detcomponentes as $detcomp) {
+                    echo $detcomp['comp_descripcion'] . " " . "";
+                }
+                ?>
+<?php } ?>
         </div>
     </div>
     <div class="row">
         <div class="col s12 m8 l4">
             <label style="color: #448aff;"><h6>Prioridad</h6></label> 
-            <?php echo $editarOt['ot_prioridad'] ?>
+<?php echo $editarOt['ot_prioridad'] ?>
         </div>
         <div class="col s12 m8 l4">
             <label style="color: #448aff;"><h6>Encargado</h6></label> 
-            <?php echo $editarOt['per_nombre'] ?>
+<?php echo $editarOt['per_nombre'] ?>
         </div>
         <div class="input-field col s12 m4 l4">
             <small class="active" style="color: #448aff;"><h6>Estado</h6></small>
@@ -70,11 +75,11 @@
 
         <div class="col s12 m8 l4">
             <label style="color: #448aff;"><h6>Fecha de inicio</h6></label> 
-            <?php echo $editarOt['ot_fecha_inicio'] ?>
+<?php echo $editarOt['ot_fecha_inicio'] ?>
         </div>
         <div class="col s12 m8 l4">
             <label style="color: #448aff;"><h6>Fecha fin</h6></label> 
-            <?php echo $editarOt['ot_fecha_fin'] ?>
+<?php echo $editarOt['ot_fecha_fin'] ?>
         </div>
     </div>
     <div class="divider"></div>
@@ -96,119 +101,121 @@
             <input id="input_text" name="ayudantes" type="text" length="10" value="<?php echo $editarOt['ot_ayudantes'] ?>"> 
         </div>
     </div>
-    
+
     <div class="row">
         <div class="input-field col s12 m12 l12">
             <input value="<?php echo $editarOt['ot_observacion'] ?>" id="ot_observacion" type="text" name="ot_observacion" class="validate">
             <label for="ot_observacion" class="active" style="color: #448aff;"><h6>Observaciones</h6></label>                    
         </div>
     </div>
-    
+
     <br>
     <div class="divider"></div>
     <div class="row">
-        <?php if(!empty($texto)){ ?>
+<?php if (!empty($texto)) { ?>
             <div class="col s12 m8 l12">
                 <label style="color: #448aff;"><h6>Guia Mantenimiento</h6></label>
-		<?php $guia = explode(",", $texto['texto_guia']); ?>
-                <?php $i=1; foreach ($guia as $tex) { ?>
+                <?php $guia = explode(",", $texto['texto_guia']); ?>
+                    <?php $i = 1;
+                    foreach ($guia as $tex) { ?>
                     <p>
-                        <?php echo $i.") ".$tex; ?>
+                    <?php echo $i . ") " . $tex; ?>
                     </p>
-                <?php $i++; } ?>
+                <?php $i++;
+            } ?>
             </div>
         <?php } ?>
     </div>
     <br>
     <div class="row">
-        <?php if($mant['id_mantenimiento']!=""){ ?>
+<?php if ($mant['id_mantenimiento'] != "") { ?>
             <div class="input-field col s5 m5 l5">
                 <small style="color: #448aff;"><h6>¿Cumplio con los estandares de mantenimiento?</h6></small>
                 <select id="estandar" name="estandar" class="error browser-default select2" data-error=".errorTxt14">
                     <option value="" disabled selected>Seleccione</option>
-                    <?php 
-                        if($m['estandar']!=""){
-                            if($m['estandar']==='Si cumple'){
-                                echo "<option value='".$m['estandar']."' selected>". $m['estandar'] . "</option>";
-                            }  else {
-                                echo "<option value='".$m['estandar']."' selected>". $m['estandar'] . "</option>";
-                            }
+                    <?php
+                    if ($m['estandar'] != "") {
+                        if ($m['estandar'] === 'Si cumple') {
+                            echo "<option value='" . $m['estandar'] . "' selected>" . $m['estandar'] . "</option>";
+                        } else {
+                            echo "<option value='" . $m['estandar'] . "' selected>" . $m['estandar'] . "</option>";
                         }
+                    }
                     ?>
                     <option value="Si cumple" >Si cumple</option>
                     <option value="No cumple" >No cumple</option>
                 </select>
                 <div class="errorTxt14"></div>
             </div>
-        <?php } ?>
+<?php } ?>
     </div>
     <br>
     <div class="row">
-        
+
         <div class="col s6">
             <label style="color: #448aff;"><h6>INSUMOS</h6></label>
-            <?php if(!empty($detalleinsumos)){ ?>
-            <table class="striped">
-                <thead>
-                    <tr>
-                        <th data-field="registro">Nombre</th>
-                        <th data-field="name">Unidad Medida</th>
-                        <th data-field="id">Valor</th>
-                        <th data-field="name">Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php					
-                    foreach ($detalleinsumos as $detins) {
-                        ?>
+<?php if (!empty($detalleinsumos)) { ?>
+                <table class="striped">
+                    <thead>
                         <tr>
-                            <td><?php echo $detins['ins_nombre'] ?></td>
-                            <td><?php echo $detins['umed_descripcion'] ?></td>
-                            <td><?php echo $detins['ins_valor'] ?></td>
-                            <td><?php echo $detins['ins_cantidad'] ?></td>
+                            <th data-field="registro">Nombre</th>
+                            <th data-field="name">Unidad Medida</th>
+                            <th data-field="id">Valor</th>
+                            <th data-field="name">Cantidad</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-            <?php }else{ ?>
-            <h6 style="color: #FF0000;">Esta ot no cuenta con insumos</h6>
-            <?php } ?>
+                    </thead>
+                    <tbody>
+    <?php
+    foreach ($detalleinsumos as $detins) {
+        ?>
+                            <tr>
+                                <td><?php echo $detins['ins_nombre'] ?></td>
+                                <td><?php echo $detins['umed_descripcion'] ?></td>
+                                <td><?php echo $detins['ins_valor'] ?></td>
+                                <td><?php echo $detins['ins_cantidad'] ?></td>
+                            </tr>
+                <?php } ?>
+                    </tbody>
+                </table>
+<?php } else { ?>
+                <h6 style="color: #FF0000;">Esta ot no cuenta con insumos</h6>
+<?php } ?>
         </div>
 
         <div class="col s6">
             <label style="color: #448aff;"><h6>HERRAMIENTAS</h6></label>
-            <?php if(!empty($detalleherramientas)){ ?>
-            <table class="striped">
-                <thead>
-                    <tr>
-                        <th data-field="registro">Nombre</th>
-                        <th data-field="name">Descripcion</th>
-                        <th data-field="name">Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php					
-                    foreach ($detalleherramientas as $dether) {
-                        ?>
+<?php if (!empty($detalleherramientas)) { ?>
+                <table class="striped">
+                    <thead>
                         <tr>
-                            <td><?php echo $dether['her_nombre'] ?></td>
-                            <td><?php echo $dether['her_descripcion'] ?></td>
-                            <td><?php echo $dether['cantidad'] ?></td>
+                            <th data-field="registro">Nombre</th>
+                            <th data-field="name">Descripcion</th>
+                            <th data-field="name">Cantidad</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-            <?php }else{ ?>
+                    </thead>
+                    <tbody>
+    <?php
+    foreach ($detalleherramientas as $dether) {
+        ?>
+                            <tr>
+                                <td><?php echo $dether['her_nombre'] ?></td>
+                                <td><?php echo $dether['her_descripcion'] ?></td>
+                                <td><?php echo $dether['cantidad'] ?></td>
+                            </tr>
+                <?php } ?>
+                    </tbody>
+                </table>
+<?php } else { ?>
                 <h6 style="color: #FF0000;">Esta ot no cuenta con herramientas</h6>
-            <?php } ?>
+<?php } ?>
         </div>
     </div>
     <br>
-        <div class="row">
-            <button name="action" type="submit" class="btn teal waves-effect waves-light submit_editarOt" style="margin-left: 40%;">Guardar
-                <i class="mdi-editor-border-color small left"> </i>
-            </button>
-        </div>
+    <div class="row">
+        <button name="action" type="submit" class="btn teal waves-effect waves-light submit_editarOt" style="margin-left: 40%;">Guardar
+            <i class="mdi-editor-border-color small left"> </i>
+        </button>
+    </div>
 </form>
 
 <script>
@@ -222,27 +229,27 @@
             estandar: {
                 required: true
             },
-            cgender:"required",
-			cagree:"required",
+            cgender: "required",
+            cagree: "required",
         },
         //For custom messages
         messages: {
-            est_id:{
+            est_id: {
                 required: "El Estado es obligatorio."
             },
-            estandar:{
+            estandar: {
                 required: "Este campo es obligatorio."
             },
             curl: "Enter your website",
         },
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
         }
     });
 

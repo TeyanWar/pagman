@@ -1,5 +1,9 @@
-<form  id="editform" class="col s12" data-url="<?php echo crearUrl("Programacion", "programacion", "postEditar", array('noVista'=>"noVista")) ?>" method="post" novalidate>
-    <h5><?php echo $parametros[2]; ?></h5>
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
+<form  id="editform" class="col s12" data-url="<?php echo crearUrl("Programacion", "programacion", "postEditar", array('noVista' => "noVista")) ?>" method="post" novalidate>
+    <h5><?php //echo $parametros[2]; ?></h5>
 
     <!--Inicio contenedor mensajes de error-->
     <div class="card red">

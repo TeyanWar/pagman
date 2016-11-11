@@ -1,6 +1,9 @@
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
 <div class="col s12 m12 l6">
     <div class="card-panel">
-        <h4 class="header2">Modificar herramienta</h4>
         <div class="row">
             <form class="centered form-horizontal" id="F_editar_herramienta" action="<?php echo crearUrl("herramientas", "herramientas", "postEditar") ?>" method="post">
                 <div class="row">

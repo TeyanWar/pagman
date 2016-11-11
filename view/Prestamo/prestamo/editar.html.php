@@ -1,3 +1,7 @@
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
 <head>
     <link href="<?php echo addLib('css/select2.css') ?>" rel="stylesheet" type="text/css">
 </head>
@@ -23,7 +27,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <!-- Campo para almacenar el id de la herramienta -->
                 <input type="hidden" name="id" value="<?php echo $prestamo['pher_id'] ?>">
 

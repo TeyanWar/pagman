@@ -1,7 +1,9 @@
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
 <div class="row">
     <form class="col s12"  action="<?php echo crearUrl("localizacion", "departamento", "postEditar") ?>" method="post">
-
-        <center><h5> Editar departamento</h5></center>
         <br><br>
         <div class="input-field col s6">
             <input  readonly=""type="text" id="dept_id" class="validate" name="dept_id" value="<?php echo $departamentos['dept_id']; ?>">
@@ -18,16 +20,15 @@
             <select class="select2"  name="reg_id">
                 <?php
                 foreach ($regionales as $regional) {
-                    if($regional['reg_id'] == $departamentos['reg_id']){
+                    if ($regional['reg_id'] == $departamentos['reg_id']) {
                         echo "<option value=" . $regional['reg_id'] . " selected >" . $regional['reg_nombre'] . "</option>";
-                    }else{
+                    } else {
                         echo "<option value=" . $regional['reg_id'] . " >" . $regional['reg_nombre'] . "</option>";
                     }
-                    
                 }
                 ?>
             </select>
-         
+
         </div>
 
 

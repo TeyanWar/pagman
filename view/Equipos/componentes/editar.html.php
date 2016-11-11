@@ -1,3 +1,8 @@
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
+
 <!--Inicio contenedor mensajes de error-->
 <div class="card red">
     <div id="cont_errors_ajax" class="card-content white-text">
@@ -97,10 +102,10 @@
         opacity: .5,
         in_duration: 300,
         out_duration: 200,
-        ready: function() {
+        ready: function () {
 
         },
-        complete: function() {
+        complete: function () {
 
         }
     });
@@ -151,7 +156,7 @@
             }
         },
         errorElement: 'div',
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             var placement = $(element).data('error');
             if (placement) {
                 $(placement).append(error);
@@ -163,7 +168,7 @@
 
     $("#edit").css("display", "none");
 
-    $("#editEquipos").click(function() {
+    $("#editEquipos").click(function () {
         $("#edit").css("display", "block");
     });
 </script>

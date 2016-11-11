@@ -1,3 +1,7 @@
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
 <!--Inicio contenedor mensajes de error-->
 <div class="card red">
     <div id="cont_errors_ajax" class="card-content white-text">
@@ -6,7 +10,7 @@
 <!--Fin contenedor mensajes de error-->
 
 <div class="col s12 m12 l6">
-    <h4 class="header2">Modificar Tipo de Medidor</h4> 
+    <!--<h4 class="header2">Modificar Tipo de Medidor</h4>--> 
     <form action="<?php echo crearUrl("medidores", "medidores", "postEditar", array('noVista')) ?>" method="post" id="editarMedidores">
 
         <div class="row">
@@ -70,10 +74,10 @@
         opacity: .5,
         in_duration: 300,
         out_duration: 200,
-        ready: function() {
+        ready: function () {
 
         },
-        complete: function() {
+        complete: function () {
 
         }
     });
@@ -124,7 +128,7 @@
             }
         },
         errorElement: 'div',
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             var placement = $(element).data('error');
             if (placement) {
                 $(placement).append(error);

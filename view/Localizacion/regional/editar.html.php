@@ -1,12 +1,9 @@
-
-
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
 <div class="row">
     <form class="col s12"  action="<?php echo crearUrl("localizacion", "regional", "postEditar") ?>" method="post">
-
-        <center><h5> Editar regional</h5></center>
-        <br>
-        <br>
-
         <div class="input-field col s6">
             <input  readonly=""type="text" id="reg_id" class="validate" name="reg_id" value="<?php echo $regional['reg_id'] ?>">
             <label style="color:#448aff;" for="reg_id" class="active" >Codigo de la regional:</label>

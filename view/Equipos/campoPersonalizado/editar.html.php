@@ -1,5 +1,7 @@
-<center><h5>EDITAR CAMPO PERSONALIZADO Código <code><?php echo $consulta['cp_id']; ?></code></h5></center><br>
-</div>
+    <center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br></div>
 <!--Inicio contenedor mensajes de error-->
 <div class="card red">
     <div id="cont_errors_ajax" class="card-content white-text">

@@ -1,13 +1,17 @@
-<form id="form2" class="col s12 validat" data-url="<?php echo crearUrl("usuarios", "usuarios", "postEditar", array('noVista'=>"noVista")) ?>" method="post" novalidate>
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
+<form id="form2" class="col s12 validat" data-url="<?php echo crearUrl("usuarios", "usuarios", "postEditar", array('noVista' => "noVista")) ?>" method="post" novalidate>
     <h4 class="header2">Modificar Persona</h4>
-    
+
     <!--Inicio contenedor mensajes de error-->
     <div class="card red">
         <div id="cont_errors_ajax" class="card-content white-text">
         </div>
     </div>
     <!--Fin contenedor mensajes de error-->
-    
+
     <div class="row">
         <div class="input-field col s4">
             <small style="color: #848484;">(*) Departamento</small>
@@ -123,7 +127,7 @@
     <br>
     <div class="divider"></div>
     <div class="row">
-        <?php if ($per['per_horas']!="" && $per['per_sueldo']!="") { ?>
+        <?php if ($per['per_horas'] != "" && $per['per_sueldo'] != "") { ?>
             <div class="col s4">
                 <label style="color: #448aff;"><h6>Contratista</h6></label>
                 <?php echo "SI" ?>
@@ -167,29 +171,29 @@
 
 <script>
     $(".select2").select2({});
-    
+
     $(document).ready(function () {
         $('select').material_select('destroy');
         $('select').material_select();
-      
-      $(document).on('click', '.modal-close', function () {    
-      $("#modalUpdate").closeModal();
-    });   
+
+        $(document).on('click', '.modal-close', function () {
+            $("#modalUpdate").closeModal();
+        });
 
     });
 </script>
 
 <script>
     //----------------- validaciones ---------------
-    
+
     /* Incluimos un método para validar el campo nombre */
 
-    jQuery.validator.addMethod("letra", function(value, element) {
+    jQuery.validator.addMethod("letra", function (value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
-    
-        //----------------------validate editar----------------------------
-    
+
+    //----------------------validate editar----------------------------
+
     $(".validat").validate({
         rules: {
             departamento: {
@@ -227,7 +231,7 @@
             },
             email: {
                 required: true,
-                email:true,
+                email: true,
                 minlength: 5,
                 maxlength: 45
             },
@@ -242,56 +246,56 @@
                 minlength: 3,
                 maxlength: 10
             },
-            cgender:"required",
-			cagree:"required",
+            cgender: "required",
+            cagree: "required",
         },
         //For custom messages
         messages: {
-            departamento:{
+            departamento: {
                 required: "El departamento es obligatorio."
             },
-            centro:{
+            centro: {
                 required: "El centro es obligatorio."
             },
-            cargo:{
+            cargo: {
                 required: "El cargo es obligatorio."
             },
-            nombre:{
+            nombre: {
                 required: "El nombre es obligatorio.",
                 letra: "Solo se permiten letras",
                 minlength: "Introduzca al menos 3 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
-            apellido:{
+            apellido: {
                 required: "El apellido es obligatorio.",
                 letra: "Solo se permiten letras",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 30 caracteres"
             },
-            telefono:{
+            telefono: {
                 required: "El telefono es obligatorio.",
                 digits: "El valor debe ser numerico",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 10 caracteres"
             },
-            movil:{
+            movil: {
                 required: "El movil es obligatorio.",
                 digits: "El valor debe ser numerico",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 10 caracteres"
             },
-            email:{
+            email: {
                 required: "El email es obligatorio.",
                 email: "El correo debe ser valido",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 45 caracteres"
             },
-            direccion:{
+            direccion: {
                 required: "La direccion es obligatorio.",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 40 caracteres"
             },
-            valorhora:{
+            valorhora: {
                 required: "El valor hora es obligatorio.",
                 number: "El valor debe ser numerico",
                 minlength: "Introduzca al menos 3 caracteres",
@@ -299,14 +303,14 @@
             },
             curl: "Enter your website",
         },
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
         }
     });
 

@@ -1,3 +1,7 @@
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
 <!--Inicio contenedor mensajes de error-->
 <div class="card red">
     <div id="cont_errors_ajax" class="card-content white-text">
@@ -29,7 +33,7 @@
                 <div class="errorTxt3"></div>
             </div>
         </div>
-       
+
         <input type="hidden" name="id" value="<?php echo $componentes['tcomp_id'] ?>">
         <!--
                     <button class="btn cyan waves-effect waves-light" type="submit" name="action">Actualizar
@@ -57,10 +61,10 @@
         opacity: .5,
         in_duration: 300,
         out_duration: 200,
-        ready: function() {
+        ready: function () {
 
         },
-        complete: function() {
+        complete: function () {
 
         }
     });
@@ -111,7 +115,7 @@
             }
         },
         errorElement: 'div',
-        errorPlacement: function(error, element) {
+        errorPlacement: function (error, element) {
             var placement = $(element).data('error');
             if (placement) {
                 $(placement).append(error);

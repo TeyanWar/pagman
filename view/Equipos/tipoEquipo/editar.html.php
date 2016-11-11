@@ -1,5 +1,7 @@
-<center><h5>EDITAR TIPO DE EQUIPO CODIGO <code><?php echo $tEquipo['tequi_id']; ?></code></h5></center><br>
-<?php
+    <center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br><?php
 $miserrores = getErrores();
 if (!$miserrores == "") {
     ?>

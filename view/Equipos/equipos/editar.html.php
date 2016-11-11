@@ -1,5 +1,7 @@
-<center><H5>EDITAR EQUIPO <code><?php echo $equipo['equi_nombre']; ?></code></H5></center>
-<!--Inicio contenedor mensajes de error-->
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br><!--Inicio contenedor mensajes de error-->
 <div class="card red">
     <div id="cont_errors_ajax" class="card-content white-text">
     </div>

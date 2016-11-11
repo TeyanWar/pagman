@@ -1,9 +1,7 @@
-
 <center>
-    <h5>
-        EDITAR CENTRO DE FORMACION CODIGO <code><?php echo $centro['cen_id']; ?></code>
-    </h5>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
 </center>
+<br>
 <br>
 <div class="row">
     <form class="col s12"  action="<?php echo crearUrl("localizacion", "centro", "postEditar") ?>" method="post">

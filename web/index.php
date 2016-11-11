@@ -42,7 +42,7 @@ if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] == "/recordar") {
 //    dd($_SESSION);
         // Captura el nombre del modulo con la primer letra mayuscula
         $modulo = ucwords($cadena[1]);
-
+        
         // Captura el nombre del controlador 
         $controller = $cadena[2];
 

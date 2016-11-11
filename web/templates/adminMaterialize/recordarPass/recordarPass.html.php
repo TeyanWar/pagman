@@ -1,5 +1,5 @@
 <div class="col s12 z-depth-4 card-panel">
-    <form class="login-form" action="<?php echo crearUrl("recordarPass", "recordarPass", "envioMails") ?>" method="POST">
+    <form class="login-form" action="<?php echo crearUrl("recuperar", "recuperar", "envioMails") ?>" method="POST">
         <div class="row">
             <div class="input-field col s12 center">
                 <h4>¿Olvidaste Tu Contrase&ntildea?</h4>

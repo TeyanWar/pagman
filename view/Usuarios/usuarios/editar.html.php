@@ -1,14 +1,18 @@
-<form id="form2" class="col s12 valiform" data-url="<?php echo crearUrl("usuarios", "usuarios", "postEditar", array('noVista'=>"noVista")) ?>" method="post" novalidate>
+<center>
+    <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
+</center>
+<br>
+<form id="form2" class="col s12 valiform" data-url="<?php echo crearUrl("usuarios", "usuarios", "postEditar", array('noVista' => "noVista")) ?>" method="post" novalidate>
 
-    <h4 class="header2">Modificar Usuario</h4>
-    
+    <!--<h4 class="header2">Modificar Usuario</h4>-->
+
     <!--Inicio contenedor mensajes de error-->
     <div class="card red">
         <div id="cont_errors_ajax" class="card-content white-text">
         </div>
     </div>
     <!--Fin contenedor mensajes de error-->
-    
+
     <div class="row">
 
         <div class="col s4">
@@ -28,12 +32,12 @@
         <div class="input-field col s4">
             <small style="color: #848484;">(*) Estado</small>
             <select id="estado" class="error browser-default select2" name="estado" data-error=".errorTxt33">
-                <?php 
-                    if($usu['usu_estado']==='activo'){
-                        echo "<option value='".$usu['usu_estado']."' selected>". $usu['usu_estado'] . "</option>";
-                    }elseif($usu['usu_estado']==='desactivado'){
-                        echo "<option value='".$usu['usu_estado']."' selected>". $usu['usu_estado'] . "</option>";
-                    }
+                <?php
+                if ($usu['usu_estado'] === 'activo') {
+                    echo "<option value='" . $usu['usu_estado'] . "' selected>" . $usu['usu_estado'] . "</option>";
+                } elseif ($usu['usu_estado'] === 'desactivado') {
+                    echo "<option value='" . $usu['usu_estado'] . "' selected>" . $usu['usu_estado'] . "</option>";
+                }
                 ?>
                 <option value="activo" >activo</option>
                 <option value="desactivado" >desactivado</option>
@@ -47,14 +51,14 @@
             <small style="color: #848484;">(*) Departamento</small>
             <select id="departamento" class="error browser-default select2" name="departamento" data-error=".errorTxt34">
                 <option value="" disabled selected>-Seleccione Departamento-</option>
-                <?php 
-                    foreach($departamentos as $depto){
-                        if($depto['dept_id']== $usu['dept_id']){
-                            echo "<option value='".$depto["dept_id"]."' selected>". $depto["dept_nombre"] . "</option>";
-                        }else{
-                            echo "<option value='".$depto["dept_id"]."'>". $depto["dept_nombre"] . "</option>";
-                        }
+                <?php
+                foreach ($departamentos as $depto) {
+                    if ($depto['dept_id'] == $usu['dept_id']) {
+                        echo "<option value='" . $depto["dept_id"] . "' selected>" . $depto["dept_nombre"] . "</option>";
+                    } else {
+                        echo "<option value='" . $depto["dept_id"] . "'>" . $depto["dept_nombre"] . "</option>";
                     }
+                }
                 ?>
             </select>
             <div class="errorTxt34"></div>
@@ -64,14 +68,14 @@
             <small style="color: #848484;">(*) Centro</small>
             <select id="centro" class="error browser-default select2" name="centro" data-error=".errorTxt35">
                 <option value="" disabled selected>-Seleccione Centro-</option>
-                <?php 
-                    foreach($centros as $cen){
-                        if($cen['cen_id']== $usu['cen_id']){
-                            echo "<option value='".$cen["cen_id"]."' selected>". $cen["cen_nombre"] . "</option>";
-                        }else{
-                            echo "<option value='".$cen["cen_id"]."'>". $cen["cen_nombre"] . "</option>";
-                        }
+                <?php
+                foreach ($centros as $cen) {
+                    if ($cen['cen_id'] == $usu['cen_id']) {
+                        echo "<option value='" . $cen["cen_id"] . "' selected>" . $cen["cen_nombre"] . "</option>";
+                    } else {
+                        echo "<option value='" . $cen["cen_id"] . "'>" . $cen["cen_nombre"] . "</option>";
                     }
+                }
                 ?>
             </select>
             <div class="errorTxt35"></div>
@@ -146,14 +150,14 @@
             <small style="color: #848484;">(*) Cargo</small>
             <select id="cargo" class="error browser-default select2" name="cargo" data-error=".errorTxt44">
                 <option value="" disabled selected>-Seleccione Cargo-</option>
-                <?php 
-                    foreach($cargos as $car){
-                        if($car['car_id']== $usu['car_id']){
-                            echo "<option value='".$car["car_id"]."' selected>". $car["car_descripcion"] . "</option>";
-                        }else{
-                            echo "<option value='".$car["car_id"]."'>". $car["car_descripcion"] . "</option>";
-                        }
+                <?php
+                foreach ($cargos as $car) {
+                    if ($car['car_id'] == $usu['car_id']) {
+                        echo "<option value='" . $car["car_id"] . "' selected>" . $car["car_descripcion"] . "</option>";
+                    } else {
+                        echo "<option value='" . $car["car_id"] . "'>" . $car["car_descripcion"] . "</option>";
                     }
+                }
                 ?>
             </select>
             <div class="errorTxt44"></div>
@@ -165,14 +169,14 @@
             <small style="color: #848484;">(*) Rol</small>
             <select id="perfil" class="error browser-default select2" name="perfil" data-error=".errorTxt45">
                 <option value="" disabled selected>-Seleccione perfil-</option>
-                <?php 
-                    foreach($perfiles as $perfil){
-                        if($perfil['rol_id']== $usu['rol_id']){
-                            echo "<option value='".$perfil["rol_id"]."' selected>". $perfil["rol_nombre"] . "</option>";
-                        }else{
-                            echo "<option value='".$perfil["rol_id"]."'>". $perfil["rol_nombre"] . "</option>";
-                        }
+                <?php
+                foreach ($perfiles as $perfil) {
+                    if ($perfil['rol_id'] == $usu['rol_id']) {
+                        echo "<option value='" . $perfil["rol_id"] . "' selected>" . $perfil["rol_nombre"] . "</option>";
+                    } else {
+                        echo "<option value='" . $perfil["rol_id"] . "'>" . $perfil["rol_nombre"] . "</option>";
                     }
+                }
                 ?>
             </select>
             <div class="errorTxt45"></div>
@@ -181,7 +185,7 @@
     <br>
     <div class="divider"></div>
     <div class="row">
-        <?php if ($usu['per_horas']!="" && $usu['per_sueldo']!="") { ?>
+        <?php if ($usu['per_horas'] != "" && $usu['per_sueldo'] != "") { ?>
             <div class="col s4">
                 <label style="color: #448aff;"><h6>Contratista</h6></label>
                 <?php echo "SI" ?>
@@ -201,7 +205,7 @@
             </div>
         <?php } ?>
     </div>
-    
+
     <div class="row">
         <!-- Campo para almacenar el id del equipo -->
         <input type="hidden" name="id" value="<?php echo $usu['per_id'] ?>">
@@ -224,31 +228,31 @@
 
 <script>
     $(".select2").select2({});
-    
+
     $(document).ready(function () {
         $('select').material_select('destroy');
         $('select').material_select();
-      
-      $(document).on('click', '.modal-close', function () {    
-        $("#modalUpdate").closeModal();
-      });   
+
+        $(document).on('click', '.modal-close', function () {
+            $("#modalUpdate").closeModal();
+        });
 
     });
     //----------------- validaciones ---------------
-    
+
     /* Incluimos un método para validar el campo nombre */
 
-    jQuery.validator.addMethod("letra", function(value, element) {
+    jQuery.validator.addMethod("letra", function (value, element) {
         return this.optional(element) || /^[a-záéóóúàèìòùäëïöüñ\s]+$/i.test(value);
     });
-    
+
     //----------------------expresion para validar solo numeros y letras----------------
-    jQuery.validator.addMethod("password", function(value, element) {
+    jQuery.validator.addMethod("password", function (value, element) {
         return this.optional(element) || /^[0-9a-zA-Z]+$/i.test(value);
     });
-    
-        //----------------------validate editar----------------------------
-    
+
+    //----------------------validate editar----------------------------
+
     $(".valiform").validate({
         rules: {
             departamento: {
@@ -302,7 +306,7 @@
             },
             email: {
                 required: true,
-                email:true,
+                email: true,
                 minlength: 5,
                 maxlength: 45
             },
@@ -317,72 +321,72 @@
                 minlength: 3,
                 maxlength: 10
             },
-            cgender:"required",
-			cagree:"required",
+            cgender: "required",
+            cagree: "required",
         },
         //For custom messages
         messages: {
-            departamento:{
+            departamento: {
                 required: "El departamento es obligatorio."
             },
-            centro:{
+            centro: {
                 required: "El centro es obligatorio."
             },
-            cargo:{
+            cargo: {
                 required: "El cargo es obligatorio."
             },
-            login:{
+            login: {
                 required: "El login es obligatorio.",
                 minlength: "Introduzca al menos 3 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
-            clave:{
+            clave: {
                 password: "Solo se permiten numeros o letras.",
                 minlength: "Introduzca al menos 4 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
-            estado:{
+            estado: {
                 required: "El estado es obligatorio."
             },
-            perfil:{
+            perfil: {
                 required: "El perfil es obligatorio."
             },
-            nombre:{
+            nombre: {
                 required: "El nombre es obligatorio.",
                 letra: "Solo se permiten letras",
                 minlength: "Introduzca al menos 3 caracteres",
                 maxlength: "Solo se permite introducir maximo 20 caracteres"
             },
-            apellido:{
+            apellido: {
                 required: "El apellido es obligatorio.",
                 letra: "Solo se permiten letras",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 30 caracteres"
             },
-            telefono:{
+            telefono: {
                 required: "El telefono es obligatorio.",
                 digits: "El valor debe ser numerico",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 10 caracteres"
             },
-            movil:{
+            movil: {
                 required: "El movil es obligatorio.",
                 digits: "El valor debe ser numerico",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 10 caracteres"
             },
-            email:{
+            email: {
                 required: "El email es obligatorio.",
                 email: "El correo debe ser valido",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 45 caracteres"
             },
-            direccion:{
+            direccion: {
                 required: "La direccion es obligatorio.",
                 minlength: "Introduzca al menos 5 caracteres",
                 maxlength: "Solo se permite introducir maximo 40 caracteres"
             },
-            valorhora:{
+            valorhora: {
                 required: "El valor hora es obligatorio.",
                 number: "El valor debe ser numerico",
                 minlength: "Introduzca al menos 3 caracteres",
@@ -390,14 +394,14 @@
             },
             curl: "Enter your website",
         },
-        errorElement : 'div',
-        errorPlacement: function(error, element) {
-          var placement = $(element).data('error');
-          if (placement) {
-            $(placement).append(error)
-          } else {
-            error.insertAfter(element);
-          }
+        errorElement: 'div',
+        errorPlacement: function (error, element) {
+            var placement = $(element).data('error');
+            if (placement) {
+                $(placement).append(error)
+            } else {
+                error.insertAfter(element);
+            }
         }
     });
 
