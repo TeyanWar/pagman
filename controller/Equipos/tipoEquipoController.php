@@ -35,21 +35,23 @@ class TipoEquipoController {
         $sqlDetalle = $objTipoEquipos->select($sqlCP);
 
         //consulta de todos los Campos personalizados
-        $sql1 = "SELECT * FROM pag_campos_personalizados WHERE estado is NULL";
-        $camposPersonalizados = $objTipoEquipos->select($sql1);
+        $sql6 = "select * from pag_campos_personalizados";
+        $camposPersonalizados = $objTipoEquipos->select($sql6);
+        
         
         $sql2 = "SELECT * FROM pag_det_tipoequipo_campospersonalizados WHERE tequi_id='$id'";
-        $campoSeleccionados = $objTipoEquipos->select($sql2);
+        $camposPersonalizadosDet = $objTipoEquipos->select($sql2);
         
         foreach ($camposPersonalizados as $key => $campoPersonalizado){
-            $camposPersonalizados[$key]['checkeado']='';
-            foreach($campoSeleccionados as $campoSeleccionado){
-                if($campoSeleccionado['cp_id'] == $campoPersonalizado['cp_id']){
-                    $camposPersonalizados[$key]['checkeado']=='checked';
+            $camposPersonalizados[$key]['checkeado'] = '';
+            foreach ($camposPersonalizadosDet as $campoPersonalizadoDet){
+                if($campoPersonalizado['cp_id'] == $campoPersonalizadoDet['cp_id']){
+                    $camposPersonalizados[$key]['checkeado'] = 'checked';
                     break;
                 }
             }
         }
+        
         // Cierra la conexion
         $objTipoEquipos->cerrar();
 
