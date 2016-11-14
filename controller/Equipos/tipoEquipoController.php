@@ -26,6 +26,7 @@ class TipoEquipoController {
         $sqlEquipo = "SELECT * FROM pag_tipo_equipo WHERE tequi_id='$id'";
         $tEquipo = $objTipoEquipos->find($sqlEquipo);
 
+
         //die(print_r($id));
         $sqlCP = "SELECT * FROM pag_tipo_equipo,pag_campos_personalizados,"
                 . "pag_det_tipoequipo_campospersonalizados WHERE "
@@ -37,7 +38,6 @@ class TipoEquipoController {
         //consulta de todos los Campos personalizados
         $sql6 = "select * from pag_campos_personalizados";
         $camposPersonalizados = $objTipoEquipos->select($sql6);
-
 
         $sql2 = "SELECT * FROM pag_det_tipoequipo_campospersonalizados WHERE tequi_id='$id'";
         $camposPersonalizadosDet = $objTipoEquipos->select($sql2);
@@ -79,9 +79,9 @@ class TipoEquipoController {
         if (count($errores) > 0) {
             setErrores($errores);
         } else {
-            
+
             //die(print_r($_POST['tequi_id']));
-            
+
             $tequi_descripcion = $_POST['tipoEquipoNombreEditar'];
             $tequi_id = $_POST['tequi_id'];
 
@@ -94,7 +94,7 @@ class TipoEquipoController {
             $respuesta = $objTipoEquipos->update($sql);
 
             if ($respuesta == true) {
-                
+
                 $sqlDelete = "DELETE FROM pag_det_tipoequipo_campospersonalizados WHERE tequi_id='$tequi_id'";
                 $eliminar = $objTipoEquipos->delete($sqlDelete);
 
@@ -106,7 +106,7 @@ class TipoEquipoController {
                             . "'$campoPersonalizado')";
                     $insertar = $objTipoEquipos->insertar($sqlInsertar);
                 }
-                
+
                 //die(print_r($insertar));
             }
 
