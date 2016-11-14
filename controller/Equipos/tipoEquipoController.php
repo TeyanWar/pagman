@@ -37,21 +37,21 @@ class TipoEquipoController {
         //consulta de todos los Campos personalizados
         $sql6 = "select * from pag_campos_personalizados";
         $camposPersonalizados = $objTipoEquipos->select($sql6);
-        
-        
+
+
         $sql2 = "SELECT * FROM pag_det_tipoequipo_campospersonalizados WHERE tequi_id='$id'";
         $camposPersonalizadosDet = $objTipoEquipos->select($sql2);
-        
-        foreach ($camposPersonalizados as $key => $campoPersonalizado){
+
+        foreach ($camposPersonalizados as $key => $campoPersonalizado) {
             $camposPersonalizados[$key]['checkeado'] = '';
-            foreach ($camposPersonalizadosDet as $campoPersonalizadoDet){
-                if($campoPersonalizado['cp_id'] == $campoPersonalizadoDet['cp_id']){
+            foreach ($camposPersonalizadosDet as $campoPersonalizadoDet) {
+                if ($campoPersonalizado['cp_id'] == $campoPersonalizadoDet['cp_id']) {
                     $camposPersonalizados[$key]['checkeado'] = 'checked';
                     break;
                 }
             }
         }
-        
+
         // Cierra la conexion
         $objTipoEquipos->cerrar();
 
@@ -61,14 +61,20 @@ class TipoEquipoController {
     function postEditar() {
 
         //  die(print_r($_POST['tequi_id']));
+        $errores = array();
 
         $tequi_id = $_POST['tequi_id'];
-        $tequi_descripcion = $_POST['tipoEquipoNombre'];
-
+        $tequi_descripcion = $_POST['tipoEquipoNombreEditar'];
+        //die(print_r($campoSeleccionado));
+        foreach ($_POST['campoSeleccionado'] as $seleccionado) {
+            if ($seleccionado == '') {
+                $errores[] = "NO puede quedar vacio";
+            }
+        }
         //die(print_r($tequi_descripcion ));
         $objTipoEquipos = new TipoEquipoModel();
 
-        $sql = "UPDATE "
+        $sql = "UPDATE"
                 . "pag_tipo_equipo "
                 . "SET "
                 . "tequi_descripcion = '$tequi_descripcion' "
@@ -76,6 +82,9 @@ class TipoEquipoController {
         //die(print_r($sql));
         $respuesta = $objTipoEquipos->update($sql);
 
+    if($respuesta == true){
+        die();
+    }
         // Cierra la conexion
         $objTipoEquipos->cerrar();
 

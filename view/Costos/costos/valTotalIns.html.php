@@ -116,18 +116,18 @@
                                             $valorTotal = 0;
                                             $valorParcial = 0;
                                             $count = 1;
-                                            foreach ($ordenTrabajo as $Orden) {
+                                            foreach ($OrdenTrabajo as $Orden) {
                                                 $valorFinal = 0;
                                                 $valorTotal = $Orden['ins_cantidad'] * $Orden['ins_valor'];
                                                 $valorParcial = $valorTotal + $valorParcial;
                                                 ?>
                                                 <tr>
-                                                    <td><?php echo $Orden['ot_id']; ?></td>
-                                                    <td><?php echo $Orden['ot_fecha_creacion']; ?></td>
-                                                    <td><?php echo $Orden['per_nombre']; ?></td>
+                                                    <td><?php echo $Orden['ot_id'] ?></td>
+                                                    <td><?php echo $Orden['ot_fecha_creacion'] ?></td>
+                                                    <td><?php echo $Orden['per_nombre'] ?></td>
                                                     <td><?php echo $Orden['ins_nombre']; ?></td>
                                                     <td><?php echo $Orden['ins_cantidad']; ?></td>
-                                                    <td><?php echo "$".number_format($valorTotal,0,',','.'); ?></td>
+                                                    <td><?php echo "$ ".number_format($valorTotal,0,',','.')?></td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
@@ -156,7 +156,7 @@
                                         }
                                         ?>
                                     </b><font color='blue' size='4px'>
-                                    <?php echo "$ ".number_format($valorParc,0,',','.'); ?></font>
+                                    <?php echo "$ ".number_format($valorParc,0,',','.')?></font>
                                 </div>
 
                                 <div class="col s12 m5 l6">

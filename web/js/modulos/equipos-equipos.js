@@ -39,6 +39,7 @@ $(document).ready(function () {
             $('#pagina').val(1);
         }
         var url = $(this).attr("data-url");
+
         $.ajax({
             url: url,
             type: "POST",
