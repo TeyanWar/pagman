@@ -1,23 +1,16 @@
 <center>
     <?php include 'templates/adminMaterialize/estandarEditarSena.html.php'; ?>    
 </center>
-<br><?php
-$miserrores = getErrores();
-if (!$miserrores == "") {
-    ?>
-    <div id="card-alert" class="card red">
-        <div class="card-content white-text">
-            <p><i class="mdi-action-info-outline"></i>
-                <?php echo $miserrores; ?> 
-            </p>
-        </div>
+<br>
+<div class="card red">
+    <div id="cont_errors_ajax" class="card-content white-text">
     </div>
-<?php }
-?>
+</div>
+
 <form class="col s12" id="formEditarCamposPersonalizados" action="<?php echo crearUrl("Equipos", "tipoEquipo", "postEditar") ?>" method="POST">
     <div class="row">
         <div class="input-field col s12">
-            <input type="text" id="tipoEquipoNombreEditar" data-error=".errorTxt1" name="tipoEquipoNombreEditar" class="validate" value="<?php echo $tEquipo['tequi_descripcion']; ?>">
+            <input type="text" id="tipoEquipoNombreEditar" name="tipoEquipoNombreEditar" class="validate" value="<?php echo $tEquipo['tequi_descripcion']; ?>" data-error=".errorTxt1">
             <label for="tipoEquipoNombreEditar" class="active" >(*)Nombre Tipo de Equipo:</label>
             <div class="errorTxt1"></div>
         </div>
@@ -35,19 +28,18 @@ if (!$miserrores == "") {
             <?php foreach ($camposPersonalizados as $campoPersonalizado) { ?>
                 <td>
                     <p>
-                        <input name="campoSeleccionado[]" id="<?php echo $campoPersonalizado['cp_id']; ?>" value="<?php echo $campoPersonalizado['cp_id']; ?>" type="checkbox" <?php echo $campoPersonalizado['checkeado']; ?> data-error=".errorTxt2" class="validate">
+                        <input name="campoSeleccionado[]" id="<?php echo $campoPersonalizado['cp_id']; ?>" value="<?php echo $campoPersonalizado['cp_id']; ?>" type="checkbox" <?php echo $campoPersonalizado['checkeado']; ?>>
                         <label for="<?php echo $campoPersonalizado['cp_id']; ?>" class="active"><?php echo ucwords($campoPersonalizado['cp_nombre']); ?></label>
-                    <div class="errorTxt2"></div>
                     </p>
                 </td>
-                <td> 
+    <!--                <td> 
                     <div class="row col s6">
                         <div class="input-field">
                             <input type="text" name="cantidad[]" class="validate" data-error=".errorTxt3" placeholder="<?php echo $campoPersonalizado['cantidad']; ?>">
                         </div>
                         <div class="errorTxt3"></div>
                     </div>
-                </td>
+                </td>-->
                 <?php
             }
             ?>
@@ -86,9 +78,6 @@ if (!$miserrores == "") {
                 letra: true,
                 espacio_blanco: true
             },
-            campoSeleccionado: {
-                required: true,
-            },
             cgender: "required",
             cagree: "required",
         },
@@ -101,9 +90,6 @@ if (!$miserrores == "") {
                 letra: "Solo se admiten Letras",
                 espacio_blanco: "Este campo no puede quedar vacío, ingresa un Nombre"
             },
-            campoSeleccionado: {
-                required: "Debe de agregar al menos un campo personalizado"
-            }
         },
         errorElement: 'div',
         errorPlacement: function (error, element) {

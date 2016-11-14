@@ -73,80 +73,59 @@ class EquiposController {
     }
 
     function postEditar() {
-
         /* Empieza Validaciones del Equipo */
-
         $errores = array();
         $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
         $patronLetrasNumeros = "/^[0-9a-zA-Z]+$/";
-
         if (!isset($_POST['medidores']) or $_POST['medidores'] == "") {
             $errores[] = "El equipo debe tener al menos un <code><b>Medidor</code></b> agregado";
         }//Valida que el Nombre del equipo no este vacio
-
         if (!isset($_POST['equi_nombre']) or $_POST['equi_nombre'] == "") {
             $errores[] = "El campo <code><b>nombre</b></code> no puede estar vac&iacute;o";
         }//Valida que el Nombre del equipo no este vacio
-
         if (!isset($_POST['equi_modelo']) or $_POST['equi_modelo'] == "") {
             $errores[] = "El campo <code><b>Modelo</b></code> no puede estar vac&iacute;o";
         }
-
         if (!isset($_POST['equi_serie']) or $_POST['equi_serie'] == "") {
             $errores[] = "El campo <code><b>Serie</b></code> no puede estar vac&iacute;o";
         }
-
         if (!isset($_POST['equi_marca']) or $_POST['equi_marca'] == "") {
             $errores[] = "El campo <code><b>Marca</b></code> no puede estar vac&iacute;o";
         }
-
         if (!isset($_POST['equi_fabricante']) or $_POST['equi_fabricante'] == "") {
             $errores[] = "El campo <code><b>Fabricante</b></code> no puede estar vac&iacute;o";
         }
-
         if (!isset($_POST['equi_estado']) or $_POST['equi_estado'] == "") {
             $errores[] = "El campo <code><b>Estado</b></code> no puede estar vac&iacute;o";
         }
-
         if (!isset($_POST['area_id']) or $_POST['area_id'] == "") {
             $errores[] = "El campo <code><b>Area</b></code> no puede estar vac&iacute;o";
         }
-
         if (!isset($_POST['per_id']) or $_POST['per_id'] == "") {
             $errores[] = "El campo <code><b>Persona</b></code> no puede estar vac&iacute;o";
         }
-
         if (!isset($_POST['equi_ubicacion']) or $_POST['equi_ubicacion'] == "") {
             $errores[] = "El campo <code><b>Ubicacion</b></code> no puede estar vac&iacute;o";
         }
-
         if (!isset($_POST['equi_fecha_compra']) or $_POST['equi_fecha_compra'] == "") {
             $errores[] = "El campo <code><b>Compra del equipo</b></code> no puede estar vac&iacute;o";
         }
-
         if (!isset($_POST['equi_fecha_instalacion']) or $_POST['equi_fecha_instalacion'] == "") {
             $errores[] = "La <code><b>Fecha de Instalacion</b></code> no puede estar vac&iacute;a";
         }
-
         if (!isset($_POST['equi_vence_garantia']) or $_POST['equi_vence_garantia'] == "") {
             $errores[] = "La <code><b>Fecha de vencimiento de la Garantia</b></code> no puede estar vac&iacute;a";
         }
-
         if (!isset($_POST['cen_id']) or $_POST['cen_id'] == "") {
             $errores[] = "El campo <code><b>Centro</b></code> no puede estar vac&iacute;o";
         }
-
         /* Termino Validaciones */
-
         $objEquipos = new EquiposModel();
         if (count($errores) > 0) {
             setErrores($errores);
         } else {
-
-
             $equi_placa = $_POST['equi_placa'];
             //die(print_r($equi_placa));
-
             $equi_nombre = $_POST['equi_nombre'];
             $equi_modelo = $_POST['equi_modelo'];
             $equi_noserie = $_POST['equi_serie'];
@@ -160,11 +139,9 @@ class EquiposController {
             $equi_fecha_instalacion = $_POST['equi_fecha_instalacion'];
             $equi_vence_garantia = $_POST['equi_vence_garantia'];
             $cen_id = $_POST['cen_id'];
-            $tequi_id=$_POST['tequi_id'];
+            $tequi_id = $_POST['tequi_id'];
             //die(print_r($_POST));
-
             $medidores = $_POST['medidores'];
-
             $sql = "UPDATE "
                     . "pag_equipo "
                     . "SET "
@@ -181,9 +158,7 @@ class EquiposController {
                     . "equi_fecha_instalacion='$equi_fecha_instalacion', "
                     . "equi_vence_garantia='$equi_vence_garantia' "
                     . "WHERE equi_id='$equi_placa'";
-
             //die(print_r($sql));
-
             $respuesta = $objEquipos->update($sql);
             if ($respuesta) {
                 $sqlEliminar = "delete from pag_det_equipo_medidor where equi_id='$equi_placa'";
@@ -197,7 +172,6 @@ class EquiposController {
             $objEquipos->cerrar();
         }
         // Cierra la conexion
-
         echo getRespuestaAccion('listar');
     }
 
@@ -443,7 +417,7 @@ class EquiposController {
                     . "cen_id, "
                     . "equi_foto, " //Campo Nuevo en la BD, aun no se coloca en el formulario, (¿Para que es?)
                     . "equi_fabricante, "
-                    . "equi_marca, "    
+                    . "equi_marca, "
                     . "equi_modelo, "
                     . "equi_serie, "
                     . "equi_ubicacion, "
@@ -504,11 +478,11 @@ class EquiposController {
         $objEquipos = new EquiposModel();
         $id = $parametros[1];
         $objTipoEquipo = new EquiposModel();
-                
+
         $sql = "SELECT * FROM pag_equipo,pag_persona,pag_estado,pag_tipo_equipo WHERE pag_equipo.per_id=pag_persona.per_id AND pag_equipo.est_id=pag_estado.est_id AND pag_equipo.tequi_id=pag_tipo_equipo.tequi_id AND tdoc_id=1 AND equi_id='$id'";
 
         $equipo = $objEquipos->find($sql);
-        
+
         // Cierra la conexion
         $objTipoEquipo->cerrar();
         $objEquipos->cerrar();

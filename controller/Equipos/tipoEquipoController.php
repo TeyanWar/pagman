@@ -62,31 +62,57 @@ class TipoEquipoController {
 
         //  die(print_r($_POST['tequi_id']));
         $errores = array();
+        $patronLetras = "/^[a-zA-Z_áéíóúñ\s]*$/";
 
-        $tequi_id = $_POST['tequi_id'];
-        $tequi_descripcion = $_POST['tipoEquipoNombreEditar'];
-        //die(print_r($campoSeleccionado));
-        foreach ($_POST['campoSeleccionado'] as $seleccionado) {
-            if ($seleccionado == '') {
-                $errores[] = "NO puede quedar vacio";
-            }
-        }
-        //die(print_r($tequi_descripcion ));
+        if (!isset($_POST['campoSeleccionado']) or $_POST['campoSeleccionado'] == "") {
+            $errores[] = "El Tipo de equipo debe tener al menos un <code><b>Campo personalizado</code></b> agregado";
+        }//Valida que un campo personalizado no este vacio
+
+        if (!isset($_POST['tipoEquipoNombreEditar']) or $_POST['tipoEquipoNombreEditar'] == "") {
+            $errores[] = "El nombre del Tipo de equipo, no puede quedar vacío.";
+        }//Valida que un campo personalizado no este vacio
+
+        /* Termina Validaciones */
+
         $objTipoEquipos = new TipoEquipoModel();
 
-        $sql = "UPDATE"
-                . "pag_tipo_equipo "
-                . "SET "
-                . "tequi_descripcion = '$tequi_descripcion' "
-                . "WHERE tequi_id = '$tequi_id'";
-        //die(print_r($sql));
-        $respuesta = $objTipoEquipos->update($sql);
+        if (count($errores) > 0) {
+            setErrores($errores);
+        } else {
+            
+            //die(print_r($_POST['tequi_id']));
+            
+            $tequi_descripcion = $_POST['tipoEquipoNombreEditar'];
+            $tequi_id = $_POST['tequi_id'];
 
-    if($respuesta == true){
-        die();
-    }
+            $sql = "UPDATE "
+                    . "pag_tipo_equipo "
+                    . "SET "
+                    . "tequi_descripcion = '$tequi_descripcion' "
+                    . "WHERE tequi_id = '$tequi_id'";
+            //die(print_r($sql));
+            $respuesta = $objTipoEquipos->update($sql);
+
+            if ($respuesta == true) {
+                
+                $sqlDelete = "DELETE FROM pag_det_tipoequipo_campospersonalizados WHERE tequi_id='$tequi_id'";
+                $eliminar = $objTipoEquipos->delete($sqlDelete);
+
+                foreach ($_POST['campoSeleccionado'] as $campoPersonalizado) {
+                    $sqlInsertar = "INSERT INTO pag_det_tipoequipo_campospersonalizados("
+                            . "tequi_id,"
+                            . "cp_id) VALUES("
+                            . "'$tequi_id',"
+                            . "'$campoPersonalizado')";
+                    $insertar = $objTipoEquipos->insertar($sqlInsertar);
+                }
+                
+                //die(print_r($insertar));
+            }
+
+            $objTipoEquipos->cerrar();
+        }
         // Cierra la conexion
-        $objTipoEquipos->cerrar();
 
         redirect(crearUrl("equipos", "tipoEquipo", "listar"));
     }
